@@ -30,7 +30,7 @@ disable-ipv6=true
     server {
         listen 88;
         location / {
-            root   /usr/share/nginx/html/webui-aria2-master;
+            root   /usr/share/nginx/html/aria2;
             index  index.php index.html index.htm;
         }
 	}
