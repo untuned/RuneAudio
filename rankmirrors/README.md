@@ -1,14 +1,19 @@
 rankmirrors.sh
 ---
 for ArchLinuxArm  
+  
+Fix packages download errors:  
+- enable(uncomment) all mirror servers
+- download test for 3 seconds from each servers
+- ranked by download speed  
+- update mirrorlist file, **/etc/pacman.d/mirrorlist** (with original backup)
+
+- **Rank**
 ```sh
 wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/rankmirrors/blob/master/rankmirrors.sh?raw=1"; chmod +x rankmirrors.sh; ./rankmirrors.sh
 ```
-#
 
-Mitigate packages download errors by :  
-file - /etc/pacman.d/mirrorlist
-- enable(uncomment) all mirror servers
-- download test for N seconds from each servers (default N=3)
-- ranked by download speed  
-- update mirrorlist file (with original backup)
+- **Update package databases**
+```sh
+pacman -Sy
+```
