@@ -15,14 +15,20 @@ RuneAudio aria2 with webui
 	}
 ```
 
+**Restart nginx**  
+```sh
+systemctl restart nginx
+```
+
 **Install**  
 ```sh
-pacman -S aria2 unzip
+pacman -S aria2
 
-wget -O webui-aria2.zip https://github.com/ziahamza/webui-aria2/archive/master.zip
-unzip webui-aria2.zip -d /usr/share/nginx/html
-rm webui-aria2.zip
-systemctl restart nginx
+mkdir /usr/share/nginx/html/aria2
+cd /usr/share/nginx/html/aria2
+wget -O aria2.zip https://github.com/ziahamza/webui-aria2/archive/master.zip
+bsdtar -xf aria2.zip -s'|[^/]*/||'
+rm aria2.zip
 ```
 
 **/root/.config/aria2/aria2.conf** - create new file  
