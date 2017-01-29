@@ -29,7 +29,7 @@ daemon=true
 disable-ipv6=true
 ' > /root/.config/aria2/aria2.conf
 
-sed '/end http block/ i\
+sed -i '/end http block/ i\
     server {\
         listen 8888;\
         location / {\
