@@ -1,0 +1,21 @@
+#Expand Partition
+
+_Tested on RuneAudio RPi3_  
+
+- **RuneAudio** install to 2GB partition by default.  
+- This left the rest of the SD card not available for use.  
+- **expand.sh** will expand the partiton to full capacity **without reboot**.  
+
+
+**SSH command**
+
+```sh
+wget -q --show-progress -O expand.sh "https://github.com/rern/expand_partition/blob/master/expand.sh?raw=1"; chmod +x expand.sh; ./expand.sh
+```
+
+- Rank mirror servers with [**rankmirrors.sh**](https://github.com/rern/ArchLinuxArm_rankmirrors/)
+- Install package **Parted**  
+- Expand default 2GB partition to full capacity of SD card with **fdisk**  
+- Probe new partition with **partprobe** (by **Parted**)  
+- Resize to new partition with **resize2fs**  
+- Done  
