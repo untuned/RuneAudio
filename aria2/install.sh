@@ -43,4 +43,5 @@ title "Restart nginx ..."
 systemctl restart nginx
 
 title "Aria2 successfully installed."
-titleend "Start Aria2: aria2c"
+echo "Start Aria2: aria2c"
+titleend "WebUI: [RuneAudio_IP]:88"
