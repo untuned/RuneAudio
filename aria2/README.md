@@ -7,38 +7,7 @@ RuneAudio aria2 with webui
 
 **Install**  
 ```sh
-pacman -S aria2
-
-mkdir /usr/share/nginx/html/aria2
-cd /usr/share/nginx/html/aria2
-wget -O aria2.zip https://github.com/ziahamza/webui-aria2/archive/master.zip
-bsdtar -xf aria2.zip -s'|[^/]*/||'
-rm aria2.zip
-```
-
-**/root/.config/aria2/aria2.conf** - create new file  
-```sh
-enable-rpc=true
-rpc-listen-all=true
-
-daemon=true
-disable-ipv6=true
-```
-
-**/etc/nginx/nginx/conf** - add these lines between `http { ... }`  
-```sh
-    server {
-        listen 88;
-        location / {
-            root   /usr/share/nginx/html/aria2;
-            index  index.php index.html index.htm;
-        }
-	}
-```
-
-**Restart nginx**  
-```sh
-systemctl restart nginx
+wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/master/aria2/install.sh?raw=1"; chmod +x install.sh; ./install.sh
 ```
 
 **Start aria2**  
@@ -56,4 +25,3 @@ _RuneAudio IP_:88 (eg: 192.168.1.11:88)
 ```sh
 killall aria2c
 ```
-
