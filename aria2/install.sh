@@ -32,12 +32,12 @@ disable-ipv6=true
 ' > /root/.config/aria2/aria2.conf
 
 sed -i '/end http block/ i\
-    server {
-        listen 88;
-        location / {
-            root  /usr/share/nginx/html/aria2;
-            index  index.php index.html index.htm;
-        }
+    server {\
+        listen 88;\
+        location / {\
+            root  /usr/share/nginx/html/aria2;\
+            index  index.php index.html index.htm;\
+        }\
     }
 ' /etc/nginx/nginx.conf
 
