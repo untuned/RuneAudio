@@ -33,7 +33,7 @@ disable-ipv6=true
 
 sed -i '/end http block/ i\
     server {\
-        listen 8888;\
+        listen 88;\
         location / {\
             root  /usr/share/nginx/html/aria2;\
             index  index.php index.html index.htm;\
