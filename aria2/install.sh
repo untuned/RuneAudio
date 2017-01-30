@@ -11,6 +11,8 @@ titleend() {
 		echo -e "\n$line\n"
 }
 
+rm install.sh
+
 title "Install Aria2 ..."
 pacman -Sy --noconfirm aria2
 
