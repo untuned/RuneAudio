@@ -14,13 +14,14 @@ alsamixer
 ![2](https://github.com/rern/Assets/blob/master/alsamixer/2.png)  
 
 **Setting**  
-'MM' = mute
+'MM' = mute  
 ![3](https://github.com/rern/Assets/blob/master/alsamixer/3.png)  
 
 **Unmute**
 - 'M' toggles 'MM' mute -> '00' unmute  
 - 'left / right arrow' switches channel  
-- 'Esc' exit
+- 'Esc' exit  
+
 ![4](https://github.com/rern/Assets/blob/master/alsamixer/4.png)  
 
 **Save Setting**  
