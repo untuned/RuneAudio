@@ -20,16 +20,18 @@ mkdir /usr/share/nginx/html/aria2
 cd /usr/share/nginx/html/aria2
 
 title "Get WebUI files ..."
-wget -O aria2.zip https://github.com/ziahamza/webui-aria2/archive/master.zip
+wget -q --show-progress -O aria2.zip https://github.com/ziahamza/webui-aria2/archive/master.zip
 bsdtar -xf aria2.zip -s'|[^/]*/||'
 rm aria2.zip
 
-mkdir /root/.config/aria2
-echo 'enable-rpc=true
-rpc-listen-all=true
-daemon=true
-disable-ipv6=true
-' > /root/.config/aria2/aria2.conf
+if [ ! -e /root/.config/aria2/aria2.conf ]; then
+	mkdir /root/.config/aria2
+	echo 'enable-rpc=true
+	rpc-listen-all=true
+	daemon=true
+	disable-ipv6=true
+	' > /root/.config/aria2/aria2.conf
+fi
 
 sed -i '/end http block/ i\
     server {\
