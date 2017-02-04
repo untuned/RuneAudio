@@ -3,6 +3,8 @@
 # expand.sh - expand partition
 # https://github.com/rern/expand_partition
 
+rm expand.sh
+
 arg=$#
 
 linered='\e[0;31m---------------------------------------------------------\e[m'
@@ -37,40 +39,8 @@ errorend() {
 		echo -e "\n$warn $1"
 		echo -e "\n$linered\n"
 }
-mirror() { # rank mirrors
-	if [ ! -f rankmirrors.sh ]; then 
-		wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/ArchLinuxArm_rankmirrors/blob/master/rankmirrors.sh?raw=1"
-		chmod +x rankmirrors.sh
-	fi
-	./rankmirrors.sh
-}
-installparted() {
-	mirror
-	title "Install Parted ..."
-	pacman -Sy --noconfirm parted
-	pa=$?
-	if (( $pa != 0 )); then
-		error "Failed: Install Parted"
-		echo 'Try again:'
-		echo -e '  \e[0;36m0\e[m No'
-		echo -e '  \e[0;36m1\e[m Yes'
-		echo
-		echo -e '\e[0;36m0\e[m / 1 ? '
-		read -n 1 answer
-		case $answer in
-			1 ) installparted;;
-			* ) echo
-				errorend "Expand partition canceled"
-				file='/etc/pacman.d/mirrorlist'
-				mv $file'.original' $file
-				rm expand.sh
-				rm rankmirrors.sh
-				exit;;	
-		esac
-	fi
-}
 
-# manage partition #######################################
+# partition data #######################################
 
 devpart=$( mount | sed -n '/on \/ type/,1p' | awk '{print $1}' )
 part=${devpart/\/dev\//}
@@ -88,6 +58,7 @@ unpartgb=$( sfdisk -F | sed -n '/'$diskesc'/,1p' | awk '{print $4}' ) # unpartit
 unpartkb=$( awk "BEGIN {print $unpartgb * 1000000}" )
 sumkb=$(( $freekb + $unpartkb ))
 
+# expand partition #######################################
 title "$info Available unused disk space: $unpartgb GB"
 echo 'Current available free space' $freemb 'MB'
 echo
@@ -98,34 +69,32 @@ echo
 echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
 case $answer in
-	1 ) pacman -Q parted > /dev/null 2>&1
-			pa=$?
-			if (( $pa != 0 )); then
-				echo
-				echo 'Update pakage server list ...'
-				echo
-				installparted
-			fi
-			title "Expand partiton ..."
-			echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk > /dev/null 2>&1
+	1 ) if ! pacman -Q parted > /dev/null 2>&1; then
+			title "Get packages file ..."
+			wget -q --show-progress -O var.tar "https://github.com/rern/RuneAudio/blob/master/expand_partition//_repo/var.tar?raw=1"
+			tar -xvf var.tar -C /
+			rm var.tar
+			pacman -Sy --noconfirm parted
+		fi
+		title "Expand partiton ..."
+		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk > /dev/null 2>&1
 
-			partprobe $disk
+		partprobe $disk
 
-			resize2fs $devpart
-			resize=$?
-			if (( $resize != 0 )); then
-				errorend "Failed: Expand partition\nTry - reboot > resize2fs $devpart"
-				exit
-			else
-				freekb=$( df | sed -n 2p | awk '{print $4}' )
-				freegb=$( awk "BEGIN {print $freekb / 1000000}" )
-				freegbr=$( LC_ALL=C /usr/bin/printf "%.*f\n" 2 $freegb ) # round to 2 decimal
-				echo
-				echo $info 'Partiton now has' $freegbr 'GB free space.'
-			fi;;
+		resize2fs $devpart
+		resize=$?
+		if (( $resize != 0 )); then
+			errorend "Failed: Expand partition\nTry - reboot > resize2fs $devpart"
+			exit
+		else
+			freekb=$( df | sed -n 2p | awk '{print $4}' )
+			freegb=$( awk "BEGIN {print $freekb / 1000000}" )
+			freegbr=$( LC_ALL=C /usr/bin/printf "%.*f\n" 2 $freegb ) # round to 2 decimal
+			echo
+			echo $info 'Partiton now has' $freegbr 'GB free space.'
+		fi;;
 
 	* ) echo
 			titleend "Expand partition canceled."
-			rm expand.sh
 			exit;;
 esac
