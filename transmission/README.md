@@ -22,6 +22,7 @@ systemctl stop transmission
 ```sh
     "download-dir": "/[path]/transmission",
     "incomplete-dir": "/[path]/transmission/.incomplete",
+    "incomplete-dir-enabled": true,
     
     "rpc-authentication-required": true,
     "rpc-password": "[password]",
