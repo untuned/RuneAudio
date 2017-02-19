@@ -15,13 +15,9 @@ systemctl start transmission
 systemctl stop transmission
 ```
 
-**Run service as root**  
-Fix write permission  
-/lib/systemd/system/transmission.service
+**Set download-dir write permission**
 ```sh
-...
-User=root
-...
+setfacl -m u:transmission:rw /[path]/transmission
 ```
 
 **/var/lib/transmission/.config/transmission-daemon/settings.json** - edit:  
