@@ -17,7 +17,6 @@ systemctl stop transmission
 
 **/var/lib/transmission/.config/transmission-daemon/settings.json** - edit:  
 - plain text `password` will be hash once login
-- login with blank username
 - logout > close browser (no explicit logout, close tab not logout)
 - no password > "rpc-authentication-required": false  
 ```sh
@@ -28,6 +27,7 @@ systemctl stop transmission
     "rpc-authentication-required": true,
     "rpc-password": "[password]",
     "rpc-url": "/[path]/transmission",
+    "rpc-username": "[username]",
     "rpc-whitelist-enabled": false,
 ```
 
