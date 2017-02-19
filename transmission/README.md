@@ -15,11 +15,6 @@ systemctl start transmission
 systemctl stop transmission
 ```
 
-**Set download-dir write permission**
-```sh
-setfacl -m u:transmission:rw /[path]/transmission
-```
-
 **/var/lib/transmission/.config/transmission-daemon/settings.json** - edit:  
 - plain text `password` will be hash once login
 - logout > close browser (no explicit logout, close tab not logout)
@@ -34,6 +29,11 @@ setfacl -m u:transmission:rw /[path]/transmission
     "rpc-url": "/[path]/transmission",
     "rpc-username": "[username]",
     "rpc-whitelist-enabled": false,
+```
+
+**Set download-dir write permission**
+```sh
+setfacl -m u:transmission:rw /[path]/transmission
 ```
 
 **Start transmission**  
