@@ -5,7 +5,7 @@ RuneAudio samba
 **/etc/samba/smb.conf**
 ```sh
 [global]
-#	netbios name = [name_in_network_browser]
+	netbios name = RT-AC66U
 	workgroup = WORKGROUP
 	server string = Samba %v on %L
 	encrypt passwords = yes
@@ -27,21 +27,21 @@ RuneAudio samba
 	printcap name = /dev/null
 	disable spoolss = yes
 
-[hdd]
-	comment = Restrict access, read and write, not show in network browser
-	path = /mnt/MPD/USB/hdd
+[readwrite]
+	comment = browseable, read, write, guess ok, no password
+	path = /media/hdd/readwrite
+	read only = no
+[read]
+	comment = browseable, read only, guess ok, no password
+	path = /media/hdd/read
+[root]
+	comment = hidden, read, write, root with password only, from [IP1] [IP2] only
+	path = /media/root
 	browseable = no
 	read only = no
 	guest ok = no
 	valid users = root
-#	host allow = [ip1 ip2]
-[Music]
-	comment = Read only access
-	path = /mnt/MPD/USB/hdd/Music
-[x]
-	comment = Read and write access
-	path = /mnt/MPD/USB/hdd/x
-	read only = no
+#	host allow = [IP1] [IP2]
 ```
 
 **Restart samba**
