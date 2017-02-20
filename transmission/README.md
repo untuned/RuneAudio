@@ -31,9 +31,10 @@ systemctl stop transmission
     "rpc-whitelist-enabled": false,
 ```
 
-**Set download-dir write permission**
+**Create download-dir, set owner**
 ```sh
-setfacl -m u:transmission:rw /[path]/transmission
+mkdir /[path]/transmission
+chown -R transmission:transmission /[path]/transmission
 ```
 
 **Start transmission**  
