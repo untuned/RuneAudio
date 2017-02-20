@@ -53,7 +53,7 @@ hostnamectl set-hostname [name]
 ```sh
 systemctl restart smbd
 
-# if set 'netbios name'
+# if set new hostname
 systemctl restart nmbd
 ```
 
