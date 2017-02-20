@@ -2,10 +2,15 @@ samba
 ---
 RuneAudio samba  
 
+**Set hostname**
+Shows in file browser
+```sh
+hostnamectl set-hostname [name]
+```
+
 **/etc/samba/smb.conf**
 ```sh
 [global]
-	netbios name = RT-AC66U
 	workgroup = WORKGROUP
 	server string = Samba %v on %L
 	encrypt passwords = yes
@@ -29,14 +34,14 @@ RuneAudio samba
 
 [readwrite]
 	comment = browseable, read, write, guess ok, no password
-	path = /media/hdd/readwrite
+	path = /mnt/MPD/USB/hdd/readwrite
 	read only = no
 [read]
 	comment = browseable, read only, guess ok, no password
-	path = /media/hdd/read
+	path = /mnt/MPD/USB/hdd/read
 [root]
 	comment = hidden, read, write, root with password only, from [IP1] [IP2] only
-	path = /media/root
+	path = /mnt/MPD/USB/root
 	browseable = no
 	read only = no
 	guest ok = no
