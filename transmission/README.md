@@ -8,7 +8,7 @@ RuneAudio_transmission
 pacman -S transmission-cli
 ```
 
-**Config**  
+**Create settings file**  
 _start to create_ `settings.json` _file, stop to allow edit_
 ```sh
 systemctl start transmission
