@@ -50,7 +50,7 @@ set directories
 - nolimit > `"rpc-whitelist-enabled": false`
 ```sh
     ....
-    "rpc-whitelist": "127.0.0.1, [IP1], [IP2]",
+    "rpc-whitelist": "127.0.0.1,[IP1],[IP2]",
     "rpc-whitelist-enabled": true,
     ...
 ```
@@ -68,7 +68,7 @@ set auto start download
 systemctl start transmission
 ```
 
-**Auto start transmission on system start**  
+[optional] **Auto start transmission on system start**  
 ```sh
 systemctl enable transmission
 ```
