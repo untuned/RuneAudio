@@ -13,8 +13,10 @@ titleend() {
 
 rm install.sh
 
-title "Install Aria2 ..."
-pacman -Sy --noconfirm aria2
+if ! pacman -Q aria2 > /dev/null 2>&1; then
+	title "Install Aria2 ..."
+	pacman -S --noconfirm aria2
+fi
 
 mkdir /usr/share/nginx/html/aria2
 cd /usr/share/nginx/html/aria2
