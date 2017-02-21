@@ -28,10 +28,14 @@ rm aria2.zip
 
 if [ ! -e /root/.config/aria2/aria2.conf ]; then
 	mkdir /root/.config/aria2
-	echo 'enable-rpc=true
+	mkdir /mnt/MPD/USB/hdd/aria2
+	echo '
+	enable-rpc=true
 	rpc-listen-all=true
 	daemon=true
 	disable-ipv6=true
+	dir=/mnt/MPD/USB/hdd/aria2
+	max-connection-per-server=3
 	' > /root/.config/aria2/aria2.conf
 fi
 
