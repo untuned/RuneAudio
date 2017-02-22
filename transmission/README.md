@@ -26,8 +26,9 @@ chown -R transmission:transmission /mnt/MPD/USB/hdd/transmission
 To run with other users, change user in `/usr/lib/systemd/system/transmission.service` and `chown` accordingly.
 
 **/var/lib/transmission/.config/transmission-daemon/settings.json** - edit:  
-`systemctl stop transmisson` before changing, otherwise it will not be saved on next run.
-_~/.config/transmission-daemon/settings.json - if run with other users_
+`systemctl stop transmisson` before changing, otherwise it will not be saved on next run.  
+_~/.config/transmission-daemon/settings.json - if run with other users_  
+
 set directories  
 ```sh
     ...
