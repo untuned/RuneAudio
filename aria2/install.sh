@@ -40,13 +40,13 @@ if [ ! -e /root/.config/aria2/aria2.conf ]; then
 fi
 fi grep -qs 'aria2' /etc/nginx/nginx.conf; then
 	sed -i '/end http block/ i\
-	    server {\
+	    server { #aria2\
 		listen 88;\
 		location / {\
 		    root  /usr/share/nginx/html/aria2;\
 		    index  index.php index.html index.htm;\
 		}\
-	    }
+	    } #aria2
 	' /etc/nginx/nginx.conf
 fi
 
