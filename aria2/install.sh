@@ -14,7 +14,7 @@ titleend() {
 rm install.sh
 
 if ! pacman -Q aria2 > /dev/null 2>&1; then
-	title "Install Aria2 ..."
+	title2 "$bar Install Aria2 ..."
 	pacman -S --noconfirm aria2
 fi
 
@@ -53,6 +53,6 @@ fi
 title "Restart nginx ..."
 systemctl restart nginx
 
-title "Aria2 successfully installed."
+title "$bar Aria2 successfully installed."
 echo "Start Aria2: aria2c"
 titleend "WebUI: [RuneAudio_IP]:88"
