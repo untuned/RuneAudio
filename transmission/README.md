@@ -9,7 +9,7 @@ pacman -S transmission-cli
 ```
 
 **Create settings file**  
-_start to create_ `settings.json` _file, stop to make it permanent_
+_start to create_ `settings.json` _file, stop to make changes permanent_
 ```sh
 systemctl start transmission
 systemctl stop transmission
