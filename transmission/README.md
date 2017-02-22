@@ -15,15 +15,15 @@ systemctl start transmission
 systemctl stop transmission
 ```
 
-**Create directories, set owner**
-_default user = transmission_
+**Create directories, set owner**  
+- default user: transmission   
+- To run with other users, change user in `/usr/lib/systemd/system/transmission.service` and `chown` accordingly.
 ```sh
 mkdir /mnt/MPD/USB/hdd/transmission
 mkdir /mnt/MPD/USB/hdd/transmission/incomplete
 mkdir /mnt/MPD/USB/hdd/transmission/torrents
 chown -R transmission:transmission /mnt/MPD/USB/hdd/transmission
 ```
-To run with other users, change user in `/usr/lib/systemd/system/transmission.service` and `chown` accordingly.
 
 **/var/lib/transmission/.config/transmission-daemon/settings.json** - edit:  
 `systemctl stop transmisson` before changing, otherwise it will not be saved on next run.  
