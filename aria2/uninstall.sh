@@ -19,11 +19,11 @@ title() {
 
 # check installed #######################################
 if ! pacman -Q aria2 > /dev/null 2>&1; then
-	title "$info aria2 not found."
+	title "$info Aria2 not found."
 	exit
 fi
 
-title2 "$bar Uninstall aria2 ..."
+title2 "$bar Uninstall Aria2 ..."
 # uninstall package #######################################
 pacman -Rs --noconfirm aria2
 
@@ -41,6 +41,6 @@ systemctl restart nginx
 # skip if reinstall - pwduninstall.sh re (any argument)
 [ $# -ne 0 ] && exit
 
-title2 "$bar aria2 successfully uninstalled."
+title2 "$bar Aria2 successfully uninstalled."
 
 rm uninstall.sh
