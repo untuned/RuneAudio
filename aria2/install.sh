@@ -38,16 +38,17 @@ if [ ! -e /root/.config/aria2/aria2.conf ]; then
 	max-connection-per-server=3
 	' > /root/.config/aria2/aria2.conf
 fi
-
-sed -i '/end http block/ i\
-    server {\
-        listen 88;\
-        location / {\
-            root  /usr/share/nginx/html/aria2;\
-            index  index.php index.html index.htm;\
-        }\
-    }
-' /etc/nginx/nginx.conf
+fi grep -qs 'aria2' /etc/nginx/nginx.conf; then
+	sed -i '/end http block/ i\
+	    server {\
+		listen 88;\
+		location / {\
+		    root  /usr/share/nginx/html/aria2;\
+		    index  index.php index.html index.htm;\
+		}\
+	    }
+	' /etc/nginx/nginx.conf
+fi
 
 title "Restart nginx ..."
 systemctl restart nginx
