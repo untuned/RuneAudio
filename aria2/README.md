@@ -28,7 +28,7 @@ Specify saved filename: (set directory in `dir` option)
 killall aria2c
 ```
 
-**Install**  
+**Uninstall**  
 ```sh
 wget -q --show-progress -O uninstall.sh "https://github.com/rern/RuneAudio/blob/master/aria2/uninstall.sh?raw=1"; chmod +x uninstall.sh; ./uninstall.sh
 ```
