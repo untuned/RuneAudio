@@ -18,7 +18,7 @@ aria2c
 **WebUI**  
   
 Browser URL:  
-\[RuneAudio IP]:88 (eg: 192.168.1.11:88)  
+\[RuneAudio IP]:88  
 
 Specify saved filename: (set directory in `dir` option)  
 [download link] --out=[filename]  
