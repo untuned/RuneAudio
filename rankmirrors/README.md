@@ -1,6 +1,6 @@
 rankmirrors.sh
 ---
-for ArchLinuxArm  
+for ArchLinuxArm and RuneAudio  
   
 Fix packages download errors:  
 - enable(uncomment) all mirror servers
