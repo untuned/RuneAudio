@@ -35,15 +35,14 @@ devpart=$( mount | sed -n '/on \/ type/,1p' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 partini=${part:0:3}
 if [ $partini == 'mmc' ]; then
-	diskesc='\/dev\/'${part::-2}
+	disk='/dev/'${part::-2}
 else
-	diskesc='\/dev\/'$partini
+	disk='/dev/'$partini
 fi
-disk=${diskesc//\\/}
 
 freekb=$( df | sed -n '/\/$/p' | awk '{print $4}' ) # free disk space in kB
 freemb=$( python -c "print($freekb / 1000)" ) # bash itself cannot do float
-unpartb=$( sfdisk -F | sed -n '/'$diskesc'/p' | awk '{print $6}' ) # unpartitoned space in GB
+unpartb=$( sfdisk -F | sed -n '\|'$diskesc'|p' | awk '{print $6}' ) # unpartitoned space in GB
 unpartmb=$( python -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 
@@ -67,7 +66,6 @@ case $answer in
 		fi
 		title "Expand partiton ..."
 		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk > /dev/null 2>&1
-		#echo ",+" | sfdisk -f -N ${part:-1} $disk --no-reread
 
 		partprobe $disk
 
