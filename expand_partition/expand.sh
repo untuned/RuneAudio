@@ -66,7 +66,7 @@ case $answer in
 			pacman -Sy --noconfirm parted
 		fi
 		title "Expand partiton ..."
-		#echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk > /dev/null 2>&1
+		umount $diskesc
 		echo ", +" | ./sfdisk -N 1 $disk
 
 		partprobe $disk
