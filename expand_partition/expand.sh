@@ -67,7 +67,7 @@ case $answer in
 		fi
 		title "Expand partiton ..."
 		umount $diskesc
-		echo ", +" | ./sfdisk -N 1 $disk
+		echo ",+" | sfdisk -N $part $disk
 
 		partprobe $disk
 
