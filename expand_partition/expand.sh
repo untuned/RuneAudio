@@ -33,9 +33,9 @@ titleend() {
 
 devpart=$( mount | sed -n '/on \/ type/,1p' | awk '{print $1}' )
 part=${devpart/\/dev\//}
-partini=$( echo $part | cut -c1-3 )
+partini=${part:0:3}
 if [ $partini == 'mmc' ]; then
-	diskesc='\/dev\/'${part::-2}
+	diskesc='\/dev\/'${part:-2}
 else
 	diskesc='\/dev\/'$partini
 fi
@@ -66,8 +66,8 @@ case $answer in
 			pacman -Sy --noconfirm parted
 		fi
 		title "Expand partiton ..."
-		umount $diskesc
-		echo ",+" | sfdisk -N $part $disk
+		#umount $diskesc
+		echo ",+" | sfdisk -f -N ${part:-1} $disk --no-reread
 
 		partprobe $disk
 
