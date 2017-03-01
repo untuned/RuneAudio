@@ -41,9 +41,9 @@ fi
 disk=${diskesc//\\/}
 
 freekb=$( df | sed -n 2p | awk '{print $4}' ) # free disk space in kB
-freemb=$( awk "BEGIN {print $freekb / 1000}" ) # bash itself cannot do float
+freemb=$( python -c "print($freekb / 1000)" ) # bash itself cannot do float
 unpartgb=$( sfdisk -F | sed -n '/'$diskesc'/,1p' | awk '{print $4}' ) # unpartitoned space in GB
-unpartkb=$( awk "BEGIN {print $unpartgb * 1000000}" )
+unpartkb=$( python -c "print($unpartgb * 1000000)" )
 sumkb=$(( $freekb + $unpartkb ))
 
 # expand partition #######################################
@@ -65,18 +65,19 @@ case $answer in
 			pacman -Sy --noconfirm parted
 		fi
 		title "Expand partiton ..."
-		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk > /dev/null 2>&1
+		#echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk > /dev/null 2>&1
+		echo ", +" | ./sfdisk -N 1 $disk
 
 		partprobe $disk
 
 		resize2fs $devpart
-		resize=$?
-		if (( $resize != 0 )); then
+		if (( $? != 0 )); then
 			errorend "Failed: Expand partition\nTry - reboot > resize2fs $devpart"
 			exit
 		else
 			freekb=$( df | sed -n 2p | awk '{print $4}' )
-			freegb=$( awk "BEGIN {print $freekb / 1000000}" )
+			freegb=$( python -c "print(round($freekb / 1000000, 2))" )
+
 			freegbr=$( LC_ALL=C /usr/bin/printf "%.*f\n" 2 $freegb ) # round to 2 decimal
 			echo
 			echo $info 'Partiton now has' $freegbr 'GB free space.'
