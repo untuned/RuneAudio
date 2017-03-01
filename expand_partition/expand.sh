@@ -35,7 +35,7 @@ devpart=$( mount | sed -n '/on \/ type/,1p' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 partini=${part:0:3}
 if [ $partini == 'mmc' ]; then
-	diskesc='\/dev\/'${part:-2}
+	diskesc='\/dev\/'${part::-2}
 else
 	diskesc='\/dev\/'$partini
 fi
