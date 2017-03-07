@@ -6,9 +6,15 @@ RuneAudio_transmission
 **Install**  
 ```sh
 wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/master/transmission/install.sh?raw=1"; chmod +x install.sh; ./install.sh
-
 ```
 
+**Unnstall**  
+```sh
+./transuninstall.sh
+```
+
+Manually install
+---
 **Create settings file**  
 _start to create_ `settings.json` _file, stop to make changes permanent_
 ```sh
