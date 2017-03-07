@@ -22,6 +22,8 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
+wget -q --show-progress -O traninstall.sh "https://github.com/rern/RuneAudio/blob/master/transmission/traninstall.sh?raw=1"; chmod +x traninstall.sh
+
 file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
 if ! pacman -Q aria2 > /dev/null 2>&1; then
