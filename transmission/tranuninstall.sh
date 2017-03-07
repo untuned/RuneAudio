@@ -31,9 +31,6 @@ pacman -Rs --noconfirm transmission-cli
 title "Remove files ..."
 rm -rfv /var/lib/transmission/.config/transmission-daemon
 
-# skip if reinstall - tranuninstall.sh re (any argument)
-[ $# -ne 0 ] && exit
-
 title2 "$bar Transmission successfully uninstalled."
 
 rm tranuninstall.sh
