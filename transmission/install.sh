@@ -22,21 +22,24 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
-title "$bar Install Transmission ..."
-pacman -Sy --noconfirm transmission-cli
-
+if ! pacman -Q aria2 > /dev/null 2>&1; then
+	title "$bar Install Transmission ..."
+	pacman -Sy --noconfirm transmission-cli
+fi
 systemctl start transmission
 systemctl stop transmission
 
-mkdir /mnt/MPD/USB/hdd/transmission
-mkdir /mnt/MPD/USB/hdd/transmission/incomplete
-mkdir /mnt/MPD/USB/hdd/transmission/torrents
-chown -R transmission:transmission /mnt/MPD/USB/hdd/transmission
+if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
+	mkdir /mnt/MPD/USB/hdd/transmission
+	mkdir /mnt/MPD/USB/hdd/transmission/incomplete
+	mkdir /mnt/MPD/USB/hdd/transmission/torrents
+	chown -R transmission:transmission /mnt/MPD/USB/hdd/transmission
+fi
 
 file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
-sed -i -e 's|"download-dir": "/var/lib/transmission/Downloads",|"download-dir": "/mnt/MPD/USB/hdd/transmission",|
-' -e 's|"incomplete-dir": "/var/lib/transmission/Downloads",|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete",|
+sed -i -e 's|"download-dir": ".*",|"download-dir": "/mnt/MPD/USB/hdd/transmission",|
+' -e 's|"incomplete-dir": ".*",|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete",|
 ' -e 's|"incomplete-dir-enabled": false,|"incomplete-dir-enabled": true,|
 ' -e '/[^{},]$/ s/$/\,/
 ' -e '/}/ i\
@@ -58,7 +61,7 @@ case $answer in
 			read pwd
 			sed -i -e 's|"rpc-authentication-required": false,|"rpc-authentication-required": true,|
 			' -e "s|\"rpc-password\": \".*\",|\"rpc-password\": \"$pwd\",|
-			" -e "s|\"rpc-username\": \"\",|\"rpc-username\": \"$usr\",|
+			" -e "s|\"rpc-username\": \".*\",|\"rpc-username\": \"$usr\",|
 			' $file
 		;;
 	* ) echo;;
