@@ -85,6 +85,7 @@ case $answer in
 esac
 
 title "$bar Transmission installed successfully."
+echo 'Download directory: /mnt/MPD/USB/hdd/transmission'
 echo 'Start: systemctl start transmission'
 echo 'Stop: systemctl stop transmission'
 titleend "Web Interface: [IP address]:9091"
