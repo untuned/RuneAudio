@@ -22,12 +22,16 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
+file='/var/lib/transmission/.config/transmission-daemon/settings.json'
+
 if ! pacman -Q aria2 > /dev/null 2>&1; then
 	title "$bar Install Transmission ..."
 	pacman -Sy --noconfirm transmission-cli
 fi
-systemctl start transmission
-systemctl stop transmission
+if [[ ! -e $file ]]; then
+	systemctl start transmission
+	systemctl stop transmission
+fi
 
 if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 	mkdir /mnt/MPD/USB/hdd/transmission
@@ -35,8 +39,6 @@ if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 	mkdir /mnt/MPD/USB/hdd/transmission/torrents
 	chown -R transmission:transmission /mnt/MPD/USB/hdd/transmission
 fi
-
-file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
 sed -i -e 's|"download-dir": ".*",|"download-dir": "/mnt/MPD/USB/hdd/transmission",|
 ' -e 's|"incomplete-dir": ".*",|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete",|
@@ -62,7 +64,7 @@ case $answer in
 			sed -i -e 's|"rpc-authentication-required": false,|"rpc-authentication-required": true,|
 			' -e "s|\"rpc-password\": \".*\",|\"rpc-password\": \"$pwd\",|
 			" -e "s|\"rpc-username\": \".*\",|\"rpc-username\": \"$usr\",|
-			' $file
+			" $file
 		;;
 	* ) echo;;
 esac
