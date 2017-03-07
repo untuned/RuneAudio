@@ -64,6 +64,19 @@ case $answer in
 	* ) echo;;
 esac
 
+title "$info Enable transmission on system startup:"
+echo -e '  \e[0;36m0\e[m No'
+echo -e '  \e[0;36m1\e[m Yes'
+echo
+echo -e '\e[0;36m0\e[m / 1 ? '
+read -n 1 answer
+case $answer in
+	1 ) systemctl enable transmission
+		systemctl start transmission;;
+	* ) echo;;
+esac
+
 title "$bar Transmission installed successfully."
 echo 'Start: systemctl start transmission'
+echo 'Stop: systemctl stop transmission'
 titleend "Web Interface: [IP address]:9091"
