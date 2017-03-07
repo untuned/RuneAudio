@@ -8,7 +8,7 @@ RuneAudio_transmission
 wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/master/transmission/install.sh?raw=1"; chmod +x install.sh; ./install.sh
 ```
 
-**Unnstall**  
+**Uninstall**  
 ```sh
 ./transuninstall.sh
 ```
