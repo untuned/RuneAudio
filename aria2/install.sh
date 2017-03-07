@@ -22,6 +22,7 @@ mkdir /usr/share/nginx/html/aria2
 cd /usr/share/nginx/html/aria2
 
 title "Get WebUI files ..."
+wget -q --show-progress -O ariauninstall.sh "https://github.com/rern/RuneAudio/blob/master/aria2/ariauninstall.sh?raw=1"; chmod +x ariauninstall.sh
 wget -q --show-progress -O aria2.zip https://github.com/ziahamza/webui-aria2/archive/master.zip
 bsdtar -xf aria2.zip -s'|[^/]*/||'
 rm aria2.zip
