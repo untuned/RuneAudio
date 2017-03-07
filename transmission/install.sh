@@ -43,6 +43,7 @@ fi
 sed -i -e 's|"download-dir": ".*",|"download-dir": "/mnt/MPD/USB/hdd/transmission",|
 ' -e 's|"incomplete-dir": ".*",|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete",|
 ' -e 's|"incomplete-dir-enabled": false,|"incomplete-dir-enabled": true,|
+' -e 's|"rpc-whitelist": "127.0.0.1",|"rpc-whitelist": "*.*.*.*",|
 ' -e '/[^{},]$/ s/$/\,/
 ' -e '/}/ i\
     "watch-dir": "/mnt/MPD/USB/hdd/transmission/torrents",\
