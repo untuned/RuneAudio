@@ -28,28 +28,22 @@ chown -R transmission:transmission /mnt/MPD/USB/hdd/transmission
 **/var/lib/transmission/.config/transmission-daemon/settings.json** - edit:  
 `systemctl stop transmisson` before changing, otherwise it will not be saved on next run.  
 _~/.config/transmission-daemon/settings.json - if run with other users_  
+ 
+```sh
+sed -i -e 's|"download-dir": "/var/lib/transmission/Downloads",|"download-dir": "/mnt/MPD/USB/hdd/transmission",|
+' -e 's|"incomplete-dir": "/var/lib/transmission/Downloads",|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete",|
+' -e 's|"incomplete-dir-enabled": false,|"incomplete-dir-enabled": true,|
+' -e 's|"rpc-authentication-required": false,|"rpc-authentication-required": true,|
+' -e 's|"rpc-password": ".*",|"rpc-password": "rune",|
+' -e 's|"rpc-username": "",|"rpc-username": "rune",|
+' -e '/[^{},]$/ s/$/\,/
+' -e '/}/ i\
+    "watch-dir": "/mnt/MPD/USB/hdd/transmission/torrents",\
+    "watch-dir-enabled": true
+' /var/lib/transmission/.config/transmission-daemon/settings.json
+```
+`watch-dir` start download on adding torrent files  
 
-set directories  
-```sh
-    ...
-    "download-dir": "/mnt/MPD/USB/hdd/transmission",
-    "incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete",
-    "incomplete-dir-enabled": true,
-    ...
-```
-[optional] set login  
-- plain text `"rpc-password"` will be hash once login
-- logout > close browser (no explicit logout, close tab not logout)
-- no login > `"rpc-authentication-required": false`  
-```sh
-    ...
-    "rpc-authentication-required": true,
-    ...
-    "rpc-password": "rune",
-    ...
-    "rpc-username": "rune",
-    ....
-```
 [optional] set specific client IP  
 - allow only IP
 - nolimit > `"rpc-whitelist-enabled": false`
@@ -58,14 +52,6 @@ set directories
     "rpc-whitelist": "127.0.0.1,[IP1],[IP2]",
     "rpc-whitelist-enabled": true,
     ...
-```
-set auto start download  
-- add torrent files to `watch-dir` will auto start download  
-- appending to last line needs a comma in the line before
-```sh
-    ...
-    "watch-dir": "/mnt/MPD/USB/hdd/transmission/torrents",
-    "watch-dir-enabled": true
 ```
 
 **Start transmission**  
