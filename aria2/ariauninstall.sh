@@ -35,7 +35,7 @@ rm -rfv /usr/share/nginx/html/aria2
 # restore modified files #######################################
 title "Restore modified files ..."
 echo '/etc/nginx/nginx.conf'
-sed -i '|server { #aria2|, |} #aria2| d' /etc/nginx/nginx.conf
+sed -i '/server { #aria2/, /} #aria2/ d' /etc/nginx/nginx.conf
 systemctl restart nginx
 
 title2 "$bar Aria2 successfully uninstalled."
