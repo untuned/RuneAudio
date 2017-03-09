@@ -51,7 +51,7 @@ dir=/mnt/MPD/USB/hdd/aria2
 max-connection-per-server=3
 ' > /root/.config/aria2/aria2.conf
 	
-if grep -qs 'aria2' /etc/nginx/nginx.conf; then
+if ! grep -qs 'aria2' /etc/nginx/nginx.conf; then
 	sed -i '/end http block/ i\
 	    server { #aria2\
 		listen 88;\
