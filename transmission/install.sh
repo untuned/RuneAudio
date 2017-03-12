@@ -22,7 +22,7 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
-wget -q --show-progress -O traninstall.sh "https://github.com/rern/RuneAudio/blob/master/transmission/traninstall.sh?raw=1"; chmod +x traninstall.sh
+wget -q --show-progress -O tranuninstall.sh "https://github.com/rern/RuneAudio/blob/master/transmission/tranuninstall.sh?raw=1"; chmod +x tranuninstall.sh
 
 file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
