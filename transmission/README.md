@@ -15,6 +15,11 @@ wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/ma
 
 Manually install
 ---
+**Install**  
+```sh
+pacman -Sy transmission-cli
+```
+
 **Create settings file**  
 _start to create_ `settings.json` _file, stop to make changes permanent_
 ```sh
