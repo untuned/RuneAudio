@@ -57,7 +57,7 @@ systemctl restart nmbd
 smbpasswd -a [user]
 ```
 
-**Set hostname** (If `netbios name` in smb.conf not work.)
+**Set hostname** (If `netbios name` in `smb.conf` not work.)  
 Shows in file browser
 ```sh
 hostnamectl set-hostname [name]
