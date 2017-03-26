@@ -27,7 +27,7 @@ wget -q --show-progress -O tranuninstall.sh "https://github.com/rern/RuneAudio/b
 file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
 if ! pacman -Q aria2 > /dev/null 2>&1; then
-	title "$bar Install Transmission ..."
+	title2 "Install Transmission ..."
 	pacman -Sy --noconfirm transmission-cli
 fi
 if [[ ! -e $file ]]; then
@@ -84,7 +84,7 @@ case $answer in
 	* ) echo;;
 esac
 
-title "$bar Transmission installed successfully."
+title2 "Transmission installed successfully."
 echo 'Download directory: /mnt/MPD/USB/hdd/transmission'
 echo 'Start: systemctl start transmission'
 echo 'Stop: systemctl stop transmission'
