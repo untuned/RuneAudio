@@ -23,7 +23,7 @@ if ! pacman -Q transmission-cli > /dev/null 2>&1; then
 	exit
 fi
 
-title2 "$bar Uninstall Transmission ..."
+title2 "Uninstall Transmission ..."
 # uninstall package #######################################
 pacman -Rs --noconfirm transmission-cli
 
@@ -31,6 +31,6 @@ pacman -Rs --noconfirm transmission-cli
 title "Remove files ..."
 rm -rfv /var/lib/transmission/.config/transmission-daemon
 
-title2 "$bar Transmission successfully uninstalled."
+title2 "Transmission successfully uninstalled."
 
 rm tranuninstall.sh
