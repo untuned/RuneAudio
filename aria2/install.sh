@@ -24,7 +24,7 @@ titleend() {
 rm install.sh
 
 if ! pacman -Q aria2 > /dev/null 2>&1; then
-	title2 "$bar Install Aria2 ..."
+	title2 "Install Aria2 ..."
 	pacman -S --noconfirm aria2
 else
 	titleend "$info Aria2 already installed."
