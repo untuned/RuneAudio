@@ -8,9 +8,9 @@ any os file browsers:
 hostnamectl set-hostname [name]
 ```
 only Windows(NetBIOS) file browsers:  
-`netbios name` in `/etc/samba/smb.conf`  
+`netbios name` in `/etc/samba-dev/smb.conf`  
 
-**/etc/samba/smb.conf**
+**/etc/samba/smb-dev.conf**
 ```sh
 [global]
 #	netbios name = [name]
