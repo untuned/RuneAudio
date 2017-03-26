@@ -23,9 +23,14 @@ titleend() {
 
 rm install.sh
 
+if [[ ! -e rankmirrors.sh ]]; then
+	wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/RuneAudio/blob/master/rankmirrors/rankmirrors.sh?raw=1"
+	chmod +x rankmirrors.sh
+	./rankmirrors.sh
+fi
 if ! pacman -Q aria2 > /dev/null 2>&1; then
 	title2 "Install Aria2 ..."
-	pacman -S --noconfirm aria2
+	pacman -Sy --noconfirm aria2
 else
 	titleend "$info Aria2 already installed."
 	exit
@@ -35,7 +40,8 @@ mkdir /usr/share/nginx/html/aria2
 cd /usr/share/nginx/html/aria2
 
 title "Get WebUI files ..."
-wget -q --show-progress -O ariauninstall.sh "https://github.com/rern/RuneAudio/blob/master/aria2/ariauninstall.sh?raw=1"; chmod +x ariauninstall.sh
+wget -q --show-progress -O ariauninstall.sh "https://github.com/rern/RuneAudio/blob/master/aria2/ariauninstall.sh?raw=1"
+chmod +x ariauninstall.sh
 wget -q --show-progress -O aria2.zip https://github.com/ziahamza/webui-aria2/archive/master.zip
 bsdtar -xf aria2.zip -s'|[^/]*/||'
 rm aria2.zip
