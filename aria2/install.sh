@@ -66,6 +66,6 @@ fi
 title "Restart nginx ..."
 systemctl restart nginx
 
-title "$bar Aria2 successfully installed."
+title2 "Aria2 successfully installed."
 echo "Start Aria2: aria2c"
 titleend "WebUI: [RuneAudio_IP]:88"
