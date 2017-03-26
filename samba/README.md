@@ -2,10 +2,18 @@ samba
 ---
 RuneAudio samba  
 
+**Server name**  
+in any os file browsers:
+```sh
+hostnamectl set-hostname [name]
+```
+in Windows(NetBIOS) file browsers:  
+`netbios name` in `/etc/samba/smb.conf`  
+
 **/etc/samba/smb.conf**
 ```sh
 [global]
-	netbios name = [name]
+#	netbios name = [name]
 	workgroup = WORKGROUP
 	server string = Samba %v on %L
 	encrypt passwords = yes
@@ -47,17 +55,11 @@ RuneAudio samba
 ```sh
 systemctl restart smbd
 
-# if set new hostname
+# if set new hostname / netbios name
 systemctl restart nmbd
 ```
 
 **Add samba user + password**
 ```sh
 smbpasswd -a [user]
-```
-
-**Set hostname** (If `netbios name` in `smb.conf` not work.)  
-Shows in file browser
-```sh
-hostnamectl set-hostname [name]
 ```
