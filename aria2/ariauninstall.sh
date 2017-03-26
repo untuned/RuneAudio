@@ -23,7 +23,7 @@ if ! pacman -Q aria2 > /dev/null 2>&1; then
 	exit
 fi
 
-title2 "$bar Uninstall Aria2 ..."
+title2 "Uninstall Aria2 ..."
 # uninstall package #######################################
 pacman -Rs --noconfirm aria2
 
@@ -38,6 +38,6 @@ echo '/etc/nginx/nginx.conf'
 sed -i '/server { #aria2/, /} #aria2/ d' /etc/nginx/nginx.conf
 systemctl restart nginx
 
-title2 "$bar Aria2 successfully uninstalled."
+title2 "Aria2 successfully uninstalled."
 
 rm ariauninstall.sh
