@@ -22,7 +22,13 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
-wget -q --show-progress -O tranuninstall.sh "https://github.com/rern/RuneAudio/blob/master/transmission/tranuninstall.sh?raw=1"; chmod +x tranuninstall.sh
+wget -q --show-progress -O tranuninstall.sh "https://github.com/rern/RuneAudio/blob/master/transmission/tranuninstall.sh?raw=1"
+chmod +x tranuninstall.sh
+if [[ ! -e rankmirrors.sh ]]; then
+	wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/RuneAudio/blob/master/rankmirrors/rankmirrors.sh?raw=1"
+	chmod +x rankmirrors.sh
+	./rankmirrors.sh
+fi
 
 file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
