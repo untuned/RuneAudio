@@ -48,8 +48,7 @@ rm aria2.zip
 
 mkdir /root/.config/aria2
 [[ ! -e /mnt/MPD/USB/hdd/aria2 ]] && mkdir /mnt/MPD/USB/hdd/aria2
-echo '
-enable-rpc=true
+echo 'enable-rpc=true
 rpc-listen-all=true
 daemon=true
 disable-ipv6=true
