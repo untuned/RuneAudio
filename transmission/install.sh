@@ -32,7 +32,7 @@ fi
 
 file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
-if ! pacman -Q aria2 > /dev/null 2>&1; then
+if ! pacman -Q transmission-cli > /dev/null 2>&1; then
 	title2 "Install Transmission ..."
 	pacman -Sy --noconfirm transmission-cli
 fi
