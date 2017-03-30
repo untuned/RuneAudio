@@ -22,8 +22,8 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
-wget -q --show-progress -O tranuninstall.sh "https://github.com/rern/RuneAudio/blob/master/transmission/tranuninstall.sh?raw=1"
-chmod +x tranuninstall.sh
+wget -q --show-progress -O uninstall_tran.sh "https://github.com/rern/RuneAudio/blob/master/transmission/tranuninstall.sh?raw=1"
+chmod +x uninstall_tran.sh
 if [[ ! -e rankmirrors.sh ]]; then
 	wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/RuneAudio/blob/master/rankmirrors/rankmirrors.sh?raw=1"
 	chmod +x rankmirrors.sh
@@ -66,14 +66,14 @@ echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
 case $answer in
 	1 ) echo
-			echo 'Username: '
-			read usr 
-			echo 'Password: '
-			read -s pwd
-			sed -i -e 's|"rpc-authentication-required": false,|"rpc-authentication-required": true,|
-			' -e "s|\"rpc-password\": \".*\",|\"rpc-password\": \"$pwd\",|
-			" -e "s|\"rpc-username\": \".*\",|\"rpc-username\": \"$usr\",|
-			" $file
+		echo 'Username: '
+		read usr 
+		echo 'Password: '
+		read -s pwd
+		sed -i -e 's|"rpc-authentication-required": false,|"rpc-authentication-required": true,|
+		' -e "s|\"rpc-password\": \".*\",|\"rpc-password\": \"$pwd\",|
+		" -e "s|\"rpc-username\": \".*\",|\"rpc-username\": \"$usr\",|
+		" $file
 		;;
 	* ) echo;;
 esac
@@ -91,6 +91,7 @@ case $answer in
 esac
 
 title2 "Transmission installed successfully."
+echo 'Uninstall: ./uninstall_tran.sh'
 echo 'Download directory: /mnt/MPD/USB/hdd/transmission'
 echo 'Start: systemctl start transmission'
 echo 'Stop: systemctl stop transmission'
