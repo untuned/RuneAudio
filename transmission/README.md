@@ -13,6 +13,15 @@ wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/ma
 ./uninstall_tran.sh
 ```
 
+**Start transmission**  
+```sh
+systemctl start transmission
+```
+
+**WebUI**  
+Browser URL:  
+_RuneAudio IP_
+
 Manually install
 ---
 **Install**  
@@ -42,18 +51,16 @@ _~/.config/transmission-daemon/settings.json - if run with other users_
     ...
 ```
 
-**Start transmission**  
-```sh
-systemctl start transmission
-```
-
 [optional] **Auto start transmission on system start**  
 ```sh
 systemctl enable transmission
 ```
 
-**WebUI**  
-  
-Browser URL:  
-  
-_RuneAudio IP_:9091 (eg: 192.168.1.11:9091)  
+
+
+:9091 (eg: 192.168.1.11:9091)  
+
+**Stop transmission**  
+```sh
+systemctl stop transmission
+```
