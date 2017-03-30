@@ -33,4 +33,4 @@ rm -rfv /var/lib/transmission/.config/transmission-daemon
 
 title2 "Transmission successfully uninstalled."
 
-rm tranuninstall.sh
+rm uninstall_tran.sh
