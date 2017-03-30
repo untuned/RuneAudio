@@ -10,7 +10,7 @@ wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/ma
 
 **Uninstall**  
 ```sh
-./transuninstall.sh
+./uninstall_tran.sh
 ```
 
 Manually install
