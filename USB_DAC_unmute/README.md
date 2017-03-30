@@ -10,7 +10,7 @@ alsamixer
 ![1](https://github.com/rern/Assets/blob/master/alsamixer/1.png)  
 
 **Select Sound Device**  
-`F6`  
+`F6` select menu  
 ![2](https://github.com/rern/Assets/blob/master/alsamixer/2.png)  
 
 **Setting**  
@@ -18,7 +18,7 @@ alsamixer
 ![3](https://github.com/rern/Assets/blob/master/alsamixer/3.png)  
 
 **Unmute**
-- `M` toggles `MM` mute -> `00` unmute  
+- `M` toggles `MM` mute <-> `00` unmute  
 - `left arrow` `right arrow` switches channel  
 - `Esc` exit  
 
