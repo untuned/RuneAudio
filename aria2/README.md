@@ -10,13 +10,17 @@ RuneAudio aria2 with webui
 wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/master/aria2/install.sh?raw=1"; chmod +x install.sh; ./install.sh
 ```
 
+**Uninstall**  
+```sh
+./uninstall_aria.sh
+```
+
 **Start aria2**  
 ```sh
 aria2c
 ```
 
 **WebUI**  
-  
 Browser URL:  
 \[RuneAudio IP]:88  
 
@@ -26,9 +30,4 @@ Specify saved filename: (set directory in `dir` option)
 **Stop aria2**  
 ```sh
 killall aria2c
-```
-
-**Uninstall**  
-```sh
-wget -q --show-progress -O uninstall.sh "https://github.com/rern/RuneAudio/blob/master/aria2/uninstall.sh?raw=1"; chmod +x uninstall.sh; ./uninstall.sh
 ```
