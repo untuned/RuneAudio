@@ -23,6 +23,9 @@ titleend() {
 
 rm install.sh
 
+wget -q --show-progress -O uninstall_aria.sh "https://github.com/rern/RuneAudio/blob/master/aria2/ariauninstall.sh?raw=1"
+chmod +x uninstall_aria.sh
+
 if [[ ! -e rankmirrors.sh ]]; then
 	wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/RuneAudio/blob/master/rankmirrors/rankmirrors.sh?raw=1"
 	chmod +x rankmirrors.sh
@@ -40,8 +43,6 @@ mkdir /usr/share/nginx/html/aria2
 cd /usr/share/nginx/html/aria2
 
 title "Get WebUI files ..."
-wget -q --show-progress -O ariauninstall.sh "https://github.com/rern/RuneAudio/blob/master/aria2/ariauninstall.sh?raw=1"
-chmod +x ariauninstall.sh
 wget -q --show-progress -O aria2.zip https://github.com/ziahamza/webui-aria2/archive/master.zip
 bsdtar -xf aria2.zip -s'|[^/]*/||'
 rm aria2.zip
@@ -72,5 +73,6 @@ title "Restart nginx ..."
 systemctl restart nginx
 
 title2 "Aria2 successfully installed."
+echo "Uninstall: ./uninstall_aria.sh"
 echo "Start Aria2: aria2c"
 titleend "WebUI: [RuneAudio_IP]:88"
