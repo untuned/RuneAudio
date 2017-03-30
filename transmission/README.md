@@ -20,7 +20,7 @@ systemctl start transmission
 
 **WebUI**  
 Browser URL:  
-_RuneAudio IP_:9091 (eg: 192.168.1.11:9091)  
+_[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)  
 
 **Stop transmission**  
 ```sh
