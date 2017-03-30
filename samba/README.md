@@ -3,11 +3,11 @@ samba
 RuneAudio samba  
 
 **Server name**  
-any os file browsers:
+- any os file browsers:
 ```sh
 hostnamectl set-hostname [name]
 ```
-only Windows(NetBIOS) file browsers:  
+- only Windows(NetBIOS) file browsers:  
 `netbios name` in `/etc/samba-dev/smb.conf`  
 
 **/etc/samba/smb-dev.conf**
