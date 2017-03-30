@@ -40,4 +40,4 @@ systemctl restart nginx
 
 title2 "Aria2 successfully uninstalled."
 
-rm ariauninstall.sh
+rm uninstall_aria.sh
