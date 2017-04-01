@@ -56,7 +56,17 @@ disable-ipv6=true
 dir=/mnt/MPD/USB/hdd/aria2
 max-connection-per-server=3
 ' > /root/.config/aria2/aria2.conf
-	
+
+echo '[Unit]
+Description=Aria2
+After=network-online.target
+[Service]
+Type=forking
+ExecStart=/usr/bin/aria2c
+[Install]
+WantedBy=multi-user.target
+' > /usr/lib/systemd/system/aria2.service
+
 if ! grep -qs 'aria2' /etc/nginx/nginx.conf; then
 	sed -i '/end http block/ i\
 	    server { #aria2\
@@ -72,7 +82,23 @@ fi
 title "Restart nginx ..."
 systemctl restart nginx
 
+title "$info Aria2 startup"
+echo 'Enable:'
+echo -e '  \e[0;36m0\e[m No'
+echo -e '  \e[0;36m1\e[m Yes'
+echo
+echo -e '\e[0;36m0\e[m / 1 ? '
+read -n 1 answer
+case $answer in
+	1 ) systemctl enable aria2
+		systemctl start aria2
+	;;
+	* ) echo;;	
+esac
+
 title2 "Aria2 successfully installed."
-echo "Uninstall: ./uninstall_aria.sh"
-echo "Start Aria2: aria2c"
+echo 'Uninstall: ./uninstall_aria.sh'
+echo 'Start: systemctl start aria2'
+echo 'Stop: systemctl stop aria2'
+echo 'Download directory: (set in WebUI)'
 titleend "WebUI: [RuneAudio_IP]:88"
