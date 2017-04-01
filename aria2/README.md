@@ -6,7 +6,7 @@ RuneAudio aria2 with webui
 
 
 **Install**  
-Connect a hard drive
+Connect a hard drive with label `hdd`  
 ```sh
 wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/master/aria2/install.sh?raw=1"; chmod +x install.sh; ./install.sh
 ```
