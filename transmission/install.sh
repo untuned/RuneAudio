@@ -92,7 +92,7 @@ esac
 
 title2 "Transmission installed successfully."
 echo 'Uninstall: ./uninstall_tran.sh'
-echo 'Download directory: /mnt/MPD/USB/hdd/transmission'
 echo 'Start: systemctl start transmission'
 echo 'Stop: systemctl stop transmission'
-titleend "Web Interface: [IP address]:9091"
+echo 'Download directory: /mnt/MPD/USB/hdd/transmission'
+titleend "WebUI: [RuneAudio_IP]:9091"
