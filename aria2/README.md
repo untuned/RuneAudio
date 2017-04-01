@@ -6,7 +6,7 @@ RuneAudio Aria2 with WebUI
 
 
 **Install**  
-Connect a hard drive with label `hdd`  
+Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`  
 ```sh
 wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/master/aria2/install.sh?raw=1"; chmod +x install.sh; ./install.sh
 ```
