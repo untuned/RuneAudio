@@ -18,14 +18,14 @@ wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/ma
 systemctl start transmission
 ```
 
-**WebUI**  
-Browser URL:  
-_[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)  
-
 **Stop transmission**  
 ```sh
 systemctl stop transmission
 ```
+
+**WebUI**  
+Browser URL:  
+_[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)  
 
 Manually install
 ---
