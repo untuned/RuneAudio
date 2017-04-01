@@ -23,6 +23,11 @@ titleend() {
 
 rm install.sh
 
+if ! grep -qs '/mnt/MPD/USB/hdd' /proc/mounts; then
+	titleend "$info Hard drive not mount at /mnt/MPD/USB/hdd"
+	exit
+fi
+
 wget -q --show-progress -O uninstall_aria.sh "https://github.com/rern/RuneAudio/blob/master/aria2/ariauninstall.sh?raw=1"
 chmod +x uninstall_aria.sh
 
