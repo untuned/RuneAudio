@@ -35,7 +35,8 @@ add torrent files to `/media/hdd/transmission/torrents` will auto start download
 - allow only IP
 - nolimit > `"rpc-whitelist-enabled": false`
 ```sh
-    ....
+    ...
     "rpc-whitelist": "127.0.0.1,[IP1],[IP2]",
     "rpc-whitelist-enabled": true,
+    ...
 ```
