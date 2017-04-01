@@ -28,10 +28,8 @@ systemctl stop transmission
 Browser URL:  
 _[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)  
 
- - edit:  
-`systemctl stop transmisson` before changing, otherwise it will not be saved on next run.  
-_~/.config/transmission-daemon/settings.json - if run with other users_  
-`watch-dir` start download on adding torrent files  
+**auto start download**  
+add torrent files to `/media/hdd/transmission/torrents` will auto start download  
 
 [optional] **set specific client IP**  
 - allow only IP
