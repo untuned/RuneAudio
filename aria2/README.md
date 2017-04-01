@@ -17,7 +17,12 @@ wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/ma
 
 **Start aria2**  
 ```sh
-aria2c
+systemctl start aria2
+```
+
+**Stop aria2**  
+```sh
+systemctl stop aria2
 ```
 
 **WebUI**  
@@ -26,8 +31,3 @@ _[RuneAudio IP]_:88 (eg: 192.168.1.11:88)
 
 Specify saved filename: (set directory in `dir` option)  
 [download link] --out=[filename]  
-
-**Stop aria2**  
-```sh
-killall aria2c
-```
