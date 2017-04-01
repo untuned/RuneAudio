@@ -104,5 +104,5 @@ title2 "Aria2 successfully installed."
 echo 'Uninstall: ./uninstall_aria.sh'
 echo 'Start: systemctl start aria2'
 echo 'Stop: systemctl stop aria2'
-echo 'Download directory: (set in WebUI)'
+echo 'Download directory: /mnt/MPD/USB/hdd/aria2'
 titleend "WebUI: [RuneAudio_IP]:88"
