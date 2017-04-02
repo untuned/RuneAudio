@@ -26,9 +26,9 @@ if ! grep -qs '/mnt/MPD/USB/hdd' /proc/mounts; then
 	titleend "$info Hard drive not mount at /mnt/MPD/USB/hdd"
 	exit
 fi
-wget -q --show-progress -O uninstall_tran.sh "https://github.com/rern/RuneAudio/blob/master/transmission/tranuninstall.sh?raw=1"
+wget -q --show-progress -O uninstall_tran.sh "https://github.com/rern/RuneAudio/blob/master/transmission/uninstall_tran.sh?raw=1"
 chmod +x uninstall_tran.sh
-if [[ ! -e rankmirrors.sh ]]; then
+if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
 	wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/RuneAudio/blob/master/rankmirrors/rankmirrors.sh?raw=1"
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
