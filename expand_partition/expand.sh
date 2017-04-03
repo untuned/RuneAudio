@@ -31,7 +31,7 @@ titleend() {
 
 # partition data #######################################
 
-devpart=$( mount | sed -n '/on \/ type/,1p' | awk '{print $1}' )
+devpart=$( mount | sed -n '/on \/ type/p' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 partini=${part:0:3}
 if [ $partini == 'mmc' ]; then
