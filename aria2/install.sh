@@ -56,7 +56,7 @@ rpc-listen-all=true
 daemon=true
 disable-ipv6=true
 dir=/mnt/MPD/USB/hdd/aria2
-max-connection-per-server=3
+max-connection-per-server=4
 ' > /root/.config/aria2/aria2.conf
 
 echo '[Unit]
