@@ -83,15 +83,25 @@ case $answer in
 	* ) echo;;
 esac
 
-title "$info Enable transmission on system startup:"
+title "$info Start Transmission on system startup:"
 echo -e '  \e[0;36m0\e[m No'
 echo -e '  \e[0;36m1\e[m Yes'
 echo
 echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
 case $answer in
-	1 ) systemctl enable transmission
-		systemctl start transmission;;
+	1 ) systemctl enable transmission;;
+	* ) echo;;
+esac
+
+title "$info Start Transmission now:"
+echo -e '  \e[0;36m0\e[m No'
+echo -e '  \e[0;36m1\e[m Yes'
+echo
+echo -e '\e[0;36m0\e[m / 1 ? '
+read -n 1 answer
+case $answer in
+	1 ) systemctl start transmission;;
 	* ) echo;;
 esac
 
