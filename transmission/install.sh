@@ -41,13 +41,9 @@ if ! pacman -Q transmission-cli > /dev/null 2>&1; then
 	pacman -Sy --noconfirm transmission-cli
 fi
 # settings at /root/.config
-systemctl stop transmission
-killall transmission-daemon
 sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
 systemctl daemon-reload
 systemctl start transmission
-#mkdir -p /root/.config/transmission-daemon
-#cp /var/lib/transmission-daemon/.config/transmission-daemon/settings.json /root/.config/transmission-daemon/
 
 if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 	mkdir /mnt/MPD/USB/hdd/transmission
@@ -60,6 +56,7 @@ file='/root/.config/transmission-daemon/settings.json'
 sed -i -e 's|"download-dir": ".*"|"download-dir": "/mnt/MPD/USB/hdd/transmission"|
 ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete"|
 ' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
+' -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
 ' -e 's|"rpc-whitelist": "127.0.0.1"|"rpc-whitelist": "*.*.*.*"|
 ' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
 ' -e '/[^{},]$/ s/$/\,/
