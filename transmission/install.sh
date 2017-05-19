@@ -43,7 +43,7 @@ fi
 # settings at /root/.config
 systemctl stop transmission-daemon
 killall transmission-daemon
-sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission-daemon.service
+sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
 systemctl daemon-reload
 systemctl start transmission
 #mkdir -p /root/.config/transmission-daemon
