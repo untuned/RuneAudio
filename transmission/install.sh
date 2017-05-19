@@ -48,10 +48,13 @@ if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 	chown -R transmission:transmission /mnt/MPD/USB/hdd/transmission
 fi
 
-# settings at /root/.config
+# change user to 'root'
 sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
+# refresh systemd services
 systemctl daemon-reload
+# create settings.json
 systemctl start transmission
+# stop to edit
 systemctl stop transmission
 file='/root/.config/transmission-daemon/settings.json'
 sed -i -e 's|"download-dir": ".*"|"download-dir": "/mnt/MPD/USB/hdd/transmission"|
