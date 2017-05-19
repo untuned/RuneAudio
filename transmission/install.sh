@@ -46,8 +46,8 @@ killall transmission-daemon
 sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission-daemon.service
 systemctl daemon-reload
 systemctl start transmission
-mkdir -p /root/.config/transmission-daemon
-cp /var/lib/transmission-daemon/.config/transmission-daemon/settings.json /root/.config/transmission-daemon/
+#mkdir -p /root/.config/transmission-daemon
+#cp /var/lib/transmission-daemon/.config/transmission-daemon/settings.json /root/.config/transmission-daemon/
 
 if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 	mkdir /mnt/MPD/USB/hdd/transmission
