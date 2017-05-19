@@ -40,10 +40,13 @@ if ! pacman -Q transmission-cli > /dev/null 2>&1; then
 	title2 "Install Transmission ..."
 	pacman -Sy --noconfirm transmission-cli
 fi
-if [[ ! -e $file ]]; then
-	systemctl start transmission
-	systemctl stop transmission
-fi
+# settings at /root/.config
+systemctl stop transmission-daemon
+killall transmission-daemon
+sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission-daemon.service
+systemctl daemon-reload
+mkdir -p /root/.config/transmission-daemon
+cp /var/lib/transmission-daemon/.config/transmission-daemon/settings.json /root/.config/transmission-daemon/
 
 if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 	mkdir /mnt/MPD/USB/hdd/transmission
@@ -52,6 +55,7 @@ if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 	chown -R transmission:transmission /mnt/MPD/USB/hdd/transmission
 fi
 
+file='/root/.config/transmission-daemon/settings.json'
 sed -i -e 's|"download-dir": ".*"|"download-dir": "/mnt/MPD/USB/hdd/transmission"|
 ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete"|
 ' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
@@ -90,8 +94,8 @@ echo
 echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
 case $answer in
-	1 ) systemctl enable transmission;;
-	* ) echo;;
+	1 ) echo;;
+	* ) systemctl disable transmission-daemon;;
 esac
 
 title "$info Start Transmission now:"
