@@ -41,7 +41,7 @@ if ! pacman -Q transmission-cli > /dev/null 2>&1; then
 	pacman -Sy --noconfirm transmission-cli
 fi
 # settings at /root/.config
-systemctl stop transmission-daemon
+systemctl stop transmission
 killall transmission-daemon
 sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
 systemctl daemon-reload
