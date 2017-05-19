@@ -40,10 +40,6 @@ if ! pacman -Q transmission-cli > /dev/null 2>&1; then
 	title2 "Install Transmission ..."
 	pacman -Sy --noconfirm transmission-cli
 fi
-# settings at /root/.config
-sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
-systemctl daemon-reload
-systemctl start transmission
 
 if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 	mkdir /mnt/MPD/USB/hdd/transmission
@@ -52,6 +48,11 @@ if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 	chown -R transmission:transmission /mnt/MPD/USB/hdd/transmission
 fi
 
+# settings at /root/.config
+sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
+systemctl daemon-reload
+systemctl start transmission
+systemctl stop transmission
 file='/root/.config/transmission-daemon/settings.json'
 sed -i -e 's|"download-dir": ".*"|"download-dir": "/mnt/MPD/USB/hdd/transmission"|
 ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete"|
