@@ -1,6 +1,6 @@
 samba
 ---
-RuneAudio samba  
+RuneAudio already installed samba  
 
 **Server name**  
 - any os file browsers:
