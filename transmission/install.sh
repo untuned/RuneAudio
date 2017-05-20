@@ -49,6 +49,7 @@ if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 fi
 
 # change user to 'root'
+pgrep transmission && systemctl stop transmission
 sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
 # refresh systemd services
 systemctl daemon-reload
