@@ -42,7 +42,7 @@ fi
 
 freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
 freemb=$( python -c "print($freekb / 1000)" ) # bash itself cannot do float
-unpartb=$( sfdisk -F | grep '$diskesc' | awk '{print $6}' ) # unpartitoned space in GB
+unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' ) # unpartitoned space in GB
 unpartmb=$( python -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 
