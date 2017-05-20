@@ -61,7 +61,6 @@ file='/root/.config/transmission-daemon/settings.json'
 sed -i -e 's|"download-dir": ".*"|"download-dir": "/mnt/MPD/USB/hdd/transmission"|
 ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete"|
 ' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
-' -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
 ' -e 's|"rpc-whitelist": "127.0.0.1"|"rpc-whitelist": "*.*.*.*"|
 ' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
 ' -e '/[^{},]$/ s/$/\,/
@@ -82,9 +81,9 @@ case $answer in
 		read usr 
 		echo 'Password: '
 		read -s pwd
-		sed -i -e 's|"rpc-authentication-required": false,|"rpc-authentication-required": true,|
-		' -e "s|\"rpc-password\": \".*\",|\"rpc-password\": \"$pwd\",|
-		" -e "s|\"rpc-username\": \".*\",|\"rpc-username\": \"$usr\",|
+		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
+		' -e "s|\"rpc-password\": \".*\"|\"rpc-password\": \"$pwd\"|
+		" -e "s|\"rpc-username\": \".*\"|\"rpc-username\": \"$usr\"|
 		" $file
 		;;
 	* ) echo;;
