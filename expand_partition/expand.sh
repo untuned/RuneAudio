@@ -31,7 +31,7 @@ titleend() {
 
 # partition data #######################################
 
-devpart=$( mount | sed -n '/on \/ type/p' | awk '{print $1}' )
+devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 partini=${part:0:3}
 if [ $partini == 'mmc' ]; then
@@ -40,9 +40,9 @@ else
 	disk='/dev/'$partini
 fi
 
-freekb=$( df | sed -n '/\/$/p' | awk '{print $4}' ) # free disk space in kB
+freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
 freemb=$( python -c "print($freekb / 1000)" ) # bash itself cannot do float
-unpartb=$( sfdisk -F | sed -n '\|'$diskesc'|p' | awk '{print $6}' ) # unpartitoned space in GB
+unpartb=$( sfdisk -F | grep '$diskesc' | awk '{print $6}' ) # unpartitoned space in GB
 unpartmb=$( python -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 
@@ -74,7 +74,7 @@ case $answer in
 			errorend "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
 			exit
 		else
-			freekb=$( df | sed -n '/\/$/p' | awk '{print $4}' )
+			freekb=$( df | grep '/$' | awk '{print $4}' )
 			freemb=$( python -c "print($freekb / 1000)" )
 			echo
 			titleend "$info Partiton now has $freemb MB free space."
