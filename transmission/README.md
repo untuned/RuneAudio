@@ -9,16 +9,6 @@ Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`
 wget -q --show-progress -O install.sh "https://github.com/rern/RuneAudio/blob/master/transmission/install.sh?raw=1"; chmod +x install.sh; ./install.sh
 ```
 
-**Complications**  
-- Transmission 2.92 needs openssl 1.1 and 1.0 
-    * libcrypto.so.1.1, libcrypto.so.1.0.0
-    * libssl.so.1.1, libssl.so.1.0.0
-- Both versions must be in `/lib/`
-- Edit `/root/.config/transmission-daemon/settings.json`
-   * `killall transmission-daemon` > `systemctl start transmission` > `systemctl stop transmission`
-- Restart
-   * `systemctl start transmission`
-
 **Uninstall**  
 ```sh
 ./uninstall_tran.sh
