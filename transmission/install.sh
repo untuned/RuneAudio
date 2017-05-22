@@ -42,6 +42,8 @@ if [[ ! -e /lib/libssl.so.1.1 ]]; then
 	cp /lib/libcrypto.so.1.0.0 /lib/libcrypto.so.1.0.0.bak
 	cp /lib/libssl.so.1.0.0 /lib/libssl.so.1.0.0.bak
 	pacman -Sy --noconfirm openssl
+	ln -s /lib/libcrypto.so.1.0.0.bak /lib/libcrypto.so.1.0.0
+	ln -s /lib/libssl.so.1.0.0.bak /lib/libssl.so.1.0.0
 fi
 if ! pacman -Q transmission-cli > /dev/null 2>&1; then
 	title2 "Install Transmission ..."
