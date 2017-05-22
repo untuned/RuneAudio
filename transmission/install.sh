@@ -36,13 +36,13 @@ fi
 
 file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
-if ! pacman -Q transmission-cli > /dev/null 2>&1; then
-	title2 "Install Transmission ..."
-	pacman -Sy --noconfirm transmission-cli
-fi
 if [[ ! -e /lib/libssl.so.1.1 ]]; then
 	title2 "Install openssl 1.1 ..."
 	pacman -Sy --noconfirm openssl
+fi
+if ! pacman -Q transmission-cli > /dev/null 2>&1; then
+	title2 "Install Transmission ..."
+	pacman -Sy --noconfirm transmission-cli
 fi
 
 if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
