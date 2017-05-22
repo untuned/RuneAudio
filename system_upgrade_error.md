@@ -3,8 +3,10 @@ System upgrade complications
 
 **Some `files exist` error:**  
 ```sh
-.../etc/ssl/certs/ca-certificates.crt exists in filesystem
-.../usr/lib/firmware/brcm/brcmfmac43430-sdio.bin exists in filesystem
+error: failed to commit transaction (conflicting files)
+ca-certificates-utils: /etc/ssl/certs/ca-certificates.crt exists in filesystem
+linux-firmware: /usr/lib/firmware/brcm/brcmfmac43430-sdio.bin exists in filesystem
+Errors occurred, no packages were upgraded.
 ```
 
 **Fix:**  
