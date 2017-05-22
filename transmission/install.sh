@@ -40,6 +40,10 @@ if ! pacman -Q transmission-cli > /dev/null 2>&1; then
 	title2 "Install Transmission ..."
 	pacman -Sy --noconfirm transmission-cli
 fi
+if [[ ! -e /lib/libssl.so.1.1 ]]; then
+	title2 "Install openssl 1.1 ..."
+	pacman -Sy --noconfirm openssl
+fi
 
 if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 	mkdir /mnt/MPD/USB/hdd/transmission
@@ -49,7 +53,7 @@ if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 fi
 
 # change user to 'root'
-pgrep transmission > /dev/null 2>&1 && systemctl stop transmission
+pgrep transmission > /dev/null 2>&1 && killall transmission-daemon
 sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
 # refresh systemd services
 systemctl daemon-reload
@@ -61,7 +65,6 @@ file='/root/.config/transmission-daemon/settings.json'
 sed -i -e 's|"download-dir": ".*"|"download-dir": "/mnt/MPD/USB/hdd/transmission"|
 ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete"|
 ' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
-' -e 's|"rpc-whitelist": "127.0.0.1"|"rpc-whitelist": "*.*.*.*"|
 ' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
 ' -e '/[^{},]$/ s/$/\,/
 ' -e '/}/ i\
