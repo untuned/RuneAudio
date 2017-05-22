@@ -38,6 +38,9 @@ file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
 if [[ ! -e /lib/libssl.so.1.1 ]]; then
 	title2 "Install openssl 1.1 ..."
+	# backup to prevent delete
+	cp /lib/libcrypto.so.1.0.0 /lib/libcrypto.so.1.0.0.bak
+	cp /lib/libssl.so.1.0.0 /lib/libssl.so.1.0.0.bak
 	pacman -Sy --noconfirm openssl
 fi
 if ! pacman -Q transmission-cli > /dev/null 2>&1; then
