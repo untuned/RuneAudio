@@ -50,7 +50,9 @@ fi
 
 # change user to 'root'
 pgrep transmission > /dev/null 2>&1 && killall transmission-daemon
-sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
+systemctl disable transmission
+cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
+sed -i 's|User=transmission|User=root|' /etc/systemd/system/transmission.service
 # refresh systemd services
 systemctl daemon-reload
 # create settings.json
@@ -95,8 +97,8 @@ echo
 echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
 case $answer in
-	1 ) echo;;
-	* ) systemctl disable transmission-daemon;;
+	1 ) systemctl enable transmission;;
+	* ) echo;;
 esac
 
 title "$info Start Transmission now:"
