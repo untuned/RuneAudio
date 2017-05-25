@@ -13,8 +13,8 @@ mkdir -p /home/x/transmission
 
 - `https://archlinuxarm.org/packages`  
 - Search `transmission-cli` `armv7h`  
-- `Source Files` > download only `PKGBUILD` to `/home/x/transmission` 
-- Edit `PKGBUILD`: remove `gtk`, `qt` and `transmission...` patch files parts 
+- `Source Files` > download(copy codes from each page) to `/home/x/transmission` 
+- Edit `PKGBUILD`: remove `gtk`, `qt` parts 
 
 Fix **error**: intltool is too old ....
 ```sh
