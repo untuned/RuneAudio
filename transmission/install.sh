@@ -33,7 +33,7 @@ wget -q --show-progress -O $transxz "https://github.com/rern/RuneAudio/blob/mast
 
 if ! pacman -Q transmission-cli &>/dev/null; then
 	title2 "Install Transmission ..."
-	pacman -U $transxz
+	pacman -U --noconfirm $transxz
 else
 	titleend "$info Transmission already installed."
 	exit
