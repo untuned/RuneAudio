@@ -28,17 +28,16 @@ if ! grep -qs '/mnt/MPD/USB/hdd' /proc/mounts; then
 fi
 wget -q --show-progress -O uninstall_tran.sh "https://github.com/rern/RuneAudio/blob/master/transmission/uninstall_tran.sh?raw=1"
 chmod +x uninstall_tran.sh
-if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/RuneAudio/blob/master/rankmirrors/rankmirrors.sh?raw=1"
-	chmod +x rankmirrors.sh
-	./rankmirrors.sh
-fi
+wget -q --show-progress -O transmission-cli-2.92-6-armv7h.pkg.tar.xz "https://github.com/rern/RuneAudio/blob/master/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz?raw=1"
 
 file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
 if ! pacman -Q transmission-cli &>/dev/null; then
 	title2 "Install Transmission ..."
-	pacman -Sy --noconfirm transmission-cli
+	pacman -U transmission-cli-2.92-6-armv7h.pkg.tar.xz
+else
+	titleend "$info Transmission already installed."
+	exit
 fi
 
 if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
@@ -50,7 +49,6 @@ fi
 
 # change user to 'root'
 pgrep transmission &>/dev/null && killall transmission-daemon
-systemctl disable transmission
 cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
 sed -i 's|User=transmission|User=root|' /etc/systemd/system/transmission.service
 # refresh systemd services
