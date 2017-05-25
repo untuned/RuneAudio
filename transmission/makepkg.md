@@ -1,6 +1,6 @@
 Recompile Transmission
 --- 
-Default `pacman -S transmission-cli` failed to start properly.  
+Default `pacman -S transmission-cli` failed to start, error: `libcrypto.so.1.1`, `libssl.so.1.1`  
 This is how to fix it.
 
 ```sh
