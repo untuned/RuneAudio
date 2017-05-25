@@ -26,13 +26,11 @@ mkdir -p /home/x/intltool
 su
 pacman -S readline guile
 ln -s /lib/libreadline.so.6 /lib/libreadline.so.7.0
-```
-
-```sh
+su x
 cd /home/x/intltool
 makepkg -A --skipinteg
+pacman -U intltool-0.51.0-2-any.pkg.tar.xz
 cd /home/x/transmission
 makepkg -A --skipinteg
-cd pkg/transmission-cli/usr/bin
-cp . /usr/bin
+pacman -U transmission-cli-2.92-6-armv7h.pkg.tar.xz
 ```
