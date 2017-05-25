@@ -3,7 +3,6 @@ RuneAudio Transmission
 
 [**Transmission**](https://transmissionbt.com/) - Fast, easy, and free BitTorrent client (CLI tools, daemon and web client)  
 
-(as of 2.92 - not working)  
 **Install**  
 Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`  
 ```sh
