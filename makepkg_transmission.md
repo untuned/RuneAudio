@@ -34,7 +34,7 @@ package_transmission-qt() {
 # to
 }
 ```
-- (**error**: intltool is too old ....)
+- (To fix **error**: intltool is too old ....)
 
 ```sh
 mkdir -p /home/x/intltool
@@ -42,8 +42,9 @@ mkdir -p /home/x/intltool
 
 - Search `intltool` `armv7h`  
 - `Source Files` > download to `/home/x/intltool` 
-- (**error**: libreadline ...)  
-- (**error**: libguile ...)  
+
+- (To fix **error**: libreadline ...)  
+- (To fix**error**: libguile ...)  
 
 ```sh
 su
