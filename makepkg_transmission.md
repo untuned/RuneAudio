@@ -33,9 +33,9 @@ package_transmission-gtk() {
 package_transmission-qt() {
 # to
 }
-```
-- (To fix **error**: intltool is too old ....)
+```  
 
+Fix **error**: intltool is too old ....
 ```sh
 mkdir -p /home/x/intltool
 ```
@@ -43,17 +43,22 @@ mkdir -p /home/x/intltool
 - Search `intltool` `armv7h`  
 - `Source Files` > download to `/home/x/intltool` 
 
-- (To fix **error**: libreadline ...)  
-- (To fix**error**: libguile ...)  
-
+Fix **error**: libreadline ... and libguile ...   
 ```sh
 su
 pacman -S readline guile
 ln -s /lib/libreadline.so.6 /lib/libreadline.so.7.0
+```
+
+- Make `initltool`
+```sh
 su x
 cd /home/x/intltool
 makepkg -A --skipinteg
 pacman -U intltool-0.51.0-2-any.pkg.tar.xz
+```
+- Make `transmission`
+```sh
 cd /home/x/transmission
 makepkg -A --skipinteg
 pacman -U transmission-cli-2.92-6-armv7h.pkg.tar.xz
