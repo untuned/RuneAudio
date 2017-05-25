@@ -57,7 +57,7 @@ echo
 echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
 case $answer in
-	1 ) if ! pacman -Q parted > /dev/null 2>&1; then
+	1 ) if ! pacman -Q parted &>/dev/null; then
 			title "Get packages file ..."
 			wget -q --show-progress -O var.tar "https://github.com/rern/RuneAudio/blob/master/expand_partition//_repo/var.tar?raw=1"
 			tar -xvf var.tar -C /
@@ -65,7 +65,7 @@ case $answer in
 			pacman -Sy --noconfirm parted
 		fi
 		title "Expand partiton ..."
-		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk > /dev/null 2>&1
+		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk &>/dev/null
 
 		partprobe $disk
 
