@@ -18,7 +18,7 @@ title() {
 }
 
 # check installed #######################################
-if ! pacman -Q aria2 > /dev/null 2>&1; then
+if ! pacman -Q aria2 &>/dev/null; then
 	title "$info Aria2 not found."
 	exit
 fi
