@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/public/images/favicon.ico">
+    
+    <title>transmission-2.92-openssl-1.1.0.patch - transmission-cli (armv7h) | Package Files | Arch Linux ARM</title>
+    
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/public/css/jquery.smartmenus.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/public/css/custom.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/public/css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/public/css/default.min.css"/>
+    
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/public/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="/public/js/jquery.smartmenus.min.js"></script>
+    <script type="text/javascript" src="/public/js/jquery.smartmenus.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/public/js/datatables.min.js"></script>
+    <script type="text/javascript" src="/public/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/public/js/highlight.pack.js"></script>
+    <script type="text/javascript" src="/public/js/bootstrap-typeahead.min.js"></script>
+    <script>hljs.configure({languages: []});hljs.initHighlightingOnLoad();</script>
+    <script type="text/javascript" src="/public/js/date.format.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><img src="/public/images/alarm.png"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav sm">
+                    <li><a href="/about">About</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/about/contact">Contact</a></li>
+                    <li><a href="/about/donate">Donate</a></li>
+                    <li><a href="/about/downloads">Downloads</a></li>
+                    <li><a href="/about/mirrors">Mirrors</a></li>
+                    <li><a href="/about/package-signing">Package Signing</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms">Platforms</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv5">ARMv5</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv5/arietta-g25">Arietta G25</a></li>
+                    <li><a href="/platforms/armv5/guruplug-display">Guruplug Display</a></li>
+                    <li><a href="/platforms/armv5/olinuxino">OLinuXino</a></li>
+                    <li><a href="/platforms/armv5/openrd">OpenRD</a></li>
+                    <li><a href="/platforms/armv5/pogoplug-series-4">Pogoplug Series 4</a></li>
+                    <li><a href="/platforms/armv5/pogoplug-v2-pinkgray">Pogoplug v2 (Pink/Gray)</a></li>
+                    <li><a href="/platforms/armv5/seagate-dockstar">Seagate DockStar</a></li>
+                    <li><a href="/platforms/armv5/seagate-goflex-home">Seagate GoFlex Home</a></li>
+                    <li><a href="/platforms/armv5/seagate-goflex-net">Seagate GoFlex Net</a></li>
+                    <li><a href="/platforms/armv5/sheevaplug">SheevaPlug</a></li>
+                    <li><a href="/platforms/armv5/tonidoplug">TonidoPlug</a></li>
+                    <li><a href="/platforms/armv5/tonidoplug-2">TonidoPlug 2</a></li>
+                    <li><a href="/platforms/armv5/zyxel-nsa320">ZyXEL NSA320</a></li>
+                    <li><a href="/platforms/armv5/zyxel-nsa325">ZyXEL NSA325</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv6">ARMv6</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv6/raspberry-pi">Raspberry Pi</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7">ARMv7</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/allwinner">AllWinner</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/allwinner/a10-olinuxino-lime">A10 OlinuXino Lime</a></li>
+                    <li><a href="/platforms/armv7/allwinner/a20-olinuxino-lime">A20 OlinuXino Lime</a></li>
+                    <li><a href="/platforms/armv7/allwinner/a20-olinuxino-lime2">A20 OlinuXino Lime2</a></li>
+                    <li><a href="/platforms/armv7/allwinner/a20-olinuxino-micro">A20 OlinuXino Micro</a></li>
+                    <li><a href="/platforms/armv7/allwinner/cubieboard">Cubieboard</a></li>
+                    <li><a href="/platforms/armv7/allwinner/cubieboard-2">Cubieboard 2</a></li>
+                    <li><a href="/platforms/armv7/allwinner/cubietruck">Cubietruck</a></li>
+                    <li><a href="/platforms/armv7/allwinner/pcduino3">pcDuino3</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7/amlogic">Amlogic</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/amlogic/odroid-c1">ODROID-C1</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7/arm">ARM</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/arm/versatile-express">Versatile Express</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7/broadcom">Broadcom</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/broadcom/raspberry-pi-2">Raspberry Pi 2</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7/freescale">Freescale</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/freescale/cubox-i">CuBox-i</a></li>
+                    <li><a href="/platforms/armv7/freescale/hobbitboard">Hobbitboard</a></li>
+                    <li><a href="/platforms/armv7/freescale/nitrogen6x">Nitrogen6X</a></li>
+                    <li><a href="/platforms/armv7/freescale/sabre-lite">SABRE Lite</a></li>
+                    <li><a href="/platforms/armv7/freescale/udoo">UDOO</a></li>
+                    <li><a href="/platforms/armv7/freescale/usb-armory">USB Armory</a></li>
+                    <li><a href="/platforms/armv7/freescale/utilite">Utilite</a></li>
+                    <li><a href="/platforms/armv7/freescale/wandboard">Wandboard</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7/marvell">Marvell</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/marvell/clearfog">ClearFog</a></li>
+                    <li><a href="/platforms/armv7/marvell/cubox">CuBox</a></li>
+                    <li><a href="/platforms/armv7/marvell/d3plug">D3Plug</a></li>
+                    <li><a href="/platforms/armv7/marvell/mirabox">Mirabox</a></li>
+                    <li><a href="/platforms/armv7/marvell/smile-plug">SMILE Plug</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7/nvidia">nVidia</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/nvidia/trimslice">TrimSlice</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7/rockchip">Rockchip</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/rockchip/asus-chromebit-cs10">Asus Chromebit CS10</a></li>
+                    <li><a href="/platforms/armv7/rockchip/asus-chromebook-flip-c100p">Asus Chromebook Flip C100P</a></li>
+                    <li><a href="/platforms/armv7/rockchip/hisense-chromebook-c11">Hisense Chromebook C11</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7/samsung">Samsung</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/samsung/odroid-u2">ODROID-U2</a></li>
+                    <li><a href="/platforms/armv7/samsung/odroid-u3">ODROID-U3</a></li>
+                    <li><a href="/platforms/armv7/samsung/odroid-x">ODROID-X</a></li>
+                    <li><a href="/platforms/armv7/samsung/odroid-x2">ODROID-X2</a></li>
+                    <li><a href="/platforms/armv7/samsung/odroid-xu">ODROID-XU</a></li>
+                    <li><a href="/platforms/armv7/samsung/odroid-xu3">ODROID-XU3</a></li>
+                    <li><a href="/platforms/armv7/samsung/odroid-xu4">ODROID-XU4</a></li>
+                    <li><a href="/platforms/armv7/samsung/samsung-chromebook">Samsung Chromebook</a></li>
+                    <li><a href="/platforms/armv7/samsung/samsung-chromebook-2">Samsung Chromebook 2</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7/ti">TI</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/ti/beagleboard">BeagleBoard</a></li>
+                    <li><a href="/platforms/armv7/ti/beagleboard-xm">BeagleBoard-xM</a></li>
+                    <li><a href="/platforms/armv7/ti/beaglebone">BeagleBone</a></li>
+                    <li><a href="/platforms/armv7/ti/beaglebone-black">BeagleBone Black</a></li>
+                    <li><a href="/platforms/armv7/ti/chiliboard">ChiliBoard</a></li>
+                    <li><a href="/platforms/armv7/ti/pandaboard">PandaBoard</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv7/xilinx">Xilinx</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv7/xilinx/zedboard">ZedBoard</a></li>
+                      </ul>
+                    </li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv8">ARMv8</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv8/amlogic">Amlogic</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv8/amlogic/odroid-c2">ODROID-C2</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv8/arm">ARM</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv8/arm/juno">Juno</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv8/broadcom">Broadcom</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv8/broadcom/raspberry-pi-3">Raspberry Pi 3</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv8/marvell">Marvell</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv8/marvell/espressobin">ESPRESSOBin</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv8/mediatek">Mediatek</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv8/mediatek/acer-chromebook-r13">Acer Chromebook R13</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv8/rockchip">Rockchip</a>
+                      <ul class="dropdown-menu">
+                    <li><a href="/platforms/armv8/rockchip/samsung-chromebook-plus">Samsung Chromebook Plus</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="/platforms/armv8/generic">Generic</a></li>
+                      </ul>
+                    </li>
+                      </ul>
+                    </li>
+                    <li><a href="/packages">Packages</a></li>
+                    <li><a href="/forum">Forum</a></li>
+                    <li><a href="/wiki">Wiki</a></li>
+          </ul>
+          
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="/about/donate">Donate</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="clearfix">
+  <div class="pull-left">
+    <h1>transmission-cli 2.92-6</h1>
+  </div>
+  <div class="pull-right">
+  </div>
+</div>
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="/packages/armv7h/transmission-cli/files">Files</a></li>
+  <li role="presentation" ><a href="/packages/armv7h/transmission-cli/log">Log</a></li>
+</ul>
+
+    <h3>transmission-2.92-openssl-1.1.0.patch</h3>
+    <pre><code>From f91cf5ad8c677b61ceb0bf5877b87f9e93256dd7 Mon Sep 17 00:00:00 2001
+From: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
+Date: Mon, 5 Sep 2016 21:49:07 +0000
+Subject: [PATCH] transmission: build against openssl 1.1.0
+
+Signed-off-by: Sebastian Andrzej Siewior <sebastian@breakpoint.cc>
+---
+ libtransmission/crypto-utils-openssl.c | 73 ++++++++++++++++++++++++++++++++--
+ 1 file changed, 69 insertions(+), 4 deletions(-)
+
+diff --git a/libtransmission/crypto-utils-openssl.c b/libtransmission/crypto-utils-openssl.c
+index c4539dc..972e24a 100644
+--- a/libtransmission/crypto-utils-openssl.c
++++ b/libtransmission/crypto-utils-openssl.c
+@@ -229,6 +229,61 @@ tr_rc4_process (tr_rc4_ctx_t   handle,
+ ****
+ ***/
+ 
++#if OPENSSL_VERSION_NUMBER < 0x10100000
++static inline int
++DH_set0_pqg (DH     * dh,
++             BIGNUM * p,
++             BIGNUM * q,
++             BIGNUM * g)
++{
++  /* If the fields p and g in d are NULL, the corresponding input
++   * parameters MUST be non-NULL.  q may remain NULL.
++   */
++  if ((dh->p == NULL && p == NULL)
++      || (dh->g == NULL && g == NULL))
++    return 0;
++
++  if (p != NULL) {
++    BN_free (dh->p);
++    dh->p = p;
++  }
++  if (q != NULL) {
++    BN_free (dh->q);
++    dh->q = q;
++  }
++  if (g != NULL) {
++    BN_free (dh->g);
++    dh->g = g;
++  }
++
++  if (q != NULL) {
++    dh->length = BN_num_bits (q);
++  }
++
++  return 1;
++}
++
++static inline int
++DH_set_length (DH   * dh,
++               long   length)
++{
++	dh->length = length;
++	return 1;
++}
++
++static inline void
++DH_get0_key(const DH      * dh,
++            const BIGNUM ** pub_key,
++            const BIGNUM ** priv_key)
++{
++  if (pub_key != NULL)
++    *pub_key = dh->pub_key;
++  if (priv_key != NULL)
++    *priv_key = dh->priv_key;
++}
++
++#endif
++
+ tr_dh_ctx_t
+ tr_dh_new (const uint8_t * prime_num,
+            size_t          prime_num_length,
+@@ -236,13 +291,19 @@ tr_dh_new (const uint8_t * prime_num,
+            size_t          generator_num_length)
+ {
+   DH * handle = DH_new ();
++  BIGNUM * p, * g;
+ 
+   assert (prime_num != NULL);
+   assert (generator_num != NULL);
++  p = BN_bin2bn (prime_num, prime_num_length, NULL);
++  g = BN_bin2bn (generator_num, generator_num_length, NULL);
+ 
+-  if (!check_pointer (handle->p = BN_bin2bn (prime_num, prime_num_length, NULL)) ||
+-      !check_pointer (handle->g = BN_bin2bn (generator_num, generator_num_length, NULL)))
++  if (!check_pointer (p) ||
++      !check_pointer (g) ||
++      !DH_set0_pqg (handle, p, NULL, g))
+     {
++      BN_free (p);
++      BN_free (g);
+       DH_free (handle);
+       handle = NULL;
+     }
+@@ -267,16 +328,20 @@ tr_dh_make_key (tr_dh_ctx_t   raw_handle,
+ {
+   DH * handle = raw_handle;
+   int dh_size, my_public_key_length;
++  const BIGNUM * hand_pub_key;
+ 
+   assert (handle != NULL);
+   assert (public_key != NULL);
+ 
+-  handle->length = private_key_length * 8;
++
++  DH_set_length(handle, private_key_length * 8);
+ 
+   if (!check_result (DH_generate_key (handle)))
+     return false;
+ 
+-  my_public_key_length = BN_bn2bin (handle->pub_key, public_key);
++  DH_get0_key (handle, &hand_pub_key, NULL);
++
++  my_public_key_length = BN_bn2bin (hand_pub_key, public_key);
+   dh_size = DH_size (handle);
+ 
+   tr_dh_align_key (public_key, my_public_key_length, dh_size);
+From 8c8386a7f3f482a9c917f51d28e0042e55f56b3e Mon Sep 17 00:00:00 2001
+From: Mike Gelfand <mikedld@mikedld.com>
+Date: Wed, 7 Sep 2016 01:09:04 +0300
+Subject: [PATCH] Fix coding style and building with !TR_LIGHTWEIGHT
+
+---
+ libtransmission/crypto-utils-openssl.c | 60 +++++++++++++++++++---------------
+ 1 file changed, 33 insertions(+), 27 deletions(-)
+
+diff --git a/libtransmission/crypto-utils-openssl.c b/libtransmission/crypto-utils-openssl.c
+index 972e24a..9fd2c58 100644
+--- a/libtransmission/crypto-utils-openssl.c
++++ b/libtransmission/crypto-utils-openssl.c
+@@ -14,6 +14,7 @@
+ #include <assert.h>
+ 
+ #include <openssl/bn.h>
++#include <openssl/crypto.h>
+ #include <openssl/dh.h>
+ #include <openssl/err.h>
+ #include <openssl/evp.h>
+@@ -48,7 +49,12 @@ log_openssl_error (const char * file,
+       static bool strings_loaded = false;
+       if (!strings_loaded)
+         {
++#if OPENSSL_VERSION_NUMBER < 0x10100000
+           ERR_load_crypto_strings ();
++#else
++          OPENSSL_init_crypto (OPENSSL_INIT_LOAD_CRYPTO_STRINGS, NULL);
++#endif
++
+           strings_loaded = true;
+         }
+ #endif
+@@ -230,6 +236,7 @@ tr_rc4_process (tr_rc4_ctx_t   handle,
+ ***/
+ 
+ #if OPENSSL_VERSION_NUMBER < 0x10100000
++
+ static inline int
+ DH_set0_pqg (DH     * dh,
+              BIGNUM * p,
+@@ -237,28 +244,29 @@ DH_set0_pqg (DH     * dh,
+              BIGNUM * g)
+ {
+   /* If the fields p and g in d are NULL, the corresponding input
+-   * parameters MUST be non-NULL.  q may remain NULL.
++   * parameters MUST be non-NULL. q may remain NULL.
+    */
+-  if ((dh->p == NULL && p == NULL)
+-      || (dh->g == NULL && g == NULL))
++  if ((dh->p == NULL && p == NULL) || (dh->g == NULL && g == NULL))
+     return 0;
+ 
+-  if (p != NULL) {
+-    BN_free (dh->p);
+-    dh->p = p;
+-  }
+-  if (q != NULL) {
+-    BN_free (dh->q);
+-    dh->q = q;
+-  }
+-  if (g != NULL) {
+-    BN_free (dh->g);
+-    dh->g = g;
+-  }
+-
+-  if (q != NULL) {
++  if (p != NULL)
++    {
++      BN_free (dh->p);
++      dh->p = p;
++    }
++  if (q != NULL)
++    {
++      BN_free (dh->q);
++      dh->q = q;
++    }
++  if (g != NULL)
++    {
++      BN_free (dh->g);
++      dh->g = g;
++    }
++
++  if (q != NULL)
+     dh->length = BN_num_bits (q);
+-  }
+ 
+   return 1;
+ }
+@@ -267,8 +275,8 @@ static inline int
+ DH_set_length (DH   * dh,
+                long   length)
+ {
+-	dh->length = length;
+-	return 1;
++  dh->length = length;
++  return 1;
+ }
+ 
+ static inline void
+@@ -295,12 +303,11 @@ tr_dh_new (const uint8_t * prime_num,
+ 
+   assert (prime_num != NULL);
+   assert (generator_num != NULL);
++
+   p = BN_bin2bn (prime_num, prime_num_length, NULL);
+   g = BN_bin2bn (generator_num, generator_num_length, NULL);
+ 
+-  if (!check_pointer (p) ||
+-      !check_pointer (g) ||
+-      !DH_set0_pqg (handle, p, NULL, g))
++  if (!check_pointer (p) || !check_pointer (g) || !DH_set0_pqg (handle, p, NULL, g))
+     {
+       BN_free (p);
+       BN_free (g);
+@@ -328,20 +335,19 @@ tr_dh_make_key (tr_dh_ctx_t   raw_handle,
+ {
+   DH * handle = raw_handle;
+   int dh_size, my_public_key_length;
+-  const BIGNUM * hand_pub_key;
++  const BIGNUM * my_public_key;
+ 
+   assert (handle != NULL);
+   assert (public_key != NULL);
+ 
+-
+   DH_set_length(handle, private_key_length * 8);
+ 
+   if (!check_result (DH_generate_key (handle)))
+     return false;
+ 
+-  DH_get0_key (handle, &hand_pub_key, NULL);
++  DH_get0_key (handle, &my_public_key, NULL);
+ 
+-  my_public_key_length = BN_bn2bin (hand_pub_key, public_key);
++  my_public_key_length = BN_bn2bin (my_public_key, public_key);
+   dh_size = DH_size (handle);
+ 
+   tr_dh_align_key (public_key, my_public_key_length, dh_size);</code></pre>
+
+      <hr>
+      <p class="small text-center text-muted">Copyright ©2009-2017 Arch Linux ARM<br>
+      The registered trademark Linux® is used pursuant to a sublicense from LMI, the exclusive licensee of Linus Torvalds, owner of the mark on a world-wide basis.<br>
+      The Arch Linux™ name and logo are used under permission of the Arch Linux Project Lead.<br></p>
+    </div>
+
+  </body>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-24579207-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</html>
