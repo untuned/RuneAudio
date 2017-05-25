@@ -1,5 +1,7 @@
-Compile a package
+Recompile Transmission
 --- 
+Default `pacman -S transmission-cli` failed to start properly.  
+This is how to fix it.
 
 ```sh
 pacman -Sy base-devel
