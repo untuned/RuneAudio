@@ -3,8 +3,7 @@ RuneAudio Aria2 with WebUI
 
 [**aria2**](https://aria2.github.io/) - Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink  
 [**webui-aria2**](https://github.com/ziahamza/webui-aria2) - Web inferface for aria2  
-
-(as of 1.32.0-1 - not working)  
+ 
 **Install**  
 Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`  
 ```sh
