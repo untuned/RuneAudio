@@ -57,7 +57,7 @@ for server in ${servers[*]}; do # download from each mirror
 	((i+=1))
 	printf "%3d. %-25s : %5d kB/s\n" $i $shorturl $speed
 	
-	rm $tmpdir* > /dev/null 2>&1 & # remove downloaded file
+	rm $tmpdir* &>/dev/null & # remove downloaded file
 done
 
 rank=$( echo -e "$dl_server" | sort -k1 -n -r ) # sort by '1st column' 'as number' 'reverse order'
