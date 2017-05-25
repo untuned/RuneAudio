@@ -53,7 +53,7 @@ mkdir /usr/share/nginx/html/aria2
 bsdtar -xf aria2.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
 rm aria2.zip
 
-mkdir /root/.config/aria2
+[[ ! -e /root/.config/aria2 ]] && mkdir /root/.config/aria2
 [[ ! -e /mnt/MPD/USB/hdd/aria2 ]] && mkdir /mnt/MPD/USB/hdd/aria2
 echo 'enable-rpc=true
 rpc-listen-all=true
