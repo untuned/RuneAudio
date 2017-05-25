@@ -18,7 +18,7 @@ title() {
 }
 
 # check installed #######################################
-if ! pacman -Q transmission-cli > /dev/null 2>&1; then
+if ! pacman -Q transmission-cli &>/dev/null; then
 	title "$info Transmission not found."
 	exit
 fi
