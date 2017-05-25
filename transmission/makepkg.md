@@ -13,30 +13,8 @@ mkdir -p /home/x/transmission
 
 - `https://archlinuxarm.org/packages`  
 - Search `transmission-cli` `armv7h`  
-- `Source Files` > download to `/home/x/transmission` 
-- Edit `PKGBUILD`: remove `gtk` and `qt` parts
-```sh
-...
-pkgname=(transmission-cli transmission-gtk transmission-qt)
-...
-makedepends=(gtk3 intltool curl qt5-base libevent systemd qt5-tools)
-...
-  sed -i '/^Icon=/ s/$/-qt/' qt/transmission-qt.desktop
-...
-  cd qt
-  qmake qtr.pro \
-    DEFINES+=TRANSLATIONS_DIR=\\\\\\\"/usr/share/transmission-qt/translations\\\\\\\"
-  make
-  lrelease translations/*.ts
-...
-package_transmission-gtk() {
-# to
-}
-...
-package_transmission-qt() {
-# to
-}
-```  
+- `Source Files` > download only `PKGBUILD` to `/home/x/transmission` 
+- Edit `PKGBUILD`: remove `gtk`, `qt` and `transmission...` patch files parts 
 
 Fix **error**: intltool is too old ....
 ```sh
