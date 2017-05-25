@@ -36,7 +36,7 @@ fi
 
 file='/var/lib/transmission/.config/transmission-daemon/settings.json'
 
-if ! pacman -Q transmission-cli > /dev/null 2>&1; then
+if ! pacman -Q transmission-cli &>/dev/null; then
 	title2 "Install Transmission ..."
 	pacman -Sy --noconfirm transmission-cli
 fi
@@ -49,7 +49,7 @@ if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 fi
 
 # change user to 'root'
-pgrep transmission > /dev/null 2>&1 && killall transmission-daemon
+pgrep transmission &>/dev/null && killall transmission-daemon
 systemctl disable transmission
 cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
 sed -i 's|User=transmission|User=root|' /etc/systemd/system/transmission.service
