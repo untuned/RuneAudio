@@ -13,7 +13,7 @@ mkdir -p /home/x/transmission
 
 - [ArchLinuxArm Packages](https://archlinuxarm.org/packages)  
 - Search `transmission-cli` `armv7h`  
-- `Source Files` > copy code from `PKGBUILD`, **only one**, to `/home/x/transmission/PKGBUILD`  
+- `Source Files` > copy code from [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/transmission/PKGBUILD), **only one**, to `/home/x/transmission/PKGBUILD`  
 - Edit `PKGBUILD`: remove lines  
   * `gtk` `qt` - no need  
   * `patch` - skip `libcrypto.so.1.1`, `libssl.so.1.1` check   
