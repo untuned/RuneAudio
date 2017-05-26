@@ -16,7 +16,7 @@ mkdir intltool
 - [ArchLinuxArm Packages](https://archlinuxarm.org/packages)  
 - search `transmission-cli` - `armv7h`  
 - `Source Files` > copy code from [`PKGBUILD`](https://archlinuxarm.org/packages/armv7h/transmission-cli/files/PKGBUILD), **only one**, to `/home/x/transmission/PKGBUILD`  
-- Edit to [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/transmission/PKGBUILD): remove lines  
+- Edit to [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/transmission/_repo/transmission/PKGBUILD): remove lines  
   * `gtk` `qt` - no need  
   * `patch` - skip `libcrypto.so.1.1`, `libssl.so.1.1` check   
   * `user` `directory` - to run as root  
@@ -32,7 +32,7 @@ mkdir intltool
 **`libcrypto.so.1.1`, `libssl.so.1.1`** 
   * [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
   * search `openssl` - `armv7h`
-  * `Download' > extract > copy `libcrypto.so.1.1`, `libssl.so.1.1` to `/lib/`
+  * [`Download'](https://archlinuxarm.org/packages/armv7h/openssl) > extract > copy `libcrypto.so.1.1`, `libssl.so.1.1` to `/lib/`
   
 **`libreadline`, `libguile`**  
 (`intltool` needs newer version)
