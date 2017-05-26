@@ -36,7 +36,8 @@ package_transmission-cli() {
     make -C "$dir" DESTDIR="$pkgdir" install
   done
 
-  install -Dm644 daemon/transmission-daemon.service \
-    "$pkgdir/usr/lib/systemd/system/transmission.service"
+  install -Dm644 daemon/transmission-daemon.service "$pkgdir/usr/lib/systemd/system/transmission.service"
   install -Dm644 COPYING "$pkgdir/usr/share/licenses/transmission-cli/COPYING"
+#  install -Dm644 "$srcdir/$pkgname.sysusers" "$pkgdir/usr/lib/sysusers.d/transmission.conf"
+#  install -Dm644 "$srcdir/$pkgname.tmpfiles" "$pkgdir/usr/lib/tmpfiles.d/transmission.conf"
 }
