@@ -1,6 +1,7 @@
 # $Id$
 # Maintainer : Tom Gundersen 
 # Maintainer : Ionut Biru 
+# Customized : omit gtk, qt, patch, user
 
 pkgbase=transmission
 pkgname=(transmission-cli)
@@ -10,22 +11,11 @@ arch=(i686 x86_64)
 url="http://www.transmissionbt.com/"
 license=(MIT)
 makedepends=(intltool curl libevent systemd)
-source=(https://github.com/transmission/transmission-releases/raw/master/transmission-${pkgver}.tar.xz		 +source=(https://github.com/transmission/transmission-releases/raw/master/transmission-${pkgver}.tar.xz)
-        transmission-2.90-libsystemd.patch		 +sha256sums=('3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f')
-        transmission-2.92-openssl-1.1.0.patch		
-        transmission-cli.sysusers		
-        transmission-cli.tmpfiles)		
-sha256sums=('3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f'		
-            '55F4DD6953F53281A3B65A74E29F96B71650116434BCCACDE1C76606D44F82FF'		
-            '05DCB642115F7B049AAD285EAC98FF485A1FBE65A1F755017C787C8CA53781B6'		
-            '83682C93436B2EDB16211DA065712BA3499D46264314CCDF725705705046BF5E'		
-            '4C481D99737CA81748097E8AFB3416C9E48AFB6BD07A0C7965CB1BE9EBF695F5')
+source=(https://github.com/transmission/transmission-releases/raw/master/transmission-${pkgver}.tar.xz)		
+sha256sums=('3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f')
 
 prepare() {
   cd $pkgbase-$pkgver
-  patch -p1 -i "$srcdir/transmission-2.90-libsystemd.patch"		
-  patch -p1 -i "$srcdir/transmission-2.92-openssl-1.1.0.patch"
-  
   rm -f m4/glib-gettext.m4
   autoreconf -fi
 }
@@ -49,9 +39,4 @@ package_transmission-cli() {
   install -Dm644 daemon/transmission-daemon.service \
     "$pkgdir/usr/lib/systemd/system/transmission.service"
   install -Dm644 COPYING "$pkgdir/usr/share/licenses/transmission-cli/COPYING"
-
-  install -Dm644 "$srcdir/$pkgname.sysusers" \
-    "$pkgdir/usr/lib/sysusers.d/transmission.conf"
-  install -Dm644 "$srcdir/$pkgname.tmpfiles" \
-    "$pkgdir/usr/lib/tmpfiles.d/transmission.conf"
 }
