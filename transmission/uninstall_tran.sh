@@ -29,8 +29,6 @@ pacman -Rs --noconfirm transmission-cli
 
 # remove files #######################################
 title "Remove files ..."
-rm /etc/systemd/system/transmission.service
-systemd daemon-reload
 rm -rfv /var/lib/transmission/.config/transmission-daemon
 
 title2 "Transmission successfully uninstalled."
