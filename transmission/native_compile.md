@@ -1,6 +1,6 @@
 Native compile Transmission
 --- 
-Default `pacman -S transmission-cli` failed to start, error: `libcrypto.so.1.1`, `libssl.so.1.1`  
+Normal `pacman -S transmission-cli` failed to start, error: `libcrypto.so.1.1`, `libssl.so.1.1`  
 RuneAudio cannot handle system wide upgrade.  
   
 **Native compile:**  
@@ -22,6 +22,7 @@ mkdir -p /home/x/transmission
 **Fix errors:**  
 
 **`intltool`**  
+(normal `pacman -S intltool` not fix error)  
 ```sh
 mkdir -p /home/x/intltool
 ```
@@ -31,6 +32,7 @@ mkdir -p /home/x/intltool
 
 **`libreadline`**  
 **`libguile`**  
+(`intltool` needs newer version)
 ```sh
 su
 pacman -S readline guile
