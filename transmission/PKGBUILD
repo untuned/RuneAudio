@@ -1,0 +1,43 @@
+# $Id$
+# Maintainer : Tom Gundersen 
+# Maintainer : Ionut Biru 
+# Customized : omit gtk, qt, patch, user
+
+pkgbase=transmission
+pkgname=(transmission-cli)
+pkgver=2.92
+pkgrel=6
+arch=(i686 x86_64)
+url="http://www.transmissionbt.com/"
+license=(MIT)
+makedepends=(intltool curl libevent systemd)
+source=(https://github.com/transmission/transmission-releases/raw/master/transmission-${pkgver}.tar.xz)		
+sha256sums=('3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f')
+
+prepare() {
+  cd $pkgbase-$pkgver
+  rm -f m4/glib-gettext.m4
+  autoreconf -fi
+}
+
+build() {
+  cd $pkgbase-$pkgver
+  ./configure --prefix=/usr
+  make
+}
+
+package_transmission-cli() {
+  pkgdesc='Fast, easy, and free BitTorrent client (CLI tools, daemon and web client)'
+  depends=(curl libevent systemd)
+
+  cd $pkgbase-$pkgver
+
+  for dir in daemon cli web utils; do
+    make -C "$dir" DESTDIR="$pkgdir" install
+  done
+
+  install -Dm644 daemon/transmission-daemon.service "$pkgdir/usr/lib/systemd/system/transmission.service"
+  install -Dm644 COPYING "$pkgdir/usr/share/licenses/transmission-cli/COPYING"
+#  install -Dm644 "$srcdir/$pkgname.sysusers" "$pkgdir/usr/lib/sysusers.d/transmission.conf"
+#  install -Dm644 "$srcdir/$pkgname.tmpfiles" "$pkgdir/usr/lib/tmpfiles.d/transmission.conf"
+}
