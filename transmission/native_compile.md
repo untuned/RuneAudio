@@ -16,8 +16,9 @@ mkdir -p /home/x/transmission
 - `Source Files` > copy code from `PKGBUILD` to `/home/x/transmission/PKGBUILD` 
 - Edit `PKGBUILD`: remove `gtk, qt, patch, user, directory` parts 
 
-**Fix errors:**
-- `intltool`
+**Fix errors:**  
+
+**`intltool`**  
 ```sh
 mkdir -p /home/x/intltool
 ```
@@ -25,8 +26,8 @@ mkdir -p /home/x/intltool
   * search `intltool` `armv7h`  
   * `Source Files` > copy code from each file to `/home/x/intltool` 
 
-- `libreadline`
-- `libguile`  
+**`libreadline`**  
+**`libguile`**  
 ```sh
 su
 pacman -S readline guile
