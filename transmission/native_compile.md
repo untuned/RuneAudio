@@ -57,5 +57,5 @@ pacman -U /home/x/intltool/intltool-0.51.0-2-any.pkg.tar.xz
 su x
 cd /home/x/transmission
 makepkg -A --skipinteg
-pacman -U transmission-cli-2.92-6-armv7h.pkg.tar.xz
+pacman -U /home/x/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 ```
