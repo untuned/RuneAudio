@@ -11,16 +11,17 @@ su x
 mkdir -p /home/x/transmission
 ```
 
-- `https://archlinuxarm.org/packages`  
+- [ArchLinuxArm Packages](https://archlinuxarm.org/packages)  
 - Search `transmission-cli` `armv7h`  
-- `Source Files` > download(copy codes from each page) to `/home/x/transmission` 
-- Edit `PKGBUILD`: remove `gtk`, `qt` parts 
+- `Source Files` > copy code from `PKGBUILD` to `/home/x/transmission/PKGBUILD` 
+- Edit `PKGBUILD`: remove `gtk, qt, patch, user, directory` parts 
 
 Fix **error**: intltool is too old ....
 ```sh
 mkdir -p /home/x/intltool
 ```
 
+- [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
 - Search `intltool` `armv7h`  
 - `Source Files` > download to `/home/x/intltool` 
 
