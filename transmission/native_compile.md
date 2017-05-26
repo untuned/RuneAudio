@@ -8,11 +8,13 @@ RuneAudio cannot handle system wide upgrade.
 pacman -Sy base-devel
 useradd -m x
 su x
-mkdir -p /home/x/transmission
+cd
+mkdir transmission
+mkdir intltool
 ```
 
 - [ArchLinuxArm Packages](https://archlinuxarm.org/packages)  
-- Search `transmission-cli` `armv7h`  
+- search `transmission-cli` - `armv7h`  
 - `Source Files` > copy code from [`PKGBUILD`](https://archlinuxarm.org/packages/armv7h/transmission-cli/files/PKGBUILD), **only one**, to `/home/x/transmission/PKGBUILD`  
 - Edit to [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/transmission/PKGBUILD): remove lines  
   * `gtk` `qt` - no need  
@@ -23,31 +25,36 @@ mkdir -p /home/x/transmission
 
 **`intltool`**  
 (normal `pacman -S intltool` not fix error)  
-```sh
-mkdir -p /home/x/intltool
-```
   * [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
-  * search `intltool` `armv7h`  
+  * search `intltool`  
   * `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/any/intltool/files) to `/home/x/intltool` 
 
-**`libreadline`**  
-**`libguile`**  
+**`libcrypto.so.1.1`, `libssl.so.1.1`** 
+  * [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
+  * search `openssl` - `armv7h`
+  * `Download' > extract > copy `libcrypto.so.1.1`, `libssl.so.1.1` to `/lib/`
+  
+**`libreadline`, `libguile`**  
 (`intltool` needs newer version)
 ```sh
 su
 pacman -S readline guile
-ln -s /lib/libreadline.so.6 /lib/libreadline.so.7.0
+# fix error: /lib/libreadline.so.6
+ln -s /lib/libreadline.so.7.0 /lib/libreadline.so.6
+pacman -S readline guile
 ```
   * compile `initltool`
 ```sh
 su x
 cd /home/x/intltool
 makepkg -A --skipinteg
-pacman -U intltool-0.51.0-2-any.pkg.tar.xz
+su
+pacman -U /home/x/intltool/intltool-0.51.0-2-any.pkg.tar.xz
 ```
 
 **Compile:**  
 ```sh
+su x
 cd /home/x/transmission
 makepkg -A --skipinteg
 pacman -U transmission-cli-2.92-6-armv7h.pkg.tar.xz
