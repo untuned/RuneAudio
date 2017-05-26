@@ -32,7 +32,7 @@ mkdir intltool
 **`libcrypto.so.1.1`, `libssl.so.1.1`** 
   * [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
   * search `openssl` - `armv7h`
-  * [`Download'](https://archlinuxarm.org/packages/armv7h/openssl) > extract > copy `libcrypto.so.1.1`, `libssl.so.1.1` to `/lib/`
+  * [`Download`](https://archlinuxarm.org/packages/armv7h/openssl) > extract > copy `libcrypto.so.1.1`, `libssl.so.1.1` to `/lib/`
   
 **`libreadline`, `libguile`**  
 (`intltool` needs newer version)
