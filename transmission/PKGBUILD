@@ -1,7 +1,7 @@
 # $Id$
 # Maintainer : Tom Gundersen 
 # Maintainer : Ionut Biru 
-# Customized : omit gtk, qt, patch, user
+# Customized : remove gtk, qt, patch, conf
 
 pkgbase=transmission
 pkgname=(transmission-cli)
