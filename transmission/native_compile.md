@@ -6,7 +6,7 @@ RuneAudio cannot handle system wide upgrade.
 
 ```sh
 pacman -Sy base-devel
-useradd x
+useradd -m x
 su x
 mkdir -p /home/x/transmission
 ```
