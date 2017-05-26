@@ -48,8 +48,7 @@ fi
 
 # change user to 'root'
 pgrep transmission &>/dev/null && killall transmission-daemon
-cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
-sed -i 's|User=transmission|User=root|' /etc/systemd/system/transmission.service
+sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
 # refresh systemd services
 systemctl daemon-reload
 # create settings.json
