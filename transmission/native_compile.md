@@ -27,7 +27,7 @@ mkdir -p /home/x/intltool
 ```
   * [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
   * search `intltool` `armv7h`  
-  * `Source Files` > copy code from **each file** to `/home/x/intltool` 
+  * `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/any/intltool/files) to `/home/x/intltool` 
 
 **`libreadline`**  
 **`libguile`**  
