@@ -42,6 +42,8 @@ pacman -S readline guile
 # fix error: /lib/libreadline.so.6
 ln -s /lib/libreadline.so.7.0 /lib/libreadline.so.6
 pacman -S readline guile
+# for xbindkeys
+ln -s libguile-2.2.so.1.2.0 libguile-2.0.so.22
 ```
   * compile `initltool`
 ```sh
