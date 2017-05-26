@@ -2,7 +2,7 @@ RuneAudio Transmission
 ---
 
 [**Transmission**](https://transmissionbt.com/) - Fast, easy, and free BitTorrent client (CLI tools, daemon and web client)  
-( [Native compiled version](https://github.com/rern/RuneAudio/blob/master/transmission/native_compile.md): fix error, `libcrypto.so.1.1`, `libssl.so.1.1`, in default package )  
+( [Native compiled version](https://github.com/rern/RuneAudio/blob/master/transmission/native_compile.md): fix error, `libcrypto.so.1.1` and `libssl.so.1.1`, in default package )  
 
 **Install**  
 Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`  
