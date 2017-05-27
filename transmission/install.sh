@@ -29,7 +29,7 @@ fi
 wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/uninstall_tran.sh
 chmod +x uninstall_tran.sh
 transxz='/var/cache/pacman/pkg/transmission-cli-2.92-6-armv7h.pkg.tar.xz'
-wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
+wget -q --show-progress $transxz https://github.com/rern/RuneAudio/raw/master/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 if ! pacman -Q transmission-cli &>/dev/null; then
 	title2 "Install Transmission ..."
