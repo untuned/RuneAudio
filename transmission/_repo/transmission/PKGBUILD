@@ -12,12 +12,11 @@ url="http://www.transmissionbt.com/"
 license=(MIT)
 makedepends=(intltool curl libevent systemd)
 #makedepends=(gtk3 intltool curl qt5-base libevent systemd qt5-tools)
-source=(https://github.com/transmission/transmission-releases/raw/master/transmission-${pkgver}.tar.xz)
-#source=(https://github.com/transmission/transmission-releases/raw/master/transmission-${pkgver}.tar.xz
+source=(https://github.com/transmission/transmission-releases/raw/master/transmission-${pkgver}.tar.xz
 #        transmission-2.90-libsystemd.patch
 #        transmission-2.92-openssl-1.1.0.patch
-#        transmission-cli.sysusers
-#        transmission-cli.tmpfiles)
+        transmission-cli.sysusers
+        transmission-cli.tmpfiles)
 sha256sums=('3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f')
 #sha256sums=('3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f'
 #            '9f8f4bb532e0e46776dbd90e75557364f495ec95896ee35900ea222d69bda411'
