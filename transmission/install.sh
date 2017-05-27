@@ -47,12 +47,14 @@ if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
 fi
 
 # change user to 'root'
-sed -i 's|User=transmission|User=root|' /lib/systemd/system/transmission.service
+cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
+sed -i 's|User=transmission|User=root|' /etc/systemd/system/transmission.service
 # refresh systemd services
 systemctl daemon-reload
-
+# create settings.json
 transmission-daemon
 killall transmission-daemon
+
 file='/root/.config/transmission-daemon/settings.json'
 sed -i -e 's|"download-dir": ".*"|"download-dir": "/mnt/MPD/USB/hdd/transmission"|
 ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete"|
