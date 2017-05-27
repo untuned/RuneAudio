@@ -31,7 +31,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/unin
 chmod +x uninstall_aria.sh
 
 if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
+	wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
 fi
