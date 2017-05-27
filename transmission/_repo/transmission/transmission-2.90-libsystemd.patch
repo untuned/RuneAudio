@@ -11,4 +11,3 @@ index ea5e296..afd236f 100644
          [AC_DEFINE(USE_SYSTEMD_DAEMON,1,[Use systemd startup notification])],
          [AS_IF([test "x$USE_SYSTEMD_DAEMON" = "xyes"],
              [AC_MSG_ERROR([systemd startup notification support requested, but libsystemd-daemon not found.])]
-			 
