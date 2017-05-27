@@ -7,7 +7,7 @@ RuneAudio Transmission
 **Install**  
 Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`  
 ```sh
-wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 ```
 
 **Uninstall**  
