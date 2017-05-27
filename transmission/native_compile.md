@@ -50,8 +50,9 @@ ln -s libguile-2.2.so.1.2.0 libguile-2.0.so.22
 su x
 cd /home/x/intltool
 makepkg -A --skipinteg
-su
-pacman -U /home/x/intltool/intltool-0.51.0-2-any.pkg.tar.xz
+makepkg -i
+#su
+#pacman -U /home/x/intltool/intltool-0.51.0-2-any.pkg.tar.xz
 ```
 
 **Compile:**  
@@ -59,5 +60,7 @@ pacman -U /home/x/intltool/intltool-0.51.0-2-any.pkg.tar.xz
 su x
 cd /home/x/transmission
 makepkg -A --skipinteg
-pacman -U /home/x/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
+makepkg -i
+#su
+#pacman -U /home/x/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 ```
