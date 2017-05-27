@@ -10,7 +10,7 @@ _Tested on RuneAudio RPi3_
 **SSH command**
 
 ```sh
-wget -q --show-progress -O expand.sh "https://github.com/rern/RuneAudio/blob/master/expand_partition/expand.sh?raw=1"; chmod +x expand.sh; ./expand.sh
+wget -q --show-progress https://github.com/rern/RuneAudio/blob/master/expand_partition/expand.sh; chmod +x expand.sh; ./expand.sh
 ```
 
 - Rank mirror servers with [**rankmirrors.sh**](https://github.com/rern/ArchLinuxArm_rankmirrors/)
