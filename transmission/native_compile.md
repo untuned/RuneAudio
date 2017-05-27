@@ -24,18 +24,19 @@ mkdir intltool
 **Fix errors:**  
 
 **`intltool`**  
-(normal `pacman -S intltool` not fix error)  
+(normal `pacman -S intltool` not recognize newer version)  
   * [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
   * search `intltool`  
   * `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/any/intltool/files) to `/home/x/intltool/` 
 
-**`libcrypto.so.1.1`, `libssl.so.1.1`** 
+**`libcrypto.so.1.1`, `libssl.so.1.1`**  
+(upgraged `pacman`, by `base-devel`, needs newer version)
   * [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
   * search `openssl` - `armv7h`
   * [`Download`](https://archlinuxarm.org/packages/armv7h/openssl) > extract > copy `libcrypto.so.1.1`, `libssl.so.1.1` to `/lib/`
   
 **`libreadline`, `libguile`**  
-(`intltool` needs newer version)
+(`makepkg intltool` needs newer version)
 ```sh
 su
 pacman -S readline guile
