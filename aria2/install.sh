@@ -27,7 +27,7 @@ if ! grep -qs '/mnt/MPD/USB/hdd' /proc/mounts; then
 	exit
 fi
 
-wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/uninstall_aria.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/uninstall_aria.sh
 chmod +x uninstall_aria.sh
 
 if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
@@ -44,7 +44,7 @@ else
 fi
 
 title "Get WebUI files ..."
-wget -q --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
+wget -qN --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
 mkdir /usr/share/nginx/html/aria2
 bsdtar -xf master.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
 rm master.zip
