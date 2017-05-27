@@ -26,10 +26,10 @@ if ! grep -qs '/mnt/MPD/USB/hdd' /proc/mounts; then
 	titleend "$info Hard drive not mount at /mnt/MPD/USB/hdd"
 	exit
 fi
-wget -q --show-progress -O uninstall_tran.sh "https://github.com/rern/RuneAudio/blob/master/transmission/uninstall_tran.sh?raw=1"
+wget -q --show-progress "https://github.com/rern/RuneAudio/blob/master/transmission/uninstall_tran.sh"
 chmod +x uninstall_tran.sh
 transxz='/var/cache/pacman/pkg/transmission-cli-2.92-6-armv7h.pkg.tar.xz'
-wget -q --show-progress -O $transxz "https://github.com/rern/RuneAudio/blob/master/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz?raw=1"
+wget -q --show-progress "https://github.com/rern/RuneAudio/blob/master/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz"
 
 if ! pacman -Q transmission-cli &>/dev/null; then
 	title2 "Install Transmission ..."
