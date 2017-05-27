@@ -54,7 +54,7 @@ systemctl daemon-reload
 # create settings.json
 transmission-daemon
 killall transmission-daemon
-
+sleep 1
 file='/root/.config/transmission-daemon/settings.json'
 sed -i -e 's|"download-dir": ".*"|"download-dir": "/mnt/MPD/USB/hdd/transmission"|
 ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete"|
