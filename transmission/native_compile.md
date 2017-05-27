@@ -62,3 +62,4 @@ makepkg -A --skipinteg
 su
 pacman -U /home/x/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 ```
+The compiled package can be install on unupdated RuneAudio.
