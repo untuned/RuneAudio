@@ -27,11 +27,11 @@ if ! grep -qs '/mnt/MPD/USB/hdd' /proc/mounts; then
 	exit
 fi
 
-wget -q --show-progress https://github.com/rern/RuneAudio/blob/master/aria2/uninstall_aria.sh
+wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/uninstall_aria.sh
 chmod +x uninstall_aria.sh
 
 if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wget -q --show-progress https://github.com/rern/RuneAudio/blob/master/rankmirrors/rankmirrors.sh
+	wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
 fi
