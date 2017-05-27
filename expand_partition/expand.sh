@@ -59,7 +59,7 @@ read -n 1 answer
 case $answer in
 	1 ) if ! pacman -Q parted &>/dev/null; then
 			title "Get packages file ..."
-			wget -q --show-progress https://github.com/rern/RuneAudio/blob/master/expand_partition//_repo/var.tar
+			wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition//_repo/var.tar
 			tar -xvf var.tar -C /
 			rm var.tar
 			pacman -Sy --noconfirm parted
