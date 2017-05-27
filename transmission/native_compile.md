@@ -15,7 +15,7 @@ mkdir intltool
 
 - [ArchLinuxArm Packages](https://archlinuxarm.org/packages)  
 - search `transmission-cli` - `armv7h`  
-- `Source Files` > copy code from [`PKGBUILD`](https://archlinuxarm.org/packages/armv7h/transmission-cli/files/PKGBUILD), **only one**, to `/home/x/transmission/PKGBUILD`  
+- `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/armv7h/transmission-cli/files), **except patched**, to `/home/x/transmission/`  
 - Edit to [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/transmission/_repo/transmission/PKGBUILD): remove lines  
   * `gtk` `qt` - no need  
   * `patch` - skip `libcrypto.so.1.1`, `libssl.so.1.1` check   
@@ -27,7 +27,7 @@ mkdir intltool
 (normal `pacman -S intltool` not fix error)  
   * [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
   * search `intltool`  
-  * `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/any/intltool/files) to `/home/x/intltool` 
+  * `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/any/intltool/files) to `/home/x/intltool/` 
 
 **`libcrypto.so.1.1`, `libssl.so.1.1`** 
   * [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
