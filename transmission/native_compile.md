@@ -55,6 +55,7 @@ pacman -U /home/x/intltool/intltool-0.51.0-2-any.pkg.tar.xz
 ```
 
 **Compile:**  
+On multicore CPU RPi3, edit `/etc/makepkg.conf` > `MAKEFLAGS="-j4"`
 ```sh
 su x
 cd /home/x/transmission
