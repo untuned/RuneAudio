@@ -28,4 +28,3 @@ diff -upr intltool-0.51.0-orig/intltool-update.in intltool-0.51.0/intltool-updat
  	if (!exists($in2{$dummy}))
  	{
  	    push @result, $dummy
-		
