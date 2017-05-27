@@ -18,7 +18,7 @@ mkdir intltool
 - `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/armv7h/transmission-cli/files), **except patched**, to `/home/x/transmission/`  
 - Edit to [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/transmission/_repo/transmission/PKGBUILD): remove lines  
   * `gtk` `qt` - no need  
-  * `patch` - skip `libcrypto.so.1.1`, `libssl.so.1.1` check   
+  * `patch` - skip `libsystemd`, `libssl-1.1.0` ( fix: `libcrypto.so.1.1`, `libssl.so.1.1` )  
 
 **Fix errors:**  
 
@@ -49,8 +49,7 @@ ln -s libguile-2.2.so.1.2.0 libguile-2.0.so.22
 ```sh
 su x
 cd /home/x/intltool
-makepkg -A --skipinteg
-makepkg -i
+makepkg -Ai --skipinteg
 #su
 #pacman -U /home/x/intltool/intltool-0.51.0-2-any.pkg.tar.xz
 ```
@@ -59,8 +58,7 @@ makepkg -i
 ```sh
 su x
 cd /home/x/transmission
-makepkg -A --skipinteg
-makepkg -i
+makepkg -Ai --skipinteg
 #su
 #pacman -U /home/x/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 ```
