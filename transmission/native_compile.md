@@ -19,7 +19,6 @@ mkdir intltool
 - Edit to [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/transmission/_repo/transmission/PKGBUILD): remove lines  
   * `gtk` `qt` - no need  
   * `patch` - skip `libcrypto.so.1.1`, `libssl.so.1.1` check   
-  * `user` `directory` - to run as root  
 
 **Fix errors:**  
 
