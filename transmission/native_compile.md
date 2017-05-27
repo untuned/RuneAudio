@@ -15,10 +15,10 @@ mkdir intltool
 
 - [ArchLinuxArm Packages](https://archlinuxarm.org/packages)  
 - search `transmission-cli` - `armv7h`  
-- `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/armv7h/transmission-cli/files), **except patched**, to `/home/x/transmission/`  
+- `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/armv7h/transmission-cli/files), except `transmission-2.92-openssl-1.1.0.patch`, to `/home/x/transmission/`  
 - Edit to [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/transmission/_repo/transmission/PKGBUILD): remove lines  
   * `gtk` `qt` - no need  
-  * `patch` - skip `libsystemd`, `libssl-1.1.0` ( fix: `libcrypto.so.1.1`, `libssl.so.1.1` )  
+  * `patch` - skip `libssl-1.1.0` ( fix: `libcrypto.so.1.1`, `libssl.so.1.1` )  
 
 **Fix errors:**  
 
