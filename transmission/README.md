@@ -26,6 +26,8 @@ systemctl stop transmission
 ```
 
 **WebUI**  
+(recommended WebUI alternative: [Transmission Web Control](https://github.com/ronggang/transmission-web-control#introduction)  
+  
 Browser URL:  
 _[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)  
 
