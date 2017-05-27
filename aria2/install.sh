@@ -27,11 +27,11 @@ if ! grep -qs '/mnt/MPD/USB/hdd' /proc/mounts; then
 	exit
 fi
 
-wget -q --show-progress -O uninstall_aria.sh "https://github.com/rern/RuneAudio/blob/master/aria2/uninstall_aria.sh?raw=1"
+wget -q --show-progress https://github.com/rern/RuneAudio/blob/master/aria2/uninstall_aria.sh
 chmod +x uninstall_aria.sh
 
 if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wget -q --show-progress -O rankmirrors.sh "https://github.com/rern/RuneAudio/blob/master/rankmirrors/rankmirrors.sh?raw=1"
+	wget -q --show-progress https://github.com/rern/RuneAudio/blob/master/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
 fi
@@ -44,10 +44,10 @@ else
 fi
 
 title "Get WebUI files ..."
-wget -q --show-progress -O aria2.zip https://github.com/ziahamza/webui-aria2/archive/master.zip
+wget -q --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
 mkdir /usr/share/nginx/html/aria2
-bsdtar -xf aria2.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
-rm aria2.zip
+bsdtar -xf master.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
+rm master.zip
 
 [[ ! -e /root/.config/aria2 ]] && mkdir /root/.config/aria2
 [[ ! -e /mnt/MPD/USB/hdd/aria2 ]] && mkdir /mnt/MPD/USB/hdd/aria2
