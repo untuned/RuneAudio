@@ -5,7 +5,7 @@ RuneAudio
 ```sh
 rm -r /var/cache/pacman
 mkdir -p /mnt/MPD/USB/hdd/varcache/pacman
-ln -s /var/cache/pacman /mnt/MPD/USB/hdd/varcache/pacman
+ln -s /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 ```
 
