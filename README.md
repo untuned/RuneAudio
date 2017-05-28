@@ -1,4 +1,4 @@
-RuneAudio
+RuneAudio setup
 ---
 
 **pacman cache**
