@@ -24,14 +24,14 @@ wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
 ```
 
-**samba**
+**Transmission**
+```sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
+```
+
+**Customize samba**
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/samba/smb-dev.conf
 systemctl restart nmbd
 systemctl restart smbd
-```
-
-**Transmission**
-```sh
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 ```
