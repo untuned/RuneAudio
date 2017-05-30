@@ -2,7 +2,8 @@ RuneAudio Transmission
 ---
 
 [**Transmission**](https://transmissionbt.com/) - Fast, easy, and free BitTorrent client (CLI tools, daemon and web client)  
-( [Native compiled version](https://github.com/rern/RuneAudio/blob/master/transmission/native_compile.md): fix error, `libcrypto.so.1.1` and `libssl.so.1.1`, in default package )  
+- [Native compiled version](https://github.com/rern/RuneAudio/blob/master/transmission/native_compile.md): fix error, `libcrypto.so.1.1` and `libssl.so.1.1`, in default package  
+- With optional WebUI alternative: [Transmission Web Control](https://github.com/ronggang/transmission-web-control#introduction  
 
 **Install**  
 Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`  
@@ -23,15 +24,6 @@ systemctl start transmission
 **Stop transmission**  
 ```sh
 systemctl stop transmission
-```
-
-**WebUI**  
-(recommended WebUI alternative: [Transmission Web Control](https://github.com/ronggang/transmission-web-control#introduction)  
-```sh
-wget -qN --show-progress https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
-mv /usr/share/transmission/web /usr/share/transmission/web.orig
-bsdtar -xvf transmission-control-full.tar.gz -C /usr/share/transmission
-chown -R root:root /usr/share/transmission/web
 ```
 
 Browser URL:  
