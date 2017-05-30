@@ -85,6 +85,22 @@ case $answer in
 		;;
 	* ) echo;;
 esac
+# web ui alternative
+title "$info Install WebUI alternative (Transmission Web Control):"
+echo -e '  \e[0;36m0\e[m No'
+echo -e '  \e[0;36m1\e[m Yes'
+echo
+echo -e '\e[0;36m0\e[m / 1 ? '
+read -n 1 answer
+case $answer in
+	1 ) echo
+		wget -qN --show-progress https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
+		mv /usr/share/transmission/web /usr/share/transmission/web.orig
+		bsdtar -xvf transmission-control-full.tar.gz -C /usr/share/transmission
+		chown -R root:root /usr/share/transmission/web
+		;;
+	* ) echo;;
+esac
 
 title "$info Start Transmission on system startup:"
 echo -e '  \e[0;36m0\e[m No'
