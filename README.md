@@ -37,4 +37,5 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/samba/smb-dev.conf -P /etc/samba
 systemctl restart nmbd
 systemctl restart smbd
+smbpasswd - a root
 ```
