@@ -15,5 +15,5 @@ additional files:
 **Tag / Meta data**  
 [**Mp3tag**](http://www.mp3tag.de/en/download.html)  
 
-**Album Art Downloader**
+**Album Art Downloader**  
 [**Album Art Downloader**](https://sourceforge.net/projects/album-art/)  
