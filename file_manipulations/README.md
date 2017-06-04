@@ -6,9 +6,10 @@ File manipulations
 
 
 **Single-file-album SACD iso > file-per-track DSD dsf**  
-Bogi's [**ISO2DSF**](https://github.com/rern/RuneAudio/raw/master/file_conversion/ISO2DSF_v1.2.2_Win7_Win8.zip)  
-how to: ISOtoDSFv122.pdf (file path must be no spaces)  
-additional files:
+[**ISO2DSF**](https://github.com/rern/RuneAudio/raw/master/file_conversion/ISO2DSF_v1.2.2_Win7_Win8.zip) by Bogi  
+how to: ISOtoDSFv122.pdf  
+file path must be `.../ISO2DSF`  
+additional files:  
 - [sacd_extract.exe](https://github.com/sacd-ripper/sacd-ripper/releases)  
 - [dff2dsf.exe](http://www.signalyst.com/professional.html)  
 
