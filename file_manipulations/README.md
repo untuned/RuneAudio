@@ -1,4 +1,4 @@
-File conversion
+File manipulations
 ---
 
 **Single-file-album flac > file-per-track flac**  
