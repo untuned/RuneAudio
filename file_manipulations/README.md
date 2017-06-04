@@ -5,7 +5,7 @@ File manipulations
 [**Exact Audio Copy**](http://www.exactaudiocopy.de/en/index.php/resources/download/)  
 
 **Single-file-album flac/wav > file-per-track flac**  
-**wav > flac**
+**wav > flac**  
 [**CUETools**](http://cue.tools/)  
 
 **Non red book wav > flac**
