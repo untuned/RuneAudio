@@ -17,3 +17,6 @@ additional files:
 
 **Album art**  
 [**Album Art Downloader**](https://sourceforge.net/projects/album-art/)  
+
+**Filename**  
+[**File Renamer**](http://www.sherrodcomputers.net/downloads/FileRenamerBasic.exe)  
