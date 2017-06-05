@@ -1,10 +1,10 @@
-File manipulations
+File manipulations tools
 ---
 
 **CD > flac**  
 [**Exact Audio Copy**](http://www.exactaudiocopy.de/en/index.php/resources/download/)  
 
-**Single-file-album flac/wav > file-per-track flac**  
+**Single-file-album > file-per-track**  
 **wav > flac**  
 [**CUETools**](http://cue.tools/)  
 
@@ -19,7 +19,7 @@ additional files:
 - [sacd_extract.exe](https://github.com/sacd-ripper/sacd-ripper/releases)  
 - [dff2dsf.exe](http://www.signalyst.com/professional.html)  
 
-**Tag / Metadata**  
+**Tag**  
 [**Mp3tag**](http://www.mp3tag.de/en/download.html)  
 
 **Album art**  
