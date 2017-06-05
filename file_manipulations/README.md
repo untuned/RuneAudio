@@ -1,4 +1,4 @@
-File manipulations tools
+File manipulation tools
 ---
 
 **CD > flac**  
