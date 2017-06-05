@@ -13,11 +13,11 @@ File manipulations tools
 
 **Single-file-album SACD iso > file-per-track DSD dsf**  
 [**ISO2DSF**](https://github.com/rern/RuneAudio/raw/master/file_conversion/ISO2DSF_v1.2.2_Win7_Win8.zip) by Bogi  
-- how to: `ISOtoDSFv122.pdf`  
-- folder must be `.../ISO2DSF/`  
+- how to: `ISOtoDSFv122.pdf` extracted from `ISO2DSF_v1.2.2_Win7_Win8.zip`     
 - additional files:  
-  * [sacd_extract.exe](https://github.com/sacd-ripper/sacd-ripper/releases)  
-  * [dff2dsf.exe](http://www.signalyst.com/professional.html)  
+  * `sacd_extract.exe` - extracted from [SACD Extract](https://github.com/sacd-ripper/sacd-ripper/releases)  
+  * `dff2dsf.exe` - extracted from [DFF2DSF](http://www.signalyst.com/professional.html)  
+- folder must be `.../ISO2DSF/`
 
 **Tag**  
 [**Mp3tag**](http://www.mp3tag.de/en/download.html)  
