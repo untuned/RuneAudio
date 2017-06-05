@@ -10,7 +10,7 @@ Exact Audio Copy is a so called audio grabber for audio CDs using standard CD an
 [**CUETools**](http://cue.tools/)  
 CUETools is a tool for lossless audio/CUE sheet format conversion.  
 
-**Non red book wav > flac**
+**Non red book wav > flac**  
 [**FLAC Frontend**](https://sourceforge.net/projects/flacfrontend/files/)  
 FLAC Frontend is a convenient way for Windows users not used to working with command lines to use the official FLAC tools.  
 
