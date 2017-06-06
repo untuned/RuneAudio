@@ -6,7 +6,8 @@ RuneAudio Transmission
 - With optional WebUI alternative: [Transmission Web Control](https://github.com/ronggang/transmission-web-control#introduction)  
 
 **Install**  
-Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`  
+- RuneAudio has trouble with system wide upgrade. Do not `pacman -Syu` upgrage.  
+- Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`  
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 ```
