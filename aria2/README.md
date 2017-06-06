@@ -4,8 +4,9 @@ RuneAudio Aria2 with WebUI
 [**aria2**](https://aria2.github.io/) - Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink  
 [**webui-aria2**](https://github.com/ziahamza/webui-aria2) - Web inferface for aria2  
  
-**Install**  
-Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`  
+**Install**
+- RuneAudio has trouble with system wide upgrade. Do not `pacman -Syu` upgrage. 
+- Connect a hard drive with label `hdd` or mount as `/mnt/MPD/USB/hdd`  
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
 ```
