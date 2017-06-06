@@ -74,13 +74,11 @@ echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
 case $answer in
 	1 ) echo
-		echo 'Username: '
-		read usr 
 		echo 'Password: '
 		read -s pwd
 		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
 		' -e "s|\"rpc-password\": \".*\"|\"rpc-password\": \"$pwd\"|
-		" -e "s|\"rpc-username\": \".*\"|\"rpc-username\": \"$usr\"|
+		" -e "s|\"rpc-username\": \".*\"|\"rpc-username\": \"root\"|
 		" $file
 		;;
 	* ) echo;;
@@ -129,4 +127,5 @@ echo 'Uninstall: ./uninstall_tran.sh'
 echo 'Start: systemctl start transmission'
 echo 'Stop:  systemctl stop transmission'
 echo 'Download directory: /mnt/MPD/USB/hdd/transmission'
-titleend "WebUI: [RuneAudio_IP]:9091"
+echo 'WebUI: [RuneAudio_IP]:9091'
+titleend "user: root"
