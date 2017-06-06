@@ -19,7 +19,7 @@ File manipulation tools
   * `dff2dsf.exe` - extracted from [DFF2DSF](http://www.signalyst.com/professional.html)  
 - folder must be `.../ISO2DSF/`
 
-**Tag**  
+**Tag / Tag <> Filename**  
 [**Mp3tag**](http://www.mp3tag.de/en/download.html) - a powerful and easy-to-use tool to edit metadata of audio files  
 
 **Album art**  
