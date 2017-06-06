@@ -1,7 +1,7 @@
 Native compile Transmission
 --- 
 Normal `pacman -S transmission-cli` failed to start, error: `libcrypto.so.1.1`, `libssl.so.1.1`  
-RuneAudio cannot handle system wide upgrade.  
+RuneAudio has trouble with system wide upgrade.  
   
 
 ```sh
