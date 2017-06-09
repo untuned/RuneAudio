@@ -11,6 +11,13 @@ File manipulation tools
 **Non Red Book wav > flac**  
 [**FLAC Frontend**](https://sourceforge.net/projects/flacfrontend/files/) - a convenient way for Windows users not used to working with command lines to use the official FLAC tools.  
 
+**dff > dsf** (to be able to add tag)  
+shift+right-click folder > Open PowerShell window here    
+
+`dff2dsf 'path/file.dff' 'path/file.dsf'`  
+- press 'tab' to auto complete file path and name.  
+- each command for each file, no wildcard.
+
 **SACD iso > DSD dsf**  
 [**ISO2DSF**](https://github.com/rern/RuneAudio/raw/master/file_conversion/ISO2DSF_v1.2.2_Win7_Win8.zip) by Bogi - read album tracks from SACD ISO file and to convert them to DSF files.  
 - how to: `ISOtoDSFv122.pdf` extracted from `ISO2DSF_v1.2.2_Win7_Win8.zip`     
