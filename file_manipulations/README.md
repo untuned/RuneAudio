@@ -1,5 +1,6 @@
 File manipulation tools
 ---
+(for Windows)  
 
 **CD > flac**  
 [**Exact Audio Copy**](http://www.exactaudiocopy.de/en/index.php/resources/download/) - a so called audio grabber for audio CDs using standard CD and DVD-ROM drives.  
@@ -12,6 +13,7 @@ File manipulation tools
 [**FLAC Frontend**](https://sourceforge.net/projects/flacfrontend/files/) - a convenient way for Windows users not used to working with command lines to use the official FLAC tools.  
 
 **dff > dsf** (to be able to add tag)  
+[**DFF2DSF**](http://www.signalyst.com/professional.html)
 shift+right-click folder > Open PowerShell window here    
 
 `dff2dsf 'path/file.dff' 'path/file.dsf'`  
