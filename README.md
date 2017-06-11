@@ -35,6 +35,6 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 **Upgrage and customize samba**
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/samba/smb.conf -P /etc/samba
-pacman -S samba libwbclient tdb tevent
+pacman -S libwbclient tdb tevent samba
 smbpasswd - a root
 ```
