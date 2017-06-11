@@ -73,14 +73,6 @@ systemctl stop nmbd
 pacman -S samba libwbclient tdb tevent
 ```
 
-**Restart samba**
-```sh
-systemctl restart smbd
-
-# if set new hostname / netbios name
-systemctl restart nmbd
-```
-
 **Add samba user + password**
 ```sh
 smbpasswd -a [user]
