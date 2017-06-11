@@ -32,7 +32,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/inst
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 ```
 
-**Customize samba**
+**Upgrage and customize samba**
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/samba/smb.conf -P /etc/samba
 pacman -S samba libwbclient tdb tevent
