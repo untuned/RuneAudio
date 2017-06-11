@@ -26,6 +26,20 @@ hostnamectl set-hostname [name]
 	log level = 0
 	syslog = 0
 
+	socket options = IPTOS_LOWDELAY SO_RCVBUF=131072 SO_SNDBUF=131072
+	min receivefile size = 2048
+	use sendfile = true
+	aio read size = 2048
+	aio write size = 2048
+	write cache size = 1024000
+	read raw = yes
+	write raw = yes
+	getwd cache = yes
+	oplocks = yes
+	max xmit = 32768
+	dead time = 15
+	large readwrite = yes
+
 	guest ok = yes
 	map to guest = bad user
 	encrypt passwords = yes
@@ -50,6 +64,13 @@ hostnamectl set-hostname [name]
 	guest ok = no
 	valid users = root
 #	host allow = [IP1] [IP2]
+```
+
+**Upgrage samba**
+```sh
+systemctl stop smbd
+systemctl stop nmbd
+pacman -S samba libwbclient tdb tevent
 ```
 
 **Restart samba**
