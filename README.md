@@ -35,6 +35,16 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 **Upgrage and customize samba**
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/samba/smb.conf -P /etc/samba
+
+systemctl stop nmbd
+systemctl stop smbd
 pacman -S libwbclient tdb tevent samba
+
+systemctl daemon-reload
+systemctl start nmbd
+systemctl start smbd
+systemctl enable nmbd
+systemctl enable smbd
+
 smbpasswd - a root
 ```
