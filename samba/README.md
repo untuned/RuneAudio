@@ -71,6 +71,7 @@ hostnamectl set-hostname [name]
 systemctl stop nmbd
 systemctl stop smbd
 pacman -S libwbclient tdb tevent samba
+
 systemctl daemon-reload
 systemctl start nmbd
 systemctl start smbd
