@@ -68,9 +68,12 @@ hostnamectl set-hostname [name]
 
 **Upgrage samba**
 ```sh
-systemctl stop smbd
-systemctl stop nmbd
-pacman -S samba libwbclient tdb tevent
+pacman -S libwbclient tdb tevent samba
+systemctl daemon-reload
+systemctl start nmbd
+systemctl start smbd
+systemctl enable nmbd
+systemctl enable smbd
 ```
 
 **Add samba user + password**
