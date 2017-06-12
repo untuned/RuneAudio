@@ -34,7 +34,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 
 **Upgrage and customize samba**
 ```sh
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/samba/smb.conf -P /etc/samba
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/samba/smb-dev.conf -P /etc/samba
 
 systemctl stop nmbd
 systemctl stop smbd
