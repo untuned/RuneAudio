@@ -68,6 +68,8 @@ hostnamectl set-hostname [name]
 
 **Upgrage samba**
 ```sh
+systemctl stop nmbd
+systemctl stop smbd
 pacman -S libwbclient tdb tevent samba
 systemctl daemon-reload
 systemctl start nmbd
