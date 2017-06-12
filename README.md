@@ -38,7 +38,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/samba/smb-
 
 systemctl stop nmbd
 systemctl stop smbd
-pacman -S libwbclient tdb tevent samba
+pacman -S tdb tevent libwbclient smbclient samba
 
 systemctl daemon-reload
 systemctl start nmbd
