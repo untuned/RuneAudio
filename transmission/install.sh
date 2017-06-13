@@ -41,7 +41,7 @@ rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 [[ ! -e /media/hdd ]] && mkdir /media; ln -s /mnt/MPD/USB/hdd/ /media/hdd
 if [[ ! -e /media/hdd/transmission ]]; then
-	mkdir -p /media/hdd/transmission/{blocklists,incomplete,resume,torrents,watch}
+	mkdir -p /media/hdd/transmission/{incomplete,watch}
 #	chown -R transmission:transmission /media/hdd/transmission
 fi
 
