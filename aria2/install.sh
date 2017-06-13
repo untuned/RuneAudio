@@ -49,8 +49,9 @@ mkdir /usr/share/nginx/html/aria2
 bsdtar -xf master.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
 rm master.zip
 
-[[ ! -e /root/.config/aria2 ]] && mkdir -p /root/.config/aria2
+[[ ! -e /media/hdd ]] && mkdir /media; ln -s /mnt/MPD/USB/hdd/ /media/hdd
 [[ ! -e /media/hdd/aria2 ]] && mkdir -p /media/hdd/aria2
+[[ ! -e /root/.config/aria2 ]] && mkdir -p /root/.config/aria2
 echo 'enable-rpc=true
 rpc-listen-all=true
 daemon=true
