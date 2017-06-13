@@ -22,8 +22,9 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
-if ! grep -qs '/mnt/MPD/USB/hdd' /proc/mounts; then
-	titleend "$info Hard drive not mount at /mnt/MPD/USB/hdd"
+label=$(e2label /dev/sda1)
+if ! grep -qs "/mnt/MPD/USB/$label" /proc/mounts; then
+	titleend "$info Hard drive not mount at /mnt/MPD/USB/$label"
 	exit
 fi
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/uninstall_tran.sh
@@ -39,14 +40,15 @@ else
 fi
 rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-[[ ! -e /media/hdd ]] && mkdir /media; ln -s /mnt/MPD/USB/hdd/ /media/hdd
-mkdir -p /media/hdd/transmission/{incomplete,watch}
-#chown -R transmission:transmission /media/hdd/transmission
+[[ ! -e /media/$label ]] && mkdir /media; ln -s /mnt/MPD/USB/$label/ /media/$label
+path=/media/$label/transmission
+mkdir -p $path/{incomplete,watch}
+#chown -R transmission:transmission $path
 
 # change user to 'root'
 cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
 sed -i -e 's|User=transmission|User=root|
-' -e '/transmission-daemon -f --log-error$/ s|$| --config-dir /media/hdd/transmission|
+' -e '/transmission-daemon -f --log-error$/ s|$| --config-dir '"$path"'|
 ' /etc/systemd/system/transmission.service
 # refresh systemd services
 systemctl daemon-reload
@@ -54,14 +56,14 @@ systemctl daemon-reload
 transmission-daemon
 killall transmission-daemon
 sleep 1
-file='/media/hdd/transmission/settings.json'
-sed -i -e 's|"download-dir": ".*"|"download-dir": "/media/hdd/transmission"|
-' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/media/hdd/transmission/incomplete"|
+file=$path/settings.json
+sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
+' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
 ' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
 ' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
 ' -e '/[^{},]$/ s/$/\,/
 ' -e '/}/ i\
-    "watch-dir": "/media/hdd/transmission/watch",\
+    "watch-dir": "'"$path"'/watch",\
     "watch-dir-enabled": true
 ' $file
 
@@ -76,8 +78,8 @@ case $answer in
 		echo 'Password: '
 		read -s pwd
 		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
-		' -e "s|\"rpc-password\": \".*\"|\"rpc-password\": \"$pwd\"|
-		" -e 's|"rpc-username": ".*"|"rpc-username": "root"|
+		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwd"'"|
+		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
 		' $file
 		;;
 	* ) echo;;
@@ -125,6 +127,6 @@ title2 "Transmission installed successfully."
 echo 'Uninstall: ./uninstall_tran.sh'
 echo 'Start: systemctl start transmission'
 echo 'Stop:  systemctl stop transmission'
-echo 'Download directory: /media/hdd/transmission'
+echo 'Download directory: '$path
 echo 'WebUI: [RuneAudio_IP]:9091'
 titleend "user: root"
