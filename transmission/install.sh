@@ -48,7 +48,7 @@ fi
 # change user to 'root'
 cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
 sed -i -e 's|User=transmission|User=root|
--e 's|ExecStart=/usr/bin/transmission-daemon -f --log-error|& --config-dir /media/hdd/transmission|
+' -e '/transmission-daemon -f --log-error$/ s|$| --config-dir /media/hdd/transmission|
 ' /etc/systemd/system/transmission.service
 # refresh systemd services
 systemctl daemon-reload
