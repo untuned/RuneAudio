@@ -22,8 +22,9 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
-if ! grep -qs '/mnt/MPD/USB/hdd' /proc/mounts; then
-	titleend "$info Hard drive not mount at /mnt/MPD/USB/hdd"
+label=$(e2label /dev/sda1)
+if ! grep -qs "/mnt/MPD/USB/$label" /proc/mounts; then
+	titleend "$info Hard drive not mount at /mnt/MPD/USB/$label"
 	exit
 fi
 
@@ -49,14 +50,14 @@ mkdir /usr/share/nginx/html/aria2
 bsdtar -xf master.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
 rm master.zip
 
-[[ ! -e /media/hdd ]] && mkdir /media; ln -s /mnt/MPD/USB/hdd/ /media/hdd
-[[ ! -e /media/hdd/aria2 ]] && mkdir -p /media/hdd/aria2
+[[ ! -e /media/$label ]] && mkdir /media; ln -s /mnt/MPD/USB/$label/ /media/$label
+mkdir -p /media/$label/aria2
 [[ ! -e /root/.config/aria2 ]] && mkdir -p /root/.config/aria2
 echo 'enable-rpc=true
 rpc-listen-all=true
 daemon=true
 disable-ipv6=true
-dir=/media/hdd/aria2
+dir=/media/$label/aria2
 max-connection-per-server=4
 ' > /root/.config/aria2/aria2.conf
 
@@ -111,5 +112,5 @@ title2 "Aria2 successfully installed."
 echo 'Uninstall: ./uninstall_aria.sh'
 echo 'Start: systemctl start aria2'
 echo 'Stop: systemctl stop aria2'
-echo 'Download directory: /media/hdd/aria2'
+echo 'Download directory: /media/$label/aria2'
 titleend "WebUI: [RuneAudio_IP]:88"
