@@ -44,7 +44,7 @@ if [[ ! -e /media/hdd/transmission ]]; then
 	mkdir /media/hdd/transmission
 	mkdir /media/hdd/transmission/incomplete
 	mkdir /media/hdd/transmission/torrents
-	chown -R root:root /media/hdd/transmission
+#	chown -R transmission:transmission /media/hdd/transmission
 fi
 
 # change user to 'root'
