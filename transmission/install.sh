@@ -41,15 +41,15 @@ rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 [[ ! -e /media/hdd ]] && mkdir /media; ln -s /mnt/MPD/USB/hdd/ /media/hdd
 if [[ ! -e /media/hdd/transmission ]]; then
-	mkdir /media/hdd/transmission
-	mkdir /media/hdd/transmission/incomplete
-	mkdir /media/hdd/transmission/watch
+	mkdir -p /media/hdd/transmission/{blocklists,incomplete,resume,torrents,watch}
 #	chown -R transmission:transmission /media/hdd/transmission
 fi
 
 # change user to 'root'
 cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
-sed -i 's|User=transmission|User=root|' /etc/systemd/system/transmission.service
+sed -i -e 's|User=transmission|User=root|
+-e 's|ExecStart=/usr/bin/transmission-daemon -f --log-error|& --config-dir /media/hdd/transmission|
+' /etc/systemd/system/transmission.service
 # refresh systemd services
 systemctl daemon-reload
 # create settings.json
