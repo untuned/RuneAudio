@@ -39,11 +39,12 @@ else
 fi
 rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-if [[ ! -e /mnt/MPD/USB/hdd/transmission ]]; then
-	mkdir /mnt/MPD/USB/hdd/transmission
-	mkdir /mnt/MPD/USB/hdd/transmission/incomplete
-	mkdir /mnt/MPD/USB/hdd/transmission/torrents
-	chown -R transmission:transmission /mnt/MPD/USB/hdd/transmission
+[[ ! -e /media/hdd ]] && mkdir /media; ln -s /mnt/MPD/USB/hdd/ /media/hdd
+if [[ ! -e /media/hdd/transmission ]]; then
+	mkdir /media/hdd/transmission
+	mkdir /media/hdd/transmission/incomplete
+	mkdir /media/hdd/transmission/torrents
+	chown -R root:root /media/hdd/transmission
 fi
 
 # change user to 'root'
@@ -56,13 +57,13 @@ transmission-daemon
 killall transmission-daemon
 sleep 1
 file='/root/.config/transmission-daemon/settings.json'
-sed -i -e 's|"download-dir": ".*"|"download-dir": "/mnt/MPD/USB/hdd/transmission"|
-' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/mnt/MPD/USB/hdd/transmission/incomplete"|
+sed -i -e 's|"download-dir": ".*"|"download-dir": "/media/hdd/transmission"|
+' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/media/hdd/transmission/incomplete"|
 ' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
 ' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
 ' -e '/[^{},]$/ s/$/\,/
 ' -e '/}/ i\
-    "watch-dir": "/mnt/MPD/USB/hdd/transmission/torrents",\
+    "watch-dir": "/media/hdd/transmission/torrents",\
     "watch-dir-enabled": true
 ' $file
 
@@ -126,6 +127,6 @@ title2 "Transmission installed successfully."
 echo 'Uninstall: ./uninstall_tran.sh'
 echo 'Start: systemctl start transmission'
 echo 'Stop:  systemctl stop transmission'
-echo 'Download directory: /mnt/MPD/USB/hdd/transmission'
+echo 'Download directory: /media/hdd/transmission'
 echo 'WebUI: [RuneAudio_IP]:9091'
 titleend "user: root"
