@@ -1,11 +1,17 @@
 RuneAudio setup
 ---
 
+**Unify USB path with OSMC**
+```sh
+mkdir /media
+ln -s /mnt/MPD/USB/hdd/ /media/hdd
+```
+
 **pacman cache**
 ```sh
 rm -r /var/cache/pacman
-mkdir -p /mnt/MPD/USB/hdd/varcache/pacman
-ln -s /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
+mkdir -p /media/hdd/varcache/pacman
+ln -s /media/hdd/varcache/pacman /var/cache/pacman
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 ```
 
