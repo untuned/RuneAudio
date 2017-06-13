@@ -49,13 +49,13 @@ mkdir /usr/share/nginx/html/aria2
 bsdtar -xf master.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
 rm master.zip
 
-[[ ! -e /root/.config/aria2 ]] && mkdir /root/.config/aria2
-[[ ! -e /mnt/MPD/USB/hdd/aria2 ]] && mkdir /mnt/MPD/USB/hdd/aria2
+[[ ! -e /root/.config/aria2 ]] && mkdir -p /root/.config/aria2
+[[ ! -e /media/hdd/aria2 ]] && mkdir -p /media/hdd/aria2
 echo 'enable-rpc=true
 rpc-listen-all=true
 daemon=true
 disable-ipv6=true
-dir=/mnt/MPD/USB/hdd/aria2
+dir=/media/hdd/aria2
 max-connection-per-server=4
 ' > /root/.config/aria2/aria2.conf
 
@@ -110,5 +110,5 @@ title2 "Aria2 successfully installed."
 echo 'Uninstall: ./uninstall_aria.sh'
 echo 'Start: systemctl start aria2'
 echo 'Stop: systemctl stop aria2'
-echo 'Download directory: /mnt/MPD/USB/hdd/aria2'
+echo 'Download directory: /media/hdd/aria2'
 titleend "WebUI: [RuneAudio_IP]:88"
