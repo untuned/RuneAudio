@@ -56,7 +56,7 @@ systemctl daemon-reload
 transmission-daemon
 killall transmission-daemon
 sleep 1
-file='/root/.config/transmission-daemon/settings.json'
+file='/media/hdd/transmission/settings.json'
 sed -i -e 's|"download-dir": ".*"|"download-dir": "/media/hdd/transmission"|
 ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "/media/hdd/transmission/incomplete"|
 ' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
