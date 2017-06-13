@@ -18,5 +18,4 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_par
 - Install package **Parted**  
 - Expand default 2GB partition to full capacity of SD card with **fdisk**  
 - Probe new partition with **partprobe** (by **Parted**)  
-- Resize to new partition with **resize2fs**  
-- Done  
+- Resize to new partition with **resize2fs**    
