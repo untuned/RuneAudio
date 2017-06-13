@@ -46,6 +46,11 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 chmod +x uninstall_tran.sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
+if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
+	wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
+	chmod +x rankmirrors.sh
+	./rankmirrors.sh
+fi
 if ! pacman -Q transmission-cli &>/dev/null; then
 	title2 "Install Transmission ..."
 	pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
