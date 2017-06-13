@@ -76,8 +76,8 @@ case $answer in
 		echo 'Password: '
 		read -s pwd
 		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
-		' -e 's|"rpc-password": ".*"|"rpc-password": "$pwd"|
-		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
+		' -e "s|\"rpc-password\": \".*\"|\"rpc-password\": \"$pwd\"|
+		" -e 's|"rpc-username": ".*"|"rpc-username": "root"|
 		' $file
 		;;
 	* ) echo;;
