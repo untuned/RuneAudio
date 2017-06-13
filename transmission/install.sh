@@ -53,7 +53,7 @@ sed -i -e 's|User=transmission|User=root|
 # refresh systemd services
 systemctl daemon-reload
 # create settings.json
-transmission-daemon
+systemctl start transmission
 killall transmission-daemon
 sleep 1
 file=$path/settings.json
@@ -77,8 +77,9 @@ case $answer in
 	1 ) echo
 		echo 'Password: '
 		read -s pwd
+		pwdhash=$(echo -n "$pwd" | sha1sum | awk '{print $1}')
 		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
-		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwd"'"|
+		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwdhash"'"|
 		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
 		' $file
 		;;
