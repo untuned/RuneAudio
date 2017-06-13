@@ -29,8 +29,14 @@ titleend() {
 		echo -e "\n$line\n"
 }
 
+title "$info Remove all USB drives before proceeding:"
+echo
+echo 'To limit any possibility of data loss to only SD card.'
+echo 'If not success, just reinstall RuneAudio.'
+echo
+read -n 1 -s -p 'Press any key to continue ... '
+echo
 # partition data #######################################
-
 devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 partini=${part:0:3}
