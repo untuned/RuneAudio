@@ -70,7 +70,7 @@ case $answer in
 			#pacman -S --noconfirm parted
 			
 			wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
-			pacman -U parted-3.2-5-armv7h.pkg.tar.xz
+			pacman -U --noconfirm parted-3.2-5-armv7h.pkg.tar.xz
 			rm parted-3.2-5-armv7h.pkg.tar.xz
 		fi
 		title "Expand partiton ..."
