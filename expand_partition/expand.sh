@@ -64,16 +64,11 @@ echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
 case $answer in
 	1 ) if ! pacman -Q parted &>/dev/null; then
-			if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-				wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
-				chmod +x rankmirrors.sh
-				./rankmirrors.sh
-			fi
 			title "Get packages file ..."
 			wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/_repo/var.tar
 			tar -xvf var.tar -C /
 			rm var.tar
-			pacman -Sy --noconfirm parted
+			pacman -S --noconfirm parted
 		fi
 		title "Expand partiton ..."
 		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk &>/dev/null
