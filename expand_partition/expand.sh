@@ -30,8 +30,7 @@ titleend() {
 }
 
 title "$info Remove all USB drives before proceeding:"
-echo 'Limit any possibility of data loss to only SD card.'
-echo 'If not success, just reinstall RuneAudio.'
+echo 'To make sure only SD card to be expanded.'
 echo
 read -n 1 -s -p 'Press any key to continue ... '
 echo
