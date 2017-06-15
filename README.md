@@ -38,11 +38,8 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/inst
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 
-ren /usr/share/transmission/web/index.html /usr/share/transmission/web/index.original.html 
-ln -s /media/hdd/transmission/web/tr-web-control /usr/share/transmission/web/tr-web-control
-ln -s /media/hdd/transmission/web/index.html /usr/share/transmission/web/index.html
-ln -s /media/hdd/transmission/web/index.mobile.html /usr/share/transmission/web/index.mobile.html
-ln -s /media/hdd/transmission/web/favicon.ico /usr/share/transmission/web/favicon.ico
+rm -r /usr/share/transmission/web
+ln -s /media/hdd/transmission/web /usr/share/transmission/web
 ```
 
 **Upgrage and customize samba**
