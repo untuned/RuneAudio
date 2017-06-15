@@ -9,11 +9,11 @@ Fix packages download errors:
 - update mirrorlist file, **/etc/pacman.d/mirrorlist** (with original backup)
 
 - **Rank**
-```sh
+```
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 ```
 
 - **Update package databases**
-```sh
+```
 pacman -Sy
 ```
