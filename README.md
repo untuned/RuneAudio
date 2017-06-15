@@ -43,13 +43,15 @@ wget -qN --show-progress $gitpath/transmission/install.sh; chmod +x install.sh; 
 
 **Upgrage and customize samba**
 ```sh
-wget -qN --show-progress $gitpath/samba/smb-dev.conf -P /etc/samba
-
 systemctl stop nmbd
 systemctl stop smbd
-pacman -S tdb tevent libwbclient smbclient samba
+pacman -Rs --no-confirm samba4-rune
+pacman -S --no-confirm tdb tevent libwbclient smbclient
+pacman -S --no-confirm samba
 
-systemctl daemon-reload
+wget -qN --show-progress $gitpath/samba/smb-dev.conf -P /etc/samba
+ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
+
 systemctl start nmbd
 systemctl start smbd
 systemctl enable nmbd
