@@ -29,29 +29,35 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
+# partition data #######################################
+freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
+freemb=$( python2 -c "print($freekb / 1000)" ) # bash itself cannot do float
+devpart=$( mount | grep 'on / type' | awk '{print $1}' )
+part=${devpart/\/dev\//}
+disk='/dev/'${part::-2}
+
+unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
+unpartmb=$( python2 -c "print($unpartb / 1000000)" )
+summb=$(( $freemb + $unpartmb ))
+
+if [[ echo $unpartb = 0 ]]; then
+	titleend "No unused space available."
+	exit
+fi
+
 if ls /dev/sd* &>/dev/null; then
 	title "$info Unmount and remove all USB drives before proceeding:"
-	echo -e '\e[0;36m' ls /dev/sd* echo'\e[m'
+	echo -e '\e[0;36m'ls /dev/sd*'\e[m'
 	echo
 	echo 'To make sure only SD card to be expanded.'
 	echo
 	read -n 1 -s -p 'Press any key to continue ... '
 	echo
 fi
-# partition data #######################################
-devpart=$( mount | grep 'on / type' | awk '{print $1}' )
-part=${devpart/\/dev\//}
-disk='/dev/'${part::-2}
-
-freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
-freemb=$( python2 -c "print($freekb / 1000)" ) # bash itself cannot do float
-unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' ) # unpartitoned space in GB
-unpartmb=$( python2 -c "print($unpartb / 1000000)" )
-summb=$(( $freemb + $unpartmb ))
 
 # expand partition #######################################
-title "$info Available unused disk space: $unpartmb MB"
-echo 'Current available free space' $freemb 'MB'
+title2 "Available unused disk space: \e[0;36m$unpartmb\e[m MB"
+echo -e "Current available free space \e[0;36m$freemb\e[m MB"
 echo
 echo -e "Expand partiton \e[0;36m$devpart\e[m to full unused space:"
 echo -e '  \e[0;36m0\e[m Cancel'
@@ -79,7 +85,7 @@ case $answer in
 			freekb=$( df | grep '/$' | awk '{print $4}' )
 			freemb=$( python2 -c "print($freekb / 1000)" )
 			echo
-			titleend "$info Partiton now has $freemb MB free space."
+			titleend -e "$info Partiton now has \e[0;36m$freemb\e[m MB free space."
 		fi;;
 
 	* ) echo
