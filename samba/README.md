@@ -1,6 +1,7 @@
 samba
 ---
-RuneAudio already installed samba  
+RuneAudio already installed samba.  
+Upgrading samba with custom configuration will potentially gain 25% more transfer speed.  
 
 **Server name**  
 - any os file browsers:
@@ -70,13 +71,18 @@ hostnamectl set-hostname [name]
 ```sh
 systemctl stop nmbd
 systemctl stop smbd
-pacman -S tdb tevent libwbclient smbclient samba
+pacman -Rs --no-confirm samba4-rune
+pacman -S --no-confirm tdb tevent libwbclient smbclient
+pacman -S --no-confirm samba
 
-systemctl daemon-reload
+ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
+
 systemctl start nmbd
 systemctl start smbd
 systemctl enable nmbd
 systemctl enable smbd
+
+smbpasswd - a root
 ```
 
 **Add samba user + password**
