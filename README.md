@@ -3,8 +3,8 @@ RuneAudio setup
 
 **Settings**  
 ```
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/mpd.db -P /var/lib/mpd
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rune.rdb -P /var/lib/redis
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.db -P /var/lib/mpd
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/rune.rdb -P /var/lib/redis
 ```
 
 **Unify USB path with OSMC**
@@ -31,8 +31,8 @@ wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/i
 ```
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh
 
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/mpd.conf.gpio -P /etc
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/gpio.json -P /srv/http
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.conf.gpio -P /etc
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P /srv/http
 ```
 
 **Aria2**
@@ -56,7 +56,7 @@ pacman -Rs --no-confirm samba4-rune
 pacman -S --no-confirm tdb tevent libwbclient smbclient
 pacman -S --no-confirm samba
 
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/samba/smb-dev.conf -P /etc/samba
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb-dev.conf -P /etc/samba
 ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
 systemctl start nmbd
