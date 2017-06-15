@@ -12,7 +12,7 @@ hostnamectl set-hostname [name]
 `netbios name` in `/etc/samba-dev/smb.conf`  
 
 **/etc/samba/smb-dev.conf**
-```sh
+```
 [global]
 #	netbios name = [name]
 	workgroup = WORKGROUP
