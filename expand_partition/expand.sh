@@ -31,7 +31,7 @@ titleend() {
 
 if ls /dev/sd* &>/dev/null; then
 	title "$info Unmount and remove all USB drives before proceeding:"
-	ls /dev/sd*
+	echo -e '\e[0;36m' ls /dev/sd* echo'\e[m'
 	echo
 	echo 'To make sure only SD card to be expanded.'
 	echo
@@ -53,7 +53,7 @@ summb=$(( $freemb + $unpartmb ))
 title "$info Available unused disk space: $unpartmb MB"
 echo 'Current available free space' $freemb 'MB'
 echo
-echo 'Expand partiton to full unused space:'
+echo -e "Expand partiton \e[0;36m$devpart\e[m to full unused space:"
 echo -e '  \e[0;36m0\e[m Cancel'
 echo -e '  \e[0;36m1\e[m Expand'
 echo
