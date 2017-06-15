@@ -65,7 +65,7 @@ mkdir /usr/share/nginx/html/aria2
 bsdtar -xf master.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
 rm master.zip
 
-[[ ! -e /media/$label ]] && { mkdir /media; ln -s /mnt/MPD/USB/$label/ /media/$label }
+[[ ! -e /media/$label ]] && ( mkdir /media; ln -s /mnt/MPD/USB/$label/ /media/$label )
 mkdir -p /media/$label/aria2
 [[ ! -e /root/.config/aria2 ]] && mkdir -p /root/.config/aria2
 echo 'enable-rpc=true
