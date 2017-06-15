@@ -5,7 +5,7 @@ Upgrading samba with custom configuration will potentially gain 25% more transfe
 
 **Server name**  
 - any os file browsers:
-```sh
+```
 hostnamectl set-hostname [name]
 ```
 - only Windows(NetBIOS) file browsers:  
@@ -68,7 +68,7 @@ hostnamectl set-hostname [name]
 ```
 
 **Upgrage samba**
-```sh
+```
 systemctl stop nmbd
 systemctl stop smbd
 pacman -Rs --no-confirm samba4-rune
@@ -86,6 +86,6 @@ smbpasswd - a root
 ```
 
 **Add samba user + password**
-```sh
+```
 smbpasswd -a [user]
 ```
