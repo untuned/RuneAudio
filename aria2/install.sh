@@ -70,7 +70,7 @@ if [[ ! -e /media/$label ]]; then
 	ln -s /mnt/MPD/USB/$label/ /media/$label
 fi
 mkdir -p /media/$label/aria2
-[[ ! -e /root/.config/aria2 ]] && mkdir -p /root/.config/aria2
+mkdir -p /root/.config/aria2
 echo 'enable-rpc=true
 rpc-listen-all=true
 daemon=true
