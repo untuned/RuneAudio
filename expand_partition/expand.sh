@@ -37,12 +37,7 @@ echo
 # partition data #######################################
 devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
-partini=${part:0:3}
-if [ $partini == 'mmc' ]; then
-	disk='/dev/'${part::-2}
-else
-	disk='/dev/'$partini
-fi
+disk='/dev/'${part::-2}
 
 freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
 freemb=$( python2 -c "print($freekb / 1000)" ) # bash itself cannot do float
