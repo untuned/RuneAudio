@@ -47,7 +47,7 @@ fi
 
 if ls /dev/sd* &>/dev/null; then
 	title "$info Unmount and remove all USB drives before proceeding:"
-	echo -e '\e[0;36m'ls /dev/sd*'\e[m'
+	echo -e '\e[0;36m'ls /dev/sd* '\e[m'
 	echo
 	echo 'To make sure only SD card to be expanded.'
 	echo
