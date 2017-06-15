@@ -84,7 +84,7 @@ case $answer in
 			exit
 		else
 			freekb=$( df | grep '/$' | awk '{print $4}' )
-			freemb=$( python -c "print($freekb / 1000)" )
+			freemb=$( python2 -c "print($freekb / 1000)" )
 			echo
 			titleend "$info Partiton now has $freemb MB free space."
 		fi;;
