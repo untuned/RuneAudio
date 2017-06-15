@@ -40,7 +40,7 @@ unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
 unpartmb=$( python2 -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 
-if [[ echo $unpartb = 0 ]]; then
+if [[ $unpartb -eq 0 ]]; then
 	titleend "No unused space available."
 	exit
 fi
