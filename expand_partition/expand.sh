@@ -25,12 +25,14 @@ title() {
 	echo -e "$line\n"
 }
 titleend() {
-		echo -e "\n$1"
-		echo -e "\n$line\n"
+	echo -e "\n$1"
+	echo -e "\n$line\n"
 }
 
 if ls /dev/sd* &>/dev/null; then
-	title "$info Remove all USB drives before proceeding:"
+	title "$info Unmount and remove all USB drives before proceeding:"
+	ls /dev/sd*
+	echo
 	echo 'To make sure only SD card to be expanded.'
 	echo
 	read -n 1 -s -p 'Press any key to continue ... '
