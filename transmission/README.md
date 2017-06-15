@@ -7,22 +7,22 @@ RuneAudio Transmission
 
 **Install**  
 - RuneAudio has trouble with system wide upgrade. Do not `pacman -Syu` upgrage.  
-```sh
+```
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 ```
 
 **Uninstall**  
-```sh
+```
 ./uninstall_tran.sh
 ```
 
 **Start transmission**  
-```sh
+```
 systemctl start transmission
 ```
 
 **Stop transmission**  
-```sh
+```
 systemctl stop transmission
 ```
 
@@ -35,7 +35,7 @@ add torrent files to `/media/hdd/transmission/torrents` will auto start download
 [optional] **set specific client IP**  
 - allow only IP
 - nolimit > `"rpc-whitelist-enabled": false`
-```sh
+```
     ...
     "rpc-whitelist": "127.0.0.1,[IP1],[IP2]",
     "rpc-whitelist-enabled": true,
@@ -43,7 +43,7 @@ add torrent files to `/media/hdd/transmission/torrents` will auto start download
 ```
 
 **Create**  
-```sh
+```
 transmission-create -p -o <file> -c "<comment>" -t "<url>"
 
 # -p --private                 Allow this torrent to only be used with the specified tracker(s)
