@@ -22,8 +22,8 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
-label=$(e2label /dev/sda1)
-title "$info Rename current USB label, $label:"
+label=$( e2label /dev/sda1 )
+title "$info Rename current USB label '$label':"
 echo -e '  \e[0;36m0\e[m No'
 echo -e '  \e[0;36m1\e[m Yes'
 echo
@@ -60,7 +60,7 @@ else
 fi
 rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-[[ ! -e /media/$label ]] && mkdir /media; ln -s /mnt/MPD/USB/$label/ /media/$label
+[[ ! -e /media/$label ]] && { mkdir /media; ln -s /mnt/MPD/USB/$label/ /media/$label }
 path=/media/$label/transmission
 mkdir -p $path/{incomplete,watch}
 #chown -R transmission:transmission $path
