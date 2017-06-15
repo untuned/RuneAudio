@@ -56,10 +56,12 @@ if ls /dev/sd* &>/dev/null; then
 fi
 
 # expand partition #######################################
-title2 "Available unused disk space: \e[0;36m$unpartmb\e[m MB"
-echo -e "Current available free space \e[0;36m$freemb\e[m MB"
+title2 "Expand partition"
+echo -e "Current partiton: \e[0;36m$devpart\e[m"
+echo -e "Available free space \e[0;36m$freemb MB\e[m"
+echo -e "Available unused disk space: \e[0;36m$unpartmb MB\e[m"
 echo
-echo -e "Expand partiton \e[0;36m$devpart\e[m to full unused space:"
+echo -e "Expand partiton to full unused space:"
 echo -e '  \e[0;36m0\e[m Cancel'
 echo -e '  \e[0;36m1\e[m Expand'
 echo
