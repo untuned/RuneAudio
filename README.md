@@ -24,7 +24,7 @@ wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/i
 **GPIO**
 ```
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh
-# customized files
+
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/mpd.conf.gpio -P /etc
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/gpio.json -P /srv/http
 ```
