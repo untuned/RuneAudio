@@ -14,7 +14,6 @@ _Tested on RuneAudio RPi3_
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/expand.sh; chmod +x expand.sh; ./expand.sh
 ```
 
-- Rank mirror servers with [**rankmirrors.sh**](https://github.com/rern/ArchLinuxArm_rankmirrors/)
 - Install package **Parted**  
 - Expand default 2GB partition to full capacity of SD card with **fdisk**  
 - Probe new partition with **partprobe** (by **Parted**)  
