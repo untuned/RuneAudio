@@ -9,10 +9,12 @@ ln -s /mnt/MPD/USB/hdd/ /media/hdd
 
 **pacman cache**
 ```sh
+gitpath=https://github.com/rern/RuneAudio/raw/master
+
 rm -r /var/cache/pacman
 mkdir -p /media/hdd/varcache/pacman
 ln -s /media/hdd/varcache/pacman /var/cache/pacman
-gitpath=https://github.com/rern/RuneAudio/raw/master
+
 wget -qN --show-progress $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 ```
 
