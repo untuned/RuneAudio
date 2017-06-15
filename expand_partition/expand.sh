@@ -85,7 +85,7 @@ case $answer in
 			freekb=$( df | grep '/$' | awk '{print $4}' )
 			freemb=$( python2 -c "print($freekb / 1000)" )
 			echo
-			titleend "$info Partiton now has \e[0;36m$freemb\e[m MB free space."
+			titleend "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
 		fi;;
 
 	* ) echo
