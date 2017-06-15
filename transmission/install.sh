@@ -60,7 +60,7 @@ else
 fi
 rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-[[ ! -e /media/$label ]] && { mkdir /media; ln -s /mnt/MPD/USB/$label/ /media/$label }
+[[ ! -e /media/$label ]] && ( mkdir /media; ln -s /mnt/MPD/USB/$label/ /media/$label )
 path=/media/$label/transmission
 mkdir -p $path/{incomplete,watch}
 #chown -R transmission:transmission $path
