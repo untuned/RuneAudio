@@ -3,6 +3,7 @@ RuneAudio setup
 
 **Settings**  
 ```
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/mpd.db -P /var/lib/mpd
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rune.rdb -P /var/lib/redis
 ```
 
