@@ -6,22 +6,22 @@ RuneAudio Aria2 with WebUI
  
 **Install**
 - RuneAudio has trouble with system wide upgrade. Do not `pacman -Syu` upgrage.  
-```sh
+```
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
 ```
 
 **Uninstall**  
-```sh
+```
 ./uninstall_aria.sh
 ```
 
 **Start aria2**  
-```sh
+```
 systemctl start aria2
 ```
 
 **Stop aria2**  
-```sh
+```
 systemctl stop aria2
 ```
 
