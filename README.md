@@ -1,6 +1,11 @@
 RuneAudio setup
 ---
 
+**Settings**  
+```
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rune.rdb -P /var/lib/redis
+```
+
 **Unify USB path with OSMC**
 ```
 mkdir /media
