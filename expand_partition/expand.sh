@@ -41,7 +41,7 @@ unpartmb=$( python2 -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 
 if [[ $unpartb -eq 0 ]]; then
-	titleend "No unused space available."
+	title "$info No unused space available."
 	exit
 fi
 
