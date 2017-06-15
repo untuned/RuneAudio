@@ -39,7 +39,7 @@ Replace `/root/.xbindkeysrc`
 Install [**RuneUI GPIO**](https://github.com/rern/RuneUI_GPIO) and add these commands to desire buttons.
 
 Such as:
-```sh
+```
 
 #<www> power on
 "php /srv/http/gpioon.php"
