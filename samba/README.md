@@ -1,7 +1,7 @@
 samba
 ---
-RuneAudio already installed samba.  
-Upgrading samba with custom configuration will potentially gain 25% more transfer speed.  
+RuneAudio already `installed samba4-rune`  
+Upgrade to latest samba, 5.6.5-1, with following configuration > improve from `8MB/s` to `10MB/s` transfer speed on wired network.  
 
 **Server name**  
 - any os file browsers:
