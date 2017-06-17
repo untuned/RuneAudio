@@ -98,6 +98,15 @@ systemctl restart nmbd
 ```
 systemctl stop nmbd
 systemctl stop smbd
+
+# fix packages download errors
+if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
+	wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
+	chmod +x rankmirrors.sh
+	./rankmirrors.sh
+fi
+pacman -Sy
+
 pacman -Rs --no-confirm samba4-rune
 pacman -S --no-confirm tdb tevent libwbclient smbclient
 pacman -S --no-confirm samba
