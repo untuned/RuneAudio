@@ -25,7 +25,6 @@ hostnamectl set-hostname [name]
 	os level = 255   
 	dns proxy = no
 	log level = 0
-	syslog = 0
 
 	socket options = IPTOS_LOWDELAY SO_RCVBUF=131072 SO_SNDBUF=131072
 	min receivefile size = 2048
@@ -65,6 +64,28 @@ hostnamectl set-hostname [name]
 	guest ok = no
 	valid users = root
 #	host allow = [IP1] [IP2]
+```
+
+**Test samba parameters**
+```
+testparm
+```
+
+**Fix minimum `rlimit_max`**
+```
+echo '
+root	soft	nofile	16384
+root	hard	nofile	16384
+' >> /etc/securities/limits/conf
+```
+Close SSH and reconnect to update new value.
+
+**Restart samba**
+```sh
+systemctl restart smbd
+
+# if set new hostname
+systemctl restart nmbd
 ```
 
 **Upgrage samba**
