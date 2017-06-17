@@ -27,6 +27,8 @@ hostnamectl set-hostname [name]
 	os level = 255   
 	dns proxy = no
 	log level = 0
+	bind interfaces only = yes
+	interfaces = lo eth0 wlan
 
 	socket options = IPTOS_LOWDELAY SO_RCVBUF=131072 SO_SNDBUF=131072
 	min receivefile size = 2048
