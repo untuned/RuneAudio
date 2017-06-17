@@ -27,6 +27,7 @@ hostnamectl set-hostname [name]
 	os level = 255   
 	dns proxy = no
 	log level = 0
+	
 	# fix IP4 only server - call failed: Address family not supported by protocol
 	bind interfaces only = yes
 	interfaces = lo eth0 wlan
