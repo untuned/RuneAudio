@@ -73,10 +73,10 @@ testparm
 
 **Fix minimum `rlimit_max`**
 ```bash
-echo '
-root	soft	nofile	16384
-root	hard	nofile	16384
-' >> /etc/securities/limits.conf
+echo -n '
+root    soft    nofile    16384
+root    hard    nofile    16384
+' >> /etc/security/limits.conf
 # Close SSH and reconnect to update new value.
 ```
 
