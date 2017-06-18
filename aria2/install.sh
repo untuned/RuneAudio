@@ -48,10 +48,10 @@ rm master.zip
 if mount | grep '/dev/sda1' &>/dev/null; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	mkdir -p $mnt/aria2
-	dldir=$mnt/aria2
+	path=$mnt/aria2
 else
 	mkdir -p /root/aria2
-	dldir=/root/aria2
+	path=/root/aria2
 fi
 
 mkdir -p /root/.config/aria2
@@ -59,7 +59,7 @@ echo "enable-rpc=true
 rpc-listen-all=true
 daemon=true
 disable-ipv6=true
-dir=$dldir
+dir=$path
 max-connection-per-server=4
 " > /root/.config/aria2/aria2.conf
 
@@ -114,5 +114,5 @@ title2 "Aria2 successfully installed."
 echo 'Uninstall: ./uninstall_aria.sh'
 echo 'Start: systemctl start aria2'
 echo 'Stop: systemctl stop aria2'
-echo 'Download directory: '$dldir
+echo 'Download directory: '$path
 titleend "WebUI: [RuneAudio_IP]:88"
