@@ -45,17 +45,14 @@ mkdir /usr/share/nginx/html/aria2
 bsdtar -xf master.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
 rm master.zip
 
-dlinput() {
-	title "$info Download directory (full path):"
-	echo 'on USB hdd: /mnt/MPD/USB/label/directory'
-	echo 'on SD card: /root/directory'
-	read dldir
-	if [[ ! -e $dldir ]]; then
-		echo -e "$warn Directory \e[0;36m$dldir\e[m not found."
-		dlinput
-	fi
-}
-dlinput
+if mount | grep '/dev/sda1' &>/dev/null; then
+	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+	mkdir -p $mnt/aria2
+	dldir=$mnt/aria2
+else
+	mkdir -p /root/aria2
+	dldir=/root/aria2
+fi
 
 mkdir -p /root/.config/aria2
 echo "enable-rpc=true
