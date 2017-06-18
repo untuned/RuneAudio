@@ -52,9 +52,10 @@ ln -s /media/hdd/transmission/web /usr/share/transmission/web
 ```
 systemctl stop nmbd
 systemctl stop smbd
-pacman -Rs --no-confirm samba4-rune
-pacman -S --no-confirm tdb tevent libwbclient smbclient
-pacman -S --no-confirm samba
+pacman -R --noconfirm samba4-rune
+pacman -S --noconfirm tdb tevent smbclient
+pacman -S --noconfirm samba
+pacman -S --noconfirm libwbclient
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb-dev.conf -P /etc/samba
 ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
