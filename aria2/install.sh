@@ -45,15 +45,17 @@ mkdir /usr/share/nginx/html/aria2
 bsdtar -xf master.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
 rm master.zip
 
-dl() {
+dlinput() {
 	title "$info Download directory (full path):"
+	echo 'on USB hdd: /mnt/MPD/USB/label/directory'
+	echo 'on SD card: /root/directory'
 	read dldir
 	if [[ ! -e $dldir ]]; then
 		echo -e "$warn Directory \e[0;36m$dldir\e[m not found."
-		dl
+		dlinput
 	fi
 }
-dl
+dlinput
 
 mkdir -p /root/.config/aria2
 echo "enable-rpc=true
@@ -115,5 +117,5 @@ title2 "Aria2 successfully installed."
 echo 'Uninstall: ./uninstall_aria.sh'
 echo 'Start: systemctl start aria2'
 echo 'Stop: systemctl stop aria2'
-echo 'Download directory: /media/$label/aria2'
+echo 'Download directory: '$dldir
 titleend "WebUI: [RuneAudio_IP]:88"
