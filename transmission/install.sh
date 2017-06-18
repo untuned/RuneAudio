@@ -22,7 +22,13 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
-label=$( e2label /dev/sda1 )
+if ! e2label /dev/sda1 &>/dev/null; then
+	titleend "$info Hard drive not found"
+	exit
+else
+	label=$( e2label /dev/sda1 )
+fi
+
 title "$info Rename current USB label '$label':"
 echo -e '  \e[0;36m0\e[m No'
 echo -e '  \e[0;36m1\e[m Yes'
@@ -38,10 +44,6 @@ case $answer in
 	* ) echo;;
 esac
 
-if ! grep -qs "/mnt/MPD/USB/$label" /proc/mounts; then
-	titleend "$info Hard drive not mount at /mnt/MPD/USB/$label"
-	exit
-fi
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/uninstall_tran.sh
 chmod +x uninstall_tran.sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
