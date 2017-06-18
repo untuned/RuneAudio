@@ -107,9 +107,10 @@ if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; t
 fi
 pacman -Sy
 
-pacman -Rs --no-confirm samba4-rune
-pacman -S --no-confirm tdb tevent libwbclient smbclient
-pacman -S --no-confirm samba
+pacman -R --noconfirm samba4-rune
+pacman -S --noconfirm tdb tevent smbclient
+pacman -S --noconfirm samba
+pacman -S --noconfirm libwbclient
 
 ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
