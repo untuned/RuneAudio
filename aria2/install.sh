@@ -6,6 +6,7 @@ line2='\e[0;36m=========================================================\e[m'
 line='\e[0;36m---------------------------------------------------------\e[m'
 bar=$( echo -e "$(tput setab 6)   $(tput setab 0)" )
 info=$( echo $(tput setab 6; tput setaf 0) i $(tput setab 0; tput setaf 7) )
+warn=$( echo $(tput setab 1) ! $(tput setab 0) )
 
 title2() {
 	echo -e "\n$line2\n"
@@ -21,28 +22,6 @@ titleend() {
 	echo -e "\n$1"
 	echo -e "\n$line\n"
 }
-
-if ! e2label /dev/sda1 &>/dev/null; then
-	titleend "$info Hard drive not found"
-	exit
-else
-	label=$( e2label /dev/sda1 )
-fi
-
-title "$info Rename current USB label '$label':"
-echo -e '  \e[0;36m0\e[m No'
-echo -e '  \e[0;36m1\e[m Yes'
-echo
-echo -e '\e[0;36m0\e[m / 1 ? '
-read -n 1 answer
-case $answer in
-	1 ) echo
-		echo 'New label: '
-		read -n 1 label
-		e2label /dev/sda1 $label
-		;;
-	* ) echo;;
-esac
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/uninstall_aria.sh
 chmod +x uninstall_aria.sh
@@ -66,19 +45,24 @@ mkdir /usr/share/nginx/html/aria2
 bsdtar -xf master.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
 rm master.zip
 
-if [[ ! -e /media/$label ]]; then
-	mkdir /media
-	ln -s /mnt/MPD/USB/$label/ /media/$label
-fi
-mkdir -p /media/$label/aria2
+dl() {
+	title "$info Download directory (full path):"
+	read dldir
+	if [[ ! -e $dldir ]]; then
+		echo -e "$warn Directory \e[0;36m$dldir\e[m not found."
+		dl
+	fi
+}
+dl
+
 mkdir -p /root/.config/aria2
-echo 'enable-rpc=true
+echo "enable-rpc=true
 rpc-listen-all=true
 daemon=true
 disable-ipv6=true
-dir=/media/$label/aria2
+dir=$dldir
 max-connection-per-server=4
-' > /root/.config/aria2/aria2.conf
+" > /root/.config/aria2/aria2.conf
 
 echo '[Unit]
 Description=Aria2
