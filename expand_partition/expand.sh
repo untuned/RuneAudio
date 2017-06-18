@@ -32,11 +32,8 @@ titleend() {
 # partition data #######################################
 freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
 freemb=$( python2 -c "print($freekb / 1000)" ) # bash itself cannot do float
-devpart=$( mount | grep 'on / type' | awk '{print $1}' )
-part=${devpart/\/dev\//}
-disk='/dev/'${part::-2}
 
-unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
+unpartb=$( sfdisk -F | grep /dev/mmcblk0p2 | awk '{print $6}' )
 unpartmb=$( python2 -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 
@@ -57,7 +54,7 @@ fi
 
 # expand partition #######################################
 title2 "Expand partition"
-echo -e "Current partiton: \e[0;36m$devpart\e[m"
+echo -e "Current partiton: \e[0;36m/dev/mmcblk0p2\e[m"
 echo -e "Available free space \e[0;36m$freemb MB\e[m"
 echo -e "Available unused disk space: \e[0;36m$unpartmb MB\e[m"
 echo
@@ -75,19 +72,19 @@ case $answer in
 			rm parted-3.2-5-armv7h.pkg.tar.xz
 		fi
 		title "Expand partiton ..."
-		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk &>/dev/null
+		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk /dev/mmcblk0p2 &>/dev/null
 
-		partprobe $disk
+		partprobe /dev/mmcblk0p2
 
 		resize2fs $devpart
 		if (( $? != 0 )); then
-			errorend "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
+			errorend "$warn Failed: Expand partition\nTry - reboot > resize2fs /dev/mmcblk0p2"
 			exit
 		else
 			freekb=$( df | grep '/$' | awk '{print $4}' )
 			freemb=$( python2 -c "print($freekb / 1000)" )
 			echo
-			titleend "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
+			titleend "$info Partiton \e[0;36m/dev/mmcblk0p2\e[m now has \e[0;36m$freemb\e[m MB free space."
 		fi;;
 
 	* ) echo
