@@ -22,28 +22,6 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
-if ! e2label /dev/sda1 &>/dev/null; then
-	titleend "$info Hard drive not found"
-	exit
-else
-	label=$( e2label /dev/sda1 )
-fi
-
-title "$info Rename current USB label '$label':"
-echo -e '  \e[0;36m0\e[m No'
-echo -e '  \e[0;36m1\e[m Yes'
-echo
-echo -e '\e[0;36m0\e[m / 1 ? '
-read -n 1 answer
-case $answer in
-	1 ) echo
-		echo 'New label: '
-		read -n 1 label
-		e2label /dev/sda1 $label
-		;;
-	* ) echo;;
-esac
-
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/uninstall_tran.sh
 chmod +x uninstall_tran.sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
@@ -62,13 +40,15 @@ else
 fi
 rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-if [[ ! -e /media/$label ]]; then
-	mkdir /media
-	ln -s /mnt/MPD/USB/$label/ /media/$label
+if mount | grep '/dev/sda1' &>/dev/null; then
+	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+	mkdir -p $mnt/transmission
+	path=$mnt/transmission
+else
+	mkdir -p /root/transmission
+	path=/root/transmission
 fi
-path=/media/$label/transmission
 mkdir -p $path/{incomplete,watch}
-#chown -R transmission:transmission $path
 
 # change user to 'root'
 cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
