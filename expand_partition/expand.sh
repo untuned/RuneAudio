@@ -72,7 +72,7 @@ case $answer in
 			rm parted-3.2-5-armv7h.pkg.tar.xz
 		fi
 		title "Expand partiton ..."
-		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk /dev/mmcblk0p2 &>/dev/null
+		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk /dev/mmcblk0 &>/dev/null
 
 		partprobe /dev/mmcblk0p2
 
