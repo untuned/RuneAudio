@@ -33,7 +33,7 @@ titleend() {
 freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
 freemb=$( python2 -c "print($freekb / 1000)" ) # bash itself cannot do float
 
-unpartb=$( sfdisk -F | grep /dev/mmcblk0p2 | awk '{print $6}' )
+unpartb=$( sfdisk -F | grep /dev/mmcblk0 | awk '{print $6}' )
 unpartmb=$( python2 -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 
