@@ -7,17 +7,11 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/rune.rdb -P /var/lib/redis
 ```
 
-**Unify USB path with OSMC**
-```
-mkdir /media
-ln -s /mnt/MPD/USB/hdd/ /media/hdd
-```
-
 **pacman cache**
 ```
 rm -r /var/cache/pacman
-mkdir -p /media/hdd/varcache/pacman
-ln -s /media/hdd/varcache/pacman /var/cache/pacman
+mkdir -p /mnt/MPD/USB/hdd/varcache/pacman
+ln -s /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
 
 wget -qN --show-progress $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 ```
@@ -45,6 +39,12 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/expand.sh; chmod +x expand.sh; ./expand.sh
 ```
 
+**Unify USB path with OSMC** (on [Dual Boot](https://github.com/rern/RPi2-3.Dual.Boot-Rune.OSMC) only)
+```
+mkdir /media
+ln -s /mnt/MPD/USB/hdd/ /media/hdd
+```
+
 **Aria2**
 ```
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
@@ -55,7 +55,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/inst
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 
 rm -r /usr/share/transmission/web
-ln -s /media/hdd/transmission/web /usr/share/transmission/web
+ln -s /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission/web
 ```
 
 **Upgrage and customize samba**
