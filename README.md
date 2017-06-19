@@ -22,6 +22,11 @@ ln -s /media/hdd/varcache/pacman /var/cache/pacman
 wget -qN --show-progress $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 ```
 
+**Disable wlan service**
+```
+systemctl disable netctl-auto@wlan0.service
+```
+
 **Enhancement**
 ```
 wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh
