@@ -40,6 +40,11 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P /srv/http
 ```
 
+**Expand partition**
+```
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/expand.sh; chmod +x expand.sh; ./expand.sh
+```
+
 **Aria2**
 ```
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
