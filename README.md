@@ -61,10 +61,9 @@ ln -s /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission/web
 **Upgrage and customize samba**
 ```bash
 pacman -R --noconfirm samba4-rune
-pacman -S --noconfirm tdb tevent smbclient libwbclient
+pacman -S --noconfirm tdb tevent smbclient samba
 # fix missing libreplace-samba4.so
 pacman -S --noconfirm libwbclient
-pacman -S --noconfirm samba
 
 killall nmbd
 killall smbd
