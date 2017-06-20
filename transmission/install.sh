@@ -87,6 +87,9 @@ esac
 # hash password by start
 systemctl start transmission
 
+# remove conf for user 'transmission'
+rm /usr/lib/tmpfiles.d/transmission.conf
+
 # web ui alternative
 title "$info Install WebUI alternative (Transmission Web Control):"
 echo -e '  \e[0;36m0\e[m No'
