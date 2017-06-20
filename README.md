@@ -76,5 +76,5 @@ systemctl daemon-reload
 systemctl restart nmbd
 systemctl restart nmbd
 
-smbpasswd - a root
+smbpasswd -a root
 ```
