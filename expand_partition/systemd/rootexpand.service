@@ -1,0 +1,10 @@
+[Unit]
+Description=Expand root partition to full SD card
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/root/expand.sh
+
+[Install]
+WantedBy=multi-user.target
