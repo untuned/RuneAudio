@@ -14,7 +14,7 @@ hostnamectl set-hostname [name]
 `netbios name` in `/etc/samba-dev/smb.conf`  
 
 **/etc/samba/smb-dev.conf**
-```
+```apacheconf
 [global]
 #	netbios name = [name]
 	workgroup = WORKGROUP
@@ -78,7 +78,7 @@ testparm
 ```
 
 **Fix minimum `rlimit_max`**
-```bash
+```sh
 echo -n '
 root    soft    nofile    16384
 root    hard    nofile    16384
@@ -95,7 +95,7 @@ systemctl restart nmbd
 ```
 
 **Upgrage samba**
-```
+```sh
 systemctl stop nmbd
 systemctl stop smbd
 
