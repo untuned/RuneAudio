@@ -59,21 +59,16 @@ ln -s /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission/web
 ```
 
 **Upgrage and customize samba**
-```
-systemctl stop nmbd
-systemctl stop smbd
+```bash
 pacman -R --noconfirm samba4-rune
-pacman -S --noconfirm tdb tevent smbclient
+pacman -S --noconfirm tdb tevent smbclient libwbclient
 pacman -S --noconfirm samba
+# fix missing libreplace.so
 pacman -S --noconfirm libwbclient
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb-dev.conf -P /etc/samba
-ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
-systemctl start nmbd
-systemctl start smbd
-systemctl enable nmbd
-systemctl enable smbd
+systemctl daemon-reload
 
 smbpasswd - a root
 ```
