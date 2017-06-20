@@ -69,6 +69,8 @@ pacman -S --noconfirm samba
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb-dev.conf -P /etc/samba
 
 systemctl daemon-reload
+systemctl restart nmbd
+systemctl restart nmbd
 
 smbpasswd - a root
 ```
