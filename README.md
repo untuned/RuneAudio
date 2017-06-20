@@ -62,7 +62,7 @@ ln -s /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission/web
 ```bash
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm tdb tevent smbclient libwbclient
-# fix missing libreplace.so
+# fix missing libreplace-samba4.so
 pacman -S --noconfirm libwbclient
 pacman -S --noconfirm samba
 
