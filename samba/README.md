@@ -108,8 +108,9 @@ fi
 pacman -Sy
 
 pacman -R --noconfirm samba4-rune
-pacman -S --noconfirm tdb tevent smbclient
+pacman -S --noconfirm tdb tevent smbclient libwbclient
 pacman -S --noconfirm samba
+# fix libreplace.so
 pacman -S --noconfirm libwbclient
 
 ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
