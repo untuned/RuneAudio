@@ -110,17 +110,9 @@ pacman -Sy
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm tdb tevent smbclient libwbclient
 pacman -S --noconfirm samba
-# fix libreplace.so
+# fix missing libreplace.so
 pacman -S --noconfirm libwbclient
-
-ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
-
-systemctl start nmbd
-systemctl start smbd
-systemctl enable nmbd
-systemctl enable smbd
-
-smbpasswd - a root
+systemctl daemon-reload
 ```
 
 **Add samba user + password**
