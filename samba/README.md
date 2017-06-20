@@ -109,10 +109,21 @@ pacman -Sy
 
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm tdb tevent smbclient libwbclient
-# fix missing libreplace.so
+# fix missing libreplace-samba4.so
 pacman -S --noconfirm libwbclient
 pacman -S --noconfirm samba
+
+killall nmbd
+killall smbd
+
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb-dev.conf -P /etc/samba
+ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
+
 systemctl daemon-reload
+systemctl enable nmbd
+systemctl enable smbd
+systemctl start nmbd
+systemctl start smbd
 ```
 
 **Add samba user + password**
