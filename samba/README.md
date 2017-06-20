@@ -120,8 +120,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
 systemctl daemon-reload
-systemctl enable nmbd
-systemctl enable smbd
+systemctl enable nmbd smbd
 systemctl start nmbd
 systemctl start smbd
 ```
