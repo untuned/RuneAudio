@@ -29,8 +29,9 @@ hostnamectl set-hostname [name]
 	log level = 0
 	
 	# fix IP4 only server - call failed: Address family not supported by protocol
-	bind interfaces only = yes
-	interfaces = lo eth0 wlan
+	# but nmbd will have trouble starting
+#	bind interfaces only = yes
+#	interfaces = lo eth0 wlan
 
 	socket options = IPTOS_LOWDELAY SO_RCVBUF=131072 SO_SNDBUF=131072
 	min receivefile size = 2048
