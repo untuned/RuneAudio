@@ -66,15 +66,17 @@ pacman -S --noconfirm tdb tevent smbclient libwbclient
 pacman -S --noconfirm libwbclient
 pacman -S --noconfirm samba
 
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb-dev.conf -P /etc/samba
-ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
-
 killall nmbd
 killall smbd
 
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb-dev.conf -P /etc/samba
+ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
+
 systemctl daemon-reload
-systemctl restart nmbd
-systemctl restart nmbd
+systemctl enable nmbd
+systemctl enable smbd
+systemctl start nmbd
+systemctl start smbd
 
 smbpasswd -a root
 ```
