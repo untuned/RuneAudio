@@ -109,9 +109,9 @@ pacman -Sy
 
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm tdb tevent smbclient libwbclient
-pacman -S --noconfirm samba
 # fix missing libreplace.so
 pacman -S --noconfirm libwbclient
+pacman -S --noconfirm samba
 systemctl daemon-reload
 ```
 
