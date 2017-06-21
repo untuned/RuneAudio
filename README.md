@@ -57,7 +57,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 if [[ -e /mnt/MPD/USB/hdd/transmission/web ]]; then
   rm -r /usr/share/transmission/web
 else
-  mv /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission
+  mv /usr/share/transmission/web /mnt/MPD/USB/hdd/transmission/web
 fi
 ln -s /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission/web
 ```
