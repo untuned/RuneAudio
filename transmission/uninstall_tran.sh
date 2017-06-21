@@ -25,13 +25,14 @@ fi
 
 title2 "Uninstall Transmission ..."
 # uninstall package #######################################
-pacman -Rs --noconfirm transmission-cli
+pacman -R --noconfirm transmission-cli
 
 # remove files #######################################
 title "Remove files ..."
-rm -rfv /var/lib/transmission/.config/transmission-daemon
+systemctl disable transmission
 rm /etc/systemd/system/transmission.service
-[[ ! -e /usr/share/transmission ]] && rm -r /usr/share/transmission
+rm -r /var/lib/transmission/.config/transmission-daemon
+rm -r /usr/share/transmission
 systemctl daemon-reload
 
 title2 "Transmission successfully uninstalled."
