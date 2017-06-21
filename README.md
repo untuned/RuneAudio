@@ -54,7 +54,11 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/inst
 ```
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 
-rm -r /usr/share/transmission/web
+if [[ -e /mnt/MPD/USB/hdd/transmission/web ]]; then
+  rm -r /usr/share/transmission/web
+else
+  mv /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission
+fi
 ln -s /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission/web
 ```
 
