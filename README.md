@@ -16,6 +16,7 @@ rm -r /var/cache/pacman
 ln -s /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
+pacman -Sy
 ```
 
 **Disable wlan service**
