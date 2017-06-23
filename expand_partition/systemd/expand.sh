@@ -9,5 +9,5 @@ if (( $unpartb > 0 )); then
 	resize2fs /dev/mmcblk0p2
 fi
 
-rm /etc/systemd/system/rootexpand.service
+rm /etc/systemd/system/expand.service
 rm /root/expand.sh
