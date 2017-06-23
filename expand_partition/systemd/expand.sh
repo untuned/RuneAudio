@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 'partprope', a part of 'parted' package, must be included in image
+# 'partprope', 'libparted.so.2' needed
 
 unpartb=$( sfdisk -F | grep /dev/mmcblk0 | awk '{print $6}' )
 if (( $unpartb > 0 )); then
