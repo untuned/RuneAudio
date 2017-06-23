@@ -1,6 +1,8 @@
 RuneAudio setup
 ---
 
+This is just an example for settings on a [Dual Boot](https://github.com/rern/RPi2-3.Dual.Boot-Rune.OSMC) system with some packages installed.  
+
 **pacman cache**
 ```
 mkdir -p /mnt/MPD/USB/hdd/varcache/pacman
@@ -15,7 +17,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 systemctl disable netctl-auto@wlan0.service
 ```
 
-**Unify USB path with OSMC** (on [Dual Boot](https://github.com/rern/RPi2-3.Dual.Boot-Rune.OSMC) only)
+**Unify USB path with OSMC**  
 ```
 mkdir /media
 ln -s /mnt/MPD/USB/hdd/ /media/hdd
