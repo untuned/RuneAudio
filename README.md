@@ -42,12 +42,6 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/expand.sh; chmod +x expand.sh; ./expand.sh
 ```
 
-**Unify USB path with OSMC** (on [Dual Boot](https://github.com/rern/RPi2-3.Dual.Boot-Rune.OSMC) only)
-```
-mkdir /media
-ln -s /mnt/MPD/USB/hdd/ /media/hdd
-```
-
 **Aria2**
 ```
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
@@ -63,6 +57,12 @@ else
   mv /usr/share/transmission/web /mnt/MPD/USB/hdd/transmission/web
 fi
 ln -s /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission/web
+```
+
+**Unify USB path with OSMC** (on [Dual Boot](https://github.com/rern/RPi2-3.Dual.Boot-Rune.OSMC) only)
+```
+mkdir /media
+ln -s /mnt/MPD/USB/hdd/ /media/hdd
 ```
 
 **Upgrage and customize samba**
