@@ -1,7 +1,10 @@
 **systemd method**
 ```sh
-# get 'partprobe' by install parted
-pacman -S parted
+# 'partprobe'
+/usr/bin/partprobe
+chmod +x /usr/bin/partprobe
+/usr/lib/libparted.so.2.0.1
+ln -s /usr/lib/libparted.so.2.0.1 /usr/lib/libparted.so.2
 
 # fdisk script
 /root/expand.sh
