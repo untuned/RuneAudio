@@ -2,8 +2,8 @@
 
 # 'partprope', a part of 'parted' package, must be included in image
 
-unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
-if ( $unpartb > 0 ); then
+unpartb=$( sfdisk -F | grep /dev/mmcblk0 | awk '{print $6}' )
+if (( $unpartb > 0 )); then
 	echo -e 'd\n\nn\n\n\n\n\nw' | fdisk /dev/mmcblk0 &>/dev/null
 	partprobe /dev/mmcblk0
 	resize2fs /dev/mmcblk0p2
