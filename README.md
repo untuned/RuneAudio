@@ -3,6 +3,11 @@ RuneAudio setup
 
 This is just an example for settings on a [Dual Boot](https://github.com/rern/RPi2-3.Dual.Boot-Rune.OSMC) system with some packages installed.  
 
+**All setup**
+```
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh; chmod +x setup.sh; ./setup.sh
+```
+
 **pacman cache**
 ```
 mkdir -p /mnt/MPD/USB/hdd/varcache/pacman
