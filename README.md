@@ -18,8 +18,9 @@ ln -s /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 ```
 
-**Disable wlan service**
+**Disable unused eth1 and wlan0 service**
 ```
+systemctl disable netctl-ifplugd@eth1.service
 systemctl disable netctl-auto@wlan0.service
 ```
 
