@@ -36,12 +36,11 @@ devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 disk='/dev/'${part::-2}
 
-unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
-unpartmb=$( python2 -c "print($unpartb / 1000000)" )
+unpartmb=$( sfdisk -F | grep $disk | awk '{print $4}' )
 summb=$(( $freemb + $unpartmb ))
-
-if [[ $unpartb -eq 0 ]]; then
-	title "$info No unused space available."
+# noobs has 3MB unpartitioned space
+if (($unpartmb < 10)); then
+	title "$info No useful space available. ( ${unpartmb}MB unused)"
 	exit
 fi
 
