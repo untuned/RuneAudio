@@ -39,7 +39,7 @@ disk='/dev/'${part::-2}
 unpartmb=$( sfdisk -F | grep $disk | awk '{print $4}' )
 summb=$(( $freemb + $unpartmb ))
 # noobs has 3MB unpartitioned space
-if [[ $unpartmb -lt 10 ]]; then
+if (($unpartmb < 10)); then
 	title "$info No useful space available. ( ${unpartmb}MB unused)"
 	exit
 fi
