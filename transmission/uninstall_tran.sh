@@ -24,6 +24,8 @@ if ! pacman -Q transmission-cli &>/dev/null; then
 fi
 
 title2 "Uninstall Transmission ..."
+# remove symlink
+[[ -e /usr/share/transmission/web ]] && rm /usr/share/transmission/web
 # uninstall package #######################################
 pacman -R --noconfirm transmission-cli
 
