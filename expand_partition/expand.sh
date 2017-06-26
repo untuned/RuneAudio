@@ -36,7 +36,8 @@ devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 disk='/dev/'${part::-2}
 
-unpartmb=$( sfdisk -F | grep $disk | awk '{print $4}' )
+unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
+unpartmb=$( python2 -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 # noobs has 3MB unpartitioned space
 if (($unpartmb < 10)); then
