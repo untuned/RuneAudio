@@ -23,15 +23,12 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 # or run 'twice':
 #pacman -S --noconfirm libwbclient
 
-killall nmbd
-killall smbd
+systemctl stop nmbd
+systemctl stop smbd
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb-dev.conf -P /etc/samba
 ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
-#systemctl daemon-reload
-#systemctl enable nmbd
-#systemctl enable smbd
 systemctl start nmbd
 systemctl start smbd
 
