@@ -53,10 +53,7 @@ sed -i -e 's|User=transmission|User=root|
 # refresh systemd services
 systemctl daemon-reload
 # create settings.json
-systemctl start transmission
-killall transmission-daemon
-sleep 1
-file=$path/settings.json
+systemctl start transmission; systemctl stop transmission; file=$path/settings.json
 sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
 ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
 ' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
