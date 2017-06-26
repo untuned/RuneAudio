@@ -7,8 +7,10 @@ ln -s /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
-### Disable unused wlan0 service
+
+### Disable unused wlan0 service, cec
 systemctl disable netctl-auto@wlan0.service
+echo 'hdmi_ignore_cec=1' >> /boot/config.txt
 
 ### Unify USB path with OSMC
 mkdir /media
