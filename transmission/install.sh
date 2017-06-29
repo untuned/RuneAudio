@@ -49,9 +49,11 @@ else
 fi
 mkdir -p $path/{incomplete,watch}
 
-# change user to 'root'
-cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
-sed -i -e 's|User=.*|User=root|' /etc/systemd/system/transmission.service
+# systemd drop-in user 'root'
+mkdir -p /etc/systemd/system/transmission.service.d
+echo '[Service]
+User=root
+' > /etc/systemd/system/transmission.service.d/username.conf
 # refresh systemd services
 systemctl daemon-reload
 # create settings.json
