@@ -60,7 +60,6 @@ ln -s /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission/web
 mkdir -p /mnt/MPD/USB/hdd/transmission/blocklists
 mkdir -p /mnt/MPD/USB/hdd/transmission/resume
 mkdir -p /mnt/MPD/USB/hdd/transmission/torrents
-mkdir -p /root/.config/transmission-daemon
 mv /root/.config/transmission-daemon/settings.json /mnt/MPD/USB/hdd/transmission/
 rm -r /root/.config/transmission-daemon/*
 ln -s /mnt/MPD/USB/hdd/transmission/blocklists /root/.config/transmission-daemon/blocklists
