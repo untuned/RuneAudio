@@ -63,19 +63,17 @@ fi
 ln -s $pathhdd/web /usr/share/transmission/web
 
 path=/root/.config/transmission-daemon
+# /mnt/MPD/USB/hdd > /media/hdd
+sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
+' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
+' -e 's|"watch-dir": ".*"|"watch-dir": "'"$path"'/watch"|
+' $path/settings.json
 mv $path/settings.json $pathhdd
 rm -r $path/*
 ln -s $pathhdd/blocklists $path/blocklists
 ln -s $pathhdd/resume $path/resume
 ln -s $pathhdd/torrents $path/torrents
 ln -s $pathhdd/settings.json $path/settings.json
-
-# /mnt/MPD/USB/hdd > /media/hdd
-path=/media/hdd/transmission
-sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
-' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
-' -e 's|"watch-dir": ".*"|"watch-dir": "'"$path"'/watch"|
-' $path/settings.json
 
 ### Aria2
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
