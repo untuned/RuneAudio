@@ -38,8 +38,9 @@ rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 if mount | grep '/dev/sda1' &>/dev/null; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	mkdir -p $mnt/transmission
+	# interchange with other os
 	mkdir -p /media
-	ln -s /mnt/MPD/USB/hdd/ /media/hdd
+	ln -s $mnt /media/hdd
 	path=/media/hdd/transmission
 else
 	mkdir -p /root/transmission
