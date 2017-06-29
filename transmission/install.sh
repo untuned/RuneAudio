@@ -47,9 +47,7 @@ mkdir -p $path/{incomplete,watch}
 
 # change user to 'root'
 cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
-sed -i -e 's|User=transmission|User=root|
-' -e '/transmission-daemon -f --log-error$/ s|$| --config-dir '"$path"'|
-' /etc/systemd/system/transmission.service
+sed -i -e 's|User=transmission|User=root|' /etc/systemd/system/transmission.service
 # refresh systemd services
 systemctl daemon-reload
 # create settings.json
