@@ -1,9 +1,15 @@
 #!/bin/bash
 
+### Dual Boot - Unify USB path with OSMC
+mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+label=$( echo $mnt | sed 's|/mnt/MPD/USB/||' )
+mkdir -p /media
+ln -s $mnt /media/$label
+
 ### pacman cache
-mkdir -p /mnt/MPD/USB/hdd/varcache/pacman
+mkdir -p $mnt/varcache/pacman
 rm -r /var/cache/pacman
-ln -s /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
+ln -s $mnt/varcache/pacman /var/cache/pacman
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
@@ -11,12 +17,6 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 ### Disable unused wlan0 service, cec
 systemctl disable netctl-auto@wlan0.service
 echo 'hdmi_ignore_cec=1' >> /boot/config.txt
-
-### Dual Boot - Unify USB path with OSMC
-mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-label=$( echo $mnt | sed 's|/mnt/MPD/USB/||' )
-mkdir -p /media
-ln -s $mnt /media/$label
 
 ### Upgrage and customize samba
 pacman -R --noconfirm samba4-rune
