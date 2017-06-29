@@ -52,6 +52,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 
 systemctl stop transmission
 
+# make usb drive a common between os for web, settings.json, directory
 pathhdd=/media/$label/transmission
 if [[ -e $pathhdd/web ]]; then
   rm -r /usr/share/transmission/web
