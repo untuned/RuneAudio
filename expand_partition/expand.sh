@@ -31,7 +31,7 @@ titleend() {
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
 	title "$info Unable to continue with this version."
-	echo '(sfdisk / python2 expected but not found)'
+	echo '(sfdisk and python2 expected but not found.)'
 	exit
 fi
 
