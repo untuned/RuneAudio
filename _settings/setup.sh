@@ -12,7 +12,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 systemctl disable netctl-auto@wlan0.service
 echo 'hdmi_ignore_cec=1' >> /boot/config.txt
 
-### Unify USB path with OSMC
+### Dual Boot - Unify USB path with OSMC
 mkdir /media
 ln -s /mnt/MPD/USB/hdd/ /media/hdd
 
@@ -59,12 +59,13 @@ fi
 ln -s $pathhdd/web /usr/share/transmission/web
 
 path=/root/.config/transmission-daemon
-# /mnt/MPD/USB/hdd > /media/hdd
 if [[ ! -e $pathhdd/settings.json ]]; then
+  ### Dual Boot - /mnt/MPD/USB/hdd > /media/hdd
   sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
   ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
   ' -e 's|"watch-dir": ".*"|"watch-dir": "'"$path"'/watch"|
   ' $path/settings.json
+
   mkdir -p $pathhdd/blocklists
   mkdir -p $pathhdd/resume
   mkdir -p $pathhdd/torrents
