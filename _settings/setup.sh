@@ -61,9 +61,10 @@ ln -s $pathhdd/web /usr/share/transmission/web
 path=/root/.config/transmission-daemon
 if [[ ! -e $pathhdd/settings.json ]]; then
   ### Dual Boot - /mnt/MPD/USB/hdd > /media/hdd
-  sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
-  ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
-  ' -e 's|"watch-dir": ".*"|"watch-dir": "'"$path"'/watch"|
+  pathmedia=/media/hdd/transmission
+  sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$pathmedia"'"|
+  ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$pathmedia"'/incomplete"|
+  ' -e 's|"watch-dir": ".*"|"watch-dir": "'"$pathmedia"'/watch"|
   ' $path/settings.json
 
   mkdir -p $pathhdd/blocklists
