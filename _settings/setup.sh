@@ -50,19 +50,19 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 
 systemctl stop transmission
 
-if [[ -e /mnt/MPD/USB/hdd/transmission/web ]]; then
+pathhdd=/mnt/MPD/USB/hdd/transmission
+mkdir -p $pathhdd/blocklists
+mkdir -p $pathhdd/resume
+mkdir -p $pathhdd/torrents
+
+if [[ -e $pathhdd/web ]]; then
   rm -r /usr/share/transmission/web
 else
-  mv /usr/share/transmission/web /mnt/MPD/USB/hdd/transmission/web
+  mv /usr/share/transmission/web $pathhdd/web
 fi
-ln -s /mnt/MPD/USB/hdd/transmission/web /usr/share/transmission/web
-
-mkdir -p /mnt/MPD/USB/hdd/transmission/blocklists
-mkdir -p /mnt/MPD/USB/hdd/transmission/resume
-mkdir -p /mnt/MPD/USB/hdd/transmission/torrents
+ln -s $pathhdd/web /usr/share/transmission/web
 
 path=/root/.config/transmission-daemon
-pathhdd=/mnt/MPD/USB/hdd/transmission
 mv $path/settings.json $pathhdd
 rm -r $path/*
 ln -s $pathhdd/blocklists $path/blocklists
