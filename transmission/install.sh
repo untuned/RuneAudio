@@ -39,9 +39,10 @@ if mount | grep '/dev/sda1' &>/dev/null; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	mkdir -p $mnt/transmission
 	# interchange with other os
+	label=$( echo $mnt | sed 's|/mnt/MPD/USB/||' )
 	mkdir -p /media
-	ln -s $mnt /media/hdd
-	path=/media/hdd/transmission
+	ln -s $mnt /media/$label
+	path=/media/$label/transmission
 else
 	mkdir -p /root/transmission
 	path=/root/transmission
