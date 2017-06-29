@@ -34,7 +34,6 @@ title "Remove files ..."
 systemctl disable transmission
 rm /etc/systemd/system/transmission.service
 rm -r /var/lib/transmission/.config/transmission-daemon
-rm -r /usr/share/transmission
 systemctl daemon-reload
 
 title2 "Transmission successfully uninstalled."
