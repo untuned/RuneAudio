@@ -48,6 +48,8 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 ### Transmission
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 
+systemctl stop transmission
+
 if [[ -e /mnt/MPD/USB/hdd/transmission/web ]]; then
   rm -r /usr/share/transmission/web
 else
