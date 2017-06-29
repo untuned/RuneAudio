@@ -1,4 +1,4 @@
-RuneAudio setup
+Rune-OSMC setup
 ---
 
 This is just an example for settings on a [Dual Boot](https://github.com/rern/RPi2-3.Dual.Boot-Rune.OSMC) system with some packages installed.  
