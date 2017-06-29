@@ -2,7 +2,7 @@
 
 ### Dual Boot - Unify USB path with OSMC
 mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-label=$( echo $mnt | sed 's|/mnt/MPD/USB/||' )
+label=${mnt##/*/}
 mkdir -p /media
 ln -s $mnt /media/$label
 
