@@ -29,6 +29,11 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
+if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
+	title "$info Unable to continue (sfdisk / python2 not found)."
+	exit
+fi
+
 # partition data #######################################
 freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
 freemb=$( python2 -c "print($freekb / 1000)" ) # bash itself cannot do float
