@@ -51,10 +51,6 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 systemctl stop transmission
 
 pathhdd=/mnt/MPD/USB/hdd/transmission
-mkdir -p $pathhdd/blocklists
-mkdir -p $pathhdd/resume
-mkdir -p $pathhdd/torrents
-
 if [[ -e $pathhdd/web ]]; then
   rm -r /usr/share/transmission/web
 else
@@ -69,6 +65,9 @@ if [[ ! -e $pathhdd/settings.json ]]; then
   ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
   ' -e 's|"watch-dir": ".*"|"watch-dir": "'"$path"'/watch"|
   ' $path/settings.json
+  mkdir -p $pathhdd/blocklists
+  mkdir -p $pathhdd/resume
+  mkdir -p $pathhdd/torrents
   mv $path/settings.json $pathhdd
 fi
 rm -r $path/*
