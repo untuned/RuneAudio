@@ -59,9 +59,12 @@ mkdir -p /mnt/MPD/USB/hdd/transmission/blocklists
 mkdir -p /mnt/MPD/USB/hdd/transmission/resume
 mkdir -p /mnt/MPD/USB/hdd/transmission/torrents
 mkdir -p /root/.config/transmission-daemon
+mv /root/.config/transmission-daemon/settings.json /mnt/MPD/USB/hdd/transmission/
+rm -r /root/.config/transmission-daemon/*
 ln -s /mnt/MPD/USB/hdd/transmission/blocklists /root/.config/transmission-daemon/blocklists
 ln -s /mnt/MPD/USB/hdd/transmission/resume /root/.config/transmission-daemon/resume
 ln -s /mnt/MPD/USB/hdd/transmission/torrents /root/.config/transmission-daemon/torrents
+ln -s /mnt/MPD/USB/hdd/transmission/settings.json /root/.config/transmission-daemon/settings.json
 
 ### Aria2
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
