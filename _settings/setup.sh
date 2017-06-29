@@ -13,8 +13,10 @@ systemctl disable netctl-auto@wlan0.service
 echo 'hdmi_ignore_cec=1' >> /boot/config.txt
 
 ### Dual Boot - Unify USB path with OSMC
-mkdir /media
-ln -s /mnt/MPD/USB/hdd/ /media/hdd
+mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+label=$( echo $mnt | sed 's|/mnt/MPD/USB/||' )
+mkdir -p /media
+ln -s $mnt /media/$label
 
 ### Upgrage and customize samba
 pacman -R --noconfirm samba4-rune
@@ -50,7 +52,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 
 systemctl stop transmission
 
-pathhdd=/mnt/MPD/USB/hdd/transmission
+pathhdd=/media/$label/transmission
 if [[ -e $pathhdd/web ]]; then
   rm -r /usr/share/transmission/web
 else
@@ -60,13 +62,6 @@ ln -s $pathhdd/web /usr/share/transmission/web
 
 path=/root/.config/transmission-daemon
 if [[ ! -e $pathhdd/settings.json ]]; then
-  ### Dual Boot - /mnt/MPD/USB/hdd > /media/hdd
-  pathmedia=/media/hdd/transmission
-  sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$pathmedia"'"|
-  ' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$pathmedia"'/incomplete"|
-  ' -e 's|"watch-dir": ".*"|"watch-dir": "'"$pathmedia"'/watch"|
-  ' $path/settings.json
-
   mkdir -p $pathhdd/blocklists
   mkdir -p $pathhdd/resume
   mkdir -p $pathhdd/torrents
