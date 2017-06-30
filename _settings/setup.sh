@@ -27,14 +27,14 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 # or run 'twice':
 #pacman -S --noconfirm libwbclient
 
-systemctl stop nmbd
-systemctl stop smbd
+# make usb drive a common between os for smb.conf
+[[ ! -e /media/hdd/samba/smb.conf ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -P /media/hdd/samba
+rm /etc/samba/smb.conf /etc/samba/smb-dev.conf
+ln -s /media/hdd/samba/smb.conf /etc/samba/smb.conf
+ln -s /media/hdd/samba/smb.conf /etc/samba/smb-dev.conf
 
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb-dev.conf -P /etc/samba
-ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
-
-systemctl start nmbd
-systemctl start smbd
+systemctl restart nmbd
+systemctl restart smbd
 
 smbpasswd -a root
 
