@@ -50,12 +50,8 @@ fi
 mkdir -p $path/{incomplete,watch}
 
 # user 'root'
-#cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
-#sed -i 's|User=.*|User=root|' /etc/systemd/system/transmission.service
-mkdir -p /etc/systemd/system/transmission.service.d
-echo -n '[Service]
-User=root
-' > /etc/systemd/system/transmission.service.d/username.conf
+cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
+sed -i 's|User=.*|User=root|' /etc/systemd/system/transmission.service
 # refresh systemd services
 systemctl daemon-reload
 # create settings.json
