@@ -17,6 +17,10 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 ### Disable unused wlan0 service, cec
 systemctl disable netctl-auto@wlan0.service
 echo 'hdmi_ignore_cec=1' >> /boot/config.txt
+# noobs cec
+mkdir -p /tmp/p1
+mount /dev/mmcblk0p1 /tmp/p1
+echo 'hdmi_ignore_cec=1' >> /tmp/p1/config.txt
 
 ### Upgrage and customize samba
 pacman -R --noconfirm samba4-rune
