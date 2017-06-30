@@ -47,9 +47,7 @@ wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.conf.gpio -P /etc
 # make usb drive a common between os for gpio.json
 [[ ! -e /media/hdd/gpio/gpio.json ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P /media/hdd/gpio
-ln -s /media/hdd/gpio/gpio.json /srv/httpgpio.json
-
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P /srv/http
+ln -s /media/hdd/gpio/gpio.json /srv/http/gpio.json
 
 ### Transmission
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
