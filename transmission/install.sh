@@ -49,7 +49,9 @@ else
 fi
 mkdir -p $path/{incomplete,watch}
 
-# systemd drop-in user 'root'
+# user 'root'
+#cp /lib/systemd/system/transmission.service /etc/systemd/system/transmission.service
+#sed -i 's|User=.*|User=root|' /etc/systemd/system/transmission.service
 mkdir -p /etc/systemd/system/transmission.service.d
 echo -n '[Service]
 User=root
