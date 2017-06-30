@@ -51,7 +51,7 @@ mkdir -p $path/{incomplete,watch}
 
 # systemd drop-in user 'root'
 mkdir -p /etc/systemd/system/transmission.service.d
-echo '[Service]
+echo -n '[Service]
 User=root
 ' > /etc/systemd/system/transmission.service.d/username.conf
 # refresh systemd services
