@@ -6,7 +6,8 @@ This is just an example of setup script.
 [**setup.sh**](https://github.com/rern/RuneAudio/blob/master/_settings/setup.sh)  
 - unify usb mount point `/media`
 - set package cache to usb to avoid slow download on os reinstall
-- disable unused wlan0 service, cec
+- disable unused wlan0 service
+- disable noobs cec
 - upgrage and customize **samba** to improve speed
 - make usb drive a common between os for `smb.conf`
 - install **RuneUI Enhancement**
