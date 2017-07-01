@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# prevent noobs cec hdmi power on
+mkdir -p /tmp/p1
+mount /dev/mmcblk0p1 /tmp/p1
+echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
+
+# force hdmi mode, remove black border
+echo '
+hdmi_group=1
+hdmi_mode=31
+disable_overscan=1
+' >> /boot/config.txt
+
 ### Dual Boot - Unify USB path with OSMC
 mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt##/*/}
@@ -16,16 +28,6 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 
 ### Disable unused wlan0 service, cec
 systemctl disable netctl-auto@wlan0.service
-# noobs cec
-mkdir -p /tmp/p1
-mount /dev/mmcblk0p1 /tmp/p1
-echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
-# remove black border
-echo "
-disable_overscan=1
-" >> /boot/config.txt
-# ? fix wrong resolution TV on after boot
-# ? hdmi_group=1 > CEA; hdmi_mode=31 > 1080p 50Hz
 
 ### Upgrage and customize samba
 pacman -R --noconfirm samba4-rune
