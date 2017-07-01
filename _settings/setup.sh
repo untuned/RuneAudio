@@ -21,6 +21,7 @@ mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
 echo 'hdmi_ignore_cec=1' >> /tmp/p1/config.txt
 # fix wrong resolution TV on after boot
+# hdmi_group=1 > CEA; hdmi_mode=32 > 1080p 24Hz
 echo "
 hdmi_group=1
 hdmi_mode=32
