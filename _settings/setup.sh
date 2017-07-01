@@ -12,9 +12,10 @@ hdmi_mode=31
 disable_overscan=1
 ' >> /boot/config.txt
 
-### Dual Boot - Unify USB path with OSMC
 mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt##/*/}
+
+### Dual Boot - Unify USB path with OSMC
 mkdir -p /media
 ln -s $mnt /media/$label
 
