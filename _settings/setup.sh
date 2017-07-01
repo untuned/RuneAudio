@@ -20,11 +20,12 @@ systemctl disable netctl-auto@wlan0.service
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
 echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
-# ? fix wrong resolution TV on after boot
-# ? hdmi_group=1 > CEA; hdmi_mode=31 > 1080p 50Hz
+# remove black border
 echo "
 disable_overscan=1
 " >> /boot/config.txt
+# ? fix wrong resolution TV on after boot
+# ? hdmi_group=1 > CEA; hdmi_mode=31 > 1080p 50Hz
 
 ### Upgrage and customize samba
 pacman -R --noconfirm samba4-rune
