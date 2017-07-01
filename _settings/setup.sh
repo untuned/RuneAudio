@@ -7,8 +7,8 @@ echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
 
 # force hdmi mode, remove black border
 echo '
-hdmi_group=1
-hdmi_mode=31
+hdmi_group=1   # cec
+hdmi_mode=31   # 1080p 50Hz
 disable_overscan=1
 ' >> /boot/config.txt
 
