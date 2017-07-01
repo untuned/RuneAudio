@@ -19,7 +19,7 @@ systemctl disable netctl-auto@wlan0.service
 # noobs cec
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
-echo 'hdmi_ignore_cec=1' >> /tmp/p1/config.txt
+echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
 # fix wrong resolution TV on after boot
 # hdmi_group=1 > CEA; hdmi_mode=31 > 1080p 50Hz
 echo "
