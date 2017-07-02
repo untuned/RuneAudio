@@ -32,7 +32,9 @@ if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; t
 fi
 if ! pacman -Q aria2 &>/dev/null; then
 	title2 "Install Aria2 ..."
-	pacman -Sy --noconfirm aria2 glibc
+	# skip with any argument
+	(( $# == 0 )) && pacman -Sy
+	pacman -S --noconfirm aria2 glibc
 else
 	titleend "$info Aria2 already installed."
 	exit
