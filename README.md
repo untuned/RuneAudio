@@ -2,7 +2,7 @@ RuneAudio setup
 ---
 
 This is just an example of setup script.  
-(RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu` upgrage.)  
+(RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`)  
 
 [**setup.sh**](https://github.com/rern/RuneAudio/blob/master/_settings/setup.sh)  
 - disable unused `wlan0` service
