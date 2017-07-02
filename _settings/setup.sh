@@ -71,5 +71,10 @@ wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.conf.gpio -P /etc
 # make usb drive a common between os for gpio.json
 [[ ! -e $mnt/gpio/gpio.json ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P $mnt/gpio
-ln -s $mnt/gpio/gpio.json /home/osmc/gpio.json
+rm /srv/http/gpio.json
+ln -s $mnt/gpio/gpio.json /srv/http/gpio.json
 systemctl restart gpioset
+
+echo 8 > /sys/module/bcm2709/parameters/reboot_part
+/var/www/command/rune_shutdown
+reboot
