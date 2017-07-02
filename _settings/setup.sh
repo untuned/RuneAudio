@@ -22,12 +22,15 @@ mkdir -p /mnt/$label
 echo "/dev/sda1       /mnt/$label           ext4     defaults,noatime  0   0" >> /etc/fstab
 mnt=/mnt/$label
 
-### pacman cache
+### set pacman cache to usb drive
 mkdir -p $mnt/varcache/pacman
 rm -r /var/cache/pacman
 ln -s $mnt/varcache/pacman /var/cache/pacman
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
+
+### Settings
+# ?
 
 ### Upgrage and customize samba
 pacman -R --noconfirm samba4-rune
@@ -38,7 +41,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 #pacman -S --noconfirm libwbclient
 
 # make usb drive a common between os for smb.conf
-[[ ! -e $mnt/samba/smb.conf ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -P /media/hdd/samba
+[[ ! -e $mnt/samba/smb.conf ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -P $mnt/samba
 rm /etc/samba/smb.conf
 ln -s $mnt/samba/smb.conf /etc/samba/smb.conf
 systemctl restart nmbd
@@ -60,5 +63,6 @@ wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.conf.gpio -P /etc
 # make usb drive a common between os for gpio.json
-[[ ! -e /media/hdd/gpio/gpio.json ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P /media/hdd/gpio
-ln -s /media/hdd/gpio/gpio.json /srv/http/gpio.json
+[[ ! -e $mnt/gpio/gpio.json ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P $mnt/gpio
+ln -s $mnt/gpio/gpio.json /home/osmc/gpio.json
+systemctl restart gpioset
