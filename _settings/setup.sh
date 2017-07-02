@@ -15,11 +15,10 @@ hdmi_mode=31   # 1080p 50Hz
 disable_overscan=1
 ' >> /boot/config.txt
 
-### set fstab for usb drive ########################################################
+### link /mnt/hdd for usb drive ########################################################
 mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mnt=/mnt/$label
-mkdir -p $mnt
 ln -s $mnt0 $mnt
 
 ### set pacman cache to usb drive  #################################################
