@@ -48,7 +48,8 @@ root    hard    nofile    16384
 
 # make usb drive a common between os for smb.conf
 [[ ! -e $mnt/samba/smb.conf ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -P $mnt/samba
-rm /etc/samba/smb.conf
+rm /etc/samba/smb-dev.conf
+ln -s $mnt/samba/smb.conf /etc/samba/smb-dev.conf
 ln -s $mnt/samba/smb.conf /etc/samba/smb.conf
 systemctl restart nmbd smbd
 # set samba password
