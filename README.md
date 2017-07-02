@@ -4,9 +4,9 @@ RuneAudio setup
 This is just an example of setup script. 
 
 [**setup.sh**](https://github.com/rern/RuneAudio/blob/master/_settings/setup.sh)  
-- disable unused wlan0 service
+- disable unused `wlan0` service
 - set hdmi mode
-- set fstab for usb drive
+- set `fstab` for usb drive
 - set package cache to usb to avoid slow download on os reinstall
 - restore settings
 - upgrage and customize **samba** to improve speed
