@@ -5,7 +5,9 @@ This is just an example of setup script.
 (RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`)  
 
 [**setup.sh**](https://github.com/rern/RuneAudio/blob/master/_settings/setup.sh)  
-( OSMC parts ease first boot)
+
+( OSMC parts ease first boot)  
+
 - disable unused `wlan0` service
 - set hdmi mode
 - OSMC - set hdmi mode
