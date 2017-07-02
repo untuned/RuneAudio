@@ -52,11 +52,11 @@ mkdir -p $path/{incomplete,watch}
 systemctl stop transmission
 systemctl disable transmission
 cp /lib/systemd/system/transmission*.service /etc/systemd/system/transmission.service
-sed -i 's|User=.*|User=root|
-' -e "|ExecStart| i\
-Environment=TRANSMISSION_HOME=$path\
-Environment=TRANSMISSION_WEB_HOME=$path/web
-" /etc/systemd/system/transmission.service
+sed -i -e 's|User=.*|User=root|
+' -e '/ExecStart/ i\
+Environment=TRANSMISSION_HOME='$path'\
+Environment=TRANSMISSION_WEB_HOME='$path'/web
+' /etc/systemd/system/transmission.service
 systemctl daemon-reload
 
 # create settings.json
