@@ -1,9 +1,26 @@
 #!/bin/bash
 
-### Disable unused wlan0 service ###################################################
+line2='\e[0;36m=========================================================\e[m'
+line='\e[0;36m---------------------------------------------------------\e[m'
+bar=$( echo -e "$(tput setab 6)   $(tput setab 0)" )
+
+title2() {
+	echo -e "\n$line2\n"
+	echo -e "$bar $1"
+	echo -e "\n$line2\n"
+}
+title() {
+	echo -e "\n$line"
+	echo $1
+	echo -e "$line\n"
+}
+
+title2 "Disable WiFi ..."
+#################################################################################
 systemctl disable netctl-auto@wlan0.service
 
-### set hdmi #######################################################################
+title2 "Set HDMI mode ..."
+#################################################################################
 # prevent noobs cec hdmi power on
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
@@ -15,13 +32,15 @@ hdmi_mode=31   # 1080p 50Hz
 disable_overscan=1
 ' >> /boot/config.txt
 
-### link /mnt/hdd for usb drive ########################################################
+title2 "Symlink /mnt/hdd ..."
+#################################################################################
 mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mnt=/mnt/$label
 ln -s $mnt0 $mnt
 
-### set pacman cache to usb drive  #################################################
+title2 "Set pacman cache ..."
+#################################################################################
 mkdir -p $mnt/varcache/pacman
 rm -r /var/cache/pacman
 ln -s $mnt/varcache/pacman /var/cache/pacman
@@ -31,7 +50,8 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 ### Settings  ######################################################################
 # ?
 
-### Upgrage and customize samba  ###################################################
+title2 "Upgrade samba ..."
+#################################################################################
 pacman -R --noconfirm samba4-rune
 pacman -Sy --noconfirm tdb tevent smbclient samba
 # fix missing libreplace-samba4.so
@@ -55,16 +75,20 @@ systemctl restart nmbd smbd
 # set samba password
 smbpasswd -a root
 
-### Transmission ####################################################################
+# Transmission
+#################################################################################
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 
-### Aria2 ###########################################################################
+# Aria2
+#################################################################################
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh 1
 
-### Enhancement  ####################################################################
+# Enhancement
+#################################################################################
 wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh
 
-### GPIO  ###########################################################################
+# GPIO
+#################################################################################
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.conf.gpio -P /etc
@@ -74,6 +98,4 @@ rm /srv/http/gpio.json
 ln -s $mnt/gpio/gpio.json /srv/http/gpio.json
 systemctl restart gpioset
 
-echo 8 > /sys/module/bcm2709/parameters/reboot_part
-/var/www/command/rune_shutdown
-reboot
+title "Finished."
