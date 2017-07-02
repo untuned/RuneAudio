@@ -1,9 +1,9 @@
 #!/bin/bash
 
-### Disable unused wlan0 service, cec
+### Disable unused wlan0 service ###################################################
 systemctl disable netctl-auto@wlan0.service
 
-### set hdmi
+### set hdmi #######################################################################
 # prevent noobs cec hdmi power on
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
@@ -15,24 +15,24 @@ hdmi_mode=31   # 1080p 50Hz
 disable_overscan=1
 ' >> /boot/config.txt
 
-### set fstab for usb drive
+### set fstab for usb drive ########################################################
 mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mkdir -p /mnt/$label
 echo "/dev/sda1       /mnt/$label           ext4     defaults,noatime  0   0" >> /etc/fstab
 mnt=/mnt/$label
 
-### set pacman cache to usb drive
+### set pacman cache to usb drive  #################################################
 mkdir -p $mnt/varcache/pacman
 rm -r /var/cache/pacman
 ln -s $mnt/varcache/pacman /var/cache/pacman
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
-### Settings
+### Settings  ######################################################################
 # ?
 
-### Upgrage and customize samba
+### Upgrage and customize samba  ###################################################
 pacman -R --noconfirm samba4-rune
 pacman -Sy --noconfirm tdb tevent smbclient samba
 # fix missing libreplace-samba4.so
@@ -49,16 +49,16 @@ systemctl restart smbd
 # set samba password
 smbpasswd -a root
 
-### Transmission
+### Transmission ####################################################################
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 
-### Aria2
+### Aria2 ###########################################################################
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
 
-### Enhancement
+### Enhancement  ####################################################################
 wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh
 
-### GPIO
+### GPIO  ###########################################################################
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.conf.gpio -P /etc
