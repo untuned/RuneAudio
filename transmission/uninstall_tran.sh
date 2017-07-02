@@ -24,8 +24,6 @@ if ! pacman -Q transmission-cli &>/dev/null; then
 fi
 
 title2 "Uninstall Transmission ..."
-# remove symlink
-[[ -L /usr/share/transmission/web ]] && rm /usr/share/transmission/web
 # uninstall package #######################################
 pacman -R --noconfirm transmission-cli
 
@@ -34,6 +32,7 @@ title "Remove files ..."
 systemctl disable transmission
 rm /etc/systemd/system/transmission.service
 systemctl daemon-reload
+rm -r /usr/share/transmission
 
 title2 "Transmission successfully uninstalled."
 
