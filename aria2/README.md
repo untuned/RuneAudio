@@ -5,7 +5,7 @@ RuneAudio Aria2 with WebUI
 [**webui-aria2**](https://github.com/ziahamza/webui-aria2) - Web inferface for aria2  
  
 **Install**
-- RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu` upgrage. 
+- RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu` 
 ```
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
 ```
