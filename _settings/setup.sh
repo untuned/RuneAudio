@@ -31,7 +31,7 @@ hdmi_group=1   # cec
 hdmi_mode=31   # 1080p 50Hz
 disable_overscan=1
 ' >> /boot/config.txt
-### osmc
+### osmc ######################################
 mkdir -p /tmp/p6
 mount /dev/mmcblk0p6 /tmp/p6
 echo '
@@ -46,18 +46,23 @@ label=${mnt0##/*/}
 mnt=/mnt/$label
 ln -s $mnt0 $mnt
 
-### osmc
+### osmc ######################################
 mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mkdir -p /tmp/p7
 mount /dev/mmcblk0p7 /tmp/p7
 echo "/dev/sda1       /mnt/$label           ext4     defaults,noatime  0   0" >> /tmp/p7/etc/fstab
-### osmc setting
+
+# Settings
+#################################################################################
+# ?
+
+### osmc setting ##############################
 gitpath=https://github.com/rern/OSMC/raw/master/_settings
-kodipath=
-wget -qN --show-progress $gitpath/mainmenu.DATA.xml -P /tmp/p7/home/osmc/.kodi/userdata/addon_data/script.skinshortcuts
-wget -qN --show-progress $gitpath/guisettings.xml -P /tmp/p7/home/osmc/.kodi/userdata
-chown -R osmc:osmc /home/osmc/.kodi/userdata
+kodipath=/tmp/p7/home/osmc/.kodi/userdata
+wget -qN --show-progress $gitpath/guisettings.xml -P $kodipath
+wget -qN --show-progress $gitpath/mainmenu.DATA.xml -P $kodipath/addon_data/script.skinshortcuts
+chown -R osmc:osmc $kodipath
 # setup marker file
 touch /walkthrough_completed
 
@@ -68,9 +73,6 @@ rm -r /var/cache/pacman
 ln -s $mnt/varcache/pacman /var/cache/pacman
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
-
-### Settings  ######################################################################
-# ?
 
 title2 "Upgrade samba ..."
 #################################################################################
