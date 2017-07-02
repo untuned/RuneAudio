@@ -52,6 +52,14 @@ label=${mnt0##/*/}
 mkdir -p /tmp/p7
 mount /dev/mmcblk0p7 /tmp/p7
 echo "/dev/sda1       /mnt/$label           ext4     defaults,noatime  0   0" >> /tmp/p7/etc/fstab
+### osmc setting
+gitpath=https://github.com/rern/OSMC/raw/master/_settings
+kodipath=
+wget -qN --show-progress $gitpath/mainmenu.DATA.xml -P /tmp/p7/home/osmc/.kodi/userdata/addon_data/script.skinshortcuts
+wget -qN --show-progress $gitpath/guisettings.xml -P /tmp/p7/home/osmc/.kodi/userdata
+chown -R osmc:osmc /home/osmc/.kodi/userdata
+# setup marker file
+touch /walkthrough_completed
 
 title2 "Set pacman cache ..."
 #################################################################################
