@@ -97,8 +97,7 @@ systemctl restart nmbd
 
 **Upgrage samba**
 ```sh
-systemctl stop nmbd
-systemctl stop smbd
+systemctl stop nmbd smbd
 
 # fix packages download errors
 if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
@@ -123,8 +122,7 @@ ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
 systemctl daemon-reload
 systemctl enable nmbd smbd
-systemctl start nmbd
-systemctl start smbd
+systemctl start nmbd smbd
 ```
 
 **Add samba user + password**
