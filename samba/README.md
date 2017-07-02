@@ -4,7 +4,7 @@ _Tested on RuneAudio beta-20160313 - samba_
 
 RuneAudio already installed `samba4-rune`  
 Upgrading to latest samba with following configuration should improve transfer speed by 30%, **8MB/s** > **11MB/s**, on wired network  
-RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu` upgrage.  
+RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu` upgrade.  
 
 **Server name**  
 - any os file browsers:
