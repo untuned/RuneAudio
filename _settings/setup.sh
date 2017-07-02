@@ -51,6 +51,7 @@ root    hard    nofile    16384
 rm /etc/samba/smb-dev.conf
 ln -s $mnt/samba/smb.conf /etc/samba/smb-dev.conf
 ln -s $mnt/samba/smb.conf /etc/samba/smb.conf
+systemctl daemon-reload
 systemctl restart nmbd smbd
 # set samba password
 smbpasswd -a root
