@@ -24,39 +24,39 @@ gapless_mp3_playback    "yes"
 mixer_type              "disabled"
 
 input {
-	plugin              "curl"
+    plugin              "curl"
 }
 
 decoder {
-	plugin              "ffmpeg"
-	enabled             "yes"
+    plugin              "ffmpeg"
+    enabled             "yes"
 }
 replaygain              "off"
 
 audio_output {
-	name                "bcm2835 ALSA_2"
-	type                "alsa"
-	device              "hw:0,0"
-	dsd_usb             "yes"
-	auto_resample       "no"
-	auto_format         "no"
+    name                "bcm2835 ALSA_2"
+    type                "alsa"
+    device              "hw:0,0"
+    dsd_usb             "yes"
+    auto_resample       "no"
+    auto_format         "no"
 }
 
 audio_output {
-	name                "xCORE USB Audio 2.0"
-	type                "alsa"
-	device              "hw:1,0"
-	dsd_usb             "yes"
-	auto_resample       "no"
-	auto_format         "no"
-	enabled             "yes"
+    name                "xCORE USB Audio 2.0"
+    type                "alsa"
+    device              "hw:1,0"
+    dsd_usb             "yes"
+    auto_resample       "no"
+    auto_format         "no"
+    enabled             "yes"
 }
 
 audio_output {
-	name               "bcm2835 ALSA_1"
-	type               "alsa"
-	device             "hw:0,0"
-	dsd_usb            "yes"
-	auto_resample      "no"
-	auto_format        "no"
+    name               "bcm2835 ALSA_1"
+    type               "alsa"
+    device             "hw:0,0"
+    dsd_usb            "yes"
+    auto_resample      "no"
+    auto_format        "no"
 }
