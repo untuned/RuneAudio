@@ -7,7 +7,7 @@ This is just an example of setup script.
 [**setup.sh**](https://github.com/rern/RuneAudio/blob/master/_settings/setup.sh)  
 - disable unused `wlan0` service
 - set hdmi mode
-- set `fstab` for usb drive
+- link `/mnt/hdd` (no `fstab` Rune read from `/mnt/MPD/USB/hdd` only
 - set package cache to usb to avoid slow download on os reinstall
 - restore settings
 - upgrage and customize **samba** to improve speed
