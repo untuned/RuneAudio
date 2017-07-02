@@ -17,6 +17,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 ```
 
 **Start transmission**  
+`transmission-daemon -d` will not correctly show `settings.json`  
 ```
 systemctl start transmission
 ```
