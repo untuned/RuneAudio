@@ -18,9 +18,9 @@ disable_overscan=1
 ### set fstab for usb drive ########################################################
 mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
-mkdir -p /mnt/$label
-echo "/dev/sda1       /mnt/$label           ext4     defaults,noatime  0   0" >> /etc/fstab
 mnt=/mnt/$label
+mkdir -p $mnt
+ln -s $mnt0 $mnt
 
 ### set pacman cache to usb drive  #################################################
 mkdir -p $mnt/varcache/pacman
