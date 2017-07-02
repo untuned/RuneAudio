@@ -40,12 +40,17 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 # or run 'twice':
 #pacman -S --noconfirm libwbclient
 
+# fix 'minimum rlimit_max'
+echo -n '
+root    soft    nofile    16384
+root    hard    nofile    16384
+' >> /etc/security/limits.conf
+
 # make usb drive a common between os for smb.conf
 [[ ! -e $mnt/samba/smb.conf ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -P $mnt/samba
 rm /etc/samba/smb.conf
 ln -s $mnt/samba/smb.conf /etc/samba/smb.conf
-systemctl restart nmbd
-systemctl restart smbd
+systemctl restart nmbd smbd
 # set samba password
 smbpasswd -a root
 
