@@ -16,6 +16,6 @@ This is just an example of setup script.
 - install **RuneUI Enhancement**
 - install **RuneUI GPIO**
 - make usb drive a common between os for `gpio.json`
-```
+```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh; chmod +x setup.sh; ./setup.sh
 ```
