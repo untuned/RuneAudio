@@ -31,6 +31,13 @@ hdmi_group=1   # cec
 hdmi_mode=31   # 1080p 50Hz
 disable_overscan=1
 ' >> /boot/config.txt
+### osmc
+mkdir -p /tmp/p6
+mount /dev/mmcblk0p6 /tmp/p6
+echo '
+hdmi_group=1
+hdmi_mode=31
+' >> /tmp/p6/config.txt
 
 title2 "Symlink /mnt/hdd ..."
 #################################################################################
@@ -38,6 +45,13 @@ mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mnt=/mnt/$label
 ln -s $mnt0 $mnt
+
+### osmc
+mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+label=${mnt0##/*/}
+mkdir -p /tmp/p7
+mount /dev/mmcblk0p7 /tmp/p7
+echo "/dev/sda1       /mnt/$label           ext4     defaults,noatime  0   0" >> /tmp/p7/etc/fstab
 
 title2 "Set pacman cache ..."
 #################################################################################
