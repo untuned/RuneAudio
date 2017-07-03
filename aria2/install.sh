@@ -22,6 +22,14 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
+# user input
+title "$info Start Aria2 on system startup:"
+echo -e '  \e[0;36m0\e[m No'
+echo -e '  \e[0;36m1\e[m Yes'
+echo
+echo -e '\e[0;36m0\e[m / 1 ? '
+read -n 1 ansstartup
+
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/uninstall_aria.sh
 chmod +x uninstall_aria.sh
 
@@ -89,29 +97,12 @@ fi
 title "Restart nginx ..."
 systemctl restart nginx
 
-title "$info Start Aria2 on system startup:"
-echo -e '  \e[0;36m0\e[m No'
-echo -e '  \e[0;36m1\e[m Yes'
-echo
-echo -e '\e[0;36m0\e[m / 1 ? '
-read -n 1 answer
-case $answer in
-	1 ) systemctl enable aria2;;
-	* ) echo;;	
-esac
+# start
+[[ $ansstartup == 1 ]] && systemctl enable aria2
+title "Start Aria2 ..."
+systemctl start aria2
 
-title "$info Start Aria2 now:"
-echo -e '  \e[0;36m0\e[m No'
-echo -e '  \e[0;36m1\e[m Yes'
-echo
-echo -e '\e[0;36m0\e[m / 1 ? '
-read -n 1 answer
-case $answer in
-	1 ) systemctl start aria2;;
-	* ) echo;;	
-esac
-
-title2 "Aria2 successfully installed."
+title2 "Aria2 installed and started successfully."
 echo 'Uninstall: ./uninstall_aria.sh'
 echo 'Start: systemctl start aria2'
 echo 'Stop: systemctl stop aria2'
