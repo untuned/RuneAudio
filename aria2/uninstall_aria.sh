@@ -29,8 +29,8 @@ pacman -Rs --noconfirm aria2
 
 # remove files #######################################
 title "Remove files ..."
-rm -rfv /root/.config/aria2
-rm -rfv /usr/share/nginx/html/aria2
+rm -rv /root/.config/aria2
+rm -rv /usr/share/nginx/html/aria2
 
 # restore modified files #######################################
 title "Restore modified files ..."
