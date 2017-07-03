@@ -29,12 +29,35 @@ setpwd() {
 	echo 'Retype password: '
 	read -s pwd2
 	echo
-	if [[ $pwd != $pwd2 ]]; then
+	if [[ $pwd1 != $pwd2 ]]; then
 		echo
 		echo "$info Passwords not matched. Try again."
 		setpwd
 	fi
 }
+
+# user inputs
+title "$info Set password:"
+echo -e '  \e[0;36m0\e[m No'
+echo -e '  \e[0;36m1\e[m Yes'
+echo
+echo -e '\e[0;36m0\e[m / 1 ? '
+read -n 1 anspwd
+[[ $anspwd == 1 ]] && setpwd
+
+title "$info Install WebUI alternative (Transmission Web Control):"
+echo -e '  \e[0;36m0\e[m No'
+echo -e '  \e[0;36m1\e[m Yes'
+echo
+echo -e '\e[0;36m0\e[m / 1 ? '
+read -n 1 answebui
+
+title "$info Start Transmission on system startup:"
+echo -e '  \e[0;36m0\e[m No'
+echo -e '  \e[0;36m1\e[m Yes'
+echo
+echo -e '\e[0;36m0\e[m / 1 ? '
+read -n 1 ansstartup
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/uninstall_tran.sh
 chmod +x uninstall_tran.sh
@@ -94,62 +117,29 @@ echo -e '  \e[0;36m1\e[m Yes'
 echo
 echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
-case $answer in
-	1 ) echo
-		echo 'Password: '
-		setpwd
-		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
-		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwd1"'"|
-		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
-		' $file
-		;;
-	* ) echo;;
-esac
+if [[ $anspwd == 1 ]] && [[ -n $pwd1 ]]; then
+	sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
+	' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwd1"'"|
+	' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
+	' $file
+fi
 # hash password by start
 systemctl start transmission
 
 # web ui alternative
-title "$info Install WebUI alternative (Transmission Web Control):"
-echo -e '  \e[0;36m0\e[m No'
-echo -e '  \e[0;36m1\e[m Yes'
-echo
-echo -e '\e[0;36m0\e[m / 1 ? '
-read -n 1 answer
-case $answer in
-	1 ) echo
-		wget -qN --show-progress https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
-		mv /usr/share/transmission/web $path
-		mv $path/web/index.html $path/web/index.original.html
-		bsdtar -xf transmission-control-full.tar.gz -C $path
-		rm transmission-control-full.tar.gz
-		chown -R root:root $path/web
-		;;
-	* ) echo;;
-esac
+fi [[ $answebui == 1 ]]; then
+	wget -qN --show-progress https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
+	mv /usr/share/transmission/web $path
+	mv $path/web/index.html $path/web/index.original.html
+	bsdtar -xf transmission-control-full.tar.gz -C $path
+	rm transmission-control-full.tar.gz
+	chown -R root:root $path/web
+fi
 
-title "$info Start Transmission on system startup:"
-echo -e '  \e[0;36m0\e[m No'
-echo -e '  \e[0;36m1\e[m Yes'
-echo
-echo -e '\e[0;36m0\e[m / 1 ? '
-read -n 1 answer
-case $answer in
-	1 ) systemctl enable transmission;;
-	* ) echo;;
-esac
+# startup
+[[ $ansstartup == 1 ]] && systemctl enable transmission
 
-title "$info Start Transmission now:"
-echo -e '  \e[0;36m0\e[m No'
-echo -e '  \e[0;36m1\e[m Yes'
-echo
-echo -e '\e[0;36m0\e[m / 1 ? '
-read -n 1 answer
-case $answer in
-	1 ) echo;;
-	* ) systemctl stop transmission;;
-esac
-
-title2 "Transmission installed successfully."
+title2 "Transmission installed and started successfully."
 echo 'Uninstall: ./uninstall_tran.sh'
 echo 'Start: systemctl start transmission'
 echo 'Stop:  systemctl stop transmission'
