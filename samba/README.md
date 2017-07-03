@@ -1,9 +1,9 @@
-samba
+Samba
 ---
 _Tested on RuneAudio beta-20160313 - samba_
 
 RuneAudio already installed `samba4-rune`  
-Upgrading to latest samba with following configuration should improve transfer speed by 30%, **8MB/s** > **11MB/s**, on wired network  
+Upgrading to latest Samba with following configuration should improve transfer speed by 30%, **8MB/s** > **11MB/s**, on wired network  
 RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`.  
 
 **Server name**  
@@ -74,7 +74,7 @@ hostnamectl set-hostname [name]
 #	host allow = [IP1] [IP2]
 ```
 
-**Test samba parameters**
+**Test conf parameters**
 ```
 testparm
 ```
@@ -88,7 +88,7 @@ root    hard    nofile    16384
 # Close SSH and reconnect to update new value.
 ```
 
-**Restart samba**
+**Restart**
 ```sh
 systemctl restart smbd
 
@@ -96,7 +96,7 @@ systemctl restart smbd
 systemctl restart nmbd
 ```
 
-**Upgrage samba**
+**Upgrage**
 ```sh
 systemctl stop nmbd smbd
 
@@ -126,7 +126,7 @@ systemctl enable nmbd smbd
 systemctl start nmbd smbd
 ```
 
-**Add samba user + password**
+**Add user + password**
 ```
 smbpasswd -a [user]
 ```
