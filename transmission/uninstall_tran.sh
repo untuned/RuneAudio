@@ -37,6 +37,6 @@ systemctl disable transmission
 rm /etc/systemd/system/transmission.service
 systemctl daemon-reload
 
-titleend "Transmission successfully uninstalled."
+titleend "Transmission uninstalled successfully."
 
 rm uninstall_tran.sh
