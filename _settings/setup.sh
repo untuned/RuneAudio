@@ -101,7 +101,7 @@ smbpasswd -a root
 
 # Transmission
 #################################################################################
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh 1
 
 # Aria2
 #################################################################################
@@ -109,11 +109,11 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/inst
 
 # Enhancement
 #################################################################################
-wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh
+wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh 3
 
 # GPIO
 #################################################################################
-wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh
+wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.conf.gpio -P /etc
 # make usb drive a common between os for gpio.json
