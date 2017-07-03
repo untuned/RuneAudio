@@ -21,6 +21,20 @@ titleend() {
 	echo -e "\n$1"
 	echo -e "\n$line\n"
 }
+setpwd() {
+	echo
+	echo 'Password: '
+	read -s pwd1
+	echo
+	echo 'Retype password: '
+	read -s pwd2
+	echo
+	if [[ $pwd != $pwd2 ]]; then
+		echo
+		echo "$info Passwords not matched. Try again."
+		setpwd
+	fi
+}
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/uninstall_tran.sh
 chmod +x uninstall_tran.sh
@@ -83,9 +97,9 @@ read -n 1 answer
 case $answer in
 	1 ) echo
 		echo 'Password: '
-		read -s pwd
+		setpwd
 		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
-		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwd"'"|
+		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwd1"'"|
 		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
 		' $file
 		;;
