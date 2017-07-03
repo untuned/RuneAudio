@@ -56,8 +56,9 @@ pacman -S --noconfirm aria2 glibc
 
 title "Get WebUI files ..."
 wget -qN --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
-mkdir -p /usr/share/nginx/html/aria2
-bsdtar -xf master.zip -s'|[^/]*/||' -C /usr/share/nginx/html/aria2/
+mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+mkdir -p $mnt/aria2/web
+bsdtar -xf master.zip -s'|[^/]*/||' -C $mnt/aria2/web
 rm master.zip
 
 if mount | grep '/dev/sda1' &>/dev/null; then
@@ -89,15 +90,15 @@ WantedBy=multi-user.target
 ' > /etc/systemd/system/aria2.service
 
 if ! grep -qs 'aria2' /etc/nginx/nginx.conf; then
-	sed -i '/end http block/ i\
+	sed -i "/end http block/ i\
 	    server { #aria2\
 		listen 88;\
 		location / {\
-		    root  /usr/share/nginx/html/aria2;\
+		    root  $mnt/aria2/web;\
 		    index  index.php index.html index.htm;\
 		}\
 	    } #aria2
-	' /etc/nginx/nginx.conf
+	" /etc/nginx/nginx.conf
 fi
 
 title "Restart nginx ..."
