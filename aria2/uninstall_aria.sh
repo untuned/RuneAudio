@@ -46,6 +46,6 @@ echo '/etc/nginx/nginx.conf'
 sed -i '/server { #aria2/, /} #aria2/ d' /etc/nginx/nginx.conf
 systemctl restart nginx
 
-titleend "Aria2 successfully uninstalled."
+titleend "Aria2 uninstalled successfully."
 
 rm uninstall_aria.sh
