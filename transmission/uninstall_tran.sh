@@ -16,6 +16,10 @@ title() {
 	echo $1
 	echo -e "$line\n"
 }
+titleend() {
+	echo -e "\n$1"
+	echo -e "\n$line\n"
+}
 
 # check installed #######################################
 if ! pacman -Q transmission-cli &>/dev/null; then
@@ -33,6 +37,6 @@ systemctl disable transmission
 rm /etc/systemd/system/transmission.service
 systemctl daemon-reload
 
-title2 "Transmission successfully uninstalled."
+titleend "Transmission successfully uninstalled."
 
 rm uninstall_tran.sh
