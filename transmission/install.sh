@@ -36,6 +36,11 @@ setpwd() {
 	fi
 }
 
+if pacman -Q transmission-cli &>/dev/null; then
+	titleend "$info Transmission already installed."
+	exit
+fi
+
 # user inputs
 if (( $# == 0 )); then # with no argument
 	title "$info Set password:"
@@ -70,13 +75,9 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 chmod +x uninstall_tran.sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-if ! pacman -Q transmission-cli &>/dev/null; then
-	title2 "Install Transmission ..."
-	pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
-else
-	titleend "$info Transmission already installed."
-	exit
-fi
+title2 "Install Transmission ..."
+pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
+
 rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 # remove conf for non-exist user 'transmission'
