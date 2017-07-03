@@ -106,30 +106,29 @@ echo -e '  \e[0;36m1\e[m Expand'
 echo
 echo -e '\e[0;36m0\e[m / 1 ? '
 read -n 1 answer
-case $answer in
-	1 ) if ! pacman -Q parted &>/dev/null; then
-			title "Get package file ..."
-			wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
-			pacman -U --noconfirm parted-3.2-5-armv7h.pkg.tar.xz
-			rm parted-3.2-5-armv7h.pkg.tar.xz
-		fi
-		title "Expand partiton ..."
-		echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk &>/dev/null
+if [[ $answer == 1 ]]; then
+	if ! pacman -Q parted &>/dev/null; then
+		title "Get package file ..."
+		wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
+		pacman -U --noconfirm parted-3.2-5-armv7h.pkg.tar.xz
+		rm parted-3.2-5-armv7h.pkg.tar.xz
+	fi
+	title "Expand partiton ..."
+	echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk &>/dev/null
 
-		partprobe $disk
+	partprobe $disk
 
-		resize2fs $devpart
-		if (( $? != 0 )); then
-			errorend "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
-			exit
-		else
-			freekb=$( df | grep '/$' | awk '{print $4}' )
-			freemb=$( python2 -c "print($freekb / 1000)" )
-			echo
-			titleend "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
-		fi;;
-
-	* ) echo
-			titleend "Expand partition canceled."
-			exit;;
-esac
+	resize2fs $devpart
+	if (( $? != 0 )); then
+		errorend "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
+		exit
+	else
+		freekb=$( df | grep '/$' | awk '{print $4}' )
+		freemb=$( python2 -c "print($freekb / 1000)" )
+		echo
+		titleend "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
+	fi
+else
+	titleend "Expand partition canceled."
+	exit
+fi
