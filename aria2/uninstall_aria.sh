@@ -16,6 +16,10 @@ title() {
 	echo $1
 	echo -e "$line\n"
 }
+titleend() {
+	echo -e "\n$1"
+	echo -e "\n$line\n"
+}
 
 # check installed #######################################
 if ! pacman -Q aria2 &>/dev/null; then
@@ -42,6 +46,6 @@ echo '/etc/nginx/nginx.conf'
 sed -i '/server { #aria2/, /} #aria2/ d' /etc/nginx/nginx.conf
 systemctl restart nginx
 
-title2 "Aria2 successfully uninstalled."
+titleend "Aria2 successfully uninstalled."
 
 rm uninstall_aria.sh
