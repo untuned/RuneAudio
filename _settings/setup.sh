@@ -66,7 +66,7 @@ mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mnt=/mnt/$label
 mkdir -p $mnt
-echo "/dev/sda1       $mnt           ext4     defaults,noatime  0   0" >> /etc/fstab
+echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /etc/fstab
 umount /dev/sda1
 mount -a
 ln -s $mnt/Music /mnt/MPD/USB/Music
@@ -74,7 +74,7 @@ ln -s $mnt/Music /mnt/MPD/USB/Music
 ### osmc ######################################
 mkdir -p /tmp/p7
 mount /dev/mmcblk0p7 /tmp/p7
-echo "/dev/sda1       $mnt           ext4     defaults,noatime  0   0" >> /tmp/p7/etc/fstab
+echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /tmp/p7/etc/fstab
 
 # Settings
 #################################################################################
