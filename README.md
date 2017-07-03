@@ -8,6 +8,7 @@ This is just an example of setup script.
 
 ( OSMC parts ease first boot)  
 
+- set password for Samba and Transmission
 - disable unused `wlan0` service
 - set hdmi mode
 - OSMC - set hdmi mode
@@ -15,7 +16,7 @@ This is just an example of setup script.
 - OSMC - set `fstab` for usb drive (fix automount to `/media/hdd_`)
 - OSMC - restore settings
 - set package cache to usb to avoid slow download on os reinstall
-- upgrage and customize **samba** to improve speed
+- upgrage and customize **Samba** to improve speed
 - make usb drive a common between os for `smb.conf`
 - install **Transmission**
 - install **Aria2**
