@@ -123,8 +123,6 @@ if [[ $anspwd == 1 ]] && [[ -n $pwd1 ]]; then
 	' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
 	' $file
 fi
-# hash password by start
-systemctl start transmission
 
 # web ui alternative
 fi [[ $answebui == 1 ]]; then
@@ -136,8 +134,10 @@ fi [[ $answebui == 1 ]]; then
 	chown -R root:root $path/web
 fi
 
-# startup
+# start
 [[ $ansstartup == 1 ]] && systemctl enable transmission
+title "Start Transmission ..."
+systemctl start transmission
 
 title2 "Transmission installed and started successfully."
 echo 'Uninstall: ./uninstall_tran.sh'
