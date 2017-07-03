@@ -14,6 +14,24 @@ title() {
 	echo $1
 	echo -e "$line\n"
 }
+setpwd() {
+	echo
+	echo 'Password: '
+	read -s pwd1
+	echo
+	echo 'Retype password: '
+	read -s pwd2
+	echo
+	if [[ $pwd1 != $pwd2 ]]; then
+		echo
+		echo "$info Passwords not matched. Try again."
+		setpwd
+	fi
+}
+
+# passwords
+title2 "root password for Samba and Transmission ..."
+setpwd
 
 title2 "Disable WiFi ..."
 #################################################################################
@@ -101,7 +119,7 @@ smbpasswd -a root
 
 # Transmission
 #################################################################################
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh 1
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh $pwd1 0 1
 
 # Aria2
 #################################################################################
