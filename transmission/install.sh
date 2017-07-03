@@ -37,8 +37,7 @@ setpwd() {
 }
 
 # user inputs
-# with no argument
-if (( $# == 0 )); then
+if (( $# == 0 )); then # with no argument
 	title "$info Set password:"
 	echo -e '  \e[0;36m0\e[m No'
 	echo -e '  \e[0;36m1\e[m Yes'
@@ -60,7 +59,7 @@ if (( $# == 0 )); then
 	echo
 	echo -e '\e[0;36m0\e[m / 1 ? '
 	read -n 1 ansstartup
-else
+else # with arguments
 	pwd1=$1
 	(( $# > 1 )) && answebui=$2 || answebui=0
 	(( $# > 2 )) && ansstartup=$3 || ansstartup=0
