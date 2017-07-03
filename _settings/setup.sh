@@ -60,19 +60,21 @@ hdmi_group=1
 hdmi_mode=31
 ' >> /tmp/p6/config.txt
 
-title2 "Symlink /mnt/hdd ..."
+title2 "Mount USB drive to /mnt/hdd ..."
 #################################################################################
 mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mnt=/mnt/$label
-ln -s $mnt0 $mnt
+mkdir -p $mnt
+echo -n "/dev/sda1       $mnt           ext4     defaults,noatime  0   0" >> /etc/fstab
+umount /dev/sda1
+mount -a
+ln -s $mnt/Music /mnt/MPD/USB/Music
 
 ### osmc ######################################
-mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-label=${mnt0##/*/}
 mkdir -p /tmp/p7
 mount /dev/mmcblk0p7 /tmp/p7
-echo "/dev/sda1       /mnt/$label           ext4     defaults,noatime  0   0" >> /tmp/p7/etc/fstab
+echo -n "/dev/sda1       $mnt           ext4     defaults,noatime  0   0" >> /tmp/p7/etc/fstab
 
 # Settings
 #################################################################################
