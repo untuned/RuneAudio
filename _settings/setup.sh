@@ -112,11 +112,10 @@ root    soft    nofile    16384
 root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
-# make usb drive a common between os for smb.conf
-[[ ! -e $mnt/samba/smb.conf ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -P $mnt/samba
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -P /etc/samba
 rm /etc/samba/smb-dev.conf
-ln -s $mnt/samba/smb.conf /etc/samba/smb-dev.conf
-ln -s $mnt/samba/smb.conf /etc/samba/smb.conf
+ln -s /etc/samba/smb.conf /etc/samba/smb-dev.conf
+
 systemctl daemon-reload
 systemctl restart nmbd smbd
 # set samba password
@@ -139,10 +138,8 @@ wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/i
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.conf.gpio -P /etc
-# make usb drive a common between os for gpio.json
-[[ ! -e $mnt/gpio/gpio.json ]] && wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P $mnt/gpio
-rm /srv/http/gpio.json
-ln -s $mnt/gpio/gpio.json /srv/http/gpio.json
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P /srv/http
+
 systemctl restart gpioset
 
 title "Finished."
