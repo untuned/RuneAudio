@@ -22,6 +22,11 @@ titleend() {
 	echo -e "\n$line\n"
 }
 
+if pacman -Q aria2 &>/dev/null; then
+	titleend "$info Aria2 already installed."
+	exit
+fi
+
 if (( $# == 0 )); then
 	# user input
 	title "$info Start Aria2 on system startup:"
@@ -43,15 +48,11 @@ if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; t
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
 fi
-if ! pacman -Q aria2 &>/dev/null; then
-	title2 "Install Aria2 ..."
-	# skip with any argument
-	(( $# == 0 )) && pacman -Sy
-	pacman -S --noconfirm aria2 glibc
-else
-	titleend "$info Aria2 already installed."
-	exit
-fi
+
+title2 "Install Aria2 ..."
+# skip with any argument
+(( $# == 0 )) && pacman -Sy
+pacman -S --noconfirm aria2 glibc
 
 title "Get WebUI files ..."
 wget -qN --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
