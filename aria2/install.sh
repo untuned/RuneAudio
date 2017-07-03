@@ -54,13 +54,6 @@ title2 "Install Aria2 ..."
 (( $# == 0 )) && pacman -Sy
 pacman -S --noconfirm aria2 glibc
 
-title "Get WebUI files ..."
-wget -qN --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
-mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-mkdir -p $mnt/aria2/web
-bsdtar -xf master.zip -s'|[^/]*/||' -C $mnt/aria2/web
-rm master.zip
-
 if mount | grep '/dev/sda1' &>/dev/null; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	mkdir -p $mnt/aria2
@@ -69,6 +62,11 @@ else
 	mkdir -p /root/aria2
 	path=/root/aria2
 fi
+title "Get WebUI files ..."
+wget -qN --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
+mkdir -p $path/web
+bsdtar -xf master.zip -s'|[^/]*/||' -C $path/web
+rm master.zip
 
 mkdir -p /root/.config/aria2
 echo "enable-rpc=true
@@ -94,7 +92,7 @@ if ! grep -qs 'aria2' /etc/nginx/nginx.conf; then
 	    server { #aria2\
 		listen 88;\
 		location / {\
-		    root  $mnt/aria2/web;\
+		    root  $path/web;\
 		    index  index.php index.html index.htm;\
 		}\
 	    } #aria2
