@@ -119,12 +119,7 @@ sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
     "watch-dir-enabled": true
 ' $file
 
-title "$info Set password:"
-echo -e '  \e[0;36m0\e[m No'
-echo -e '  \e[0;36m1\e[m Yes'
-echo
-echo -e '\e[0;36m0\e[m / 1 ? '
-read -n 1 answer
+# set password
 if [[ $anspwd == 1 ]] && [[ -n $pwd1 ]]; then
 	sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
 	' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwd1"'"|
