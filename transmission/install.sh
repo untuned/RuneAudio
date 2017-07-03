@@ -37,6 +37,7 @@ setpwd() {
 }
 
 # user inputs
+# with no argument
 if (( $# == 0 )); then
 	title "$info Set password:"
 	echo -e '  \e[0;36m0\e[m No'
