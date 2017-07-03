@@ -131,7 +131,7 @@ if [[ $anspwd == 1 ]] && [[ -n $pwd1 ]]; then
 fi
 
 # web ui alternative
-fi [[ $answebui == 1 ]]; then
+if [[ $answebui == 1 ]]; then
 	wget -qN --show-progress https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
 	mv /usr/share/transmission/web $path
 	mv $path/web/index.html $path/web/index.original.html
