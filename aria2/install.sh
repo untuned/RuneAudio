@@ -86,7 +86,7 @@ Type=forking
 ExecStart=/usr/bin/aria2c
 [Install]
 WantedBy=multi-user.target
-' > /usr/lib/systemd/system/aria2.service
+' > /etc/systemd/system/aria2.service
 
 if ! grep -qs 'aria2' /etc/nginx/nginx.conf; then
 	sed -i '/end http block/ i\
