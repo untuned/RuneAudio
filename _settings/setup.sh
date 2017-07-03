@@ -93,7 +93,7 @@ ln -s $mnt/varcache/pacman /var/cache/pacman
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
-title2 "Upgrade samba ..."
+title2 "Upgrade Samba ..."
 #################################################################################
 pacman -R --noconfirm samba4-rune
 pacman -Sy --noconfirm tdb tevent smbclient samba
