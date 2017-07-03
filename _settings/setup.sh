@@ -123,11 +123,14 @@ systemctl restart nmbd smbd
 
 # Transmission
 #################################################################################
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh $pwd1 0 1
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh $pwd1 1 1
 
 # Aria2
 #################################################################################
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh 1
+rm -r $mnt/aria2/web/*
+mv /var/www/html/aria2 $mnt/aria2/web
+ln -s $mnt/aria2/web /var/www/html/aria2
 
 # Enhancement
 #################################################################################
