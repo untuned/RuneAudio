@@ -128,5 +128,6 @@ systemctl start nmbd smbd
 
 **Add user + password**
 ```
+adduser [user] # create new system user if not exist
 smbpasswd -a [user]
 ```
