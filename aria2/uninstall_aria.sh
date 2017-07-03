@@ -24,6 +24,10 @@ if ! pacman -Q aria2 &>/dev/null; then
 fi
 
 title2 "Uninstall Aria2 ..."
+systemctl disable aria2
+systemctl stop aria2
+rm /etc/systemd/system/aria2.service
+systemctl daemon-reload
 # uninstall package #######################################
 pacman -Rs --noconfirm aria2
 
