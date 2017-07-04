@@ -76,6 +76,7 @@ mnt=/mnt/$label
 mkdir -p $mnt
 echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /etc/fstab
 umount -l /dev/sda1
+rm -r /mnt/MPD/USB/$label
 mount -a
 ln -s $mnt/Music /mnt/MPD/USB/Music
 systemctl start mpd
