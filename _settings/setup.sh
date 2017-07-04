@@ -97,7 +97,7 @@ wget -qN --show-progress $gitpath/guisettings.xml -P $kodipath
 wget -qN --show-progress $gitpath/mainmenu.DATA.xml -P $kodipath/addon_data/script.skinshortcuts
 chown -R osmc:osmc $kodipath
 # setup marker file
-touch /walkthrough_completed
+touch /tmp/p7/walkthrough_completed
 
 title2 "Set pacman cache ..."
 #################################################################################
