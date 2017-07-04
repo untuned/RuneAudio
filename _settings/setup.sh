@@ -62,14 +62,16 @@ hdmi_mode=31
 
 title2 "Mount USB drive to /mnt/hdd ..."
 #################################################################################
+systemctl stop mpd
 mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mnt=/mnt/$label
 mkdir -p $mnt
 echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /etc/fstab
-umount /dev/sda1
+umount -l /dev/sda1
 mount -a
 ln -s $mnt/Music /mnt/MPD/USB/Music
+systemctl start mpd
 
 ### osmc ######################################
 mkdir -p /tmp/p7
