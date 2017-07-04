@@ -62,7 +62,10 @@ hdmi_mode=31
 
 title2 "Mount USB drive to /mnt/hdd ..."
 #################################################################################
+# disable auto update mpd database
 systemctl stop mpd
+sed -i '\|sendMpdCommand| s|^|//|' /srv/http/command/usbmount
+
 mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mnt=/mnt/$label
@@ -148,3 +151,4 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 systemctl restart gpioset
 
 title "Finished."
+titleend "Please proceed to Settings menu."
