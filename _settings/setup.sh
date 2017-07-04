@@ -104,6 +104,12 @@ title2 "Set pacman cache ..."
 mkdir -p $mnt/varcache/pacman
 rm -r /var/cache/pacman
 ln -s $mnt/varcache/pacman /var/cache/pacman
+
+### osmc ######################################
+mkdir -p $mnt/varcache/apt
+rm -r /var/cache/apt
+ln -s $mnt/varcache/apt /var/cache/apt
+
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
