@@ -14,7 +14,7 @@ else
 	exit
 fi
 
-line='\e[0;36m---------------------------------------------------------\e[m'
+line=$( printf '\e[0;36m%*s\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' - )
 
 tmpdir=/tmp/rankmirrors/
 rm -rf $tmpdir && mkdir $tmpdir
@@ -36,9 +36,9 @@ else
 fi
 
 IFS=$'\n' read -d '' -r -a servers < $tmplist # convert list to array
-echo -e "\n$line"
+echo $line
 echo 'Rank mirror servers by download speed ...'
-echo -e "$line\n"
+echo $line
 echo 'Test' ${#servers[@]} 'servers @' $sec 'seconds:'
 echo
 
