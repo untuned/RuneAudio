@@ -86,19 +86,6 @@ mkdir -p /tmp/p7
 mount /dev/mmcblk0p7 /tmp/p7
 echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /tmp/p7/etc/fstab
 
-# Settings
-#################################################################################
-# ?
-
-### osmc setting ##############################
-gitpath=https://github.com/rern/OSMC/raw/master/_settings
-kodipath=/tmp/p7/home/osmc/.kodi/userdata
-wget -qN --show-progress $gitpath/guisettings.xml -P $kodipath
-wget -qN --show-progress $gitpath/mainmenu.DATA.xml -P $kodipath/addon_data/script.skinshortcuts
-chown -R osmc:osmc $kodipath
-# setup marker file
-touch /tmp/p7/walkthrough_completed
-
 title2 "Set pacman cache ..."
 #################################################################################
 mkdir -p $mnt/varcache/pacman
@@ -112,6 +99,10 @@ ln -s $mnt/varcache/apt /var/cache/apt
 
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
+
+# Settings
+#################################################################################
+# ?
 
 title2 "Upgrade Samba ..."
 #################################################################################
