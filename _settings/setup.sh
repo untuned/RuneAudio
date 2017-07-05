@@ -21,7 +21,11 @@ title2 "Set HDMI mode ..."
 # prevent noobs cec hdmi power on
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
-echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
+if [[ -e /tmp/p1/config.txt ]]; then
+  echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
+else
+  echo 'hdmi_ignore_cec_init=1' > /tmp/p1/config.txt
+fi
 # force hdmi mode, remove black border
 echo '
 hdmi_group=1   # cec
