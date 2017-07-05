@@ -12,8 +12,11 @@ rm setup.sh f_heading.sh f_password.sh
 title "$info root password for Samba and Transmission ..."
 setpwd
 
-# mount points
+# sd card mount points
 mkdir -p /tmp/p1 /tmp/p6 /tmp/p7
+mount /dev/mmcblk0p1 /tmp/p1
+mount /dev/mmcblk0p6 /tmp/p6
+mount /dev/mmcblk0p7 /tmp/p7
 
 title2 "Disable WiFi ..."
 #################################################################################
@@ -22,7 +25,6 @@ systemctl disable netctl-auto@wlan0.service
 title2 "Set HDMI mode ..."
 #################################################################################
 # prevent noobs cec hdmi power on
-mount /dev/mmcblk0p1 /tmp/p1
 if [[ -e /tmp/p1/config.txt ]]; then
   ! grep 'hdmi_ignore_cec_init=1' /tmp/p1/config.txt &> /dev/null && echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
 else
@@ -35,7 +37,6 @@ hdmi_mode=31   # 1080p 50Hz
 disable_overscan=1' >> /boot/config.txt
 fi
 ### osmc ######################################
-mount /dev/mmcblk0p6 /tmp/p6
 if ! grep 'hdmi_mode=' /tmp/p6/config.txt; then
 echo 'hdmi_group=1
 hdmi_mode=31' >> /tmp/p6/config.txt
@@ -56,9 +57,7 @@ umount -l /dev/sda1
 mount -a
 ln -s $mnt/Music /mnt/MPD/USB/Music
 systemctl start mpd
-
 ### osmc ######################################
-mount /dev/mmcblk0p7 /tmp/p7
 echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /tmp/p7/etc/fstab
 
 title2 "Set pacman cache ..."
