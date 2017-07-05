@@ -3,6 +3,7 @@
 # expand.sh - expand partition
 # https://github.com/rern/expand_partition
 
+# import heading function
 wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
 
 rm expand.sh
