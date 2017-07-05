@@ -22,7 +22,7 @@ title2 "Set HDMI mode ..."
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
 if [[ -e /tmp/p1/config.txt ]]; then
-  echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
+  ! grep 'hdmi_ignore_cec_init=1' /tmp/p1/config.txt && echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
 else
   echo 'hdmi_ignore_cec_init=1' > /tmp/p1/config.txt
 fi
