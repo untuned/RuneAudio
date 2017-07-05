@@ -25,7 +25,7 @@ else
   echo 'hdmi_ignore_cec_init=1' > /tmp/p1/config.txt
 fi
 # force hdmi mode, remove black border
-if ! grep 'hdmi_mode=' /boot/config.txt; then
+if ! grep 'hdmi_mode=' /boot/config.txt &> /dev/null; then
 echo 'hdmi_group=1   # cec
 hdmi_mode=31   # 1080p 50Hz
 disable_overscan=1' >> /boot/config.txt
@@ -33,7 +33,7 @@ fi
 ### osmc ######################################
 mkdir -p /tmp/p6
 mount /dev/mmcblk0p6 /tmp/p6
-if ! grep 'hdmi_mode=' /tmp/p6/config.txt; then
+if ! grep 'hdmi_mode=' /tmp/p6/config.txt &> /dev/null; then
 echo 'hdmi_group=1
 hdmi_mode=31' >> /tmp/p6/config.txt
 fi
@@ -48,7 +48,7 @@ mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mnt=/mnt/$label
 mkdir -p $mnt
-if ! grep $mnt /etc/fstab; then
+if ! grep $mnt /etc/fstab &> /dev/null; then
   echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /etc/fstab
   umount -l /dev/sda1
   mount -a
@@ -56,7 +56,7 @@ fi
 ln -s $mnt/Music /mnt/MPD/USB/Music
 systemctl start mpd
 ### osmc ######################################
-if ! grep $mnt /tmp/p7/etc/fstab; then
+if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
   mkdir -p /tmp/p7
   mount /dev/mmcblk0p7 /tmp/p7
   echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /tmp/p7/etc/fstab
