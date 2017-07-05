@@ -3,39 +3,9 @@
 # expand.sh - expand partition
 # https://github.com/rern/expand_partition
 
+wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
+
 rm expand.sh
-
-linered=$( printf '\e[0;31m%*s\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' - )
-line2=$( printf '\e[0;36m%*s\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' = )
-line=$( printf '\e[0;36m%*s\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' - )
-bar=$( echo -e "$(tput setab 6)   $(tput setab 0)" )
-warn=$( echo $(tput setab 1) ! $(tput setab 0) )
-info=$( echo $(tput setab 6; tput setaf 0) i $(tput setab 0; tput setaf 7) )
-
-# functions #######################################
-title2() {
-	echo $line2
-	echo -e "$bar $1"
-	echo $line2
-}
-title() {
-	echo $line
-	echo -e "$1"
-	echo $line
-}
-titleend() {
-	echo -e "\n$1"
-	echo $line
-}
-error() {
-	echo $linered
-	echo $warn $1
-	echo $linered
-}
-errorend() {
-	echo -e "\n$warn $1"
-	echo $linered
-}
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
 	title "$info Unable to continue with this version."
