@@ -151,6 +151,6 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 
 systemctl restart gpioset
 
-title "Finished."
-echo "Please proceed to menu Settings."
+title "Setup finished successfully."
+echo "Proceed to menu Settings."
 titleend "Update library database: menu Sources > Rebuild"
