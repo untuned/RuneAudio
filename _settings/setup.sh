@@ -28,20 +28,16 @@ else
 fi
 # force hdmi mode, remove black border
 if ! grep 'hdmi_mode=' /boot/config.txt; then
-  echo '
-  hdmi_group=1   # cec
-  hdmi_mode=31   # 1080p 50Hz
-  disable_overscan=1
-  ' >> /boot/config.txt
+echo 'hdmi_group=1   # cec
+hdmi_mode=31   # 1080p 50Hz
+disable_overscan=1' >> /boot/config.txt
 fi
 ### osmc ######################################
 mkdir -p /tmp/p6
 mount /dev/mmcblk0p6 /tmp/p6
 if ! grep 'hdmi_mode=' /tmp/p6/config.txt; then
-  echo '
-  hdmi_group=1
-  hdmi_mode=31
-  ' >> /tmp/p6/config.txt
+echo 'hdmi_group=1
+hdmi_mode=31' >> /tmp/p6/config.txt
 fi
 
 title2 "Mount USB drive to /mnt/hdd ..."
