@@ -1,10 +1,12 @@
 #!/bin/bash
 
-wget -qN --show-progress https://github.com/rern/tips/raw/master/bash/f_heading.sh
-chmod +x f_heading.sh
+# import heading and password function
+wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh
+wget -qN https://github.com/rern/tips/raw/master/bash/f_password.sh
+chmod +x f_heading.sh f_password.sh
 . f_heading.sh
-
-rm setup.sh f_heading.sh
+. f_password.sh
+rm setup.sh f_heading.sh f_password.sh
 
 # passwords
 title "$info root password for Samba and Transmission ..."
