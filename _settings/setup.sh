@@ -22,23 +22,27 @@ title2 "Set HDMI mode ..."
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
 if [[ -e /tmp/p1/config.txt ]]; then
-  ! grep 'hdmi_ignore_cec_init=1' /tmp/p1/config.txt && echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
+  ! grep 'hdmi_ignore_cec_init=1' /tmp/p1/config.txt &> /dev/null && echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
 else
   echo 'hdmi_ignore_cec_init=1' > /tmp/p1/config.txt
 fi
 # force hdmi mode, remove black border
-echo '
-hdmi_group=1   # cec
-hdmi_mode=31   # 1080p 50Hz
-disable_overscan=1
-' >> /boot/config.txt
+if ! grep 'hdmi_mode=' /boot/config.txt; then
+  echo '
+  hdmi_group=1   # cec
+  hdmi_mode=31   # 1080p 50Hz
+  disable_overscan=1
+  ' >> /boot/config.txt
+fi
 ### osmc ######################################
 mkdir -p /tmp/p6
 mount /dev/mmcblk0p6 /tmp/p6
-echo '
-hdmi_group=1
-hdmi_mode=31
-' >> /tmp/p6/config.txt
+if ! grep 'hdmi_mode=' /tmp/p6/config.txt; then
+  echo '
+  hdmi_group=1
+  hdmi_mode=31
+  ' >> /tmp/p6/config.txt
+fi
 
 title2 "Mount USB drive to /mnt/hdd ..."
 #################################################################################
