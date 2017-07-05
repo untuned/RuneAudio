@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# install.sh [startup]
+
 # import heading function
 wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
 
