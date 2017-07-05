@@ -1,12 +1,10 @@
 #!/bin/bash
 
 # import heading and password function
-wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh
-wget -qN https://github.com/rern/tips/raw/master/bash/f_password.sh
-chmod +x f_heading.sh f_password.sh
-. f_heading.sh
-. f_password.sh
-rm setup.sh f_heading.sh f_password.sh
+wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
+wget -qN https://github.com/rern/tips/raw/master/bash/f_password.sh; . f_password.sh; rm f_password.sh
+
+rm setup.sh
 
 # passwords
 title "$info root password for Samba and Transmission ..."
@@ -50,15 +48,19 @@ mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mnt=/mnt/$label
 mkdir -p $mnt
-echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /etc/fstab
-umount -l /dev/sda1
-mount -a
+if ! grep $mnt /etc/fstab; then
+  echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /etc/fstab
+  umount -l /dev/sda1
+  mount -a
+fi
 ln -s $mnt/Music /mnt/MPD/USB/Music
 systemctl start mpd
 ### osmc ######################################
-mkdir -p /tmp/p7
-mount /dev/mmcblk0p7 /tmp/p7
-echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /tmp/p7/etc/fstab
+if ! grep $mnt /tmp/p7/etc/fstab; then
+  mkdir -p /tmp/p7
+  mount /dev/mmcblk0p7 /tmp/p7
+  echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /tmp/p7/etc/fstab
+fi
 
 title2 "Set pacman cache ..."
 #################################################################################
