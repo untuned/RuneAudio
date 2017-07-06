@@ -98,8 +98,12 @@ redis-cli set timezone Asia/Bangkok   # timezone
 timedatectl set-timezone Asia/Bangkok
 #redis-cli set orionprofile            # sound signature 
 redis-cli hset airplay enable 0       # airplay
+#hset spotify enable 0                 # spotify
 redis-cli hset dlna enable 0          # upnp/dlna
+#redis-cli set local_browser 0         # local browser
 redis-cli set udevil 0                # usb automount
+#redis-cli set coverart 0              # usb automount
+#redis-cli hset lastfm enable 0        # upnp/dlna
 redis-cli set usb_db_autorebuild 0    # usb auto rebuild
 
 title2 "Upgrade Samba ..."
