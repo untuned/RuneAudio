@@ -142,5 +142,6 @@ timesec=$(( $timediff % 60 ))
 
 title2 "Setup finished successfully."
 echo "Duration: $timemin min $timesec sec"
+echo
 echo "Proceed to menu Settings."
 titleend "Update library database: menu Sources > Rebuild"
