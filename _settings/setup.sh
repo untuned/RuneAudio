@@ -92,6 +92,8 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 
 # Settings
 #################################################################################
+redis-cli set usb_db_autorebuild 0    # usb auto rebuild
+
 #redis-cli set hostname                # hostname
 #redis-cli set ntpserever              # ntpserever
 redis-cli set timezone Asia/Bangkok   # timezone
@@ -104,7 +106,12 @@ redis-cli hset dlna enable 0          # upnp/dlna
 redis-cli set udevil 0                # usb automount
 #redis-cli set coverart 0              # usb automount
 #redis-cli hset lastfm enable 0        # upnp/dlna
-redis-cli set usb_db_autorebuild 0    # usb auto rebuild
+
+#redis-cli set opcache 0               # opcache
+#redis-cli set playerid 0              # playerid
+#redis-cli hset get branch dev         # git branch
+#redis-cli set dev 0                   # dev mode
+#redis-cli set debug 0                 # debug
 
 title2 "Upgrade Samba ..."
 #################################################################################
