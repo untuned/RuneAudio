@@ -94,12 +94,12 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 #################################################################################
 redis-cli set usb_db_autorebuild 0    # usb auto rebuild
 
-#redis-cli set hostname                # hostname
+#redis-cli set hostname runeaudio      # hostname
 #hostnamectl set-hostname runeaudio
 #redis-cli set ntpserever pool.ntp.org # ntpserever
 redis-cli set timezone Asia/Bangkok   # timezone
 timedatectl set-timezone Asia/Bangkok
-#redis-cli set orionprofile            # sound signature 
+#redis-cli set orionprofile RuneAudio # sound signature 
 redis-cli hset airplay enable 0       # airplay
 #hset spotify enable 0                 # spotify
 redis-cli hset dlna enable 0          # upnp/dlna
