@@ -96,7 +96,7 @@ redis-cli set usb_db_autorebuild 0    # usb auto rebuild
 
 #redis-cli set hostname                # hostname
 #hostnamectl set-hostname runeaudio
-#redis-cli set ntpserever              # ntpserever
+#redis-cli set ntpserever pool.ntp.org # ntpserever
 redis-cli set timezone Asia/Bangkok   # timezone
 timedatectl set-timezone Asia/Bangkok
 #redis-cli set orionprofile            # sound signature 
