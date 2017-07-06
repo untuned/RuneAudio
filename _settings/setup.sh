@@ -1,5 +1,7 @@
 #!/bin/bash
 
+timestart=$( date +%s )
+
 # import heading and password function
 wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
 wget -qN https://github.com/rern/tips/raw/master/bash/f_password.sh; . f_password.sh; rm f_password.sh
@@ -130,6 +132,12 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 
 systemctl restart gpioset
 
+timeend=$( date +%s )
+timediff=$(( $timestart - $timeend ))
+timemin=$(( $timestart / $timeend ))
+timesec=$(( $timestart % $timeend ))
+
 title2 "Setup finished successfully."
+echo "Duration: $timemin min $timesec sec"
 echo "Proceed to menu Settings."
 titleend "Update library database: menu Sources > Rebuild"
