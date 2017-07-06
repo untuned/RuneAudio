@@ -49,11 +49,13 @@ else
 	mkdir -p /root/aria2
 	path=/root/aria2
 fi
-title "Get WebUI files ..."
-wget -qN --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
-mkdir -p $path/web
-bsdtar -xf master.zip -s'|[^/]*/||' -C $path/web
-rm master.zip
+if (( $# == 0 )); then
+	title "Get WebUI files ..."
+	wget -qN --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
+	mkdir -p $path/web
+	bsdtar -xf master.zip -s'|[^/]*/||' -C $path/web
+	rm master.zip
+fi
 
 mkdir -p /root/.config/aria2
 echo "enable-rpc=true
