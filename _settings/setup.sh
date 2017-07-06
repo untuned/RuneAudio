@@ -92,11 +92,12 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 
 # Settings
 #################################################################################
-redis-cli set timezone Asia/Bangkok
+redis-cli set timezone Asia/Bangkok   # timezone
 timedatectl set-timezone Asia/Bangkok
-redis-cli hset airplay enable 0
-redis-cli hset dlna enable 0
-redis-cli set usb_db_autorebuild 0
+redis-cli hset airplay enable 0       # airplay
+redis-cli hset dlna enable 0          # upnp/dlna
+redis-cli set udevil 0                # usb automount
+redis-cli set usb_db_autorebuild 0    # usb auto rebuild
 
 title2 "Upgrade Samba ..."
 #################################################################################
