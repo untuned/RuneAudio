@@ -92,8 +92,11 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 
 # Settings
 #################################################################################
+#redis-cli set hostname                # hostname
+#redis-cli set ntpserever              # ntpserever
 redis-cli set timezone Asia/Bangkok   # timezone
 timedatectl set-timezone Asia/Bangkok
+#redis-cli set orionprofile            # sound signature 
 redis-cli hset airplay enable 0       # airplay
 redis-cli hset dlna enable 0          # upnp/dlna
 redis-cli set udevil 0                # usb automount
