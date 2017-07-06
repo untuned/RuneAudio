@@ -4,17 +4,18 @@
 # mitigate download errors by enable(uncomment) and 
 # rank servers in /etc/pacman.d/mirrorlist by download speed
 
+# import heading function
+wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
+
 if [[ $# -eq 0 ]]; then
 	sec=3 # default 3 seconds each
 elif [[ $1 =~ ^[0-9]+$ ]]; then
 	sec=$1
 else
 	echo -e "\nUsage: rankmirrors.sh <N>"
-	echo -e "Rank /etc/pacman.d/mirrorlist by download speed for N seconds from each server.\n"
+	titleend "Rank /etc/pacman.d/mirrorlist by download speed for N seconds from each server.\n"
 	exit
 fi
-
-line=$( printf '\e[0;36m%*s\e[m\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' - )
 
 tmpdir=/tmp/rankmirrors/
 rm -rf $tmpdir && mkdir $tmpdir
@@ -36,9 +37,9 @@ else
 fi
 
 IFS=$'\n' read -d '' -r -a servers < $tmplist # convert list to array
-echo $line
-echo 'Rank mirror servers by download speed ...'
-echo $line
+
+title2 'Rank mirror servers by download speed ...'
+echo
 echo 'Test' ${#servers[@]} 'servers @' $sec 'seconds:'
 echo
 
@@ -67,8 +68,8 @@ echo
 echo -e '\e[0;36m/etc/pacman.d/mirrorlist\e[m was updated with these servers top the list:'
 echo
 echo -e "$rankfile" | sed -n 1,3p
-echo '...'
 echo
+title "Mirror list ranked successfully."
 
 [ ! -f $list'.original' ] && cp $list $list'.original' # skip if already backup
 echo -e "$rankfile" > $list
