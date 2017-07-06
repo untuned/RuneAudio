@@ -35,6 +35,9 @@ echo 'hdmi_group=1   # cec
 hdmi_mode=31   # 1080p 50Hz
 disable_overscan=1' >> /boot/config.txt
 fi
+# remove 'forcetrigger'
+sed -i "s/ forcetrigger//" /tmp/p1/recovery.cmdline
+
 ### osmc ######################################
 mkdir -p /tmp/p6
 mount /dev/mmcblk0p6 /tmp/p6
@@ -144,9 +147,6 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P /srv/http
 
 systemctl restart gpioset
-
-# remove 'forcetrigger'
-sed -i "s/ forcetrigger//" /tmp/p1/recovery.cmdline
 
 timeend=$( date +%s )
 timediff=$(( $timeend - $timestart ))
