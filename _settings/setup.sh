@@ -76,8 +76,10 @@ ln -s $mnt/varcache/pacman /var/cache/pacman
 mkdir -p $mnt/varcache/apt
 rm -r /tmp/p7/var/cache/apt
 ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
-# noobs marker for update prompt
-rm /tmp/p7/vendor
+
+# disable setup marker files
+touch /walkthrough_completed # initial setup
+rm /tmp/p7/vendor # noobs marker for update prompt
 
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
