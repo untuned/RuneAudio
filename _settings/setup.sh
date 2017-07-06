@@ -133,9 +133,9 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 systemctl restart gpioset
 
 timeend=$( date +%s )
-timediff=$(( $timestart - $timeend ))
-timemin=$(( $timestart / $timeend ))
-timesec=$(( $timestart % $timeend ))
+timediff=$(( $timeend - $timestart ))
+timemin=$(( $timediff / 60 ))
+timesec=$(( $timediff % 60 ))
 
 title2 "Setup finished successfully."
 echo "Duration: $timemin min $timesec sec"
