@@ -104,7 +104,7 @@ systemctl restart nmbd smbd
 # set samba password
 (echo $pwd1; echo $pwd1) | smbpasswd -s -a root
 
-title "Samba upgraded successfully."
+title2 "Samba upgraded successfully."
 
 # Transmission
 #################################################################################
@@ -130,6 +130,6 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 
 systemctl restart gpioset
 
-title "Setup finished successfully."
+title2 "Setup finished successfully."
 echo "Proceed to menu Settings."
 titleend "Update library database: menu Sources > Rebuild"
