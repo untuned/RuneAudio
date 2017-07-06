@@ -45,6 +45,7 @@ title2 "Mount USB drive to /mnt/hdd ..."
 # disable auto update mpd database
 systemctl stop mpd
 sed -i '\|sendMpdCommand| s|^|//|' /srv/http/command/usbmount
+sed -i '/^KERNEL/ s/^/#/' /etc/udev/rules.d/rune_usb-stor.rules
 
 mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
@@ -147,5 +148,4 @@ timesec=$(( $timediff % 60 ))
 title2 "Setup finished successfully."
 echo "Duration: $timemin min $timesec sec"
 echo
-echo "Proceed to menu Settings."
 titleend "Update library database: menu Sources > Rebuild"
