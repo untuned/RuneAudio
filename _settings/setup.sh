@@ -132,6 +132,9 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 
 systemctl restart gpioset
 
+# remove 'forcetrigger'
+sed -i "s/ forcetrigger//" /tmp/p1/recovery.cmdline
+
 timeend=$( date +%s )
 timediff=$(( $timeend - $timestart ))
 timemin=$(( $timediff / 60 ))
