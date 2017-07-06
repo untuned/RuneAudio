@@ -84,7 +84,7 @@ rm -r /tmp/p7/var/cache/apt
 ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
 
 # disable setup marker files
-touch /walkthrough_completed # initial setup
+touch /tmp/p7/walkthrough_completed # initial setup
 rm /tmp/p7/vendor # noobs marker for update prompt
 
 # rankmirrors
