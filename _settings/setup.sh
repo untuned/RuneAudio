@@ -90,7 +90,7 @@ rm /tmp/p7/vendor # noobs marker for update prompt
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
-# Settings
+title2 "Settings ..."
 #################################################################################
 redis-cli set usb_db_autorebuild 0    # usb auto rebuild
 
@@ -147,9 +147,6 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 # Aria2
 #################################################################################
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh 1
-rm -r $mnt/aria2/web/*
-mv /var/www/html/aria2 $mnt/aria2/web
-ln -s $mnt/aria2/web /var/www/html/aria2
 
 # Enhancement
 #################################################################################
