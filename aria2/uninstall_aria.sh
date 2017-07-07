@@ -19,8 +19,13 @@ pacman -Rs --noconfirm aria2
 
 # remove files #######################################
 title "Remove files ..."
+if mount | grep '/dev/sda1'; then
+	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+	rm -rv $mnt/aria2/web
+else
+	rm -rv /root/aria2/web
+fi
 rm -rv /root/.config/aria2
-rm -r /usr/share/nginx/html/aria2
 
 # restore modified files #######################################
 title "Restore modified files ..."
