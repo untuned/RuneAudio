@@ -90,29 +90,31 @@ rm /tmp/p7/vendor # noobs marker for update prompt
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
-title2 "Settings ..."
+title2 "Set settings ..."
 #################################################################################
-redis-cli set usb_db_autorebuild 0    # usb auto rebuild
+{
+  redis-cli set usb_db_autorebuild 0     # usb auto rebuild
 
-#redis-cli set hostname runeaudio      # hostname
-#hostnamectl set-hostname runeaudio
-#redis-cli set ntpserever pool.ntp.org # ntpserever
-redis-cli set timezone Asia/Bangkok   # timezone
-timedatectl set-timezone Asia/Bangkok
-#redis-cli set orionprofile RuneAudio # sound signature 
-redis-cli hset airplay enable 0       # airplay
-#hset spotify enable 0                 # spotify
-redis-cli hset dlna enable 0          # upnp/dlna
-#redis-cli set local_browser 0         # local browser
-redis-cli set udevil 0                # usb automount
-#redis-cli set coverart 0              # usb automount
-#redis-cli hset lastfm enable 0        # upnp/dlna
+  #redis-cli set hostname runeaudio      # hostname
+  #hostnamectl set-hostname runeaudio
+  #redis-cli set ntpserever pool.ntp.org # ntpserever
+  redis-cli set timezone Asia/Bangkok    # timezone
+  timedatectl set-timezone Asia/Bangkok
+  #redis-cli set orionprofile RuneAudio  # sound signature 
+  redis-cli hset airplay enable 0        # airplay
+  #hset spotify enable 0                 # spotify
+  redis-cli hset dlna enable 0           # upnp/dlna
+  #redis-cli set local_browser 0         # local browser
+  redis-cli set udevil 0                 # usb automount
+  #redis-cli set coverart 0              # usb automount
+  #redis-cli hset lastfm enable 0        # upnp/dlna
 
-#redis-cli set opcache 0               # opcache
-#redis-cli set playerid id             # playerid
-#redis-cli hset get branch dev         # git branch
-#redis-cli set dev 0                   # dev mode
-#redis-cli set debug 0                 # debug
+  #redis-cli set opcache 0               # opcache
+  #redis-cli set playerid id             # playerid
+  #redis-cli hset get branch dev         # git branch
+  #redis-cli set dev 0                   # dev mode
+  #redis-cli set debug 0                 # debug
+} &> /dev/null
 
 title2 "Upgrade Samba ..."
 #################################################################################
