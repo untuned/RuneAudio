@@ -19,7 +19,7 @@ fi
 
 tmpdir=/tmp/rankmirrors/
 rm -rf $tmpdir && mkdir $tmpdir
-list='/etc/pacman.d/mirrorlist'
+list=/etc/pacman.d/mirrorlist
 tmplist=/tmp/mirrorlist
 cp $list $tmplist
 
@@ -29,7 +29,7 @@ if grep -qs '# Server = ' $tmplist; then
 	sed -i '/^\s*$/d
 		/^# Server = /!d
 		s/^# Server = //g
-		s|$arch/$repo|'$dlfile'|g' $tmplist # use '|' to avoid escape '/'
+		s|$arch/$repo|'$dlfile'|g' $tmplist
 		# delete blank lines and lines not start with '# Server = ', remove '# Server = '
 else
 	sed -i 's/^Server = //g
@@ -40,7 +40,7 @@ IFS=$'\n' read -d '' -r -a servers < $tmplist # convert list to array
 
 title2 'Rank mirror servers by download speed ...'
 echo
-echo 'Test' ${#servers[@]} 'servers @' $sec 'seconds:'
+echo Test ${#servers[@]} servers @ $sec seconds:
 echo
 
 i=0
