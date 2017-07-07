@@ -25,7 +25,7 @@ unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
 unpartmb=$( python2 -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 # noobs has 3MB unpartitioned space
-if (($unpartmb < 10)); then
+if [[ $unpartmb -lt 10 ]]; then
 	title "$info No useful space available. ( ${unpartmb}MB unused)"
 	exit
 fi
@@ -66,7 +66,7 @@ if [[ $answer == 1 ]]; then
 	partprobe $disk
 
 	resize2fs $devpart
-	if (( $? != 0 )); then
+	if [[ $? != 0 ]]; then
 		errorend "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
 		exit
 	else
