@@ -10,7 +10,7 @@ rm expand.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
 	title "$info Unable to continue with this version."
-	echo '(sfdisk and python2 expected but not found.)'
+	echo (sfdisk and python2 expected but not found.)
 	exit
 fi
 
@@ -19,7 +19,7 @@ freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
 freemb=$( python2 -c "print($freekb / 1000)" ) # bash itself cannot do float
 devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
-disk='/dev/'${part::-2}
+disk=/dev/${part::-2}
 
 unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
 unpartmb=$( python2 -c "print($unpartb / 1000000)" )
@@ -35,7 +35,7 @@ if ls /dev/sd* &>/dev/null; then
 	hdd=$( ls /dev/sd? )
 	echo -e "\e[0;36m$hdd\e[m"
 	echo
-	echo 'Precaution - To make sure only SD card to be expanded.'
+	echo Precaution - To make sure only SD card to be expanded.
 	echo
 	read -n 1 -s -p 'Press any key to continue ... '
 	echo
