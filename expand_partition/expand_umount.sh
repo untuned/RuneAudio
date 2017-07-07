@@ -18,7 +18,7 @@ freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
 freemb=$( python2 -c "print($freekb / 1000)" ) # bash itself cannot do float
 devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
-disk='/dev/'${part::-2}
+disk=/dev/${part::-2}
 
 unpartmb=$( sfdisk -F | grep $disk | awk '{print $4}' )
 summb=$(( $freemb + $unpartmb ))
@@ -33,7 +33,7 @@ if ls /dev/sd? &>/dev/null; then
 	hdd=$( ls /dev/sd? )
 	mnt=$( df | grep '/dev/sd' | awk '{print $NF}' )
 	title "$info Unmount and remove all USB drives before proceeding:"
-	echo 'Remove to make sure only SD card to be expanded.'
+	echo Remove to make sure only SD card to be expanded.
 	echo
 	echo -e "Drive: \e[0;36m$hdd\e[m"
 	
@@ -53,7 +53,7 @@ if ls /dev/sd? &>/dev/null; then
 					echo
 				else
 					echo -e "$info USB drive: $mnt unmount failed."
-					echo "Continue:"
+					echo Continue:
 					echo -e '  \e[0;36m0\e[m No'
 					echo -e '  \e[0;36m1\e[m Yes'
 					echo
