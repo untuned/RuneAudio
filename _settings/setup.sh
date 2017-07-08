@@ -89,9 +89,6 @@ ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
 touch /tmp/p7/walkthrough_completed # initial setup
 rm /tmp/p7/vendor # noobs marker for update prompt
 
-# rankmirrors
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
-
 title2 "Set settings ..."
 #################################################################################
 {
@@ -118,10 +115,17 @@ title2 "Set settings ..."
   #redis-cli set debug 0                 # debug
 } &> /dev/null
 
+# rankmirrors
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
+
+title2 "Update package database ..."
+#################################################################################
+pacman -Sy
+
 title2 "Upgrade Samba ..."
 #################################################################################
 pacman -R --noconfirm samba4-rune
-pacman -Sy --noconfirm tdb tevent smbclient samba
+pacman -S --noconfirm tdb tevent smbclient samba
 # fix missing libreplace-samba4.so
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/libreplace-samba4.so -P /usr/lib/samba
 # or run 'twice':
