@@ -105,7 +105,7 @@ if [[ $answer == 1 ]]; then
 		freekb=$( df | grep '/$' | awk '{print $4}' )
 		freemb=$( python2 -c "print($freekb / 1000)" )
 		echo
-		titleinfo "Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
+		title2 "Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
 	fi
 else
 	titleinfo "Expand partition cancelled."
