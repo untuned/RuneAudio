@@ -9,7 +9,7 @@ wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.
 rm expand.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
-	title "$info Unable to continue (sfdisk / python2 not found)."
+	titleinfo "Unable to continue (sfdisk / python2 not found)."
 	exit
 fi
 
@@ -24,7 +24,7 @@ unpartmb=$( sfdisk -F | grep $disk | awk '{print $4}' )
 summb=$(( $freemb + $unpartmb ))
 # noobs has 3MB unpartitioned space
 if (($unpartmb < 10)); then
-	title "$info No useful space available. ( ${unpartmb}MB unused)"
+	titleinfo "No useful space available. ( ${unpartmb}MB unused)"
 	exit
 fi
 
@@ -32,14 +32,14 @@ fi
 if ls /dev/sd? &>/dev/null; then
 	hdd=$( ls /dev/sd? )
 	mnt=$( df | grep '/dev/sd' | awk '{print $NF}' )
-	title "$info Unmount and remove all USB drives before proceeding:"
+	titleinfo "Unmount and remove all USB drives before proceeding:"
 	echo Remove to make sure only SD card to be expanded.
 	echo
 	echo -e "Drive: \e[0;36m$hdd\e[m"
 	
 	if df | grep '/dev/sd' &>/dev/null; then
 		echo -e "Mount: \e[0;36m$mnt\e[m"
-		title "$info Unmount: $mnt"
+		titleinfo "Unmount: $mnt"
 		echo -e '  \e[0;36m0\e[m No'
 		echo -e '  \e[0;36m1\e[m Yes'
 		echo
@@ -99,15 +99,15 @@ if [[ $answer == 1 ]]; then
 
 	resize2fs $devpart
 	if (( $? != 0 )); then
-		errorend "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
+		errorend "Failed: Expand partition\nTry - reboot > resize2fs $devpart"
 		exit
 	else
 		freekb=$( df | grep '/$' | awk '{print $4}' )
 		freemb=$( python2 -c "print($freekb / 1000)" )
 		echo
-		titleend "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
+		titleinfo "Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
 	fi
 else
-	titleend "Expand partition canceled."
+	titleinfo "Expand partition cancelled."
 	exit
 fi
