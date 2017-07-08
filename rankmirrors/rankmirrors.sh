@@ -69,7 +69,7 @@ echo -e '\e[0;36m/etc/pacman.d/mirrorlist\e[m was updated with these servers top
 echo
 echo -e "$rankfile" | sed -n 1,3p
 echo
-title "Mirror list ranked successfully."
+title2 "Mirror list ranked successfully."
 
 [ ! -f $list'.original' ] && cp $list $list'.original' # skip if already backup
 echo -e "$rankfile" > $list
