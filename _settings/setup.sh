@@ -12,7 +12,7 @@ title "This setup will take 7 min."
 echo
 
 # passwords
-title "$info root password for Samba and Transmission ..."
+titleinfo "root password for Samba and Transmission ..."
 setpwd
 
 title2 "Disable WiFi ..."
