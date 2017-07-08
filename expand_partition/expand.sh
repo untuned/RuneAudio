@@ -9,7 +9,7 @@ wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.
 rm expand.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
-	title "$info Unable to continue with this version."
+	titleinfo "Unable to continue with this version."
 	echo (sfdisk and python2 expected but not found.)
 	exit
 fi
@@ -26,12 +26,12 @@ unpartmb=$( python2 -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 # noobs has 3MB unpartitioned space
 if [[ $unpartmb -lt 10 ]]; then
-	title "$info No useful space available. ( ${unpartmb}MB unused)"
+	titleinfo "No useful space available. ( ${unpartmb}MB unused)"
 	exit
 fi
 
 if ls /dev/sd* &>/dev/null; then
-	title "$info Unmount and remove all USB drives before proceeding:"
+	titleinfo "Unmount and remove all USB drives before proceeding:"
 	hdd=$( ls /dev/sd? )
 	echo -e "\e[0;36m$hdd\e[m"
 	echo
@@ -73,9 +73,9 @@ if [[ $answer == 1 ]]; then
 		freekb=$( df | grep '/$' | awk '{print $4}' )
 		freemb=$( python2 -c "print($freekb / 1000)" )
 		echo
-		titleend "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
+		title2 "Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
 	fi
 else
-	titleend "Expand partition canceled."
+	titleinfo "Expand partition cancelled."
 	exit
 fi
