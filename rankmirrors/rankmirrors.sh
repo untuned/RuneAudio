@@ -70,6 +70,7 @@ echo
 echo -e "$rankfile" | sed -n 1,3p
 echo
 title2 "Mirror list ranked successfully."
+titleend "Update package database: pacman -Sy"
 
 [ ! -f $list'.original' ] && cp $list $list'.original' # skip if already backup
 echo -e "$rankfile" > $list
