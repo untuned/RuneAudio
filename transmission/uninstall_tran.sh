@@ -5,7 +5,7 @@ wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.
 
 # check installed #######################################
 if ! pacman -Q transmission-cli &>/dev/null; then
-	title "$info Transmission not found."
+	titleinfo "Transmission not found."
 	exit
 fi
 
@@ -19,6 +19,6 @@ systemctl disable transmission
 rm /etc/systemd/system/transmission.service
 systemctl daemon-reload
 
-titleend "Transmission uninstalled successfully."
+title2 "Transmission uninstalled successfully."
 
 rm uninstall_tran.sh
