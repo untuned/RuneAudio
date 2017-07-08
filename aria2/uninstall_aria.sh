@@ -5,7 +5,7 @@ wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.
 
 # check installed #######################################
 if ! pacman -Q aria2 &>/dev/null; then
-	title "$info Aria2 not found."
+	titleinfo "Aria2 not found."
 	exit
 fi
 
