@@ -15,11 +15,11 @@ echo
 titleinfo "root password for Samba and Transmission ..."
 setpwd
 
-title2 "Disable WiFi ..."
+titlebar "Disable WiFi ..."
 #################################################################################
 systemctl disable netctl-auto@wlan0.service
 
-title2 "Set HDMI mode ..."
+titlebar "Set HDMI mode ..."
 #################################################################################
 # prevent noobs cec hdmi power on
 mkdir -p /tmp/p1
@@ -48,7 +48,7 @@ fi
 sed -i '/gpio/ s/^/#/
 ' /tmp/p6/config.txt
 
-title2 "Mount USB drive to /mnt/hdd ..."
+titlebar "Mount USB drive to /mnt/hdd ..."
 #################################################################################
 # disable auto update mpd database
 systemctl stop mpd
@@ -74,7 +74,7 @@ if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
   echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /tmp/p7/etc/fstab
 fi
 
-title2 "Set pacman cache ..."
+titlebar "Set pacman cache ..."
 #################################################################################
 mkdir -p $mnt/varcache/pacman
 rm -r /var/cache/pacman
@@ -89,7 +89,7 @@ ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
 touch /tmp/p7/walkthrough_completed # initial setup
 rm /tmp/p7/vendor # noobs marker for update prompt
 
-title2 "Set settings ..."
+titlebar "Set settings ..."
 #################################################################################
 {
   redis-cli set usb_db_autorebuild 0     # usb auto rebuild
@@ -118,7 +118,7 @@ title2 "Set settings ..."
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
-title2 "Update package database ..."
+titlebar "Update package database ..."
 #################################################################################
 pacman -Sy
 
