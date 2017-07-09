@@ -88,4 +88,4 @@ echo 'Run: systemctl [ start / stop ] aria2'
 echo 'Startup: systemctl [ enable /disable ] aria2'
 echo
 echo "Download directory: $path"
-titleend "WebUI: [RuneAudio_IP]/aria2"
+titleend "WebUI: [RuneAudio_IP]/aria2/"
