@@ -66,6 +66,7 @@ if ! grep $mnt /etc/fstab &> /dev/null; then
   umount -l /dev/sda1
   mount -a
 fi
+[[ -e /mnt/MPD/USB/hdd && $( ls -1 /mnt/MPD/USB/hdd | wc -l ) == 0 ]] && rm -r /mnt/MPD/USB/hdd
 ln -s $mnt/Music /mnt/MPD/USB/Music
 systemctl start mpd
 ### osmc ######################################
