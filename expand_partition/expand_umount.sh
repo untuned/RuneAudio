@@ -33,7 +33,7 @@ if ls /dev/sd? &>/dev/null; then
 	hdd=$( ls /dev/sd? )
 	mnt=$( df | grep '/dev/sd' | awk '{print $NF}' )
 	titleinfo "Unmount and remove all USB drives before proceeding:"
-	echo Remove to make sure only SD card to be expanded.
+	echo 'Remove to make sure only SD card to be expanded.'
 	echo
 	echo -e "Drive: \e[0;36m$hdd\e[m"
 	
