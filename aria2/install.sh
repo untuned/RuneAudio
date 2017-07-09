@@ -88,7 +88,7 @@ if ! grep -qs 'aria2' /etc/nginx/nginx.conf; then
 	' /etc/nginx/nginx.conf
 fi
 
-title "Restart nginx ..."
+title "Restart NGINX ..."
 systemctl restart nginx
 
 # start
