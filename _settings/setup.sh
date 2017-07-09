@@ -138,7 +138,7 @@ root    soft    nofile    16384
 root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -O /etc/samba
+wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -O /etc/samba
 rm /etc/samba/smb-dev.conf
 ln -sf /etc/samba/smb.conf /etc/samba/smb-dev.conf
 
