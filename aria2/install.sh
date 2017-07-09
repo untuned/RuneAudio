@@ -97,9 +97,9 @@ title "Start Aria2 ..."
 systemctl start aria2
 
 title2 "Aria2 installed and started successfully."
-echo Uninstall: ./uninstall_aria.sh
-echo Run: systemctl [ start / stop ] aria2
-echo Startup: systemctl [ enable /disable ] aria2
+echo 'Uninstall: ./uninstall_aria.sh'
+echo 'Run: systemctl [ start / stop ] aria2'
+echo 'Startup: systemctl [ enable /disable ] aria2'
 echo
-echo Download directory: $path
+echo "Download directory: $path"
 titleend "WebUI: [RuneAudio_IP]:88"
