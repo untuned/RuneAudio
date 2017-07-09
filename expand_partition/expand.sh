@@ -10,7 +10,7 @@ rm expand.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
 	titleinfo "Unable to continue with this version."
-	echo (sfdisk and python2 expected but not found.)
+	echo '(sfdisk and python2 expected but not found.)'
 	exit
 fi
 
@@ -35,7 +35,7 @@ if ls /dev/sd* &>/dev/null; then
 	hdd=$( ls /dev/sd? )
 	echo -e "\e[0;36m$hdd\e[m"
 	echo
-	echo Precaution - To make sure only SD card to be expanded.
+	echo 'Precaution - To make sure only SD card to be expanded.'
 	echo
 	read -n 1 -s -p 'Press any key to continue ... '
 	echo
