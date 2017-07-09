@@ -56,6 +56,7 @@ if (( $# == 0 )); then
 	bsdtar -xf master.zip -s'|[^/]*/||' -C $path/web
 	rm master.zip
 fi
+ln -s $path/web /srv/http/aria2
 
 mkdir -p /root/.config/aria2
 echo "enable-rpc=true
@@ -76,21 +77,6 @@ ExecStart=/usr/bin/aria2c
 WantedBy=multi-user.target
 ' > /etc/systemd/system/aria2.service
 
-if ! grep -qs 'aria2' /etc/nginx/nginx.conf; then
-	sed -i '/end http block/ i\
-		\tserver { #aria2\
-		\t\tlisten 88;\
-		\t\tlocation / {\
-			\t\t\troot  '$path'/web;\
-			\t\t\tindex  index.php index.html index.htm;\
-		\t\t}\
-		\t} #aria2
-	' /etc/nginx/nginx.conf
-fi
-
-title "Restart NGINX ..."
-systemctl restart nginx
-
 # start
 [[ $ansstartup == 1 ]] && systemctl enable aria2
 title "Start Aria2 ..."
@@ -102,4 +88,4 @@ echo 'Run: systemctl [ start / stop ] aria2'
 echo 'Startup: systemctl [ enable /disable ] aria2'
 echo
 echo "Download directory: $path"
-titleend "WebUI: [RuneAudio_IP]:88"
+titleend "WebUI: [RuneAudio_IP]/aria2"
