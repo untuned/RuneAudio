@@ -118,10 +118,10 @@ title "Start Transmission ..."
 systemctl start transmission
 
 title2 "Transmission installed and started successfully."
-echo Uninstall: ./uninstall_tran.sh
-echo Run: systemctl [ start / stop ] transmission
-echo Startup: systemctl [ enable / disable ] transmission
+echo 'Uninstall: ./uninstall_tran.sh'
+echo 'Run: systemctl [ start / stop ] transmission'
+echo 'Startup: systemctl [ enable / disable ] transmission'
 echo
-echo Download directory: $path
-echo WebUI: [RuneAudio_IP]:9091
+echo "Download directory: $path"
+echo 'WebUI: [RuneAudio_IP]:9091'
 titleend "user: root"
