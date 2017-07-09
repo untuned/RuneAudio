@@ -17,7 +17,8 @@ setpwd
 
 titlebar "Disable WiFi ..."
 #################################################################################
-systemctl disable netctl-auto@wlan0.service
+systemctl disable netctl-auto@wlan0
+systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
 
 titlebar "Set HDMI mode ..."
 #################################################################################
