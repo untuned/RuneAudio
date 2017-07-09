@@ -1,13 +1,13 @@
 RuneAudio setup
 ---
 
-This is just an example of setup script.  
-(RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`)  
-
 [**setup.sh**](https://github.com/rern/RuneAudio/blob/master/_settings/setup.sh)  
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh; chmod +x setup.sh; ./setup.sh
 ```
+(RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`)  
+
+This is just an example of setup script.  
 - set password for Samba and Transmission
 - disable unused `wlan0` service
 - set hdmi mode (+ OSMC boot partition)
