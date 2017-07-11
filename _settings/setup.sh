@@ -3,24 +3,24 @@
 timestart=$( date +%s )
 
 # import heading and password function
-wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
+wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 wget -qN https://github.com/rern/tips/raw/master/bash/f_password.sh; . f_password.sh; rm f_password.sh
 
 rm setup.sh
 
-title "This setup will take 7 min."
+title This setup will take 7 min.
 echo
 
 # passwords
-titleinfo "root password for Samba and Transmission ..."
+title $info root password for Samba and Transmission ...
 setpwd
 
-titlebar "Disable WiFi ..."
+title $bar Disable WiFi ...
 #################################################################################
 systemctl disable netctl-auto@wlan0
 systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
 
-titlebar "Set HDMI mode ..."
+title $bar Set HDMI mode ...
 #################################################################################
 # prevent noobs cec hdmi power on
 mkdir -p /tmp/p1
@@ -49,7 +49,7 @@ fi
 sed -i '/gpio/ s/^/#/
 ' /tmp/p6/config.txt
 
-titlebar "Mount USB drive to /mnt/hdd ..."
+title $bar Mount USB drive to /mnt/hdd ...
 #################################################################################
 # disable auto update mpd database
 systemctl stop mpd
@@ -76,7 +76,7 @@ if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
   echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /tmp/p7/etc/fstab
 fi
 
-titlebar "Set pacman cache ..."
+title $bar Set pacman cache ...
 #################################################################################
 mkdir -p $mnt/varcache/pacman
 rm -r /var/cache/pacman
@@ -91,7 +91,7 @@ ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
 touch /tmp/p7/walkthrough_completed # initial setup
 rm /tmp/p7/vendor # noobs marker for update prompt
 
-titlebar "Set settings ..."
+title $bar Set settings ...
 #################################################################################
 {
   redis-cli set usb_db_autorebuild 0     # usb auto rebuild
@@ -120,11 +120,11 @@ titlebar "Set settings ..."
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
-titlebar "Update package database ..."
+title $bar Update package database ...
 #################################################################################
 pacman -Sy
 
-title2 "Upgrade Samba ..."
+title -l = $bar Upgrade Samba ...
 #################################################################################
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm tdb tevent smbclient samba
@@ -147,7 +147,7 @@ systemctl restart nmbd smbd
 # set samba password
 (echo $pwd1; echo $pwd1) | smbpasswd -s -a root
 
-title2 "Samba upgraded successfully."
+title -l = $bar Samba upgraded successfully.
 
 # Transmission
 #################################################################################
@@ -175,6 +175,6 @@ timediff=$(( $timeend - $timestart ))
 timemin=$(( $timediff / 60 ))
 timesec=$(( $timediff % 60 ))
 
-title2 "Setup finished successfully."
+title -l = $bar Setup finished successfully.
 echo "Duration: $timemin min $timesec sec"
-titleend "Update library database: menu Sources > Rebuild"
+title -nt 'Update library database: menu Sources > Rebuild'
