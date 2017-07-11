@@ -143,8 +143,6 @@ root    hard    nofile    16384
 wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -O /etc/samba/smb-dev.conf
 ln -sf /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
-systemctl daemon-reload
-systemctl restart nmbd smbd
 # set samba password
 (echo $pwd1; echo $pwd1) | smbpasswd -s -a root
 
@@ -164,12 +162,12 @@ wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/i
 
 # GPIO
 #################################################################################
-wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
-
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.conf.gpio -P /etc
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P /srv/http
+wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 
-systemctl restart gpioset
+#systemctl daemon-reload # done in GPIO install
+systemctl restart nmbd smbd
 
 timeend=$( date +%s )
 timediff=$(( $timeend - $timestart ))
