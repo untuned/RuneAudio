@@ -18,7 +18,7 @@ systemctl daemon-reload
 pacman -Rs --noconfirm aria2
 
 # restore file
-sed -i -e '/location \/aria2/, /}/ d
+sed -i -e '/location \/aria2/, /^$/ d
 ' -e '/^\s*rewrite/ d
 ' -e 's/#rewrite/rewrite/g
 ' /etc/nginx/nginx.conf
