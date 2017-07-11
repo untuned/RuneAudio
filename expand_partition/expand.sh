@@ -67,7 +67,7 @@ if [[ $answer == 1 ]]; then
 
 	resize2fs $devpart
 	if [[ $? != 0 ]]; then
-		errorend "Failed: Expand partition\nTry - reboot > resize2fs $devpart"
+		title -c 1 "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
 		exit
 	else
 		freekb=$( df | grep '/$' | awk '{print $4}' )
