@@ -43,7 +43,8 @@ sed -i "s/ forcetrigger//" /tmp/p1/recovery.cmdline
 mkdir -p /tmp/p6
 mount /dev/mmcblk0p6 /tmp/p6
 if ! grep 'hdmi_mode=' /tmp/p6/config.txt &> /dev/null; then
-echo 'hdmi_group=1
+echo 'hdmi_ignore_cec=1
+hdmi_group=1
 hdmi_mode=31' >> /tmp/p6/config.txt
 fi
 sed -i '/gpio/ s/^/#/
