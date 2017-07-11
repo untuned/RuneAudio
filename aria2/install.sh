@@ -5,18 +5,18 @@
 #   any argument = no prompt + no package update
 
 # import heading function
-wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
+wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 rm install.sh
 
 if pacman -Q aria2 &>/dev/null; then
-	titleend "$info Aria2 already installed."
+	title $info Aria2 already installed.
 	exit
 fi
 
 if (( $# == 0 )); then
 	# user input
-	titleinfo "Start Aria2 on system startup:"
+	title $info Start Aria2 on system startup:
 	echo -e '  \e[0;36m0\e[m No'
 	echo -e '  \e[0;36m1\e[m Yes'
 	echo
@@ -36,7 +36,7 @@ if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; t
 	./rankmirrors.sh
 fi
 
-title2 "Install Aria2 ..."
+title -l = $bar Install Aria2 ...
 # skip with any argument
 (( $# == 0 )) && pacman -Sy
 pacman -S --noconfirm aria2 glibc
@@ -50,7 +50,7 @@ else
 	path=/root/aria2
 fi
 if (( $# == 0 )); then
-	title "Get WebUI files ..."
+	title Get WebUI files ...
 	wget -qN --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
 	mkdir -p $path/web
 	bsdtar -xf master.zip -s'|[^/]*/||' -C $path/web
@@ -92,13 +92,13 @@ WantedBy=multi-user.target
 
 # start
 [[ $ansstartup == 1 ]] && systemctl enable aria2
-title "Start Aria2 ..."
+title Start Aria2 ...
 systemctl start aria2
 
-title2 "Aria2 installed and started successfully."
+title -l = $bar Aria2 installed and started successfully.
 echo 'Uninstall: ./uninstall_aria.sh'
 echo 'Run: systemctl [ start / stop ] aria2'
 echo 'Startup: systemctl [ enable /disable ] aria2'
 echo
 echo "Download directory: $path"
-titleend "WebUI: [RuneAudio_IP]/aria2/"
+title -nt WebUI: [RuneAudio_IP]/aria2/
