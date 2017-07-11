@@ -60,7 +60,7 @@ ln -s $path/web /srv/http/aria2
 
 # modify file
 file=/etc/nginx/nginx.conf
-linenum=$( sed -n '/listen 80 /{=}' $file )
+linenum=$( sed -n '/listen 80 /=' $file )
 
 sed -i -e '/^\s*rewrite/ s/^\s*/&#/
 ' -e "$(( $linenum + 8 ))"' a\
