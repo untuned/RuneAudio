@@ -6,19 +6,19 @@
 #   any argument = no prompt + no package update
 
 # import heading and password function
-wget -qN https://github.com/rern/tips/raw/master/bash/f_heading.sh; . f_heading.sh; rm f_heading.sh
+wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 wget -qN https://github.com/rern/tips/raw/master/bash/f_password.sh; . f_password.sh; rm f_password.sh
 
 rm install.sh
 
 if pacman -Q transmission-cli &>/dev/null; then
-	titleinfo "Transmission already installed."
+	title $info Transmission already installed.
 	exit
 fi
 
 # user inputs
 if (( $# == 0 )); then # with no argument
-	titleinfo "Set password:"
+	title $info Set password:
 	echo -e '  \e[0;36m0\e[m No'
 	echo -e '  \e[0;36m1\e[m Yes'
 	echo
@@ -26,14 +26,14 @@ if (( $# == 0 )); then # with no argument
 	read -n 1 anspwd
 	[[ $anspwd == 1 ]] && setpwd
 
-	titleinfo "Install WebUI alternative (Transmission Web Control):"
+	title "$info Install WebUI alternative (Transmission Web Control):"
 	echo -e '  \e[0;36m0\e[m No'
 	echo -e '  \e[0;36m1\e[m Yes'
 	echo
 	echo -e '\e[0;36m0\e[m / 1 ? '
 	read -n 1 answebui
 
-	titleinfo "Start Transmission on system startup:"
+	title $info Start Transmission on system startup:
 	echo -e '  \e[0;36m0\e[m No'
 	echo -e '  \e[0;36m1\e[m Yes'
 	echo
@@ -50,7 +50,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 chmod +x uninstall_tran.sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-title2 "Install Transmission ..."
+title -l = $bar Install Transmission ...
 pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
@@ -114,14 +114,14 @@ fi
 
 # start
 [[ $ansstartup == 1 ]] && systemctl enable transmission
-title "Start Transmission ..."
+title Start Transmission ...
 systemctl start transmission
 
-title2 "Transmission installed and started successfully."
+title -l = $bar Transmission installed and started successfully.
 echo 'Uninstall: ./uninstall_tran.sh'
 echo 'Run: systemctl [ start / stop ] transmission'
 echo 'Startup: systemctl [ enable / disable ] transmission'
 echo
 echo "Download directory: $path"
 echo 'WebUI: [RuneAudio_IP]:9091'
-titleend "user: root"
+title -nt user: root
