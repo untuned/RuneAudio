@@ -70,7 +70,7 @@ sed -i -e '/^\s*rewrite/ s/^\s*/&#/
 \            rewrite /img/(.*) /assets/img/$1 break;\
 \            rewrite /fonts/(.*) /assets/fonts/$1 break;
 ' -e "$(( $linenum + 9 ))"' a\
-\        location /aria2/ {\
+\        location /aria2 {\
 \            alias /mnt/hdd/aria2/web;\
 \        }\
 ' $file
