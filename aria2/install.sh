@@ -63,14 +63,13 @@ file=/etc/nginx/nginx.conf
 linenum=$( sed -n '/listen 80 /{=}' $file )
 
 sed -i -e '/^\s*rewrite/ s/^\s*/&#/
-' -e ''"$(( $linenum + 8 ))"' a\
+' -e "$(( $linenum + 8 ))"' a\
 \            rewrite /css/(.*) /assets/css/$1 break;\
 \            rewrite /less/(.*) /assets/less/$1 break;\
 \            rewrite /js/(.*) /assets/js/$1 break;\
 \            rewrite /img/(.*) /assets/img/$1 break;\
 \            rewrite /fonts/(.*) /assets/fonts/$1 break;
 ' $file
-
 
 mkdir -p /root/.config/aria2
 echo "enable-rpc=true
