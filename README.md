@@ -20,12 +20,6 @@ This is just an example of setup script.
 - install **RuneUI Enhancement**
 - install **RuneUI GPIO**  
 
-**Terminal banner**  
-can be modified dynamically by create a startup script chmod +x in `/etc/profile.d`
-```sh
-/etc/motd
-```
-
 **Harware revision**  
 ```sh
 cat /proc/cpuinfo | grep Revision | awk '{print $3}'
