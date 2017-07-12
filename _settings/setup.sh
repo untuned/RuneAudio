@@ -117,8 +117,8 @@ title $bar Set settings ...
   #redis-cli set dev 0                   # dev mode
   #redis-cli set debug 0                 # debug
 } &> /dev/null
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /root
-chmod +x /root/cmd.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /etc/profile.d
+chmod +x /etc/profile.d/cmd.sh
 
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
