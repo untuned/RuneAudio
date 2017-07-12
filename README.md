@@ -19,3 +19,6 @@ This is just an example of setup script.
 - install **Aria2**
 - install **RuneUI Enhancement**
 - install **RuneUI GPIO**  
+
+**Terminal banner**  
+`/etc/motd`
