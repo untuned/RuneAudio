@@ -6,7 +6,7 @@ wget -qN https://github.com/rern/tips/raw/master/bash/f_password.sh; . f_passwor
 
 rm setup.sh
 
-title This setup will take 8 min.
+title This setup will take up to 8 minutes.
 echo
 
 # passwords
