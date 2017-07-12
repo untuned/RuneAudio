@@ -117,7 +117,9 @@ title $bar Set settings ...
   #redis-cli set dev 0                   # dev mode
   #redis-cli set debug 0                 # debug
 } &> /dev/null
+
 # reboot command
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/motd -P /etc/
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /etc/profile.d
 chmod +x /etc/profile.d/cmd.sh
 
