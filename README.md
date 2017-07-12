@@ -21,6 +21,7 @@ This is just an example of setup script.
 - install **RuneUI GPIO**  
 
 **Terminal banner**  
+can be modified dynamically by create a startup script chmod +x in `/etc/profile.d`
 ```sh
 /etc/motd
 ```
