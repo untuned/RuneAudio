@@ -68,9 +68,11 @@ else
 fi
 mkdir -p $path/{incomplete,watch}
 
-# custom systemd unit
 systemctl stop transmission
 systemctl disable transmission
+update-rc.d -f transmission-daemon remove
+
+# custom systemd unit
 cp /lib/systemd/system/transmission*.service /etc/systemd/system/transmission.service
 sed -i -e 's|User=.*|User=root|
 ' -e '/ExecStart/ i\
