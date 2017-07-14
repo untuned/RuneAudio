@@ -120,7 +120,7 @@ title $bar Set settings ...
 
 # reboot command and motd
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /etc/profile.d
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/motd -P /etc/profile.d
+wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/motd -O /etc/motd
 
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
