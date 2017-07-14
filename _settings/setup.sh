@@ -118,10 +118,9 @@ title $bar Set settings ...
   #redis-cli set debug 0                 # debug
 } &> /dev/null
 
-# reboot command
-wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/motd -O /etc/motd
+# reboot command and motd
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /etc/profile.d
-chmod +x /etc/profile.d/cmd.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/motd -P /etc/profile.d
 
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
