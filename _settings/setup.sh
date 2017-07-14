@@ -119,7 +119,7 @@ title $bar Set settings ...
 } &> /dev/null
 
 # reboot command
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/motd -P /etc/
+wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/motd -O /etc/motd
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /etc/profile.d
 chmod +x /etc/profile.d/cmd.sh
 
