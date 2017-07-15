@@ -129,11 +129,11 @@ pacman -Sy
 title -l = "$bar Upgrade Samba ..."
 #################################################################################
 pacman -R --noconfirm samba4-rune
-pacman -S --noconfirm tdb tevent smbclient libwbclient samba
+pacman -S --noconfirm tdb tevent smbclient samba
 # fix missing libreplace-samba4.so
 #wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/libreplace-samba4.so -P /usr/lib/samba
 # or run 'twice':
-#pacman -S --noconfirm libwbclient
+pacman -S --noconfirm libwbclient
 
 # fix 'minimum rlimit_max'
 echo -n '
