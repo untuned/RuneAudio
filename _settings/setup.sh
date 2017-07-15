@@ -184,13 +184,13 @@ wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.
 #systemctl daemon-reload # done in GPIO install
 systemctl restart nmbd smbd
 
+# update library
+mpc update
+
 timeend=$( date +%s )
 timediff=$(( $timeend - $timestart ))
 timemin=$(( $timediff / 60 ))
 timesec=$(( $timediff % 60 ))
-
-# update library
-mpc update
 
 title -l = "$bar Setup finished successfully."
 title -nt "Duration: $timemin min $timesec sec"
