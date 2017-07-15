@@ -126,4 +126,4 @@ echo "Startup: systemctl [ enable / disable ] transmission"
 echo
 echo "Download directory: $path"
 echo "WebUI: [RuneAudio_IP]:9091"
-title -nt "user: root"
+title -nt "User: root"
