@@ -12,32 +12,32 @@ wget -qN https://github.com/rern/tips/raw/master/bash/f_password.sh; . f_passwor
 rm install.sh
 
 if pacman -Q transmission-cli &>/dev/null; then
-	title $info Transmission already installed.
+	title "$info Transmission already installed."
 	exit
 fi
 
 # user inputs
 if (( $# == 0 )); then # with no argument
-	title $info Set password:
-	echo -e '  \e[0;36m0\e[m No'
-	echo -e '  \e[0;36m1\e[m Yes'
+	title "$info Set password:"
+	echo -e "  \e[0;36m0\e[m No"
+	echo -e "  \e[0;36m1\e[m Yes"
 	echo
-	echo -e '\e[0;36m0\e[m / 1 ? '
+	echo -e "\e[0;36m0\e[m / 1 ? "
 	read -n 1 anspwd
 	[[ $anspwd == 1 ]] && setpwd
 
 	title "$info Install WebUI alternative (Transmission Web Control):"
-	echo -e '  \e[0;36m0\e[m No'
-	echo -e '  \e[0;36m1\e[m Yes'
+	echo -e "  \e[0;36m0\e[m No"
+	echo -e "  \e[0;36m1\e[m Yes"
 	echo
-	echo -e '\e[0;36m0\e[m / 1 ? '
+	echo -e "\e[0;36m0\e[m / 1 ? "
 	read -n 1 answebui
 
-	title $info Start Transmission on system startup:
-	echo -e '  \e[0;36m0\e[m No'
-	echo -e '  \e[0;36m1\e[m Yes'
+	title "$info Start Transmission on system startup:"
+	echo -e "  \e[0;36m0\e[m No"
+	echo -e "  \e[0;36m1\e[m Yes"
 	echo
-	echo -e '\e[0;36m0\e[m / 1 ? '
+	echo -e "\e[0;36m0\e[m / 1 ? "
 	read -n 1 ansstartup
 	echo
 else # with arguments
@@ -50,7 +50,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 chmod +x uninstall_tran.sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-title -l = $bar Install Transmission ...
+title -l = "$bar Install Transmission ..."
 pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
@@ -116,14 +116,14 @@ fi
 
 # start
 [[ $ansstartup == 1 ]] && systemctl enable transmission
-title Start Transmission ...
+title "Start Transmission ..."
 systemctl start transmission
 
-title -l = $bar Transmission installed and started successfully.
-echo 'Uninstall: ./uninstall_tran.sh'
-echo 'Run: systemctl [ start / stop ] transmission'
-echo 'Startup: systemctl [ enable / disable ] transmission'
+title -l = "$bar Transmission installed and started successfully."
+echo "Uninstall: ./uninstall_tran.sh"
+echo "Run: systemctl [ start / stop ] transmission"
+echo "Startup: systemctl [ enable / disable ] transmission"
 echo
 echo "Download directory: $path"
-echo 'WebUI: [RuneAudio_IP]:9091'
-title -nt user: root
+echo "WebUI: [RuneAudio_IP]:9091"
+title -nt "user: root"
