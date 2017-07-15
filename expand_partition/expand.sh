@@ -9,8 +9,8 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 rm expand.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
-	title $info Unable to continue with this version.
-	echo '(sfdisk and python2 expected but not found.)'
+	title "$info Unable to continue with this version."
+	echo "(sfdisk and python2 expected but not found.)"
 	exit
 fi
 
@@ -31,11 +31,11 @@ if [[ $unpartmb -lt 10 ]]; then
 fi
 
 if ls /dev/sd* &>/dev/null; then
-	title $info Unmount and remove all USB drives before proceeding:
+	title "$info Unmount and remove all USB drives before proceeding:"
 	hdd=$( ls /dev/sd? )
 	echo -e "\e[0;36m$hdd\e[m"
 	echo
-	echo 'Precaution - To make sure only SD card to be expanded.'
+	echo "Precaution - To make sure only SD card to be expanded."
 	echo
 	read -n 1 -s -p 'Press any key to continue ... '
 	echo
@@ -48,20 +48,20 @@ echo -e "Available free space \e[0;36m$freemb MB\e[m"
 echo -e "Available unused disk space: \e[0;36m$unpartmb MB\e[m"
 echo
 echo -e "Expand partiton to full unused space:"
-echo -e '  \e[0;36m0\e[m Cancel'
-echo -e '  \e[0;36m1\e[m Expand'
+echo -e "  \e[0;36m0\e[m Cancel"
+echo -e "  \e[0;36m1\e[m Expand"
 echo
-echo -e '\e[0;36m0\e[m / 1 ? '
+echo -e "\e[0;36m0\e[m / 1 ? "
 read -n 1 answer
 if [[ $answer == 1 ]]; then
 	if ! pacman -Q parted &>/dev/null; then
-		title Get package file ...
+		title "Get package file ..."
 		wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
 		pacman -U --noconfirm parted-3.2-5-armv7h.pkg.tar.xz
 		rm parted-3.2-5-armv7h.pkg.tar.xz
 	fi
-	title Expand partiton ...
-	echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk &>/dev/null
+	title "Expand partiton ..."
+	echo -e "d\n\nn\n\n\n\n\nw" | fdisk $disk &>/dev/null
 
 	partprobe $disk
 
@@ -76,6 +76,6 @@ if [[ $answer == 1 ]]; then
 		title "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
 	fi
 else
-	title $info Expand partition cancelled.
+	title "$info Expand partition cancelled."
 	exit
 fi
