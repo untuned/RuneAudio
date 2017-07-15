@@ -6,21 +6,18 @@ wget -qN https://github.com/rern/tips/raw/master/bash/f_password.sh; . f_passwor
 
 rm setup.sh
 
-title This setup will take up to 8 minutes.
-echo
-
 # passwords
-title $info root password for Samba and Transmission ...
+title "$info root password for Samba and Transmission ..."
 setpwd
 
 timestart=$( date +%s )
 
-title $bar Disable WiFi ...
+title "$bar Disable WiFi ..."
 #################################################################################
 systemctl disable netctl-auto@wlan0
 systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
 
-title $bar Set HDMI mode ...
+title "$bar Set HDMI mode ..."
 #################################################################################
 # prevent noobs cec hdmi power on
 mkdir -p /tmp/p1
@@ -50,7 +47,7 @@ fi
 sed -i '/gpio/ s/^/#/
 ' /tmp/p6/config.txt
 
-title $bar Mount USB drive to /mnt/hdd ...
+title "$bar Mount USB drive to /mnt/hdd ..."
 #################################################################################
 # disable auto update mpd database
 systemctl stop mpd
@@ -77,7 +74,7 @@ if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
   echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /tmp/p7/etc/fstab
 fi
 
-title $bar Set pacman cache ...
+title "$bar Set pacman cache ..."
 #################################################################################
 mkdir -p $mnt/varcache/pacman
 rm -r /var/cache/pacman
@@ -92,7 +89,7 @@ ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
 touch /tmp/p7/walkthrough_completed # initial setup
 rm /tmp/p7/vendor # noobs marker for update prompt
 
-title $bar Set settings ...
+title "$bar Set settings ..."
 #################################################################################
 {
   redis-cli set usb_db_autorebuild 0     # usb auto rebuild
@@ -125,11 +122,11 @@ wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/m
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
-title $bar Update package database ...
+title "$bar Update package database ..."
 #################################################################################
 pacman -Sy
 
-title -l = $bar Upgrade Samba ...
+title -l = "$bar Upgrade Samba ..."
 #################################################################################
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm tdb tevent smbclient samba
@@ -150,7 +147,7 @@ ln -sf /etc/samba/smb-dev.conf /etc/samba/smb.conf
 # set samba password
 (echo $pwd1; echo $pwd1) | smbpasswd -s -a root
 
-title -l = $bar Samba upgraded successfully.
+title -l = "$bar Samba upgraded successfully."
 
 # Transmission
 #################################################################################
@@ -178,6 +175,6 @@ timediff=$(( $timeend - $timestart ))
 timemin=$(( $timediff / 60 ))
 timesec=$(( $timediff % 60 ))
 
-title -l = $bar Setup finished successfully.
+title -l = "$bar Setup finished successfully."
 echo "Duration: $timemin min $timesec sec"
-title -nt 'Update library database: menu Sources > Rebuild'
+title -nt "Update library database: menu Sources > Rebuild"
