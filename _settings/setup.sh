@@ -19,6 +19,7 @@ systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
 
 title "$bar Set HDMI mode ..."
 #################################################################################
+echo "1080p 50Hz, disable overscan (+ OSMC)"
 # prevent noobs cec hdmi power on
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
@@ -29,9 +30,12 @@ else
 fi
 # force hdmi mode, remove black border
 if ! grep 'hdmi_mode=' /boot/config.txt &> /dev/null; then
-echo 'hdmi_group=1   # cec
-hdmi_mode=31   # 1080p 50Hz
-disable_overscan=1' >> /boot/config.txt
+echo '
+hdmi_ignore_cec=1 # disable cec
+hdmi_group=1
+hdmi_mode=31      # 1080p 50Hz
+disable_overscan=1
+' >> /boot/config.txt
 fi
 # remove 'forcetrigger'
 sed -i "s/ forcetrigger//" /tmp/p1/recovery.cmdline
@@ -40,9 +44,11 @@ sed -i "s/ forcetrigger//" /tmp/p1/recovery.cmdline
 mkdir -p /tmp/p6
 mount /dev/mmcblk0p6 /tmp/p6
 if ! grep 'hdmi_mode=' /tmp/p6/config.txt &> /dev/null; then
-echo 'hdmi_ignore_cec=1
+echo '
+hdmi_ignore_cec=1
 hdmi_group=1
-hdmi_mode=31' >> /tmp/p6/config.txt
+hdmi_mode=31
+' >> /tmp/p6/config.txt
 fi
 sed -i '/gpio/ s/^/#/
 ' /tmp/p6/config.txt
@@ -57,10 +63,11 @@ udevadm control --reload-rules && udevadm trigger
 
 mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
-mnt=/mnt/$label
-mkdir -p $mnt
+mnt="/mnt/$label"
+mkdir -p "$mnt"
+fstabmnt="/dev/sda1 $mnt ext4 defaults,noatime 0 0"
 if ! grep $mnt /etc/fstab &> /dev/null; then
-  echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /etc/fstab
+  echo "$fstabmnt" >> /etc/fstab
   umount -l /dev/sda1
   mount -a
 fi
@@ -71,11 +78,13 @@ systemctl start mpd
 if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
   mkdir -p /tmp/p7
   mount /dev/mmcblk0p7 /tmp/p7
-  echo "/dev/sda1 $mnt ext4 defaults,noatime 0 0" >> /tmp/p7/etc/fstab
+  echo "$fstabmnt" >> /tmp/p7/etc/fstab
 fi
+echo "$fstabmnt (+OSMC)"
 
 title "$bar Set pacman cache ..."
 #################################################################################
+echo "$mnt/varcache/pacman (+OSMC - $mnt/varcache/apt)"
 mkdir -p $mnt/varcache/pacman
 rm -r /var/cache/pacman
 ln -s $mnt/varcache/pacman /var/cache/pacman
@@ -180,6 +189,8 @@ timediff=$(( $timeend - $timestart ))
 timemin=$(( $timediff / 60 ))
 timesec=$(( $timediff % 60 ))
 
+# update library
+mpc update
+
 title -l = "$bar Setup finished successfully."
-echo "Duration: $timemin min $timesec sec"
-title -nt "Update library database: menu Sources > Rebuild"
+title -nt "Duration: $timemin min $timesec sec"
