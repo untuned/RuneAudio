@@ -9,7 +9,7 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 rm expand.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
-	title $info 'Unable to continue (sfdisk / python2 not found).'
+	title "$info Unable to continue (sfdisk / python2 not found)."
 	exit
 fi
 
@@ -32,18 +32,18 @@ fi
 if ls /dev/sd? &>/dev/null; then
 	hdd=$( ls /dev/sd? )
 	mnt=$( df | grep '/dev/sd' | awk '{print $NF}' )
-	title $info Unmount and remove all USB drives before proceeding:
-	echo 'Remove to make sure only SD card to be expanded.'
+	title "$info Unmount and remove all USB drives before proceeding:"
+	echo "Remove to make sure only SD card to be expanded."
 	echo
 	echo -e "Drive: \e[0;36m$hdd\e[m"
 	
 	if df | grep '/dev/sd' &>/dev/null; then
 		echo -e "Mount: \e[0;36m$mnt\e[m"
-		title $info Unmount: $mnt
-		echo -e '  \e[0;36m0\e[m No'
-		echo -e '  \e[0;36m1\e[m Yes'
+		title "$info Unmount: $mnt"
+		echo -e "  \e[0;36m0\e[m No"
+		echo -e "  \e[0;36m1\e[m Yes"
 		echo
-		echo -e '\e[0;36m0\e[m / 1 ? '
+		echo -e "\e[0;36m0\e[m / 1 ? "
 		read -n 1 answer
 		case $answer in
 			1 ) umount -l /dev/sd??
@@ -54,10 +54,10 @@ if ls /dev/sd? &>/dev/null; then
 				else
 					echo -e "$info USB drive: $mnt unmount failed."
 					echo Continue:
-					echo -e '  \e[0;36m0\e[m No'
-					echo -e '  \e[0;36m1\e[m Yes'
+					echo -e "  \e[0;36m0\e[m No"
+					echo -e "  \e[0;36m1\e[m Yes"
 					echo
-					echo -e '\e[0;36m0\e[m / 1 ? '
+					echo -e "\e[0;36m0\e[m / 1 ? "
 					read -n 1 answer
 					case $answer in
 						1 ) echo;;
@@ -80,20 +80,20 @@ echo -e "Current available free space: \e[0;36m$freemb MB\e[m"
 echo -e "Available unused disk space: \e[0;36m$unpartmb MB\e[m"
 echo
 echo -e "Expand partiton to full unused space:"
-echo -e '  \e[0;36m0\e[m Cancel'
-echo -e '  \e[0;36m1\e[m Expand'
+echo -e "  \e[0;36m0\e[m Cancel"
+echo -e "  \e[0;36m1\e[m Expand"
 echo
-echo -e '\e[0;36m0\e[m / 1 ? '
+echo -e "\e[0;36m0\e[m / 1 ? "
 read -n 1 answer
 if [[ $answer == 1 ]]; then
 	if ! pacman -Q parted &>/dev/null; then
-		title Get package file ...
+		title "Get package file ..."
 		wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
 		pacman -U --noconfirm parted-3.2-5-armv7h.pkg.tar.xz
 		rm parted-3.2-5-armv7h.pkg.tar.xz
 	fi
-	title Expand partiton ...
-	echo -e 'd\n\nn\n\n\n\n\nw' | fdisk $disk &>/dev/null
+	title "Expand partiton ..."
+	echo -e "d\n\nn\n\n\n\n\nw" | fdisk $disk &>/dev/null
 
 	partprobe $disk
 
@@ -108,6 +108,6 @@ if [[ $answer == 1 ]]; then
 		title "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
 	fi
 else
-	title $info Expand partition cancelled.
+	title "$info Expand partition cancelled."
 	exit
 fi
