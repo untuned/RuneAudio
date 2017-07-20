@@ -115,8 +115,7 @@ pacman -S --noconfirm libwbclient
 
 systemctl stop nmbd smbd
 
-mv /etc/samba/smb.conf{,.bak}
-ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
+ln -sf /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
 systemctl daemon-reload
 systemctl enable nmbd smbd
