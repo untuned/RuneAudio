@@ -113,10 +113,9 @@ pacman -S --noconfirm tdb tevent smbclient samba
 # fix missing libreplace-samba4.so
 pacman -S --noconfirm libwbclient
 
-killall nmbd
-killall smbd
+systemctl stop nmbd smbd
 
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb-dev.conf -P /etc/samba
+mv /etc/samba/smb.conf{,.bak}
 ln -s /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
 systemctl daemon-reload
