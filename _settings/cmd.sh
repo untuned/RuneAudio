@@ -21,6 +21,11 @@ srestart() {
 	systemctl restart $1
 }
 
+mountosmc() {
+	mkdir -p /tmp/p7
+	mount /dev/mmcblk0p7 /tmp/p7
+}
+
 bootosmc() {
 	echo 6 > /sys/module/bcm2709/parameters/reboot_part
 	/var/www/command/rune_shutdown
