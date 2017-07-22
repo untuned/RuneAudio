@@ -19,7 +19,7 @@ systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
 
 title "$bar Set HDMI mode ..."
 #################################################################################
-echo "1080p 50Hz, disable overscan (+ OSMC)"
+echo "1080p 50Hz, disable overscan (+OSMC)"
 # prevent noobs cec hdmi power on
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
