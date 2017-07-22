@@ -185,6 +185,7 @@ wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.
 systemctl restart nmbd smbd
 
 # show installed packages status
+title "Installed packages status"
 systemctl | egrep 'aria2|nmbd|smbd|transmission'
 
 # update library
