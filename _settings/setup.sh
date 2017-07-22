@@ -135,6 +135,19 @@ title "$bar Set settings ..."
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /etc/profile.d
 wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/motd -O /etc/motd
 
+# add reboot menu
+sed -i -e '/id="poweroff"/ i\
+<button id="rebootosmc" name="syscmd" value="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button>
+&nbsp;
+<button id="rebootrune" name="syscmd" value="rebootrune" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot Rune</button>
+&nbsp;
+' /srv/http/app/templates/footer.php
+sed -i -e '/function topbottom/ i\
+$('#rebootosmc, #rebootrune').click(function() {
+	$.get(this.id +'.php');
+}
+' /srv/http/assets/js/custom.js
+
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
