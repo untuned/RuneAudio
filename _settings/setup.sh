@@ -181,8 +181,11 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P /srv/http
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 
-#systemctl daemon-reload # done in GPIO install
+# systemctl daemon-reload # done in GPIO install
 systemctl restart nmbd smbd
+
+# show installed packages status
+systemctl | egrep 'aria2|nmbd|smbd|transmission'
 
 # update library
 mpc update
