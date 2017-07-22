@@ -134,7 +134,8 @@ title "$bar Set settings ..."
 # reboot command and motd
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /etc/profile.d
 wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/motd -O /etc/motd
-
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/rebootosmc.php -P /srv/http
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/rebootrune.php -P /srv/http
 # add reboot menu
 sed -i -e '/id="poweroff"/ i\
 <button id="rebootosmc" name="syscmd" value="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button>
