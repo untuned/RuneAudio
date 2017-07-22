@@ -70,7 +70,6 @@ mkdir -p $path/{incomplete,watch}
 
 systemctl stop transmission
 systemctl disable transmission
-update-rc.d -f transmission-daemon remove
 
 # custom systemd unit
 cp /lib/systemd/system/transmission*.service /etc/systemd/system/transmission.service
