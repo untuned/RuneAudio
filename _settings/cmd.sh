@@ -42,34 +42,30 @@ bootrune() {
 	/var/www/command/rune_shutdown
 	reboot
 }
-hardresetosmc() {
+
+yesno() {
 	echo
-	echo 'Reset to virgin OSMC?'
+	echo "$1"
 	echo -e '  \e[0;36m0\e[m No'
 	echo -e '  \e[0;36m1\e[m Yes'
 	echo
 	echo -e '\e[0;36m0\e[m / 1 ? '
 	read -n 1 ans
-	
+}
+hardresetosmc() {
+	yesno 'Reset to virgin OSMC?'	
 	if [[ $ans == 1 ]]; then
 		mountmmc 1
 		umount -l /dev/mmcblk0p7
 		mkfs.ext4 /dev/mmcblk0p7
 		mountmmc 7
-		bsdtar -xvf /tmp/p1/os/RuneAudio/boot.tar.xz -C /tmp/p7
+		bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7
 	fi
 }
 
 }
 hardreset() {
-	echo
-	echo 'Reset to virgin NOOBS?'
-	echo -e '  \e[0;36m0\e[m No'
-	echo -e '  \e[0;36m1\e[m Yes'
-	echo
-	echo -e '\e[0;36m0\e[m / 1 ? '
-	read -n 1 ans
-	
+	yesno 'Reset to virgin NOOBS?'
 	if [[ $ans == 1 ]]; then
 		mkdir /tmp/p1
 		mount /dev/mmcblk0p1 /tmp/p1
