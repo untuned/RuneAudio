@@ -35,4 +35,4 @@ rm -rv /root/.config/aria2
 
 title -nt "Aria2 uninstalled successfully."
 
-rm uninstall_aria.sh
+rm $0
