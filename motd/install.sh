@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm $0
+
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 title -l = "$bar Install Rune logo motd ..."
@@ -11,5 +13,5 @@ echo -e "$( < /etc/motd.banner )"
 
 mv /etc/motd{,.original}
 
-echo "Uninstall: uninstall_motd.sh
+echo "Uninstall: ./uninstall_motd.sh
 title -nt "$info Relogin to see new Rune logo motd."
