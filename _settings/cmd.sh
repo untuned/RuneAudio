@@ -24,9 +24,12 @@ srestart() {
 	systemctl restart $1
 }
 
+mountmmc() {
+	mkdir -p /tmp/p$1
+	mount /dev/mmcblk0p$1 /tmp/p$1
+}
 mountosmc() {
-	mkdir -p /tmp/p7
-	mount /dev/mmcblk0p7 /tmp/p7
+	mountmmc 7
 }
 
 bootosmc() {
@@ -38,6 +41,25 @@ bootrune() {
 	echo 8 > /sys/module/bcm2709/parameters/reboot_part
 	/var/www/command/rune_shutdown
 	reboot
+}
+hardresetosmc() {
+	echo
+	echo 'Reset to virgin OSMC?'
+	echo -e '  \e[0;36m0\e[m No'
+	echo -e '  \e[0;36m1\e[m Yes'
+	echo
+	echo -e '\e[0;36m0\e[m / 1 ? '
+	read -n 1 ans
+	
+	if [[ $ans == 1 ]]; then
+		mountmmc 1
+		umount -l /dev/mmcblk0p7
+		mkfs.ext4 /dev/mmcblk0p7
+		mountmmc 7
+		bsdtar -xvf /tmp/p1/os/RuneAudio/boot.tar.xz -C /tmp/p7
+	fi
+}
+
 }
 hardreset() {
 	echo
