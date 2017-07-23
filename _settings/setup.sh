@@ -132,10 +132,11 @@ title "$bar Set settings ..."
 } &> /dev/null
 
 # reboot command and motd
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /etc/profile.d
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/motd.banner -P /etc
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/rebootosmc.php -P /srv/http
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/rebootrune.php -P /srv/http
+gitpath=https://github.com/rern/RuneAudio/raw/master
+wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
+wget -qN --show-progress $gitpath/motd/motd.banner -P /etc
+wget -qN --show-progress $gitpath/_settings/rebootosmc.php -P /srv/http
+wget -qN --show-progress $gitpath/_settings/rebootrune.php -P /srv/http
 # add reboot menu
 sed -i -e '/id="poweroff"/ i\
 <button id="rebootosmc" name="syscmd" value="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button>
@@ -150,7 +151,7 @@ $('#rebootosmc, #rebootrune').click(function() {
 ' /srv/http/assets/js/custom.js
 
 # rankmirrors
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
+wget -qN --show-progress $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
 title "$bar Update package database ..."
 #################################################################################
@@ -169,7 +170,7 @@ root    soft    nofile    16384
 root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
-wget -q --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/smb.conf -O /etc/samba/smb-dev.conf
+wget -q --show-progress $gitpath/_settings/smb.conf -O /etc/samba/smb-dev.conf
 ln -sf /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
 # set samba password
@@ -191,8 +192,8 @@ wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/i
 
 # GPIO
 #################################################################################
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/mpd.conf.gpio -P /etc
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/gpio.json -P /srv/http
+wget -qN --show-progress $gitpath/_settings/mpd.conf.gpio -P /etc
+wget -qN --show-progress $gitpath/_settings/gpio.json -P /srv/http
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 
 # systemctl daemon-reload # done in GPIO install
