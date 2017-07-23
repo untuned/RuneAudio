@@ -3,10 +3,10 @@
 # expand.sh - expand partition
 # https://github.com/rern/expand_partition
 
+rm $0
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
-
-rm expand.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
 	title "$info Unable to continue with this version."
