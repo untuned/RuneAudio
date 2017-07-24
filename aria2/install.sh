@@ -16,15 +16,9 @@ fi
 
 if (( $# == 0 )); then
 	# user input
-	title "$info Start Aria2 on system startup:"
-	echo -e "  \e[0;36m0\e[m No"
-	echo -e "  \e[0;36m1\e[m Yes"
-	echo
-	echo -e "\e[0;36m0\e[m / 1 ? "
-	read -n 1 ansstartup
-	echo
+	yesno "$info Start Aria2 on system startup:"
 else
-	ansstartup=$1
+	ans=$1
 fi
 
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/uninstall_aria.sh
@@ -95,7 +89,7 @@ WantedBy=multi-user.target
 ' > /etc/systemd/system/aria2.service
 
 # start
-[[ $ansstartup == 1 ]] && systemctl enable aria2
+[[ $ans == 1 ]] && systemctl enable aria2
 title "Start Aria2 ..."
 systemctl start aria2
 
