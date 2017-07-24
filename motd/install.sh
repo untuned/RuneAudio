@@ -11,14 +11,12 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/motd/unins
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/motd/motd.banner -P /etc
 echo '#!/bin/bash
 echo -e "\e[38;5;'${color}'m$( < /etc/motd.banner )\e[0m\n"
+PS1=$( echo -e "\u@\e[38;5;'${color}'m\h\e[0m:\W # " )
 ' > /etc/profile.d/motd.sh
 
 mv /etc/motd{,.original}
 
-# prompt
-sed -i '/PS1=/ a\
-PS1="\\u@\\e[38;5;'${color}'m\\h\\e[0m:\\W \\$"
-' /etc/bash.bashrc
+sed -i '/PS1=/ s/^/#/' /etc/bash.bashrc
 
 echo "Uninstall: ./uninstall_motd.sh
 title -nt "$info Relogin to see new Rune logo motd."
