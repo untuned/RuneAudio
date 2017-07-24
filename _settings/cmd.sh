@@ -42,13 +42,17 @@ bootrune() {
 
 resetosmc() {
 	umount -l /dev/mmcblk0p7 &> /dev/null
+	# format
 	echo y | mkfs.ext4 /dev/mmcblk0p7 &> /dev/null
+	# set label to match cmdline.txt
 	label=$( blkid /dev/mmcblk0p7 | awk '{print $2}' | sed -e 's/LABEL="//' -e 's/"//' )
 	e2label /dev/mmcblk0p7 $label
+	# extract image files
 	mountmmc 7
 	mountmmc 1
 	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7
-
+	
+	### from setup.sh
 	mkdir -p $mnt/varcache/apt
 	rm -r /tmp/p7/var/cache/apt
 	ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
@@ -56,7 +60,6 @@ resetosmc() {
 	rm /tmp/p7/vendor
 	
 	### from partition_setup.sh
-	# fstab
 	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	label=${mnt0##/*/}
 	mnt="/mnt/$label"
