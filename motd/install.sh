@@ -17,7 +17,7 @@ mv /etc/motd{,.original}
 
 # prompt
 sed -i '/PS1=/ a\
-PS1="\\e[38;5;'${color}'m$PS1\\e[0m"
+PS1="\\u@\\e[38;5;'${color}'m\\h\\e[0m:\\W \\$"
 ' /etc/bash.bashrc
 
 echo "Uninstall: ./uninstall_motd.sh
