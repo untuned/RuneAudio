@@ -43,6 +43,8 @@ bootrune() {
 resetosmc() {
 	umount -l /dev/mmcblk0p7 &> /dev/null
 	echo y | mkfs.ext4 /dev/mmcblk0p7 &> /dev/null
+	label=$( blkid /dev/mmcblk0p7 | awk '{print $2}' | sed -e 's/LABEL="//' -e 's/"//' )
+	e2label /dev/mmcblk0p7 $label
 	mountmmc 7
 	mountmmc 1
 	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7
