@@ -46,7 +46,14 @@ resetosmc() {
 	mountmmc 7
 	mountmmc 1
 	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7
+
+	mkdir -p $mnt/varcache/apt
+	rm -r /tmp/p7/var/cache/apt
+	ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
+	touch /tmp/p7/walkthrough_completed
+	rm /tmp/p7/vendor
 	
+	### from partition_setup.sh
 	# fstab
 	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	label=${mnt0##/*/}
@@ -66,14 +73,6 @@ resetosmc() {
 	chmod 644 /tmp/p7/etc/udev/rules.d/usbsound.rules
 	chmod 755 /tmp/p7/home/osmc/*.py
 	chown -R 1000:1000 /tmp/p7/home/osmc
-
-	# packages cache
-	mkdir -p $mnt/varcache/apt
-	rm -r /tmp/p7/var/cache/apt
-	ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
-	# disable setup marker files
-	touch /tmp/p7/walkthrough_completed # initial setup
-	rm /tmp/p7/vendor # noobs marker for update prompt
 }
 
 hardreset() {
