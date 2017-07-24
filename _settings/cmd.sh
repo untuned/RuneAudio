@@ -6,7 +6,6 @@ motd=/etc/motd.banner
 [[ -e $motd ]] && echo -e "\e[38;5;${color}m$(< $motd)\e[0m\n"
 PS1=$( echo -e "\e[38;5;${color}m$PS1\e[0m" )
 
-
 tcolor() { 
 	echo -e "\e[38;5;10m$1\e[0m"
 }
