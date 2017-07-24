@@ -20,5 +20,5 @@ mv /etc/motd{,.original}
 
 sed -i '/PS1=/ s/^/#/' /etc/bash.bashrc
 
-echo "Uninstall: ./uninstall_motd.sh"
+echo -e "\nUninstall: ./uninstall_motd.sh"
 title -nt "$info Relogin to see new Rune logo motd."
