@@ -50,7 +50,7 @@ hdmi_group=1
 hdmi_mode=31
 ' >> /tmp/p6/config.txt
 fi
-sed -i '/gpio/ s/^/#/
+sed -i '/^gpio/ s/^/#/
 ' /tmp/p6/config.txt
 
 title "$bar Mount USB drive to /mnt/hdd ..."
@@ -79,8 +79,8 @@ if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
   mkdir -p /tmp/p7
   mount /dev/mmcblk0p7 /tmp/p7
   echo "$fstabmnt" >> /tmp/p7/etc/fstab
+  echo "$fstabmnt (+OSMC)"
 fi
-echo "$fstabmnt (+OSMC)"
 
 title "$bar Set pacman cache ..."
 #################################################################################
@@ -90,13 +90,14 @@ rm -r /var/cache/pacman
 ln -s $mnt/varcache/pacman /var/cache/pacman
 
 ### osmc ######################################
-mkdir -p $mnt/varcache/apt
-rm -r /tmp/p7/var/cache/apt
-ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
-
+if [[ ! -L /tmp/p7/var/cache/apt ]]; then
+	mkdir -p $mnt/varcache/apt
+	rm -r /tmp/p7/var/cache/apt
+	ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
+fi
 # disable setup marker files
 touch /tmp/p7/walkthrough_completed # initial setup
-rm /tmp/p7/vendor # noobs marker for update prompt
+rm -f /tmp/p7/vendor # noobs marker for update prompt
 
 title "$bar Set settings ..."
 #################################################################################
