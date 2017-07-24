@@ -41,11 +41,11 @@ bootrune() {
 }
 
 resetosmc() {
+	label=$( blkid /dev/mmcblk0p7 | awk '{print $2}' | sed -e 's/LABEL="//' -e 's/"//' )
 	umount -l /dev/mmcblk0p7 &> /dev/null
 	# format
 	echo y | mkfs.ext4 /dev/mmcblk0p7 &> /dev/null
 	# set label to match cmdline.txt
-	label=$( blkid /dev/mmcblk0p7 | awk '{print $2}' | sed -e 's/LABEL="//' -e 's/"//' )
 	e2label /dev/mmcblk0p7 $label
 	# extract image files
 	mountmmc 7
