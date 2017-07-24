@@ -6,7 +6,7 @@ title -l = "$bar Uninstall Rune logo motd ..."
 
 mv /etc/motd{.original,}
 rm /etc/motd.banner
-rm /etc/profile.f/motd.sh
+rm /etc/profile.d/motd.sh
 
 sed -i '/PS1/ s/^#//' /etc/bash.bashrc
 
