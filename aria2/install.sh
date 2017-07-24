@@ -16,7 +16,7 @@ fi
 
 if (( $# == 0 )); then
 	# user input
-	yesno "$info Start Aria2 on system startup:"
+	yesno "$info Start Aria2 on system startup:" ans
 else
 	ans=$1
 fi
