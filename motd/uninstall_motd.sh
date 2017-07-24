@@ -8,6 +8,8 @@ mv /etc/motd{.original,}
 rm /etc/motd.banner
 rm /etc/profile.f/motd.sh
 
+sed -i '/e[38;5/d' /etc/bash.bashrc
+
 title -nt "$info Relogin to see original motd."
 
 rm $0
