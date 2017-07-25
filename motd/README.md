@@ -1,7 +1,7 @@
 motd
 ---
 
-Message of the day - RuneAudio Logo and colored command prompt  
+Message of the day - RuneAudio Logo and dimmed command prompt  
 For SSH terminal login screen  
 
 (created with [**jp2a**](https://github.com/cslarsen/jp2a))  
