@@ -14,10 +14,9 @@ color=51
 echo -e "\e[38;5;${color}m$( < /etc/motd.banner )\e[0m\n"
 #PS1='\''\u@\e[38;5;${color}m\h\e[0m:\W \$ '\'' # single quote only
 #' > /etc/profile.d/motd.sh
+#sed -i '/PS1=/ s/^/#/' /etc/bash.bashrc
 
 mv /etc/motd{,.original}
-
-sed -i '/PS1=/ s/^/#/' /etc/bash.bashrc
 
 echo -e "\nUninstall: ./uninstall_motd.sh"
 title -nt "$info Relogin to see new Rune logo motd."
