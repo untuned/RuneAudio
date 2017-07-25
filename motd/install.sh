@@ -12,8 +12,10 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/motd/motd.
 mv /etc/motd{,.original}
 
 echo '#!/bin/bash
+
 color=51
 prompt=242
+
 echo -e "\e[38;5;${color}m$( < /etc/motd.logo )\e[0m\n"
 ' > /etc/profile.d/motd.sh
 
