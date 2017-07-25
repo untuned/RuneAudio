@@ -49,8 +49,7 @@ resetosmc() {
 	echo y | mkfs.ext4 -L $label /dev/mmcblk0p7 &> /dev/null
 	# extract image files
 	mountmmc 7
-	mountmmc 1
-	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7
+	bsdtar -xvf /mnt/hdd/os/OSMC/root-rbp2.tar.xz -C /tmp/p7
 	
 	### from setup.sh
 	mkdir -p $mnt/varcache/apt
@@ -63,18 +62,21 @@ resetosmc() {
 	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	label=${mnt0##/*/}
 	mnt="/mnt/$label"
-	echo "$vfat_part  /boot    vfat     defaults,noatime,noauto,x-systemd.automount    0   0
-	$ext4_part      /                  ext4     defaults,noatime  0   0
-	/dev/mmcblk0p1  /media/RECOVERY    vfat     noauto,noatime    0   0
-	/dev/mmcblk0p5  /media/SETTINGS    ext4     noauto,noatime    0   0
-	/dev/mmcblk0p8  /media/boot        vfat     noauto,noatime    0   0
-	/dev/mmcblk0p9  /media/root        ext4     noauto,noatime    0   0
-	/dev/sda1       $mnt               ext4     defaults,noatime  0   0
-	" > /tmp/p7/etc/fstab
+	echo "# filesystem	dir	             type  options           dump pass
+------------------------------------------------------------------
+/dev/mmcblk0p6  /boot            vfat  defaults,noatime  0    0
+/dev/mmcblk0p7  /                ext4  defaults,noatime  0    0
+/dev/mmcblk0p1  /media/RECOVERY  vfat  noauto,noatime    0    0
+/dev/mmcblk0p5  /media/SETTINGS  ext4  noauto,noatime    0    0
+/dev/mmcblk0p8  /media/boot      vfat  noauto,noatime    0    0
+/dev/mmcblk0p9  /media/root      ext4  noauto,noatime    0    0
+/dev/sda1       /mnt/hdd         ext4  defaults,noatime  0    0
+" > /tmp/p7/etc/fstab               ext4     defaults,noatime  0   0
+
 	# customize files
 	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" /tmp/p7/etc/shadow
 	sed -i "s/PermitRootLogin without-password/PermitRootLogin yes/" /tmp/p7/etc/ssh/sshd_config
-	cp -r /tmp/p1/os/OSMC/custom/. /tmp/p7
+	cp -r /mnt/hdd/os/OSMC/custom/. /tmp/p7
 	chmod 644 /tmp/p7/etc/udev/rules.d/usbsound.rules
 	chmod 755 /tmp/p7/home/osmc/*.py
 	chown -R 1000:1000 /tmp/p7/home/osmc
