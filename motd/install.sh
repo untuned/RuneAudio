@@ -13,7 +13,7 @@ mv /etc/motd{,.original}
 
 echo '#!/bin/bash
 
-color=51
+color=45
 prompt=242
 
 echo -e "\e[38;5;${color}m$( < /etc/motd.logo )\e[0m\n"
