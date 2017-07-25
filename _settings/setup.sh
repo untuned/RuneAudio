@@ -134,6 +134,7 @@ title "$bar Set settings ..."
 
 # reboot command and motd
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/motd/install.sh; chmod +x install.sh; ./install.sh
+touch /root/.hushlogin
 
 gitpath=https://github.com/rern/RuneAudio/raw/master
 wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
