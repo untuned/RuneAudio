@@ -63,7 +63,7 @@ resetosmc() {
 	label=${mnt0##/*/}
 	mnt="/mnt/$label"
 	echo "
-# filesystem	dir	             type  options           dump pass
+# filesystem	dir              type  options           dump pass
 #-----------------------------------------------------------------
 /dev/mmcblk0p6  /boot            vfat  defaults,noatime  0    0
 /dev/mmcblk0p7  /                ext4  defaults,noatime  0    0
@@ -72,7 +72,7 @@ resetosmc() {
 /dev/mmcblk0p8  /media/boot      vfat  noauto,noatime    0    0
 /dev/mmcblk0p9  /media/root      ext4  noauto,noatime    0    0
 /dev/sda1       /mnt/hdd         ext4  defaults,noatime  0    0
-" > /tmp/p7/etc/fstab               ext4     defaults,noatime  0   0
+" > /tmp/p7/etc/fstab
 
 	# customize files
 	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" /tmp/p7/etc/shadow
