@@ -133,10 +133,10 @@ title "$bar Set settings ..."
 } &> /dev/null
 
 # reboot command and motd
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/motd/install.sh; chmod +x install.sh; ./install.sh
+gitpath=https://github.com/rern/RuneAudio/raw/master
+wget -qN --show-progress $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
 
-gitpath=https://github.com/rern/RuneAudio/raw/master
 wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
 wget -qN --show-progress $gitpath/_settings/rebootosmc.php -P /srv/http
 wget -qN --show-progress $gitpath/_settings/rebootrune.php -P /srv/http
