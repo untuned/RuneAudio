@@ -13,12 +13,13 @@ mv /etc/motd{,.original}
 
 echo '#!/bin/bash
 color=51
+prompt=242
 echo -e "\e[38;5;${color}m$( < /etc/motd.logo )\e[0m\n"
 ' > /etc/profile.d/motd.sh
 
 sed -i -e "/^PS1=/ s/^/#/
 " -e '/PS1=/ a\
-PS1=\x27\\e[38;5;8m\\u@\\h:\\e[0m\\w \\$ \x27
+PS1=\x27\\e[38;5;'$prompt'm\\u@\\h:\\e[0m\\w \\$ \x27
 ' /etc/bash.bashrc
 
 echo -e "\nUninstall: ./uninstall_motd.sh"
