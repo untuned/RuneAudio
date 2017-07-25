@@ -140,10 +140,10 @@ wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
 wget -qN --show-progress $gitpath/_settings/rebootosmc.php -P /srv/http
 wget -qN --show-progress $gitpath/_settings/rebootrune.php -P /srv/http
 # add reboot menu
-sed -i -e '/id="poweroff"/ i\
-<button id="rebootosmc" name="syscmd" value="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button>
-&nbsp;
-<button id="rebootrune" name="syscmd" value="rebootrune" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot Rune</button>
+sed -i '/id="poweroff"/ i\
+<button id="rebootosmc" name="syscmd" value="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button> \
+&nbsp; \
+<button id="rebootrune" name="syscmd" value="rebootrune" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot Rune</button> \
 &nbsp;
 ' /srv/http/app/templates/footer.php
 sed -i -e '/function topbottom/ i\
