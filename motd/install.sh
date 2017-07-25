@@ -11,8 +11,8 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/motd/motd.
 
 echo '#!/bin/bash
 color=51
-echo -e "\e[38;5;'${color}'m$( < /etc/motd.banner )\e[0m\n"
-PS1='\''\u@\e[38;5;'${color}'m\h\e[0m:\W \$ '\'' # single quote only
+echo -e "\e[38;5;${color}m$( < /etc/motd.banner )\e[0m\n"
+PS1='\''\u@\e[38;5;${color}m\h\e[0m:\W \$ '\'' # single quote only
 ' > /etc/profile.d/motd.sh
 
 mv /etc/motd{,.original}
