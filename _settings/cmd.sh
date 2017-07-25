@@ -62,8 +62,9 @@ resetosmc() {
 	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	label=${mnt0##/*/}
 	mnt="/mnt/$label"
-	echo "# filesystem	dir	             type  options           dump pass
-------------------------------------------------------------------
+	echo "
+# filesystem	dir	             type  options           dump pass
+#-----------------------------------------------------------------
 /dev/mmcblk0p6  /boot            vfat  defaults,noatime  0    0
 /dev/mmcblk0p7  /                ext4  defaults,noatime  0    0
 /dev/mmcblk0p1  /media/RECOVERY  vfat  noauto,noatime    0    0
