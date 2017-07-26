@@ -52,7 +52,8 @@ resetosmc() {
 	echo y | mkfs.ext4 -L $label /dev/mmcblk0p7 &> /dev/null
 	# extract image files
 	mountmmc 7
-	bsdtar -xvf /mnt/hdd/os/OSMC/root-rbp2.tar.xz -C /tmp/p7
+	mountmmc 1
+	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7
 	
 	### from setup.sh
 	mkdir -p $mnt/varcache/apt
@@ -80,7 +81,7 @@ resetosmc() {
 	# customize files
 	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" /tmp/p7/etc/shadow
 	sed -i "s/PermitRootLogin without-password/PermitRootLogin yes/" /tmp/p7/etc/ssh/sshd_config
-	cp -r /mnt/hdd/os/OSMC/custom/. /tmp/p7
+	cp -r /tmp/p1/os/OSMC/custom/. /tmp/p7
 	chmod 644 /tmp/p7/etc/udev/rules.d/usbsound.rules
 	chmod 755 /tmp/p7/home/osmc/*.py
 	chown -R 1000:1000 /tmp/p7/home/osmc
