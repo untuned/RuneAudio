@@ -193,7 +193,7 @@ sed -i '/id="poweroff"/ i\
                 <button id="rebootrune" name="syscmd" value="rebootrune" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot Rune</button> \
                 &nbsp;
 ' /srv/http/app/templates/footer.php
-sed -i "s/#reboot, #poweroff/&, #rebootosmc, #rebootrune/" /srv/http/assets/js/custom.js
+sed -i "s/#reboot, #poweroff/&, #rebootosmc, #rebootrune/" /srv/http/assets/js/gpio.js
 
 # systemctl daemon-reload # done in GPIO install
 systemctl restart nmbd smbd
