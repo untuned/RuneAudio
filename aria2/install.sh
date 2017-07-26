@@ -8,6 +8,7 @@ rm $0
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+timestart
 
 if pacman -Q aria2 &>/dev/null; then
 	title "$info Aria2 already installed."
@@ -93,6 +94,7 @@ WantedBy=multi-user.target
 title "Start Aria2 ..."
 systemctl start aria2
 
+timestop
 title -l = "$bar Aria2 installed and started successfully."
 echo "Uninstall: ./uninstall_aria.sh"
 echo "Run: systemctl [ start / stop ] aria2"
