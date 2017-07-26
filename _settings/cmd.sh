@@ -103,7 +103,7 @@ hardreset() {
 	echo -e '  \e[0;36m2\e[m NOOBS: OSMC + Rune'
 	echo
 	echo -e '\e[0;36m0\e[m / 1 / 2 ? '
-	read ans
+	read -n 1 ans
 	case $ans in
 		1) resetosmc;;
 		2) mountmmc 1
