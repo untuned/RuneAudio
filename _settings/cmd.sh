@@ -92,7 +92,7 @@ resetosmc() {
 	timesec=$(( $timediff % 60 ))
 	echo -e "\nDuration: $timemin min $timesec sec"
 	
-	title -l = "$bar OSMC resetted successfully."
+	title -l = "$bar OSMC reset successfully."
 	
 	echo -e '\nReboot to OSMC:'
 	echo -e '  \e[0;36m0\e[m No'
