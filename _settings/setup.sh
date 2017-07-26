@@ -134,12 +134,9 @@ title "$bar Set settings ..."
 
 # reboot command and motd
 gitpath=https://github.com/rern/RuneAudio/raw/master
+wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
 wget -qN --show-progress $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
-
-wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
-wget -qN --show-progress $gitpath/_settings/rebootosmc.php -P /srv/http
-wget -qN --show-progress $gitpath/_settings/rebootrune.php -P /srv/http
 
 # rankmirrors
 wget -qN --show-progress $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
@@ -188,17 +185,15 @@ wget -qN --show-progress $gitpath/_settings/gpio.json -P /srv/http
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 
 # add reboot menu
+wget -qN --show-progress $gitpath/_settings/rebootosmc.php -P /srv/http
+wget -qN --show-progress $gitpath/_settings/rebootrune.php -P /srv/http
 sed -i '/id="poweroff"/ i\
                 <button id="rebootosmc" name="syscmd" value="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button> \
                 &nbsp; \
                 <button id="rebootrune" name="syscmd" value="rebootrune" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot Rune</button> \
                 &nbsp;
 ' /srv/http/app/templates/footer.php
-sed -i "/function topbottom/ i\
-$('#rebootosmc, #rebootrune').click(function() { \
-	$.get(this.id +'.php'); \
-}
-" /srv/http/assets/js/custom.js
+sed -i "s/#reboot, #poweroff/&, #rebootosmc, #rebootrune/" /srv/http/assets/js/custom.js
 
 # systemctl daemon-reload # done in GPIO install
 systemctl restart nmbd smbd
