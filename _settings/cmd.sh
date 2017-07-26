@@ -45,6 +45,7 @@ bootrune() {
 resetosmc() {
 	umount -l /dev/mmcblk0p7 &> /dev/null
 	# format with label to match cmdline.txt
+	echo -e "\nFormat partition ...\n"
 	label=$( blkid /dev/mmcblk0p7 | awk '{print $2}' | sed -e 's/LABEL="//' -e 's/"//' )
 	echo y | mkfs.ext4 -L $label /dev/mmcblk0p7 &> /dev/null
 	# extract image files
