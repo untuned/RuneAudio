@@ -2,6 +2,8 @@
 
 rm $0
 
+# import heading function
+wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
 # reboot command and motd
@@ -9,9 +11,6 @@ gitpath=https://github.com/rern/RuneAudio/raw/master
 wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
 wget -qN --show-progress $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
-
-# import heading function
-wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 # passwords
 title "$info root password for Samba and Transmission ..."
