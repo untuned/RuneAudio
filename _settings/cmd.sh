@@ -44,7 +44,8 @@ bootrune() {
 
 resetosmc() {
 	wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
-	timestart=$( date +%s )
+	timestart
+	
 	umount -l /dev/mmcblk0p7 &> /dev/null
 	# format with label to match cmdline.txt
 	title "$bar Format partition ..."
@@ -87,20 +88,10 @@ resetosmc() {
 	rm /tmp/p7/vendor
 	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P /etc/profile.d
 	
-	timeend=$( date +%s )
-	timediff=$(( $timeend - $timestart ))
-	timemin=$(( $timediff / 60 ))
-	timesec=$(( $timediff % 60 ))
-	echo -e "\nDuration: $timemin min $timesec sec"
-	
+	timestop
 	title -l = "$bar OSMC reset successfully."
 	
-	echo -e '\nReboot to OSMC:'
-	echo -e '  \e[0;36m0\e[m No'
-	echo -e '  \e[0;36m1\e[m Yes'
-	echo
-	echo -e '\e[0;36m0\e[m / 1 ? '
-	read ansre
+	yesno 'Reboot to OSMC:' ansre
 	[[ $ansre == 1 ]] && bootosmc
 }
 
