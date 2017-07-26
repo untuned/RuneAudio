@@ -43,9 +43,11 @@ bootrune() {
 }
 
 resetosmc() {
+	wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+	timestart=$( date +%s )
 	umount -l /dev/mmcblk0p7 &> /dev/null
 	# format with label to match cmdline.txt
-	echo -e "\nFormat partition ...\n"
+	title "$bar Format partition ..."
 	label=$( blkid /dev/mmcblk0p7 | awk '{print $2}' | sed -e 's/LABEL="//' -e 's/"//' )
 	echo y | mkfs.ext4 -L $label /dev/mmcblk0p7 &> /dev/null
 	# extract image files
@@ -82,6 +84,22 @@ resetosmc() {
 	chmod 644 /tmp/p7/etc/udev/rules.d/usbsound.rules
 	chmod 755 /tmp/p7/home/osmc/*.py
 	chown -R 1000:1000 /tmp/p7/home/osmc
+	
+	timeend=$( date +%s )
+	timediff=$(( $timeend - $timestart ))
+	timemin=$(( $timediff / 60 ))
+	timesec=$(( $timediff % 60 ))
+	echo -e "\nDuration: $timemin min $timesec sec"
+	
+	title -l = "$bar OSMC resetted successfully."
+	
+	echo -e '\nReboot to OSMC:'
+	echo -e '  \e[0;36m0\e[m No'
+	echo -e '  \e[0;36m1\e[m Yes'
+	echo
+	echo -e '\e[0;36m0\e[m / 1 ? '
+	read ansre
+	[[ $ansre == 1 ]] && bootosmc
 }
 
 hardreset() {
