@@ -193,6 +193,7 @@ sed -i '/id="poweroff"/ i\
                 &nbsp;
 ' /srv/http/app/templates/footer.php
 sed -i "s/#reboot, #poweroff/&, #rebootosmc, #rebootrune/" /srv/http/assets/js/gpio.js
+curl '127.0.0.1/clear'
 
 # systemctl daemon-reload # done in GPIO install
 systemctl restart nmbd smbd
