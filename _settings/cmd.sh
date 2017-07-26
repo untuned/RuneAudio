@@ -85,6 +85,7 @@ resetosmc() {
 	ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
 	touch /tmp/p7/walkthrough_completed
 	rm /tmp/p7/vendor
+	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P /etc/profile.d
 	
 	timeend=$( date +%s )
 	timediff=$(( $timeend - $timestart ))
