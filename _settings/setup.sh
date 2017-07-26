@@ -2,14 +2,20 @@
 
 rm $0
 
+timestart
+
+# reboot command and motd
+gitpath=https://github.com/rern/RuneAudio/raw/master
+wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
+wget -qN --show-progress $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
+touch /root/.hushlogin
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 # passwords
 title "$info root password for Samba and Transmission ..."
 setpwd
-
-timestart=$( date +%s )
 
 title "$bar Disable WiFi ..."
 #################################################################################
@@ -131,12 +137,6 @@ title "$bar Set settings ..."
 	#redis-cli set debug 0                 # debug
 } &> /dev/null
 
-# reboot command and motd
-gitpath=https://github.com/rern/RuneAudio/raw/master
-wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
-wget -qN --show-progress $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
-touch /root/.hushlogin
-
 # rankmirrors
 wget -qN --show-progress $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
@@ -205,10 +205,6 @@ systemctl | egrep 'aria2|nmbd|smbd|transmission'
 # update library
 mpc update
 
-timeend=$( date +%s )
-timediff=$(( $timeend - $timestart ))
-timemin=$(( $timediff / 60 ))
-timesec=$(( $timediff % 60 ))
-
+timestop
 title -l = "$bar Setup finished successfully."
 title -nt "Duration: $timemin min $timesec sec"
