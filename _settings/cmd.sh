@@ -53,7 +53,11 @@ resetosmc() {
 	# extract image files
 	mountmmc 7
 	mountmmc 1
-	[[ ! type bsdtar ]] && apt update; apt install bsdtar
+	if ! type bsdtar &>/dev/null; then
+		title "Install bsdtar ..."
+		apt update
+		apt install -y bsdtar
+	fi
 	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7
 	
 	### from partition_setup.sh
