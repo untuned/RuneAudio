@@ -54,7 +54,7 @@ resetosmc() {
 	# extract image files
 	mountmmc 7
 	mountmmc 1
-	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7
+	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7 --exclude=/var/cache/apt
 	
 	### from partition_setup.sh
 	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
