@@ -145,6 +145,7 @@ pacman -Sy
 
 title -l = "$bar Upgrade Samba ..."
 #################################################################################
+timestart
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm tdb tevent smbclient samba
 # fix missing libreplace-samba4.so (may need to run twice)
@@ -162,6 +163,7 @@ ln -sf /etc/samba/smb-dev.conf /etc/samba/smb.conf
 # set samba password
 (echo $pwd1; echo $pwd1) | smbpasswd -s -a root
 
+timestop
 title -l = "$bar Samba upgraded successfully."
 
 # Transmission
