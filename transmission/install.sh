@@ -9,7 +9,7 @@ rm $0
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
-#timestart
+timestart
 
 if pacman -Q transmission-cli &>/dev/null; then
 	title "$info Transmission already installed."
@@ -103,7 +103,7 @@ fi
 title "Start Transmission ..."
 systemctl start transmission
 
-#timestop
+timestop
 title -l = "$bar Transmission installed and started successfully."
 echo "Uninstall: ./uninstall_tran.sh"
 echo "Run: systemctl [ start / stop ] transmission"
