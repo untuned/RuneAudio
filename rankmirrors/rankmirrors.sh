@@ -6,6 +6,7 @@
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+timestart
 
 if [[ $# -eq 0 ]]; then
 	sec=3 # default 3 seconds each
@@ -68,6 +69,8 @@ echo -e "$( tcolor '/etc/pacman.d/mirrorlist' ) was updated with these servers t
 echo
 echo -e "$rankfile" | sed -n 1,3p
 echo
+
+timestop
 title -l = "$bar Mirror list ranked successfully."
 title -nt "Update package database: pacman -Sy"
 
