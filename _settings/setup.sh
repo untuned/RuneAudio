@@ -4,7 +4,7 @@ rm $0
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
-timestart
+timestart l
 
 # reboot command and motd
 gitpath=https://github.com/rern/RuneAudio/raw/master
@@ -204,6 +204,6 @@ systemctl | egrep 'aria2|nmbd|smbd|transmission'
 # update library
 mpc update
 
-timestop
+timestop l
 title -l = "$bar Setup finished successfully."
 title -nt "Duration: $timemin min $timesec sec"
