@@ -20,6 +20,7 @@ title "$bar Disable WiFi ..."
 #################################################################################
 systemctl disable netctl-auto@wlan0
 systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
+echo
 
 title "$bar Set HDMI mode ..."
 #################################################################################
@@ -56,6 +57,7 @@ hdmi_mode=31
 fi
 sed -i '/^gpio/ s/^/#/
 ' /tmp/p6/config.txt
+echo
 
 title "$bar Mount USB drive to /mnt/hdd ..."
 #################################################################################
@@ -85,6 +87,7 @@ if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
   echo "$fstabmnt" >> /tmp/p7/etc/fstab
   echo "$fstabmnt (+OSMC)"
 fi
+echo
 
 title "$bar Set pacman cache ..."
 #################################################################################
@@ -102,6 +105,7 @@ fi
 # disable setup marker files
 touch /tmp/p7/walkthrough_completed # initial setup
 rm -f /tmp/p7/vendor # noobs marker for update prompt
+echo
 
 title "$bar Set settings ..."
 #################################################################################
@@ -142,6 +146,7 @@ wget -qN --show-progress $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirro
 title "$bar Update package database ..."
 #################################################################################
 pacman -Sy
+echo
 
 title -l = "$bar Upgrade Samba ..."
 #################################################################################
@@ -165,18 +170,22 @@ ln -sf /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
 timestop
 title -l = "$bar Samba upgraded successfully."
+echo
 
 # Transmission
 #################################################################################
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh $pwd1 1 1
+echo
 
 # Aria2
 #################################################################################
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh 1
+echo
 
 # Enhancement
 #################################################################################
 wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh 3
+echo
 
 # GPIO
 #################################################################################
