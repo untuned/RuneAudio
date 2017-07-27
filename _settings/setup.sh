@@ -208,4 +208,3 @@ mpc update
 
 timestop l
 title -l = "$bar Setup finished successfully."
-title -nt "Duration: $timemin min $timesec sec"
