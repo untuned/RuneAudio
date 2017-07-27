@@ -207,13 +207,16 @@ curl '127.0.0.1/clear'
 
 # systemctl daemon-reload # done in GPIO install
 systemctl restart nmbd smbd
+echo
 
 # show installed packages status
 title "Installed packages status"
 systemctl | egrep 'aria2|nmbd|smbd|transmission'
+echo
 
 # update library
 mpc update
+echo
 
 timestop l
 title -l = "$bar Setup finished successfully."
