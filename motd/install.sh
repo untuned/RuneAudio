@@ -23,6 +23,16 @@ sed -i -e '/^PS1=/ s/^/#/
 color=242\
 PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 ' /etc/bash.bashrc
+# PS1='\[\e[38;5;'$color'm\]\u@\h:\[\e[0m\]\w \$ '
+# \x27       - escaped <'>
+# \\         - escaped <\>
+# \[ \]      - omit charater count when press <home> key
+# \e[38;5;Nm - color
+# \e[0m      - reset color
+# \u         - username
+# \h         - hostname
+# \w         - current directory
+# \$         - promt symbol: <$> users; <#> root
 
 echo -e "\nUninstall: ./uninstall_motd.sh"
 title -nt "$info Relogin to see new Rune logo motd."
