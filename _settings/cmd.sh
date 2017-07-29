@@ -58,20 +58,27 @@ resetosmc() {
 	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7 --exclude=/var/cache/apt
 	
 	### from partition_setup.sh
+	bootlabel=$( blkid /dev/mmcblk0p6 | awk '{print $2}' )
+	bootlabel=${bootlabel//\"/}
+
 	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	label=${mnt0##/*/}
 	mnt="/mnt/$label"
-	echo "
-# filesystem	dir              type  options           dump pass
-#-----------------------------------------------------------------
-/dev/mmcblk0p6  /boot            vfat  defaults,noatime  0    0
-/dev/mmcblk0p7  /                ext4  defaults,noatime  0    0
+	
+	fstabcontent="
+#filesystem	    dir              type  options           dump pass
+$bootlabel      /boot            vfat  defaults,noatime  0    0
 /dev/mmcblk0p1  /media/RECOVERY  vfat  noauto,noatime    0    0
 /dev/mmcblk0p5  /media/SETTINGS  ext4  noauto,noatime    0    0
 /dev/mmcblk0p8  /media/boot      vfat  noauto,noatime    0    0
 /dev/mmcblk0p9  /media/root      ext4  noauto,noatime    0    0
-/dev/sda1       /mnt/hdd         ext4  defaults,noatime  0    0
-" > /tmp/p7/etc/fstab
+/dev/sda1       $mnt             ext4  defaults,noatime  0    0
+"
+	file=/tmp/p7/etc/fstab
+	echo "$fstabcontent" | column -t > $file
+	w=$( wc -L < $file )                 # widest line
+	hr=$( printf "%${w}s\n" | tr ' ' - ) # horizontal line
+	sed -i '1 a'$hr $file
 
 	# customize files
 	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" /tmp/p7/etc/shadow
