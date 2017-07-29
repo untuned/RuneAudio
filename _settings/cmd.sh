@@ -58,8 +58,8 @@ resetosmc() {
 	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7 --exclude=/var/cache/apt
 	
 	### from partition_setup.sh
-	bootlabel=$( blkid /dev/mmcblk0p6 | awk '{print $2}' )
-	bootlabel=${bootlabel//\"/}
+	vfat_part=$( blkid /dev/mmcblk0p6 | awk '{ print $2 }' )
+	vfat_part=${vfat_part//\"/}
 
 	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	label=${mnt0##/*/}
@@ -67,7 +67,7 @@ resetosmc() {
 	
 	fstabcontent="
 #filesystem     dir              type  options           dump pass
-$bootlabel      /boot            vfat  defaults,noatime  0    0
+$vfat_part      /boot            vfat  defaults,noatime  0    0
 /dev/mmcblk0p1  /media/RECOVERY  vfat  noauto,noatime    0    0
 /dev/mmcblk0p5  /media/SETTINGS  ext4  noauto,noatime    0    0
 /dev/mmcblk0p8  /media/boot      vfat  noauto,noatime    0    0
