@@ -13,7 +13,7 @@ wget -qN --show-progress $gitpath/motd/install.sh; chmod +x install.sh; ./instal
 touch /root/.hushlogin
 
 # passwords
-title "$info root password for Samba and Transmission ..."
+title "root password for Samba and Transmission ..."
 setpwd
 
 title "$bar Disable WiFi ..."
