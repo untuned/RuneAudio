@@ -76,9 +76,11 @@ $vfat_part      /boot      vfat  defaults,noatime
 "
 	file=/tmp/p7/etc/fstab
 	echo "$fstabcontent" | column -t > $file
+	
 	w=$( wc -L < $file )                 # widest line
 	hr=$( printf "%${w}s\n" | tr ' ' - ) # horizontal line
 	sed -i '1 a\#'$hr $file
+	
 	mkdir -p /media/p1 /media/p5 /media/p8 /media/p9
 
 	# customize files
