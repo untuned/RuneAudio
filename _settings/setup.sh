@@ -194,9 +194,10 @@ wget -qN --show-progress $gitpath/_settings/gpio.json -P /srv/http
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 
 # add reboot menu
-wget -qN --show-progress $gitpath/_settings/rebootosmc.php -P /srv/http
-wget -qN --show-progress $gitpath/_settings/rebootrune.php -P /srv/http
-chmod +x /srv/http/*.php
+echo '<?php
+exec("/usr/bin/sudo /root/gpiooff.py; /usr/bin/sudo /root/reboot.py 6");
+' > /srv/http/rebootosmc.php
+cat /srv/http/rebootosmc.php | sed 's/6/8/' > /srv/http/rebootrune.php
 
 file=/srv/http/app/templates/footer.php
 linenum1=$( sed -n '/id="reboot"/=' $file )
