@@ -81,7 +81,8 @@ $vfat_part      /boot      vfat  defaults,noatime
 	hr=$( printf "%${w}s\n" | tr ' ' - ) # horizontal line
 	sed -i '1 a\#'$hr $file
 	
-	mkdir -p /media/p1 /media/p5 /media/p8 /media/p9
+	path=/tmp/p7/media
+	mkdir -p $path/p1 $path/p5 $path/p8 $path/p9
 
 	# customize files
 	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" /tmp/p7/etc/shadow
