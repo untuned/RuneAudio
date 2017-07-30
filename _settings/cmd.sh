@@ -55,10 +55,10 @@ resetosmc() {
 	# extract image files
 	mountmmc 7
 	mountmmc 1
-	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7 --exclude=/var/cache/apt
+	pathosmc=/tmp/p7
+	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C $pathosmc --exclude=/var/cache/apt
 	
 	### from partition_setup.sh
-	pathtmp=/tmp/p7
 	vfat_part=$( blkid /dev/mmcblk0p6 | awk '{ print $2 }' )
 	vfat_part=${vfat_part//\"/}
 
@@ -75,31 +75,31 @@ $vfat_part      /boot      vfat  defaults,noatime
 /dev/mmcblk0p9  /media/p9  ext4  noauto,noatime
 /dev/sda1       $mnt       ext4  defaults,noatime
 "
-	file=$pathtmp/etc/fstab
+	file=$pathosmc/etc/fstab
 	echo "$fstabcontent" | column -t > $file
 	
 	w=$( wc -L < $file )                 # widest line
 	hr=$( printf "%${w}s\n" | tr ' ' - ) # horizontal line
 	sed -i '1 a\#'$hr $file
 	
-	path=$pathtmp/media
-	mkdir -p $path/p1 $path/p5 $path/p8 $path/p9
+	pathmedia=$pathosmc/media
+	mkdir -p $pathmedia/p1 $pathmedia/p5 $pathmedia/p8 $pathmedia/p9
 
 	# customize files
-	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" $pathtmp/etc/shadow
-	sed -i "s/PermitRootLogin without-password/PermitRootLogin yes/" $pathtmp/etc/ssh/sshd_config
-	cp -r /tmp/p1/os/OSMC/custom/. $pathtmp
-	chmod 644 $pathtmp/etc/udev/rules.d/usbsound.rules
-	chmod 755 $pathtmp/home/osmc/*.py
-	chown -R 1000:1000 $pathtmp/home/osmc
+	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" $pathosmc/etc/shadow
+	sed -i "s/PermitRootLogin without-password/PermitRootLogin yes/" $pathosmc/etc/ssh/sshd_config
+	cp -r /tmp/p1/os/OSMC/custom/. $pathosmc
+	chmod 644 $pathosmc/etc/udev/rules.d/usbsound.rules
+	chmod 755 $pathosmc/home/osmc/*.py
+	chown -R 1000:1000 $pathosmc/home/osmc
 	
 	### from setup.sh
 	mkdir -p $mnt/varcache/apt
-	rm -r $pathtmp/var/cache/apt
-	ln -s $mnt/varcache/apt $pathtmp/var/cache/apt
-	touch $pathtmp/walkthrough_completed
-	rm $pathtmp/vendor
-	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P $pathtmp/etc/profile.d
+	rm -r $pathosmc/var/cache/apt
+	ln -s $mnt/varcache/apt $pathosmc/var/cache/apt
+	touch $pathosmc/walkthrough_completed
+	rm $pathosmc/vendor
+	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P $pathosmc/etc/profile.d
 	
 	timestop
 	title -l = "$bar OSMC reset successfully."
