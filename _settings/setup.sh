@@ -197,9 +197,9 @@ wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.
 wget -qN --show-progress $gitpath/_settings/rebootosmc.php -P /srv/http
 wget -qN --show-progress $gitpath/_settings/rebootrune.php -P /srv/http
 sed -i '/id="poweroff"/ i\
-                <button id="rebootosmc" name="syscmd" value="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button> \
+                <button id="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button> \
                 &nbsp; \
-                <button id="rebootrune" name="syscmd" value="rebootrune" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot Rune</button> \
+                <button id="rebootrune" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot Rune</button> \
                 &nbsp;
 ' /srv/http/app/templates/footer.php
 sed -i "s/#reboot, #poweroff/&, #rebootosmc, #rebootrune/" /srv/http/assets/js/gpio.js
