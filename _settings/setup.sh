@@ -196,6 +196,7 @@ wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.
 # add reboot menu
 wget -qN --show-progress $gitpath/_settings/rebootosmc.php -P /srv/http
 wget -qN --show-progress $gitpath/_settings/rebootrune.php -P /srv/http
+chmod +x /srv/http/*.php
 sed -i '/id="poweroff"/ i\
                 <button id="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button> \
                 &nbsp; \
