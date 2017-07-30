@@ -222,8 +222,8 @@ systemctl | egrep 'aria2|nmbd|smbd|transmission'
 echo
 
 # update library
-mpc update
+mpc update &> /dev/null
+echo 'MPD library updating ...'
 echo
-
 timestop l
 title -l = "$bar Setup finished successfully."
