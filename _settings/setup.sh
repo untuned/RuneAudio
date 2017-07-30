@@ -223,7 +223,7 @@ echo
 
 # update library
 mpc update &> /dev/null
-echo 'MPD library updating ...'
+title "MPD library updating ..."
 echo
 timestop l
 title -l = "$bar Setup finished successfully."
