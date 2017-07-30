@@ -58,6 +58,7 @@ resetosmc() {
 	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C /tmp/p7 --exclude=/var/cache/apt
 	
 	### from partition_setup.sh
+	pathtmp=/tmp/p7
 	vfat_part=$( blkid /dev/mmcblk0p6 | awk '{ print $2 }' )
 	vfat_part=${vfat_part//\"/}
 
@@ -74,31 +75,31 @@ $vfat_part      /boot      vfat  defaults,noatime
 /dev/mmcblk0p9  /media/p9  ext4  noauto,noatime
 /dev/sda1       $mnt       ext4  defaults,noatime
 "
-	file=/tmp/p7/etc/fstab
+	file=$pathtmp/etc/fstab
 	echo "$fstabcontent" | column -t > $file
 	
 	w=$( wc -L < $file )                 # widest line
 	hr=$( printf "%${w}s\n" | tr ' ' - ) # horizontal line
 	sed -i '1 a\#'$hr $file
 	
-	path=/tmp/p7/media
+	path=$pathtmp/media
 	mkdir -p $path/p1 $path/p5 $path/p8 $path/p9
 
 	# customize files
-	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" /tmp/p7/etc/shadow
-	sed -i "s/PermitRootLogin without-password/PermitRootLogin yes/" /tmp/p7/etc/ssh/sshd_config
-	cp -r /tmp/p1/os/OSMC/custom/. /tmp/p7
-	chmod 644 /tmp/p7/etc/udev/rules.d/usbsound.rules
-	chmod 755 /tmp/p7/home/osmc/*.py
-	chown -R 1000:1000 /tmp/p7/home/osmc
+	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" $pathtmp/etc/shadow
+	sed -i "s/PermitRootLogin without-password/PermitRootLogin yes/" $pathtmp/etc/ssh/sshd_config
+	cp -r /tmp/p1/os/OSMC/custom/. $pathtmp
+	chmod 644 $pathtmp/etc/udev/rules.d/usbsound.rules
+	chmod 755 $pathtmp/home/osmc/*.py
+	chown -R 1000:1000 $pathtmp/home/osmc
 	
 	### from setup.sh
 	mkdir -p $mnt/varcache/apt
-	rm -r /tmp/p7/var/cache/apt
-	ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
-	touch /tmp/p7/walkthrough_completed
-	rm /tmp/p7/vendor
-	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P /etc/profile.d
+	rm -r $pathtmp/var/cache/apt
+	ln -s $mnt/varcache/apt $pathtmp/var/cache/apt
+	touch $pathtmp/walkthrough_completed
+	rm $pathtmp/vendor
+	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P $pathtmp/etc/profile.d
 	
 	timestop
 	title -l = "$bar OSMC reset successfully."
