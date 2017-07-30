@@ -66,7 +66,7 @@ resetosmc() {
 	label=${mnt0##/*/}
 	mnt="/mnt/$label"
 	
-	fstabcontent="
+	echo "
 #device         mount      type  options
 $vfat_part      /boot      vfat  defaults,noatime
 /dev/mmcblk0p1  /media/p1  vfat  noauto,noatime
@@ -74,13 +74,7 @@ $vfat_part      /boot      vfat  defaults,noatime
 /dev/mmcblk0p8  /media/p8  vfat  noauto,noatime
 /dev/mmcblk0p9  /media/p9  ext4  noauto,noatime
 /dev/sda1       $mnt       ext4  defaults,noatime
-"
-	file=$pathosmc/etc/fstab
-	echo "$fstabcontent" | column -t > $file
-	
-	w=$( wc -L < $file )                 # widest line
-	hr=$( printf "%${w}s\n" | tr ' ' - ) # horizontal line
-	sed -i '1 a\#'$hr $file
+" > $pathosmc/etc/fstab
 	
 	pathmedia=$pathosmc/media
 	mkdir -p $pathmedia/p1 $pathmedia/p5 $pathmedia/p8 $pathmedia/p9
