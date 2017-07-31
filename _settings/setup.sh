@@ -221,8 +221,8 @@ sed -i -e $'/id="poweroff"/ a\
                 &nbsp; \
                 <button id="reboot" name="syscmd" value="reboot" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot</button>
 ' -e '/reboot.php/ a\
-rm rm -v ${path}rebootosmc.php \
-rm rm -v ${path}rebootrune.php
+rm rm -v ${path}/rebootosmc.php \
+rm rm -v ${path}/rebootrune.php
 ' /root/uninstall_gpio.sh
 
 curl '127.0.0.1/clear'
