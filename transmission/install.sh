@@ -12,7 +12,7 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 timestart
 
 if pacman -Q transmission-cli &>/dev/null; then
-	title "$info Transmission already installed."
+	echo -e "$info Transmission already installed."
 	exit
 fi
 
@@ -100,7 +100,7 @@ fi
 
 # start
 [[ $ansstartup == 1 ]] && systemctl enable transmission
-title "Start Transmission ..."
+echo -e "$bar Start Transmission ..."
 systemctl start transmission
 
 timestop
