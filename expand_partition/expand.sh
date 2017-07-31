@@ -9,7 +9,7 @@ rm $0
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
-	title "$info Unable to continue with this version."
+	echo -e "$info Unable to continue with this version."
 	echo "(sfdisk and python2 expected but not found.)"
 	exit
 fi
@@ -26,12 +26,12 @@ unpartmb=$( python2 -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 # noobs has 3MB unpartitioned space
 if [[ $unpartmb -lt 10 ]]; then
-	title "$info No useful space available. ( ${unpartmb}MB unused)"
+	echo -e "$info No useful space available. ( ${unpartmb}MB unused)"
 	exit
 fi
 
 if ls /dev/sd* &>/dev/null; then
-	title "$info Unmount and remove all USB drives before proceeding:"
+	echo -e "$info Unmount and remove all USB drives before proceeding:"
 	hdd=$( ls /dev/sd? )
 	echo -e "\e[0;36m$hdd\e[m"
 	echo
@@ -55,27 +55,27 @@ echo -e "\e[0;36m0\e[m / 1 ? "
 read -n 1 answer
 if [[ $answer == 1 ]]; then
 	if ! pacman -Q parted &>/dev/null; then
-		title "Get package file ..."
+		echo -e "$bar Get package file ..."
 		wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
 		pacman -U --noconfirm parted-3.2-5-armv7h.pkg.tar.xz
 		rm parted-3.2-5-armv7h.pkg.tar.xz
 	fi
-	title "Expand partiton ..."
+	echo -e "$bar Expand partiton ..."
 	echo -e "d\n\nn\n\n\n\n\nw" | fdisk $disk &>/dev/null
 
 	partprobe $disk
 
 	resize2fs $devpart
 	if [[ $? != 0 ]]; then
-		title -c 1 "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
+		echo -e "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
 		exit
 	else
 		freekb=$( df | grep '/$' | awk '{print $4}' )
 		freemb=$( python2 -c "print($freekb / 1000)" )
 		echo
-		title "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
+		title -l = "$bar Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
 	fi
 else
-	title "$info Expand partition cancelled."
+	echo -e "$info Expand partition cancelled."
 	exit
 fi
