@@ -68,7 +68,6 @@ echo
 echo -e "$( tcolor '/etc/pacman.d/mirrorlist' ) was updated with these servers top the list:"
 echo
 echo -e "$rankfile" | sed -n 1,3p
-echo
 
 timestop
 title -l = "$bar Mirror list ranked successfully."
