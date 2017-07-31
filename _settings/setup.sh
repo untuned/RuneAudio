@@ -16,15 +16,14 @@ touch /root/.hushlogin
 title "$bar root password for Samba and Transmission ..."
 setpwd
 
-title "$bar Disable WiFi ..."
+echo -e "$bar Disable WiFi ..."
 #################################################################################
 systemctl disable netctl-auto@wlan0
 systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
 echo
 
-title "$bar Set HDMI mode ..."
+echo -e "$bar Set HDMI mode ..."
 #################################################################################
-echo "1080p 50Hz, disable overscan (+OSMC)"
 # prevent noobs cec hdmi power on
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
@@ -59,7 +58,7 @@ sed -i '/^gpio/ s/^/#/
 ' /tmp/p6/config.txt
 echo
 
-title "$bar Mount USB drive to /mnt/hdd ..."
+echo -e "$bar Mount USB drive to /mnt/hdd ..."
 #################################################################################
 # disable auto update mpd database
 systemctl stop mpd
@@ -89,7 +88,7 @@ if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
 fi
 echo
 
-title "$bar Set pacman cache ..."
+echo -e "$bar Set pacman cache ..."
 #################################################################################
 echo "$mnt/varcache/pacman (+OSMC - $mnt/varcache/apt)"
 mkdir -p $mnt/varcache/pacman
@@ -107,7 +106,7 @@ touch /tmp/p7/walkthrough_completed # initial setup
 rm -f /tmp/p7/vendor # noobs marker for update prompt
 echo
 
-title "$bar Set settings ..."
+echo -e "$bar Set settings ..."
 #################################################################################
 {
 	### Sources ###
@@ -143,7 +142,7 @@ title "$bar Set settings ..."
 # rankmirrors
 wget -qN --show-progress $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
-title "$bar Update package database ..."
+echo -e "$bar Update package database ..."
 #################################################################################
 pacman -Sy
 echo
@@ -217,13 +216,14 @@ systemctl restart nmbd smbd
 echo
 
 # show installed packages status
-title "Installed packages status"
+echo -e "$bar Installed packages status"
 systemctl | egrep 'aria2|nmbd|smbd|transmission'
 echo
 
 # update library
+echo -e "$bar MPD library updating ..."
 mpc update &> /dev/null
-title "MPD library updating ..."
 echo
+
 timestop l
 title -l = "$bar Setup finished successfully."
