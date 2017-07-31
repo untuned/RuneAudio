@@ -9,7 +9,7 @@ rm $0
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
-	title "$info Unable to continue (sfdisk / python2 not found)."
+	echo -e "$info Unable to continue (sfdisk / python2 not found)."
 	exit
 fi
 
@@ -24,7 +24,7 @@ unpartmb=$( sfdisk -F | grep $disk | awk '{print $4}' )
 summb=$(( $freemb + $unpartmb ))
 # noobs has 3MB unpartitioned space
 if (($unpartmb < 10)); then
-	title "$info No useful space available. ( ${unpartmb}MB unused)"
+	echo -e "$info No useful space available. ( ${unpartmb}MB unused)"
 	exit
 fi
 
@@ -32,41 +32,25 @@ fi
 if ls /dev/sd? &>/dev/null; then
 	hdd=$( ls /dev/sd? )
 	mnt=$( df | grep '/dev/sd' | awk '{print $NF}' )
-	title "$info Unmount and remove all USB drives before proceeding:"
-	echo "Remove to make sure only SD card to be expanded."
+	echo -e "$info Unmount and remove all USB drives before proceeding:"
+	echo "Precuation - To make sure only SD card to be expanded."
 	echo
 	echo -e "Drive: \e[0;36m$hdd\e[m"
 	
 	if df | grep '/dev/sd' &>/dev/null; then
-		echo -e "Mount: \e[0;36m$mnt\e[m"
-		title "$info Unmount: $mnt"
-		echo -e "  \e[0;36m0\e[m No"
-		echo -e "  \e[0;36m1\e[m Yes"
-		echo
-		echo -e "\e[0;36m0\e[m / 1 ? "
-		read -n 1 answer
-		case $answer in
-			1 ) umount -l /dev/sd??
-				if [ $? -eq 0 ]; then
-					echo -e "\n$info USB drive: \e[0;36m$hdd\e[m unmounted and can be removed now.\n"
-					read -n 1 -s -p 'Press any key to continue ... '
-					echo
-				else
-					echo -e "$info USB drive: $mnt unmount failed."
-					echo Continue:
-					echo -e "  \e[0;36m0\e[m No"
-					echo -e "  \e[0;36m1\e[m Yes"
-					echo
-					echo -e "\e[0;36m0\e[m / 1 ? "
-					read -n 1 answer
-					case $answer in
-						1 ) echo;;
-						* ) exit;;
-					esac
-				fi
-				;;
-			* ) echo;;
-		esac
+		yesno "$info Unmount: $mnt" answer
+		if [[ $answer == 1 ]]; then
+			umount -l /dev/sd??
+			if [ $? -eq 0 ]; then
+				echo -e "\n$info USB drive: \e[0;36m$hdd\e[m unmounted and can be removed now.\n"
+				read -n 1 -s -p 'Press any key to continue ... '
+				echo
+			else
+				echo -e "$info USB drive: $mnt unmount failed."
+				yesno "Continue:" ans
+				[[ $ans != 1 ]] && exit
+			fi
+		fi
 	else
 		read -n 1 -s -p 'Press any key to continue ... '
 		echo
@@ -87,27 +71,27 @@ echo -e "\e[0;36m0\e[m / 1 ? "
 read -n 1 answer
 if [[ $answer == 1 ]]; then
 	if ! pacman -Q parted &>/dev/null; then
-		title "Get package file ..."
+		echo -e "$bar Get package file ..."
 		wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
 		pacman -U --noconfirm parted-3.2-5-armv7h.pkg.tar.xz
 		rm parted-3.2-5-armv7h.pkg.tar.xz
 	fi
-	title "Expand partiton ..."
+	echo -e "$bar Expand partiton ..."
 	echo -e "d\n\nn\n\n\n\n\nw" | fdisk $disk &>/dev/null
 
 	partprobe $disk
 
 	resize2fs $devpart
 	if (( $? != 0 )); then
-		title -c 1 "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
+		echo -e "$warn Failed: Expand partition\nTry - reboot > resize2fs $devpart"
 		exit
 	else
 		freekb=$( df | grep '/$' | awk '{print $4}' )
 		freemb=$( python2 -c "print($freekb / 1000)" )
 		echo
-		title "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
+		title -l = "$info Partiton \e[0;36m$devpart\e[m now has \e[0;36m$freemb\e[m MB free space."
 	fi
 else
-	title "$info Expand partition cancelled."
+	echo -e "$info Expand partition cancelled."
 	exit
 fi
