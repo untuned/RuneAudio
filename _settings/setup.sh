@@ -201,8 +201,8 @@ exec("/usr/bin/sudo /root/gpiooff.py; /usr/bin/sudo /root/reboot.py 6");
 cat /srv/http/rebootosmc.php | sed 's/6/8/' > /srv/http/rebootrune.php
 
 sed -i -e '/class="modal-header"/, /div/ d
-' -e '/id="reboot"/, /Cancel/ d
-' -e '/id="poweroff"/ i\
+' -e '/&nbsp;/, /Cancel/ d
+' -e '/value="poweroff"/ i\
                 <button id="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button> \
                 <button id="rebootrune" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot Rune</button> \
                 &nbsp;
