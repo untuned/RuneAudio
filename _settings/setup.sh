@@ -138,6 +138,7 @@ echo -e "$bar Set settings ..."
 	#redis-cli set dev 1                   # dev mode
 	#redis-cli set debug 0                 # debug
 } &> /dev/null
+echo
 
 # rankmirrors
 wget -qN --show-progress $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
