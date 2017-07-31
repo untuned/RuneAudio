@@ -210,7 +210,7 @@ sed -i -e '/class="modal-header"/, /div/ d
 
 sed -i "s/#reboot, #poweroff/&, #rebootosmc, #rebootrune/" /srv/http/assets/js/gpio.js
 
-sed -i $'/id="poweroff"/ a\
+sed -i -e $'/id="poweroff"/ a\
 \' -e \'/class="modal-body txtmid"/ i\\\ \
             <div class="modal-header"> \
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> \
@@ -220,6 +220,9 @@ sed -i $'/id="poweroff"/ a\
 \' -e \'/value="poweroff"/ a\\\ \
                 &nbsp; \
                 <button id="reboot" name="syscmd" value="reboot" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot</button>
+' -e '/reboot.php/ a\
+rm rm -v ${path}rebootosmc.php \
+rm rm -v ${path}rebootrune.php
 ' /root/uninstall_gpio.sh
 
 curl '127.0.0.1/clear'
