@@ -200,15 +200,13 @@ exec("/usr/bin/sudo /root/gpiooff.py; /usr/bin/sudo /root/reboot.py 6");
 ' > /srv/http/rebootosmc.php
 cat /srv/http/rebootosmc.php | sed 's/6/8/' > /srv/http/rebootrune.php
 
-file=/srv/http/app/templates/footer.php
-linenum1=$( sed -n '/id="reboot"/=' $file )
-linenum2=$( sed -n '/Cancel/=' $file )
-sed -i -e "$linenum1, $linenum2 d
-" -e '/id="poweroff"/ i\
+sed -i -e '/class="modal-header"/, /div/ d
+' -e '/id="reboot"/, /Cancel/ d
+' -e '/id="poweroff"/ i\
                 <button id="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button> \
                 <button id="rebootrune" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot Rune</button> \
                 &nbsp;
-' $file
+' /srv/http/app/templates/footer.php
 
 sed -i "s/#reboot, #poweroff/&, #rebootosmc, #rebootrune/" /srv/http/assets/js/gpio.js
 curl '127.0.0.1/clear'
