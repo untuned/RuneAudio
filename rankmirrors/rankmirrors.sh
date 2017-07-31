@@ -13,7 +13,7 @@ if [[ $# -eq 0 ]]; then
 elif [[ $1 =~ ^[0-9]+$ ]]; then
 	sec=$1
 else
-	title "$info Usage: rankmirrors.sh [second]"
+	echo -e "$info Usage: rankmirrors.sh [second]"
 	exit
 fi
 
