@@ -192,6 +192,7 @@ echo
 wget -qN --show-progress $gitpath/_settings/mpd.conf.gpio -P /etc
 wget -qN --show-progress $gitpath/_settings/gpio.json -P /srv/http
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
+echo
 
 # add reboot menu
 echo '<?php
@@ -214,12 +215,10 @@ curl '127.0.0.1/clear'
 
 # systemctl daemon-reload # done in GPIO install
 systemctl restart nmbd smbd
-echo
 
 # show installed packages status
 echo -e "$bar Installed packages status"
 systemctl | egrep 'aria2|nmbd|smbd|transmission'
-echo
 
 # update library
 echo -e "$bar MPD library updating ..."
