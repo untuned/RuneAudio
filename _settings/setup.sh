@@ -216,14 +216,13 @@ systemctl restart nmbd smbd
 echo
 
 # show installed packages status
-echo -e "$bar Installed packages status"
+echo -e "$bar Installed packages status\n"
 systemctl | egrep 'aria2|nmbd|smbd|transmission'
 echo
 
 # update library
 echo -e "$bar MPD library updating ..."
 mpc update &> /dev/null
-echo
 
 timestop l
 title -l = "$bar Setup finished successfully."
