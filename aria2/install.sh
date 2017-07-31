@@ -11,7 +11,7 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 timestart
 
 if pacman -Q aria2 &>/dev/null; then
-	title "$info Aria2 already installed."
+	echo -e "$info Aria2 already installed."
 	exit
 fi
 
@@ -45,7 +45,7 @@ else
 	path=/root/aria2
 fi
 if (( $# == 0 )); then
-	title "Get WebUI files ..."
+	echo -e "$bar Get WebUI files ..."
 	wget -qN --show-progress https://github.com/ziahamza/webui-aria2/archive/master.zip
 	mkdir -p $path/web
 	bsdtar -xf master.zip -s'|[^/]*/||' -C $path/web
@@ -91,7 +91,7 @@ WantedBy=multi-user.target
 
 # start
 [[ $ans == 1 ]] && systemctl enable aria2
-title "Start Aria2 ..."
+echo -e "$bar Start Aria2 ..."
 systemctl start aria2
 
 timestop
