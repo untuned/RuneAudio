@@ -108,8 +108,10 @@ echo
 
 echo -e "$bar Set settings ..."
 #################################################################################
+wget -q --show-progress $gitpath/_settings/mpd.db -O /var/lib/mpd/mpd.db
+chown mpd:audio /var/lib/mpd/mpd.db
 wget -q --show-progress $gitpath/_settings/rune.rdb -O /var/lib/redis/rune.rdb
-chown redus:redis /var/lib/redis/rune.rdb
+chown redis:redis /var/lib/redis/rune.rdb
 sed -i's/8000/1000/' /srv/http/assets/js/runeui.js # change pnotify 8 to 1 sec
 echo
 
