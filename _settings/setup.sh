@@ -179,8 +179,8 @@ echo -e "$bar Installed packages status"
 systemctl | egrep 'aria2|nmbd|smbd|transmission'
 
 # update library
-echo -e "$bar MPD library updating ..."
-mpc update &> /dev/null
+#echo -e "$bar MPD library updating ..."
+#mpc update &> /dev/null
 
 timestop l
 title -l = "$bar Setup finished successfully."
