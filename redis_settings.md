@@ -1,3 +1,7 @@
+**rdb file**  
+`/var/lib/redis/rune.rdb`
+
+**redis-cli**
 ```
 ### Sources ###
 #redis-cli set usb_db_autorebuild 0    # usb auto rebuild
