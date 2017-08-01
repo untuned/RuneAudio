@@ -122,7 +122,7 @@ echo -e "$bar Set settings ..."
 	#redis-cli set hostname runeaudio      # hostname (string)
 	#hostnamectl set-hostname runeaudio
 	#redis-cli set ntpserever pool.ntp.org # ntpserever (string)
-	redis-cli set timezone Asis/Bangkok    # timezone (string from list)
+	redis-cli set timezone Asia/Bangkok    # timezone (string from list)
 	timedatectl set-timezone Asia/Bangkok
 	#redis-cli set orionprofile RuneAudio  # sound signature (string from list)
 	redis-cli hset airplay enable 0        # airplay
