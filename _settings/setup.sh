@@ -138,6 +138,8 @@ echo -e "$bar Set settings ..."
 	#redis-cli set dev 1                   # dev mode
 	#redis-cli set debug 0                 # debug
 } &> /dev/null
+
+sed -i's/8000/1000/' /srv/http/assets/js/runeui.js # change pnotify 8 to 1 sec
 echo
 
 # rankmirrors
