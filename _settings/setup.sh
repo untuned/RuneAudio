@@ -78,7 +78,7 @@ if ! grep $mnt /etc/fstab &> /dev/null; then
 fi
 [[ -e /mnt/MPD/USB/hdd && $( ls -1 /mnt/MPD/USB/hdd | wc -l ) == 0 ]] && rm -r /mnt/MPD/USB/hdd
 ln -s $mnt/Music /mnt/MPD/USB/Music
-systemctl start mpd
+
 ### osmc ######################################
 if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
   mkdir -p /tmp/p7
@@ -110,6 +110,7 @@ echo -e "$bar Set settings ..."
 #################################################################################
 wget -q --show-progress $gitpath/_settings/mpd.db -O /var/lib/mpd/mpd.db
 chown mpd:audio /var/lib/mpd/mpd.db
+systemctl stop redis
 wget -q --show-progress $gitpath/_settings/rune.rdb -O /var/lib/redis/rune.rdb
 chown redis:redis /var/lib/redis/rune.rdb
 sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js # change pnotify 8 to 1 sec
@@ -172,7 +173,7 @@ echo
 curl '127.0.0.1/clear' &> /dev/null
 
 # systemctl daemon-reload # done in GPIO install
-systemctl restart nmbd smbd
+systemctl restart mpd redis nmbd smbd
 
 # show installed packages status
 echo -e "$bar Installed packages status"
