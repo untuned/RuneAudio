@@ -61,7 +61,7 @@ resetosmc() {
 	mountmmc 7
 	mountmmc 1
 	pathosmc=/tmp/p7
-	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C $pathosmc --exclude=/var/cache/apt
+	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C $pathosmc --exclude=./var/cache/apt
 	
 	### from partition_setup.sh
 	vfat_part=$( blkid /dev/mmcblk0p6 | awk '{ print $2 }' )
