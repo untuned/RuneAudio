@@ -8,7 +8,7 @@ timestart l
 
 # reboot command and motd
 gitpath=https://github.com/rern/RuneAudio/raw/master
-[[ -e /etc/profile.d/cmd.sh ]] && wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
+[[ ! -e /etc/profile.d/cmd.sh ]] && wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
 wget -qN --show-progress $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
 
