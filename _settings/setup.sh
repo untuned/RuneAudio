@@ -112,11 +112,13 @@ file=/var/lib/mpd/mpd.db
 mv $file{,.original}
 wget -q --show-progress $gitpath/_settings/mpd.db -P /var/lib/mpd
 chown mpd:audio $file
+chmod 644 $file
 systemctl stop redis
 file=/var/lib/redis/rune.rdb
 mv $file{,.original}
 wget -q --show-progress $gitpath/_settings/rune.rdb -P /var/lib/redis/
 chown redis:redis $file
+chmod 644 $file
 sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js # change pnotify 8 to 1 sec
 echo
 
