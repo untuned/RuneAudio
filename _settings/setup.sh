@@ -106,7 +106,7 @@ touch /tmp/p7/walkthrough_completed # initial setup
 rm -f /tmp/p7/vendor # noobs marker for update prompt
 echo
 
-echo -e "$bar Set settings ..."
+echo -e "$bar Restore settings ..."
 #################################################################################
 file=/var/lib/mpd/mpd.db
 mv $file{,.original}
