@@ -194,37 +194,6 @@ wget -qN --show-progress $gitpath/_settings/gpio.json -P /srv/http
 wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 echo
 
-# add reboot menu
-echo '<?php
-exec("/usr/bin/sudo /root/gpiooff.py; /usr/bin/sudo /root/reboot.py 6");
-' > /srv/http/rebootosmc.php
-cat /srv/http/rebootosmc.php | sed 's/6/8/' > /srv/http/rebootrune.php
-
-sed -i -e '/class="modal-header"/, /div/ d
-' -e '/&nbsp;/, /Cancel/ d
-' -e '/value="poweroff"/ i\
-                <button id="rebootosmc" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot OSMC</button> \
-                <button id="rebootrune" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot Rune</button> \
-                &nbsp;
-' /srv/http/app/templates/footer.php
-
-sed -i "s/#reboot, #poweroff/&, #rebootosmc, #rebootrune/" /srv/http/assets/js/gpio.js
-
-sed -i -e $'/id="poweroff"/ a\
-\' -e \'/class="modal-body txtmid"/ i\\\ \
-            <div class="modal-header"> \
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> \
-                <h4 class="modal-title" id="poweroff-modal-label">Turn off the player</h4> \
-            </div> \
-\' -e \'/rebootosmc/, /&nbsp;/ d \
-\' -e \'/value="poweroff"/ a\\\ \
-                &nbsp; \
-                <button id="reboot" name="syscmd" value="reboot" class="btn btn-primary btn-lg btn-block" data-dismiss="modal"><i class="fa fa-refresh sx"></i> Reboot</button>
-' -e '/reboot.php/ a\
-rm rm -v ${path}/rebootosmc.php \
-rm rm -v ${path}/rebootrune.php
-' /root/uninstall_gpio.sh
-
 curl '127.0.0.1/clear'
 
 # systemctl daemon-reload # done in GPIO install
