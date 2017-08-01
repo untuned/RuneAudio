@@ -15,13 +15,18 @@ cp /var/lib/mpd/mpd.db /backup/path
 ```sh
 # settings - redis
 systemctl stop redis
-mv /var/lib/redis/rune.rdb{,.backup}
-cp /backup/path/rune.rdb /var/lib/redis
-systemctl start redis
+file=/var/lib/redis/rune.rdb
+mv $file{,.original}
+cp /backup/path/rune.rdb /var/lib/redis/
+chown redis:redis $file
+chmod 644 $file
+systemctl restart redis
 
 # library - mpd
-systemctl stop mpd
-mv /var/lib/mpd/mpd.db{,.backup}
+file=/var/lib/mpd/mpd.db
+mv $file{,.original}
 cp /backup/path/mpd.db /var/lib/mpd
-systemctl start mpd
+chown mpd:audio $file
+chmod 644 $file
+systemctl restart mpd
 ```
