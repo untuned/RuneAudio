@@ -56,6 +56,7 @@ resetosmc() {
 	wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 	timestart
 	
+	title -l = "$bar OSMC reset ..."
 	umount -l /dev/mmcblk0p7 &> /dev/null
 	# format with label to match cmdline.txt
 	echo -e "$bar Format partition ..."
