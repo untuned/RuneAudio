@@ -30,9 +30,9 @@ mount /dev/mmcblk0p1 /tmp/p1
 ! grep '^hdmi_ignore_cec_init=1' /tmp/p1/config.txt &> /dev/null && echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
 # force hdmi mode, remove black border
 if ! grep '^hdmi_mode=' /boot/config.txt &> /dev/null; then
-wget -q --show-progress $gitpath/_settings/edid.dat -P /boot
+#wget -q --show-progress $gitpath/_settings/edid.dat -P /boot
 echo '
-hdmi_edid_file=1  # read monitor data from file (fix power off > on - wrong resolution)
+#hdmi_edid_file=1  # read monitor data from file (fix power off > on - wrong resolution)
 hdmi_ignore_cec=1 # disable cec
 hdmi_group=1
 hdmi_mode=31      # 1080p 50Hz
