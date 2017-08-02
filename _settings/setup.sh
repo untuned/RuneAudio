@@ -109,14 +109,14 @@ echo -e "$bar Restore settings ..."
 systemctl stop redis
 file=/var/lib/redis/rune.rdb
 mv $file{,.original}
-wget -q --show-progress $gitpath/_settings/rune.rdb -P /var/lib/redis/
+wget -q --show-progress $gitpath/_settings/rune.rdb -O $file
 chown redis:redis $file
 chmod 644 $file
 systemctl restart redis
 
 file=/var/lib/mpd/mpd.db
 mv $file{,.original}
-wget -q --show-progress $gitpath/_settings/mpd.db -O /var/lib/mpd/mpd.db
+wget -q --show-progress $gitpath/_settings/mpd.db -O $file
 chown mpd:audio $file
 chmod 644 $file
 systemctl restart mpd
