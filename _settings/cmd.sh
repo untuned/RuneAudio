@@ -96,7 +96,7 @@ $vfat_part      /boot      vfat  defaults,noatime
 	
 	### from setup.sh
 	mkdir -p $mnt/varcache/apt
-	rm -r $pathosmc/var/cache/apt
+	rm -fr $pathosmc/var/cache/apt
 	ln -s $mnt/varcache/apt $pathosmc/var/cache/apt
 	touch $pathosmc/walkthrough_completed
 	rm $pathosmc/vendor
