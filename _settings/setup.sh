@@ -33,8 +33,10 @@ else
   echo 'hdmi_ignore_cec_init=1' > /tmp/p1/config.txt
 fi
 # force hdmi mode, remove black border
+wget -q --show-progress $gitpath/_settings/edid.dat -P /boot
 if ! grep 'hdmi_mode=' /boot/config.txt &> /dev/null; then
 echo '
+hdmi_edid_file=1  # read monitor data from file (fix power off > on - wrong resolution)
 hdmi_ignore_cec=1 # disable cec
 hdmi_group=1
 hdmi_mode=31      # 1080p 50Hz
