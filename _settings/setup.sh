@@ -33,7 +33,7 @@ else
   echo 'hdmi_ignore_cec_init=1' > /tmp/p1/config.txt
 fi
 # force hdmi mode, remove black border
-if ! grep 'hdmi_mode=' /boot/config.txt &> /dev/null; then
+if ! grep '^hdmi_mode=' /boot/config.txt &> /dev/null; then
 wget -q --show-progress $gitpath/_settings/edid.dat -P /boot
 echo '
 hdmi_edid_file=1  # read monitor data from file (fix power off > on - wrong resolution)
@@ -49,7 +49,7 @@ sed -i "s/ forcetrigger//" /tmp/p1/recovery.cmdline
 ### osmc ######################################
 mkdir -p /tmp/p6
 mount /dev/mmcblk0p6 /tmp/p6
-if ! grep 'hdmi_mode=' /tmp/p6/config.txt &> /dev/null; then
+if ! grep '^hdmi_mode=' /tmp/p6/config.txt &> /dev/null; then
 echo '
 hdmi_ignore_cec=1
 hdmi_group=1
