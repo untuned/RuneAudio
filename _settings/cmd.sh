@@ -49,7 +49,7 @@ setup() {
 		chmod +x setup.sh
 		./setup.sh
 	else
-		echo -e "Already setup."
+		echo "Already setup."
 	fi
 }
 resetosmc() {
