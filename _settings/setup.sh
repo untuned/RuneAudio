@@ -27,11 +27,7 @@ echo -e "$bar Set HDMI mode ..."
 # prevent noobs cec hdmi power on
 mkdir -p /tmp/p1
 mount /dev/mmcblk0p1 /tmp/p1
-if [[ -e /tmp/p1/config.txt ]]; then
-  ! grep 'hdmi_ignore_cec_init=1' /tmp/p1/config.txt &> /dev/null && echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
-else
-  echo 'hdmi_ignore_cec_init=1' > /tmp/p1/config.txt
-fi
+! grep '^hdmi_ignore_cec_init=1' /tmp/p1/config.txt &> /dev/null && echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
 # force hdmi mode, remove black border
 if ! grep '^hdmi_mode=' /boot/config.txt &> /dev/null; then
 wget -q --show-progress $gitpath/_settings/edid.dat -P /boot
