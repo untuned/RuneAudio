@@ -86,7 +86,7 @@ $vfat_part      /boot      vfat  defaults,noatime
 /dev/sda1       $mnt       ext4  defaults,noatime
 " > $pathosmc/etc/fstab
 	
-	# customize files
+	# from partition_setup.sh
 	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" $pathosmc/etc/shadow
 	sed -i -e "s/PermitRootLogin without-password/PermitRootLogin yes/
 	" -e "1 i\UseDNS no
