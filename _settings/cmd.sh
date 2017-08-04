@@ -69,7 +69,7 @@ resetosmc() {
 	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C $pathosmc \
 		--exclude=./var/cache/apt \
 		--exclude=./usr/include \
-		--exclude=./usr/lib/libgo.* \
+		--exclude=./usr/lib/{python2.7/test,python3*,libgo.*} \
 		--exclude=./usr/share/{doc,gtk-doc,info,man}
 	
 	### from partition_setup.sh
