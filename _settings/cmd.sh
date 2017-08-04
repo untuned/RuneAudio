@@ -25,7 +25,7 @@ srestart() {
 }
 
 mountmmc() {
-	if [[ ! mount | grep p$1 ]]; then
+	if [[ ! $( mount | grep p$1 ) ]]; then
 		mkdir -p /tmp/p$1
 		mount /dev/mmcblk0p$1 /tmp/p$1
 	fi
