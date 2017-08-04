@@ -25,8 +25,10 @@ srestart() {
 }
 
 mountmmc() {
-	mkdir -p /tmp/p$1
-	mount /dev/mmcblk0p$1 /tmp/p$1
+	if [[ ! mount | grep p$1 ]]; then
+		mkdir -p /tmp/p$1
+		mount /dev/mmcblk0p$1 /tmp/p$1
+	fi
 }
 mountosmc() {
 	mountmmc 7
@@ -60,11 +62,12 @@ resetosmc() {
 	umount -l /dev/mmcblk0p7 &> /dev/null
 	# format with label to match cmdline.txt
 	echo -e "$bar Format partition ..."
-	label=$( blkid /dev/mmcblk0p7 | awk '{print $2}' | sed -e 's/LABEL="//' -e 's/"//' )
+	mountmmc 6
+	label=$( cat /tmp/p6/cmdline.txt | awk '{print $1}' | sed 's/root=LABEL=//' )
 	echo y | mkfs.ext4 -L $label /dev/mmcblk0p7 &> /dev/null
 	# extract image files
-	mountmmc 7
 	mountmmc 1
+	mountmmc 7
 	pathosmc=/tmp/p7
 	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C $pathosmc \
 		--exclude=./var/cache/apt \
