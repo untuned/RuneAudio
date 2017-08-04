@@ -47,14 +47,10 @@ mountosmc() {
 }
 
 bootosmc() {
-	echo 6 > /sys/module/bcm2709/parameters/reboot_part
-	/var/www/command/rune_shutdown
-	reboot
+	/root/reboot.py 6
 }
 bootrune() {
-	echo 8 > /sys/module/bcm2709/parameters/reboot_part
-	/var/www/command/rune_shutdown
-	reboot
+	/root/reboot.py 8
 }
 
 setup() {
