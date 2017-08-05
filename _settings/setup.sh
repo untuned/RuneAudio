@@ -101,6 +101,7 @@ echo
 
 echo -e "$bar Restore settings ..."
 #################################################################################
+# settings
 systemctl stop redis
 file=/var/lib/redis/rune.rdb
 mv $file{,.original}
@@ -108,7 +109,11 @@ wget -q --show-progress $gitpath/_settings/rune.rdb -O $file
 chown redis:redis $file
 chmod 644 $file
 systemctl restart redis
+# extra command for some settings
+ln -s -f /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
+#hostname RT-AC66U                                       # set hostname
 
+# mpd database
 file=/var/lib/mpd/mpd.db
 mv $file{,.original}
 wget -q --show-progress $gitpath/_settings/mpd.db -O $file
@@ -116,7 +121,7 @@ chown mpd:audio $file
 chmod 644 $file
 systemctl restart mpd
 
-sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js # change pnotify 8 to 1 sec
+sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js      # change pnotify 8 to 1 sec
 echo
 
 # rankmirrors
