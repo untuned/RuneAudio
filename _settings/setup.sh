@@ -2,6 +2,13 @@
 
 rm $0
 
+mmc() {
+	if [[ ! $( mount | grep p$1 ) ]]; then
+		mkdir -p /tmp/p$1
+		mount /dev/mmcblk0p$1 /tmp/p$1
+	fi
+}
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart l
@@ -24,34 +31,23 @@ echo
 
 echo -e "$bar Set HDMI mode ..."
 #################################################################################
-# prevent noobs cec hdmi power on
-mkdir -p /tmp/p1
-mount /dev/mmcblk0p1 /tmp/p1
-! grep '^hdmi_ignore_cec_init=1' /tmp/p1/config.txt &> /dev/null && echo 'hdmi_ignore_cec_init=1' >> /tmp/p1/config.txt
-# force hdmi mode, remove black border
-if ! grep '^hdmi_mode=' /boot/config.txt &> /dev/null; then
-#wget -q --show-progress $gitpath/_settings/edid.dat -P /boot
-echo '
-#hdmi_edid_file=1  # read monitor data from file (fix power off > on - wrong resolution)
-hdmi_ignore_cec=1 # disable cec
+mmc 1
+# force hdmi mode, remove black border (overscan)
+hdmimode='
 hdmi_group=1
 hdmi_mode=31      # 1080p 50Hz
 disable_overscan=1
-' >> /boot/config.txt
-fi
+hdmi_ignore_cec=1 # disable cec
+'
+! grep '^hdmi_mode=' /tmp/p1/config.txt &> /dev/null && echo "$hdmimode" >> /tmp/p1/config.txt
+! grep '^hdmi_mode=' /boot/config.txt &> /dev/null && echo "$hdmimode" >> /boot/config.txt
 # remove 'forcetrigger'
 sed -i "s/ forcetrigger//" /tmp/p1/recovery.cmdline
 
 ### osmc ######################################
-mkdir -p /tmp/p6
-mount /dev/mmcblk0p6 /tmp/p6
-if ! grep '^hdmi_mode=' /tmp/p6/config.txt &> /dev/null; then
-echo '
-hdmi_ignore_cec=1
-hdmi_group=1
-hdmi_mode=31
-' >> /tmp/p6/config.txt
-fi
+mmc 6
+! grep '^hdmi_mode=' /tmp/p6/config.txt &> /dev/null && echo "$hdmimode" >> /tmp/p6/config.txt
+
 sed -i '/^gpio/ s/^/#/
 ' /tmp/p6/config.txt
 echo
@@ -79,8 +75,7 @@ ln -s $mnt/Music /mnt/MPD/USB/Music
 
 ### osmc ######################################
 if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
-  mkdir -p /tmp/p7
-  mount /dev/mmcblk0p7 /tmp/p7
+  mmc 7
   echo "$fstabmnt" >> /tmp/p7/etc/fstab
   echo "$fstabmnt (+OSMC)"
 fi
