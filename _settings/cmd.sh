@@ -67,12 +67,12 @@ resetosmc() {
 	umount -l /dev/mmcblk0p7 &> /dev/null
 	# format with label to match cmdline.txt
 	echo -e "$bar Format partition ..."
-	mountmmc 6
+	mmc 6
 	label=$( cat /tmp/p6/cmdline.txt | awk '{print $1}' | sed 's/root=LABEL=//' )
 	echo y | mkfs.ext4 -L $label /dev/mmcblk0p7 &> /dev/null
 	# extract image files
-	mountmmc 1
-	mountmmc 7
+	mmc 1
+	mmc 7
 	pathosmc=/tmp/p7
 	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C $pathosmc \
 		--exclude=./var/cache/apt \
@@ -134,7 +134,7 @@ hardreset() {
 	echo
 	case $ans in
 		1) resetosmc;;
-		2) mountmmc 1
+		2) mmc 1
 			echo -n " forcetrigger" >> /tmp/p1/recovery.cmdline
 			/var/www/command/rune_shutdown
 			reboot;;
