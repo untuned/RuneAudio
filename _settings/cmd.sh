@@ -60,7 +60,7 @@ setup() {
 		chmod +x setup.sh
 		./setup.sh
 	else
-		echo "Already setup."
+		echo -e "\n\e[30m\e[43m ! \e[0m Already setup."
 	fi
 }
 resetosmc() {
