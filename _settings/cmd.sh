@@ -1,5 +1,7 @@
 #!/bin/bash
 
+info='\e[30m\e[43m ! \e[0m'
+
 alias ls='ls -a --color --group-directories-first'
 export LS_COLORS='tw=01;34:ow=01;34:ex=00;32:or=31'
 
@@ -60,7 +62,7 @@ setup() {
 		chmod +x setup.sh
 		./setup.sh
 	else
-		echo -e "\n\e[30m\e[43m ! \e[0m Already setup."
+		echo -e "\n$info Already setup."
 	fi
 }
 resetosmc() {
@@ -89,7 +91,7 @@ resetosmc() {
 }
 
 hardreset() {
-	echo -e "\n\e[30m\e[43m ! \e[0m Reset to virgin OS:"
+	echo -e "\n$info Reset to virgin OS:"
 	echo -e '  \e[0;36m0\e[m Cancel'
 	echo -e '  \e[0;36m1\e[m OSMC'
 	echo -e '  \e[0;36m2\e[m NOOBS: OSMC + Rune'
