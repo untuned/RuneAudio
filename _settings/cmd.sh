@@ -64,66 +64,22 @@ setup() {
 	fi
 }
 resetosmc() {
-	wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
-	timestart
+	osmcreset n
 	
-	title -l = "$bar OSMC reset ..."
-	umount -l /dev/mmcblk0p7 &> /dev/null
-	# format with label to match cmdline.txt
-	echo -e "$bar Format partition ..."
-	mmc 6
-	label=$( cat /tmp/p6/cmdline.txt | awk '{print $1}' | sed 's/root=LABEL=//' )
-	echo y | mkfs.ext4 -L $label /dev/mmcblk0p7 &> /dev/null
-	# extract image files
-	mmc 1
-	mmc 7
-	pathosmc=/tmp/p7
-	bsdtar -xvf /tmp/p1/os/OSMC/root-rbp2.tar.xz -C $pathosmc \
-		--exclude=./var/cache/apt \
-		--exclude=./usr/include \
-		--exclude=./usr/lib/{python2.7/test,python3*,libgo.*} \
-		--exclude=./usr/share/{doc,gtk-doc,info,man}
-	
-	### from partition_setup.sh
-	vfat_part=$( blkid /dev/mmcblk0p6 | awk '{ print $2 }' )
-	vfat_part=${vfat_part//\"/}
-
+	# from setup.sh
 	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	label=${mnt0##/*/}
 	mnt="/mnt/$label"
-	
-	echo "
-#device         mount      type  options
-$vfat_part      /boot      vfat  defaults,noatime
-/dev/mmcblk0p1  /media/p1  vfat  noauto,noatime
-/dev/mmcblk0p5  /media/p5  ext4  noauto,noatime
-/dev/mmcblk0p8  /media/p8  vfat  noauto,noatime
-/dev/mmcblk0p9  /media/p9  ext4  noauto,noatime
-/dev/sda1       $mnt       ext4  defaults,noatime
-" > $pathosmc/etc/fstab
-	
-	sed -i "s/root:.*/root:\$6\$X6cgc9tb\$wTTiWttk\/tRwPrM8pLZCZpYpHE8zEar2mkSSQ7brQvflqhA5K1dgcyU8nzX\/.tAImkMbRMR0ex51LjPsIk8gm0:17000:0:99999:7:::/" $pathosmc/etc/shadow
-	sed -i -e "s/PermitRootLogin without-password/PermitRootLogin yes/
-	" -e "1 i\UseDNS no
-	" $pathosmc/etc/ssh/sshd_config
-	cp -r /tmp/p1/os/OSMC/custom/. $pathosmc
-	chmod 644 $pathosmc/etc/udev/rules.d/usbsound.rules
-	chmod 755 $pathosmc/home/osmc/*.py
-	chown -R 1000:1000 $pathosmc/home/osmc
-	
-	### from setup.sh
-	mkdir -p $mnt/varcache/apt
+	mmc 7
+	pathosmc=/tmp/p7
+
 	rm -fr $pathosmc/var/cache/apt
+	mkdir -p $mnt/varcache/apt
 	ln -s $mnt/varcache/apt $pathosmc/var/cache/apt
 	touch $pathosmc/walkthrough_completed
 	rm $pathosmc/vendor
+	
 	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P $pathosmc/etc/profile.d
-	
-	timestop
-	title -l = "$bar OSMC reset successfully."
-	
-	yesno 'Reboot to OSMC:' ansre
-	[[ $ansre == 1 ]] && bootosmc
 }
 
 hardreset() {
