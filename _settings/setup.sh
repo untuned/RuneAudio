@@ -29,6 +29,7 @@ systemctl disable netctl-auto@wlan0
 systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
 echo
 
+if ! grep '^hdmi_mode=' /boot/config.txt &> /dev/null; then
 echo -e "$bar Set HDMI mode ..."
 #################################################################################
 mmc 1
@@ -41,8 +42,6 @@ hdmi_ignore_cec=1 # disable cec
 '
 ! grep '^hdmi_mode=' /tmp/p1/config.txt &> /dev/null && echo "$hdmimode" >> /tmp/p1/config.txt
 ! grep '^hdmi_mode=' /boot/config.txt &> /dev/null && echo "$hdmimode" >> /boot/config.txt
-# remove 'forcetrigger'
-sed -i "s/ forcetrigger//" /tmp/p1/recovery.cmdline
 
 ### osmc ######################################
 mmc 6
@@ -51,6 +50,7 @@ mmc 6
 sed -i '/^gpio/ s/^/#/
 ' /tmp/p6/config.txt
 echo
+fi
 
 echo -e "$bar Mount USB drive to /mnt/hdd ..."
 #################################################################################
@@ -77,7 +77,6 @@ ln -s $mnt/Music /mnt/MPD/USB/Music
 if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
   mmc 7
   echo "$fstabmnt" >> /tmp/p7/etc/fstab
-  echo "$fstabmnt (+OSMC)"
 fi
 echo
 
