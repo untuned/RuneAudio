@@ -64,7 +64,7 @@ setup() {
 	fi
 }
 resetosmc() {
-	osmcreset n
+	. osmcreset n
 	
 	# from setup.sh
 	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
@@ -80,13 +80,7 @@ resetosmc() {
 	
 	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P $pathosmc/etc/profile.d
 	
-	echo "Reboot to OSMC after reset:"
-	echo -e '  \e[0;36m0\e[m No'
-	echo -e '  \e[0;36m1\e[m Yes'
-	echo
-	echo -e '\e[0;36m0\e[m / 1 ? '
-	read -n 1 ansre
-	echo
+	yesno "Reboot to OSMC after reset:" ansre
 	[[ $ansre == 1 ]] && bootosmc
 }
 
