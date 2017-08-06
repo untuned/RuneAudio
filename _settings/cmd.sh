@@ -72,14 +72,22 @@ resetosmc() {
 	mnt="/mnt/$label"
 	mmc 7
 	pathosmc=/tmp/p7
-
-	rm -fr $pathosmc/var/cache/apt
 	mkdir -p $mnt/varcache/apt
+	rm -fr $pathosmc/var/cache/apt
 	ln -s $mnt/varcache/apt $pathosmc/var/cache/apt
 	touch $pathosmc/walkthrough_completed
 	rm $pathosmc/vendor
 	
 	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P $pathosmc/etc/profile.d
+	
+	echo "Reboot to OSMC after reset:"
+	echo -e '  \e[0;36m0\e[m No'
+	echo -e '  \e[0;36m1\e[m Yes'
+	echo
+	echo -e '\e[0;36m0\e[m / 1 ? '
+	read -n 1 ansre
+	echo
+	[[ $ansre == 1 ]] && bootosmc
 }
 
 hardreset() {
