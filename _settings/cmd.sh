@@ -86,7 +86,7 @@ resetosmc() {
 	
 	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P $pathosmc/etc/profile.d
 	
-	yesno "Reboot to OSMC after reset:" ansre
+	yesno "Reboot to OSMC:" ansre
 	[[ $ansre == 1 ]] && bootosmc
 }
 
