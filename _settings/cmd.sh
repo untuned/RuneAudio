@@ -44,10 +44,14 @@ mmc() {
 }
 
 bootosmc() {
-	/root/reboot.py 6
+	mmc 5
+	sed -i "s/default_partition_to_boot=./default_partition_to_boot=6/" /tmp/p5/noobs.conf
+	reboot
 }
 bootrune() {
-	/root/reboot.py 8
+	mmc 5
+	sed -i "s/default_partition_to_boot=./default_partition_to_boot=8/" /tmp/p5/noobs.conf
+	reboot
 }
 
 setup() {
