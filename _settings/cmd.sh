@@ -66,7 +66,7 @@ setup() {
 resetosmc() {
 	. osmcreset n
 	
-	# from setup.sh
+	# from Rune setup.sh
 	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	label=${mnt0##/*/}
 	mnt="/mnt/$label"
