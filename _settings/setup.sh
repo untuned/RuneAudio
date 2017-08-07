@@ -105,6 +105,7 @@ systemctl stop redis
 file=/var/lib/redis/rune.rdb
 mv $file{,.original}
 wget -q --show-progress $gitpath/_settings/rune.rdb -O $file
+wget -q --show-progress $gitpath/_settings/181FM.pls -P /mnt/MPD/Webradio
 chown redis:redis $file
 chmod 644 $file
 systemctl restart redis
