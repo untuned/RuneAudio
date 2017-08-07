@@ -129,6 +129,13 @@ systemctl restart mpd
 
 wget -q --show-progress $gitpath/_settings/.toprc -P /root # 'top' settings
 sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js        # change pnotify 8 to 1 sec
+sed -i -e '/m:0x0 + c:180/ s/^#//
+' -e '/m:0x0 + c:180/ i\
+"/root/gpioon.py"
+' -e '/m:0x8 + c:64/ s/^#//
+' -e '/m:0x8 + c:64/ i\
+"/root/gpiooff.py"
+' /root/.xbindkeysrc
 echo
 
 # rankmirrors
