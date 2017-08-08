@@ -43,15 +43,6 @@ hdmi_ignore_cec=1 # disable cec
 ! grep '^hdmi_mode=' /tmp/p1/config.txt &> /dev/null && echo "$hdmimode" >> /tmp/p1/config.txt
 ! grep '^hdmi_mode=' /boot/config.txt &> /dev/null && echo "$hdmimode" >> /boot/config.txt
 
-### osmc ######################################
-mmc 6
-! grep '^hdmi_mode=' /tmp/p6/config.txt &> /dev/null && echo "$hdmimode" >> /tmp/p6/config.txt
-
-sed -i '/^gpio/ s/^/#/
-' /tmp/p6/config.txt
-echo
-fi
-
 echo -e "$bar Mount USB drive to /mnt/hdd ..."
 #################################################################################
 # disable auto update mpd database
@@ -73,30 +64,20 @@ fi
 [[ -e /mnt/MPD/USB/hdd && $( ls -1 /mnt/MPD/USB/hdd | wc -l ) == 0 ]] && rm -r /mnt/MPD/USB/hdd
 ln -sf $mnt/Music /mnt/MPD/USB/Music
 
-### osmc ######################################
-if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
-  mmc 7
-  echo "$fstabmnt" >> /tmp/p7/etc/fstab
-fi
-echo
-
 echo -e "$bar Set pacman cache ..."
 #################################################################################
-echo "$mnt/varcache/pacman (+OSMC - $mnt/varcache/apt)"
+echo "$mnt/varcache/pacman"
 if [[ ! -L /var/cache/pacman ]]; then
 	mkdir -p $mnt/varcache/pacman
 	rm -r /var/cache/pacman
 	ln -sf $mnt/varcache/pacman /var/cache/pacman
 fi
-### osmc ######################################
-if [[ ! -L /tmp/p7/var/cache/apt ]]; then
-	mkdir -p $mnt/varcache/apt
-	rm -r /tmp/p7/var/cache/apt
-	ln -s $mnt/varcache/apt /tmp/p7/var/cache/apt
-fi
-# disable setup marker files
-touch /tmp/p7/walkthrough_completed # initial setup
-rm -f /tmp/p7/vendor # noobs marker for update prompt
+
+echo -e "$bar OSMC pre-setup ..."
+#################################################################################
+	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
+	chmod +x presetup.sh
+	./presetup.sh
 echo
 
 echo -e "$bar Restore settings ..."
