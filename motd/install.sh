@@ -2,7 +2,7 @@
 
 rm $0
 
-[[ -e /etc/motd.logo ]] && echo -e '\n"Rune logo motd" already installed\n'; exit
+[[ -e /etc/motd.logo ]] && echo -e '\n"Rune logo motd" already installed.\n'; exit
 
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
