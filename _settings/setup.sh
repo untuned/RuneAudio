@@ -68,9 +68,8 @@ mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 label=${mnt0##/*/}
 mnt="/mnt/$label"
 mkdir -p "$mnt"
-fstabmnt="/dev/sda1       $mnt         ext4  defaults,noatime"
-if ! grep $mnt /etc/fstab &> /dev/null; then
-  echo "$fstabmnt" >> /etc/fstab
+if ! grep -q $mnt /etc/fstab; then
+  echo "/dev/sda1  $mnt  ext4  defaults,noatime" >> /etc/fstab
   umount -l /dev/sda1
   mount -a
 fi
@@ -88,9 +87,8 @@ fi
 
 echo -e "$bar OSMC pre-setup ..."
 #################################################################################
-	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
-	chmod +x presetup.sh
-	./presetup.sh
+wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
+. presetup.sh
 echo
 
 echo -e "$bar Restore settings ..."
