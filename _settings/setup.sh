@@ -56,7 +56,7 @@ echo -e "$bar Mount USB drive to /mnt/hdd ..."
 #################################################################################
 # disable auto update mpd database
 systemctl stop mpd
-sed -i '\|sendMpdCommand| s|^|//|' /srv/http/command/usbmount
+sed -i '/^sendMpdCommand/ s|^|//|' /srv/http/command/usbmount
 sed -i '/^KERNEL/ s/^/#/' /etc/udev/rules.d/rune_usb-stor.rules
 udevadm control --reload-rules && udevadm trigger
 
