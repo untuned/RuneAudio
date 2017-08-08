@@ -43,7 +43,7 @@ rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
 
-if mount | grep '/dev/sda1' &>/dev/null; then
+if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	mkdir -p $mnt/transmission
 	path=$mnt/transmission
