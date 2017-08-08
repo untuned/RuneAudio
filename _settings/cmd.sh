@@ -67,6 +67,7 @@ setup() {
 }
 resetosmc() {
 	. osmcreset n
+	[[ $? != 0 ]] && return
 	
 	# from Rune setup.sh
 	mmc 7
