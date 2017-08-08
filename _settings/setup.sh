@@ -112,7 +112,7 @@ echo '[playlist]
 NumberOfEntries=1
 File1=http://listen.181fm.com:8006
 Title1=181FM' > /mnt/MPD/Webradio/181FM.pls
-redis-cli hset 181FM http://listen.181fm.com:8006
+redis-cli hset webradios 181FM http://listen.181fm.com:8006
 
 systemctl restart redis
 # extra command for some settings
