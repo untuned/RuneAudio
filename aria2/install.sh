@@ -25,7 +25,7 @@ fi
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/uninstall_aria.sh
 chmod +x uninstall_aria.sh
 
-if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
+if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
 	wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
@@ -36,7 +36,7 @@ title -l = "$bar Install Aria2 ..."
 (( $# == 0 )) && pacman -Sy
 pacman -S --noconfirm aria2 glibc
 
-if mount | grep '/dev/sda1' &>/dev/null; then
+if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	mkdir -p $mnt/aria2
 	path=$mnt/aria2
