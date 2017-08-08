@@ -69,21 +69,9 @@ resetosmc() {
 	. osmcreset n
 	[[ $? != 0 ]] && return
 	
-	# from Rune setup.sh
-	mmc 7
-	pathosmc=/tmp/p7
-	
-	mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-	label=${mnt0##/*/}
-	mnt="/mnt/$label"
-
-	echo "/dev/sda1  $mnt  ext4  defaults,noatime" >> $pathosmc/etc/fstab
-	
-	mkdir -p $mnt/varcache/apt
-	rm -fr $pathosmc/var/cache/apt
-	ln -s $mnt/varcache/apt $pathosmc/var/cache/apt
-	touch $pathosmc/walkthrough_completed
-	rm $pathosmc/vendor
+	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
+	chmod +x presetup.sh
+	./presetup.sh
 	
 	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P $pathosmc/etc/profile.d
 	
