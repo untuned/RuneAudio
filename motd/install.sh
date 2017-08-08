@@ -2,6 +2,8 @@
 
 rm $0
 
+[[ -e /etc/motd.logo ]] && echo '"Rune logo motd" already installed'; exit
+
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 title -l = "$bar Install Rune logo motd ..."
