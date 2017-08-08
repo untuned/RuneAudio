@@ -42,18 +42,19 @@ echo
 
 echo -e "$bar Set HDMI mode ..."
 #################################################################################
-if ! grep -q '^hdmi_mode=' /boot/config.txt; then
-	mmc 1
-	# force hdmi mode, remove black border (overscan)
-	hdmimode='
+mmc 1
+mmc 6
+# force hdmi mode, remove black border (overscan)
+hdmimode='
 hdmi_group=1
 hdmi_mode=31      # 1080p 50Hz
 disable_overscan=1
-hdmi_ignore_cec=1 # disable cec
-'
-	! grep -q '^hdmi_mode=' /tmp/p1/config.txt && echo "$hdmimode" >> /tmp/p1/config.txt
-	! grep -q '^hdmi_mode=' /boot/config.txt && echo "$hdmimode" >> /boot/config.txt
-fi
+hdmi_ignore_cec=1' # disable cec
+
+! grep -q '^hdmi_mode=' /tmp/p1/config.txt && echo "$hdmimode" >> /tmp/p1/config.txt
+! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p6/config.txt
+! grep -q '^hdmi_mode=' /boot/config.txt && echo "$hdmimode" >> /boot/config.txt
+echo
 
 echo -e "$bar Mount USB drive to /mnt/hdd ..."
 #################################################################################
