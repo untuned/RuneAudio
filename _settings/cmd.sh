@@ -69,10 +69,9 @@ setup() {
 resetosmc() {
 	. osmcreset n
 	[[ $? != 0 ]] && return
-	# omit initial setup
+	# preload initial setup
 	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
-	chmod +x presetup.sh
-	./presetup.sh
+	. presetup.sh
 	# preload command shortcuts
 	mmc 7
 	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P /tmp/p7/etc/profile.d
