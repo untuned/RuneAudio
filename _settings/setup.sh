@@ -71,7 +71,7 @@ if ! grep $mnt /etc/fstab &> /dev/null; then
   mount -a
 fi
 [[ -e /mnt/MPD/USB/hdd && $( ls -1 /mnt/MPD/USB/hdd | wc -l ) == 0 ]] && rm -r /mnt/MPD/USB/hdd
-ln -s $mnt/Music /mnt/MPD/USB/Music
+ln -sf $mnt/Music /mnt/MPD/USB/Music
 
 ### osmc ######################################
 if ! grep $mnt /tmp/p7/etc/fstab &> /dev/null; then
@@ -83,10 +83,11 @@ echo
 echo -e "$bar Set pacman cache ..."
 #################################################################################
 echo "$mnt/varcache/pacman (+OSMC - $mnt/varcache/apt)"
-mkdir -p $mnt/varcache/pacman
-rm -r /var/cache/pacman
-ln -s $mnt/varcache/pacman /var/cache/pacman
-
+if [[ ! -L /var/cache/pacman ]]; then
+	mkdir -p $mnt/varcache/pacman
+	rm -r /var/cache/pacman
+	ln -sf $mnt/varcache/pacman /var/cache/pacman
+fi
 ### osmc ######################################
 if [[ ! -L /tmp/p7/var/cache/apt ]]; then
 	mkdir -p $mnt/varcache/apt
@@ -116,8 +117,8 @@ redis-cli hset webradios 181FM http://listen.181fm.com:8006
 
 systemctl restart redis
 # extra command for some settings
-ln -s -f /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
-#hostname RT-AC66U                                       # set hostname
+ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
+#hostname RT-AC66U                                     # set hostname
 
 # mpd database
 file=/var/lib/mpd/mpd.db
