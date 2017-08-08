@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# command shortcuts and motd
+# passwords for samba and transmission
+# disable wifi, hdmi mode, fstab, pacman cache
+# preload osmc pre-setup
+# restore settings
+# upgrade samba
+# install transmission
+# install aria2
+# install rune enhancement
+# install rune gpio
+
 rm $0
 
 mmc() {
@@ -13,13 +24,13 @@ mmc() {
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart l
 
-# reboot command and motd
+# command shortcuts and motd
 gitpath=https://github.com/rern/RuneAudio/raw/master
 [[ ! -e /etc/profile.d/cmd.sh ]] && wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
 wget -qN --show-progress $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
 
-# passwords
+# passwords for samba and transmission
 echo -e "$bar root password for Samba and Transmission ...\n"
 setpwd
 
@@ -29,19 +40,20 @@ systemctl disable netctl-auto@wlan0
 systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
 echo
 
-if ! grep '^hdmi_mode=' /boot/config.txt &> /dev/null; then
 echo -e "$bar Set HDMI mode ..."
 #################################################################################
-mmc 1
-# force hdmi mode, remove black border (overscan)
-hdmimode='
+if ! grep -q '^hdmi_mode=' /boot/config.txt; then
+	mmc 1
+	# force hdmi mode, remove black border (overscan)
+	hdmimode='
 hdmi_group=1
 hdmi_mode=31      # 1080p 50Hz
 disable_overscan=1
 hdmi_ignore_cec=1 # disable cec
 '
-! grep '^hdmi_mode=' /tmp/p1/config.txt &> /dev/null && echo "$hdmimode" >> /tmp/p1/config.txt
-! grep '^hdmi_mode=' /boot/config.txt &> /dev/null && echo "$hdmimode" >> /boot/config.txt
+	! grep -q '^hdmi_mode=' /tmp/p1/config.txt && echo "$hdmimode" >> /tmp/p1/config.txt
+	! grep -q '^hdmi_mode=' /boot/config.txt && echo "$hdmimode" >> /boot/config.txt
+fi
 
 echo -e "$bar Mount USB drive to /mnt/hdd ..."
 #################################################################################
