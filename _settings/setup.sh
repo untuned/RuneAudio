@@ -106,9 +106,10 @@ echo '[playlist]
 NumberOfEntries=1
 File1=http://listen.181fm.com:8006
 Title1=181FM' > /mnt/MPD/Webradio/181FM.pls
+
+systemctl start redis
 redis-cli hset webradios 181FM http://listen.181fm.com:8006
 
-systemctl restart redis
 # extra command for some settings
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
 #hostname RT-AC66U                                     # set hostname
