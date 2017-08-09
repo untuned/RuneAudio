@@ -45,14 +45,14 @@ mmc() {
 }
 
 bootosmc() {
-	mmc 5
-	sed -i "s/default_partition_to_boot=./default_partition_to_boot=6/" /tmp/p5/noobs.conf
-	reboot
+ 	echo 6 > /sys/module/bcm2709/parameters/reboot_part
+ 	/var/www/command/rune_shutdown
+ 	reboot
 }
 bootrune() {
-	mmc 5
-	sed -i "s/default_partition_to_boot=./default_partition_to_boot=8/" /tmp/p5/noobs.conf
-	reboot
+	echo 8 > /sys/module/bcm2709/parameters/reboot_part
+ 	/var/www/command/rune_shutdown
+ 	reboot
 }
 
 setup() {
