@@ -68,7 +68,7 @@ setup() {
 }
 resetosmc() {
 	. osmcreset n
-	[[ $? != 0 ]] && return
+	[[ $success != 1 ]] && return
 	# preload initial setup
 	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
 	. presetup.sh
