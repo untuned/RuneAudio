@@ -22,11 +22,11 @@ mmc() {
 }
 
 # import heading function
-wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+wget -qN https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
 timestart l
 
 # command shortcuts and motd
-gitpath=https://github.com/rern/RuneAudio/raw/master
+gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master
 [[ ! -e /etc/profile.d/cmd.sh ]] && wget -qN --show-progress $gitpath/_settings/cmd.sh -P /etc/profile.d
 wget -qN --show-progress $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
@@ -88,7 +88,7 @@ fi
 
 echo -e "$bar OSMC pre-setup ..."
 #################################################################################
-wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
+wget -qN --show-progress https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
 . presetup.sh
 echo
 
@@ -161,24 +161,24 @@ echo
 
 # Transmission
 #################################################################################
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh $pwd1 1 1
+wget -qN --show-progress $gitpath/transmission/install.sh; chmod +x install.sh; ./install.sh $pwd1 1 1
 echo
 
 # Aria2
 #################################################################################
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh 1
+wget -qN --show-progress $gitpath/aria2/install.sh; chmod +x install.sh; ./install.sh 1
 echo
 
 # Enhancement
 #################################################################################
-wget -qN --show-progress https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh 3
+wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneUI_enhancement/master/install.sh; chmod +x install.sh; ./install.sh 3
 echo
 
 # GPIO
 #################################################################################
 wget -qN --show-progress $gitpath/_settings/mpd.conf.gpio -P /etc
 wget -qN --show-progress $gitpath/_settings/gpio.json -P /srv/http
-wget -qN --show-progress https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
+wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneUI_GPIO/master/install.sh; chmod +x install.sh; ./install.sh 1
 echo
 
 curl '127.0.0.1/clear' &> /dev/null
