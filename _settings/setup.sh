@@ -79,12 +79,8 @@ ln -sf $mnt/Music /mnt/MPD/USB/Music
 
 echo -e "$bar Set pacman cache ..."
 #################################################################################
-echo "$mnt/varcache/pacman"
-if [[ ! -L /var/cache/pacman ]]; then
-	mkdir -p $mnt/varcache/pacman
-	rm -r /var/cache/pacman
-	ln -sf $mnt/varcache/pacman /var/cache/pacman
-fi
+mkdir -p $mnt/varcache/pacman
+ln -sf $mnt/varcache/pacman /var/cache/pacman
 
 echo -e "$bar OSMC pre-setup ..."
 #################################################################################
