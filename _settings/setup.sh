@@ -101,13 +101,14 @@ mv $file{,.original}
 wget -q --show-progress $gitpath/_settings/rune.rdb -O $file
 chown redis:redis $file
 chmod 644 $file
+systemctl start redis
+
 # add webradio
 echo '[playlist]
 NumberOfEntries=1
 File1=http://listen.181fm.com:8006
 Title1=181FM' > /mnt/MPD/Webradio/181FM.pls
 
-systemctl reload-or-restart redis
 redis-cli hset webradios 181FM http://listen.181fm.com:8006
 
 # extra command for some settings
