@@ -7,7 +7,7 @@
 rm $0
 
 # import heading function
-wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+wget -qN https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
 timestart
 
 if pacman -Q aria2 &>/dev/null; then
@@ -22,11 +22,11 @@ else
 	ans=$1
 fi
 
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/uninstall_aria.sh
+wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/aria2/uninstall_aria.sh
 chmod +x uninstall_aria.sh
 
 if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
+	wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
 fi
