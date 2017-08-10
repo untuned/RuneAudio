@@ -107,7 +107,7 @@ NumberOfEntries=1
 File1=http://listen.181fm.com:8006
 Title1=181FM' > /mnt/MPD/Webradio/181FM.pls
 
-systemctl start redis
+systemctl reload-or-restart redis
 redis-cli hset webradios 181FM http://listen.181fm.com:8006
 
 # extra command for some settings
