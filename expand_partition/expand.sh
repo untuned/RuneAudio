@@ -6,7 +6,7 @@
 rm $0
 
 # import heading function
-wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+wget -qN https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
 	echo -e "$info Unable to continue with this version."
@@ -56,7 +56,7 @@ read -n 1 answer
 if [[ $answer == 1 ]]; then
 	if ! pacman -Q parted &>/dev/null; then
 		echo -e "$bar Get package file ..."
-		wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
+		wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
 		pacman -U --noconfirm parted-3.2-5-armv7h.pkg.tar.xz
 		rm parted-3.2-5-armv7h.pkg.tar.xz
 	fi
