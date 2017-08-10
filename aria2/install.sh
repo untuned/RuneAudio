@@ -22,11 +22,12 @@ else
 	ans=$1
 fi
 
-wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/aria2/uninstall_aria.sh
+gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master
+wget -qN --show-progress $gitpath/aria2/uninstall_aria.sh
 chmod +x uninstall_aria.sh
 
 if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/rankmirrors/rankmirrors.sh
+	wget -qN --show-progress $gitpath/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
 fi
