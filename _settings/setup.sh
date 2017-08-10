@@ -99,17 +99,10 @@ systemctl stop redis
 file=/var/lib/redis/rune.rdb
 mv $file{,.original}
 wget -q --show-progress $gitpath/_settings/rune.rdb -O $file
+wget -q --show-progress $gitpath/_settings/181FM.pls -P /mnt/MPD/Webradio # add webradio
 chown redis:redis $file
 chmod 644 $file
 systemctl start redis
-
-# add webradio
-echo '[playlist]
-NumberOfEntries=1
-File1=http://listen.181fm.com:8006
-Title1=181FM' > /mnt/MPD/Webradio/181FM.pls
-
-redis-cli hset webradios 181FM http://listen.181fm.com:8006
 
 # extra command for some settings
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
