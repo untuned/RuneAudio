@@ -11,7 +11,7 @@ _Tested on RuneAudio RPi3_
 **SSH command**
 
 ```
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/expand_partition/expand.sh; chmod +x expand.sh; ./expand.sh
+wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/expand_partition/expand.sh; chmod +x expand.sh; ./expand.sh
 ```
 
 - Install package **Parted**  
