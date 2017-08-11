@@ -60,8 +60,6 @@ bootrune() {
 	bootx 8
 }
 
-c='\e[30m\e[43m'
-c0='\e[0m'
 setup() {
 	if [[ ! -e /etc/motd.logo ]]; then
 		wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/_settings/setup.sh
