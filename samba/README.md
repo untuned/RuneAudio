@@ -125,3 +125,6 @@ systemctl restart nmbd smbd
 adduser [user] # create new system user if not exist
 smbpasswd -a [user]
 ```
+
+**List accessing**  
+`smbstatus`  
