@@ -38,7 +38,7 @@ if ls /dev/sd? &>/dev/null; then
 	echo -e "Drive: \e[0;36m$hdd\e[m"
 	
 	if df | grep '/dev/sd' &>/dev/null; then
-		yesno "$info Unmount: $mnt" answer
+		yesno "Unmount: $mnt" answer
 		if [[ $answer == 1 ]]; then
 			umount -l /dev/sd??
 			if [ $? -eq 0 ]; then
@@ -63,12 +63,7 @@ echo -e "Current partiton: \e[0;36m$devpart\e[m"
 echo -e "Current available free space: \e[0;36m$freemb MB\e[m"
 echo -e "Available unused disk space: \e[0;36m$unpartmb MB\e[m"
 echo
-echo -e "Expand partiton to full unused space:"
-echo -e "  \e[0;36m0\e[m Cancel"
-echo -e "  \e[0;36m1\e[m Expand"
-echo
-echo -e "\e[0;36m0\e[m / 1 ? "
-read -n 1 answer
+yesno "Expand partiton to full unused space:" answer
 if [[ $answer == 1 ]]; then
 	if ! pacman -Q parted &>/dev/null; then
 		echo -e "$bar Get package file ..."
