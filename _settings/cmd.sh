@@ -54,10 +54,10 @@ bootx() {
  	reboot
 }
 bootosmc() {
- 	bootx 6
+ 	bootx 6 &
 }
 bootrune() {
-	bootx 8
+	bootx 8 &
 }
 
 setup() {
