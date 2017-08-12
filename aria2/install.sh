@@ -17,9 +17,9 @@ fi
 
 if (( $# == 0 )); then
 	# user input
-	yesno "Start Aria2 on system startup:" ans
+	yesno "Start Aria2 on system startup:"
 else
-	ans=$1
+	answer=$1
 fi
 
 gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master
@@ -91,7 +91,7 @@ WantedBy=multi-user.target
 ' > /etc/systemd/system/aria2.service
 
 # start
-[[ $ans == 1 ]] && systemctl enable aria2
+[[ $answer == 1 ]] && systemctl enable aria2
 echo -e "$bar Start Aria2 ..."
 systemctl start aria2
 
