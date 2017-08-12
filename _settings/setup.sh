@@ -94,11 +94,12 @@ echo -e "$bar Restore settings ..."
 systemctl stop redis
 file=/var/lib/redis/rune.rdb
 mv $file{,.original}
-wget -q --show-progress $gitpath/_settings/rune.rdb -O $file
-wget -q --show-progress $gitpath/_settings/181FM.pls -P /mnt/MPD/Webradio # add webradio
+wget -q --show-progress $gitpath/_settings/rune.rdb -O $file              # database of local music and webradio
+wget -q --show-progress $gitpath/_settings/181FM.pls -P /mnt/MPD/Webradio # add webradio file
 chown redis:redis $file
 chmod 644 $file
 systemctl start redis
+mpc update Webradio
 
 # extra command for some settings
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
