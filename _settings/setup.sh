@@ -77,7 +77,7 @@ fi
 [[ -e /mnt/MPD/USB/hdd && $( ls -1 /mnt/MPD/USB/hdd | wc -l ) == 0 ]] && rm -r /mnt/MPD/USB/hdd
 ln -sf $mnt/Music /mnt/MPD/USB/Music
 
-echo -e "$bar Set pacman cache ..."
+echo -e "\n$bar Set pacman cache ...\n"
 #################################################################################
 mkdir -p $mnt/varcache/pacman
 rm -rf /var/cache/pacman
