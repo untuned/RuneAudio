@@ -43,8 +43,8 @@ if ! grep -q 'a.playlist > b.playlist' $runeui; then
             });
 	' $runeui
 	
-	#sed -i 's/for(d=0;c=a\[d\];d+=1)/data.sort(function(a,b){return a.playlist<b.playlist?-1:a.playlist>b.playlist?1:0});&/
-	#' /srv/http/assets/js/runeui.min.js
+	sed -i 's/for(d=0;c=a\[d\];d+=1)/ a.sort(function(x,y){return x.playlist<y.playlist?-1:x.playlist>y.playlist?1:0});&/
+	' /srv/http/assets/js/runeui.min.js
 fi
 
 echo -e '\n\e[36m\e[46m . \e[0m Webradio imported successfully.\n'
