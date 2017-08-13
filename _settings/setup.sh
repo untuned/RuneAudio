@@ -94,11 +94,11 @@ echo -e "$bar Restore settings ..."
 # settings
 systemctl stop redis
 file=/var/lib/redis/rune.rdb
-mv $file{,.original}
-wget -qN --show-progress $gitpath/_settings/rune.rdb -O $file              # database of local music and webradio
+#mv $file{,.original}
+wget -q --show-progress $gitpath/_settings/rune.rdb -O $file              # database of local music and webradio
 wget -qN --show-progress $gitpath/_settings/181FM.pls -P /mnt/MPD/Webradio # add webradio file
-chown redis:redis $file
-chmod 644 $file
+#chown redis:redis $file
+#chmod 644 $file
 systemctl start redis
 mpc update Webradio
 
@@ -108,10 +108,10 @@ ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
 
 # mpd database
 file=/var/lib/mpd/mpd.db
-mv $file{,.original}
-wget -qN --show-progress $gitpath/_settings/mpd.db -O $file
-chown mpd:audio $file
-chmod 644 $file
+#mv $file{,.original}
+wget -q --show-progress $gitpath/_settings/mpd.db -O $file
+#chown mpd:audio $file
+#chmod 644 $file
 systemctl restart mpd
 
 sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js        # change pnotify 8 to 1 sec
