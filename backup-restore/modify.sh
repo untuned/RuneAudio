@@ -11,23 +11,23 @@ sed -i "/case 'restore'/,+4 s|// ||" /srv/http/command/rune_SY_wrk
 sed -i -e '/function wrk_backup/, /^}/ s|^|//|
 ' -e '/function wrk_backup/ i\
 function wrk_backup(\$bktype) {\
-    \$file = "/tmp/backup_".date('Ymd-hi').".tar.xz";\
-    \$exclude = ' --exclude /etc/netctl/examples ';\
-    \$dir = " /var/lib/mpd /etc/mpd.conf /var/lib/redis/rune.rdb /etc/netctl /etc/mpdscribble.conf /etc/spop /etc/localtime";\
+    \$file = "/tmp/backup_"\.date('Ymd-hi')\."\.tar\.xz";\
+    \$exclude = " --exclude /etc/netctl/examples ";\
+    \$dir = " /var/lib/mpd /etc/mpd\.conf /var/lib/redis/rune\.rdb /etc/netctl /etc/mpdscribble\.conf /etc/spop /etc/localtime";\
     \$cmdstring = "redis-cli save; ";\
-    \$cmdstring .= 'bsdtar -czf'.\$exclude.\$file.\$dir;\
+    \$cmdstring \.= "bsdtar -czf \.\$exclude\.\$file\.\$dir";\
     sysCmd(\$cmdstring);\
     return \$filepath;\
 }
 ' -e '/function wrk_restore/, /^}/ s|^|//|
 ' -e '/function wrk_restore/ i\
 function wrk_restore(\$backupfile) {\
-    \$path = "/tmp/backup_20170813-0733.tar.gz";
+    \$file = "/tmp/backup\.tar\.xz";\
     \$cmdstring = "systemctl stop mpd redis; ";\
-    \$cmdstring .= "bsdtar -xf ".\$path." -C /; ";\
-    \$cmdstring .= "systemctl start mpd redis; ";\
-    \$cmdstring .= "mpc update Webradio";\
-    \$cmdstring .= "rm \$path";\
+    \$cmdstring \.= "bsdtar -xf "\.\$path\." -C /; ";\
+    \$cmdstring \.= "systemctl start mpd redis; ";\
+    \$cmdstring \.= "mpc update Webradio";\
+    \$cmdstring \.= "rm \$path";\
     sysCmd(\$cmdstring);\
 }
 ' /srv/http/app/libs/runeaudio.php
