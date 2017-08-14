@@ -46,7 +46,8 @@ $restore = exec("sudo /srv/http/restore.sh $filedest; echo $?");
 if ($restore == 1) die('Restore failed !');
 ```
  
-`/srv/http/restore.sh`
+`/srv/http/restore.sh`  
+(php cannot sudo bash command directly.)
 ```sh
 #!/bin/bash
 
