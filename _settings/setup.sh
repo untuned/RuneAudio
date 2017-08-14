@@ -104,7 +104,7 @@ mpc update Webradio
 
 # extra command for some settings
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
-#hostname RT-AC66U                                     # set hostname
+#hostnamectl set-hostname RT-AC66U                     # set hostname
 
 # mpd database
 file=/var/lib/mpd/mpd.db
