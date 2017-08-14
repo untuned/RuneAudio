@@ -1,8 +1,4 @@
 #!/bin/bash
 
-systemctl stop mpd redis
-bsdtar -xf $1 -C /
-systemctl start mpd redis
-mpc update Webradio
-hostnamectl set-hostname $( redis-cli get hostname )
+bsdtar -xf $1 -C /root/x
 rm $1
