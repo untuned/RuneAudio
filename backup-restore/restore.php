@@ -10,5 +10,8 @@ if (! move_uploaded_file($filetmp, $filedest)) die('File move error !');
 
 $restore = exec("sudo /srv/http/restore.sh $filedest; echo $?");
 
-if ($restore == 1) die('Restore failed !');
-echo 'Restored successfully.';
+if ($restore == 0) {
+  echo 'Restored successfully.';
+} else {
+  echo 'Restore failed !';
+}
