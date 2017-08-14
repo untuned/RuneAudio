@@ -14,6 +14,6 @@ echo '<br>';
 if ($filesize === 0) die('File upload error !');
 if (! move_uploaded_file($filetmp, $filedest)) die('File move error !');
 
-$restore = exec("sudo /srv/http/extract.sh $filedest; echo $?");
+$restore = exec("sudo /srv/http/restore.sh $filedest; echo $?");
 
 if ($restore == 1) die('Restore failed !');
