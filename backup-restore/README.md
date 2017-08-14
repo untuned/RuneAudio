@@ -2,14 +2,14 @@
 `/srv/http/app/templates/settings.php`  
 ```html
 <!--<form class="form-horizontal" method="post">-->
-    <form class="form-horizontal" method="post" action="../../restore.php">
+    <form action="../../restore.php" method="post" enctype="multipart/form-data" class="form-horizontal">
         <fieldset>
             <div class="form-group">
                 <label class="control-label col-sm-2">Restore player config</label>
                 <div class="col-sm-10">
                     <p>
                         <span id="btn-backup-browse" class="btn btn-default btn-lg btn-file">
-                            Browse... <input type="file" name="fileToUpload">
+                            Browse... <input type="file" name="filebackup">
                         </span> 
                         <span id="backup-file"></span>
                         <span class="help-block">Restore a previously exported backup</span>
