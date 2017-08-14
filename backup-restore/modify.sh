@@ -16,15 +16,18 @@ function wrk_backup(\$bktype) {\
     \$dir = " /var/lib/mpd /etc/mpd.conf /var/lib/redis/rune.rdb /etc/netctl /etc/mpdscribble.conf /etc/spop /etc/localtime";\
     \$cmdstring = "redis-cli save; ";\
     \$cmdstring .= 'bsdtar -czf'.\$exclude.\$file.\$dir;\
+    sysCmd(\$cmdstring);\
+    return \$filepath;\
 }
 ' -e '/function wrk_restore/, /^}/ s|^|//|
 ' -e '/function wrk_restore/ i\
 function wrk_restore(\$backupfile) {\
-    \$path = "/run/backup_20170813-0733.tar.gz";
+    \$path = "/tmp/backup_20170813-0733.tar.gz";
     \$cmdstring = "systemctl stop mpd redis; ";\
     \$cmdstring .= "bsdtar -xf ".\$path." -C /; ";\
     \$cmdstring .= "systemctl start mpd redis; ";\
     \$cmdstring .= "mpc update Webradio";\
     \$cmdstring .= "rm \$path";\
+    sysCmd(\$cmdstring);\
 }
 ' /srv/http/app/libs/runeaudio.php
