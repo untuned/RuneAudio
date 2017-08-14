@@ -1,8 +1,8 @@
 **modify upload**  
 `/srv/http/app/templates/settings.php`  
 ```html
-<!--    <form class="form-horizontal" method="post">-->
-    <form class="form-horizontal" method="post" action="../../upload.php">
+<!--<form class="form-horizontal" method="post">-->
+    <form class="form-horizontal" method="post" action="../../restore.php">
         <fieldset>
             <div class="form-group">
                 <label class="control-label col-sm-2">Restore player config</label>
@@ -14,8 +14,8 @@
                         <span id="backup-file"></span>
                         <span class="help-block">Restore a previously exported backup</span>
                     </p>
-<!--                    <button id="btn-backup-upload" name="syscmd" value="restore" class="btn btn-primary btn-lg" type="submit" disabled>Upload</button>-->
-                    <input type="submit" id="restore" class="btn btn-primary btn-lg" value="Restore">
+<!--                <button id="btn-backup-upload" name="syscmd" value="restore" class="btn btn-primary btn-lg" type="submit" disabled>Upload</button>-->
+                    <input type="submit" class="btn btn-primary btn-lg" value="Restore">
                 </div>
             </div>
 		</fieldset>
