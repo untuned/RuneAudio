@@ -31,7 +31,7 @@ function wrk_backup(\$bktype) {\
 		' /etc/spop'\.\
 		' /etc/localtime'\.\
 		' /etc/netctl'\.\
-		' /mnt/MPD/Webradio'\.\
+		' /mnt/MPD/Webradio'\
 	;\
 	\$exclude = '--exclude /etc/netctl/examples';\
 	\$cmdstring = "redis-cli save; ";\
