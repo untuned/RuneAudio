@@ -15,7 +15,7 @@
                         <span class="help-block">Restore a previously exported backup</span>
                     </p>
 <!--                <button id="btn-backup-upload" name="syscmd" value="restore" class="btn btn-primary btn-lg" type="submit" disabled>Upload</button>-->
-                    <input type="submit" class="btn btn-primary btn-lg" value="Restore">
+                    <input id="btn-backup-upload" type="submit" class="btn btn-primary btn-lg" value="Restore" disabled>
                 </div>
             </div>
 		</fieldset>
@@ -32,18 +32,16 @@ $filetmp = $file['tmp_name'];
 $filedest = '/srv/http/'.$filename;
 $filesize = filesize($filetmp);
 
-echo '<br>name = '.$filename;
-echo '<br>tmp_name = '.$filetmp;
-echo '<br>dest = '.$filedest;
-echo '<br>size = '.$filesize;
-echo '<br>';
-
 if ($filesize === 0) die('File upload error !');
 if (! move_uploaded_file($filetmp, $filedest)) die('File move error !');
 
 $restore = exec("sudo /srv/http/restore.sh $filedest; echo $?");
 
-if ($restore == 1) die('Restore failed !');
+if ($restore == 0) {
+	echo 'Restored successfully.';
+} else {
+	echo 'Restore failed !';
+}
 ```
  
 `/srv/http/restore.sh`  
