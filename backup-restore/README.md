@@ -1,3 +1,21 @@
+**modify backup**
+`/srv/http/app/libs/runeaudio.php`  
+```php
+/*function wrk_backup($bktype)
+{
+    if ($bktype === 'dev') {
+        $filepath = "/run/totalbackup_".date('Y-m-d').".tar.gz";
+        $cmdstring = "tar -czf ".$filepath." /var/lib/mpd /boot/cmdline.txt /var/www /etc /var/lib/redis/rune.rdb";
+    } else {
+        $filepath = "/run/backup_".date('Y-m-d').".tar.gz";*/
+        $cmdstring = "redis-cli save; ";
+        $cmdstring .= "tar -czf ".$filepath." --exclude /etc/netctl/examples /mnt/MPD/Webradio /var/lib/mpd /etc/mpd.conf /var/lib/redis/rune.rdb /etc/netctl /etc/mpdscribble.conf /etc/spop";
+/*    }
+    sysCmd($cmdstring);
+    return $filepath;
+}*/
+```
+
 **modify upload**  
 `/srv/http/app/templates/settings.php`  
 ```html
