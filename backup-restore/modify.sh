@@ -17,7 +17,7 @@ function wrk_backup(\$bktype) {\
     \$cmdstring = "redis-cli save; ";\
     \$cmdstring \.= "bsdtar -czf \.\$exclude\.\$file\.\$dir";\
     sysCmd(\$cmdstring);\
-    return \$filepath;\
+    return \$file;\
 }
 ' -e '/function wrk_restore/, /^}/ s|^|//|
 ' -e '/function wrk_restore/ i\
@@ -27,7 +27,7 @@ function wrk_restore(\$backupfile) {\
     \$cmdstring \.= "bsdtar -xf "\.\$path\." -C /; ";\
     \$cmdstring \.= "systemctl start mpd redis; ";\
     \$cmdstring \.= "mpc update Webradio";\
-    \$cmdstring \.= "rm \$path";\
+    \$cmdstring \.= "rm \$file";\
     sysCmd(\$cmdstring);\
 }
 ' /srv/http/app/libs/runeaudio.php
