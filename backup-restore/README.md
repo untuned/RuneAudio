@@ -10,7 +10,7 @@ How To
     - include `/mnt/MPD/Webradio`
     - add `redis-cli save`
 - Restore:
-    - remove default form event
+    - remove default form event to avoid page change
     - upload file by ajax instead
     - use new php script to upload file
 - Write permission:
