@@ -17,7 +17,7 @@ mkdir -p /srv/http/tmp
 chown http:http /srv/http/tmp
 
 sed -i -e '\|/run/backup_|,+1 s|^|//|
-' -e '\|/run/backup_| a\
+' -e '\|/run/backup_| i\
     \$filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";\
     \$cmdstring = "rm -f /srv/http/tmp/backup_\* &> /dev/null; "\.\
         "redis-cli save; "\.\
