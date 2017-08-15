@@ -111,7 +111,7 @@ file=/etc/sudoers.d/sudoers
 echo $file
 echo 'http ALL=NOPASSWD: ALL' > $file
 
-chmod 755 /etc/sudoers.d/sudoers /srv/http/restore.*
+chmod 755 /etc/sudoers.d/sudoers /srv/http/restore.* /srv/http/tmp
 chown http:http /srv/http/restore.* /srv/http/tmp
 
 # refresh #######################################
