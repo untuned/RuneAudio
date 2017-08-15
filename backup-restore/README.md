@@ -63,9 +63,9 @@ How To
                 <label class="control-label col-sm-2">Restore player config</label>
                 <div class="col-sm-10">
                     <p>
-                        <span id="btn-backup-browse" class="btn btn-default btn-lg btn-file">
+                        <span id="btn-backup-browse" class="btn btn-default btn-lg btn-file">-->
                             Browse... <input type="file" name="filebackup">
-                        </span> 
+                    <!--</span> 
                         <span id="backup-file"></span>
                         <span class="help-block">Restore a previously exported backup</span>
                     </p>-->
