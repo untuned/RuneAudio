@@ -15,9 +15,14 @@ if [[ -e /srv/http/restore.php ]]; then
     echo -e "$info Already installed."
     exit
 fi
-mkdir -p /srv/http/tmp
+
+dir=/srv/http/tmp
+echo $dir
+mkdir -p $dir
 chown http:http /srv/http/tmp
 
+file=/srv/http/app/libs/runeaudio.php
+echo $file
 sed -i -e '\|/run/backup_|,+1 s|^|//|
 ' -e '\|/run/backup_| i\
         \$filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";\
@@ -33,15 +38,19 @@ sed -i -e '\|/run/backup_|,+1 s|^|//|
                 "/etc/mpdscribble\.conf "\.\
                 "/etc/spop"\
         ;
-' /srv/http/app/libs/runeaudio.php
+' $file
 
 systemctl restart rune_SY_wrk &
 
+file=/srv/http/app/templates/settings.php
+echo $file
 sed -i -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
 ' -e 's/type="file"/& name="filebackup"/
 ' -e'/value="restore"/ s/name="syscmd" value="restore" //; s/type="submit" disabled>Upload/disabled>Restore/
-' /srv/http/app/templates/settings.php
+' $file
 
+file=/srv/http/assets/js/runeui.js
+echo $file
 echo '
 $("#restore").submit(function() {
     var formData = new FormData($(this)[0]);
@@ -59,11 +68,15 @@ $("#restore").submit(function() {
     });
     return false
 });
-' >> /srv/http/assets/js/runeui.js
+' >> $file
 
+file=/srv/http/assets/js/runeui.min.js
+echo $file
 echo '$("#restore").submit(function(){var t=new FormData($(this)[0]);return $.ajax({url:"../../restore.php",type:"POST",data:t,cache:!1,contentType:!1,enctype:"multipart/form-data",processData:!1,success:function(t){alert(t)}}),!1});
-' >> /srv/http/assets/js/runeui.min.js
+' >> $file
 
+file=/srv/http/restore.php
+echo $file
 echo '<?php
 $file = $_FILES["filebackup"];
 $filename = $file["name"];
@@ -81,8 +94,10 @@ if ($restore == 0) {
 } else {
 	echo "Restore failed !";
 }
-' > /srv/http/restore.php
+' > $file
 
+file=/srv/http/restore.sh
+echo $file
 echo '#!/bin/bash
 
 systemctl stop mpd redis
@@ -91,9 +106,11 @@ systemctl start mpd redis
 mpc update Webradio
 hostnamectl set-hostname $( redis-cli get hostname )
 rm $1
-' > /srv/http/restore.sh
+' > $file
 
-echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/sudoers
+file=/etc/sudoers.d/sudoers
+echo $file
+echo 'http ALL=NOPASSWD: ALL' > $file
 chmod 755 -R /etc/sudoers.d/
 
 # refresh #######################################
