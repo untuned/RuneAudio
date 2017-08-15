@@ -1,7 +1,26 @@
+How To
+---
+**Issues**  
+- RuneAudio 'Backup' works but `redis-cli save` was missing before backup
+- Restore with 'Upload' was disabled for pending code
+
+**Fixes**  
+Backup:
+- exclude unnecessary `/etc/netctl/examples`
+- include `/mnt/MPD/Webradio`
+- add `redis-cli save`
+
+Restore:
+- remove form default: method, name-value-type
+- use ajax instead: add form id, enctype
+- use new php script to upload file
+- use external bash script to restore (workaround write permission outside ./http)
+
 **modify backup**  
 `/srv/http/app/libs/runeaudio.php`  
-- add webradio files
 - exculde unnecessary `/etc/netctl/examples`
+- include `/mnt/MPD/Webradio`
+- add `redis-cli save`
 ```php
 /*function wrk_backup($bktype)
 {
