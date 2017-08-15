@@ -3,8 +3,6 @@
 # install.sh
 
 # fix restore settings issue
-# must 'systemctl restart rune_SY_wrk' after modify
-# or menu > development > restart rune_SY_wrk
 
 rm $0
 
