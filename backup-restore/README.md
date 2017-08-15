@@ -14,9 +14,8 @@ How To
     - upload file by ajax instead
     - use new php script to upload file
 - Write permission:
-    - http user cannot write outside `./http`
+    - http user cannot write outside `./http` and sudo commands directly
     - allow no password sudo in `/etc/sudoers.d`
-    - http user cannot sudo commands directly
     - use external bash script to restore
 <hr>
 
