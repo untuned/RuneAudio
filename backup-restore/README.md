@@ -76,6 +76,25 @@ How To
 		</fieldset>
     </form>-->
 ```
+`/srv/http/assets/js/runeui.js`  
+```js
+// append
+    $('#restore').submit(function() {
+        var formData = new FormData($(this)[0]);
+        $.ajax({
+            url: '../../restore.php',
+            type: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function (response) {
+                alert(response);
+            }
+        });
+    });
+```
  
 **add restore script**  
 `/srv/http/restore.php`  
