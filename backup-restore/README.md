@@ -35,7 +35,7 @@ How To
         $filepath = "/run/backup_".date('Y-m-d').".tar.gz";*/
         $cmdstring = 'rm -f /srv/http/tmp/backup_* &> /dev/null; '.
             'redis-cli save; '.
-            "tar -czf $filepath".
+            "tar -cpzf $filepath".
                 ' --exclude /etc/netctl/examples '.
                 '/etc/netctl '.
                 '/mnt/MPD/Webradio '.
