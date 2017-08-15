@@ -19,7 +19,6 @@ fi
 dir=/srv/http/tmp
 echo $dir
 mkdir -p $dir
-chown http:http /srv/http/tmp
 
 file=/srv/http/app/libs/runeaudio.php
 echo $file
@@ -108,13 +107,12 @@ hostnamectl set-hostname $( redis-cli get hostname )
 rm $1
 ' > $file
 
-chown http:http /srv/http/restore.*
-chmod 755 /srv/http/restore.*
-
 file=/etc/sudoers.d/sudoers
 echo $file
 echo 'http ALL=NOPASSWD: ALL' > $file
-chmod 755 -R /etc/sudoers.d/
+
+chmod 755 /etc/sudoers.d/sudoers /srv/http/restore.*
+chown http:http /srv/http/restore.* /srv/http/tmp
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
