@@ -5,16 +5,17 @@ How To
 - Restore with 'Upload' was disabled for pending code
 
 **Fixes**  
-Backup:
-- exclude unnecessary `/etc/netctl/examples`
-- include `/mnt/MPD/Webradio`
-- add `redis-cli save`
+- Backup:
+    - exclude unnecessary `/etc/netctl/examples`
+    - include `/mnt/MPD/Webradio`
+    - add `redis-cli save`
 
-Restore:
-- remove form default: method, name-value-type
-- use ajax instead: add form id, enctype
-- use new php script to upload file
-- use external bash script to restore (workaround write permission outside ./http)
+- Restore:
+    - remove form default: method, name-value-type
+    - use ajax instead: add form id, enctype
+    - use new php script to upload file
+    - use external bash script to restore (workaround write permission outside ./http)
+<hr>
 
 **modify backup**  
 `/srv/http/app/libs/runeaudio.php`  
