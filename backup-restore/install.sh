@@ -40,7 +40,7 @@ sed -i -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
 ' -e'/value="restore"/ s/name="syscmd" value="restore" //; s/type="submit" disabled>Upload/disabled>Restore/
 ' /srv/http/app/templates/settings.php
 
-jsrestore='
+echo '
 $("#restore").submit(function() {
     var formData = new FormData($(this)[0]);
     $.ajax({
@@ -57,9 +57,10 @@ $("#restore").submit(function() {
     });
     return false
 });
-'
-echo "$jsrestore" >> /srv/http/assets/js/runeui.js
-echo "$jsrestore" >> /srv/http/assets/js/runeui.min.js
+' >> /srv/http/assets/js/runeui.js
+
+echo '$("#restore").submit(function(){var t=new FormData($(this)[0]);return $.ajax({url:"../../restore.php",type:"POST",data:t,cache:!1,contentType:!1,enctype:"multipart/form-data",processData:!1,success:function(t){alert(t)}}),!1});
+' >> /srv/http/assets/js/runeui.min.js
 
 echo '<?php
 $file = $_FILES["filebackup"];
