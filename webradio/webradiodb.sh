@@ -31,16 +31,12 @@ mpc update Webradio &> /dev/null
 
 # fix sorting
 runeui=/srv/http/assets/js/runeui.js
-if ! grep -q 'a.playlist > b.playlist' $runeui; then
-	line=$(( $( sed -n '/id="webradio-add"/=' $runeui ) - 9 ))
-	sed -i $line' i\
-            data.sort(function(a, b){\
-                if (a.playlist < b.playlist)\
-                    return -1;\
-                if (a.playlist > b.playlist)\
-                    return 1;\
-                return 0;\
-            });
+if ! grep -q 'append(elems)' $runeui; then
+	sed -i '/highlighted entry/ a\
+            var elems = $("#database-entries li").detach().sort(function (a, b) {\
+                return $(a).text().toLowerCase().localeCompare(\$(b).text().toLowerCase());\
+            });\
+            $('#database-entries').append(elems);
 	' $runeui
 	
 	sed -i 's/for(d=0;c=a\[d\];d+=1)/ a.sort(function(x,y){return x.playlist<y.playlist?-1:x.playlist>y.playlist?1:0});&/
