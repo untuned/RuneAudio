@@ -11,6 +11,10 @@ wget -qN https://raw.githubusercontent.com/rern/title_script/master/title.sh; . 
 
 title -l = "$bar Install Backup-Restore update ..."
 
+if [[ -e /srv/http/restore.php ]]; then
+    echo -e "$info Already installed."
+    exit
+fi
 mkdir -p /srv/http/tmp
 chown http:http /srv/http/tmp
 
