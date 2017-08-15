@@ -46,6 +46,7 @@
  
 **add restore files**  
 `/srv/http/restore.php`  
+(php, http user, cannot save file outside ./http)
 ```php
 <?php
 $file = $_FILES['filebackup'];
@@ -67,7 +68,7 @@ if ($restore == 0) {
 ```
  
 `/srv/http/restore.sh`  
-(php cannot sudo bash command directly.)
+(php, http user, cannot sudo bash command directly.)
 ```sh
 #!/bin/bash
 
