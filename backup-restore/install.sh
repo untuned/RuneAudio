@@ -108,6 +108,9 @@ hostnamectl set-hostname $( redis-cli get hostname )
 rm $1
 ' > $file
 
+chown http:http /srv/http/restore.*
+chmod 755 /srv/http/restore.*
+
 file=/etc/sudoers.d/sudoers
 echo $file
 echo 'http ALL=NOPASSWD: ALL' > $file
