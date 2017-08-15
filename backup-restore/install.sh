@@ -6,6 +6,13 @@
 # must 'systemctl restart rune_SY_wrk' after modify
 # or menu > development > restart rune_SY_wrk
 
+rm $0
+
+# import heading function
+wget -qN https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
+
+title -l = "$bar Install Backup-Restore update ..."
+
 mkdir -p /srv/http/tmp
 chown http:http /srv/http/tmp
 
@@ -83,3 +90,18 @@ rm $1
 
 echo 'http ALL=NOPASSWD: ALL' > /etc/sudoers.d/sudoers
 chmod 755 -R /etc/sudoers.d/
+
+# refresh #######################################
+echo -e "$bar Clear PHP OPcache ..."
+curl '127.0.0.1/clear'
+echo
+
+if pgrep midori >/dev/null; then
+	killall midori
+	sleep 1
+	xinit &>/dev/null &
+	echo 'Local browser restarted.'
+fi
+
+title -l = "$bar Backup-Restore update installed successfully."
+title -nt "$info Refresh browser before use."
