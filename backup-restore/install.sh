@@ -18,19 +18,19 @@ chown http:http /srv/http/tmp
 
 sed -i -e '\|/run/backup_|,+1 s|^|//|
 ' -e '\|/run/backup_| i\
-    \$filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";\
-    \$cmdstring = "rm -f /srv/http/tmp/backup_\* &> /dev/null; "\.\
-        "redis-cli save; "\.\
-        "tar -czf \$filepath"\.\
-            " --exclude /etc/netctl/examples "\.\
-            "/etc/netctl "\.\
-            "/mnt/MPD/Webradio "\.\
-            "/var/lib/redis/rune\.rdb "\.\
-            "/var/lib/mpd "\.\
-            "/etc/mpd\.conf "\.\
-            "/etc/mpdscribble\.conf "\.\
-            "/etc/spop"\
-    ;
+        \$filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";\
+        \$cmdstring = "rm -f /srv/http/tmp/backup_\* &> /dev/null; "\.\
+            "redis-cli save; "\.\
+            "tar -czf \$filepath"\.\
+                " --exclude /etc/netctl/examples "\.\
+                "/etc/netctl "\.\
+                "/mnt/MPD/Webradio "\.\
+                "/var/lib/redis/rune\.rdb "\.\
+                "/var/lib/mpd "\.\
+                "/etc/mpd\.conf "\.\
+                "/etc/mpdscribble\.conf "\.\
+                "/etc/spop"\
+        ;
 ' /srv/http/app/libs/runeaudio.php
 
 systemctl restart rune_SY_wrk &
