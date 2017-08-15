@@ -18,6 +18,11 @@ How To
     - http user cannot write outside `./http` or `sudo` bash commands directly
     - allow no password sudo in `/etc/sudoers.d`
     - use external bash script to restore
+    
+**Install**
+```sh
+wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/backup-restore/install.sh; chmod +x install.sh; ./install.sh
+```
 <hr>
 
 **modify backup**  
