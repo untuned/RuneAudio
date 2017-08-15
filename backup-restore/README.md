@@ -10,13 +10,14 @@ How To
     - include `/mnt/MPD/Webradio`
     - add `redis-cli save`
 - Restore:
-    - remove form default: method, name-value-type
-    - use ajax instead: add form id, enctype
+    - remove default form event
+    - upload file by ajax instead
     - use new php script to upload file
 - Write permission:
-    - http user cannot write outside ./http and sudo commands
-    - use external bash script to restore (workaround write permission outside ./http)
+    - http user cannot write outside `./http`
     - allow no password sudo in `/etc/sudoers.d`
+    - http user cannot sudo commands directly
+    - use external bash script to restore
 <hr>
 
 **modify backup**  
