@@ -9,6 +9,7 @@ How To
     - exclude unnecessary `/etc/netctl/examples`
     - include `/mnt/MPD/Webradio`
     - add `redis-cli save`
+    - delete previous backup
 - Restore:
     - remove default form event to avoid page change
     - upload file by ajax instead
