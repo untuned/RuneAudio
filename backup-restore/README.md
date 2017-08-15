@@ -1,5 +1,7 @@
 **modify backup**  
 `/srv/http/app/libs/runeaudio.php`  
+- add webradio files
+- exculde unnecessary `/etc/netctl/examples`
 ```php
 /*function wrk_backup($bktype)
 {
@@ -18,10 +20,12 @@
 
 **modify upload**  
 `/srv/http/app/templates/settings.php`  
+- remove form default: method, name-value-type
+- use ajax instead: add form id, enctype
 ```html
-<!--<form class="form-horizontal" method="post">-->
-    <form action="../../restore.php" method="post" enctype="multipart/form-data" class="form-horizontal">
-        <fieldset>
+    <form id="restore" enctype="multipart/form-data" class="form-horizontal">
+<!--<form class="form-horizontal" method="post">
+    <fieldset>
             <div class="form-group">
                 <label class="control-label col-sm-2">Restore player config</label>
                 <div class="col-sm-10">
@@ -31,13 +35,13 @@
                         </span> 
                         <span id="backup-file"></span>
                         <span class="help-block">Restore a previously exported backup</span>
-                    </p>
-<!--                <button id="btn-backup-upload" name="syscmd" value="restore" class="btn btn-primary btn-lg" type="submit" disabled>Upload</button>-->
-                    <input id="btn-backup-upload" type="submit" class="btn btn-primary btn-lg" value="Restore" disabled>
+                    </p>-->
+                    <button id="btn-backup-upload" class="btn btn-primary btn-lg" disabled>Restore</button>
+<!--                <button id="btn-backup-upload" name="syscmd" value="restore" class="btn btn-primary btn-lg" type="submit" disabled>Upload</button>
                 </div>
             </div>
 		</fieldset>
-    </form>
+    </form>-->
 ```
  
 **add restore files**  
