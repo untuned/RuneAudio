@@ -32,7 +32,7 @@ How To
         $cmdstring = "tar -czf ".$filepath." /var/lib/mpd /boot/cmdline.txt /var/www /etc /var/lib/redis/rune.rdb";
     } else {
         $filepath = "/run/backup_".date('Y-m-d').".tar.gz";*/
-        $cmdstring = "rm /srv/http/tmp/backup_*;
+        $cmdstring = "rm /srv/http/tmp/backup_*; ";
         $cmdstring .= "redis-cli save; ";
         $cmdstring .= "tar -czf ".$filepath." --exclude /etc/netctl/examples /mnt/MPD/Webradio /var/lib/mpd /etc/mpd.conf /var/lib/redis/rune.rdb /etc/netctl /etc/mpdscribble.conf /etc/spop";
 /*    }
