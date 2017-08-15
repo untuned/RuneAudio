@@ -39,7 +39,7 @@ if ! grep -q 'append(elems)' $runeui; then
             $('#database-entries').append(elems);
 	' $runeui
 	
-	sed -i 's/for(d=0;c=a\[d\];d+=1)/ a.sort(function(x,y){return x.playlist<y.playlist?-1:x.playlist>y.playlist?1:0});&/
+	sed -i 's/var u=$("span","#db-currentpath")/var elems=$("#database-entries li").detach().sort(function(e,t){return $(e).text().toLowerCase().localeCompare($(t).text().toLowerCase())});$("#database-entries").append(elems);var u=$("span","#db-currentpath")/
 	' /srv/http/assets/js/runeui.min.js
 fi
 
