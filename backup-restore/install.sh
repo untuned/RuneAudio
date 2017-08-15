@@ -2,7 +2,7 @@
 
 # install.sh
 
-# fix restore settings issue
+# fix restore settings
 
 rm $0
 
