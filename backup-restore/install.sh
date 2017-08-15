@@ -33,6 +33,8 @@ sed -i -e '\|/run/backup_|,+1 s|^|//|
     ;
 ' /srv/http/app/libs/runeaudio.php
 
+systemctl restart rune_SY_wrk &
+
 sed -i -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
 ' -e 's/type="file"/& name="filebackup"/
 ' -e'/value="restore"/ s/name="syscmd" value="restore" //; s/type="submit" disabled>Upload/disabled>Restore/
