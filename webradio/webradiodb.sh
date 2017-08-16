@@ -31,7 +31,7 @@ mpc update Webradio &> /dev/null
 
 # fix sorting
 runeui=/srv/http/assets/js/runeui.js
-if ! grep -q 'append(elems)' $runeui; then
+if ! grep -q 'localeCompare' $runeui; then
     sed -i '/highlighted entry/ a\
             var elems = $("#database-entries li").detach().sort(function (a, b) {\
                 return $(a).text().toLowerCase().localeCompare(\$(b).text().toLowerCase());\
