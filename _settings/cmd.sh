@@ -71,7 +71,10 @@ setup() {
 }
 resetosmc() {
 	. osmcreset n
-	[[ $success != 1 ]] && return
+	if [[ $success != 1 ]]; then
+		echo -e "\e[37m\e[41m ! \e[0m OSMC reset failed."
+		return
+	fi
 	# preload initial setup
 	wget -qN --show-progress https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
 	. presetup.sh
@@ -79,7 +82,6 @@ resetosmc() {
 	mmc 7
 	wget -qN --show-progress https://raw.githubusercontent.com/rern/OSMC/master/_settings/cmd.sh -P /tmp/p7/etc/profile.d
 	
-	yesno "Reboot to OSMC:" ansre
 	[[ $ansre == 1 ]] && bootosmc
 }
 
