@@ -1,7 +1,7 @@
 How To
 ---
 **Issues**  
-- RuneAudio 'Backup' works but `redis-cli save` was missing before backup
+- RuneAudio 'Backup' works but does not save database before backup
 - Restore with 'Upload' was disabled for pending code
 
 **Fixes**  
