@@ -24,7 +24,7 @@ mkdir -p $dir
 
 file=/srv/http/app/libs/runeaudio.php
 echo $file
-sed -i '.original' -e '\|/run/backup_|,+1 s|^|//|
+sed -i -e '\|/run/backup_|,+1 s|^|//|
 ' -e '\|/run/backup_| i\
         $filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";\
         $cmdstring = "rm -f /srv/http/tmp/backup_* &> /dev/null; ".\
@@ -45,14 +45,13 @@ systemctl restart rune_SY_wrk
 
 file=/srv/http/app/templates/settings.php
 echo $file
-sed -i '.original' -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
+sed -i -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
 ' -e 's/type="file"/& name="filebackup"/
 ' -e'/value="restore"/ s/name="syscmd" value="restore" //; s/type="submit" disabled>Upload/disabled>Restore/
 ' $file
 
 file=/srv/http/assets/js/runeui.js
 echo $file
-cp $file{,.original}
 echo '
 $("#restore").submit(function() {
     var formData = new FormData($(this)[0]);
@@ -74,7 +73,6 @@ $("#restore").submit(function() {
 
 file=/srv/http/assets/js/runeui.min.js
 echo $file
-cp $file{,.original}
 echo '$("#restore").submit(function(){var t=new FormData($(this)[0]);return $.ajax({url:"../../restore.php",type:"POST",data:t,cache:!1,contentType:!1,enctype:"multipart/form-data",processData:!1,success:function(t){alert(t)}}),!1});
 ' >> $file
 
