@@ -17,7 +17,7 @@ mv -f /srv/http/assets/js/runeui.js{.original,}
 mv -f /srv/http/assets/js/runeui.min.js{.original,}
 rm /srv/http/restore.* /etc/sudoers.d/sudoers
 
-systemctl restart rune_SY_wrk &
+systemctl restart rune_SY_wrk
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
