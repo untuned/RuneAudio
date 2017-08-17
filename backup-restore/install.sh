@@ -16,6 +16,8 @@ if [[ -e /srv/http/restore.php ]]; then
     exit
 fi
 
+wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/backup-restore/uninstall_back.sh; chmod +x uninstall_back.sh
+
 dir=/srv/http/tmp
 echo $dir
 mkdir -p $dir
@@ -129,4 +131,5 @@ if pgrep midori >/dev/null; then
 fi
 
 title -l = "$bar Backup-Restore update installed successfully."
+echo 'Uninstall: ./uninstall_back.sh'
 title -nt "$info Refresh browser before use."
