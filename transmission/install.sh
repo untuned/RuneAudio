@@ -61,11 +61,11 @@ systemctl disable transmission
 ln -s /lib/systemd/system/trans{mission,}.service
 dir=/etc/systemd/system/trans.service.d
 mkdir $dir
-echo '[Service]
+echo "[Service]
 User=root
 Environment=TRANSMISSION_HOME=$path
 Environment=TRANSMISSION_WEB_HOME=$path/web
-' > $dir/override.conf
+" > $dir/override.conf
 systemctl daemon-reload
 
 # create settings.json
