@@ -33,13 +33,6 @@ echo -e "$bar Clear PHP OPcache ..."
 curl '127.0.0.1/clear'
 echo
 
-if pgrep midori >/dev/null; then
-	killall midori
-	sleep 1
-	xinit &>/dev/null &
-	echo 'Local browser restarted.'
-fi
-
 title -l = "$bar Backup-Restore update uninstalled successfully."
 
 rm #0
