@@ -19,6 +19,11 @@ rm /srv/http/restore.* /etc/sudoers.d/sudoers
 
 systemctl restart rune_SY_wrk &
 
+# refresh #######################################
+echo -e "$bar Clear PHP OPcache ..."
+curl '127.0.0.1/clear'
+echo
+
 if pgrep midori >/dev/null; then
 	killall midori
 	sleep 1
