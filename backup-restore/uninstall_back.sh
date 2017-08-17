@@ -11,6 +11,7 @@ if [[ ! -e /srv/http/restore.php ]]; then
 fi
 
 rm -r /srv/http/tmp
+
 sed -i -e '\|/run/backup_|,+1 s|^//||
 ' -e '\|/srv/http/tmp|,/^ \+;/ d
 ' /srv/http/app/libs/runeaudio.php
@@ -28,7 +29,6 @@ rm /srv/http/restore.* /etc/sudoers.d/sudoers
 
 systemctl restart rune_SY_wrk
 
-# refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
 curl '127.0.0.1/clear'
 echo
