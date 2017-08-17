@@ -35,4 +35,4 @@ echo
 
 title -l = "$bar Backup-Restore update uninstalled successfully."
 
-rm #0
+rm $0
