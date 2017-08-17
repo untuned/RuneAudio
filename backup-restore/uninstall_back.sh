@@ -17,8 +17,8 @@ sed -i -e '\|/run/backup_|,+1 s|^//||
 
 sed -i -e 's/id="restore"/method="post"/
 ' -e 's/type="file" name="filebackup"/type="file"/
-' -e 's/id="btn-backup-upload"/ s/id="btn-backup-upload"/& name="syscmd" value="restore"/; s/disabled>Restore/type="submit" disabled>Upload/
-'/srv/http/app/templates/settings.php
+' -e '/id="btn-backup-upload"/ s/id="btn-backup-upload"/& name="syscmd" value="restore"/; s/disabled>Restore/type="submit" disabled>Upload/
+' /srv/http/app/templates/settings.php
 
 sed -i '/#restore/,/^});/ d' /srv/http/assets/js/runeui.js
 
