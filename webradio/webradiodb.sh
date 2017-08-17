@@ -40,7 +40,7 @@ if ! grep -q 'localeCompare' $runeui; then
     ' $runeui
     
     sed -i 's/var u=$("span","#db-currentpath")/var elems=$("#database-entries li").detach().sort(function(a,b){return $(a).text().toLowerCase().localeCompare($(b).text().toLowerCase())});$("#database-entries").append(elems);&/
-    ' /srv/http/assets/js/runeui.min.js
+    ' ${runeui/.js/.min.js}
 fi
 
 echo -e '\n\e[36m\e[46m . \e[0m Webradio imported successfully.\n'
