@@ -108,8 +108,8 @@ systemctl start transmission
 timestop
 title -l = "$bar Transmission installed and started successfully."
 echo "Uninstall: ./uninstall_tran.sh"
-echo "Run: systemctl [ start / stop ] transmission"
-echo "Startup: systemctl [ enable / disable ] transmission"
+echo "Run: systemctl [ start / stop ] trans"
+echo "Startup: systemctl [ enable / disable ] trans"
 echo
 echo "Download directory: $path"
 echo "WebUI: [RuneAudio_IP]:9091"
