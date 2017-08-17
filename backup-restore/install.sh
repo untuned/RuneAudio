@@ -41,7 +41,7 @@ sed -i '.original' -e '\|/run/backup_|,+1 s|^|//|
         ;
 ' $file
 
-systemctl restart rune_SY_wrk &
+systemctl restart rune_SY_wrk
 
 file=/srv/http/app/templates/settings.php
 echo $file
