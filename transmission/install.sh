@@ -58,7 +58,8 @@ systemctl stop transmission
 systemctl disable transmission
 
 # custom systemd unit
-dir=/etc/systemd/system/transmission.service.d
+ln -s /lib/systemd/system/trans{mission,}.service
+dir=/etc/systemd/system/trans.service.d
 mkdir $dir
 echo "User=root
 Environment=TRANSMISSION_HOME=$path
