@@ -54,10 +54,10 @@ else
 fi
 mkdir -p $path/{incomplete,watch}
 
+# custom systemd unit
 systemctl stop transmission
 systemctl disable transmission
 
-# custom systemd unit
 ln -s /lib/systemd/system/trans{mission,}.service
 dir=/etc/systemd/system/trans.service.d
 mkdir $dir
