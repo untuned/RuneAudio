@@ -13,7 +13,7 @@ title -l = "$bar Install Rune logo motd ..."
 
 gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master/motd
 wget -qN --show-progress $gitpath/uninstall_motd.sh; chmod +x uninstall_motd.sh
-echo '
+echo "
                           .,;uh         
                    .,;cdk0XNWMM,        
              .,cdONMMMMMMMMMMMM:        
@@ -34,7 +34,7 @@ echo '
                kMNo0WMXo'               
                 dNNOd;'                 
                  ''                     
- ' > /etc/motd.logo
+ " > /etc/motd.logo
 
 mv /etc/motd{,.original}
 
