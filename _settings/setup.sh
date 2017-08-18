@@ -70,9 +70,9 @@ label=${mnt0##/*/}
 mnt="/mnt/$label"
 mkdir -p "$mnt"
 if ! grep -q $mnt /etc/fstab; then
-  echo "/dev/sda1  $mnt  ext4  defaults,noatime" >> /etc/fstab
-  umount -l /dev/sda1
-  mount -a
+	echo "/dev/sda1  $mnt  ext4  defaults,noatime" >> /etc/fstab
+	umount -l /dev/sda1
+	mount -a
 fi
 [[ -e /mnt/MPD/USB/hdd && $( ls -1 /mnt/MPD/USB/hdd | wc -l ) == 0 ]] && rm -r /mnt/MPD/USB/hdd
 ln -sf $mnt/Music /mnt/MPD/USB/Music
@@ -87,8 +87,8 @@ echo -e "$bar OSMC pre-setup ..."
 #################################################################################
 mmc 7
 if [[ ! -e /tmp/p7/walkthrough_completed ]]; then
-  wget -qN --show-progress https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
-  . presetup.sh
+	wget -qN --show-progress https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
+	. presetup.sh
 fi
 echo
 
