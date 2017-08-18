@@ -103,7 +103,6 @@ wget -qN --show-progress $gitpath/_settings/181FM.pls -P /mnt/MPD/Webradio # add
 #chown redis:redis $file
 #chmod 644 $file
 systemctl start redis
-mpc update Webradio
 
 # extra command for some settings
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
@@ -116,6 +115,7 @@ wget -q --show-progress $gitpath/_settings/mpd.db -O $file
 #chown mpd:audio $file
 #chmod 644 $file
 systemctl restart mpd
+mpc update Webradio
 
 sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js        # change pnotify 8 to 1 sec
 sed -i -e '/m:0x0 + c:180/ s/^#//
