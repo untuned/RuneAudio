@@ -85,8 +85,11 @@ ln -sf $mnt/varcache/pacman /var/cache/pacman
 
 echo -e "$bar OSMC pre-setup ..."
 #################################################################################
-wget -qN --show-progress https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
-. presetup.sh
+mmc 7
+if [[ ! -e /tmp/p7/walkthrough_completed ]]; then
+  wget -qN --show-progress https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
+  . presetup.sh
+fi
 echo
 
 echo -e "$bar Restore settings ..."
