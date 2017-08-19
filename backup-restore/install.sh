@@ -29,7 +29,7 @@ sed -i -e '\|/run/backup_|,+1 s|^|//|
         $filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";\
         $cmdstring = "rm -f /srv/http/tmp/backup_* &> /dev/null; ".\
             "redis-cli save; ".\
-            "tar -czf $filepath".\
+            "bsdtar -czf $filepath".\
                 " --exclude /etc/netctl/examples ".\
                 "/etc/netctl ".\
                 "/mnt/MPD/Webradio ".\
@@ -86,6 +86,8 @@ $filedest = "/srv/http/tmp/$filename";
 $filesize = filesize($filetmp);
 
 if ($filesize === 0) die("File upload error !");
+
+exec("rm /srv/http/tmp/*");
 if (! move_uploaded_file($filetmp, $filedest)) die("File move error !");
 
 $restore = exec("sudo /srv/http/restore.sh $filedest; echo $?");
@@ -102,7 +104,7 @@ echo $file
 echo '#!/bin/bash
 
 systemctl stop mpd redis
-bsdtar -xpf $1 -C /
+bsdtar -xf $1 -C /
 systemctl start mpd redis
 mpc update Webradio
 hostnamectl set-hostname $( redis-cli get hostname )
