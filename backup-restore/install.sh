@@ -87,7 +87,7 @@ $filesize = filesize($filetmp);
 
 if ($filesize === 0) die("File upload error !");
 
-exec("rm /srv/http/tmp/*");
+exec("rm -f /srv/http/tmp/backup_*");
 if (! move_uploaded_file($filetmp, $filedest)) die("File move error !");
 
 $restore = exec("sudo /srv/http/restore.sh $filedest; echo $?");
