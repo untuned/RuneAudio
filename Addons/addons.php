@@ -82,9 +82,17 @@
 </div>
 
 <div class="boxed-group">
-<legend>Transmission</legend>
+<legend>Samba Upgrade</legend>
 <form class="form-horizontal">
 <p>Fast, easy, and free BitTorrent client. ( More detail on <a href="https://github.com/rern/RuneAudio/blob/master/transmission/README.md">GitHub</a> )</p>
+<a id="intran" class="btn btn-primary">Install</a> &nbsp; <a id="untran" class="btn btn-default">Uninstall</a>
+</form>
+</div>
+	
+<div class="boxed-group">
+<legend>Transmission</legend>
+<form class="form-horizontal">
+<p>Faster and more customized shares. ( More detail on <a href="https://github.com/rern/RuneAudio/blob/master/samba/README.md">GitHub</a> )</p>
 <a id="intran" class="btn btn-primary">Install</a> &nbsp; <a id="untran" class="btn btn-default">Uninstall</a>
 </form>
 </div>
