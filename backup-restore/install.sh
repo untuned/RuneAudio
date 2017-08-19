@@ -29,7 +29,7 @@ sed -i -e '\|/run/backup_|,+1 s|^|//|
         $filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";\
         $cmdstring = "rm -f /srv/http/tmp/backup_* &> /dev/null; ".\
             "redis-cli save; ".\
-            "bsdtar -czf $filepath".\
+            "bsdtar -czpf $filepath".\
                 " --exclude /etc/netctl/examples ".\
                 "/etc/netctl ".\
                 "/mnt/MPD/Webradio ".\
@@ -104,7 +104,7 @@ echo $file
 echo '#!/bin/bash
 
 systemctl stop mpd redis
-bsdtar -xf $1 -C /
+bsdtar -xpf $1 -C /
 systemctl start mpd redis
 mpc update Webradio
 hostnamectl set-hostname $( redis-cli get hostname )
