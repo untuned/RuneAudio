@@ -107,6 +107,7 @@ systemctl start redis
 # extra command for some settings
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
 #hostnamectl set-hostname RT-AC66U                     # set hostname
+sed -i 's/info,man/info,locale,man/' /usr/local/bin/osmcreset
 
 # mpd database
 file=/var/lib/mpd/mpd.db
