@@ -22,17 +22,16 @@ i=1
 str=''
 redis-cli hgetall webradios | \
 while read line; do
-	if [[ $i == 1 ]]; then
+	if [[ $(( i % 2)) == 1 ]]; then
 		str+="[playlist]\nNumberOfEntries=1\nFile1=$line\n"
 		filename="${line}.pls"
-		i=0
 	else
 		str+="Title1=$line"
 		echo -e "$str" > "/mnt/MPD/Webradio/$filename"
-		echo $filename
+		echo $i - $filename
 		str=''
-		i=1
 	fi
+	(( i++ ))
 done
 
 echo -e '\n\e[36m\e[46m . \e[0m Webradio files created successfully.\n'
