@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# webradiodb.sh
+
+# for import redis database to /mnt/MPD/Webradio/*.pls
+# - clear files
+# - create files from database
+# - refresh ui
+# - fix sorting
+
+if [[ ! -e /var/lib/redis/rune.rdb ]]; then
+	echo -e '\e[30m\e[43m i \e[0m No database file found.'
+	echo -e 'Copy rune.rdb backup to \e[36m/var/lib/\e[0m then run again.\n'
+	exit
+fi
+# clear files
+rm /mnt/MPD/Webradio/*.pls
+
+echo
+# create files from database
 i=1
 str=''
 redis-cli hgetall webradios | \
@@ -10,8 +28,11 @@ while read line; do
 		i=0
 	else
 		str+="Title1=$line"
-		echo -e "$str" > "$filename"
+		echo -e "$str" > "/mnt/MPD/Webradio/$filename"
+		echo $filename
 		str=''
 		i=1
 	fi
 done
+
+echo -e '\n\e[36m\e[46m . \e[0m Webradio files created successfully.\n'
