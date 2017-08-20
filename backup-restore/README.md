@@ -2,7 +2,7 @@ Backup-Restore update
 ---
 
 **Issues**  
-- RuneAudio 'Backup' works but does not save database before backup
+- RuneAudio 'Backup' works but should save database before backup
 - Restore with 'Upload' was disabled for pending code
 
 **Fixes**  
