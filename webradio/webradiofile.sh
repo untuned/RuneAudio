@@ -13,10 +13,12 @@ if [[ ! -e /var/lib/redis/rune.rdb ]]; then
 	echo -e 'Copy rune.rdb backup to \e[36m/var/lib/\e[0m then run again.\n'
 	exit
 fi
-# clear files
-rm -f /mnt/MPD/Webradio/*.pls
 
-echo
+path=/mnt/MPD/Webradio
+# clear files
+rm -f $path/*.pls
+
+echo -e "\n\e[36m\e[46m . \e[0m $path\n"
 # create files from database
 i=1
 str=''
@@ -27,8 +29,8 @@ while read line; do
 		filename="${line}.pls"
 	else
 		str+="Title1=$line"
-		echo -e "$str" > "/mnt/MPD/Webradio/$filename"
-		echo $(( i / 2 )) - $filename
+		echo -e "$str" > "$path/$filename"
+		printf "%3s - $filename\n" $(( i / 2 ))
 		str=''
 	fi
 	(( i++ ))
