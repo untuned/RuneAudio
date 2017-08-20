@@ -34,4 +34,7 @@ while read line; do
 	(( i++ ))
 done
 
+# refresh ui
+mpc update Webradio &> /dev/null
+
 echo -e '\n\e[36m\e[46m . \e[0m Webradio files created successfully.\n'
