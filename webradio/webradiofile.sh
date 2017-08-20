@@ -14,7 +14,7 @@ if [[ ! -e /var/lib/redis/rune.rdb ]]; then
 	exit
 fi
 # clear files
-rm /mnt/MPD/Webradio/*.pls
+rm -f /mnt/MPD/Webradio/*.pls
 
 echo
 # create files from database
