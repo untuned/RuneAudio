@@ -15,5 +15,6 @@ wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master
 wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/webradio/webradiofile.sh; chmod +x webradiofile.sh; ./webradiofile.sh
 ```
 
+**refresh**
 - refresh browser
 - done
