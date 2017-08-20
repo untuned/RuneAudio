@@ -98,11 +98,25 @@ echo -e "$bar Restore settings ..."
 systemctl stop redis
 file=/var/lib/redis/rune.rdb
 #mv $file{,.original}
-wget -q --show-progress $gitpath/_settings/rune.rdb -O $file              # database of local music and webradio
-wget -qN --show-progress $gitpath/_settings/181FM.pls -P /mnt/MPD/Webradio # add webradio file
+wget -q --show-progress $gitpath/_settings/rune.rdb -O $file              # database
 #chown redis:redis $file
 #chmod 644 $file
 systemctl start redis
+# create webradio files
+i=1
+str=''
+redis-cli hgetall webradios | \
+while read line; do
+	if [[ $(( i % 2)) == 1 ]]; then
+		str+="[playlist]\nNumberOfEntries=1\nFile1=$line\n"
+		filename="${line}.pls"
+	else
+		str+="Title1=$line"
+		echo -e "$str" > "/mnt/MPD/Webradio/$filename"
+		str=''
+	fi
+	(( i++ ))
+done
 
 # extra command for some settings
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
