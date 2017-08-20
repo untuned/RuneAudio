@@ -20,7 +20,7 @@ This is just an example of setup script.
 - install **RuneUI Enhancement**
 - install **RuneUI GPIO**  
 
-**Harware revision**  
+**Hardware revision**  
 ```sh
 cat /proc/cpuinfo | grep Revision | awk '{print $3}'
 # a02082 - RPi 3 (Sony, UK)
