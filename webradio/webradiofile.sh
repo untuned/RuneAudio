@@ -28,7 +28,7 @@ while read line; do
 	else
 		str+="Title1=$line"
 		echo -e "$str" > "/mnt/MPD/Webradio/$filename"
-		echo $i - $filename
+		echo $(( i / 2 )) - $filename
 		str=''
 	fi
 	(( i++ ))
