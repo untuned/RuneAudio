@@ -25,7 +25,7 @@ sed -i '/#restore/,/^});/ d' /srv/http/assets/js/runeui.js
 
 sed -i 's/\$("#restore").\+});//' /srv/http/assets/js/runeui.min.js
 
-rm /srv/http/restore.* /etc/sudoers.d/sudoers
+rm /srv/http/restore.* /etc/sudoers.d/http
 
 systemctl restart rune_SY_wrk
 
