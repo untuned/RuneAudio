@@ -111,11 +111,11 @@ hostnamectl set-hostname $( redis-cli get hostname )
 rm $1
 ' > $file
 
-file=/etc/sudoers.d/sudoers
+file=/etc/sudoers.d/http
 echo $file
 echo 'http ALL=NOPASSWD: ALL' > $file
 
-chmod 755 /etc/sudoers.d/sudoers /srv/http/restore.* /srv/http/tmp
+chmod 755 /srv/http/restore.* /srv/http/tmp
 chown http:http /srv/http/restore.* /srv/http/tmp
 
 echo -e "$bar Clear PHP OPcache ..."
