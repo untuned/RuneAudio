@@ -30,7 +30,7 @@ while read line; do
 	else
 		str+="Title1=$line"
 		echo -e "$str" > "$path/$filename"
-		printf "%3s - $filename\n" $(( i / 2 ))
+		printf "%3s. $filename\n" $(( i / 2 ))
 		str=''
 	fi
 	(( i++ ))
