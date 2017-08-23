@@ -32,8 +32,8 @@ else # with arguments
 fi
 
 gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master/transmission
-wget -qN --show-progress $gitpath/uninstall_tran.sh
-chmod +x uninstall_tran.sh
+wget -qN --show-progress $gitpath/uninstall_tran.sh -P /usr/local/bin
+chmod +x /usr/local/bin/uninstall_tran.sh
 wget -qN --show-progress $gitpath/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 title -l = "$bar Install Transmission ..."
@@ -108,7 +108,7 @@ systemctl start trans
 
 timestop
 title -l = "$bar Transmission installed and started successfully."
-echo "Uninstall: ./uninstall_tran.sh"
+echo "Uninstall: uninstall_tran.sh"
 echo "Run: systemctl [ start / stop ] trans"
 echo "Startup: systemctl [ enable / disable ] trans"
 echo
