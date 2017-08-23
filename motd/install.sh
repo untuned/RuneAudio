@@ -12,7 +12,8 @@ wget -qN https://raw.githubusercontent.com/rern/title_script/master/title.sh; . 
 title -l = "$bar Install Rune logo motd ..."
 
 gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master/motd
-wget -qN --show-progress $gitpath/uninstall_motd.sh; chmod +x uninstall_motd.sh
+wget -qN --show-progress $gitpath/uninstall_motd.sh -P /usr/local/bin
+chmod +x /usr/local/bin/uninstall_motd.sh
 echo "
                           .,;uh         
                    .,;cdk0XNWMM,        
@@ -61,5 +62,5 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 # \w         - current directory
 # \$         - promt symbol: <$> users; <#> root
 
-echo -e "\nUninstall: ./uninstall_motd.sh"
+echo -e "\nUninstall: uninstall_motd.sh"
 title -nt "$info Relogin to see new Rune logo motd."
