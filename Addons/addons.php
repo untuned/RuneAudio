@@ -52,7 +52,7 @@
 <div class="boxed-group">
 <legend>Extended character fonts</legend>
 <form class="form-horizontal">
-<p>Font files replacement for Cyrillic, Greek and IPA phonetics. ( More detail on <a href="https://github.com/rern/RuneAudio/blob/master/expand_partition/README.md">GitHub</a> )</p>
+<p>Font files replacement for Cyrillic, Greek and IPA phonetics.</p>
 <a id="inexpa" class="btn btn-primary">Install</a> &nbsp; <a id="unexpa" class="btn btn-default">Uninstall</a>
 </form>
 </div>
