@@ -50,6 +50,14 @@
 </div>
 
 <div class="boxed-group">
+<legend>Extended character fonts</legend>
+<form class="form-horizontal">
+<p>Font files replacement for Cyrillic, Greek and IPA phonetics. ( More detail on <a href="https://github.com/rern/RuneAudio/blob/master/expand_partition/README.md">GitHub</a> )</p>
+<a id="inexpa" class="btn btn-primary">Install</a> &nbsp; <a id="unexpa" class="btn btn-default">Uninstall</a>
+</form>
+</div>
+	
+<div class="boxed-group">
 <legend>Rank Mirror Packages Servers</legend>
 <form class="form-horizontal">
 <p>Fix packages download errors. ( More detail on <a href="https://github.com/rern/RuneAudio/blob/master/rankmirrors/README.md">GitHub</a> )</p>
