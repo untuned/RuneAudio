@@ -14,6 +14,7 @@ title -l = "$bar Install Rune logo motd ..."
 gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master/motd
 wget -qN --show-progress $gitpath/uninstall_motd.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_motd.sh
+
 echo "
                           .,;uh         
                    .,;cdk0XNWMM,        
