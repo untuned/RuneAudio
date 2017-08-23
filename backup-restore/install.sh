@@ -16,7 +16,8 @@ if [[ -e /srv/http/restore.php ]]; then
     exit
 fi
 
-wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/backup-restore/uninstall_back.sh; chmod +x uninstall_back.sh
+wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/backup-restore/uninstall_back.sh -P /usr/local/bin
+chmod +x /usr/local/bin/uninstall_back.sh
 
 dir=/srv/http/tmp
 echo $dir
@@ -123,5 +124,5 @@ curl '127.0.0.1/clear'
 echo
 
 title -l = "$bar Backup-Restore update installed successfully."
-echo 'Uninstall: ./uninstall_back.sh'
+echo 'Uninstall: uninstall_back.sh'
 title -nt "$info Refresh browser before use."
