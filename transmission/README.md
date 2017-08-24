@@ -12,7 +12,6 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmissi
 ```
 
 **Start transmission**  
-`transmission-daemon -d` will not correctly show `settings.json`  
 ```
 systemctl start transmission
 ```
@@ -22,11 +21,14 @@ systemctl start transmission
 systemctl stop transmission
 ```
 
-Browser URL:  
+**settings**  
+`/path/transmission/settings.json` must be edited after stop transmission  
+
+**Browser URL:**  
 _[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)  
 
 **auto start download**  
-add torrent files to `/media/hdd/transmission/torrents` will auto start download  
+add torrent files to `/path/transmission/torrents` will auto start download  
 
 [optional] **set specific client IP**  
 - allow only IP
