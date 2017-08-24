@@ -9,5 +9,5 @@ For SSH terminal login screen
 ![motd](https://raw.githubusercontent.com/rern/RuneAudio/master/motd/motdr.png)  
 **Install**  
 ```sh
-wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/motd/install.sh; chmod +x install.sh; ./install.sh
+wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/RuneAudio/master/motd/install.sh; chmod +x install.sh; ./install.sh
 ```
