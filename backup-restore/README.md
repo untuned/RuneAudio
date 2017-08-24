@@ -22,5 +22,5 @@ Backup-Restore update
     
 **Install**
 ```sh
-wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneAudio/raw/master/backup-restore/install.sh; chmod +x install.sh; ./install.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/backup-restore/install.sh; chmod +x install.sh; ./install.sh
 ```
