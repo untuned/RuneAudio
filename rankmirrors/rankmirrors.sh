@@ -5,7 +5,7 @@
 # rank servers in /etc/pacman.d/mirrorlist by download speed
 
 # import heading function
-wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+wget -qN --no-check-certificate https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
 if [[ $# -eq 0 ]]; then
