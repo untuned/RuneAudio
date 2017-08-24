@@ -5,7 +5,7 @@ wget -qN --no-check-certificate https://raw.githubusercontent.com/rern/title_scr
 title -l = "$bar Uninstall Rune logo motd ..."
 
 mv /etc/motd{.original,}
-rm /etc/motd.logo /etc/profile.d/motd.sh /root/.hushlogin
+rm /etc/motd.logo /etc/profile.d/motd.sh
 
 sed -i -e '/^PS1=/ d
 ' -e '/^#PS1=/ s/^#//
