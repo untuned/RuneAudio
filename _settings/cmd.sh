@@ -66,7 +66,7 @@ bootrune() {
 
 setup() {
 	if [[ ! -e /etc/motd.logo ]]; then
-		wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/_settings/setup.sh
+		wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/RuneAudio/master/_settings/setup.sh
 		chmod +x setup.sh
 		./setup.sh
 	else
@@ -80,11 +80,11 @@ resetosmc() {
 		return
 	fi
 	# preload initial setup
-	wget -qN --show-progress https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
+	wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
 	. presetup.sh
 	# preload command shortcuts
 	mmc 7
-	wget -qN --show-progress https://raw.githubusercontent.com/rern/OSMC/master/_settings/cmd.sh -P /tmp/p7/etc/profile.d
+	wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/OSMC/master/_settings/cmd.sh -P /tmp/p7/etc/profile.d
 	
 	[[ $ansre == 1 ]] && bootosmc
 }
