@@ -130,12 +130,13 @@ ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
 sed -i 's/info,man/info,locale,man/' /usr/local/bin/osmcreset
 
 # mpd database
+systemctl stop mpd
 file=/var/lib/mpd/mpd.db
 #mv $file{,.original}
 wgetnc $gitpath/_settings/mpd.db -O $file
 #chown mpd:audio $file
 #chmod 644 $file
-systemctl restart mpd
+systemctl start mpd
 sleep 1
 mpc update Webradio &> /dev/null
 
