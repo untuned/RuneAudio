@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # import heading function
-wget -qN https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
+wget -qN --no-check-certificate https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
 
 # check installed #######################################
 if ! pacman -Q aria2 &>/dev/null; then
