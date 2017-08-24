@@ -55,8 +55,9 @@ fi
 mkdir -p $path/{incomplete,watch}
 
 # custom systemd unit
-systemctl stop transmission
-systemctl disable transmission
+ln -s /lib/systemd/system/trans{mission,}.service
+systemctl stop trans
+systemctl disable trans
 
 dir=/etc/systemd/system/transmission.service.d
 mkdir $dir
@@ -66,13 +67,11 @@ Environment=TRANSMISSION_HOME=$path
 Environment=TRANSMISSION_WEB_HOME=$path/web
 " > $dir/override.conf
 systemctl daemon-reload
-ln -s /lib/systemd/system/trans{mission,}.service
 
 # create settings.json
 file=$path/settings.json
 [[ -e $file ]] && rm $file
 systemctl start trans
-sleep 1
 systemctl stop trans
 
 sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
