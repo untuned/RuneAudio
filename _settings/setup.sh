@@ -20,15 +20,18 @@ mmc() {
 		mount /dev/mmcblk0p$1 $mntdir
 	fi
 }
+wgetnc() {
+    wget -qN --show-progress --no-check-certificate $@
+}
 
 # import heading function
-wget -qN --no-check-certificate https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
+wgetnc https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
 timestart l
 
 # command shortcuts and motd
 gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master
-[[ ! -e /etc/profile.d/cmd.sh ]] && wget -qN --show-progress --no-check-certificate $gitpath/_settings/cmd.sh -P /etc/profile.d
-wget -qN --show-progress --no-check-certificate $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
+[[ ! -e /etc/profile.d/cmd.sh ]] && wgetnc $gitpath/_settings/cmd.sh -P /etc/profile.d
+wgetnc $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
 
 # passwords for samba and transmission
@@ -87,7 +90,7 @@ echo -e "$bar OSMC pre-setup ..."
 #################################################################################
 mmc 7
 if [[ ! -e /tmp/p7/walkthrough_completed ]]; then
-	wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
+	wgetnc https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
 	. presetup.sh
 fi
 echo
@@ -98,7 +101,7 @@ echo -e "$bar Restore settings ..."
 systemctl stop redis
 file=/var/lib/redis/rune.rdb
 #mv $file{,.original}
-wget -q --show-progress --no-check-certificate $gitpath/_settings/rune.rdb -O $file              # database
+wgetnc $gitpath/_settings/rune.rdb -O $file              # database
 #chown redis:redis $file
 #chmod 644 $file
 systemctl start redis
@@ -126,7 +129,7 @@ sed -i 's/info,man/info,locale,man/' /usr/local/bin/osmcreset
 # mpd database
 file=/var/lib/mpd/mpd.db
 #mv $file{,.original}
-wget -q --show-progress --no-check-certificate $gitpath/_settings/mpd.db -O $file
+wgetnc $gitpath/_settings/mpd.db -O $file
 #chown mpd:audio $file
 #chmod 644 $file
 systemctl restart mpd
@@ -143,7 +146,7 @@ sed -i -e '/m:0x0 + c:180/ s/^#//
 echo
 
 # rankmirrors
-wget -qN --show-progress --no-check-certificate $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
+wgetnc $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
 
 echo -e "$bar Update package database ..."
 #################################################################################
@@ -164,7 +167,7 @@ root    soft    nofile    16384
 root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
-wget -q --show-progress --no-check-certificate $gitpath/_settings/smb.conf -O /etc/samba/smb-dev.conf
+wgetnc $gitpath/_settings/smb.conf -O /etc/samba/smb-dev.conf
 ln -sf /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
 # set samba password
@@ -176,24 +179,24 @@ echo
 
 # Transmission
 #################################################################################
-wget -qN --show-progress --no-check-certificate $gitpath/transmission/install.sh; chmod +x install.sh; ./install.sh $pwd1 1 1
+wgetnc $gitpath/transmission/install.sh; chmod +x install.sh; ./install.sh $pwd1 1 1
 echo
 
 # Aria2
 #################################################################################
-wget -qN --show-progress --no-check-certificate $gitpath/aria2/install.sh; chmod +x install.sh; ./install.sh 1
+wgetnc $gitpath/aria2/install.sh; chmod +x install.sh; ./install.sh 1
 echo
 
 # Enhancement
 #################################################################################
-wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/RuneUI_enhancement/master/install.sh; chmod +x install.sh; ./install.sh 3
+wgetnc https://raw.githubusercontent.com/rern/RuneUI_enhancement/master/install.sh; chmod +x install.sh; ./install.sh 3
 echo
 
 # GPIO
 #################################################################################
-wget -qN --show-progress --no-check-certificate $gitpath/_settings/mpd.conf.gpio -P /etc
-wget -qN --show-progress --no-check-certificate $gitpath/_settings/gpio.json -P /srv/http
-wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/RuneUI_GPIO/master/install.sh; chmod +x install.sh; ./install.sh 1
+wgetnc $gitpath/_settings/mpd.conf.gpio -P /etc
+wgetnc $gitpath/_settings/gpio.json -P /srv/http
+wgetnc https://raw.githubusercontent.com/rern/RuneUI_GPIO/master/install.sh; chmod +x install.sh; ./install.sh 1
 echo
 
 curl '127.0.0.1/clear' &> /dev/null
