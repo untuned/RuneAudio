@@ -185,14 +185,14 @@ echo
 
 # Enhancement
 #################################################################################
-wgetnc https://raw.githubusercontent.com/rern/RuneUI_enhancement/master/install.sh; chmod +x install.sh; ./install.sh 3
+wgetnc https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh 3
 echo
 
 # GPIO
 #################################################################################
 wgetnc $gitpath/_settings/mpd.conf.gpio -P /etc
 wgetnc $gitpath/_settings/gpio.json -P /srv/http
-wgetnc https://raw.githubusercontent.com/rern/RuneUI_GPIO/master/install.sh; chmod +x install.sh; ./install.sh 1
+wgetnc https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 echo
 
 curl '127.0.0.1/clear' &> /dev/null
