@@ -64,12 +64,9 @@ bootrune() {
 	bootx 8 &
 }
 
-wgetnc() {
-    wget -qN --show-progress --no-check-certificate $@
-}
 setup() {
 	if [[ ! -e /etc/motd.logo ]]; then
-		wgetnc https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh
+		wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh
 		chmod +x setup.sh
 		./setup.sh
 	else
@@ -83,11 +80,11 @@ resetosmc() {
 		return
 	fi
 	# preload initial setup
-	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
+	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
 	. presetup.sh
 	# preload command shortcuts
 	mmc 7
-	wgetnc https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P /tmp/p7/etc/profile.d
+	wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/cmd.sh -P /tmp/p7/etc/profile.d
 	
 	[[ $ansre == 1 ]] && bootosmc
 }
