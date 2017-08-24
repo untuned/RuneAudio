@@ -7,7 +7,7 @@
 rm $0
 
 # import heading function
-wget -qN --no-check-certificate https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
+wget -qN --no-check-certificate https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 title -l = "$bar Install Backup-Restore update ..."
 
@@ -16,7 +16,7 @@ if [[ -e /srv/http/restore.php ]]; then
     exit
 fi
 
-wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/RuneAudio/master/backup-restore/uninstall_back.sh -P /usr/local/bin
+wgetnc https://github.com/rern/RuneAudio/raw/master/backup-restore/uninstall_back.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_back.sh
 
 dir=/srv/http/tmp
