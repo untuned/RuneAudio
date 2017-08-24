@@ -102,6 +102,7 @@ if [[ $answebui == 1 ]]; then
 fi
 
 # start
+systemctl daemon-reload
 [[ $ansstartup == 1 ]] && systemctl enable trans
 echo -e "$bar Start Transmission ..."
 systemctl start trans
