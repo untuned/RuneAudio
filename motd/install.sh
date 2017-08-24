@@ -7,11 +7,11 @@ if [[ -e /etc/motd.logo ]]; then
   exit
 fi
 
-wget -qN --no-check-certificate https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
+wget -qN --no-check-certificate https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 title -l = "$bar Install Rune logo motd ..."
 
-wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/RuneAudio/master/motd/uninstall_motd.sh -P /usr/local/bin
+wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_motd.sh
 
 echo "
