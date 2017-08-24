@@ -8,7 +8,7 @@
 rm $0
 
 # import heading function
-wget -qN --no-check-certificate https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
+wget -qN --no-check-certificate https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
 if pacman -Q transmission-cli &>/dev/null; then
@@ -31,10 +31,10 @@ else # with arguments
 	(( $# > 2 )) && ansstartup=$3 || ansstartup=0
 fi
 
-gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master/transmission
-wget -qN --show-progress --no-check-certificate $gitpath/uninstall_tran.sh -P /usr/local/bin
+gitpath=https://github.com/rern/RuneAudio/raw/master/transmission
+wgetnc $gitpath/uninstall_tran.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_tran.sh
-wget -qN --show-progress --no-check-certificate $gitpath/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
+wgetnc $gitpath/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 title -l = "$bar Install Transmission ..."
 pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
@@ -93,7 +93,7 @@ fi
 
 # web ui alternative
 if [[ $answebui == 1 ]]; then
-	wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/ronggang/transmission-web-control/master/release/transmission-control-full.tar.gz
+	wgetnc https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
 	cp /usr/share/transmission/web $path
 	mv $path/web/index{,.original.}.html
 	bsdtar -xf transmission-control-full.tar.gz -C $path
