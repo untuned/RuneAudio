@@ -23,6 +23,7 @@ systemctl stop transmission
 
 **settings**  
 `/path/transmission/settings.json` must be edited after stop transmission  
+`transmission-daemon -d` will not correctly show `settings.json`  
 
 **Browser URL:**  
 _[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)  
