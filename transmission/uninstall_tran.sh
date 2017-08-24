@@ -16,7 +16,6 @@ pacman -R --noconfirm transmission-cli
 # remove files #######################################
 echo -e "$bar Remove files ..."
 systemctl disable transmission
-rm -r /etc/systemd/system/transmission.service.d
 systemctl daemon-reload
 rm /lib/systemd/system/trans.service
 if mount | grep -q '/dev/sda1'; then
