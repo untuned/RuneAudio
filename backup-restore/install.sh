@@ -7,7 +7,7 @@
 rm $0
 
 # import heading function
-wget -qN --no-check-certificate https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 title -l = "$bar Install Backup-Restore update ..."
 
