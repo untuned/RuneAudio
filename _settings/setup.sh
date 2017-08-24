@@ -20,16 +20,13 @@ mmc() {
 		mount /dev/mmcblk0p$1 $mntdir
 	fi
 }
-wgetnc() {
-    wget -qN --show-progress --no-check-certificate $@
-}
 
 # import heading function
-wgetnc https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
+wget -qN --show-progress --no-check-certificate https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart l
 
 # command shortcuts and motd
-gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master
+gitpath=https://github.com/rern/RuneAudio/raw/master
 [[ ! -e /etc/profile.d/cmd.sh ]] && wgetnc $gitpath/_settings/cmd.sh -P /etc/profile.d
 wgetnc $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
@@ -90,7 +87,7 @@ echo -e "$bar OSMC pre-setup ..."
 #################################################################################
 mmc 7
 if [[ ! -e /tmp/p7/walkthrough_completed ]]; then
-	wgetnc https://raw.githubusercontent.com/rern/OSMC/master/_settings/presetup.sh
+	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
 	. presetup.sh
 fi
 echo
