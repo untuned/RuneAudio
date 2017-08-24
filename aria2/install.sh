@@ -7,7 +7,7 @@
 rm $0
 
 # import heading function
-wget -qN --no-check-certificate https://raw.githubusercontent.com/rern/title_script/master/title.sh; . title.sh; rm title.sh
+wget -qN --no-check-certificate https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
 if pacman -Q aria2 &>/dev/null; then
@@ -22,12 +22,12 @@ else
 	answer=$1
 fi
 
-gitpath=https://raw.githubusercontent.com/rern/RuneAudio/master
-wget -qN --show-progress --no-check-certificate $gitpath/aria2/uninstall_aria.sh -P /usr/local/bin
+gitpath=https://github.com/rern/RuneAudio/raw/master
+wgetnc $gitpath/aria2/uninstall_aria.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_aria.sh
 
 if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wget -qN --show-progress --no-check-certificate $gitpath/rankmirrors/rankmirrors.sh -P /usr/local/bin
+	wgetnc $gitpath/rankmirrors/rankmirrors.sh -P /usr/local/bin
 	chmod +x /usr/local/bin/rankmirrors.sh
 	rankmirrors.sh
 fi
@@ -47,7 +47,7 @@ else
 fi
 if (( $# == 0 )); then
 	echo -e "$bar Get WebUI files ..."
-	wget -qN --show-progress --no-check-certificate https://github.com/ziahamza/webui-aria2/archive/master.zip
+	wgetnc https://github.com/ziahamza/webui-aria2/archive/master.zip
 	mkdir -p $path/web
 	bsdtar -xf master.zip --strip 1 -C $path/web
 	rm master.zip
