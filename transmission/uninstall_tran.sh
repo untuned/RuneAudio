@@ -16,8 +16,9 @@ pacman -R --noconfirm transmission-cli
 # remove files #######################################
 echo -e "$bar Remove files ..."
 systemctl disable transmission
-rm /etc/systemd/system/transmission.service
+rm -r /etc/systemd/system/transmission.service.d
 systemctl daemon-reload
+rm /lib/systemd/system/trans.service
 
 title -l = "$bar Transmission uninstalled successfully."
 
