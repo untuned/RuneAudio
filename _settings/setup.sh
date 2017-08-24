@@ -78,7 +78,7 @@ if ! grep -q $mnt /etc/fstab; then
 	mount -a
 fi
 [[ -e /mnt/MPD/USB/hdd && $( ls -1 /mnt/MPD/USB/hdd | wc -l ) == 0 ]] && rm -r /mnt/MPD/USB/hdd
-find /mnt/hdd/Music -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 ln -s -t /mnt/MPD/USB
+find /mnt/hdd/Music -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 ln -sf -t /mnt/MPD/USB
 
 echo -e "\n$bar Set pacman cache ...\n"
 #################################################################################
