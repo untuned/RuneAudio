@@ -102,6 +102,12 @@ wgetnc $gitpath/_settings/rune.rdb -O $file              # database
 #chown redis:redis $file
 #chmod 644 $file
 systemctl start redis
+restartredis() {
+	sleep 1
+	systemctl start redis
+}
+systemctl status redis | grep -q 'dead' && restartredis
+
 # create webradio files
 i=1
 str=''
@@ -129,7 +135,9 @@ file=/var/lib/mpd/mpd.db
 wgetnc $gitpath/_settings/mpd.db -O $file
 #chown mpd:audio $file
 #chmod 644 $file
-systemctl restart mpd && mpc update Webradio
+systemctl restart mpd
+sleep 1
+mpc update Webradio
 
 sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js        # change pnotify 8 to 1 sec
 sed -i -e '/m:0x0 + c:180/ s/^#//
