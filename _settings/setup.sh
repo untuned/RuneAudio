@@ -22,7 +22,7 @@ mmc() {
 }
 
 # import heading function
-wget -qN --show-progress --no-check-certificate https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+wget -qN --show-progress https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart l
 
 # command shortcuts and motd
