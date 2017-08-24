@@ -8,12 +8,7 @@ RuneAudio Transmission
 **Install**  
 - RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu` 
 ```
-wget -qN --show-progress https://raw.githubusercontent.com/rern/RuneAudio/master/transmission/install.sh; chmod +x install.sh; ./install.sh
-```
-
-**Uninstall**  
-```
-./uninstall_tran.sh
+wget -qN --show-progress --no-check-certificate https://raw.githubusercontent.com/rern/RuneAudio/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 ```
 
 **Start transmission**  
