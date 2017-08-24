@@ -10,7 +10,7 @@ Fix packages download errors:
 
 **Rank**
 ```sh
-wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh -P /usr/local/bin; chmod +x /usr/local/bin/rankmirrors.sh; rankmirrors.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh -P /usr/local/bin; chmod +x /usr/local/bin/rankmirrors.sh; rankmirrors.sh
 ```
 
 **Update package databases**
