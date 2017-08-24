@@ -137,7 +137,7 @@ wgetnc $gitpath/_settings/mpd.db -O $file
 #chmod 644 $file
 systemctl restart mpd
 sleep 1
-mpc update Webradio
+mpc update Webradio &> /dev/null
 
 sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js        # change pnotify 8 to 1 sec
 sed -i -e '/m:0x0 + c:180/ s/^#//
