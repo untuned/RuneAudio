@@ -9,7 +9,7 @@ function bash($cmd) {
 	$proc = popen("$cmd 2>&1", 'r');
 	$std = '';
 
-	echo '<pre>';
+	echo '<body style="color: #bbb; background: #000;"><pre>';
 	while (!feof($proc)) {
 		$std = fread($proc, 4096);
 		$std = preg_replace('/.\\[.*?m/', '', $std);
@@ -17,7 +17,7 @@ function bash($cmd) {
 		echo "$std";
 		@ flush();
 	}
-	echo '</pre>';
+	echo '</pre></body>';
 
 	pclose($proc);
 }
