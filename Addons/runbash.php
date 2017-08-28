@@ -12,11 +12,9 @@ function bash($cmd) {
 	echo '<pre>';
 	while (!feof($proc)) {
 		$std = fread($proc, 4096);
-		if (strpos($std, 'tput') === false || strpos($std, 'unknown terminal') === false) {
-			$std = preg_replace('/.\\[.*?m| \.  | i  /', '', $std);
-			$std = preg_replace('/ \.  | i  /', '', $std);
-			echo "$std";
-		}
+		$std = preg_replace('/.\\[.*?m/', '', $std);
+		$std = preg_replace('/ \.  | i  /', '', $std);
+		echo "$std";
 		@ flush();
 	}
 	echo '</pre>';
