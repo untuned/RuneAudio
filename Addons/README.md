@@ -4,11 +4,12 @@ All in one menu ready for installation.
 - Aria2
 - Backup-Restore Uodate
 - Expand Partition
-- Extended charactors fonts
+- Fonts - Extended characters
+- 'motd' RuneAudio Logo for SSH Terminal
 - Rank Mirror Package Servers
-- RuneAudio Logo for SSH Terminal
 - RuneUI Enhancements
 - RuneUI GPIO
+- RuneUI Password
 - Samba Upgrade
 - Transmission
 - Webradio Import
