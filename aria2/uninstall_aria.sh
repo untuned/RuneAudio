@@ -16,7 +16,6 @@ rm /etc/systemd/system/aria2.service
 systemctl daemon-reload
 # uninstall package #######################################
 pacman -Rs --noconfirm aria2
-redis-cli hset addons aria 0
 
 # restore file
 sed -i -e '/location \/aria2/, /^$/ d
@@ -33,6 +32,8 @@ else
 	rm -r /root/aria2/web
 fi
 rm -rv /root/.config/aria2
+
+redis-cli hset addons aria 0
 
 title -l = "$bar Aria2 uninstalled successfully."
 
