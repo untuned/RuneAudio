@@ -71,7 +71,7 @@ $check = '<i class="fa fa-check blue"></i>';
 <div class="boxed-group">
 <legend><?php if ($font) echo $check;?>Fonts - Extended characters</legend>
 <form class="form-horizontal">
-<p>Font files replacement for Cyrillic, Greek and IPA phonetics. ( More detail on <a href="https://github.com/rern/RuneAudio/tree/master/font_extended">GitHub</a> )</p>
+<p>Font files replacement for Extended Latin-based, Cyrillic-based, Greek and IPA phonetics. ( More detail on <a href="https://github.com/rern/RuneAudio/tree/master/font_extended">GitHub</a> )</p>
 <a id="infont" class="btn btn-default <?php if ($font) echo 'disabled';?>">Install</a> &nbsp; <a id="unfont" class="btn btn-default <?php if (!$font) echo 'disabled';?>">Uninstall</a>
 </form>
 </div>
