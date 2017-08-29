@@ -45,7 +45,7 @@ else
 	mkdir -p /root/aria2
 	path=/root/aria2
 fi
-if (( $# == 0 )); then
+if [[ $2 != 0 ]]; then
 	echo -e "$bar Get WebUI files ..."
 	wgetnc https://github.com/ziahamza/webui-aria2/archive/master.zip
 	mkdir -p $path/web
