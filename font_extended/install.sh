@@ -34,4 +34,4 @@ fi
 
 title -l = "$bar Extended fonts installed successfully."
 echo 'Uninstall: uninstall_font.sh'
-title -nt "$info Refresh browser to start using."
+title -nt "$info Refresh browser for new fonts."
