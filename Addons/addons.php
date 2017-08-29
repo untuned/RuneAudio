@@ -141,15 +141,15 @@ $check = '<i class="fa fa-check blue"></i>';
 </div>
 
 </div>
-<script src="assets/js/vendor/jquery-2.1.0.min.js"></script>
+
 <script>
-$(document).ready(function() {
-
-$('#addons a').click(function() {
-	window.location.href = 'addonbash.php?id='+ $(this).prop('id');
-});
-
-});
+var btn = document.getElementsByClassName('btn');
+for (var i = 0; i < btn.length; i++) {
+	btn[i].onclick = function(e) {
+		//alert('addonbash.php?id='+this.id);
+		window.location.href = 'addonbash.php?id='+ this.id;
+	}
+}
 </script>
 
 </body>
