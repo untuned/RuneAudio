@@ -16,6 +16,7 @@ if grep -q 'Addons' /srv/http/app/templates/header.php; then
     exit
 fi
 
+wgetnc https://github.com/rern/RuneAudio/raw/master/Addons/addons.php
 wgetnc https://github.com/rern/RuneAudio/raw/master/Addons/runbash.sh
 wgetnc https://github.com/rern/RuneAudio/raw/master/Addons/uninstall_addo.sh -P /usr/local/bin
 chmod +x /srv/http/runbash.sh /usr/local/bin/uninstall_addo.sh
