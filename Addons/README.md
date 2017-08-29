@@ -13,3 +13,8 @@ All in one menu ready for installation.
 - Samba Upgrade
 - Transmission
 - Webradio Import
+
+**Install**  
+```sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/Addons/install.sh; chmod +x install.sh; ./install.sh
+```
