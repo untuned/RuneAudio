@@ -39,15 +39,38 @@
 </head>
 <body>
 <div id="addons" class="container">
-<h1>Addon Install ...</h1><a id="close"><i class="fa fa-times fa-lg"></i></a>
+<h1>Addon Install ...</h1><a id="close" href="addons.php"><i class="fa fa-times fa-lg"></i></a>
 <p>Please wait until finished.</p>
 <pre>
 <?php
+$id = $_GET['id'];
+$wget = 'wget -qN --show-progress https://github.com/rern';
+$wgetsub = "$wget/RuneAudio/raw/master";
+$wgetinst = 'install.sh; chmod +x install.sh; /usr/bin/sudo ./install.sh';
+$uninst = '/usr/bin/sudo /usr/local/bin/uninstall_';
 $addon = array(
-'inaria' => 'wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; /usr/bin/sudo ./install.sh 1',
-'inmotd' => 'wget -qN https://github.com/rern/RuneAudio/raw/master/motd/install.sh; chmod +x install.sh; /usr/bin/sudo ./install.sh',
-'unaria' => '/usr/bin/sudo /usr/local/bin/uninstall_aria.sh',
-'unmotd' => '/usr/bin/sudo /usr/local/bin/uninstall_motd.sh'
+'inaria' => "$wgetsub/aria2/$wgetinst 1",
+'inback' => "$wgetsub/backup-restore/$wgetinst",
+'inexpa' => "$wgetsub/expand_partition/$wgetinst",
+'infont' => "$wgetsub/font_extended/$wgetinst",
+'inmotd' => "$wgetsub/motd/$wgetinst",
+'inrank' => "$wgetsub/rankmirrors/$wgetinst",
+'insamb' => "$wgetsub/samba/$wgetinst",
+'intran' => "$wgetsub/transmission/$wgetinst",
+'inwebr' => "$wgetsub/webradio/$wgetinst",
+'inenha' => "$wget/RuneUI_enhancement/raw/master/$wgetinst",
+'ingpio' => "$wget/RuneUI_GPIO/raw/master/$wgetinst",
+'ingpio' => "$wget/RuneUI_password/raw/master/$wgetinst",
+'unaria' => $uninst.'aria.sh',
+'unback' => $uninst.'back.sh',
+'unexpa' => $uninst.'expa.sh',
+'unfont' => $uninst.'font.sh',
+'unmotd' => $uninst.'motd.sh',
+'unsamb' => $uninst.'samb.sh',
+'untran' => $uninst.'tran.sh',
+'unenha' => $uninst.'enha.sh',
+'unenha' => $uninst.'gpio.sh',
+'unenha' => $uninst.'pass.sh'
 );
 
 function bash($cmd) {
@@ -57,33 +80,26 @@ function bash($cmd) {
 
 	while (!feof($proc)) {
 		$std = fread($proc, 4096);
-		if (strpos($std, '.....') === false) { // suppress repetitive progress bars
-			$std = preg_replace('/.\\[38;5;6m.\\[48;5;6m/', '<a class="cc">', $std); // bar
-			$std = preg_replace('/.\\[38;5;0m.\\[48;5;3m/', '<a class="ky">', $std); // info
-			$std = preg_replace('/.\\[38;5;6m.\\[48;5;0m/', '<a class="ck">', $std); // tcolor
-			$std = preg_replace('/.\\[38;5;6m/', '<a class="ck">', $std); // lcolor
-			$std = preg_replace('/.\\[0m/', '</a>', $std); // reset color
-			echo "$std";
-		}
+		$std = preg_replace('/.\\[38;5;6m.\\[48;5;6m/', '<a class="cc">', $std); // bar
+		$std = preg_replace('/.\\[38;5;0m.\\[48;5;3m/', '<a class="ky">', $std); // info
+		$std = preg_replace('/.\\[38;5;6m.\\[48;5;0m/', '<a class="ck">', $std); // tcolor
+		$std = preg_replace('/.\\[38;5;6m/', '<a class="ck">', $std); // lcolor
+		$std = preg_replace('/.\\[0m/', '</a>', $std); // reset color
+		echo "$std";
 		@ flush();
 	}
 
 	pclose($proc);
 }
 
-bash($addon[$_GET['id']]);
+bash($addon[$id]);
 ?>
 </pre>
 </div>
-<script src="assets/js/vendor/jquery-2.1.0.min.js"></script>
 <script>
-$(document).ready(function() {
-
-$('#close').click(function() {
-	window.location.href = 'addons.php';
-});
-
-});
+setInterval(function() {
+	window.scrollTo(0,document.body.scrollHeight);
+}, 1000);
 </script>
 
 </body>
