@@ -107,7 +107,7 @@ systemctl daemon-reload
 [[ $ansstartup == 1 ]] && systemctl enable trans
 echo -e "$bar Start Transmission ..."
 if systemctl start trans &> /dev/null; then
-	redis-cli hset addons tran 1
+	redis-cli hset addons tran 1 &> /dev/null
 else
 	title -l = "$warn Transmission install failed."
 	exit
