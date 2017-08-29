@@ -33,7 +33,7 @@ else
 fi
 rm -rv /root/.config/aria2
 
-redis-cli hset addons aria 0
+redis-cli hset addons aria 0 &> /dev/null
 
 title -l = "$bar Aria2 uninstalled successfully."
 
