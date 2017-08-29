@@ -68,8 +68,8 @@ $addon = array(
 'unsamb' => $uninst.'samb.sh',
 'untran' => $uninst.'tran.sh',
 'unenha' => $uninst.'enha.sh',
-'unenha' => $uninst.'gpio.sh',
-'unenha' => $uninst.'pass.sh'
+'ungpio' => $uninst.'gpio.sh',
+'unpass' => $uninst.'pass.sh'
 );
 
 function bash($cmd) {
