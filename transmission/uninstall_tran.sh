@@ -12,7 +12,6 @@ fi
 title -l = "Uninstall Transmission ..."
 # uninstall package #######################################
 pacman -R --noconfirm transmission-cli
-redis-cli hset addons tran 0
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
@@ -23,6 +22,8 @@ if mount | grep -q '/dev/sda1'; then
 else
 	rm -r /root/transmission/web
 fi
+
+redis-cli hset addons tran 0
 
 title -l = "$bar Transmission uninstalled successfully."
 
