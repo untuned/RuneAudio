@@ -121,7 +121,7 @@ echo 'http ALL=NOPASSWD: ALL' > $file
 chmod 755 /srv/http/restore.* /srv/http/tmp
 chown http:http /srv/http/restore.* /srv/http/tmp
 
-redis-cli hset addons back 1
+redis-cli hset addons back 1 &> /dev/null
 
 echo -e "$bar Clear PHP OPcache ..."
 curl '127.0.0.1/clear'
