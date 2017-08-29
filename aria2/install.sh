@@ -94,7 +94,7 @@ WantedBy=multi-user.target
 [[ $answer == 1 ]] && systemctl enable aria2
 echo -e "$bar Start Aria2 ..."
 if systemctl start aria2 &> /dev/null; then
-	redis-cli hset addons aria 1
+	redis-cli hset addons aria 1 &> /dev/null
 else
 	title -l = "$warn Aria2 install failed."
 	exit
