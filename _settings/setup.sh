@@ -128,6 +128,8 @@ done
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
 #hostnamectl set-hostname RT-AC66U                     # set hostname
 sed -i 's/info,man/info,locale,man/' /usr/local/bin/osmcreset
+sed -i "s/opcache.enable=./opcache.enable=$( redis-cli get opcache )/" /etc/php/conf.d/opcache.ini
+systemctl restart php-fpm
 
 # mpd database
 systemctl stop mpd
