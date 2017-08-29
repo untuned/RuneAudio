@@ -12,6 +12,7 @@ fi
 title -l = "Uninstall Transmission ..."
 # uninstall package #######################################
 pacman -R --noconfirm transmission-cli
+redis-cli hset addons tran 0
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
