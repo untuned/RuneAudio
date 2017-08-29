@@ -32,6 +32,7 @@ if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist
 	rankmirrors.sh
 fi
 
+echo
 title -l = "$bar Install Aria2 ..."
 # skip with any argument
 (( $# == 0 )) && pacman -Sy
