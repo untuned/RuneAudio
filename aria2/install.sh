@@ -104,7 +104,7 @@ timestop
 title -l = "$bar Aria2 installed and started successfully."
 echo "Uninstall: uninstall_aria.sh"
 echo "Run: systemctl [ start / stop ] aria2"
-echo "Startup: systemctl [ enable /disable ] aria2"
+echo "Startup: systemctl [ enable / disable ] aria2"
 echo
 echo "Download directory: $path"
 title -nt "WebUI: [RuneAudio_IP]/aria2/"
