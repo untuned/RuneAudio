@@ -146,7 +146,7 @@ $check = '<i class="fa fa-check blue"></i>';
 $(document).ready(function() {
 
 $('#addons a').click(function() {
-	window.location.href = '0.php?id='+ $(this).prop('id');
+	window.location.href = 'runbash.php?id='+ $(this).prop('id');
 });
 
 });
