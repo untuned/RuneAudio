@@ -23,7 +23,7 @@ else
 	rm -r /root/transmission/web
 fi
 
-redis-cli hset addons tran 0
+redis-cli hset addons tran 0 &> /dev/null
 
 title -l = "$bar Transmission uninstalled successfully."
 
