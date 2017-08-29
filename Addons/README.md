@@ -1,6 +1,6 @@
 Addons for RuneAudio
 ---
-All in one menu ready for installation.
+All addons in one page ready for easy installation.
 - Aria2
 - Backup-Restore Uodate
 - Expand Partition
