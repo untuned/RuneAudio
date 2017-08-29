@@ -146,7 +146,6 @@ $check = '<i class="fa fa-check blue"></i>';
 var btn = document.getElementsByClassName('btn');
 for (var i = 0; i < btn.length; i++) {
 	btn[i].onclick = function(e) {
-		//alert('addonbash.php?id='+this.id);
 		window.location.href = 'addonbash.php?id='+ this.id;
 	}
 }
