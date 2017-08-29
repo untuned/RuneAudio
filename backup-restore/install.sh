@@ -110,6 +110,7 @@ systemctl start mpd redis
 mpc update Webradio
 hostnamectl set-hostname $( redis-cli get hostname )
 sed -i "s/opcache.enable=./opcache.enable=$( redis-cli get opcache )/" /etc/php/conf.d/opcache.ini
+systemctl restart php-fpm
 rm $1
 ' > $file
 
