@@ -27,6 +27,7 @@ summb=$(( $freemb + $unpartmb ))
 # noobs has 3MB unpartitioned space
 if [[ $unpartmb -lt 10 ]]; then
 	echo -e "$info No useful space available. ( ${unpartmb}MB unused)"
+	redis-cli hset addons expa 1 &> /dev/null
 	exit
 fi
 
