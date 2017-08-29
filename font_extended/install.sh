@@ -17,6 +17,7 @@ wgetnc https://github.com/rern/_assets/RuneUI_enhancement/raw/master/lato.tar.xz
 mv /srv/http/assets/fonts/lato{,backup}
 mkdir /srv/http/assets/fonts/lato
 bsdtar -xvf lato.tar.xz -C /srv/http/assets/fonts/lato
+rm lato.tar.xz
 
 redis-cli hset addons font 1 &> /dev/null
 
