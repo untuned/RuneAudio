@@ -31,7 +31,7 @@ if mount | grep -q '/dev/sda1'; then
 else
 	rm -r /root/aria2/web
 fi
-rm -rv /root/.config/aria2
+rm -rv /root/.config/aria2 /srv/http/aria2
 
 redis-cli hset addons aria 0 &> /dev/null
 
