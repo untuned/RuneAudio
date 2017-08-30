@@ -16,14 +16,25 @@ if grep -q 'Addons' /srv/http/app/templates/header.php; then
     exit
 fi
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/Addons/addons.php
-wgetnc https://github.com/rern/RuneAudio/raw/master/Addons/runbash.sh
+wgetnc https://github.com/rern/RuneAudio/raw/master/Addons/addonbash.sh
+wgetnc https://github.com/rern/RuneAudio/raw/master/Addons/addondl.php
 wgetnc https://github.com/rern/RuneAudio/raw/master/Addons/uninstall_addo.sh -P /usr/local/bin
 chmod +x /srv/http/runbash.sh /usr/local/bin/uninstall_addo.sh
 
 sed -e '/poweroff-modal/ i\
-            <li><a href="addons.php"><i class="fa fa-cubes"></i> Addons</a></li>
+            <li><a href id="addons"><i class="fa fa-cubes"></i> Addons</a></li>
 ' /srv/http/app/templates/header.php
+echo '
+$("#addons").click(function() {
+	$.get("addondl.php", function(data) {
+		if (data == 0) {
+			window.location.href = "addons.php";
+		} else {
+			alert("Download Addons page failed.");
+		}
+	});
+});
+' >> /srv/http/assets/js/runeui.js
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
