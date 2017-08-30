@@ -45,13 +45,13 @@ else
 	mkdir -p /root/aria2
 	path=/root/aria2
 fi
-if [[ $2 != 0 ]]; then
-	echo -e "$bar Get WebUI files ..."
-	wgetnc https://github.com/ziahamza/webui-aria2/archive/master.zip
-	mkdir -p $path/web
-	bsdtar -xf master.zip --strip 1 -C $path/web
-	rm master.zip
-fi
+
+echo -e "$bar Get WebUI files ..."
+wgetnc https://github.com/ziahamza/webui-aria2/archive/master.zip
+mkdir -p $path/web
+bsdtar -xf master.zip --strip 1 -C $path/web
+rm master.zip
+
 ln -s $path/web /srv/http/aria2
 
 # modify file
