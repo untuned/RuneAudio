@@ -124,7 +124,7 @@ chown http:http /srv/http/restore.* /srv/http/tmp
 redis-cli hset addons back 1 &> /dev/null
 
 echo -e "$bar Clear PHP OPcache ..."
-curl '127.0.0.1/clear'
+systemctl reload php-fpm
 echo
 
 title -l = "$bar Backup-Restore update installed successfully."
