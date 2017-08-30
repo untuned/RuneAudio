@@ -206,7 +206,7 @@ wgetnc $gitpath/_settings/gpio.json -P /srv/http
 wgetnc https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 echo
 
-curl '127.0.0.1/clear' &> /dev/null
+systemctl reload php-fpm
 
 # systemctl daemon-reload # done in GPIO install
 systemctl restart nmbd smbd
