@@ -24,6 +24,7 @@ chmod +x /srv/http/runbash.sh /usr/local/bin/uninstall_addo.sh
 sed -e '/poweroff-modal/ i\
             <li><a href id="addons"><i class="fa fa-cubes"></i> Addons</a></li>
 ' /srv/http/app/templates/header.php
+
 echo '
 $("#addons").click(function() {
 	$.get("addondl.php", function(data) {
@@ -35,6 +36,9 @@ $("#addons").click(function() {
 	});
 });
 ' >> /srv/http/assets/js/runeui.js
+
+echo '$("#addons").click(function(){$.get("addondl.php",function(d){0==d?window.location.href="addons.php":alert("Download Addons page failed.")})});
+' >> /srv/http/assets/js/runeui.min.js
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
