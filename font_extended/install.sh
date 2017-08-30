@@ -23,7 +23,7 @@ redis-cli hset addons font 1 &> /dev/null
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
-curl '127.0.0.1/clear'
+systemctl reload php-fpm
 echo
 
 if pgrep midori >/dev/null; then
