@@ -191,7 +191,7 @@ echo
 
 # Aria2
 #################################################################################
-wgetnc $gitpath/aria2/install.sh; chmod +x install.sh; ./install.sh 1 1
+wgetnc $gitpath/aria2/install.sh; chmod +x install.sh; ./install.sh 1
 echo
 
 # Enhancement
