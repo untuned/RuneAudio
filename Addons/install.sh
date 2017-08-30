@@ -31,13 +31,13 @@ $("#addons").click(function() {
 		if (data == 0) {
 			window.location.href = "addons.php";
 		} else {
-			alert("Download Addons page failed.");
+			alert("Addons server not reachable.");
 		}
 	});
 });
 ' >> /srv/http/assets/js/runeui.js
 
-echo '$("#addons").click(function(){$.get("addondl.php",function(d){0==d?window.location.href="addons.php":alert("Download Addons page failed.")})});
+echo '$("#addons").click(function(){$.get("addondl.php",function(d){0==d?window.location.href="addons.php":alert("Addons server not reachable.")})});
 ' >> /srv/http/assets/js/runeui.min.js
 
 # refresh #######################################
