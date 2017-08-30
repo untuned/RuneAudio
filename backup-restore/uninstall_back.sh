@@ -31,7 +31,7 @@ redis-cli hset addons back 0 &> /dev/null
 systemctl restart rune_SY_wrk
 
 echo -e "$bar Clear PHP OPcache ..."
-curl '127.0.0.1/clear'
+systemctl reload php-fpm
 echo
 
 title -l = "$bar Backup-Restore update uninstalled successfully."
