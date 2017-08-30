@@ -20,7 +20,7 @@ rm -rv /srv/http/{addons.php,runbash.sh}
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
-curl '127.0.0.1/clear'
+systemctl reload php-fpm
 echo
 
 if pgrep midori >/dev/null; then
