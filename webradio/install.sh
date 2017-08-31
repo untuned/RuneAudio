@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# webradiodb.sh
-
 # for import /mnt/MPD/Webradio/*.pls
 # - clear database
 # - extract files to database
 # - refresh ui
 # - fix sorting
+
+rm $0
 
 # clear database
 redis-cli del webradios &> /dev/null
