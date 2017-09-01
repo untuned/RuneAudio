@@ -1,5 +1,7 @@
 #!/bin/bash
 
+version=20170901
+
 rm $0
 
 # import heading function
@@ -19,7 +21,7 @@ mkdir /srv/http/assets/fonts/lato
 bsdtar -xvf lato.tar.xz -C /srv/http/assets/fonts/lato
 rm lato.tar.xz
 
-redis-cli hset addons font 1 &> /dev/null
+redis-cli hset addons font $version &> /dev/null
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
