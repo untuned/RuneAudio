@@ -29,4 +29,13 @@ fi
 title -l = "$bar Extended fonts uninstalled successfully."
 title -nt "$info Refresh browser for original fonts."
 
+# clear opcache and restart local browser #######################################
+systemctl reload php-fpm
+
+if pgrep midori > /dev/null; then
+	killall midori
+	sleep 1
+	xinit &> /dev/null &
+fi
+
 rm $0
