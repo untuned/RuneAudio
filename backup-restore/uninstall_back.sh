@@ -30,10 +30,9 @@ rm /srv/http/restore.* /etc/sudoers.d/http-backup
 redis-cli hset addons back 0 &> /dev/null
 systemctl restart rune_SY_wrk
 
-echo -e "$bar Clear PHP OPcache ..."
-systemctl reload php-fpm
-echo
-
 title -l = "$bar Backup-Restore update uninstalled successfully."
+
+# clear opcache #######################################
+systemctl reload php-fpm
 
 rm $0
