@@ -196,7 +196,7 @@ echo
 
 # Enhancement
 #################################################################################
-wgetnc https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh 3
+wgetnc https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh 1.5
 echo
 
 # GPIO
