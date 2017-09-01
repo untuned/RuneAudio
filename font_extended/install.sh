@@ -23,16 +23,15 @@ rm lato.tar.xz
 
 redis-cli hset addons font $version &> /dev/null
 
-if pgrep midori >/dev/null; then
-	killall midori
-	sleep 1
-	xinit &>/dev/null &
-	echo 'Local browser restarted.'
-fi
-
 title -l = "$bar Extended fonts installed successfully."
 echo 'Uninstall: uninstall_font.sh'
 title -nt "$info Refresh browser for new fonts."
 
-# clear opcache #######################################
+# clear opcache and restart local browser #######################################
 systemctl reload php-fpm
+
+if pgrep midori > /dev/null; then
+	killall midori
+	sleep 1
+	xinit &> /dev/null &
+fi
