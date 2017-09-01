@@ -1,5 +1,7 @@
 #!/bin/bash
 
+version=20170901
+
 # install.sh
 
 # fix restore settings
@@ -120,7 +122,7 @@ echo 'http ALL=NOPASSWD: ALL' > $file
 chmod 755 /srv/http/restore.* /srv/http/tmp
 chown http:http /srv/http/restore.* /srv/http/tmp
 
-redis-cli hset addons back 1 &> /dev/null
+redis-cli hset addons back $version &> /dev/null
 
 echo -e "$bar Clear PHP OPcache ..."
 systemctl reload php-fpm
