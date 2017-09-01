@@ -1,5 +1,7 @@
 #!/bin/bash
 
+version=20170901
+
 rm $0
 
 if [[ -e /etc/motd.logo ]]; then
@@ -62,7 +64,7 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 # \w         - current directory
 # \$         - promt symbol: <$> users; <#> root
 
-redis-cli hset addons motd 1 &> /dev/null
+redis-cli hset addons motd $version &> /dev/null
 
 echo -e "\nUninstall: uninstall_motd.sh"
 title -nt "$info Relogin to see new Rune logo motd."
