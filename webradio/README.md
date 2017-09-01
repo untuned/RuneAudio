@@ -5,7 +5,7 @@ Webradio import
 - copy webradio  `*.pls` files to `/mnt/MPD/Webradio/`  
 - run import script:
 ```sh
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/webradio/install.sh; chmod +x install.sh; ./install.sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/webradio/webradiodb.sh; chmod +x webradiodb.sh; ./webradiodb.sh
 ```
 
 **covert database to file**
