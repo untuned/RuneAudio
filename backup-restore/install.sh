@@ -124,10 +124,9 @@ chown http:http /srv/http/restore.* /srv/http/tmp
 
 redis-cli hset addons back $version &> /dev/null
 
-echo -e "$bar Clear PHP OPcache ..."
-systemctl reload php-fpm
-echo
-
 title -l = "$bar Backup-Restore update installed successfully."
 echo 'Uninstall: uninstall_back.sh'
 title -nt "$info Refresh browser before use."
+
+# clear opcache #######################################
+systemctl reload php-fpm
