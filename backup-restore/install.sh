@@ -51,7 +51,7 @@ sed -i -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
 ' -e'/value="restore"/ s/name="syscmd" value="restore" //; s/type="submit" disabled>Upload/disabled>Restore/
 ' $file
 
-file=/srv/http/assets/js/runeui.js
+file=/srv/http/assets/js/restore.js
 echo $file
 echo '
 $("#restore").submit(function() {
@@ -70,12 +70,11 @@ $("#restore").submit(function() {
     });
     return false
 });
-' >> $file
+' > $file
 
-file=/srv/http/assets/js/runeui.min.js
+file=/srv/http/app/templates/footer.php
 echo $file
-echo '$("#restore").submit(function(){var t=new FormData($(this)[0]);return $.ajax({url:"../../restore.php",type:"POST",data:t,cache:!1,contentType:!1,enctype:"multipart/form-data",processData:!1,success:function(t){alert(t)}}),!1});
-' >> $file
+echo '<script src="<?=$this->asset('"'"'/js/restore.js'"'"')?>"></script>' >> $file
 
 file=/srv/http/restore.php
 echo $file
