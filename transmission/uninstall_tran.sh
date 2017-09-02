@@ -9,7 +9,7 @@ if ! pacman -Q transmission-cli &>/dev/null; then
 	exit
 fi
 
-title -l = "Uninstall Transmission ..."
+title -l = "$bar Uninstall Transmission ..."
 # uninstall package #######################################
 pacman -R --noconfirm transmission-cli
 
