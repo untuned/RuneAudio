@@ -1,5 +1,7 @@
 #!/bin/bash
 
+version=20170901
+
 # install.sh [password] [webui] [startup]
 #   [webui] = 1 / 0
 #   [startup] = 1 / null )
@@ -107,7 +109,7 @@ systemctl daemon-reload
 [[ $ansstartup == 1 ]] && systemctl enable trans
 echo -e "$bar Start Transmission ..."
 if systemctl start trans &> /dev/null; then
-	redis-cli hset addons tran 1 &> /dev/null
+	redis-cli hset addons tran $version &> /dev/null
 else
 	title -l = "$warn Transmission install failed."
 	exit
