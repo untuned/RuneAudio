@@ -4,12 +4,12 @@ version=20170901
 
 rm $0
 
+wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+
 if [[ -e /etc/motd.logo ]]; then
-  echo -e '\n"Rune logo motd" already installed.\n'
+  echo -e "$info Rune logo motd already installed."
   exit
 fi
-
-wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 title -l = "$bar Install Rune logo motd ..."
 
