@@ -36,6 +36,8 @@ root    soft    nofile    16384
 root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
+wgetnc https://github.com/rern/RuneAudio/raw/master/samba/uninstall_samb.sh -P /usr/local/bin
+chmod +x /usr/local/bin/uninstall_samb.sh
 wgetnc https://github.com/rern/RuneAudio/raw/master/samba/smb-dev.conf -O /etc/samba/smb-dev.conf
 ln -sf /etc/samba/smb{-dev,}.conf
 
