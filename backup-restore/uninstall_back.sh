@@ -27,7 +27,7 @@ sed -i 's/\$("#restore").\+});//' /srv/http/assets/js/runeui.min.js
 
 rm /srv/http/restore.* /etc/sudoers.d/http-backup
 
-redis-cli hset addons back 0 &> /dev/null
+redis-cli hdel addons back &> /dev/null
 systemctl restart rune_SY_wrk
 
 title -l = "$bar Backup-Restore update uninstalled successfully."
