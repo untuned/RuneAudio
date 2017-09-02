@@ -11,7 +11,7 @@ sed -i -e '/^PS1=/ d
 ' -e '/^#PS1=/ s/^#//
 ' /etc/bash.bashrc
 
-redis-cli hset addons motd 0 &> /dev/null
+redis-cli hdel addons motd &> /dev/null
 
 title -nt "\n$info Relogin to see original motd."
 
