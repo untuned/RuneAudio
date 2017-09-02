@@ -15,6 +15,7 @@ pacman -R --noconfirm transmission-cli
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
+rm -r /etc/systemd/system/transmission.service.d
 rm /lib/systemd/system/trans.service
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
