@@ -12,7 +12,7 @@ title -l = "$bar Unnstall Extended fonts ..."
 rm -rv /srv/http/assets/fonts/lato
 mv /srv/http/assets/fonts/lato{backup,}
 
-redis-cli hset addons font 0 &> /dev/null
+redis-cli hdel addons font &> /dev/null
 
 # refresh #######################################
 echo -e "$bar Clear PHP OPcache ..."
