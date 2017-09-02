@@ -16,6 +16,8 @@ title -l = "$bar Install Rune logo motd ..."
 wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_motd.sh
 
+echo -e "$bar Modify files ..."
+
 echo "
                           .,;uh         
                    .,;cdk0XNWMM,        
@@ -66,5 +68,6 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 
 redis-cli hset addons motd $version &> /dev/null
 
+title -l = "$bar Rune logo motd installed successfully."
 echo -e "\nUninstall: uninstall_motd.sh"
 title -nt "$info Relogin to see new Rune logo motd."
