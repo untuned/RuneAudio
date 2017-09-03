@@ -2,22 +2,13 @@
 
 rm $0
 
-# rankmirrors.sh <SECONDS>
+# rankmirrors.sh
 # mitigate download errors by enable(uncomment) and 
 # rank servers in /etc/pacman.d/mirrorlist by download speed
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
-
-if [[ $# -eq 0 ]]; then
-	sec=3 # default 3 seconds each
-elif [[ $1 =~ ^[0-9]+$ ]]; then
-	sec=$1
-else
-	echo -e "$info Usage: rankmirrors.sh [second]"
-	exit
-fi
 
 tmpdir=/tmp/rankmirrors/
 rm -rf $tmpdir && mkdir $tmpdir
@@ -71,10 +62,16 @@ echo -e "$( tcolor '/etc/pacman.d/mirrorlist' ) was updated with these servers t
 echo
 echo -e "$rankfile" | sed -n 1,3p
 
-timestop
-title -l = "$bar Mirror list ranked successfully."
-title -nt "Update package database: pacman -Sy"
-
 [ ! -f $list'.original' ] && cp $list $list'.original' # skip if already backup
 echo -e "$rankfile" > $list
 rm -rf $tmpdir
+
+timestop
+title -l = "$bar Mirror list ranked successfully."
+
+if (( $# == 0 )); then
+	title -nt "Update package database: pacman -Sy"
+else
+	echo -e "$bar Update package database ..."
+	pacman -Sy
+fi
