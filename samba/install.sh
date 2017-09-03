@@ -7,7 +7,7 @@ rm $0
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-if [[ $( smbd -V ) != 'Version xxxx' ]]; then
+if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
 	echo -e "$info Samba already upgraged."
 	exit
 fi
