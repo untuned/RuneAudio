@@ -2,6 +2,8 @@
 
 rm $0
 
+sec=3 # each server
+
 # rankmirrors.sh
 # mitigate download errors by enable(uncomment) and 
 # rank servers in /etc/pacman.d/mirrorlist by download speed
