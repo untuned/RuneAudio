@@ -66,6 +66,9 @@ bootrune() {
 
 setup() {
 	if [[ ! -e /etc/motd.logo ]]; then
+		systemctl stop ntpd
+		ntpdate pool.ntp.org
+		systemctl start ntpd
 		wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh
 		chmod +x setup.sh
 		./setup.sh
