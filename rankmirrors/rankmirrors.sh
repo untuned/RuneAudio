@@ -72,7 +72,7 @@ timestop
 title -l = "$bar Mirror list ranked successfully."
 
 if (( $# == 0 )); then
-	title -nt "Update package database: pacman -Sy"
+	title -nt "$info Update package database: pacman -Sy"
 else
 	echo -e "$bar Update package database ..."
 	pacman -Sy
