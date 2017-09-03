@@ -59,7 +59,9 @@ ln -s $path/web /srv/http/aria2
 
 # modify file
 file=/etc/nginx/nginx.conf
-linenum=$( sed -n '/listen 80 /=' $file )
+
+if ! grep -q 'aria2' $file; then
+	linenum=$( sed -n '/listen 80 /=' $file )
 
 sed -i -e '/^\s*rewrite/ s/^\s*/&#/
 ' -e "$(( $linenum + 7 ))"' a\
@@ -73,6 +75,7 @@ sed -i -e '/^\s*rewrite/ s/^\s*/&#/
 \            alias '$path'/web;\
 \        }\
 ' $file
+fi
 
 mkdir -p /root/.config/aria2
 echo "enable-rpc=true
