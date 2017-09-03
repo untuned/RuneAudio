@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm $0
+
 # rankmirrors.sh <SECONDS>
 # mitigate download errors by enable(uncomment) and 
 # rank servers in /etc/pacman.d/mirrorlist by download speed
