@@ -31,8 +31,7 @@ chmod +x /usr/local/bin/uninstall_aria.sh
 if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
 	wgetnc $gitpath/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
-	./rankmirrors.sh
-	rm rankmirrors.sh
+	./rankmirrors.sh 1
 fi
 
 title -l = "$bar Install Aria2 ..."
