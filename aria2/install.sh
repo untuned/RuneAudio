@@ -103,7 +103,7 @@ else
 fi
 
 timestop
-title -l = "$bar Aria2 installed and started successfully."
+title -l = "$bar Aria2 installed successfully."
 echo "Uninstall: uninstall_aria.sh"
 echo "Run: systemctl [ start / stop ] aria2"
 echo "Startup: systemctl [ enable / disable ] aria2"
