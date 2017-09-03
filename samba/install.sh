@@ -16,11 +16,13 @@ title -l = "$bar Upgrade Samba ..."
 #################################################################################
 timestart
 
+gitpath=https://github.com/rern/RuneAudio/raw/master
 # fix packages download errors
 if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh
+	wgetnc $gitpath/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
+	rm rankmirrors.sh
 fi
 pacman -Sy
 
@@ -36,9 +38,9 @@ root    soft    nofile    16384
 root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/samba/uninstall_samb.sh -P /usr/local/bin
+wgetnc $gitpath/samba/uninstall_samb.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_samb.sh
-wgetnc https://github.com/rern/RuneAudio/raw/master/samba/smb-dev.conf -O /etc/samba/smb-dev.conf
+wgetnc $gitpath/samba/smb-dev.conf -O /etc/samba/smb-dev.conf
 ln -sf /etc/samba/smb{-dev,}.conf
 
 # set samba password
