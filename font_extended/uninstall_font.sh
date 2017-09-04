@@ -14,11 +14,6 @@ mv /srv/http/assets/fonts/lato{.backup,}
 
 redis-cli hdel addons font &> /dev/null
 
-# refresh #######################################
-echo -e "$bar Clear PHP OPcache ..."
-systemctl reload php-fpm
-echo
-
 if pgrep midori >/dev/null; then
 	killall midori
 	sleep 1
