@@ -44,8 +44,6 @@ sed -i -e '\|/run/backup_|,+1 s|^|//|
         ;
 ' $file
 
-systemctl restart rune_SY_wrk
-
 file=/srv/http/app/templates/settings.php
 echo $file
 sed -i -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
@@ -130,3 +128,5 @@ title -nt "$info Refresh browser before use."
 
 # clear opcache #######################################
 systemctl reload php-fpm
+#sleep 1
+#systemctl restart rune_SY_wrk
