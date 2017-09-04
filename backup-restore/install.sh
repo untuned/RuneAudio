@@ -27,6 +27,7 @@ echo $dir
 mkdir -p $dir
 
 file=/srv/http/app/libs/runeaudio.php
+if ! grep -q 'bsdtar -czpf' $file; then
 echo $file
 sed -i -e '\|/run/backup_|,+1 s|^|//|
 ' -e '\|/run/backup_| i\
@@ -44,15 +45,24 @@ sed -i -e '\|/run/backup_|,+1 s|^|//|
                 "/etc/spop"\
         ;
 ' $file
+fi
 
-echo -e "$bar Add new files ..."
 file=/srv/http/app/templates/settings.php
+if ! grep -q 'filebackup' $file; then
 echo $file
 sed -i -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
 ' -e 's/type="file"/& name="filebackup"/
 ' -e'/value="restore"/ s/name="syscmd" value="restore" //; s/type="submit" disabled>Upload/disabled>Restore/
 ' $file
+fi
 
+file=/srv/http/app/templates/footer.php
+if ! grep -q 'restore.js' $file; then
+	echo $file
+	echo '<script src="<?=$this->asset('"'"'/js/restore.js'"'"')?>"></script>' >> $file
+fi
+
+echo -e "$bar Add new files ..."
 file=/srv/http/assets/js/restore.js
 echo $file
 echo '
@@ -73,10 +83,6 @@ $("#restore").submit(function() {
     return false
 });
 ' > $file
-
-file=/srv/http/app/templates/footer.php
-echo $file
-echo '<script src="<?=$this->asset('"'"'/js/restore.js'"'"')?>"></script>' >> $file
 
 file=/srv/http/restore.php
 echo $file
