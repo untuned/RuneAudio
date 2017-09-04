@@ -16,7 +16,7 @@ title -l = "$bar Install Extended fonts ..."
 wgetnc https://github.com/rern/RuneAudio/raw/master/font_extended/uninstall_font.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_font.sh
 wgetnc https://github.com/rern/_assets/RuneUI_enhancement/raw/master/lato.tar.xz
-mv /srv/http/assets/fonts/lato{,.backupext}
+mv /srv/http/assets/fonts/lato{,.backup}
 mkdir /srv/http/assets/fonts/lato
 bsdtar -xvf lato.tar.xz -C /srv/http/assets/fonts/lato
 rm lato.tar.xz
