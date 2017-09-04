@@ -117,7 +117,7 @@ else
 fi
 
 timestop
-title -l = "$bar Transmission installed successfully."
+title -l = "$bar Transmission installed and started successfully."
 echo "Uninstall: uninstall_tran.sh"
 echo "Run: systemctl [ start / stop ] trans"
 echo "Startup: systemctl [ enable / disable ] trans"
