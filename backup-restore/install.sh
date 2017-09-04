@@ -11,12 +11,12 @@ rm $0
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-title -l = "$bar Install Backup-Restore update ..."
-
 if [[ -e /srv/http/restore.php ]]; then
     echo -e "$info Already installed."
     exit
 fi
+
+title -l = "$bar Install Backup-Restore update ..."
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/backup-restore/uninstall_back.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_back.sh
