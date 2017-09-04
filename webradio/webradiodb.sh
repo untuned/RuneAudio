@@ -6,6 +6,8 @@
 # - refresh ui
 # - fix sorting
 
+# import heading function
+wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 rm $0
 
 # clear database
@@ -15,8 +17,8 @@ echo
 # add data from files
 for file in /mnt/MPD/Webradio/*.pls; do
 	if [[ ! -e $file ]]; then
-		echo -e '\e[30m\e[43m i \e[0m No webradio files found.'
-		echo -e 'Copy *.pls to \e[36m/mnt/MPD/Webradio/\e[0m then run again.\n'
+		echo -e "$info No webradio files found."
+		echo 'Copy *.pls to /mnt/MPD/Webradio/ then run again.'
 		exit
 	fi
 	name=$( grep 'Title1' "$file" | cut -d '=' -f2 )
@@ -43,4 +45,4 @@ if ! grep -q 'localeCompare' $runeui; then
     ' ${runeui/.js/.min.js}
 fi
 
-echo -e '\n\e[36m\e[46m . \e[0m Webradio imported successfully.\n'
+title -l = "$bar Webradio imported successfully."
