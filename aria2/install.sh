@@ -75,6 +75,8 @@ sed -i -e '/^\s*rewrite/ s/^\s*/&#/
 \            alias '$path'/web;\
 \        }\
 ' $file
+
+	systemctl restart nginx
 fi
 
 mkdir -p /root/.config/aria2
