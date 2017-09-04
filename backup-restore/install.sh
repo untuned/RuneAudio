@@ -21,6 +21,7 @@ fi
 wgetnc https://github.com/rern/RuneAudio/raw/master/backup-restore/uninstall_back.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_back.sh
 
+echo -e "$bar Modify files ..."
 dir=/srv/http/tmp
 echo $dir
 mkdir -p $dir
@@ -44,6 +45,7 @@ sed -i -e '\|/run/backup_|,+1 s|^|//|
         ;
 ' $file
 
+echo -e "$bar Add new files ..."
 file=/srv/http/app/templates/settings.php
 echo $file
 sed -i -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
