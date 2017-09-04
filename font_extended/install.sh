@@ -7,7 +7,7 @@ rm $0
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-if [[ -e /srv/http/assets/fonts/latobackup ]]; then
+if [[ -e /srv/http/assets/fonts/lato.backup ]]; then
 	echo -e "$info Extended fonts already installed."
 	exit
 fi
