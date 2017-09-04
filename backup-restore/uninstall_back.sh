@@ -10,8 +10,7 @@ if [[ ! -e /srv/http/restore.php ]]; then
     exit
 fi
 
-rm -r /srv/http/tmp
-
+echo -e "$bar Restore files ..."
 sed -i -e '\|/run/backup_|,+1 s|^//||
 ' -e '\|/srv/http/tmp|,/^ \+;/ d
 ' /srv/http/app/libs/runeaudio.php
@@ -25,7 +24,7 @@ sed -i '/#restore/,/^});/ d' /srv/http/assets/js/runeui.js
 
 sed -i 's/\$("#restore").\+});//' /srv/http/assets/js/runeui.min.js
 
-rm /srv/http/restore.* /etc/sudoers.d/http-backup
+rm /srv/http/restore.* rm -r /srv/http/tmp /etc/sudoers.d/http-backup
 
 redis-cli hdel addons back &> /dev/null
 
