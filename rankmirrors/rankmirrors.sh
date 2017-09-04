@@ -76,5 +76,5 @@ if (( $# == 0 )); then
 else
 	echo -e "$bar Update package database ..."
 	pacman -Sy
-	title -nt = "$bar Package database updated."
+	title -nt "$bar Package database updated."
 fi
