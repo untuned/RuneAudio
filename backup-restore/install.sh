@@ -126,7 +126,7 @@ title -l = "$bar Backup-Restore update installed successfully."
 echo 'Uninstall: uninstall_back.sh'
 title -nt "$info Refresh browser before use."
 
-# clear opcache #######################################
-systemctl reload php-fpm
-#sleep 1
-#systemctl restart rune_SY_wrk
+# clear opcache if run from terminal #######################################
+[[ -t 1 ]] && systemctl reload php-fpm
+
+systemctl restart rune_SY_wrk
