@@ -27,9 +27,10 @@ title -l = "$bar Extended fonts installed successfully."
 echo 'Uninstall: uninstall_font.sh'
 title -nt "$info Refresh browser for new fonts."
 
-# clear opcache and restart local browser #######################################
-systemctl reload php-fpm
+# clear opcache if run from terminal #######################################
+[[ -t 1 ]] && systemctl reload php-fpm
 
+# restart local browser #######################################
 if pgrep midori > /dev/null; then
 	killall midori
 	sleep 1
