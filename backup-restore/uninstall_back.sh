@@ -28,11 +28,12 @@ sed -i 's/\$("#restore").\+});//' /srv/http/assets/js/runeui.min.js
 rm /srv/http/restore.* /etc/sudoers.d/http-backup
 
 redis-cli hdel addons back &> /dev/null
-systemctl restart rune_SY_wrk
 
 title -l = "$bar Backup-Restore update uninstalled successfully."
 
-# clear opcache #######################################
-systemctl reload php-fpm
+# clear opcache if run from terminal #######################################
+[[ -t 1 ]] && systemctl reload php-fpm
+
+systemctl restart rune_SY_wrk
 
 rm $0
