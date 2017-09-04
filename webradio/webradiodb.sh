@@ -10,6 +10,8 @@
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 rm $0
 
+title -l = "$bar Webradio Import ..."
+
 # clear database
 redis-cli del webradios &> /dev/null
 
