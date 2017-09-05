@@ -11,7 +11,7 @@ fi
 
 title -l = "$bar Uninstall Transmission ..."
 # uninstall package #######################################
-pacman -R --noconfirm transmission-cli
+pacman -Rs --noconfirm transmission-cli
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
