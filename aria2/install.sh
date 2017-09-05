@@ -31,13 +31,12 @@ chmod +x /usr/local/bin/uninstall_aria.sh
 if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
 	wgetnc $gitpath/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
-	./rankmirrors.sh 1
+	./rankmirrors.sh
 fi
 
 title -l = "$bar Install Aria2 ..."
-# skip with any argument
-(( $# == 0 )) && pacman -Sy
-pacman -S --noconfirm aria2 glibc
+
+pacman -Sy --noconfirm aria2 glibc
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
