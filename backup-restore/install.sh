@@ -131,7 +131,7 @@ chown http:http /srv/http/restore.* /srv/http/tmp
 redis-cli hset addons back $version &> /dev/null
 
 title -l = "$bar Backup-Restore update installed successfully."
-echo 'Uninstall: uninstall_back.sh'
+[[ -t 1 ]] && echo 'Uninstall: uninstall_back.sh'
 title -nt "$info Refresh browser before use."
 
 # clear opcache if run from terminal #######################################
