@@ -1,7 +1,5 @@
 #!/bin/bash
 
-version=20170901
-
 rm $0
 
 # import heading function
@@ -47,6 +45,8 @@ ln -sf /etc/samba/smb{-dev,}.conf
 
 systemctl daemon-reload
 systemctl restart nmbd smbd
+
+redis-cli hset addons samb 1 &> /dev/null
 
 timestop
 title -l = "$bar Samba upgraded successfully."
