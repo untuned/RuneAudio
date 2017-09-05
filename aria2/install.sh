@@ -58,7 +58,7 @@ ln -s $path/web /srv/http/aria2
 
 # modify file
 file=/etc/nginx/nginx.conf
-
+echo $file
 if ! grep -q 'aria2' $file; then
 	linenum=$( sed -n '/listen 80 /=' $file )
 
@@ -74,19 +74,21 @@ sed -i -e '/^\s*rewrite/ s/^\s*/&#/
 \            alias '$path'/web;\
 \        }\
 ' $file
-
-	systemctl restart nginx
 fi
 
 mkdir -p /root/.config/aria2
+file=/root/.config/aria2/aria2.conf
+echo $file
 echo "enable-rpc=true
 rpc-listen-all=true
 daemon=true
 disable-ipv6=true
 dir=$path
 max-connection-per-server=4
-" > /root/.config/aria2/aria2.conf
+" > $file
 
+file=/etc/systemd/system/aria2.service
+echo $file
 echo '[Unit]
 Description=Aria2
 After=network-online.target
@@ -95,7 +97,7 @@ Type=forking
 ExecStart=/usr/bin/aria2c
 [Install]
 WantedBy=multi-user.target
-' > /etc/systemd/system/aria2.service
+' > $file
 
 # start
 [[ $answer == 1 ]] && systemctl enable aria2
@@ -115,3 +117,5 @@ echo "Startup: systemctl [ enable / disable ] aria2"
 echo
 echo "Download directory: $path"
 title -nt "WebUI: [RuneAudio_IP]/aria2/"
+
+systemctl restart nginx
