@@ -24,7 +24,7 @@ sed -i '/#restore/,/^});/ d' /srv/http/assets/js/runeui.js
 
 sed -i 's/\$("#restore").\+});//' /srv/http/assets/js/runeui.min.js
 
-rm /srv/http/restore.* rm -r /srv/http/tmp /etc/sudoers.d/http-backup
+rm /srv/http/restore.* /srv/http/tmp /etc/sudoers.d/http-backup
 
 redis-cli hdel addons back &> /dev/null
 
