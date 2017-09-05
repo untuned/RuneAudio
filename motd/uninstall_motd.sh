@@ -11,12 +11,14 @@ title -l = "$bar Uninstall Rune logo motd ..."
 
 echo -e "$bar Restore files ..."
 
-mv /etc/motd{.original,}
-rm /etc/motd.logo /etc/profile.d/motd.sh
+mv -v /etc/motd{.original,}
+rm -v /etc/motd.logo /etc/profile.d/motd.sh
 
+file=/etc/bash.bashrc
+echo $file
 sed -i -e '/^PS1=/ d
 ' -e '/^#PS1=/ s/^#//
-' /etc/bash.bashrc
+' $file
 
 redis-cli hdel addons motd &> /dev/null
 
