@@ -10,7 +10,7 @@ fi
 
 title -l = "$bar Unnstall Extended fonts ..."
 rm -rv /srv/http/assets/fonts/lato
-mv /srv/http/assets/fonts/lato{.backup,}
+mv -v /srv/http/assets/fonts/lato{.backup,}
 
 redis-cli hdel addons font &> /dev/null
 
