@@ -20,8 +20,9 @@ if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; t
 	wgetnc $gitpath/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh 1
+else
+	pacman -Sy
 fi
-pacman -Sy
 
 systemctl stop nmbd smbd
 
