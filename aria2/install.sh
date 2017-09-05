@@ -118,4 +118,5 @@ echo
 echo "Download directory: $path"
 title -nt "WebUI: [RuneAudio_IP]/aria2/"
 
-systemctl restart nginx
+# refresh svg support last for webui installation
+systemctl reload nginx
