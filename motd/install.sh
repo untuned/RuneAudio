@@ -16,8 +16,10 @@ title -l = "$bar Install Rune logo motd ..."
 wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_motd.sh
 
-echo -e "$bar Modify files ..."
+echo -e "$bar Add new files ..."
 
+file=/etc/motd.logo
+echo $file
 echo "
                           .,;uh         
                    .,;cdk0XNWMM,        
@@ -39,22 +41,28 @@ echo "
                kMNo0WMXo'               
                 dNNOd;'                 
                  ''                     
- " > /etc/motd.logo
+ " > $file
 
-mv /etc/motd{,.original}
-
+file=/etc/profile.d/motd.sh
+echo $file
 echo '#!/bin/bash
 
 color=45
 
 echo -e "\e[38;5;${color}m$( < /etc/motd.logo )\e[0m\n"
-' > /etc/profile.d/motd.sh
+' > $file
 
+echo -e "$bar Modify files ..."
+
+mv -v /etc/motd{,.original}
+
+file=/etc/bash.bashrc
+echo $file
 sed -i -e '/^PS1=/ s/^/#/
 ' -e '/PS1=/ a\
 color=242\
 PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
-' /etc/bash.bashrc
+' $file
 # PS1='\[\e[38;5;'$color'm\]\u@\h:\[\e[0m\]\w \$ '
 # \x27       - escaped <'>
 # \\         - escaped <\>
