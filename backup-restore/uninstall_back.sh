@@ -11,21 +11,29 @@ if [[ ! -e /srv/http/restore.php ]]; then
 fi
 
 echo -e "$bar Restore files ..."
+file=/srv/http/app/libs/runeaudio.php
+echo $file
 sed -i -e '\|/run/backup_|,+1 s|^//||
 ' -e '\|/srv/http/tmp|,/^ \+;/ d
-' /srv/http/app/libs/runeaudio.php
+' $file
 
+file=/srv/http/app/templates/settings.php
+echo $file
 sed -i -e 's/id="restore"/method="post"/
 ' -e 's/type="file" name="filebackup"/type="file"/
 ' -e '/id="btn-backup-upload"/ s/id="btn-backup-upload"/& name="syscmd" value="restore"/; s/disabled>Restore/type="submit" disabled>Upload/
-' /srv/http/app/templates/settings.php
+' $file
 
-sed -i '/#restore/,/^});/ d' /srv/http/assets/js/runeui.js
+file=/srv/http/assets/js/runeui.js
+echo $file
+sed -i '/#restore/,/^});/ d' $file
 
-sed -i 's/\$("#restore").\+});//' /srv/http/assets/js/runeui.min.js
+file=/srv/http/assets/js/runeui.min.js
+echo $file
+sed -i 's/\$("#restore").\+});//' $file
 
-rm /srv/http/restore.* /etc/sudoers.d/http-backup
-rm -r /srv/http/tmp
+rm -v /srv/http/restore.* /etc/sudoers.d/http-backup
+rm -rv /srv/http/tmp
 
 redis-cli hdel addons back &> /dev/null
 
