@@ -7,6 +7,7 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 
 if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
 	echo -e "$info Samba already upgraged."
+	redis-cli hset addons samb 1 &> /dev/null
 	exit
 fi
 
