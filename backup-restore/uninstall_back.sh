@@ -7,7 +7,7 @@ title -l = "$bar Uninstall Backup-Restore update ..."
 
 if [[ ! -e /srv/http/restore.php ]]; then
     echo -e "$info Uninstall Backup-Restore update not found."
-    exit
+    exit 1
 fi
 
 echo -e "$bar Restore files ..."

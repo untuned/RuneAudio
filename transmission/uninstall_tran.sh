@@ -6,7 +6,7 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 # check installed #######################################
 if ! pacman -Q transmission-cli &>/dev/null; then
 	echo -e "$info Transmission not found."
-	exit
+	exit 1
 fi
 
 title -l = "$bar Uninstall Transmission ..."

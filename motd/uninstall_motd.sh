@@ -4,7 +4,7 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 
 if [[ ! -e /etc/motd.logo ]]; then
   echo -e "$info Rune logo motd not found."
-  exit
+  exit 1
 fi
 
 title -l = "$bar Uninstall Rune logo motd ..."

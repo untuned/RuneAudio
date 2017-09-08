@@ -5,7 +5,7 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 
 if [[ ! -e /srv/http/assets/fonts/lato.backup ]]; then
 	echo -e "$info Extended fonts not found."
-	exit
+	exit 1
 fi
 
 title -l = "$bar Unnstall Extended fonts ..."
