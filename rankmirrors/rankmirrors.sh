@@ -73,8 +73,9 @@ title -l = "$bar Mirror list ranked successfully."
 
 if (( $# == 0 )); then
 	title -nt "$bar Update package database: pacman -Sy"
-else
-	echo -e "$bar Update package database ..."
-	pacman -Sy
-	title -nt "$bar Package database updated."
+	exit
 fi
+
+echo -e "$bar Update package database ..."
+pacman -Sy
+title -nt "$bar Package database updated."
