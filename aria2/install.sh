@@ -17,7 +17,7 @@ if pacman -Q aria2 &>/dev/null; then
 	exit
 fi
 
-if [[ $# == 0 || $1 == 0 ]]; then
+if (( $# == 0 )); then
 	# user input
 	yesno "Start Aria2 on system startup:"
 else
