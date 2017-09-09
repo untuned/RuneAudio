@@ -71,7 +71,7 @@ rm -rf $tmpdir
 timestop
 title -l = "$bar Mirror list ranked successfully."
 
-if (( $# == 0 )); then
+if [[ $# == 0 || $1 = 0 ]]; then
 	title -nt "$bar Update package database: pacman -Sy"
 	exit
 fi
