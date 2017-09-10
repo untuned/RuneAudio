@@ -59,7 +59,7 @@ fi
 file=/srv/http/app/templates/footer.php
 if ! grep -q 'restore.js' $file; then
 	echo $file
-	echo '<script src="<?=$this->asset('"'"'/js/restore.js'"'"')?>"></script>' >> $file
+	echo '<script src="<?=$this->asset('\''/js/restore.js'\'')?>"></script>' >> $file
 fi
 
 echo -e "$bar Add new files ..."
