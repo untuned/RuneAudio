@@ -112,11 +112,11 @@ fi
 timestop
 title -l = "$bar Aria2 installed and started successfully."
 [[ -t 1 ]] && echo "Uninstall: uninstall_aria.sh"
-echo "Run: systemctl [ start / stop ] aria2"
-echo "Startup: systemctl [ enable / disable ] aria2"
+echo "Run: systemctl < start / stop > aria2"
+echo "Startup: systemctl < enable / disable > aria2"
 echo
 echo "Download directory: $path"
-title -nt "WebUI: [ RuneAudio_IP ]/aria2/"
+title -nt "WebUI: < RuneAudio_IP >/aria2/"
 
 # refresh svg support last for webui installation
 systemctl reload nginx
