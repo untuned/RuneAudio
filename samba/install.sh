@@ -51,4 +51,5 @@ redis-cli hset addons samb 1 &> /dev/null
 
 timestop
 title -l = "$bar Samba upgraded successfully."
+echo 'Add Samba user: smbpasswd -s -a < user >'
 title -nt "$info Edit /etc/smb-dev.conf to fit usage."
