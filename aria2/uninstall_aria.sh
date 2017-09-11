@@ -29,9 +29,9 @@ sed -i -e '/location \/aria2/, /^$/ d
 echo -e "$bar Remove files ..."
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-	rm -rv $mnt/aria2/web
+	rm -r $mnt/aria2/web
 else
-	rm -rv /root/aria2/web
+	rm -r /root/aria2/web
 fi
 rm -rv /root/.config/aria2 /srv/http/aria2
 
