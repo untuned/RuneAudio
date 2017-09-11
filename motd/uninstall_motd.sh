@@ -7,7 +7,10 @@ if [[ ! -e /etc/motd.logo ]]; then
   exit 1
 fi
 
-title -l = "$bar Uninstall Rune logo motd ..."
+$type=Uninstall
+[[ ${@:$#} == -u ]] && update=1; $type=Update
+
+title -l = "$bar $type Rune logo motd ..."
 
 echo -e "$bar Restore files ..."
 
@@ -23,6 +26,6 @@ sed -i -e '/^PS1=/ d
 redis-cli hdel addons motd &> /dev/null
 
 title -l = "$bar Rune logo motd uninstalled successfully."
-title -nt "\n$info Relogin to see original motd."
+[[ ! update ]] && title -nt "\n$info Relogin to see original motd."
 
 rm $0
