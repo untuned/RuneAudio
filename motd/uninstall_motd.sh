@@ -1,14 +1,19 @@
 #!/bin/bash
 
+if [[ ${@:$#} == -u ]]; then
+	shift
+	update=1
+	type=Update
+else
+	type=Uninstall
+fi
+
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ ! -e /etc/motd.logo ]]; then
   echo -e "$info Rune logo motd not found."
   exit 1
 fi
-
-type=Uninstall
-[[ ${@:$#} == -u ]] && update=1; type=Update
 
 title -l = "$bar $type Rune logo motd ..."
 
