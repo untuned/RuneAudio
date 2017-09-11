@@ -9,19 +9,21 @@ if ! pacman -Q aria2 &>/dev/null; then
 	exit 1
 fi
 
-title -l = "$bar Uninstall Aria2 ..."
-
-if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-else
-	mnt=/root
-fi
-
+type=Uninstall
 # if update, save settings #######################################
 if [[ ${@:$#} == -u ]]; then
 	rm -r /tmp/aria
 	mkdir -p /tmp/aria
 	[[ -e /etc/systemd/system/multi-user.target.wants/aria.service ]] && touch /tmp/aria/ansstartup
+	type=Update
+fi
+
+title -l = "$bar $type Aria2 ..."
+
+if mount | grep -q '/dev/sda1'; then
+	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+else
+	mnt=/root
 fi
 
 systemctl disable aria2
