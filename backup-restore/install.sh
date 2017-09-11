@@ -16,8 +16,8 @@ if [[ -e /srv/http/restore.php ]]; then
     exit
 fi
 
-$type=installed
-[[ ${@:$#} == -u ]] && update=1; $type=updated
+type=installed
+[[ ${@:$#} == -u ]] && update=1; type=updated
 
 title -l = "$bar Install Backup-Restore update ..."
 
@@ -135,7 +135,7 @@ redis-cli hset addons back $version &> /dev/null
 
 title -l = "$bar Backup-Restore update $type successfully."
 [[ -t 1 ]] && echo 'Uninstall: uninstall_back.sh'
-[[ ! update ]] && title -nt "$info Refresh browser before use."
+[[ ! $update ]] && title -nt "$info Refresh browser before use."
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
