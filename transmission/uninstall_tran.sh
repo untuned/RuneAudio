@@ -13,9 +13,11 @@ if [[ ${@:$#} == -u ]]; then
 		mkdir -p /root/transmission
 		path=/root/transmission
 	fi
-	mv $path/settings.json{,.upgrade}
-	[[ -e $path/web ]] && answebui=1
-	[[ -e /etc/systemd/system/multi-user.target.wants/transmission.service ]] && ansstartup=1
+	rm -r /tmp/tran
+	mkdir -p /tmp/tran
+	mv $path/settings.json /tmp/tran
+	[[ -e $path/web ]] && touch /tmp/tran/answebui
+	[[ -e /etc/systemd/system/multi-user.target.wants/transmission.service ]] && touch /tmp/tran/ansstartup
 fi
 
 # check installed #######################################
