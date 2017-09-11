@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [[ ${@:$#} == -u ]]; then
+	shift
+	update=1
+	type=Update
+else
+	type=Uninstall
+fi
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
@@ -7,9 +15,6 @@ if [[ ! -e /srv/http/assets/fonts/lato.backup ]]; then
 	echo -e "$info Extended fonts not found."
 	exit 1
 fi
-
-type=Uninstall
-[[ ${@:$#} == -u ]] && update=1; type=Update
 
 title -l = "$bar $type Extended fonts ..."
 
