@@ -8,8 +8,8 @@ if [[ ! -e /srv/http/assets/fonts/lato.backup ]]; then
 	exit 1
 fi
 
-$type=Uninstall
-[[ ${@:$#} == -u ]] && update=1; $type=Update
+type=Uninstall
+[[ ${@:$#} == -u ]] && update=1; type=Update
 
 title -l = "$bar $type Extended fonts ..."
 
@@ -26,7 +26,7 @@ if pgrep midori >/dev/null; then
 fi
 
 title -l = "$bar Extended fonts uninstalled successfully."
-[[ ! update ]] && title -nt "$info Refresh browser for original fonts."
+[[ ! $update ]] && title -nt "$info Refresh browser for original fonts."
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
