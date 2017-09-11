@@ -8,6 +8,14 @@ version=20170901
 
 rm $0
 
+if [[ ${@:$#} == -u ]]; then
+	shift
+	update=1
+	type=updated
+else
+	type=installed
+fi
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
@@ -15,9 +23,6 @@ if [[ -e /srv/http/restore.php ]]; then
     echo -e "$info Already installed."
     exit
 fi
-
-type=installed
-[[ ${@:$#} == -u ]] && update=1; type=updated
 
 title -l = "$bar Install Backup-Restore update ..."
 
