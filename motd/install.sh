@@ -11,7 +11,7 @@ if [[ -e /etc/motd.logo ]]; then
   exit
 fi
 
-$type=installed
+type=installed
 [[ ${@:$#} == -u ]] && update=1; $type=updated
 
 title -l = "$bar Install Rune logo motd ..."
