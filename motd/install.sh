@@ -12,7 +12,7 @@ if [[ -e /etc/motd.logo ]]; then
 fi
 
 type=installed
-[[ ${@:$#} == -u ]] && update=1; $type=updated
+[[ ${@:$#} == -u ]] && update=1; type=updated
 
 title -l = "$bar Install Rune logo motd ..."
 
@@ -81,4 +81,4 @@ redis-cli hset addons motd $version &> /dev/null
 
 title -l = "$bar Rune logo motd $type successfully."
 [[ -t 1 ]] && echo -e "\nUninstall: uninstall_motd.sh"
-[[ ! update ]] && title -nt "$info Relogin to see new Rune logo motd."
+[[ ! $update ]] && title -nt "$info Relogin to see new Rune logo motd."
