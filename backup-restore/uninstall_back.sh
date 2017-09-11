@@ -3,12 +3,15 @@
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-title -l = "$bar Uninstall Backup-Restore update ..."
-
 if [[ ! -e /srv/http/restore.php ]]; then
     echo -e "$info Uninstall Backup-Restore update not found."
     exit 1
 fi
+
+$type=Uninstall
+[[ ${@:$#} == -u ]] && update=1; $type=Update
+
+title -l = "$bar $type Backup-Restore update ..."
 
 echo -e "$bar Restore files ..."
 file=/srv/http/app/libs/runeaudio.php
