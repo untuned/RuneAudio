@@ -8,8 +8,8 @@ if [[ ! -e /srv/http/restore.php ]]; then
     exit 1
 fi
 
-$type=Uninstall
-[[ ${@:$#} == -u ]] && update=1; $type=Update
+type=Uninstall
+[[ ${@:$#} == -u ]] && update=1; type=Update
 
 title -l = "$bar $type Backup-Restore update ..."
 
