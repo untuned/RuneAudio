@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# if update, save settings #######################################
+if [[ ${@:$#} == -u ]]; then
+	shift
+	rm -r /tmp/aria
+	mkdir -p /tmp/aria
+	[[ -e /etc/systemd/system/multi-user.target.wants/aria.service ]] && touch /tmp/aria/ansstartup
+	type=Update
+else
+	type=Uninstall
+fi
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
@@ -7,15 +18,6 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 if ! pacman -Q aria2 &>/dev/null; then
 	echo -e "$info Aria2 not found."
 	exit 1
-fi
-
-type=Uninstall
-# if update, save settings #######################################
-if [[ ${@:$#} == -u ]]; then
-	rm -r /tmp/aria
-	mkdir -p /tmp/aria
-	[[ -e /etc/systemd/system/multi-user.target.wants/aria.service ]] && touch /tmp/aria/ansstartup
-	type=Update
 fi
 
 title -l = "$bar $type Aria2 ..."
