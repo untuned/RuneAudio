@@ -4,6 +4,14 @@ version=20170901
 
 rm $0
 
+if [[ ${@:$#} == -u ]]; then
+	shift
+	update=1
+	type=updated
+else
+	type=installed
+fi
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
@@ -11,9 +19,6 @@ if [[ -e /srv/http/assets/fonts/lato.backup ]]; then
 	echo -e "$info Extended fonts already installed."
 	exit
 fi
-
-type=installed
-[[ ${@:$#} == -u ]] && update=1; type=updated
 
 title -l = "$bar Install Extended fonts ..."
 
