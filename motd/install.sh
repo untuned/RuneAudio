@@ -4,15 +4,20 @@ version=20170901
 
 rm $0
 
+if [[ ${@:$#} == -u ]]; then
+	shift
+	update=1
+	type=updated
+else
+	type=installed
+fi
+
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ -e /etc/motd.logo ]]; then
   echo -e "$info Rune logo motd already installed."
   exit
 fi
-
-type=installed
-[[ ${@:$#} == -u ]] && update=1; type=updated
 
 title -l = "$bar Install Rune logo motd ..."
 
