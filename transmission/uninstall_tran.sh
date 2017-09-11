@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# if update, save settings #######################################
+if [[ ${@:$#} == -u ]]; then
+	shift
+	rm -r /tmp/tran
+	mkdir -p /tmp/tran
+	cp $path/settings.json /tmp/tran
+	[[ -e $path/web ]] && touch /tmp/tran/answebui
+	[[ -e /etc/systemd/system/multi-user.target.wants/transmission.service ]] && touch /tmp/tran/ansstartup
+	type=Update
+else
+	type=Uninstall
+fi
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
@@ -7,17 +19,6 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 if ! pacman -Q transmission-cli &>/dev/null; then
 	echo -e "$info Transmission not found."
 	exit 1
-fi
-
-type=Uninstall
-# if update, save settings #######################################
-if [[ ${@:$#} == -u ]]; then
-	rm -r /tmp/tran
-	mkdir -p /tmp/tran
-	cp $path/settings.json /tmp/tran
-	[[ -e $path/web ]] && touch /tmp/tran/answebui
-	[[ -e /etc/systemd/system/multi-user.target.wants/transmission.service ]] && touch /tmp/tran/ansstartup
-	type=Update
 fi
 
 title -l = "$bar $type Transmission ..."
