@@ -12,7 +12,11 @@ if [[ -e /srv/http/assets/fonts/lato.backup ]]; then
 	exit
 fi
 
+$type=installed
+[[ ${@:$#} == -u ]] && update=1; $type=updated
+
 title -l = "$bar Install Extended fonts ..."
+
 wgetnc https://github.com/rern/RuneAudio/raw/master/font_extended/uninstall_font.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_font.sh
 wgetnc https://github.com/rern/_assets/raw/master/RuneUI_enhancement/lato.tar.xz
@@ -23,9 +27,9 @@ rm lato.tar.xz
 
 redis-cli hset addons font $version &> /dev/null
 
-title -l = "$bar Extended fonts installed successfully."
+title -l = "$bar Extended fonts $type successfully."
 [[ -t 1 ]] && echo 'Uninstall: uninstall_font.sh'
-title -nt "$info Refresh browser for new fonts."
+[[ ! update ]] && title -nt "$info Refresh browser for new fonts."
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
