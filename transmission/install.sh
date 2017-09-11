@@ -123,6 +123,8 @@ else
 	exit
 fi
 
+rm -r /tmp/tran
+
 timestop
 title -l = "$bar Transmission $type and started successfully."
 # skip if upgrade
