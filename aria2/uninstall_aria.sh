@@ -10,6 +10,22 @@ if ! pacman -Q aria2 &>/dev/null; then
 fi
 
 title -l = "$bar Uninstall Aria2 ..."
+
+if mount | grep -q '/dev/sda1'; then
+	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+else
+	mnt=/root
+fi
+
+# if update, save settings #######################################
+if [[ ${@:$#} == -u ]]; then
+	rm -r /tmp/aria
+	mkdir -p /tmp/aria
+	cp /etc/nginx/nginx.conf /tmp/aria
+	cp /root/.config/aria2/aria2.conf /tmp/aria
+	[[ -e /etc/systemd/system/multi-user.target.wants/aria.service ]] && touch /tmp/aria/ansstartup
+fi
+
 systemctl disable aria2
 systemctl stop aria2
 rm -v /etc/systemd/system/aria2.service
@@ -27,12 +43,8 @@ sed -i -e '/location \/aria2/, /^$/ d
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
-if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-	rm -r $mnt/aria2/web
-else
-	rm -r /root/aria2/web
-fi
+
+rm -r $mnt/aria2/web	
 rm -rv /root/.config/aria2 /srv/http/aria2
 
 redis-cli hdel addons aria &> /dev/null
