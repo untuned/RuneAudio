@@ -9,7 +9,18 @@ if ! pacman -Q transmission-cli &>/dev/null; then
 	exit 1
 fi
 
-title -l = "$bar Uninstall Transmission ..."
+type=Uninstall
+# if update, save settings #######################################
+if [[ ${@:$#} == -u ]]; then
+	rm -r /tmp/tran
+	mkdir -p /tmp/tran
+	cp $path/settings.json /tmp/tran
+	[[ -e $path/web ]] && touch /tmp/tran/answebui
+	[[ -e /etc/systemd/system/multi-user.target.wants/transmission.service ]] && touch /tmp/tran/ansstartup
+	type=Update
+fi
+
+title -l = "$bar $type Transmission ..."
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
@@ -18,15 +29,6 @@ if mount | grep -q '/dev/sda1'; then
 else
 	mkdir -p /root/transmission
 	path=/root/transmission
-fi
-
-# if update, save settings #######################################
-if [[ ${@:$#} == -u ]]; then
-	rm -r /tmp/tran
-	mkdir -p /tmp/tran
-	cp $path/settings.json /tmp/tran
-	[[ -e $path/web ]] && touch /tmp/tran/answebui
-	[[ -e /etc/systemd/system/multi-user.target.wants/transmission.service ]] && touch /tmp/tran/ansstartup
 fi
 
 # uninstall package #######################################
