@@ -17,6 +17,9 @@ if pacman -Q aria2 &>/dev/null; then
 	exit
 fi
 
+$type=installed
+[[ ${@:$#} == -u ]] && update=1; $type=updated
+
 if (( $# == 0 )); then
 	# user input
 	yesno "Start Aria2 on system startup:"
@@ -100,7 +103,7 @@ WantedBy=multi-user.target
 ' > $file
 
 # start
-[[ $answer == 1 ]] && systemctl enable aria2
+[[ $answer == 1 ]] || [[ -e /tmp/aria/ansstartup ]] && systemctl enable aria2
 echo -e "$bar Start Aria2 ..."
 if systemctl start aria2 &> /dev/null; then
 	redis-cli hset addons aria $version &> /dev/null
@@ -110,7 +113,9 @@ else
 fi
 
 timestop
-title -l = "$bar Aria2 installed and started successfully."
+title -l = "$bar Aria2 $type and started successfully."
+# skip if upgrade
+[[ $update ]] && exit
 [[ -t 1 ]] && echo "Uninstall: uninstall_aria.sh"
 echo "Run: systemctl < start / stop > aria2"
 echo "Startup: systemctl < enable / disable > aria2"
