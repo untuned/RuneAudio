@@ -13,6 +13,9 @@ rm $0
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
+$type=installed
+[[ ${@:$#} == -u ]] && update=1; $type=updated
+
 if pacman -Q transmission-cli &>/dev/null; then
 	echo -e "$info Transmission already installed."
 	exit
@@ -76,26 +79,30 @@ file=$path/settings.json
 systemctl start trans
 systemctl stop trans
 
-sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
-' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
-' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
-' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
-' -e '/[^{},\{, \}]$/ s/$/, /
-' -e '/}/ i\
-    "watch-dir": "'"$path"'/watch", \
-    "watch-dir-enabled": true
-' $file
-
-# set password
-if [[ -n $pwd1 && $pwd1 != 0 ]]; then
-	sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
-	' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwd1"'"|
-	' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
+if [[ ! update ]]; then
+	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
+	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
+	' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
+	' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
+	' -e '/[^{},\{, \}]$/ s/$/, /
+	' -e '/}/ i\
+	    "watch-dir": "'"$path"'/watch", \
+	    "watch-dir-enabled": true
 	' $file
+
+	# set password
+	if [[ -n $pwd1 && $pwd1 != 0 ]]; then
+		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
+		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwd1"'"|
+		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
+		' $file
+	fi
+else
+	mv /tmp/tran/settings.json $path
 fi
 
 # web ui alternative
-if [[ $answebui == 1 ]]; then
+if [[ $answebui == 1 ]] || [[ -e /tmp/tran/answebui ]]; then
 	wgetnc https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
@@ -107,7 +114,7 @@ fi
 
 # start
 systemctl daemon-reload
-[[ $ansstartup == 1 ]] && systemctl enable trans
+[[ $ansstartup == 1 ]] || [[ -e /tmp/tran/ansstartup ]] && systemctl enable trans
 echo -e "$bar Start Transmission ..."
 if systemctl start trans &> /dev/null; then
 	redis-cli hset addons tran $version &> /dev/null
@@ -117,7 +124,9 @@ else
 fi
 
 timestop
-title -l = "$bar Transmission installed and started successfully."
+title -l = "$bar Transmission $type and started successfully."
+# skip if upgrade
+[[ $update ]] && exit
 [[ -t 1 ]] && echo "Uninstall: uninstall_tran.sh"
 echo "Run: systemctl < start / stop > trans"
 echo "Startup: systemctl < enable / disable > trans"
