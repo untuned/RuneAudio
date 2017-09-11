@@ -18,8 +18,8 @@ if pacman -Q transmission-cli &>/dev/null; then
 	exit
 fi
 
-$type=installed
-[[ ${@:$#} == -u ]] && update=1; $type=updated
+type=installed
+[[ ${@:$#} == -u ]] && update=1; type=updated
 
 # user inputs
 if (( $# == 0 )); then # with no argument
@@ -79,7 +79,7 @@ file=$path/settings.json
 systemctl start trans
 systemctl stop trans
 
-if [[ ! update ]]; then
+if [[ ! $update ]]; then
 	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
 	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
 	' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
