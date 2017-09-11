@@ -11,6 +11,9 @@ if [[ -e /etc/motd.logo ]]; then
   exit
 fi
 
+$type=installed
+[[ ${@:$#} == -u ]] && update=1; $type=updated
+
 title -l = "$bar Install Rune logo motd ..."
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin
@@ -76,6 +79,6 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 
 redis-cli hset addons motd $version &> /dev/null
 
-title -l = "$bar Rune logo motd installed successfully."
-echo -e "\nUninstall: uninstall_motd.sh"
-title -nt "$info Relogin to see new Rune logo motd."
+title -l = "$bar Rune logo motd $type successfully."
+[[ -t 1 ]] && echo -e "\nUninstall: uninstall_motd.sh"
+[[ ! update ]] && title -nt "$info Relogin to see new Rune logo motd."
