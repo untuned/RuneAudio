@@ -13,13 +13,13 @@ rm $0
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
-$type=installed
-[[ ${@:$#} == -u ]] && update=1; $type=updated
-
 if pacman -Q transmission-cli &>/dev/null; then
 	echo -e "$info Transmission already installed."
 	exit
 fi
+
+$type=installed
+[[ ${@:$#} == -u ]] && update=1; $type=updated
 
 # user inputs
 if (( $# == 0 )); then # with no argument
