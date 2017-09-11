@@ -9,6 +9,14 @@ version=20170901
 
 rm $0
 
+if [[ ${@:$#} == -u ]]; then
+	shift
+	update=1
+	type=updated
+else
+	type=installed
+fi
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
@@ -17,9 +25,6 @@ if pacman -Q transmission-cli &>/dev/null; then
 	echo -e "$info Transmission already installed."
 	exit
 fi
-
-type=installed
-[[ ${@:$#} == -u ]] && update=1; type=updated
 
 # user inputs
 if (( $# == 0 )); then # with no argument
