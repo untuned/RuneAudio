@@ -17,8 +17,8 @@ if pacman -Q aria2 &>/dev/null; then
 	exit
 fi
 
-$type=installed
-[[ ${@:$#} == -u ]] && update=1; $type=updated
+type=installed
+[[ ${@:$#} == -u ]] && update=1; type=updated
 
 if (( $# == 0 )); then
 	# user input
