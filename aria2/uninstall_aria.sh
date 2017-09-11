@@ -21,8 +21,6 @@ fi
 if [[ ${@:$#} == -u ]]; then
 	rm -r /tmp/aria
 	mkdir -p /tmp/aria
-	cp /etc/nginx/nginx.conf /tmp/aria
-	cp /root/.config/aria2/aria2.conf /tmp/aria
 	[[ -e /etc/systemd/system/multi-user.target.wants/aria.service ]] && touch /tmp/aria/ansstartup
 fi
 
