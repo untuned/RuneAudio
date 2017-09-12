@@ -4,12 +4,12 @@
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ ! -e /srv/http/restore.php ]]; then
-    echo -e "$info Uninstall Backup-Restore update not found."
+    echo -e "$info Uninstall Backup-Restore Update not found."
     exit 1
 fi
 
 [[ $1 != u ]] && type=Uninstall || type=Update
-title -l = "$bar $type Backup-Restore update ..."
+title -l = "$bar $type Backup-Restore Update ..."
 
 echo -e "$bar Restore files ..."
 file=/srv/http/app/libs/runeaudio.php
@@ -38,7 +38,7 @@ rm -rv /srv/http/tmp
 
 redis-cli hdel addons back &> /dev/null
 
-[[ $1 != u ]] && title -l = "$bar Backup-Restore update uninstalled successfully."
+[[ $1 != u ]] && title -l = "$bar Backup-Restore Update uninstalled successfully."
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
