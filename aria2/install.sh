@@ -99,8 +99,9 @@ ExecStart=/usr/bin/aria2c
 WantedBy=multi-user.target
 ' > $file
 
+[[ $answer == 1 ]] || [[ -e /tmp/ariastartup ]] && systemctl enable aria2
+rm -f /tmp/ariastartup
 # start
-[[ $answer == 1 ]] || [[ -e /tmp/aria/ansstartup ]] && systemctl enable aria2
 echo -e "$bar Start Aria2 ..."
 if systemctl start aria2 &> /dev/null; then
 	redis-cli hset addons aria $version &> /dev/null
