@@ -100,7 +100,7 @@ WantedBy=multi-user.target
 ' > $file
 
 [[ $answer == 1 ]] || [[ $( redis-cli get ariastartup ) ]] && systemctl enable aria2
-redis-cli del ariastartup
+redis-cli del ariastartup &> /dev/null
 # start
 echo -e "$bar Start Aria2 ..."
 if systemctl start aria2 &> /dev/null; then
