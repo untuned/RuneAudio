@@ -104,7 +104,7 @@ if [[ $answebui == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
 	wgetnc https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
-	mv $path/web/index{,.original.}.html
+	mv $path/web/index{,.original}.html
 	bsdtar -xf transmission-control-full.tar.gz -C $path
 	rm transmission-control-full.tar.gz
 	chown -R root:root $path/web
