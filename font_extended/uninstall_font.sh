@@ -8,6 +8,7 @@ if [[ ! -e /srv/http/assets/fonts/lato.backup ]]; then
 	exit 1
 fi
 
+[[ $1 != u ]] && type=Uninstall || type=Update
 title -l = "$bar $type Extended fonts ..."
 
 rm -rv /srv/http/assets/fonts/lato
