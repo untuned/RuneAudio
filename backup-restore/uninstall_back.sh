@@ -1,13 +1,5 @@
 #!/bin/bash
 
-if [[ ${@:$#} == -u ]]; then
-	shift
-	update=1
-	type=Update
-else
-	type=Uninstall
-fi
-
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
@@ -16,6 +8,7 @@ if [[ ! -e /srv/http/restore.php ]]; then
     exit 1
 fi
 
+[[ $1 != u ]] && type=Uninstall || type=Update
 title -l = "$bar $type Backup-Restore update ..."
 
 echo -e "$bar Restore files ..."
@@ -45,7 +38,7 @@ rm -rv /srv/http/tmp
 
 redis-cli hdel addons back &> /dev/null
 
-title -l = "$bar Backup-Restore update uninstalled successfully."
+[[ $1 != u ]] && title -l = "$bar Backup-Restore update uninstalled successfully."
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
