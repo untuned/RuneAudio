@@ -1,13 +1,5 @@
 #!/bin/bash
 
-if [[ ${@:$#} == -u ]]; then
-	shift
-	update=1
-	type=Update
-else
-	type=Uninstall
-fi
-
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ ! -e /etc/motd.logo ]]; then
@@ -15,6 +7,7 @@ if [[ ! -e /etc/motd.logo ]]; then
   exit 1
 fi
 
+[[ $1 != u ]] && type=Uninstall || type=Update
 title -l = "$bar $type Rune logo motd ..."
 
 echo -e "$bar Restore files ..."
@@ -30,7 +23,9 @@ sed -i -e '/^PS1=/ d
 
 redis-cli hdel addons motd &> /dev/null
 
-title -l = "$bar Rune logo motd uninstalled successfully."
-[[ ! $update ]] && title -nt "\n$info Relogin to see original motd."
+if [[ $1 != u ]]; then
+	title -l = "$bar Rune logo motd uninstalled successfully."
+	title -nt "\n$info Relogin to see original motd."
+fi
 
 rm $0
