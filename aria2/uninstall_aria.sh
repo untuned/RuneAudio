@@ -10,7 +10,7 @@ if ! pacman -Q aria2 &>/dev/null; then
 fi
 
 # if update, save settings #######################################
-if [[ $1 == u ]] && [[ -e /etc/systemd/system/multi-user.target.wants/aria.service ]]; then
+if [[ $1 == u ]] && [[ $( systemctl list-unit-files | grep 'aria.*enable' ) ]]; then
 	redis-cli set ariastartup 1 &> /dev/null
 fi
 
