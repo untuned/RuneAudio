@@ -1,13 +1,5 @@
 #!/bin/bash
 
-if [[ ${@:$#} == -u ]]; then
-	shift
-	update=1
-	type=Update
-else
-	type=Uninstall
-fi
-
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
@@ -30,8 +22,10 @@ if pgrep midori >/dev/null; then
 	echo 'Local browser restarted.'
 fi
 
-title -l = "$bar Extended fonts uninstalled successfully."
-[[ ! $update ]] && title -nt "$info Refresh browser for original fonts."
+if [[ $1 != u ]]; then
+	title -l = "$bar Extended fonts uninstalled successfully."
+	title -nt "$info Refresh browser for original fonts."
+fi
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
