@@ -16,7 +16,7 @@ if [[ -e /srv/http/restore.php ]]; then
     exit
 fi
 
-[[ $1 != u ]] && title -l = "$bar Install Backup-Restore update ..."
+[[ $1 != u ]] && title -l = "$bar Install Backup-Restore Update ..."
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/backup-restore/uninstall_back.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_back.sh
@@ -131,11 +131,11 @@ chown http:http /srv/http/restore.* /srv/http/tmp
 redis-cli hset addons back $version &> /dev/null
 
 if [[ $1 != u ]]; then
-	title -l = "$bar Backup-Restore update installed successfully."
+	title -l = "$bar Backup-Restore Update installed successfully."
 	[[ -t 1 ]] && echo 'Uninstall: uninstall_back.sh'
 	title -nt "$info Refresh browser before use."
 else
-	title -l = "$bar Backup-Restore update updated successfully."
+	title -l = "$bar Backup-Restore Update updated successfully."
 fi
 
 # clear opcache if run from terminal #######################################
