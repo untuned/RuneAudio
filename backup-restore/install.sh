@@ -12,7 +12,7 @@ rm $0
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ -e /srv/http/restore.php ]]; then
-    echo -e "$info Already installed."
+    echo -e "$info Backup-Restore Update already installed."
     exit
 fi
 
