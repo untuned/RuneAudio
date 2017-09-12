@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# if update, save settings #######################################
-[[ $1 == u ]] && [[ -e /etc/systemd/system/multi-user.target.wants/aria.service ]] && touch /tmp/ariastartup
-
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
@@ -10,6 +7,11 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 if ! pacman -Q aria2 &>/dev/null; then
 	echo -e "$info Aria2 not found."
 	exit 1
+fi
+
+# if update, save settings #######################################
+if [[ $1 == u ]] && [[ -e /etc/systemd/system/multi-user.target.wants/aria.service ]]; then
+	redis-cli set ariastartup 1 &> /dev/null
 fi
 
 [[ $1 != u ]] && type=Uninstall || type=Update
