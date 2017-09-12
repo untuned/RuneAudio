@@ -8,14 +8,6 @@ version=20170901
 
 rm $0
 
-if [[ ${@:$#} == -u ]]; then
-	shift
-	update=1
-	type=updated
-else
-	type=installed
-fi
-
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
@@ -24,7 +16,7 @@ if [[ -e /srv/http/restore.php ]]; then
     exit
 fi
 
-title -l = "$bar Install Backup-Restore update ..."
+[[ $1 != u ]] && title -l = "$bar Install Backup-Restore update ..."
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/backup-restore/uninstall_back.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_back.sh
@@ -138,9 +130,13 @@ chown http:http /srv/http/restore.* /srv/http/tmp
 
 redis-cli hset addons back $version &> /dev/null
 
-title -l = "$bar Backup-Restore update $type successfully."
-[[ -t 1 ]] && echo 'Uninstall: uninstall_back.sh'
-[[ ! $update ]] && title -nt "$info Refresh browser before use."
+if [[ $1 != u ]]; then
+	title -l = "$bar Backup-Restore update installed successfully."
+	[[ -t 1 ]] && echo 'Uninstall: uninstall_back.sh'
+	title -nt "$info Refresh browser before use."
+else
+	title -l = "$bar Backup-Restore update updated successfully."
+fi
 
 # clear opcache if run from terminal #######################################
 [[ -t 1 ]] && systemctl reload php-fpm
