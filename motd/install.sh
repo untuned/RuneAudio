@@ -76,9 +76,10 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 
 redis-cli hset addons motd $version &> /dev/null
 
-[[ $1 != u ]] && type=installed || type=updated
-title -l = "$bar Rune logo motd $type successfully."
 if [[ $1 != u ]]; then
+	title -l = "$bar Rune logo motd installed successfully."
 	[[ -t 1 ]] && echo -e "\nUninstall: uninstall_motd.sh"
 	title -nt "$info Relogin to see new Rune logo motd."
+else
+	title -l = "$bar Rune logo motd updated successfully."
 fi
