@@ -4,7 +4,7 @@
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ ! -e /srv/http/restore.php ]]; then
-    echo -e "$info Uninstall Backup-Restore Update not found."
+    echo -e "$info Backup-Restore Update not found."
     exit 1
 fi
 
