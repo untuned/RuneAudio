@@ -124,5 +124,5 @@ else
 	title -l = "$bar Aria2 updated and started successfully."
 fi
 
-# refresh svg support last for webui installation
+# refresh svg support last for directories fix
 systemctl reload nginx
