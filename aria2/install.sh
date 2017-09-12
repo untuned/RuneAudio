@@ -8,14 +8,6 @@ version=20170901
 
 rm $0
 
-if [[ ${@:$#} == -u ]]; then
-	shift
-	update=1
-	type=updated
-else
-	type=installed
-fi
-
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
@@ -42,7 +34,7 @@ if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist
 	./rankmirrors.sh
 fi
 
-title -l = "$bar Install Aria2 ..."
+[[ $1 != u ]] && title -l = "$bar Install Aria2 ..."
 
 pacman -Sy --noconfirm aria2 glibc
 
@@ -118,15 +110,18 @@ else
 fi
 
 timestop
-title -l = "$bar Aria2 $type and started successfully."
-# skip if upgrade
-[[ $update ]] && exit
-[[ -t 1 ]] && echo "Uninstall: uninstall_aria.sh"
-echo "Run: systemctl < start / stop > aria2"
-echo "Startup: systemctl < enable / disable > aria2"
-echo
-echo "Download directory: $path"
-title -nt "WebUI: < RuneAudio_IP >/aria2/"
+
+if [[ $1 != u ]]; then
+	title -l = "$bar Aria2 installed and started successfully."
+	[[ -t 1 ]] && echo "Uninstall: uninstall_aria.sh"
+	echo "Run: systemctl < start / stop > aria2"
+	echo "Startup: systemctl < enable / disable > aria2"
+	echo
+	echo "Download directory: $path"
+	title -nt "WebUI: < RuneAudio_IP >/aria2/"
+else
+	title -l = "$bar Aria2 updated and started successfully."
+fi
 
 # refresh svg support last for webui installation
 systemctl reload nginx
