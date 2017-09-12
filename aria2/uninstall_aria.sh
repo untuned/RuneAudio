@@ -1,15 +1,7 @@
 #!/bin/bash
 
 # if update, save settings #######################################
-if [[ ${@:$#} == -u ]]; then
-	shift
-	rm -r /tmp/aria
-	mkdir -p /tmp/aria
-	[[ -e /etc/systemd/system/multi-user.target.wants/aria.service ]] && touch /tmp/aria/ansstartup
-	type=Update
-else
-	type=Uninstall
-fi
+[[ $1 == u ]] && [[ -e /etc/systemd/system/multi-user.target.wants/aria.service ]] && touch /tmp/ariastartup
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
@@ -20,6 +12,7 @@ if ! pacman -Q aria2 &>/dev/null; then
 	exit 1
 fi
 
+[[ $1 != u ]] && type=Uninstall || type=Update
 title -l = "$bar $type Aria2 ..."
 
 if mount | grep -q '/dev/sda1'; then
@@ -51,6 +44,6 @@ rm -rv /root/.config/aria2 /srv/http/aria2
 
 redis-cli hdel addons aria &> /dev/null
 
-title -l = "$bar Aria2 uninstalled successfully."
+[[ $1 != u ]] && title -l = "$bar Aria2 uninstalled successfully."
 
 rm $0
