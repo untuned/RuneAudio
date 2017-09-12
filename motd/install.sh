@@ -4,14 +4,6 @@ version=20170901
 
 rm $0
 
-if [[ ${@:$#} == -u ]]; then
-	shift
-	update=1
-	type=updated
-else
-	type=installed
-fi
-
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ -e /etc/motd.logo ]]; then
@@ -19,7 +11,7 @@ if [[ -e /etc/motd.logo ]]; then
   exit
 fi
 
-title -l = "$bar Install Rune logo motd ..."
+[[ $1 != u ]] && title -l = "$bar Install Rune logo motd ..."
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_motd.sh
@@ -84,6 +76,9 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 
 redis-cli hset addons motd $version &> /dev/null
 
+[[ $1 != u ]] && type=installed || type=updated
 title -l = "$bar Rune logo motd $type successfully."
-[[ -t 1 ]] && echo -e "\nUninstall: uninstall_motd.sh"
-[[ ! $update ]] && title -nt "$info Relogin to see new Rune logo motd."
+if [[ $1 != u ]]; then
+	[[ -t 1 ]] && echo -e "\nUninstall: uninstall_motd.sh"
+	title -nt "$info Relogin to see new Rune logo motd."
+fi
