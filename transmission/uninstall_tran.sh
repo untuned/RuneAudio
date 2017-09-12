@@ -19,8 +19,8 @@ fi
 # if update, save settings #######################################
 if [[ $1 == u ]]; then
 	cp $path/settings.json /tmp
-	[[ -e $path/web/index.original ]] && redis-cli set tranwebui 1
-	[[ -e /etc/systemd/system/multi-user.target.wants/transmission.service ]] && redis-cli set transtartup 1
+	[[ -e $path/web/index.original.html ]] && redis-cli set tranwebui 1
+	[[ $( systemctl list-unit-files | grep 'tran.*enable' ) ]] && redis-cli set transtartup 1
 fi
 
 [[ $1 != u ]] && type=Uninstall || type=Update
