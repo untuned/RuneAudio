@@ -9,14 +9,6 @@ version=20170901
 
 rm $0
 
-if [[ ${@:$#} == -u ]]; then
-	shift
-	update=1
-	type=updated
-else
-	type=installed
-fi
-
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
@@ -46,7 +38,8 @@ wgetnc $gitpath/uninstall_tran.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_tran.sh
 wgetnc $gitpath/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-title -l = "$bar Install Transmission ..."
+[[ $1 != u ]] && title -l = "$bar Install Transmission ..."
+
 pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
@@ -84,7 +77,7 @@ file=$path/settings.json
 systemctl start trans
 systemctl stop trans
 
-if [[ ! $update ]]; then
+if [[ $1 != u ]]; then
 	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
 	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
 	' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
@@ -103,11 +96,11 @@ if [[ ! $update ]]; then
 		' $file
 	fi
 else
-	mv /tmp/tran/settings.json $path
+	mv /tmp/settings.json $path
 fi
 
 # web ui alternative
-if [[ $answebui == 1 ]] || [[ -e /tmp/tran/answebui ]]; then
+if [[ $answebui == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
 	wgetnc https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
@@ -116,10 +109,11 @@ if [[ $answebui == 1 ]] || [[ -e /tmp/tran/answebui ]]; then
 	rm transmission-control-full.tar.gz
 	chown -R root:root $path/web
 fi
+redis-cli del tranwebui &> /dev/null
 
 # start
 systemctl daemon-reload
-[[ $ansstartup == 1 ]] || [[ -e /tmp/tran/ansstartup ]] && systemctl enable trans
+[[ $ansstartup == 1 ]] || [[ $( redis-cli get transtartup ) ]] && systemctl enable trans
 echo -e "$bar Start Transmission ..."
 if systemctl start trans &> /dev/null; then
 	redis-cli hset addons tran $version &> /dev/null
@@ -127,17 +121,19 @@ else
 	title -l = "$warn Transmission install failed."
 	exit
 fi
-
-rm -r /tmp/tran
+redis-cli del transtartup &> /dev/null
 
 timestop
-title -l = "$bar Transmission $type and started successfully."
-# skip if upgrade
-[[ $update ]] && exit
-[[ -t 1 ]] && echo "Uninstall: uninstall_tran.sh"
-echo "Run: systemctl < start / stop > trans"
-echo "Startup: systemctl < enable / disable > trans"
-echo
-echo "Download directory: $path"
-echo "WebUI: < RuneAudio_IP >:9091"
-title -nt "User: root"
+
+if [[ $1 != u ]]; then
+	title -l = "$bar Transmission installed and started successfully."
+	[[ -t 1 ]] && echo "Uninstall: uninstall_tran.sh"
+	echo "Run: systemctl < start / stop > trans"
+	echo "Startup: systemctl < enable / disable > trans"
+	echo
+	echo "Download directory: $path"
+	echo "WebUI: < RuneAudio_IP >:9091"
+	title -nt "User: root"
+else
+	title -l = "$bar Transmission updated and started successfully."
+fi
