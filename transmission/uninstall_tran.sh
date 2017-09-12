@@ -1,17 +1,5 @@
 #!/bin/bash
 
-# if update, save settings #######################################
-if [[ ${@:$#} == -u ]]; then
-	shift
-	rm -r /tmp/tran
-	mkdir -p /tmp/tran
-	cp $path/settings.json /tmp/tran
-	[[ -e $path/web ]] && touch /tmp/tran/answebui
-	[[ -e /etc/systemd/system/multi-user.target.wants/transmission.service ]] && touch /tmp/tran/ansstartup
-	type=Update
-else
-	type=Uninstall
-fi
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
@@ -21,16 +9,22 @@ if ! pacman -Q transmission-cli &>/dev/null; then
 	exit 1
 fi
 
-title -l = "$bar $type Transmission ..."
-
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-	mkdir -p $mnt/transmission
 	path=$mnt/transmission
 else
-	mkdir -p /root/transmission
 	path=/root/transmission
 fi
+
+# if update, save settings #######################################
+if [[ $1 == u ]]; then
+	cp $path/settings.json /tmp
+	[[ -e $path/web/index.original ]] && redis-cli set tranwebui 1
+	[[ -e /etc/systemd/system/multi-user.target.wants/transmission.service ]] && redis-cli set transtartup 1
+fi
+
+[[ $1 != u ]] && type=Uninstall || type=Update
+title -l = "$bar $type Transmission ..."
 
 # uninstall package #######################################
 pacman -Rs --noconfirm transmission-cli
@@ -44,6 +38,6 @@ rm -r $path/web
 
 redis-cli hdel addons tran &> /dev/null
 
-title -l = "$bar Transmission uninstalled successfully."
+[[ $1 != u ]] && title -l = "$bar Transmission uninstalled successfully."
 
 rm $0
