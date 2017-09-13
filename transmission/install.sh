@@ -7,8 +7,6 @@ title='Transmission'
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-installstart $1
-
 # user inputs
 if (( $# == 0 )); then # with no argument
 	yesno "Set password:" anspwd
@@ -16,7 +14,7 @@ if (( $# == 0 )); then # with no argument
 
 	yesno "Install WebUI alternative (Transmission Web Control):" answebui
 
-	yesno "Start Transmission on system startup:" ansstartup
+	yesno "Start $title on system startup:" ansstartup
 	echo
 else # with arguments
 	pwd1=$1
@@ -24,12 +22,12 @@ else # with arguments
 	(( $# > 2 )) && ansstartup=$3 || ansstartup=0
 fi
 
+installstart $1
+
 gitpath=https://github.com/rern/RuneAudio/raw/master/transmission
 wgetnc $gitpath/uninstall_tran.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_tran.sh
 wgetnc $gitpath/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
-
-[[ $1 != u ]] && title -l = "$bar Install Transmission ..."
 
 pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
