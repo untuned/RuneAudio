@@ -1,15 +1,13 @@
 #!/bin/bash
 
+# required variables
+alias=motd
+title='Backup-Restore Update'
+
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-if [[ ! -e /usr/local/bin/uninstall_back.sh ]]; then
-    echo -e "$info Backup-Restore Update not found."
-    exit 1
-fi
-
-[[ $1 != u ]] && type=Uninstall || type=Update
-title -l = "$bar $type Backup-Restore Update ..."
+uninstallstart $1
 
 echo -e "$bar Restore files ..."
 file=/srv/http/app/libs/runeaudio.php
@@ -36,13 +34,8 @@ sed -i 's/\$("#restore").\+});//' $file
 rm -v /srv/http/restore.* /etc/sudoers.d/http-backup
 rm -rv /srv/http/tmp
 
-redis-cli hdel addons back &> /dev/null
+uninstallfinish $1 c
 
-[[ $1 != u ]] && title -l = "$bar Backup-Restore Update uninstalled successfully."
-
-# clear opcache if run from terminal #######################################
-[[ -t 1 ]] && systemctl reload php-fpm
+clearcache
 
 systemctl restart rune_SY_wrk
-
-rm $0
