@@ -119,10 +119,10 @@ echo 'http ALL=NOPASSWD: ALL' > $file
 chmod 755 /srv/http/restore.* /srv/http/tmp
 chown http:http /srv/http/restore.* /srv/http/tmp
 
-installfinish $1 c
+installfinish $1
 
 title -nt "$info Refresh browser before use."
 
-clearcache
+[[ -t 1 ]] && clearcache
 
 systemctl restart rune_SY_wrk
