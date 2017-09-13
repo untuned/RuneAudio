@@ -1,18 +1,20 @@
 #!/bin/bash
 
-version=20170901
+alias=motd
+title='Login Logo for SSH Terminal'
+version=$( sed -n "/alias.*$alias/{n;p}" /srv/http/addonslist.php | cut -d "'" -f 4 )
 
 rm $0
 
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ -e /usr/local/bin/uninstall_motd.sh ]]; then
-  echo -e "$info Rune logo motd already installed."
+  echo -e "$info $title already installed."
   redis-cli hset addons motd 1 &> /dev/null
   exit
 fi
 
-[[ $1 != u ]] && title -l = "$bar Install Rune logo motd ..."
+[[ $1 != u ]] && title -l = "$bar Install $title ..."
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_motd.sh
@@ -78,9 +80,9 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 redis-cli hset addons motd $version &> /dev/null
 
 if [[ $1 != u ]]; then
-	title -l = "$bar Rune logo motd installed successfully."
+	title -l = "$bar $title installed successfully."
 	[[ -t 1 ]] && echo -e "\nUninstall: uninstall_motd.sh"
 	title -nt "$info Relogin to see new Rune logo motd."
 else
-	title -l = "$bar Rune logo motd updated successfully."
+	title -l = "$bar $title updated successfully."
 fi
