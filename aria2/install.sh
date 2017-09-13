@@ -7,14 +7,14 @@ title='Aria2'
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-installstart $1
-
 if (( $# == 0 )); then
 	# user input
 	yesno "Start $title on system startup:"
 else
 	answer=$1
 fi
+
+installstart $1
 
 gitpath=https://github.com/rern/RuneAudio/raw/master
 wgetnc $gitpath/aria2/uninstall_aria.sh -P /usr/local/bin
