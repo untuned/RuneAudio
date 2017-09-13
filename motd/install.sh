@@ -81,8 +81,8 @@ redis-cli hset addons $alias $version &> /dev/null
 
 if [[ $1 != u ]]; then
 	title -l = "$bar $title installed successfully."
-	[[ -t 1 ]] && echo -e "\nUninstall: uninstall_motd.sh"
-	title -nt "$info Relogin to see new Rune logo motd."
+	[[ -t 1 ]] && echo -e "\nUninstall: uninstall_$alias.sh"
+	title -nt "$info Relogin to see new $title."
 else
 	title -l = "$bar $title updated successfully."
 fi
