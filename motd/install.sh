@@ -70,4 +70,5 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 # \$         - promt symbol: <$> users; <#> root
 
 installfinish
+
 title -nt "$info Relogin to see new $title."
