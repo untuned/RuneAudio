@@ -6,7 +6,7 @@ title='Login Logo for SSH Terminal'
 
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-uninstallstart
+uninstallstart $1
 
 echo -e "$bar Restore files ..."
 
@@ -19,5 +19,6 @@ sed -i -e '/^PS1=/ d
 ' -e '/^#PS1=/ s/^#//
 ' $file
 
-uninstallfinish
+uninstallfinish $1
+
 title -nt "$info Relogin to see original motd."
