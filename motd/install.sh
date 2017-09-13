@@ -1,19 +1,22 @@
 #!/bin/bash
 
+# required variables
 alias=motd
 title='Login Logo for SSH Terminal'
-version=$( sed -n "/alias.*$alias/{n;p}" /srv/http/addonslist.php | cut -d "'" -f 4 )
 
 rm $0
 
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-if [[ -e /usr/local/bin/uninstall_$alias.sh ]]; then
-  title -l '=' "$info $title already installed."
-  title -nt "Please try update instead."
-  redis-cli hset addons $alias 1 &> /dev/null
-  exit
-fi
+function checkinstall() {
+	if [[ -e /usr/local/bin/uninstall_$alias.sh ]]; then
+	  title -l '=' "$info $title already installed."
+	  title -nt "Please try update instead."
+	  redis-cli hset addons $alias 1 &> /dev/null
+	  exit
+	fi
+}
+checkinstall
 
 [[ $1 != u ]] && title -l '=' "$bar Install $title ..."
 
@@ -78,12 +81,19 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 # \w         - current directory
 # \$         - promt symbol: <$> users; <#> root
 
-redis-cli hset addons $alias $version &> /dev/null
+function saveversion() {
+	version=$( sed -n "/alias.*$alias/{n;p}" /srv/http/addonslist.php | cut -d "'" -f 4 )
+	redis-cli hset addons $alias $version &> /dev/null
+}
+saveversion
 
-if [[ $1 != u ]]; then
-	title -l '=' "$bar $title installed successfully."
-	[[ -t 1 ]] && echo -e "\nUninstall: uninstall_$alias.sh"
-	title -nt "$info Relogin to see new $title."
-else
-	title -l '=' "$bar $title updated successfully."
-fi
+function installfinish() {
+	if [[ $1 != u ]]; then
+		title -l '=' "$bar $title installed successfully."
+		[[ -t 1 ]] && echo -e "\nUninstall: uninstall_$alias.sh"
+		(( $# != 0 )) && title -nt $1
+	else
+		title -l '=' "$bar $title updated successfully."
+	fi
+}
+installfinish "$info Relogin to see new $title."
