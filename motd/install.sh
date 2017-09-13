@@ -6,7 +6,7 @@ title='Login Logo for SSH Terminal'
 
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-installstart
+installstart $1
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_motd.sh
@@ -69,6 +69,6 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 # \w         - current directory
 # \$         - promt symbol: <$> users; <#> root
 
-installfinish
+installfinish $1
 
 title -nt "$info Relogin to see new $title."
