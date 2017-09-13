@@ -1,22 +1,13 @@
 #!/bin/bash
 
-version=20170901
-
-# install.sh
-
-# fix restore settings
-
-rm $0
+# required variables
+alias=motd
+title='Backup-Restore Update'
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-if [[ -e /usr/local/bin/uninstall_back.sh ]]; then
-    echo -e "$info Backup-Restore Update already installed."
-    exit
-fi
-
-[[ $1 != u ]] && title -l = "$bar Install Backup-Restore Update ..."
+installstart
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/backup-restore/uninstall_back.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_back.sh
@@ -128,17 +119,10 @@ echo 'http ALL=NOPASSWD: ALL' > $file
 chmod 755 /srv/http/restore.* /srv/http/tmp
 chown http:http /srv/http/restore.* /srv/http/tmp
 
-redis-cli hset addons back $version &> /dev/null
+installfinish $1 c
 
-if [[ $1 != u ]]; then
-	title -l = "$bar Backup-Restore Update installed successfully."
-	[[ -t 1 ]] && echo 'Uninstall: uninstall_back.sh'
-	title -nt "$info Refresh browser before use."
-else
-	title -l = "$bar Backup-Restore Update updated successfully."
-fi
+title -nt "$info Refresh browser before use."
 
-# clear opcache if run from terminal #######################################
-[[ -t 1 ]] && systemctl reload php-fpm
+clearcache
 
 systemctl restart rune_SY_wrk
