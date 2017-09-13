@@ -1,21 +1,13 @@
 #!/bin/bash
 
-version=20170901
-
-# install.sh [startup]
-#   [startup] = 1 / null
-#   any argument = no prompt + no package update
-
-rm $0
+# required variables
+alias=motd
+title='Aria2'
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
-timestart
 
-if [[ -e /usr/local/bin/uninstall_aria.sh ]]; then
-	echo -e "$info Aria2 already installed."
-	exit
-fi
+installstart $1
 
 if (( $# == 0 )); then
 	# user input
@@ -101,28 +93,20 @@ WantedBy=multi-user.target
 
 [[ $answer == 1 ]] || [[ $( redis-cli get ariastartup ) ]] && systemctl enable aria2
 redis-cli del ariastartup &> /dev/null
-# start
+
 echo -e "$bar Start Aria2 ..."
-if systemctl start aria2 &> /dev/null; then
-	redis-cli hset addons aria $version &> /dev/null
-else
+if ! systemctl start aria2 &> /dev/null; then
 	title -l = "$warn Aria2 install failed."
 	exit
 fi
 
-timestop
+installfinish $1
 
-if [[ $1 != u ]]; then
-	title -l = "$bar Aria2 installed and started successfully."
-	[[ -t 1 ]] && echo "Uninstall: uninstall_aria.sh"
-	echo "Run: systemctl < start / stop > aria2"
-	echo "Startup: systemctl < enable / disable > aria2"
-	echo
-	echo "Download directory: $path"
-	title -nt "WebUI: < RuneAudio_IP >/aria2/"
-else
-	title -l = "$bar Aria2 updated and started successfully."
-fi
+echo "Run: systemctl < start / stop > aria2"
+echo "Startup: systemctl < enable / disable > aria2"
+echo
+echo "Download directory: $path"
+title -nt "WebUI: < RuneAudio_IP >/aria2/"
 
 # refresh svg support last for directories fix
 systemctl reload nginx
