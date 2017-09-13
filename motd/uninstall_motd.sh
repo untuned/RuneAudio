@@ -20,4 +20,4 @@ sed -i -e '/^PS1=/ d
 ' $file
 
 uninstallfinish
-title -nt "\n$info Relogin to see original motd."
+title -nt "$info Relogin to see original motd."
