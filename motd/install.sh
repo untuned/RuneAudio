@@ -9,12 +9,12 @@ rm $0
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
 if [[ -e /usr/local/bin/uninstall_$alias.sh ]]; then
-  echo -e "$info $title already installed."
+  title -l '=' "$info $title already installed."
   redis-cli hset addons $alias 1 &> /dev/null
   exit
 fi
 
-[[ $1 != u ]] && title -l = "$bar Install $title ..."
+[[ $1 != u ]] && title -l '=' "$bar Install $title ..."
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_motd.sh
@@ -80,9 +80,9 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 redis-cli hset addons $alias $version &> /dev/null
 
 if [[ $1 != u ]]; then
-	title -l = "$bar $title installed successfully."
+	title -l '=' "$bar $title installed successfully."
 	[[ -t 1 ]] && echo -e "\nUninstall: uninstall_$alias.sh"
 	title -nt "$info Relogin to see new $title."
 else
-	title -l = "$bar $title updated successfully."
+	title -l '=' "$bar $title updated successfully."
 fi
