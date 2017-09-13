@@ -21,7 +21,4 @@ installfinish
 
 title -nt "$info Refresh browser for new fonts."
 
-restartmidori
-
-# clear opcache if run from terminal #######################################
-[[ -t 1 ]] && systemctl reload php-fpm
+clearcache
