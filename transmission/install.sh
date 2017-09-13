@@ -1,22 +1,13 @@
 #!/bin/bash
 
-version=20170901
-
-# install.sh [password] [webui] [startup]
-#   [webui] = 1 / 0
-#   [startup] = 1 / null )
-#   any argument = no prompt + no package update
-
-rm $0
+# required variables
+alias=tran
+title='Transmission'
 
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
-timestart
 
-if [[ -e /usr/local/bin/uninstall_tran.sh ]]; then
-	echo -e "$info Transmission already installed."
-	exit
-fi
+installstart
 
 # user inputs
 if (( $# == 0 )); then # with no argument
@@ -108,32 +99,26 @@ if [[ $answebui == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
 	bsdtar -xf transmission-control-full.tar.gz -C $path
 	rm transmission-control-full.tar.gz
 	chown -R root:root $path/web
+	redis-cli del tranwebui &> /dev/null
 fi
-redis-cli del tranwebui &> /dev/null
 
-# start
 systemctl daemon-reload
-[[ $ansstartup == 1 ]] || [[ $( redis-cli get transtartup ) ]] && systemctl enable trans
+if [[ $ansstartup == 1 ]] || [[ $( redis-cli get transtartup ) ]]; then
+	systemctl enable trans
+	redis-cli del transtartup &> /dev/null
+fi
+
 echo -e "$bar Start Transmission ..."
-if systemctl start trans &> /dev/null; then
-	redis-cli hset addons tran $version &> /dev/null
-else
+if ! systemctl start trans &> /dev/null; then
 	title -l = "$warn Transmission install failed."
 	exit
 fi
-redis-cli del transtartup &> /dev/null
 
-timestop
+installfinish
 
-if [[ $1 != u ]]; then
-	title -l = "$bar Transmission installed and started successfully."
-	[[ -t 1 ]] && echo "Uninstall: uninstall_tran.sh"
-	echo "Run: systemctl < start / stop > trans"
-	echo "Startup: systemctl < enable / disable > trans"
-	echo
-	echo "Download directory: $path"
-	echo "WebUI: < RuneAudio_IP >:9091"
-	title -nt "User: root"
-else
-	title -l = "$bar Transmission updated and started successfully."
-fi
+echo "Run: systemctl < start / stop > trans"
+echo "Startup: systemctl < enable / disable > trans"
+echo
+echo "Download directory: $path"
+echo "WebUI: < RuneAudio_IP >:9091"
+title -nt "User: root"
