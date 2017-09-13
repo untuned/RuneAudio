@@ -17,7 +17,7 @@ mkdir /srv/http/assets/fonts/lato
 bsdtar -xvf lato.tar.xz -C /srv/http/assets/fonts/lato
 rm lato.tar.xz
 
-installfinish $1
+installfinish $1 c
 
 title -nt "$info Refresh browser for new fonts."
 
