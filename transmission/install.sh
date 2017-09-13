@@ -13,7 +13,7 @@ rm $0
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
-if pacman -Q transmission-cli &>/dev/null; then
+if [[ -e /usr/local/bin/uninstall_tran.sh ]]; then
 	echo -e "$info Transmission already installed."
 	exit
 fi
