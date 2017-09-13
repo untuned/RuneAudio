@@ -7,7 +7,7 @@ title='Transmission'
 # import heading function
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-installstart
+installstart $1
 
 # user inputs
 if (( $# == 0 )); then # with no argument
@@ -114,7 +114,7 @@ if ! systemctl start trans &> /dev/null; then
 	exit
 fi
 
-installfinish
+installfinish $1
 
 echo "Run: systemctl < start / stop > trans"
 echo "Startup: systemctl < enable / disable > trans"
