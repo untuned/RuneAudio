@@ -34,8 +34,8 @@ sed -i 's/\$("#restore").\+});//' $file
 rm -v /srv/http/restore.* /etc/sudoers.d/http-backup
 rm -rv /srv/http/tmp
 
-uninstallfinish $1 c
+uninstallfinish $1
 
-clearcache
+[[ -t 1 ]] && clearcache
 
 systemctl restart rune_SY_wrk
