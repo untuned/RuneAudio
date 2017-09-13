@@ -11,7 +11,7 @@ installstart $1
 
 if (( $# == 0 )); then
 	# user input
-	yesno "Start Aria2 on system startup:"
+	yesno "Start $title on system startup:"
 else
 	answer=$1
 fi
@@ -25,8 +25,6 @@ if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
 fi
-
-[[ $1 != u ]] && title -l = "$bar Install Aria2 ..."
 
 pacman -Sy --noconfirm aria2 glibc
 
@@ -94,9 +92,9 @@ WantedBy=multi-user.target
 [[ $answer == 1 ]] || [[ $( redis-cli get ariastartup ) ]] && systemctl enable aria2
 redis-cli del ariastartup &> /dev/null
 
-echo -e "$bar Start Aria2 ..."
+echo -e "$bar Start $title ..."
 if ! systemctl start aria2 &> /dev/null; then
-	title -l = "$warn Aria2 install failed."
+	title -l = "$warn $title install failed."
 	exit
 fi
 
