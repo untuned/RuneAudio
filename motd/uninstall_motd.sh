@@ -1,15 +1,12 @@
 #!/bin/bash
 
+# required variables
+alias=motd
+title='Login Logo for SSH Terminal'
+
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-if [[ ! -e /usr/local/bin/uninstall_motd.sh ]]; then
-  echo -e "$info Rune logo motd not found."
-  redis-cli hdel addons motd &> /dev/null
-  exit 1
-fi
-
-[[ $1 != u ]] && type=Uninstall || type=Update
-title -l = "$bar $type Rune logo motd ..."
+uninstallstart
 
 echo -e "$bar Restore files ..."
 
@@ -22,11 +19,5 @@ sed -i -e '/^PS1=/ d
 ' -e '/^#PS1=/ s/^#//
 ' $file
 
-redis-cli hdel addons motd &> /dev/null
-
-if [[ $1 != u ]]; then
-	title -l = "$bar Rune logo motd uninstalled successfully."
-	title -nt "\n$info Relogin to see original motd."
-fi
-
-rm $0
+uninstallfinish
+title -nt "\n$info Relogin to see original motd."
