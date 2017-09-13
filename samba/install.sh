@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# required variables
+alias=samb
+title='Samba Upgrade'
+
 rm $0
 
 # import heading function
@@ -7,11 +11,11 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 
 if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
 	echo -e "$info Samba already upgraged."
-	redis-cli hset addons samb 1 &> /dev/null
+	redis-cli hset addons $alias 1 &> /dev/null
 	exit
 fi
 
-title -l = "$bar Upgrade Samba ..."
+title -l = "$bar Install $title ..."
 #################################################################################
 timestart
 
@@ -47,9 +51,9 @@ ln -sf /etc/samba/smb{-dev,}.conf
 systemctl daemon-reload
 systemctl restart nmbd smbd
 
-redis-cli hset addons samb 1 &> /dev/null
+redis-cli hset addons $alias 1 &> /dev/null
 
 timestop
-title -l = "$bar Samba upgraded successfully."
+title -l = "$bar $title installed successfully."
 echo 'Add Samba user: smbpasswd -s -a < user >'
 title -nt "$info Edit /etc/smb-dev.conf to fit usage."
