@@ -8,9 +8,7 @@ rm $0
 
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-checkinstall
-
-[[ $1 != u ]] && title -l '=' "$bar Install $title ..."
+installstart
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_motd.sh
@@ -72,8 +70,6 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 # \h         - hostname
 # \w         - current directory
 # \$         - promt symbol: <$> users; <#> root
-
-saveversion
 
 installfinish
 title -nt "$info Relogin to see new $title."
