@@ -14,4 +14,4 @@ mv -v /srv/http/assets/fonts/lato{.backup,}
 
 uninstallfinish $1
 
-clearcache
+[[ -t 1 ]] && clearcache
