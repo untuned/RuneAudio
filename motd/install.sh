@@ -8,6 +8,7 @@ wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; r
 
 if [[ -e /usr/local/bin/uninstall_motd.sh ]]; then
   echo -e "$info Rune logo motd already installed."
+  redis-cli hset addons motd 1 &> /dev/null
   exit
 fi
 
