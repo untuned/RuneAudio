@@ -88,12 +88,9 @@ function saveversion() {
 saveversion
 
 function installfinish() {
-	if [[ $1 != u ]]; then
-		title -l '=' "$bar $title installed successfully."
-		[[ -t 1 ]] && echo -e "\nUninstall: uninstall_$alias.sh"
-		(( $# != 0 )) && title -nt $1
-	else
-		title -l '=' "$bar $title updated successfully."
-	fi
+	[[ $1 != u ]] && title -l '=' "$bar $title updated successfully."; exit
+	
+	title -l '=' "$bar $title installed successfully."
+	[[ -t 1 ]] && echo -e "\nUninstall: uninstall_$alias.sh"
 }
-installfinish "$info Relogin to see new $title."
+title -nt "$info Relogin to see new $title."
