@@ -8,9 +8,9 @@ rm $0
 
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 
-if [[ -e /usr/local/bin/uninstall_motd.sh ]]; then
+if [[ -e /usr/local/bin/uninstall_$alias.sh ]]; then
   echo -e "$info $title already installed."
-  redis-cli hset addons motd 1 &> /dev/null
+  redis-cli hset addons $alias 1 &> /dev/null
   exit
 fi
 
@@ -77,7 +77,7 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 # \w         - current directory
 # \$         - promt symbol: <$> users; <#> root
 
-redis-cli hset addons motd $version &> /dev/null
+redis-cli hset addons $alias $version &> /dev/null
 
 if [[ $1 != u ]]; then
 	title -l = "$bar $title installed successfully."
