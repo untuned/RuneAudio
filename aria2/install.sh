@@ -12,7 +12,7 @@ rm $0
 wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
-if pacman -Q aria2 &>/dev/null; then
+if [[ -e /usr/local/bin/uninstall_aria.sh ]]; then
 	echo -e "$info Aria2 already installed."
 	exit
 fi
