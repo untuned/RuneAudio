@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# required variables
 alias=tran
 
 # import heading function
