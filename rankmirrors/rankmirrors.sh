@@ -9,7 +9,7 @@ sec=3 # each server
 # rank servers in /etc/pacman.d/mirrorlist by download speed
 
 # import heading function
-wget -qN https://github.com/rern/title_script/raw/master/title.sh; . title.sh; rm title.sh
+wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.sh; rm title.sh
 timestart
 
 tmpdir=/tmp/rankmirrors/
