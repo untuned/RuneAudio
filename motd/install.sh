@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# required variables
 alias=motd
 
 wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.sh; rm title.sh
