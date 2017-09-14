@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# required variables
 alias=font
 
 # import heading function
