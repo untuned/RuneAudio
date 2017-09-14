@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# required variables
 alias=back
 
 # import heading function
