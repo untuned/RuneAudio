@@ -10,7 +10,7 @@ wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.s
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
 	title -l '=' "$info Unable to continue with this version."
-	echo "(sfdisk and python2 expected but not found.)"
+	title -n "sfdisk and python2 expected but not found."
 	exit
 fi
 
@@ -26,7 +26,7 @@ unpartmb=$( python2 -c "print($unpartb / 1000000)" )
 summb=$(( $freemb + $unpartmb ))
 # noobs has 3MB unpartitioned space
 if [[ $unpartmb -lt 10 ]]; then
-	title -l '=' "$info No useful space available. ( ${unpartmb}MB unused)"
+	title -l '=' "$info No useful space available. ( ${unpartmb}MB unused space )"
 	redis-cli hset addons expa 1 &> /dev/null
 	exit
 fi
@@ -35,8 +35,6 @@ if [[ -t 1 ]] && ls /dev/sd* &>/dev/null; then
 	echo -e "$info Unmount and remove all USB drives before proceeding:"
 	hdd=$( ls /dev/sd? )
 	echo -e "\e[0;36m$hdd\e[m"
-	echo
-	echo "Precaution - To make sure only SD card to be expanded."
 	echo
 	read -n 1 -s -p 'Press any key to continue ... '
 	echo
@@ -49,9 +47,9 @@ echo -e "Available free space \e[0;36m$freemb MB\e[m"
 echo -e "Available unused disk space: \e[0;36m$unpartmb MB\e[m"
 echo
 
-[[ -t 1 ]] && yesno "Expand partiton to full unused space:" answer || answer=1
+[[ -t 1 ]] && yesno "Expand partiton to full unused space:" answer
 
-if [[ $answer == 1 ]]; then
+if [[ -t 1 || $answer == 1 ]]; then
 	if ! pacman -Q parted &>/dev/null; then
 		echo -e "$bar Get package file ..."
 		wgetnc https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
