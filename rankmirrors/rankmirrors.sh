@@ -60,7 +60,7 @@ rank=$( echo -e "$dl_server" | sort -k1 -n -r ) # sort by '1st column' 'as numbe
 rankfile=$( echo -e "$rank" | cut -f2-4 -d' ' ) # keep '2nd-4th column' 'devided by space' (remove 1st column)
 
 echo
-echo -e "$( tcolor '/etc/pacman.d/mirrorlist' ) was updated with these servers top the list:"
+echo -e "$info Mirror list was updated with these servers top the list:"
 echo
 echo -e "$rankfile" | sed -n 1,3p
 
