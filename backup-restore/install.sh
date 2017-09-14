@@ -5,7 +5,7 @@ alias=back
 # import heading function
 wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.sh; rm title.sh
 
-installstart
+installstart $1
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/backup-restore/uninstall_back.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_back.sh
