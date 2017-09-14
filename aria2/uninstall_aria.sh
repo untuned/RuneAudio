@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# required variables
 alias=aria
 
 # import heading function
