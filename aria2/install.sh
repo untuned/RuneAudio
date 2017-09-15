@@ -24,6 +24,7 @@ if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist
 	./rankmirrors.sh
 fi
 
+echo -e "$bar Aria2 package ..."
 pacman -Sy --noconfirm aria2 glibc
 
 if mount | grep -q '/dev/sda1'; then
@@ -35,7 +36,7 @@ else
 	path=/root/aria2
 fi
 
-echo -e "$bar Get WebUI files ..."
+echo -e "$bar WebUI ..."
 wgetnc https://github.com/ziahamza/webui-aria2/archive/master.zip
 rm -rf $path/web
 mkdir $path/web
