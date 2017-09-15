@@ -1,9 +1,9 @@
 #!/bin/bash
 
 alias=motd
-[[ ! -e /srv/http/addonslist.php ]] && title='Login Logo for SSH Terminal'
 
 wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.sh; rm title.sh
+[[ ! -e /srv/http/addonslist.php ]] && wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonslist.php -P /srv/http
 
 uninstallstart $1
 
