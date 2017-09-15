@@ -50,13 +50,13 @@ if [[ -t 1 ]]; then
 fi
 
 if ! pacman -Q parted &>/dev/null; then
-	echo -e "$bar Get package file ..."
+	echo -e "$bar Install parted ..."
 	wgetnc https://github.com/rern/RuneAudio/raw/master/expand_partition/parted-3.2-5-armv7h.pkg.tar.xz
 	pacman -U --noconfirm parted-3.2-5-armv7h.pkg.tar.xz
 	rm parted-3.2-5-armv7h.pkg.tar.xz
 fi
 
-echo -e "$bar Expand partiton ..."
+echo -e "$bar fdisk ..."
 echo -e "d\n\nn\n\n\n\n\nw" | fdisk $disk &>/dev/null
 
 partprobe $disk
@@ -64,12 +64,12 @@ partprobe $disk
 resize2fs $devpart
 	
 if [[ $? != 0 ]]; then
-	title -l '=' "$warn Expand partition failed.\nTry - reboot > resize2fs $devpart"
+	title -l '=' "$warn Expand partition failed."
+	title -nt "Try: reboot > resize2fs $devpart"
 	exit
 else
 	freekb=$( df | grep '/$' | awk '{print $4}' )
 	freemb=$( python2 -c "print($freekb / 1000)" )
-	echo
 	
 	redis-cli hset addons expa 1 &> /dev/null # mark as expanded - disable webui button
 	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor $freemb ) MB free space."
