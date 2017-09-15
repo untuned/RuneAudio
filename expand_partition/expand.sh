@@ -61,6 +61,7 @@ echo -e "d\n\nn\n\n\n\n\nw" | fdisk $disk &>/dev/null
 
 partprobe $disk
 
+echo -e "\n$bar resize2fs ..."
 resize2fs $devpart
 	
 if [[ $? != 0 ]]; then
