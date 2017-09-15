@@ -36,9 +36,9 @@ fi
 
 # expand partition #######################################
 title -l '=' "$bar Expand partition ..."
-echo "Current partiton           : $( tcolor $devpart )"
-echo "Available free space       : $( tcolor $freemb ) MB"
-echo "Available unused disk space: $( tcolor $unpartmb ) MB"
+printf "%-23s %s\n"     'Current partiton      :' $devpart
+printf "%-23s %5s %s\n" 'Available free space  :' $freemb MB
+printf "%-23s %5s %s\n" 'Available unused space:' $unpartmb MB
 echo
 
 if [[ -t 1 ]]; then
