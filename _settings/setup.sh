@@ -25,11 +25,9 @@ mmc() {
 wget -qN --show-progress https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.sh; rm title.sh
 timestart l
 
-# command shortcuts and motd
+# command shortcuts
 gitpath=https://github.com/rern/RuneAudio/raw/master
 [[ ! -e /etc/profile.d/cmd.sh ]] && wgetnc $gitpath/_settings/cmd.sh -P /etc/profile.d
-wgetnc $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
-touch /root/.hushlogin
 
 # passwords for samba and transmission
 echo -e "$bar root password for Samba and Transmission ..."
@@ -153,12 +151,14 @@ sed -i -e '/m:0x0 + c:180/ s/^#//
 echo
 
 # rankmirrors
-wgetnc $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh
+wgetnc $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh 1
 
-echo -e "$bar Update package database ..."
-#################################################################################
-pacman -Sy
-echo
+# addons menu
+wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh
+
+# motd
+wgetnc $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
+touch /root/.hushlogin
 
 title -l = "$bar Upgrade Samba ..."
 #################################################################################
