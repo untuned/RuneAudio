@@ -1,7 +1,7 @@
 #!/bin/bash
 
 alias=motd
-[[ -t 1 ]] && title='Login Logo for SSH Terminal'
+[[ ! -e /srv/http/addonslist.php ]] && title='Login Logo for SSH Terminal'
 
 wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.sh; rm title.sh
 
