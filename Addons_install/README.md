@@ -5,7 +5,8 @@ Install Addons Menu with PuTTY
 - double click **PuTTY**
 ---
 ![putty1](https://github.com/rern/RuneAudio/blob/master/Addons_install/putty01.png)  
-- `1` fill `Host Name (or IP address)` with RuneAudio's
+`192.168.1.22` **must be changed** to your RuneAudio's
+- `1` fill `Host Name (or IP address)`
 - `2` select `SSH`
 - `3` click `Open` to connect
 ---
