@@ -11,7 +11,7 @@ rm $0
 [[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
 . /srv/http/title.sh
 
-title -l = "$bar Webradio Import ..."
+title -l '=' "$bar Webradio Import ..."
 
 # clear database
 redis-cli del webradios &> /dev/null
