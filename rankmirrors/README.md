@@ -8,7 +8,10 @@ Fix packages download errors:
 - ranked by download speed  
 - update mirrorlist file, **/etc/pacman.d/mirrorlist** (with original backup)
 
-**Rank**
+**Rank**  
+from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
+
+or from SSH terminal
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh -P /usr/local/bin; chmod +x /usr/local/bin/rankmirrors.sh; rankmirrors.sh
 ```
