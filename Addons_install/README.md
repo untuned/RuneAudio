@@ -9,6 +9,7 @@ Install Addons Menu with PuTTY
 - `1` fill `Host Name (or IP address)`
 - `2` select `SSH`
 - `3` click `Open` to connect
+- click `Yes` in `Security Alert` to continue
 ---
 ![putty2](https://github.com/rern/RuneAudio/blob/master/Addons_install/putty02.png)  
 - `1` login as: `root` > `Enter`
