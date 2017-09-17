@@ -2,6 +2,8 @@
 
 alias=font
 
+. /srv/http/title.sh
+
 uninstallstart $1
 
 rm -rv /srv/http/assets/fonts/lato
