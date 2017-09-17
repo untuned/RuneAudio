@@ -2,7 +2,7 @@ Install Addons Menu with PuTTY
 ---
 
 - download [**PuTTY**](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe) << click
-- double click `putty.exe`
+- start PuTTY by double click `putty.exe`
 ---
 ![putty1](https://github.com/rern/RuneAudio/blob/master/Addons_install/putty01.png)  
 `192.168.1.22` **must be changed** to your RuneAudio's
