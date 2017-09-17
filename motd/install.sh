@@ -4,13 +4,8 @@
 
 alias=motd
 
-if [[ -t 1 ]]; then
-	wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
-	. title.sh
-	rm title.sh
-
-	wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonslist.php -P /srv/http
-fi
+[[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
+[[ ! -e /srv/http/addonslist.php ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonslist.php -P /srv/http
 
 installstart $1
 
