@@ -4,7 +4,7 @@
 
 alias=font
 
-[[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
+[[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/title.sh -P /srv/http
 . /srv/http/title.sh
 [[ ! -e /srv/http/addonslist.php ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonslist.php -P /srv/http
 
