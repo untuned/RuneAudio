@@ -2,8 +2,6 @@
 
 alias=motd
 
-[[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
-
 uninstallstart $1
 
 echo -e "$bar Restore files ..."
