@@ -8,7 +8,7 @@ _Tested on RuneAudio RPi3_
 - Expand the partiton to full capacity **without reboot**.  
 
 
-**How to**
+**How to**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
 
 or from SSH terminal
