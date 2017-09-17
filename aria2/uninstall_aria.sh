@@ -2,6 +2,8 @@
 
 alias=aria
 
+. /srv/http/title.sh
+
 uninstallstart $1
 
 # if update, save settings #######################################
