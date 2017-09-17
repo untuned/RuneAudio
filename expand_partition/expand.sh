@@ -2,7 +2,7 @@
 
 rm $0
 
-[[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
+[[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/title.sh -P /srv/http
 . /srv/http/title.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
