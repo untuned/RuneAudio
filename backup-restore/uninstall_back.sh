@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# required variables
 alias=back
+
+. /srv/http/title.sh
 
 uninstallstart $1
 
