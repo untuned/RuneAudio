@@ -2,6 +2,8 @@
 
 alias=motd
 
+. /srv/http/title.sh
+
 uninstallstart $1
 
 echo -e "$bar Restore files ..."
