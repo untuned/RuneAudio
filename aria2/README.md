@@ -4,7 +4,7 @@ RuneAudio Aria2 with WebUI
 [**aria2**](https://aria2.github.io/) - Download utility that supports HTTP(S), FTP, BitTorrent, and Metalink  
 [**webui-aria2**](https://github.com/ziahamza/webui-aria2) - Web inferface for aria2  
  
-**Install**
+**Install**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
 
 or from SSH terminal
