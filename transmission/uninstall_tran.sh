@@ -2,6 +2,8 @@
 
 alias=tran
 
+. /srv/http/title.sh
+
 uninstallstart $1
 
 if mount | grep -q '/dev/sda1'; then
