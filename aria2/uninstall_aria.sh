@@ -2,8 +2,7 @@
 
 alias=aria
 
-# import heading function
-wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.sh; rm title.sh
+[[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
 
 uninstallstart $1
 
