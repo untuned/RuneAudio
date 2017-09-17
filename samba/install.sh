@@ -7,6 +7,7 @@ title='Samba Upgrade'
 rm $0
 
 [[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
+. /srv/http/title.sh
 
 if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
 	echo -e "$info Samba already upgraged."
