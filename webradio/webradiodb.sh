@@ -6,9 +6,10 @@
 # - refresh ui
 # - fix sorting
 
-# import heading function
-wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.sh; rm title.sh
 rm $0
+
+[[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
+. /srv/http/title.sh
 
 title -l = "$bar Webradio Import ..."
 
