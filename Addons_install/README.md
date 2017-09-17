@@ -1,7 +1,7 @@
 Install Addons Menu with PuTTY
 ---
 
-- download [**PuTTY**](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe) << click
+- download [**PuTTY**](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe) `<< click`
 - start PuTTY by double click `putty.exe`
 ---
 ![putty1](https://github.com/rern/RuneAudio/blob/master/Addons_install/putty01.png)  
