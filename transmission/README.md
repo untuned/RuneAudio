@@ -6,10 +6,13 @@ RuneAudio Transmission
 - With optional WebUI alternative: [Transmission Web Control](https://github.com/ronggang/transmission-web-control#introduction)  
 
 **Install**  
-- RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu` 
+from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
+
+or from SSH terminal
 ```
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/transmission/install.sh; chmod +x install.sh; ./install.sh
 ```
+RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`  
 
 **Start transmission**  
 ```
