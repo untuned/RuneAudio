@@ -6,8 +6,7 @@ title='Samba Upgrade'
 
 rm $0
 
-# import heading function
-wget -qN https://github.com/rern/RuneAudio_Addons/raw/master/title.sh; . title.sh; rm title.sh
+[[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
 
 if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
 	echo -e "$info Samba already upgraged."
