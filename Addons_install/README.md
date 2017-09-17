@@ -12,5 +12,6 @@ Install Addons Menu with PuTTY
 ![putty2](https://github.com/rern/RuneAudio/blob/master/Addons_install/putty02.png)  
 - `1` login as: `root`
 - `2` root@192.168.1.22's password: `rune`
-- `3` right click anywhere in PuTTY window > press `Enter` to start installation
+- `3` copy install script > right click anywhere in PuTTY window > press `Enter` to start installation  
+
 ![putty0](https://github.com/rern/RuneAudio/blob/master/Addons_install/putty03.png)  
