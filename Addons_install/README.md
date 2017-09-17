@@ -1,8 +1,8 @@
 Install Addons Menu with PuTTY
 ---
 
-- Download [**PuTTY**](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe)
-- Double click **PuTTY**
+- download [**PuTTY**](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe)
+- double click **PuTTY**
 ---
 ![putty1](https://github.com/rern/RuneAudio/blob/master/Addons_install/putty01.png)  
 - `1` fill `Host Name (or IP address)` with RuneAudio's
