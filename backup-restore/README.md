@@ -20,7 +20,7 @@ Backup-Restore update
     - allow no password sudo in `/etc/sudoers.d`
     - use external bash script to restore
     
-**Install**
+**Install**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
 
 or from SSH terminal
