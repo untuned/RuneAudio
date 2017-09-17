@@ -2,12 +2,8 @@
 
 rm $0
 
-file=/srv/http/title.sh
-if [[ ! -e $file ]]; then
-	wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
-	. $file
-	rm $file
-fi
+[[ ! -e /srv/http/title.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/title.sh -P /srv/http
+. /srv/http/title.sh
 
 if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
 	title -l '=' "$info Unable to continue with this version."
