@@ -69,14 +69,8 @@ echo -e "$rankfile" | sed -n 1,3p
 echo -e "$rankfile" > $list
 rm -rf $tmpdir
 
-timestop
-title -l = "$bar Mirror list ranked successfully."
-
-if [[ $# == 0 || $1 = 0 ]]; then
-	title -nt "$bar Update package database: pacman -Sy"
-	exit
-fi
-
 echo -e "$bar Update package database ..."
 pacman -Sy
-title -nt "$bar Package database updated."
+
+timestop
+title -l = "$bar Mirror list ranked and updated successfully."
