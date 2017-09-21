@@ -41,7 +41,8 @@ if ! grep -q 'localeCompare' $runeui; then
             var elems = $("#database-entries li").detach().sort(function (a, b) {\
                 return $(a).text().toLowerCase().localeCompare($(b).text().toLowerCase());\
             });\
-            $("#database-entries").append(elems);
+            $("#database-entries").append(elems);\
+	    $("#webradio-add").parent().prepend($("#webradio-add"))
     ' $runeui
     
     sed -i 's/var u=$("span","#db-currentpath")/var elems=$("#database-entries li").detach().sort(function(a,b){return $(a).text().toLowerCase().localeCompare($(b).text().toLowerCase())});$("#database-entries").append(elems);&/
