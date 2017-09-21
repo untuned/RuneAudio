@@ -41,18 +41,11 @@ if ! grep -q 'localeCompare' $runeui; then
             var elems = $("#database-entries li").detach().sort(function (a, b) {\
                 return $(a).text().toLowerCase().localeCompare($(b).text().toLowerCase());\
             });\
-            $("#database-entries").append(elems);\
-	    $("#webradio-add").parent().prepend($("#webradio-add"))
+            $("#database-entries").append(elems);
     ' $runeui
     
     sed -i 's/var u=$("span","#db-currentpath")/var elems=$("#database-entries li").detach().sort(function(a,b){return $(a).text().toLowerCase().localeCompare($(b).text().toLowerCase())});$("#database-entries").append(elems);&/
     ' ${runeui/.js/.min.js}
-fi
-# for early users who missed this line
-if ! grep -q 'prepend($("#webradio-add"))' $runeui; then
-    sed -i '/("#database-entries").append(elems)/ a\
-	    $("#webradio-add").parent().prepend($("#webradio-add"))
-    ' $runeui	    
 fi
 
 title -l '=' "$bar Webradio imported successfully."
