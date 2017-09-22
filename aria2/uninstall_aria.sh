@@ -2,7 +2,7 @@
 
 alias=aria
 
-. /srv/http/title.sh
+. /srv/http/addonstitle.sh
 
 uninstallstart $1
 
