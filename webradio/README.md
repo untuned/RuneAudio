@@ -1,8 +1,16 @@
 Webradio import
 ---
 
-**import files to database**  
+webradio file syntax:
 `Radio name` = filename
+```sh
+[playlist]
+NumberOfEntries=1
+File1=http://urlpath:port
+Title1=name
+```
+
+**import files to database**  
 - copy webradio  `*.pls` files to `/mnt/MPD/Webradio/`  
 - run import script:
 ```sh
