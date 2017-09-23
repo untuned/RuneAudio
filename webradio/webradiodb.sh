@@ -17,13 +17,13 @@ title -l '=' "$bar Webradio Import ..."
 redis-cli del webradios &> /dev/null
 
 echo
+if ! ls /mnt/MPD/Webradio/*.pls &> /dev/null; then
+	title -l '=' "$info No webradio files found."
+	title -nt 'Copy *.pls to /mnt/MPD/Webradio/ then run again.'
+	exit
+fi
 # add data from files
 for file in /mnt/MPD/Webradio/*.pls; do
-	if [[ ! -e $file ]]; then
-		title -l '=' "$info No webradio files found."
-		title -nt 'Copy *.pls to /mnt/MPD/Webradio/ then run again.'
-		exit
-	fi
 	name=$( basename "$file" )
 	url=$( grep 'File1' "$file" | cut -d '=' -f2 )
 	
