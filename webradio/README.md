@@ -1,8 +1,10 @@
 Webradio import
 ---
 
-webradio file syntax:
-`Radio name` = filename
+Webradio needs files and database data together to make hte list.
+
+**webradio `<filename>.pls` file syntax:**    
+`Radio name` in Webradio list = filename  
 ```sh
 [playlist]
 NumberOfEntries=1
@@ -17,13 +19,9 @@ Title1=name
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/webradio/webradiodb.sh; chmod +x webradiodb.sh; ./webradiodb.sh
 ```
 
-**covert database to file**
+**export database to file**
 - copy `rune.rdb` backup files to `/var/lib/redis/`  
-- run import script
+- run export script
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/webradio/webradiofile.sh; chmod +x webradiofile.sh; ./webradiofile.sh
 ```
-
-**refresh**
-- refresh browser
-- done
