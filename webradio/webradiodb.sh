@@ -24,7 +24,7 @@ for file in /mnt/MPD/Webradio/*.pls; do
 		title -nt 'Copy *.pls to /mnt/MPD/Webradio/ then run again.'
 		exit
 	fi
-	name=$( grep 'Title1' "$file" | cut -d '=' -f2 )
+	name=$( basename "$file" )
 	url=$( grep 'File1' "$file" | cut -d '=' -f2 )
 	
 	redis-cli hset webradios "$name" "$url" &> /dev/null
