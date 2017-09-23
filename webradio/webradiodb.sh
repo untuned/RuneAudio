@@ -6,7 +6,7 @@
 # - refresh ui
 # - fix sorting
 
-#rm $0
+rm $0
 
 [[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
@@ -36,7 +36,7 @@ mpc update Webradio &> /dev/null
 
 # fix sorting
 runeui=/srv/http/assets/js/runeui.js
-if ! grep '^//\s*if (path === '"'"'Webradio'"'"')' $runeui; then
+if ! grep -q "^//\s*if (path === 'Webradio')" $runeui; then
     sed -i $'/^\s*if (path === \'Webradio\')/, /}/ s|^|//|' $runeui
 fi
 
@@ -57,7 +57,7 @@ if ! grep -q 'localeCompare\|addwebradio' $runeui; then
 fi
 if ! grep -q 'var addwebradio' $runeui; then
     sed -i '/("#database-entries")\.append(elems)/ a\
-			if (path === "Webradio") {\
+			if (path === '"'"'Webradio'"'"') {\
 				var addwebradio = '"'"'<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>'"'"';\
 				$("#database-entries").append(addwebradio);\
 			}
