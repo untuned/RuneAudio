@@ -39,4 +39,4 @@ done
 mpc update Webradio &> /dev/null
 
 title -l '=' "$bar Webradio exported successfully."
-title -nt "$info Webradio files: /mnt/MPD/Webradio"
+title -nt "$info Webradio files: /mnt/MPD/Webradio/"
