@@ -25,6 +25,7 @@ fi
 # add data from files
 for file in /mnt/MPD/Webradio/*.pls; do
 	name=$( basename "$file" )
+	name=${name%.*}
 	url=$( grep 'File1' "$file" | cut -d '=' -f2 )
 	
 	redis-cli hset webradios "$name" "$url" &> /dev/null
