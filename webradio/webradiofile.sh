@@ -1,24 +1,23 @@
 #!/bin/bash
 
-# webradiodb.sh
+rm $0
 
-# for import redis database to /mnt/MPD/Webradio/*.pls
-# - clear files
-# - create files from database
-# - refresh ui
-# - fix sorting
+[[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
+. /srv/http/addonstitle.sh
 
 if [[ ! -e /var/lib/redis/rune.rdb ]]; then
-	echo -e '\e[30m\e[43m i \e[0m No database file found.'
-	echo -e 'Copy rune.rdb backup to \e[36m/var/lib/\e[0m then run again.\n'
+	title -l '=' "$info No database file found."
+	title -nt 'Copy rune.rdb backup to /var/lib/ then run again.'
 	exit
 fi
+
+title -l '=' "$bar Webradio export ..."
 
 path=/mnt/MPD/Webradio
 # clear files
 rm -f $path/*.pls
 
-echo -e "\n\e[36m\e[46m . \e[0m $path\n"
+echo -e "$bar $path"
 # create files from database
 i=1
 str=''
@@ -39,4 +38,5 @@ done
 # refresh ui
 mpc update Webradio &> /dev/null
 
-echo -e '\n\e[36m\e[46m . \e[0m Webradio files created successfully.\n'
+title -l '=' "$bar Webradio exported successfully."
+title -nt "$info Webradio files: /mnt/MPD/Webradio"
