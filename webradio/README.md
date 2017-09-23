@@ -9,7 +9,7 @@ Webradio needs files and database data together to make hte list.
 [playlist]
 NumberOfEntries=1
 File1=http://urlpath:port
-Title1=name
+Title1=filename
 ```
 
 **import files to database**  
