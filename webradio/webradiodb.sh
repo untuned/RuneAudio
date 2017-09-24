@@ -55,7 +55,7 @@ if ! grep -q 'var addwebradio' $file; then
 				});\
 				$("#database-entries").append(elems);\
 				var addwebradio = '"'"'<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>'"'"';\
-					$("#database-entries").append(addwebradio);\
+				$("#database-entries").append(addwebradio);\
 			}
     ' $file
     
