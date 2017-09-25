@@ -12,8 +12,8 @@ alias=webr
 
 installstart $1
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/webradio/uninstall_webr.sh -P /usr/local/bin
-chmod +x /usr/local/bin/uninstall_webr.sh
+wgetnc https://github.com/rern/RuneAudio/raw/master/webradio/uninstall_$alias.sh -P /usr/local/bin
+chmod +x /usr/local/bin/uninstall_$alias.sh
 
 runeui=/srv/http/assets/js/runeui.js
 runeuimin=/srv/http/assets/js/runeui.min.js
