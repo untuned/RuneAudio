@@ -17,21 +17,15 @@ chmod +x /usr/local/bin/uninstall_$alias.sh
 
 runeui=/srv/http/assets/js/runeui.js
 runeuimin=/srv/http/assets/js/runeui.min.js
+echo $runeui
+echo $runeuimin
 
 # remove previous modified if exist
-echo $runeui
-
-if grep -q "^//\s*if (path === 'Webradio')" $runeui; then
-	sed -i $'/^\s*if (path === \'Webradio\')/, /}/ s|^|//|' $runeui
-else
-	sed -i '/("#database-entries li").detach()/,/("#database-entries").append(elems)/ d' $runeui
-	sed -i 's/var elems=.*("span","#db-currentpath")/var u=$("span","#db-currentpath")/' $runeuimin
-fi
+sed -i '/("#database-entries li").detach()/,/("#database-entries").append(elems)/ d' $runeui
+sed -i 's/var elems=.*("span","#db-currentpath")/var u=$("span","#db-currentpath")/' $runeuimin
 
 # modify files
-if ! grep -q "^//\s*if (path === 'Webradio')" $runeui; then
-    sed -i $'/^\s*if (path === \'Webradio\')/, /}/ s|^|//|' $runeui
-fi
+sed -i $'/^\s*if (path === \'Webradio\')/, /}/ s|^|//|' $runeui
 
 if ! grep -q 'var addwebradio' $runeui; then
     sed -i '/highlighted entry/ a\
@@ -45,8 +39,6 @@ if ! grep -q 'var addwebradio' $runeui; then
 		}
     ' $runeui
 fi
-
-echo $runeuimin
 
 if ! grep -q 'var addwebradio' $runeuimin; then
 	perl -p -i -e 's|("Webradio"===t.*?</li>'"'"'\),)|/\*\1\*/|' $runeuimin
