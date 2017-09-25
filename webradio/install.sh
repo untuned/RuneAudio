@@ -12,7 +12,7 @@ alias=webr
 
 installstart $1
 
-wgetuninstall
+getuninstall $alias
 
 runeui=/srv/http/assets/js/runeui.js
 runeuimin=/srv/http/assets/js/runeui.min.js
