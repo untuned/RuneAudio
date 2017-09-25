@@ -43,16 +43,17 @@ fi
 
 if ! grep -q 'var addwebradio' $file; then
     sed -i '/highlighted entry/ a\
-			if (path === "Webradio") {\
-				var elems = $("#database-entries li").detach().sort(function (a, b) {\
-					return $(a).text().toLowerCase().localeCompare($(b).text().toLowerCase());\
-				});\
-				$("#database-entries").append(elems);\
-				var addwebradio = '"'"'<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>'"'"';\
-				$("#database-entries").append(addwebradio);\
-			}
+		if (path === "Webradio") {\
+			var elems = $("#database-entries li").detach().sort(function (a, b) {\
+				return $(a).text().toLowerCase().localeCompare($(b).text().toLowerCase());\
+			});\
+			$("#database-entries").append(elems);\
+			var addwebradio = '"'"'<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>'"'"';\
+			$("#database-entries").append(addwebradio);\
+		}
     ' $file
     
+	perl -p -i -e 's|("Webradio"===t.*?</li>'"'"'\),)|/\*\1\*/|' ${file/.js/.min.js}
 	sed -i $'s|var u=$("span","#db-currentpath")|if("Webradio"===path){var elems=$("#database-entries li").detach().sort(function(a,e){return $(a).text().toLowerCase().localeCompare($(e).text().toLowerCase())});$("#database-entries").append(elems);var addwebradio=\'<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>\';$("#database-entries").append(addwebradio)}&|' ${file/.js/.min.js}
 fi
 
