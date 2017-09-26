@@ -15,7 +15,8 @@ sed -i $'|^//\t*\s*if (path === \'Webradio\')|, |}| s|^//||
 file=/srv/http/assets/js/runeui.min.js
 echo $file
 sed -i -e 's|/\*webr0||
-	' -e 's|webr1\*/||
-	' -e 's|/\*webr0\*/.*/\*webr1\*/||' $file
+' -e 's|webr1\*/||
+' -e 's|/\*webr0\*/.*/\*webr1\*/||
+' $file
 
 uninstallfinish $1
