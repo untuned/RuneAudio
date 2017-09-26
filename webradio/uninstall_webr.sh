@@ -10,7 +10,7 @@ file=/srv/http/assets/js/runeui.js
 echo $file
 
 if grep -q 'var addwebradio' $file; then
-    sed -i '/^\t*\s*if (path === "Webradio")/,/}/ d' $file
+    sed -i '/^\t*\s*if (path === "Webradio")/,/}\n/ d' $file
     
 	file=/srv/http/assets/js/runeui.min.js
 	echo $file
