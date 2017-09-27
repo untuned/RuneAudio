@@ -21,7 +21,7 @@ sed -i '/("#database-entries li").detach()/,/("#database-entries").append(elems)
 sed -i 's/var elems=.*("span","#db-currentpath")/var u=$("span","#db-currentpath")/' $runeuimin
 
 # modify files
-sed -i $'/^\s*if (path === \'Webradio\')/, /}/ s|^|//|' $runeui
+sed -i $'/^\s*if (path === \'Webradio\')/, /}/ s|^|// webr|' $runeui
 
 if ! grep -q 'var addwebradio' $runeui; then
     sed -i '/highlighted entry/ a\
