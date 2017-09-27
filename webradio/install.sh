@@ -18,7 +18,7 @@ echo $runeuimin
 
 # remove previous modified if exist
 if grep -q 'var addwebradio' $runeui; then                                                        # 2nd version
-	sed -i -e '\|^//\s*if \(path === "Webradio"\)|,/}/ s|^//||
+	sed -i -e $'|^//\s*if (path === \'Webradio\')|, /}/ s|^//||'
 	' -e '\|^\s*if (path === "Webradio")|,/}\n/ d
 	' $runeui
 fi
@@ -29,8 +29,7 @@ perl -p -i -e 's|if\("Webradio"===path\).*?(var u=\$\("span","#db-currentpath"\)
 # modify files
 sed -i $'/^\s*if (path === \'Webradio\')/, /}/ s|^|//webr|' $runeui
 
-if ! grep -q 'var addwebradio' $runeui; then
-    sed -i '/highlighted entry/ a\
+sed -i '/highlighted entry/ a\
 			if (path === "Webradio") { //webr0\
 				var elems = $("#database-entries li").detach().sort(function (a, b) {\
 					return $(a).text().toLowerCase().localeCompare($(b).text().toLowerCase());\
@@ -39,12 +38,10 @@ if ! grep -q 'var addwebradio' $runeui; then
 				var addwebradio = '"'"'<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>'"'"';\
 				$("#database-entries").append(addwebradio);\
 			} //webr1
-    ' $runeui
-fi
+' $runeui
 
-if ! grep -q 'var addwebradio' $runeuimin; then
-	perl -p -i -e 's|("Webradio"===t.*?</li>'"'"'\),)|/\*webr0\1webr1\*/|' $runeuimin
-	sed -i $'s|var u=$("span","#db-currentpath")|/\*webr0\*/if("Webradio"===path){var elems=$("#database-entries li").detach().sort(function(a,e){return $(a).text().toLowerCase().localeCompare($(e).text().toLowerCase())});$("#database-entries").append(elems);var addwebradio=\'<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>\';$("#database-entries").append(addwebradio)}/\*webr1\*/&|' $runeuimin
-fi
+perl -p -i -e 's|("Webradio"===t.*?</li>'"'"'\),)|/\*webr0\1webr1\*/|' $runeuimin
+
+sed -i $'s|var u=$("span","#db-currentpath")|/\*webr0\*/if("Webradio"===path){var elems=$("#database-entries li").detach().sort(function(a,e){return $(a).text().toLowerCase().localeCompare($(e).text().toLowerCase())});$("#database-entries").append(elems);var addwebradio=\'<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>\';$("#database-entries").append(addwebradio)}/\*webr1\*/&|' $runeuimin
 
 installfinish $1
