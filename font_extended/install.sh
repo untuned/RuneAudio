@@ -6,12 +6,11 @@ alias=font
 
 [[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
-[[ ! -e /srv/http/addonslist.php ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonslist.php -P /srv/http
 
 installstart $1
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/font_extended/uninstall_font.sh -P /usr/local/bin
-chmod +x /usr/local/bin/uninstall_font.sh
+getuninstall
+
 wgetnc https://github.com/rern/_assets/raw/master/RuneUI_enhancement/lato.tar.xz
 mv /srv/http/assets/fonts/lato{,.backup}
 mkdir /srv/http/assets/fonts/lato
