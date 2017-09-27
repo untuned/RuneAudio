@@ -19,7 +19,8 @@ echo $runeuimin
 # remove previous modified if exist
 if grep -q 'var addwebradio' $runeui; then                                                        # 2nd version
 	sed -i -e $'|^//\s*if (path === \'Webradio\')|, /}/ s|^//||'
-	' -e '\|^\s*if (path === "Webradio")|,/}\n/ d
+	' -e '\|^\s*if (path === "Webradio")|,/var addwebradio/ d
+	' -e '/append(addwebradio)/{N;d}
 	' $runeui
 fi
 sed -i '/("#database-entries li").detach()/,/("#database-entries").append(elems)/ d' $runeui      # 1st version
