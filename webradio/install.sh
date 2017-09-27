@@ -23,7 +23,7 @@ if grep -q 'var addwebradio' $runeui; then                                      
 	' $runeui
 fi
 sed -i '/("#database-entries li").detach()/,/("#database-entries").append(elems)/ d' $runeui      # 1st version
-perl -p -i -e 's|/\*("Webradio"===t.*?</li>'"'"'\),)\*/|\1|' $runeuimin                           # 2nd + 1st
+sed -i 's|/\*||g; s|\*/||' $runeuimin                                                             # 2nd + 1st
 perl -p -i -e 's|if\("Webradio"===path\).*?(var u=\$\("span","#db-currentpath"\))|\1|' $runeuimin # 1st
 
 # modify files
