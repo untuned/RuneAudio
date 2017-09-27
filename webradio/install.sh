@@ -1,7 +1,5 @@
 #!/bin/bash
 
-rm $0
-
 # change version number in RuneAudio_Addons/srv/http/addonslist.php
 
 alias=webr
