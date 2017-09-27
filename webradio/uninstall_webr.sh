@@ -8,7 +8,7 @@ uninstallstart $1
 
 file=/srv/http/assets/js/runeui.js
 echo $file
-sed -i 's|^//webr||
+sed -i -e 's|^//webr||
 ' -e '\|//webr0|,\|//webr1| d
 ' $file
     
