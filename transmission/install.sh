@@ -6,7 +6,6 @@ alias=tran
 
 [[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
-[[ ! -e /srv/http/addonslist.php ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonslist.php -P /srv/http
 
 # user inputs
 if (( $# == 0 )); then # with no argument
@@ -25,9 +24,9 @@ fi
 
 installstart $1
 
+getuninstall
+
 gitpath=https://github.com/rern/RuneAudio/raw/master/transmission
-wgetnc $gitpath/uninstall_tran.sh -P /usr/local/bin
-chmod +x /usr/local/bin/uninstall_tran.sh
 wgetnc $gitpath/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
