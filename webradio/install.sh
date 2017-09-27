@@ -16,14 +16,20 @@ runeuimin=/srv/http/assets/js/runeui.min.js
 echo $runeui
 echo $runeuimin
 
+# remove previous modified if exist
+if grep -q 'var addwebradio' $runeui; then # 2nd version
+	sed -i -e '\|^//\t*\s*if (path === "Webradio")|,|}| s|^//||
+	' -e '|^\t*\s*if (path === "Webradio")|,|}\n| d
+	' $runeui
+fi
+sed -i '/("#database-entries li").detach()/,/("#database-entries").append(elems)/ d' $runeui # 1st version
+perl -p -i -e 's|/\*("Webradio"===t.*?</li>'"'"'\),)\*/|\1|' $runeuimin
+perl -p -i -e 's|if\("Webradio"===path\).*?(var u=\$\("span","#db-currentpath"\))|\1|' $runeuimin
+
 # modify files
 sed -i $'/^\s*if (path === \'Webradio\')/, /}/ s|^|//webr|' $runeui
 
 if ! grep -q 'var addwebradio' $runeui; then
-	# remove previous modified if exist
-	sed -i '/("#database-entries li").detach()/,/("#database-entries").append(elems)/ d' $runeui
-	sed -i 's/if("Webradio"===path){var elems=.*("span","#db-currentpath")/var u=$("span","#db-currentpath")/' $runeuimin
-	
     sed -i '/highlighted entry/ a\
 			if (path === "Webradio") { //webr0\
 				var elems = $("#database-entries li").detach().sort(function (a, b) {\
