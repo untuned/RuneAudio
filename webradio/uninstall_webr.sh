@@ -8,8 +8,8 @@ uninstallstart $1
 
 file=/srv/http/assets/js/runeui.js
 echo $file
-sed -i $'|^//\t*\s*if (path === \'Webradio\')|, |}| s|^//||
-' -e '\|// webr0|,\|// webr1| d
+sed -i 's|^//webr||
+' -e '\|//webr0|,\|//webr1| d
 ' $file
     
 file=/srv/http/assets/js/runeui.min.js
