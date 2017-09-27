@@ -17,14 +17,14 @@ echo $runeui
 echo $runeuimin
 
 # remove previous modified if exist
-if grep -q 'var addwebradio' $runeui; then # 2nd version
+if grep -q 'var addwebradio' $runeui; then                                                        # 2nd version
 	sed -i -e '\|^//\t*\s*if (path === "Webradio")|,|}| s|^//||
 	' -e '|^\t*\s*if (path === "Webradio")|,|}\n| d
 	' $runeui
 fi
-sed -i '/("#database-entries li").detach()/,/("#database-entries").append(elems)/ d' $runeui # 1st version
-perl -p -i -e 's|/\*("Webradio"===t.*?</li>'"'"'\),)\*/|\1|' $runeuimin
-perl -p -i -e 's|if\("Webradio"===path\).*?(var u=\$\("span","#db-currentpath"\))|\1|' $runeuimin
+sed -i '/("#database-entries li").detach()/,/("#database-entries").append(elems)/ d' $runeui      # 1st version
+perl -p -i -e 's|/\*("Webradio"===t.*?</li>'"'"'\),)\*/|\1|' $runeuimin                           # 2nd + 1st
+perl -p -i -e 's|if\("Webradio"===path\).*?(var u=\$\("span","#db-currentpath"\))|\1|' $runeuimin # 1st
 
 # modify files
 sed -i $'/^\s*if (path === \'Webradio\')/, /}/ s|^|//webr|' $runeui
