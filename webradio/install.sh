@@ -22,9 +22,9 @@ if grep -q 'var addwebradio' $runeui; then                                      
 	' -e '/^\s*if (path === "Webradio")/, /^\s*}$/ d
 	' $runeui
 fi
+sed -i 's|/\*||g; s|\*/||' $runeuimin                                                             # 2nd
+sed -i sed 's/if("Webradio"===path).*append(addwebradio)}//' $runeuimin # 1st                     # 2nd + 1st
 sed -i '/("#database-entries li").detach()/,/("#database-entries").append(elems)/ d' $runeui      # 1st version
-sed -i 's|/\*||g; s|\*/||' $runeuimin                                                             # 2nd + 1st
-sed -i sed 's/if("Webradio"===path).*append(addwebradio)}//' $runeuimin # 1st
 
 # modify files
 sed -i $'/^\s*if (path === \'Webradio\')/, /}/ s|^|//webr|' $runeui
