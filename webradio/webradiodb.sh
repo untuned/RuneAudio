@@ -31,9 +31,3 @@ mpc update Webradio &> /dev/null
 
 title -l '=' "$bar Webradio imported successfully."
 title -nt "$info Refresh browser to start using."
-
-if [[ $1 == 1 ]]; then
-	wgetnc https://github.com/rern/RuneAudio/raw/UPDATE/webradio/install.sh
-	chmod +x install.sh
-	./install.sh
-fi
