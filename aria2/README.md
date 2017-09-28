@@ -7,12 +7,6 @@ RuneAudio Aria2 with WebUI
 **Install**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
 
-or from SSH terminal
-```
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/aria2/install.sh; chmod +x install.sh; ./install.sh
-```
-RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`  
-
 **Start aria2**  
 ```
 systemctl start aria2
