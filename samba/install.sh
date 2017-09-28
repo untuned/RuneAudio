@@ -1,23 +1,10 @@
 #!/bin/bash
 
-# required variables
 alias=samb
-title='Samba Upgrade'
 
-rm $0
-
-[[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
 
-if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
-	echo -e "$info Samba already upgraged."
-	redis-cli hset addons $alias 1 &> /dev/null
-	exit
-fi
-
-title -l = "$bar Install $title ..."
-#################################################################################
-timestart
+installstart
 
 gitpath=https://github.com/rern/RuneAudio/raw/master
 # fix packages download errors
@@ -51,9 +38,7 @@ ln -sf /etc/samba/smb{-dev,}.conf
 systemctl daemon-reload
 systemctl restart nmbd smbd
 
-redis-cli hset addons $alias 1 &> /dev/null
+installfinish
 
-timestop
-title -l = "$bar $title installed successfully."
 echo 'Add Samba user: smbpasswd -s -a < user >'
 title -nt "$info Edit /etc/smb-dev.conf to fit usage."
