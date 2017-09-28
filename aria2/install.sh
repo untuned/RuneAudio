@@ -15,6 +15,7 @@ else
 fi
 
 installstart $1
+
 getuninstall
 
 gitpath=https://github.com/rern/RuneAudio/raw/master
