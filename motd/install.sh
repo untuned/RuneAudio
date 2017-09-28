@@ -10,7 +10,7 @@ alias=motd
 
 installstart $1
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin		 +getuninstall
+wgetnc https://github.com/rern/RuneAudio/raw/master/motd/uninstall_motd.sh -P /usr/local/bin
 chmod +x /usr/local/bin/uninstall_motd.sh
 
 echo -e "$bar Add new files ..."
