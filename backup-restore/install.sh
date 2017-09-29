@@ -119,9 +119,6 @@ chown http:http /srv/http/restore.* /srv/http/tmp
 
 installfinish $1
 
-echo -e "$info Refresh browser before use."
 title -nt "Please wait 5 seconds before continue."
-
-[[ -t 1 ]] && clearcache
 
 systemctl restart rune_SY_wrk
