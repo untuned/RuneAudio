@@ -222,3 +222,5 @@ systemctl | egrep 'aria2|nmbd|smbd|transmission'
 
 timestop l
 title -l = "$bar Setup finished successfully."
+
+clearcache
