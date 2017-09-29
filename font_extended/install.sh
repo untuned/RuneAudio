@@ -17,7 +17,3 @@ bsdtar -xvf lato.tar.xz -C /srv/http/assets/fonts/lato
 rm lato.tar.xz
 
 installfinish $1
-
-title -nt "$info Refresh browser for new fonts."
-
-[[ -t 1 ]] && clearcache
