@@ -30,4 +30,3 @@ done
 mpc update Webradio &> /dev/null
 
 title -l '=' "$bar Webradio imported successfully."
-title -nt "$info Refresh browser to start using."
