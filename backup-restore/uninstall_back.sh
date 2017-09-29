@@ -35,6 +35,4 @@ uninstallfinish $1
 
 title -nt "Please wait 5 seconds before continue."
 
-[[ -t 1 ]] && clearcache
-
 systemctl restart rune_SY_wrk
