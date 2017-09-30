@@ -13,7 +13,7 @@ rm -v /etc/motd.logo /etc/profile.d/motd.sh
 
 file=/etc/bash.bashrc
 echo $file
-sed -i -e '/^PS1=/ d
+sed -i -e '/^color=/, /^PS1=/ d
 ' -e '/^#PS1=/ s/^#//
 ' $file
 
