@@ -19,4 +19,4 @@ sed -i -e '/^color=/, /^PS1=\x27/ d
 
 uninstallfinish $1
 
-title -nt "$info Relogin to see original motd."
+[[ $1 != u ]] && title -nt "$info Relogin to see original motd."
