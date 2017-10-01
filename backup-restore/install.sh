@@ -4,14 +4,11 @@
 
 alias=back
 
-[[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
-[[ ! -e /srv/http/addonslist.php ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonslist.php -P /srv/http
 
 installstart $1
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/backup-restore/uninstall_back.sh -P /usr/local/bin
-chmod +x /usr/local/bin/uninstall_back.sh
+getuninstall
 
 echo -e "$bar Modify files ..."
 dir=/srv/http/tmp
@@ -122,9 +119,6 @@ chown http:http /srv/http/restore.* /srv/http/tmp
 
 installfinish $1
 
-echo -e "$info Refresh browser before use."
 title -nt "Please wait 5 seconds before continue."
-
-[[ -t 1 ]] && clearcache
 
 systemctl restart rune_SY_wrk

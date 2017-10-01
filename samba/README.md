@@ -10,12 +10,6 @@ _Tested on RuneAudio beta-20160313 - samba_
 **Install**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
 
-or from SSH terminal
-```
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/samba/install.sh; chmod +x install.sh; ./install.sh
-```
-RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu` 
-
 **Server name**  
 - any os file browsers:
 ```

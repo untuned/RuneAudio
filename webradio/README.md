@@ -25,3 +25,11 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/webradio/w
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/webradio/webradiofile.sh; chmod +x webradiofile.sh; ./webradiofile.sh
 ```
+
+Webradio Sorting
+---
+
+Fix Webradio sorting.  
+  
+**Install**  
+from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  

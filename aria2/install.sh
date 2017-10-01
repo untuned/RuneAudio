@@ -4,9 +4,7 @@
 
 alias=aria
 
-[[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
-[[ ! -e /srv/http/addonslist.php ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonslist.php -P /srv/http
 
 if (( $# == 0 )); then
 	# user input
@@ -17,9 +15,9 @@ fi
 
 installstart $1
 
+getuninstall
+
 gitpath=https://github.com/rern/RuneAudio/raw/master
-wgetnc $gitpath/aria2/uninstall_aria.sh -P /usr/local/bin
-chmod +x /usr/local/bin/uninstall_aria.sh
 
 if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
 	wgetnc $gitpath/rankmirrors/rankmirrors.sh
