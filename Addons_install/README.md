@@ -21,5 +21,5 @@ Install Addons Menu with PuTTY
 <hr>
 
 ### Using Addons Menu  
-- Refresh browser page of RuneAudio
+- Refresh RuneAudio browser
 - `Menu` > `Addons`
