@@ -14,12 +14,12 @@ Install Addons Menu with PuTTY
 - click `Yes` to continue
 ---
 ![putty_login](https://github.com/rern/RuneAudio/blob/master/Addons_install/putty_login.png)  
-- `1` login as: `root` > `Enter`
-- `2` root@192.168.1.22's password: `rune` > `Enter` (password will not show and cursor will not move)
-- `3` install
-  - copy this install script: `wget -qN --show-progress https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh`
-  - paste by right click anywhere in PuTTY window > `Enter`
----
-**Using Addons Menu**  
+- `1` login as: `root` > press `Enter`
+- `2` root@192.168.1.22's password: `rune` > press `Enter` ( password will not show and cursor will not move )
+- `3` root@runeaudio:~ # `wget -qN --show-progress https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh` > press `Enter` ( `copy` code > `right-click` in PuTTY = paste )  
+
+<hr>
+
+### Using Addons Menu  
 - Refresh browser page of RuneAudio
 - `Menu` > `Addons`
