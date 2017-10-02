@@ -6,13 +6,6 @@ alias=aria
 
 . /srv/http/addonstitle.sh
 
-if (( $# == 0 )); then
-	# user input
-	yesno "Start $title on system startup:"
-else
-	answer=$1
-fi
-
 installstart $1
 
 getuninstall
@@ -89,7 +82,7 @@ ExecStart=/usr/bin/aria2c
 WantedBy=multi-user.target
 ' > $file
 
-[[ $answer == 1 ]] || [[ $( redis-cli get ariastartup ) ]] && systemctl enable aria2
+[[ $1 == 1 ]] || [[ $( redis-cli get ariastartup ) ]] && systemctl enable aria2
 redis-cli del ariastartup &> /dev/null
 
 echo -e "$bar Start $title ..."
