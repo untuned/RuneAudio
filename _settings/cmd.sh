@@ -58,7 +58,7 @@ bootrune() {
 
 setup() {
 	if [[ ! -e /etc/motd.logo ]]; then
-		echo -e "\e[33m\e[43m . \e[0m Set date-time ..."
+		echo -e "\e[36m\e[46m . \e[0m Set date-time ..."
 		systemctl stop ntpd
 		ntpdate pool.ntp.org
 		systemctl start ntpd
