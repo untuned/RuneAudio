@@ -18,7 +18,7 @@ pacman -Sy
 systemctl stop nmbd smbd
 
 pacman -R --noconfirm samba4-rune
-pacman -S --noconfirm tdb tevent smbclient samba
+pacman -S --noconfirm ldb tdb tevent smbclient samba
 pacman -S --noconfirm libwbclient
 
 # fix 'minimum rlimit_max'
