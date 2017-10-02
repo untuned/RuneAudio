@@ -1,25 +1,12 @@
 #!/bin/bash
 
+# $1-password; $2-webui alternative; $3-startup
+
 # change version number in RuneAudio_Addons/srv/http/addonslist.php
 
 alias=tran
 
 . /srv/http/addonstitle.sh
-
-# user inputs
-if (( $# == 0 )); then # with no argument
-	yesno "Set password:" anspwd
-	[[ $anspwd == 1 ]] && setpwd
-
-	yesno "Install WebUI alternative (Transmission Web Control):" answebui
-
-	yesno "Start $title on system startup:" ansstartup
-	echo
-else # with arguments
-	pwd1=$1
-	(( $# > 1 )) && answebui=$2 || answebui=0
-	(( $# > 2 )) && ansstartup=$3 || ansstartup=0
-fi
 
 installstart $1
 
@@ -77,7 +64,7 @@ if [[ $1 != u ]]; then
 	' $file
 
 	# set password
-	if [[ -n $pwd1 && $pwd1 != 0 ]]; then
+	if [[ -n $1 && $1 != 0 ]]; then
 		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
 		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$pwd1"'"|
 		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
@@ -88,7 +75,7 @@ else
 fi
 
 # web ui alternative
-if [[ $answebui == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
+if [[ $2 == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
 	wgetnc https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
@@ -100,7 +87,7 @@ if [[ $answebui == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
 fi
 
 systemctl daemon-reload
-if [[ $ansstartup == 1 ]] || [[ $( redis-cli get transtartup ) ]]; then
+if [[ $3 == 1 ]] || [[ $( redis-cli get transtartup ) ]]; then
 	systemctl enable trans
 	redis-cli del transtartup &> /dev/null
 fi
