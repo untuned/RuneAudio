@@ -35,6 +35,11 @@ ln -sf /etc/samba/smb{-dev,}.conf
 # set samba password
 (echo $1; echo $1) | smbpasswd -s -a root
 
+mkdir -p /mnt/MPD/USB/hdd/read
+mkdir -p /mnt/MPD/USB/hdd/readwrite
+chmod 755 /mnt/MPD/USB/hdd/read
+chmod 777 /mnt/MPD/USB/hdd/readwrite
+
 systemctl daemon-reload
 systemctl restart nmbd smbd
 
