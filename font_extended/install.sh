@@ -17,3 +17,5 @@ bsdtar -xvf lato.tar.xz -C /srv/http/assets/fonts/lato
 rm lato.tar.xz
 
 installfinish $1
+
+clearcache
