@@ -44,3 +44,5 @@ sed -i 's|"Webradio"===t.*</li>.),|/\*webr0&webr1\*/|' $runeuimin
 sed -i $'s|var u=$("span","#db-currentpath")|/\*webr0\*/if("Webradio"===path){var elems=$("#database-entries li").detach().sort(function(a,e){return $(a).text().toLowerCase().localeCompare($(e).text().toLowerCase())});$("#database-entries").append(elems);var addwebradio=\'<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>\';$("#database-entries").append(addwebradio)}/\*webr1\*/&|' $runeuimin
 
 installfinish $1
+
+clearcache
