@@ -66,10 +66,15 @@ systemctl restart nmbd smbd
 
 installfinish
 
+l=${#read}
+lrw=${#readwrite}
+ll=${#label}
+(( $lrw > $l )) && l=$lrw
+(( $ll > $l )) && l=$ll
 echo -e "$info Windows Network > RUNEAUDIO >"
-printf "%-20s - read + write\n" $readwrite
-printf "%-20s - read only\n\n" $read
-printf "%-20s - Map network drive... only\n" $label
+printf "%-${l}s - read + write\n" $readwrite
+printf "%-${l}s - read only\n\n" $read
+printf "%-${l}s - 'Map network drive...' only\n" $label
 
 echo 'Add Samba user: smbpasswd -s -a < user >'
 title -nt "Edit /etc/smb-dev.conf if needed."
