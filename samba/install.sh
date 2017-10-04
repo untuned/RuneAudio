@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# sharename: $1-read ; $2-readwrite
+
 alias=samb
 
 . /srv/http/addonstitle.sh
