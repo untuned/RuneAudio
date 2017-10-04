@@ -10,11 +10,12 @@ if [[ $( smbd -V ) == 'Version 4.3.4' ]]; then
 	title "$info Samba already upgraged."
 	exit
 fi
-label=$( e2label /dev/sda1 )
-if [[ $? == 1 ]]; then
+if mount | grep -q '/dev/sda1'; then
 	title "$info No USB drive found."
 	exit
 fi
+
+mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 [[ $1 == 0 ]] && read=readonly || read=$1
 [[ $2 == 0 ]] && readwrite=readwrite || readwrite=$2
 [[ $3 == 0 ]] && pwd=rune || pwd=$3
@@ -50,24 +51,24 @@ ln -sf /etc/samba/smb{-dev,}.conf
 echo "
 [$readwrite]
 	comment = browseable, read, write, guess ok, no password
-	path = /mnt/MPD/USB/$label/$readwrite
+	path = $mnt/$readwrite
 	read only = no
 [$read]
 	comment = browseable, read only, guess ok, no password
-	path = /mnt/MPD/USB/$label/$read
+	path = $mnt/$read
 [$label]
 	comment = hidden, read, write, root with password only
-	path = /mnt/MPD/USB/$label
+	path = $mnt/$label
 	browseable = no
 	read only = no
 	guest ok = no
 	valid users = root
 " >> /etc/samba/smb-dev.conf
 
-mkdir -p /mnt/MPD/USB/$label/$read
-mkdir -p /mnt/MPD/USB/$label/$readwrite
-chmod 755 /mnt/MPD/USB/$label/$read
-chmod 777 /mnt/MPD/USB/$label/$readwrite
+mkdir -p $mnt/$read
+mkdir -p $mnt/$readwrite
+chmod 755 $mnt/$read
+chmod 777 $mnt/$readwrite
 
 # set samba password
 (echo $pwd; echo $pwd) | smbpasswd -s -a root
