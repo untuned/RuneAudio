@@ -10,7 +10,7 @@ if [[ $( smbd -V ) == 'Version 4.3.4' ]]; then
 	title "$info Samba already upgraged."
 	exit
 fi
-if mount | grep -q '/dev/sda1'; then
+if mount | ! grep -q '/dev/sda1'; then
 	title "$info No USB drive found."
 	exit
 fi
