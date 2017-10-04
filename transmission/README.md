@@ -8,6 +8,15 @@ RuneAudio Transmission
 **Install**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)   
 
+**start / stop**  
+```
+systemctl < start / stop > transmission
+```
+
+**WebUI**  
+Browser URL:    
+_[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)
+
 **settings**  
 `/path/transmission/settings.json` must be edited after stop transmission  
 `transmission-daemon -d` will not correctly show `settings.json`  
