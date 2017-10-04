@@ -6,6 +6,19 @@ alias=samb
 
 . /srv/http/addonstitle.sh
 
+if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
+	title "$info Samba already upgraged."
+	exit
+fi
+label=$( e2label /dev/sda1 )
+if [[ $? == 1 ]]; then
+	title "$info No USB drive found."
+	exit
+fi
+[[ $1 == 0 ]] && read=readonly || read=$1
+[[ $2 == 0 ]] && readwrite=readwrite || readwrite=$2
+[[ $3 == 0 ]] && pwd=rune || pwd=$3
+
 installstart
 
 gitpath=https://github.com/rern/RuneAudio/raw/master
@@ -34,10 +47,6 @@ chmod +x /usr/local/bin/uninstall_samb.sh
 wgetnc $gitpath/samba/smb-dev.conf -O /etc/samba/smb-dev.conf
 ln -sf /etc/samba/smb{-dev,}.conf
 
-label=$( e2label /dev/sda1 )
-[[ $1 == 0 ]] && read=readonly || read=$1
-[[ $2 == 0 ]] && readwrite=readwrite || readwrite=$2
-
 echo "
 [$readwrite]
 	comment = browseable, read, write, guess ok, no password
@@ -47,7 +56,7 @@ echo "
 	comment = browseable, read only, guess ok, no password
 	path = /mnt/MPD/USB/$label/$read
 [$label]
-	comment = hidden, read, write, root with password only, from [IP1] [IP2] only
+	comment = hidden, read, write, root with password only
 	path = /mnt/MPD/USB/$label
 	browseable = no
 	read only = no
@@ -61,7 +70,6 @@ chmod 755 /mnt/MPD/USB/$label/$read
 chmod 777 /mnt/MPD/USB/$label/$readwrite
 
 # set samba password
-[[ $3 == 0 ]] && pwd=rune || pwd=$3
 (echo $pwd; echo $pwd) | smbpasswd -s -a root
 
 systemctl daemon-reload
