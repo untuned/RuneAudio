@@ -6,7 +6,7 @@ alias=samb
 
 . /srv/http/addonstitle.sh
 
-if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
+if [[ $( smbd -V ) == 'Version 4.3.4' ]]; then
 	title "$info Samba already upgraged."
 	exit
 fi
