@@ -1,4 +1,4 @@
-Native compile Transmission
+Native compiled Transmission
 --- 
 Normal `pacman -S transmission-cli` failed to start, error: `libcrypto.so.1.1`, `libssl.so.1.1`  
 RuneAudio has trouble with system wide upgrade.  
