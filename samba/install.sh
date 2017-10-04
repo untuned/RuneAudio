@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# sharename: $1-read ; $2-readwrite
+# $1-readonly name ; $2-readwrite name ; $3-password
 
 alias=samb
 
@@ -35,8 +35,8 @@ wgetnc $gitpath/samba/smb-dev.conf -O /etc/samba/smb-dev.conf
 ln -sf /etc/samba/smb{-dev,}.conf
 
 label=$( e2label /dev/sda1 )
-read=$1
-readwrite=$2
+[[ $1 == 0 ]] && read=readonly || read=$1
+[[ $2 == 0 ]] && readwrite=readwrite || readwrite=$2
 
 echo "
 [$readwrite]
@@ -61,7 +61,8 @@ chmod 755 /mnt/MPD/USB/$label/$read
 chmod 777 /mnt/MPD/USB/$label/$readwrite
 
 # set samba password
-(echo $1; echo $1) | smbpasswd -s -a root
+[[ $3 == 0 ]] && pwd=rune || pwd=$3
+(echo $pwd; echo $pwd) | smbpasswd -s -a root
 
 systemctl daemon-reload
 systemctl restart nmbd smbd
