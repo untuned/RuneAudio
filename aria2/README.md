@@ -7,23 +7,16 @@ RuneAudio Aria2 with WebUI
 **Install**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
 
-**Start aria2**  
+**start / stop**  
 ```
-systemctl start aria2
-```
-
-**Stop aria2**  
-```
-systemctl stop aria2
+systemctl < start / stop > aria2
 ```
 
 **WebUI**  
 Browser URL:    
 _[RuneAudio IP]_:88 (eg: 192.168.1.11:88)
 
-**Tips**  
-Specify saved filename.ext - without spaces: (set directory in `dir` option)  
-[download link] --out=[filename.ext]   
-
-Fix download speed drop:  
-`[pause]` > `[resume]` button   
+**Specify saved filename**  
+- [download link] --out=[file_name.ext]   
+- file_name.ext - without spaces
+- set directory in `dir` option
