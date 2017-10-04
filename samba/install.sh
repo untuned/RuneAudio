@@ -32,18 +32,44 @@ chmod +x /usr/local/bin/uninstall_samb.sh
 wgetnc $gitpath/samba/smb-dev.conf -O /etc/samba/smb-dev.conf
 ln -sf /etc/samba/smb{-dev,}.conf
 
+label=$( e2label /dev/sda1 )
+read=$1
+readwrite=$2
+
+echo "
+[$readwrite]
+	comment = browseable, read, write, guess ok, no password
+	path = /mnt/MPD/USB/$label/$readwrite
+	read only = no
+[$read]
+	comment = browseable, read only, guess ok, no password
+	path = /mnt/MPD/USB/$label/$read
+[$label]
+	comment = hidden, read, write, root with password only, from [IP1] [IP2] only
+	path = /mnt/MPD/USB/$label
+	browseable = no
+	read only = no
+	guest ok = no
+	valid users = root
+" >> /etc/samba/smb-dev.conf
+
+mkdir -p /mnt/MPD/USB/$label/$read
+mkdir -p /mnt/MPD/USB/$label/$readwrite
+chmod 755 /mnt/MPD/USB/$label/$read
+chmod 777 /mnt/MPD/USB/$label/$readwrite
+
 # set samba password
 (echo $1; echo $1) | smbpasswd -s -a root
-
-mkdir -p /mnt/MPD/USB/hdd/read
-mkdir -p /mnt/MPD/USB/hdd/readwrite
-chmod 755 /mnt/MPD/USB/hdd/read
-chmod 777 /mnt/MPD/USB/hdd/readwrite
 
 systemctl daemon-reload
 systemctl restart nmbd smbd
 
 installfinish
 
+echo -e "$info Windows Network > RUNEAUDIO >"
+printf "%-20s - read + write\n" $readwrite
+printf "%-20s - read only\n\n" $read
+printf "%-20s - Map network drive... only\n" $label
+
 echo 'Add Samba user: smbpasswd -s -a < user >'
-title -nt "$info Edit /etc/smb-dev.conf to fit usage."
+title -nt "Edit /etc/smb-dev.conf if needed."
