@@ -8,22 +8,9 @@ RuneAudio Transmission
 **Install**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)   
 
-**Start transmission**  
-```
-systemctl start transmission
-```
-
-**Stop transmission**  
-```
-systemctl stop transmission
-```
-
 **settings**  
 `/path/transmission/settings.json` must be edited after stop transmission  
 `transmission-daemon -d` will not correctly show `settings.json`  
-
-**Browser URL:**  
-_[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)  
 
 **auto start download**  
 add torrent files to `/path/transmission/torrents` will auto start download  
@@ -38,7 +25,7 @@ add torrent files to `/path/transmission/torrents` will auto start download
     ...
 ```
 
-**Create**  
+**create torrent file**  
 ```
 transmission-create -p -o <file> -c "<comment>" -t "<url>"
 
