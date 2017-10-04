@@ -76,7 +76,8 @@ ll=${#label}
 echo -e "$info Windows Network > RUNEAUDIO >"
 printf "%-${l}s - read + write\n" $readwrite
 printf "%-${l}s - read only\n\n" $read
-printf "%-${l}s - 'Map network drive...' only\n" $label
+
+printf "%-${l}s - 'Map network drive...' only\n\n" $label
 
 echo 'Add Samba user: smbpasswd -s -a < user >'
 title -nt "Edit /etc/smb-dev.conf if needed."
