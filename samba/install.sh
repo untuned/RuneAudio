@@ -16,9 +16,10 @@ if mount | grep -q '/dev/sda1'; then
 fi
 
 mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-[[ $1 == 0 ]] && read=readonly || read=$1
-[[ $2 == 0 ]] && readwrite=readwrite || readwrite=$2
-[[ $3 == 0 ]] && pwd=rune || pwd=$3
+[[ $1 == 0 ]] && server=RuneAudio || server=$1
+[[ $2 == 0 ]] && read=readonly || read=$2
+[[ $3 == 0 ]] && readwrite=readwrite || readwrite=$3
+[[ $4 == 0 ]] && pwd=rune || pwd=$4
 
 installstart
 
