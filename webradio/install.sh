@@ -8,6 +8,7 @@ alias=webr
 
 if [[ $( redis-cli get release ) == '0.4b' ]]; then
 	title -l '=' "$info RuneAudio 0.4b does not need this fix."
+	exit
 fi
 
 installstart $1
