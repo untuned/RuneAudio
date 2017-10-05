@@ -21,7 +21,8 @@ mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 [[ $3 == 0 ]] && readwrite=readwrite || readwrite=$3
 [[ $4 == 0 ]] && pwd=rune || pwd=$4
 
-installstart
+title -l '=' "$bar Upgrade Samba ..."
+timestart
 
 gitpath=https://github.com/rern/RuneAudio/raw/master
 # fix packages download errors
@@ -77,8 +78,9 @@ chmod 777 $mnt/$readwrite
 systemctl daemon-reload
 systemctl restart nmbd smbd
 
-installfinish
+redis-cli hset addons samba 1 &> /dev/null # mark as expanded - disable webui button
 
+title -l '=' $bar Samba upgraded successfully."
 l=${#read}
 lrw=${#readwrite}
 ll=${#label}
