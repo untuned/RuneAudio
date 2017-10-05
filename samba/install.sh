@@ -56,7 +56,7 @@ echo "
 [$read]
 	comment = browseable, read only, guess ok, no password
 	path = $mnt/$read
-[$label]
+[$mnt]
 	comment = hidden, read, write, root with password only
 	path = $mnt/$label
 	browseable = no
