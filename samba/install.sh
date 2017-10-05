@@ -57,7 +57,7 @@ echo "
 [$read]
 	comment = browseable, read only, guess ok, no password
 	path = $mnt/$read
-[$usbroot]
+[usbroot]
 	comment = hidden, read, write, root with password only
 	path = $mnt
 	browseable = no
@@ -72,7 +72,7 @@ chmod 755 $mnt/$read
 chmod 777 $mnt/$readwrite
 
 # set samba password
-(echo $pwd; echo $pwd) | smbpasswd -s -a root
+(echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
 systemctl daemon-reload
 systemctl restart nmbd smbd
@@ -80,16 +80,17 @@ systemctl restart nmbd smbd
 redis-cli hset addons samba 1 &> /dev/null # mark as expanded - disable webui button
 
 title -l '=' "$bar Samba upgraded successfully."
-l=${#read}
-lrw=${#readwrite}
-ll=${#label}
-(( $lrw > $l )) && l=$lrw
-(( $ll > $l )) && l=$ll
-echo -e "$info Windows Network > RUNEAUDIO >"
-printf "%-${l}s - read + write\n" $readwrite
-printf "%-${l}s - read only\n\n" $read
 
-printf "%-${l}s - 'Map network drive...' only\n\n" $label
+l=10
+lr=${#read}
+lrw=${#readwrite}
+(( $lr > $l )) && l=$lr
+(( $lrw > $l )) && l=$lrw
+echo -e "$info Windows Network > RUNEAUDIO >"
+printf "%-${l}s - read+write share\n" $readwrite
+printf "%-${l}s - read only share\n\n" $read
+
+printf "%-${l}s - not shown \\\\\\$server\\usbroot \n\n" usbroot
 
 echo 'Add Samba user: smbpasswd -s -a < user >'
 title -nt "Edit shares: /etc/smb-dev.conf"
