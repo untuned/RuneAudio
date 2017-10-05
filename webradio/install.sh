@@ -6,6 +6,10 @@ alias=webr
 
 . /srv/http/addonstitle.sh
 
+if [[ $( redis-cli get buildversion ) == 'beta-20170229' ]]; then
+	title -l '=' "$info RuneAudio 0.4b does not need this fix."
+fi
+
 installstart $1
 
 getuninstall
