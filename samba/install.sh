@@ -90,7 +90,7 @@ echo -e "$info Windows Network > RUNEAUDIO >"
 printf "%-${l}s - read+write share\n" $readwrite
 printf "%-${l}s - read only share\n\n" $read
 
-printf "%-${l}s - not shown \\\\\\$server\\usbroot \n\n" usbroot
+printf "%-${l}s - \\\\\\$server\\usbroot > user: root + password\n\n" usbroot
 
 echo 'Add Samba user: smbpasswd -s -a < user >'
 title -nt "Edit shares: /etc/smb-dev.conf"
