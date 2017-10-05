@@ -45,8 +45,6 @@ root    soft    nofile    16384
 root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
-wgetnc $gitpath/samba/uninstall_samb.sh -P /usr/local/bin
-chmod +x /usr/local/bin/uninstall_samb.sh
 wgetnc $gitpath/samba/smb-dev.conf -O /etc/samba/smb-dev.conf
 ln -sf /etc/samba/smb{-dev,}.conf
 
@@ -80,7 +78,7 @@ systemctl restart nmbd smbd
 
 redis-cli hset addons samba 1 &> /dev/null # mark as expanded - disable webui button
 
-title -l '=' $bar Samba upgraded successfully."
+title -l '=' "$bar Samba upgraded successfully."
 l=${#read}
 lrw=${#readwrite}
 ll=${#label}
