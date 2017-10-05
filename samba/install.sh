@@ -46,8 +46,14 @@ root    soft    nofile    16384
 root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
-wgetnc $gitpath/samba/smb-dev.conf -O /etc/samba/smb-dev.conf
+file=/etc/samba/smb-dev.conf
+echo $file
+wgetnc $gitpath/samba/smb-dev.conf -O $file
 ln -sf /etc/samba/smb{-dev,}.conf
+
+sed -i "/\^[global\]/ a\
+	netbios name = $server
+" $file
 
 echo "
 [$readwrite]
@@ -64,7 +70,7 @@ echo "
 	read only = no
 	guest ok = no
 	valid users = root
-" >> /etc/samba/smb-dev.conf
+" >> $file
 
 mkdir -p $mnt/$read
 mkdir -p $mnt/$readwrite
