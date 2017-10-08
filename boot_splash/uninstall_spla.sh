@@ -12,11 +12,11 @@ sed -i -e 's/console=tty3/console=ttyAMA0,115200 console=tty1/
 ' -e 's/ logo.nologo//
 ' /boot/cmdline.txt
 
-systemctl disable bootsplash
+systemctl disable ply-image
 
 echo -e "$bar Remove files ..."
-rm -v /etc/systemd/system/bootsplash.service
+rm -v /etc/systemd/system/ply-image.service
 rm -v /usr/local/bin/ply-image
-rm -rv /usr/share/bootsplash
+rm -rv /usr/share/ply-image
 
 uninstallfinish $1
