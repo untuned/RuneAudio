@@ -15,7 +15,20 @@ sed -i -e 's/console=ttyAMA0,115200//
 ' -e '${s/$/ loglevel=0 logo.nologo/}
 ' /boot/cmdline.txt
 
-wget $gitpath/ply-image.service -P /etc/systemd/system
+echo '[Unit]
+Description=Boot splash screen
+DefaultDependencies=no
+After=systemd-vconsole-setup.service
+Before=sysinit.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/ply-image /usr/share/ply-image/start.png
+
+[Install]
+WantedBy=getty.target
+' > /etc/systemd/system/ply-image.service
 systemctl enable ply-image
 
 wgetnc $gitpath/ply-image -P /usr/local/bin
