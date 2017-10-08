@@ -51,9 +51,9 @@ echo $file
 wgetnc $gitpath/samba/smb-dev.conf -O $file
 ln -sf /etc/samba/smb{-dev,}.conf
 
-sed -i "/^\[global\]/ a\
-	netbios name = $server
-" $file
+sed -i '/^\[global\]/ a\
+\t	netbios name = '"$server"'
+' $file
 
 echo "
 [$readwrite]
