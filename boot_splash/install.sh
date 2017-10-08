@@ -15,15 +15,15 @@ sed -i -e 's/console=ttyAMA0,115200//
 ' -e '${s/$/ logo.nologo/}
 ' /boot/cmdline.txt
 
-wget $gitpath/bootsplash.service -P /etc/systemd/system
-systemctl enable bootsplash
+wget $gitpath/ply-image.service -P /etc/systemd/system
+systemctl enable ply-image
 
 wgetnc $gitpath/ply-image -P /usr/local/bin
-chmod 755 /usr/local/bin/ply-image
+chmod 644 /usr/local/bin/ply-image
 
-mkdir -p /usr/share/bootsplash
-wgetnc $gitpath/start.png -P /usr/share/bootsplash
+mkdir -p /usr/share/ply-image
+wgetnc $gitpath/start.png -P /usr/share/ply-image
 
 installfinish $1
 
-title -nt "$info Change image: /usr/share/bootsplash/start.png"
+title -nt "$info Change image: /usr/share/ply-image/start.png"
