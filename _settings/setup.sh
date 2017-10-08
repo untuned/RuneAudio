@@ -152,7 +152,11 @@ sed -i -e '/m:0x0 + c:180/ s/^#//
 echo
 
 # rankmirrors
-wgetnc $gitpath/rankmirrors/rankmirrors.sh; chmod +x rankmirrors.sh; ./rankmirrors.sh 1
+if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
+	wgetnc $gitpath/rankmirrors/rankmirrors.sh
+	chmod +x rankmirrors.sh
+	./rankmirrors.sh
+fi
 
 # addons menu
 wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh
