@@ -12,7 +12,7 @@ gitpath=https://github.com/rern/RuneAudio/raw/master/boot_splash
 
 sed -i -e 's/console=ttyAMA0,115200//
 ' -e 's/console=tty1/console=tty3/
-' -e '${s/$/ logo.nologo/}
+' -e '${s/$/ loglevel=0 logo.nologo/}
 ' /boot/cmdline.txt
 
 wget $gitpath/ply-image.service -P /etc/systemd/system
@@ -23,6 +23,8 @@ chmod 644 /usr/local/bin/ply-image
 
 mkdir -p /usr/share/ply-image
 wgetnc $gitpath/start.png -P /usr/share/ply-image
+
+touch /root/.hushlogin
 
 installfinish $1
 
