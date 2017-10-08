@@ -51,7 +51,7 @@ echo $file
 wgetnc $gitpath/samba/smb-dev.conf -O $file
 ln -sf /etc/samba/smb{-dev,}.conf
 
-sed -i "/\^[global\]/ a\
+sed -i "/^\[global\]/ a\
 	netbios name = $server
 " $file
 
@@ -96,7 +96,7 @@ echo -e "$info Windows Network > RUNEAUDIO >"
 printf "%-${l}s - read+write share\n" $readwrite
 printf "%-${l}s - read only share\n\n" $read
 
-printf "%-${l}s - \\\\\\$server\\usbroot > user: root + password\n\n" usbroot
+printf "%-${l}s - "'\\\\'"$server"'\\'"usbroot > user: root + password\n\n" usbroot
 
 echo 'Add Samba user: smbpasswd -s -a < user >'
 title -nt "Edit shares: /etc/smb-dev.conf"
