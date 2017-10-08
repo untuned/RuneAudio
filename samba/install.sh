@@ -27,7 +27,7 @@ timestart
 
 gitpath=https://github.com/rern/RuneAudio/raw/master
 # fix packages download errors
-if  grep '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
+if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
 	wgetnc $gitpath/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
 	./rankmirrors.sh
