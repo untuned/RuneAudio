@@ -7,7 +7,7 @@ Before=sysinit.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/local/bin/ply-image /usr/share/bootsplash/start.png
+ExecStart=/usr/local/bin/ply-image /usr/share/ply-image/start.png
 
 [Install]
 WantedBy=getty.target
