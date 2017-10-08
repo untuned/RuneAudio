@@ -18,5 +18,6 @@ echo -e "$bar Remove files ..."
 rm -v /etc/systemd/system/ply-image.service
 rm -v /usr/local/bin/ply-image
 rm -rv /usr/share/ply-image
+rm -v /root/.hushlogin
 
 uninstallfinish $1
