@@ -25,6 +25,7 @@ systemctl daemon-reload
 pacman -Rs --noconfirm aria2
 
 # restore file
+echo -e "$bar Restore files ..."
 file=/etc/nginx/nginx.conf
 echo $file
 sed -i -e '/location \/aria2/, /^$/ d
