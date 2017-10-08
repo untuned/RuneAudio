@@ -167,26 +167,30 @@ touch /root/.hushlogin
 
 title -l = "$bar Upgrade Samba ..."
 #################################################################################
-timestart
-pacman -R --noconfirm samba4-rune
-pacman -S --noconfirm tdb tevent smbclient samba
-# fix missing libreplace-samba4.so (may need to run twice)
-pacman -S --noconfirm libwbclient
+if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
+	title "$info Samba already upgraged."
+else
+	timestart
+	pacman -R --noconfirm samba4-rune
+	pacman -S --noconfirm tdb tevent smbclient samba
+	# fix missing libreplace-samba4.so (may need to run twice)
+	pacman -S --noconfirm libwbclient
 
-# fix 'minimum rlimit_max'
-echo -n '
-root    soft    nofile    16384
-root    hard    nofile    16384
-' >> /etc/security/limits.conf
+	# fix 'minimum rlimit_max'
+	echo -n '
+	root    soft    nofile    16384
+	root    hard    nofile    16384
+	' >> /etc/security/limits.conf
 
-wgetnc $gitpath/_settings/smb.conf -O /etc/samba/smb-dev.conf
-ln -sf /etc/samba/smb-dev.conf /etc/samba/smb.conf
+	wgetnc $gitpath/_settings/smb.conf -O /etc/samba/smb-dev.conf
+	ln -sf /etc/samba/smb-dev.conf /etc/samba/smb.conf
 
-# set samba password
-(echo $pwd1; echo $pwd1) | smbpasswd -s -a root
+	# set samba password
+	(echo $pwd1; echo $pwd1) | smbpasswd -s -a root
 
-timestop
-title -l = "$bar Samba upgraded successfully."
+	timestop
+	title -l = "$bar Samba upgraded successfully."
+fi
 echo
 
 # Transmission
