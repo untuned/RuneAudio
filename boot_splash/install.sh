@@ -25,3 +25,5 @@ mkdir -p /usr/share/bootsplash
 wgetnc $gitpath/start.png -P /usr/share/bootsplash
 
 installfinish $1
+
+title -nt "$info Change image: /usr/share/bootsplash/start.png"
