@@ -9,7 +9,7 @@ uninstallstart $1
 echo -e "$bar Restore files ..."
 echo /boot/cmdline.txt
 sed -i -e 's/console=tty3/console=ttyAMA0,115200 console=tty1/
-' -e 's/ logo.nologo//
+' -e 's/ loglevel=0 logo.nologo//
 ' /boot/cmdline.txt
 
 systemctl disable ply-image
