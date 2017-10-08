@@ -1,5 +1,5 @@
 [Unit]
-Description = display splash screen during boot
+Description=Boot splash screen
 DefaultDependencies=no
 After=systemd-vconsole-setup.service
 Before=sysinit.target
