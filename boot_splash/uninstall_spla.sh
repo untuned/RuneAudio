@@ -12,6 +12,9 @@ sed -i -e 's/console=tty3/console=ttyAMA0,115200 console=tty1/
 ' -e 's/ loglevel=0 logo.nologo//
 ' /boot/cmdline.txt
 
+echo /boot/config.txt
+sed '/disable_splash=1/ d' /boot/confix.txt
+
 systemctl disable ply-image
 
 echo -e "$bar Remove files ..."
