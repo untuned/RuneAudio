@@ -15,6 +15,8 @@ sed -i -e 's/console=tty3/console=ttyAMA0,115200 console=tty1/
 echo /boot/config.txt
 sed '/disable_splash=1/ d' /boot/confix.txt
 
+mv /etc/motd{.ply,}
+
 systemctl disable ply-image
 
 echo -e "$bar Remove files ..."
