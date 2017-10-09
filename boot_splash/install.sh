@@ -11,15 +11,10 @@ getuninstall
 gitpath=https://github.com/rern/RuneAudio/raw/master/boot_splash
 
 sed -i -e '/^\s*$/ d
-' -e 's/ console=ttyAMA0,115200//
-' -e 's/console=tty1/console=tty3/
-' -e '1 s/$/ loglevel=3 logo.nologo/
+' -e '1 s/$/ loglevel=0 logo.nologo/
 ' /boot/cmdline.txt
 
 echo 'disable_splash=1' >> /boot/config.txt
-
-mv /etc/issue{,.ply}
-mv /etc/motd{,.ply}
 
 systemctl disable getty@tty1.service
 
@@ -44,8 +39,6 @@ chmod 755 /usr/local/bin/ply-image
 
 mkdir -p /usr/share/ply-image
 wgetnc $gitpath/start.png -P /usr/share/ply-image
-
-touch /root/.hushlogin
 
 installfinish $1
 
