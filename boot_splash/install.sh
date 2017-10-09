@@ -18,6 +18,7 @@ sed -i -e '/^\s*$/ d
 
 echo 'disable_splash=1' >> /boot/config.txt
 
+mv /etc/issue{,.ply}
 mv /etc/motd{,.ply}
 
 echo '[Unit]
