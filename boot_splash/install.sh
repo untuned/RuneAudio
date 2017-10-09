@@ -16,6 +16,8 @@ sed -i -e '/^\s*$/ d
 ' -e '1 s/$/ loglevel=3 logo.nologo/
 ' /boot/cmdline.txt
 
+echo 'disable_splash=1' >> /boot/config.txt
+
 echo '[Unit]
 Description=Boot splash screen
 DefaultDependencies=no
