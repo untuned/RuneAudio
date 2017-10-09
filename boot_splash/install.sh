@@ -10,9 +10,10 @@ getuninstall
 
 gitpath=https://github.com/rern/RuneAudio/raw/master/boot_splash
 
-sed -i -e 's/console=ttyAMA0,115200//
+sed -i -e '/^\s*$/ d
+' -e 's/ console=ttyAMA0,115200//
 ' -e 's/console=tty1/console=tty3/
-' -e '${s/$/ loglevel=0 logo.nologo/}
+' -e '1 s/$/ loglevel=3 logo.nologo/
 ' /boot/cmdline.txt
 
 echo '[Unit]
