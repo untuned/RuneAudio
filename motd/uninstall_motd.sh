@@ -8,7 +8,7 @@ uninstallstart $1
 
 echo -e "$bar Restore files ..."
 
-mv -v /etc/motd{.original,} 2> /ddv/null
+mv -v /etc/motd{.original,} 2> /dev/null
 rm -v /etc/motd.logo /etc/profile.d/motd.sh
 
 file=/etc/bash.bashrc
