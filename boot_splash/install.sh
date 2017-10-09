@@ -21,6 +21,8 @@ echo 'disable_splash=1' >> /boot/config.txt
 mv /etc/issue{,.ply}
 mv /etc/motd{,.ply}
 
+systemctl disable getty@tty1.service
+
 echo '[Unit]
 Description=Boot splash screen
 DefaultDependencies=no
