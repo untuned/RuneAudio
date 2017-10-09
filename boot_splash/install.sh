@@ -11,7 +11,7 @@ getuninstall
 gitpath=https://github.com/rern/RuneAudio/raw/master/boot_splash
 
 sed -i -e '/^\s*$/ d
-' -e '1 s/$/ loglevel=0 logo.nologo/
+' -e '1 s/$/ logo.nologo/
 ' /boot/cmdline.txt
 
 echo 'disable_splash=1' >> /boot/config.txt
