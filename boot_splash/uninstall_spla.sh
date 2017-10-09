@@ -8,7 +8,7 @@ uninstallstart $1
 
 echo -e "$bar Restore files ..."
 echo /boot/cmdline.txt
-sed -i -e 's/ loglevel=0 logo.nologo//' /boot/cmdline.txt
+sed -i -e 's/ logo.nologo//' /boot/cmdline.txt
 
 echo /boot/config.txt
 sed '/disable_splash=1/ d' /boot/confix.txt
