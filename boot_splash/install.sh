@@ -32,7 +32,7 @@ WantedBy=getty.target
 systemctl enable ply-image
 
 wgetnc $gitpath/ply-image -P /usr/local/bin
-chmod 644 /usr/local/bin/ply-image
+chmod 755 /usr/local/bin/ply-image
 
 mkdir -p /usr/share/ply-image
 wgetnc $gitpath/start.png -P /usr/share/ply-image
