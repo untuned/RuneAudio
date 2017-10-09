@@ -18,6 +18,8 @@ sed -i -e '/^\s*$/ d
 
 echo 'disable_splash=1' >> /boot/config.txt
 
+mv /etc/motd{,.ply}
+
 echo '[Unit]
 Description=Boot splash screen
 DefaultDependencies=no
