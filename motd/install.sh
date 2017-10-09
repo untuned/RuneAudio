@@ -48,7 +48,7 @@ echo -e "\e[38;5;${color}m$( < /etc/motd.logo )\e[0m\n"
 
 echo -e "$bar Modify files ..."
 
-mv -v /etc/motd{,.original}
+mv -fv /etc/motd{,.original}
 
 file=/etc/bash.bashrc
 echo $file
