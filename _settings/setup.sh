@@ -5,6 +5,8 @@
 # disable wifi, hdmi mode, fstab, pacman cache
 # preload osmc pre-setup
 # restore settings
+# install addons menu
+# install motd
 # upgrade samba
 # install transmission
 # install aria2
@@ -96,10 +98,7 @@ echo -e "$bar Restore settings ..."
 # settings
 systemctl stop redis
 file=/var/lib/redis/rune.rdb
-#mv $file{,.original}
-wgetnc $gitpath/_settings/rune.rdb -O $file              # database
-#chown redis:redis $file
-#chmod 644 $file
+wgetnc $gitpath/_settings/rune.rdb -O $file
 systemctl start redis
 restartredis() {
 	sleep 1
@@ -133,10 +132,7 @@ systemctl restart php-fpm
 # mpd database
 systemctl stop mpd
 file=/var/lib/mpd/mpd.db
-#mv $file{,.original}
 wgetnc $gitpath/_settings/mpd.db -O $file
-#chown mpd:audio $file
-#chmod 644 $file
 systemctl start mpd
 sleep 1
 mpc update Webradio &> /dev/null
@@ -152,6 +148,7 @@ sed -i -e '/m:0x0 + c:180/ s/^#//
 echo
 
 # rankmirrors
+#################################################################################
 if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
 	wgetnc $gitpath/rankmirrors/rankmirrors.sh
 	chmod +x rankmirrors.sh
@@ -159,9 +156,11 @@ if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist
 fi
 
 # addons menu
+#################################################################################
 wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh
 
 # motd
+#################################################################################
 wgetnc $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
 
@@ -199,10 +198,6 @@ systemctl restart nmbd smbd
 # show installed packages status
 echo -e "$bar Installed packages status"
 systemctl | egrep 'aria2|nmbd|smbd|transmission'
-
-# update library
-#echo -e "$bar MPD library updating ..."
-#mpc update &> /dev/null
 
 timestop l
 title -l = "$bar Setup finished successfully."
