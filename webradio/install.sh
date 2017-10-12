@@ -7,7 +7,9 @@ alias=webr
 . /srv/http/addonstitle.sh
 
 if [[ $( redis-cli get release ) == '0.4b' ]]; then
-	redis-cli hset addons webr 20170925 &> /dev/null # mark as installed - disable button
+	addonslist=$( sed -n "/'$alias'/,/^),/p" /srv/http/addonslist.php )
+	version=$( getvalue version )
+	redis-cli hset addons webr $version &> /dev/null # mark as installed - disable button
 	title -l '=' "$info RuneAudio 0.4b does not need this fix."
 	exit
 fi
