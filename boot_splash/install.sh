@@ -5,7 +5,7 @@ alias=spla
 . /srv/http/addonstitle.sh
 
 if [[ $( redis-cli get release ) == '0.4b' ]]; then
-	title -l '=' "$info RuneAudio 0.4b already has this feature."
+	title -l '=' "$info RuneAudio 0.4b has this feature built-in."
 	exit
 fi
 
