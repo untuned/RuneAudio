@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# $1-readonly name ; $2-readwrite name ; $3-password
+# $1-server name ; $2-readonly name ; $3-readwrite name ; $4-password
 
 alias=samb
 
