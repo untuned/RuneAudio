@@ -187,6 +187,8 @@ else
 
 	# set samba password
 	(echo $pwd1; echo $pwd1) | smbpasswd -s -a root
+	
+	redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
 
 	timestop
 	title -l = "$bar Samba upgraded successfully."
