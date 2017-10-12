@@ -83,7 +83,7 @@ chmod 777 $mnt/$readwrite
 systemctl daemon-reload
 systemctl restart nmbd smbd
 
-redis-cli hset addons samb 1 &> /dev/null # mark as expanded - disable webui button
+redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
 
 title -l '=' "$bar Samba upgraded successfully."
 
