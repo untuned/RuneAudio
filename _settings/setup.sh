@@ -165,35 +165,9 @@ wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x 
 wgetnc $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
 
-title -l = "$bar Upgrade Samba ..."
+# samba
 #################################################################################
-if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
-	title "$info Samba already upgraged."
-else
-	timestart
-	pacman -R --noconfirm samba4-rune
-	pacman -S --noconfirm ldb tdb tevent smbclient samba
-	# fix missing libreplace-samba4.so
-	pacman -S --noconfirm libwbclient
-
-	# fix 'minimum rlimit_max'
-	echo -n '
-	root    soft    nofile    16384
-	root    hard    nofile    16384
-	' >> /etc/security/limits.conf
-
-	wgetnc $gitpath/_settings/smb.conf -O /etc/samba/smb-dev.conf
-	ln -sf /etc/samba/smb-dev.conf /etc/samba/smb.conf
-
-	# set samba password
-	(echo $pwd1; echo $pwd1) | smbpasswd -s -a root
-	
-	redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
-
-	timestop
-	title -l = "$bar Samba upgraded successfully."
-fi
-echo
+wgetnc $gitpath/samba/install.sh; chmod +x install.sh; ./install.sh $pwd1
 
 # Transmission
 #################################################################################
