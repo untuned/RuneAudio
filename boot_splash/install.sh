@@ -4,13 +4,7 @@ alias=spla
 
 . /srv/http/addonstitle.sh
 
-if [[ $( redis-cli get release ) == '0.4b' ]]; then
-	addonslist=$( sed -n "/'$alias'/,/^),/p" /srv/http/addonslist.php )
-	version=$( getvalue version )
-	redis-cli hset addons spla $version &> /dev/null # mark as installed - disable button
-	title -l '=' "$info RuneAudio 0.4b has this feature built-in."
-	exit
-fi
+checkversion04 'RuneAudio 0.4b has this feature built-in.'
 
 installstart $1
 
