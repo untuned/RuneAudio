@@ -172,8 +172,8 @@ if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
 else
 	timestart
 	pacman -R --noconfirm samba4-rune
-	pacman -S --noconfirm tdb tevent smbclient samba
-	# fix missing libreplace-samba4.so (may need to run twice)
+	pacman -S --noconfirm ldb tdb tevent smbclient samba
+	# fix missing libreplace-samba4.so
 	pacman -S --noconfirm libwbclient
 
 	# fix 'minimum rlimit_max'
