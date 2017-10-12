@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# $1-server name ; $2-readonly name ; $3-readwrite name ; $4-password
+#  $1-password ; $2-server name ; $3-readonly name ; $4-readwrite name
 
 alias=samb
 
@@ -15,13 +15,6 @@ if ! mount | grep -q '/dev/sda1'; then
 	title "$info No USB drive found."
 	exit
 fi
-
-mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-usbroot=$( basename $mnt )
-[[ $1 == 0 ]] && server=RuneAudio || server=$1
-[[ $2 == 0 ]] && read=readonly || read=$2
-[[ $3 == 0 ]] && readwrite=readwrite || readwrite=$3
-[[ $4 == 0 ]] && pwd=rune || pwd=$4
 
 title -l '=' "$bar Upgrade Samba ..."
 timestart
@@ -52,8 +45,16 @@ echo $file
 wgetnc $gitpath/samba/smb-dev.conf -O $file
 ln -sf /etc/samba/smb{-dev,}.conf
 
+[[ $1 == 0 ]] && pwd=rune || pwd=$1
+if (( $# > 1 )); then
+	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+	usbroot=$( basename $mnt )
+	[[ $2 == 0 ]] && server=RuneAudio || server=$2
+	[[ $3 == 0 ]] && read=readonly || read=$3
+	[[ $4 == 0 ]] && readwrite=readwrite || readwrite=$4
+
 sed -i '/^\[global\]/ a\
-\t	netbios name = '"$server"'
+\tnetbios name = '"$server"'
 ' $file
 
 echo "
@@ -73,10 +74,11 @@ echo "
 	valid users = root
 " >> $file
 
-mkdir -p $mnt/$read
-mkdir -p $mnt/$readwrite
-chmod 755 $mnt/$read
-chmod 777 $mnt/$readwrite
+	mkdir -p $mnt/$read
+	mkdir -p $mnt/$readwrite
+	chmod 755 $mnt/$read
+	chmod 777 $mnt/$readwrite
+fi
 
 # set samba password
 (echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
@@ -88,6 +90,7 @@ redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
 
 title -l '=' "$bar Samba upgraded successfully."
 
+(( $# == 1 )) && exit
 l=10
 lr=${#read}
 lrw=${#readwrite}

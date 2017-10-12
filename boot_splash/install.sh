@@ -5,6 +5,7 @@ alias=spla
 . /srv/http/addonstitle.sh
 
 if [[ $( redis-cli get release ) == '0.4b' ]]; then
+	redis-cli hset addons spla 20171010 &> /dev/null # mark as installed - disable button
 	title -l '=' "$info RuneAudio 0.4b has this feature built-in."
 	exit
 fi
