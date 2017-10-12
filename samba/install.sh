@@ -7,6 +7,7 @@ alias=samb
 . /srv/http/addonstitle.sh
 
 if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
+	redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
 	title "$info Samba already upgraged."
 	exit
 fi
