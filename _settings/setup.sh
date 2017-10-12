@@ -158,6 +158,9 @@ if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist
 	./rankmirrors.sh
 fi
 
+# addons menu
+wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh
+
 # motd
 wgetnc $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
 touch /root/.hushlogin
