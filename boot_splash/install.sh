@@ -4,8 +4,6 @@ alias=spla
 
 . /srv/http/addonstitle.sh
 
-checkversion04 'RuneAudio 0.4b has this feature built-in.'
-
 installstart $1
 
 getuninstall
