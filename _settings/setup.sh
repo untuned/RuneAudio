@@ -78,12 +78,6 @@ fi
 [[ -e /mnt/MPD/USB/hdd && $( ls -1 /mnt/MPD/USB/hdd | wc -l ) == 0 ]] && rm -r /mnt/MPD/USB/hdd
 find /mnt/hdd/Music -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 ln -sf -t /mnt/MPD/USB
 
-echo -e "\n$bar Set pacman cache ...\n"
-#################################################################################
-mkdir -p $mnt/varcache/pacman
-rm -rf /var/cache/pacman
-ln -sf $mnt/varcache/pacman /var/cache/pacman
-
 echo -e "$bar OSMC pre-setup ..."
 #################################################################################
 mmc 7
@@ -146,6 +140,12 @@ sed -i -e '/m:0x0 + c:180/ s/^#//
 "/root/gpiooff.py"
 ' /root/.xbindkeysrc
 echo
+
+echo -e "\n$bar Set pacman cache ...\n"
+#################################################################################
+mkdir -p $mnt/varcache/pacman
+rm -rf /var/cache/pacman
+ln -sf $mnt/varcache/pacman /var/cache/pacman
 
 # rankmirrors
 #################################################################################
