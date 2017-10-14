@@ -15,7 +15,7 @@ gitpath=https://github.com/rern/RuneAudio/raw/master
 rankmirrors
 
 echo -e "$bar Aria2 package ..."
-pacman -Sy --noconfirm aria2 glibc
+pacman -S --noconfirm aria2 glibc
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
