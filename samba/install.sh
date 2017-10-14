@@ -19,16 +19,9 @@ fi
 title -l '=' "$bar Upgrade Samba ..."
 timestart
 
-gitpath=https://github.com/rern/RuneAudio/raw/master
-# fix packages download errors
-if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wgetnc $gitpath/rankmirrors/rankmirrors.sh
-	chmod +x rankmirrors.sh
-	./rankmirrors.sh
-fi
-pacman -Sy
-
 systemctl stop nmbd smbd
+
+rankmirrors
 
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm ldb tdb tevent smbclient samba
@@ -42,7 +35,7 @@ root    hard    nofile    16384
 
 file=/etc/samba/smb-dev.conf
 echo $file
-wgetnc $gitpath/samba/smb-dev.conf -O $file
+wgetnc https://github.com/rern/RuneAudio/raw/master/samba/smb-dev.conf -O $file
 ln -sf /etc/samba/smb{-dev,}.conf
 
 [[ $1 == 0 ]] && pwd=rune || pwd=$1
