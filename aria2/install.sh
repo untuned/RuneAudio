@@ -12,11 +12,7 @@ getuninstall
 
 gitpath=https://github.com/rern/RuneAudio/raw/master
 
-if  grep -q '^Server = http://mirror.archlinuxarm.org/' /etc/pacman.d/mirrorlist; then
-	wgetnc $gitpath/rankmirrors/rankmirrors.sh
-	chmod +x rankmirrors.sh
-	./rankmirrors.sh
-fi
+rankmirrors
 
 echo -e "$bar Aria2 package ..."
 pacman -Sy --noconfirm aria2 glibc
