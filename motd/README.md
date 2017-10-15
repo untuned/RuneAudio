@@ -1,5 +1,6 @@
 motd
 ---
+_Tested on RuneAudio 0.3 and 0.4b_
 
 Message of the day - RuneAudio Logo and dimmed command prompt  
 For SSH terminal login screen  
