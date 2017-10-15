@@ -1,5 +1,6 @@
 Webradio import
 ---
+_Tested on RuneAudio 0.3 and 0.4b_
 
 Webradio needs files and database data together to make hte list.
 
