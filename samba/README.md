@@ -1,6 +1,6 @@
 Samba Upgrade
 ---
-_Tested on RuneAudio 0.3 and 0.4b - samba_
+_Tested on RuneAudio 0.3 and 0.4b_
 
 **Upgrage**  
 - RuneAudio already installed `samba4-rune` (samba 4.3.4)  
