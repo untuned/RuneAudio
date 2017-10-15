@@ -1,4 +1,4 @@
-Boot Splash
+Boot Logo
 ---
 _Tested on RuneAudio 0.3_
 
