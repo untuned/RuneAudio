@@ -1,5 +1,6 @@
 Backup-Restore update
 ---
+_Tested on RuneAudio 0.3 and 0.4b_
 
 **Issues**  
 - RuneAudio 'Backup' works but should save database before backup
