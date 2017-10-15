@@ -10,14 +10,6 @@ _Tested on RuneAudio 0.3 and 0.4b - samba_
 **Install**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
 
-**Server name**  
-- any os file browsers:
-```
-hostnamectl set-hostname [name]
-```
-- only Windows(NetBIOS) file browsers:  
-`netbios name` in `/etc/samba-dev/smb.conf`  
-
 **Test conf parameters**
 ```
 testparm
@@ -37,5 +29,5 @@ adduser [user] # create new system user if not exist
 smbpasswd -a [user]
 ```
 
-**List accessing**  
+**List currently accessing hosts**  
 `smbstatus`  
