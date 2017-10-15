@@ -1,6 +1,6 @@
 rankmirrors.sh
 ---
-_for ArchLinuxArm and RuneAudio_  
+_for ArchLinuxArm and tested on RuneAudio 0.3 and 0.4b_  
   
 Fix packages download errors:  
 - enable(uncomment) all mirror servers
