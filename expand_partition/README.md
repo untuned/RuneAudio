@@ -1,7 +1,7 @@
 Expand Partition
 ---
 
-_Tested on RuneAudio RPi3_  
+_Tested on RuneAudio 0.3 and 0.4b_  
 
 - **RuneAudio** install to 2GB partition by default.  
 - This left the rest of the SD card not available for use.  
