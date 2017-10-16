@@ -94,11 +94,9 @@ systemctl stop redis
 file=/var/lib/redis/rune.rdb
 wgetnc $gitpath/_settings/rune.rdb -O $file
 systemctl start redis
-restartredis() {
-	sleep 1
-	systemctl start redis
-}
-systemctl status redis | grep -q 'dead' && restartredis
+
+sleep 2
+systemctl status redis | grep -q 'dead' && systemctl start redis
 
 # create webradio files
 i=1
