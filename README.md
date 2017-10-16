@@ -14,7 +14,9 @@ This is just an example of setup script.
 - set `fstab` mount USB drive to `/mnt/hdd` (+ OSMC root partition)
 - restore settings
 - set package cache to usb to avoid slow download on os reinstall
-- upgrage and customize **Samba** to improve speed
+- install **Addons Menu**
+- install **Login Logo**
+- upgrage **Samba**
 - install **Transmission**
 - install **Aria2**
 - install **RuneUI Enhancement**
