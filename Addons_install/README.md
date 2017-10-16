@@ -2,7 +2,7 @@ Install Addons Menu with PuTTY
 ---
 
 - download [**PuTTY**](https://the.earth.li/~sgtatham/putty/latest/w32/putty.exe) `<< click`
-- start PuTTY by double click `putty.exe`
+- start **PuTTY** by double click `putty.exe`
 ---
 ![putty_config](https://github.com/rern/RuneAudio/blob/master/Addons_install/putty_config.png)  
 `192.168.1.22` **must be changed** to your RuneAudio's **Menu** > **Network** > ETH0 or WLAN0 [IP address]
@@ -20,7 +20,7 @@ Install Addons Menu with PuTTY
     - press `Enter` ( password will not show and cursor will not move )
 - `3` **root@runeaudio:~ #** `wget -qN --show-progress https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh`
     - press `Enter`
-	- `copy` the code, from `wget ...` to `... ./install.sh` > `right-click` in **PuTTY** = paste
+	- ( `copy` the code, from `wget ...` to `... ./install.sh` > `right-click` in **PuTTY** = paste )
 
 <hr>
 
