@@ -4,7 +4,7 @@ alias=webr
 
 . /srv/http/addonstitle.sh
 
-uninstallstart $1
+uninstallstart $@
 
 file=/srv/http/assets/js/runeui.js
 echo $file
@@ -19,4 +19,4 @@ sed -i -e 's|/\*webr0||
 ' -e 's|/\*webr0\*/.*/\*webr1\*/||
 ' $file
 
-uninstallfinish $1
+uninstallfinish $@
