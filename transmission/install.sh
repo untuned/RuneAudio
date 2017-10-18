@@ -8,7 +8,7 @@ alias=tran
 
 . /srv/http/addonstitle.sh
 
-installstart $1
+installstart $@
 
 getuninstall
 
@@ -98,7 +98,7 @@ if ! systemctl start trans &> /dev/null; then
 	exit
 fi
 
-installfinish $1
+installfinish $@
 
 echo "Run: systemctl < start / stop > trans"
 echo "Startup: systemctl < enable / disable > trans"
