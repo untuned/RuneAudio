@@ -4,7 +4,7 @@ alias=aria
 
 . /srv/http/addonstitle.sh
 
-uninstallstart $1
+uninstallstart $@
 
 # if update, save settings #######################################
 if [[ $1 == u ]] && [[ $( systemctl list-unit-files | grep 'aria.*enable' ) ]]; then
@@ -39,4 +39,4 @@ echo -e "$bar Remove files ..."
 rm -r $mnt/aria2/web	
 rm -rv /root/.config/aria2 /srv/http/aria2
 
-uninstallfinish $1
+uninstallfinish $@
