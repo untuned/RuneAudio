@@ -4,7 +4,7 @@ alias=tran
 
 . /srv/http/addonstitle.sh
 
-uninstallstart $1
+uninstallstart $@
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
@@ -30,4 +30,4 @@ rm -rv /etc/systemd/system/transmission.service.d
 rm -v /lib/systemd/system/trans.service
 rm -r $path/web
 
-uninstallfinish $1
+uninstallfinish $@
