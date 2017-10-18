@@ -6,7 +6,7 @@ alias=font
 
 . /srv/http/addonstitle.sh
 
-installstart $1
+installstart $@
 
 getuninstall
 
@@ -16,6 +16,6 @@ mkdir /srv/http/assets/fonts/lato
 bsdtar -xvf lato.tar.xz -C /srv/http/assets/fonts/lato
 rm lato.tar.xz
 
-installfinish $1
+installfinish $@
 
 clearcache
