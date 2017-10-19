@@ -8,7 +8,7 @@ installstart $@
 
 getuninstall
 
-gitpath=https://github.com/rern/RuneAudio/raw/master/boot_splash
+gitpath=https://github.com/rern/RuneAudio/raw/$branch/boot_splash
 
 sed -i -e '/^\s*$/ d
 ' -e '1 s/$/ logo.nologo/
