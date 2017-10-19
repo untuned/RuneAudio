@@ -10,10 +10,6 @@ alias=tran
 
 installstart $@
 
-echo $1
-echo $2
-echo $3
-
 getuninstall
 
 gitpath=https://github.com/rern/RuneAudio/raw/$branch/transmission
