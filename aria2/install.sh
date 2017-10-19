@@ -10,7 +10,7 @@ installstart $@
 
 getuninstall
 
-gitpath=https://github.com/rern/RuneAudio/raw/master
+gitpath=https://github.com/rern/RuneAudio/raw/$branch
 
 rankmirrors
 
