@@ -12,7 +12,7 @@ installstart $@
 
 getuninstall
 
-gitpath=https://github.com/rern/RuneAudio/raw/master/transmission
+gitpath=https://github.com/rern/RuneAudio/raw/$branch/transmission
 wgetnc $gitpath/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
