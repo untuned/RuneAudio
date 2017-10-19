@@ -76,6 +76,7 @@ fi
 
 # web ui alternative
 if [[ $2 == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
+	echo -e "$bar Get Web IU alternative ..."
 	wgetnc https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
