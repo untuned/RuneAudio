@@ -31,9 +31,7 @@ i\
                 <i id="db-up" class="fa fa-arrow-left"></i>\
             </div>
 }
-' -e '/id="db-currentpath"/ {
-s/^/<!--brea
-N;N; s/$/brea-->/
+' -e '/db-currentpath/ {N;N; s/^/<!--brea/; s/$/brea-->/}
 }
 ' $file
 
