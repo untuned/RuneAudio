@@ -21,8 +21,7 @@ echo '<script src="<?=$this->asset('"'"'/js/breadcrumb.js'"'"')?>"></script>' >>
 
 file=/srv/http/app/templates/playback.php
 echo $file
-sed -i -e '/id="db-currentpath/,/<\/div>/ s/^/<!--enh/; s/$/-->/
-' -e '/id="db-level-up"/ {
+sed -i -e '/id="db-level-up"/ {
 s/^/<!--brea/
 s/$/brea-->/
 i\
@@ -31,7 +30,7 @@ i\
                 <i id="db-up" class="fa fa-arrow-left"></i>\
             </div>
 }
-' -e '/db-currentpath/ {N;N; s/^/<!--brea/; s/$/brea-->/}
+' -e '/id="db-currentpath"/ {N;N; s/^/<!--brea/; s/$/brea-->/}
 }
 ' $file
 
