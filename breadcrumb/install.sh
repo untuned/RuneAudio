@@ -31,7 +31,6 @@ i\
             </div>
 }
 ' -e '/id="db-currentpath"/ {N;N; s/^/<!--brea/; s/$/brea-->/}
-}
 ' $file
 
 installfinish $@
