@@ -8,11 +8,11 @@ alias=tran
 
 . /srv/http/addonstitle.sh
 
-installstart $1
+installstart $@
 
 getuninstall
 
-gitpath=https://github.com/rern/RuneAudio/raw/master/transmission
+gitpath=https://github.com/rern/RuneAudio/raw/$branch/transmission
 wgetnc $gitpath/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
@@ -76,6 +76,7 @@ fi
 
 # web ui alternative
 if [[ $2 == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
+	echo -e "$bar Get WebUI alternative ..."
 	wgetnc https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
@@ -98,7 +99,7 @@ if ! systemctl start trans &> /dev/null; then
 	exit
 fi
 
-installfinish $1
+installfinish $@
 
 echo "Run: systemctl < start / stop > trans"
 echo "Startup: systemctl < enable / disable > trans"

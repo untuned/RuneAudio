@@ -4,7 +4,7 @@ alias=motd
 
 . /srv/http/addonstitle.sh
 
-uninstallstart $1
+uninstallstart $@
 
 echo -e "$bar Restore files ..."
 
@@ -17,6 +17,6 @@ sed -i -e '/^color=/, /^PS1=\x27/ d
 ' -e '/^#PS1=/ s/^#//
 ' $file
 
-uninstallfinish $1
+uninstallfinish $@
 
 [[ $1 != u ]] && title -nt "$info Relogin to see original motd."

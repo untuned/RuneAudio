@@ -6,16 +6,16 @@ alias=font
 
 . /srv/http/addonstitle.sh
 
-installstart $1
+installstart $@
 
 getuninstall
 
-wgetnc https://github.com/rern/_assets/raw/master/RuneUI_enhancement/lato.tar.xz
+wgetnc https://github.com/rern/_assets/raw/$branch/RuneUI_enhancement/lato.tar.xz
 mv /srv/http/assets/fonts/lato{,.backup}
 mkdir /srv/http/assets/fonts/lato
 bsdtar -xvf lato.tar.xz -C /srv/http/assets/fonts/lato
 rm lato.tar.xz
 
-installfinish $1
+installfinish $@
 
 clearcache

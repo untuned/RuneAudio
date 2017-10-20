@@ -6,7 +6,7 @@ alias=back
 
 . /srv/http/addonstitle.sh
 
-installstart $1
+installstart $@
 
 getuninstall
 
@@ -117,7 +117,7 @@ echo 'http ALL=NOPASSWD: ALL' > $file
 chmod 755 /srv/http/restore.* /srv/http/tmp
 chown http:http /srv/http/restore.* /srv/http/tmp
 
-installfinish $1
+installfinish $@
 
 title -nt "Please wait 5 seconds before continue."
 

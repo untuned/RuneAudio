@@ -4,9 +4,9 @@ alias=font
 
 . /srv/http/addonstitle.sh
 
-uninstallstart $1
+uninstallstart $@
 
 rm -rv /srv/http/assets/fonts/lato
 mv -v /srv/http/assets/fonts/lato{.backup,}
 
-uninstallfinish $1
+uninstallfinish $@

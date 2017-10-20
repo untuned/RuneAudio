@@ -4,7 +4,7 @@ alias=back
 
 . /srv/http/addonstitle.sh
 
-uninstallstart $1
+uninstallstart $@
 
 echo -e "$bar Restore files ..."
 file=/srv/http/app/libs/runeaudio.php
@@ -31,7 +31,7 @@ sed -i 's/\$("#restore").\+});//' $file
 rm -v /srv/http/restore.* /etc/sudoers.d/http-backup
 rm -rv /srv/http/tmp
 
-uninstallfinish $1
+uninstallfinish $@
 
 title -nt "Please wait 5 seconds before continue."
 

@@ -6,11 +6,11 @@ alias=aria
 
 . /srv/http/addonstitle.sh
 
-installstart $1
+installstart $@
 
 getuninstall
 
-gitpath=https://github.com/rern/RuneAudio/raw/master
+gitpath=https://github.com/rern/RuneAudio/raw/$branch
 
 rankmirrors
 
@@ -87,7 +87,7 @@ if ! systemctl start aria2 &> /dev/null; then
 	exit
 fi
 
-installfinish $1
+installfinish $@
 
 echo "Run: systemctl < start / stop > aria2"
 echo "Startup: systemctl < enable / disable > aria2"

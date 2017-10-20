@@ -6,7 +6,7 @@ alias=motd
 
 . /srv/http/addonstitle.sh
 
-installstart $1
+installstart $@
 
 getuninstall
 
@@ -68,6 +68,6 @@ PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
 # \w         - current directory
 # \$         - promt symbol: <$> users; <#> root
 
-installfinish $1
+installfinish $@
 
 title -nt "$info Relogin to see new $title."
