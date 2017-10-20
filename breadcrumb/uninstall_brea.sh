@@ -12,7 +12,7 @@ rm /srv/http/assets/js/breadcrumb.js
 echo -e "$bar Restore files ..."
 file=/srv/http/app/templates/footer.php
 echo $file
-sed '/breadcrumb.js/ d' $file
+sed -i '/breadcrumb.js/ d' $file
 
 file=/srv/http/app/templates/playback.php
 echo $file
