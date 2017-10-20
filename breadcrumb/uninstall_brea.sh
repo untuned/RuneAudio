@@ -16,8 +16,8 @@ sed -i '/breadcrumb.js/ d' $file
 
 file=/srv/http/app/templates/playback.php
 echo $file
-sed -i -e '/id="db-level-up"/ {s/^<!--enh//; s/enh-->$//}
-' -e '/id="db-currentpath"/, /<\/div>/ d
+sed -i -e '/id="db-currentpath"/, /<\/div>/ d
+' -e 's/<!--brea\|brea-->//g
 ' $file
 
 uninstallfinish $@
