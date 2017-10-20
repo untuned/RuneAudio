@@ -16,9 +16,7 @@ sed '/breadcrumb.js/ d' $file
 
 file=/srv/http/app/templates/playback.php
 echo $file
-sed -i -e '/id="db-level-up"/ {
-s/^<!--enh//
-s/enh-->$//
+sed -i -e '/id="db-level-up"/ {s/^<!--enh//; s/enh-->$//}
 ' -e '/id="db-currentpath"/, /<\/div>/ d
 ' $file
 
