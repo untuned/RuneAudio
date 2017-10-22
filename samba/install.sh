@@ -81,7 +81,7 @@ systemctl restart nmbd smbd
 
 redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
 
-timefinish
+timestop
 title -l '=' "$bar Samba upgraded successfully."
 
 (( $# == 1 )) && exit
