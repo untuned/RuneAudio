@@ -43,5 +43,7 @@ rm ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
 systemctl daemon-reload
 systemctl restart mpd
 
+redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
+
 timefinish
 title -l '=' "$bar MPD upgraded successfully."
