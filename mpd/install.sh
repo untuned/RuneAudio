@@ -45,5 +45,5 @@ systemctl restart mpd
 
 redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 
-timefinish
+timestop
 title -l '=' "$bar MPD upgraded successfully."
