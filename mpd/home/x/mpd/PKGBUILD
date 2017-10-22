@@ -18,8 +18,8 @@ depends=('libao' 'ffmpeg' 'libmodplug' 'audiofile' 'libshout' 'libmad' 'curl' 'f
          'libgme' 'zziplib')
 makedepends=('boost' 'doxygen')
 validpgpkeys=('0392335A78083894A4301C43236E8A58C6DB4512')
-source=('mpd-0.20.11.tar.xz'
-#source=("https://www.musicpd.org/download/${pkgname}/${pkgver%.*}/${pkgname}-${pkgver}.tar.xz"{,.sig}
+#source=("https://www.musicpd.org/download/${pkgname}/${pkgver}/${pkgname}-${pkgver}.tar.xz"{,.sig}
+source=("https://www.musicpd.org/download/${pkgname}/${pkgver%.*}/${pkgname}-${pkgver}.tar.xz"{,.sig}
         'tmpfiles.d'
         'conf')
 sha256sums=('e9227d9daf32a63d6f34bf2ea18b3179b4a383e9d2b49d548702a37451e514bc'
