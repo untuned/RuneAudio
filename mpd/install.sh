@@ -23,7 +23,7 @@ pacman -R --noconfirm ashuffle-rune mpd-rune ffmpeg-rune
 
 rankmirrors
 
-echo -e "bar Install packaes ..."
+echo -e "$bar Install packages ..."
 # fix libreadline error
 pacman -S --noconfirm readline
 ln -s /lib/libreadline.so.7.0 /lib/libreadline.so.6
@@ -33,6 +33,7 @@ pacman -S --noconfirm alsa-lib audiofile avahi boost bzip2 curl dbus doxygen exp
 pacman -S --noconfirm libao libcdio-paranoia libgme libid3tag libmad libmms libmodplug libmpdclient libnfs libogg libsamplerate libshout libsndfile libsoxr libupnp libutil-linux libvorbis libwebp
 pacman -S --noconfirm mp3unicode mpg123 smbclient sqlite tdb tevent wavpack yajl zlib zziplib
 
+echo -e "$bar Install MPD ..."
 pacman -S --noconfirm mpd
 cp /etc/mpd.conf{.pacorig,}
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
