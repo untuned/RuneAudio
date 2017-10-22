@@ -18,8 +18,8 @@ depends=('libao' 'ffmpeg' 'libmodplug' 'audiofile' 'libshout' 'libmad' 'curl' 'f
          'libgme' 'zziplib')
 makedepends=('boost' 'doxygen')
 validpgpkeys=('0392335A78083894A4301C43236E8A58C6DB4512')
-#source=("https://www.musicpd.org/download/${pkgname}/${pkgver}/${pkgname}-${pkgver}.tar.xz"{,.sig}
-source=("https://www.musicpd.org/download/${pkgname}/${pkgver%.*}/${pkgname}-${pkgver}.tar.xz"{,.sig}
+source=('mpd-0.20.11.tar.xz'
+#source=("https://www.musicpd.org/download/${pkgname}/${pkgver%.*}/${pkgname}-${pkgver}.tar.xz"{,.sig}
         'tmpfiles.d'
         'conf')
 sha256sums=('e9227d9daf32a63d6f34bf2ea18b3179b4a383e9d2b49d548702a37451e514bc'
@@ -36,14 +36,31 @@ build() {
 		--prefix=/usr \
 		--sysconfdir=/etc \
 		--enable-cdio-paranoia \
-		--enable-iso9660 \
 		--enable-jack \
 		--enable-libmpdclient \
 		--enable-pipe-output \
 		--enable-pulse \
 		--enable-soundcloud \
 		--enable-zzip \
+		--enable-soxr \
+		--enable-ffmpeg \
 		--disable-sidplay \
+		--disable-ao \
+		--disable-bzip2 \
+		--disable-fluidsynth \
+		--disable-gme \
+		--disable-ipv6 \
+		--disable-iso9660 \
+		--disable-modplug \
+		--disable-mpg123 \
+		--disable-opus \
+		--disable-oss \
+		--disable-pulse \
+		--disable-recorder-output \
+		--disable-shout \
+		--disable-wildmidi \
+		--disable-zzip \
+		--with-zeroconf=avahi \
 		--with-systemduserunitdir=/usr/lib/systemd/user \
 		--with-systemdsystemunitdir=/usr/lib/systemd/system \
 
