@@ -6,8 +6,11 @@ Native compiled mpd
 - mpd: `PKGBUILD` `conf` `install` `tmpfiles.d`
 ```sh
 wget -qN https://github.com/rern/RuneAudio/raw/master/mpd/files.tar.xz
-bsdtar -xvf files.tar -C /
-rm files.tar
+rm -rf /tmp/mpd
+mkdir -p /tmp/mpd
+bsdtar -xvf files.tar -C /tmp/mpd
+cp -rfv /tmp/mpd/* /
+rm -rf files.tar.xz /tmp/mpd
 ```
 
 **remove conflict packages**  
