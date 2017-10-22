@@ -1,0 +1,10 @@
+[Unit]
+Description=Automatic shuffle for MPD.
+After=mpd.service
+
+[Service]
+ExecStart=/usr/bin/ashuffle
+ExecReload=/bin/kill -HUP $(pidof ashuffle)
+
+[Install]
+WantedBy=multi-user.target
