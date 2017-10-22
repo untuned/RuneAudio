@@ -9,7 +9,8 @@ wget -qN https://github.com/rern/RuneAudio/raw/master/mpd/files.tar.xz
 rm -rf /tmp/mpd
 mkdir -p /tmp/mpd
 bsdtar -xvf files.tar.xz -C /tmp/mpd
-cp -rfv /tmp/mpd/* /
+chown -R root:root /tmp/mpd
+cp -rf /tmp/mpd/* /
 rm -rf files.tar.xz /tmp/mpd
 ```
 
