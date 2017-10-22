@@ -1,10 +1,6 @@
 Native compiled mpd
 ---
 
-**edit `/etc/makepkg.conf`**
-- `MAKEFLAGS="-j5"` - cpu cores + 1
-- `BUILDDIR=/mnt/MPD/USB/hdd/makepkg` - move to faster drive
-
 **copy files**  
 - fix missing `lib...`s: `libcrypto.so.1.1` `libssl.so.1.1`
 - mpd build files: `PKGBUILD` `conf` `install` `tmpfiles.d`
@@ -40,6 +36,11 @@ pacman -S mp3unicode mpg123 smbclient sqlite tdb tevent wavpack yajl zlib zzipli
 
 **pre-compile**
 ```sh
+# cpu cores + 1 and put temp file to faster drive
+sed -i -e 's/#AKEFLAGS="-j2"/MAKEFLAGS="-j5"/
+' -e 's|#BUILDDIR=.*|BUILDDIR=/mnt/MPD/USB/hdd/makepkg|
+' /etc/makepkg.conf
+
 useradd x
 chown -R x:x /home/x
 cd /home/x/mpd
