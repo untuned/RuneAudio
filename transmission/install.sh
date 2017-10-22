@@ -23,7 +23,7 @@ rm -rf files.tar.xz /tmp/install
 
 rankmirrors
 
-pacman -S --noconfirm transmission-cli
+pacman -S --noconfirm libevent transmission-cli
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
