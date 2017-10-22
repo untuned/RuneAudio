@@ -19,23 +19,22 @@ wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P
 chown root:root /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
 
 echo -e "$bar Remove conflict packages ..."
-pacman -R ashuffle-rune mpd-rune ffmpeg-rune
+pacman -R --noconfirm ashuffle-rune mpd-rune ffmpeg-rune
 
 rankmirrors
 
 echo -e "bar Install packaes ..."
 # fix libreadline error
-pacman -S readline
+pacman -S --noconfirm readline
 ln -s /lib/libreadline.so.7.0 /lib/libreadline.so.6
 
-pacman -S base-devel
-pacman -S alsa-lib audiofile avahi boost bzip2 curl dbus doxygen expat faad2 ffmpeg flac guile icu jack lame ldb 
-pacman -S libao libcdio-paranoia libgme libid3tag libmad libmms libmodplug libmpdclient libnfs libogg libsamplerate libshout libsndfile libsoxr libupnp libutil-linux libvorbis libwebp
-pacman -S mp3unicode mpg123 smbclient sqlite tdb tevent wavpack yajl zlib zziplib
+pacman -S --noconfirm base-devel
+pacman -S --noconfirm alsa-lib audiofile avahi boost bzip2 curl dbus doxygen expat faad2 ffmpeg flac guile icu jack lame ldb 
+pacman -S --noconfirm libao libcdio-paranoia libgme libid3tag libmad libmms libmodplug libmpdclient libnfs libogg libsamplerate libshout libsndfile libsoxr libupnp libutil-linux libvorbis libwebp
+pacman -S --noconfirm mp3unicode mpg123 smbclient sqlite tdb tevent wavpack yajl zlib zziplib
 
-mv /etc/mpd.conf{,.backup}
-pacman -S mpd
-mv /etc/mpd.conf{.backup,}
+pacman -S --noconfirm mpd
+cp /etc/mpd.conf{.pacorig,}
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
 pacman -U ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
 rm ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
