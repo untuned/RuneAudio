@@ -1,11 +1,11 @@
 Native compiled Transmission
 --- 
-Normal `pacman -S transmission-cli` failed to start, error: `libcrypto.so.1.1`, `libssl.so.1.1`  
+`pacman -S transmission-cli` > failed to start - error: `libcrypto.so.1.1`, `libssl.so.1.1`  
 RuneAudio has trouble with system wide upgrade.  
-  
 
 ```sh
-pacman -Sy base-devel
+pacman -Sy
+pacman -S base-devel
 useradd -m x
 su x
 cd
@@ -20,7 +20,13 @@ mkdir intltool
   * `gtk` `qt` - no need  
   * `patch` - skip `libssl-1.1.0` ( fix: `libcrypto.so.1.1`, `libssl.so.1.1` )  
 
-**Fix errors:**  
+## Fix errors:  
+
+**`libmount`**  
+`pacman -Sy base-devel` > failed to boot - error: `libmount.so.1
+```sh
+pacman -S libutil-linux
+``` 
 
 **`intltool`**  
 (normal `pacman -S intltool` not recognize newer version)  
