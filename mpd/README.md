@@ -1,6 +1,10 @@
 Native compiled mpd
 ---
 
+**edit `/etc/makepkg.conf`**
+- `MAKEFLAGS="-j5"` - cpu cores + 1
+- `BUILDDIR=/mnt/MPD/USB/hdd/makepkg` - move to faster drive
+
 **copy files**  
 - fix missing `lib...`s: `libcrypto.so.1.1` `libssl.so.1.1`
 - mpd build files: `PKGBUILD` `conf` `install` `tmpfiles.d`
@@ -31,7 +35,7 @@ ln -s /lib/libreadline.so.7.0 /lib/libreadline.so.6
 pacman -S base-devel
 pacman -S alsa-lib audiofile avahi boost curl dbus doxygen expat faad2 ffmpeg flac guile icu jack lame ldb 
 pacman -S libao libcdio-paranoia libgme libid3tag libmad libmms libmodplug libmpdclient libnfs libogg libsamplerate libshout libsndfile libsoxr libupnp libutil-linux libvorbis libwebp
-pacman -S mp3unicode smbclient sqlite tdb tevent wavpack yajl zlib zziplib
+pacman -S mp3unicode mpg123 smbclient sqlite tdb tevent wavpack yajl zlib zziplib
 ```
 
 **pre-compile**
