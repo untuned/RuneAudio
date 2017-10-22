@@ -15,7 +15,7 @@ rm -rf files.tar.xz /tmp/install
 
 **remove conflict packages**  
 ```sh
-pacman -R ashuffle-rune mpd-rune ffmpeg-rune`
+pacman -R ashuffle-rune mpd-rune ffmpeg-rune
 ```
 
 **fix libreadline error** 
