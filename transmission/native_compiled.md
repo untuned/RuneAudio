@@ -23,7 +23,7 @@ mkdir intltool
 ## Fix errors:  
 
 **`libmount`**  
-`pacman -Sy base-devel` > failed to boot - error: `libmount.so.1
+`pacman -Sy base-devel` > failed to boot - error: `libmount.so.1`
 ```sh
 pacman -S libutil-linux
 ``` 
