@@ -2,8 +2,8 @@ Native compiled mpd
 ---
 
 **copy files**  
-- missing lib: `libcrypto.so.1.1` `libssl.so.1.1`  
-- mpd: `PKGBUILD` `conf` `install` `tmpfiles.d`
+- fix missing `lib...`s: `libcrypto.so.1.1` `libssl.so.1.1` `libmount.so.1.1.0` 
+- mpd build files: `PKGBUILD` `conf` `install` `tmpfiles.d`
 ```sh
 wget -qN https://github.com/rern/RuneAudio/raw/master/mpd/files.tar.xz
 rm -rf /tmp/install
@@ -18,7 +18,7 @@ rm -rf files.tar.xz /tmp/install
 pacman -R ashuffle-rune mpd-rune ffmpeg-rune
 ```
 
-**fix libreadline error**  
+**fix `libreadline.so.6` error**  
 [`rankmirrors.sh`](https://github.com/rern/RuneAudio/tree/master/rankmirrors) fixes download errors.
 ```sh
 pacman -Sy
