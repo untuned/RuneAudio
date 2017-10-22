@@ -30,7 +30,7 @@ ln -s /lib/libreadline.so.7.0 /lib/libreadline.so.6
 ```sh
 pacman -S base-devel
 pacman -S alsa-lib audiofile avahi boost curl dbus doxygen expat faad2 ffmpeg flac guile icu jack lame ldb 
-pacman -S libao libcdio-paranoia libgme libid3tag libmad libmms libmodplug libmpdclient libnfs libogg libsamplerate libshout libsndfile libsoxr libupnp libvorbis libwebp
+pacman -S libao libcdio-paranoia libgme libid3tag libmad libmms libmodplug libmpdclient libnfs libogg libsamplerate libshout libsndfile libsoxr libupnp libutil-linux libvorbis libwebp
 pacman -S mp3unicode smbclient sqlite tdb tevent wavpack yajl zlib zziplib
 ```
 
