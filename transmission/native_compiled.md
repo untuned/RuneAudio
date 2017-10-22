@@ -50,7 +50,16 @@ ln -s /lib/libreadline.so.7.0 /lib/libreadline.so.6
 # for xbindkeys
 ln -s libguile-2.2.so.1.2.0 libguile-2.0.so.22
 ```
-  * compile `initltool`
+
+**pre-compile**
+```sh
+# cpu cores + 1 and put temp file to faster drive
+sed -i -e 's/#AKEFLAGS="-j2"/MAKEFLAGS="-j5"/
+' -e 's|#BUILDDIR=.*|BUILDDIR=/mnt/MPD/USB/hdd/makepkg|
+' /etc/makepkg.conf
+```
+
+**compile `initltool`**
 ```sh
 su x
 cd /home/x/intltool
@@ -60,7 +69,6 @@ pacman -U /home/x/intltool/intltool-0.51.0-2-any.pkg.tar.xz
 ```
 
 **Compile:**  
-On multicore CPU RPi3, edit `/etc/makepkg.conf` > `MAKEFLAGS="-j4"`
 ```sh
 su x
 cd /home/x/transmission
