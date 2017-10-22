@@ -14,8 +14,8 @@ title -l '=' "$bar Upgrade MPD ..."
 timestart
 
 echo -e "$bar Get files ..."
-wget -qN https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
-wget -qN https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
+wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
+wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
 chown root:root /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
 
 echo -e "$bar Remove conflict packages ..."
@@ -36,6 +36,10 @@ pacman -S mp3unicode mpg123 smbclient sqlite tdb tevent wavpack yajl zlib zzipli
 mv /etc/mpd.conf{,.backup}
 pacman -S mpd
 mv /etc/mpd.conf{.backup,}
+wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
+pacman -U ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
+rm ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
+
 systemctl daemon-reload
 systemctl restart mpd
 
