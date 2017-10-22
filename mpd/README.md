@@ -45,4 +45,7 @@ su x
 **compile**
 ```sh
 makepkg
+
+su
+pacman -U /home/x/mpd/mpd-0.20.11-1-armv7h.pkg.tar.xz
 ```
