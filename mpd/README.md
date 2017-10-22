@@ -24,7 +24,10 @@ ln -s /lib/libreadline.so.7.0 /lib/libreadline.so.6
 
 **install packages**
 ```sh
-pacman -S base-devel boost guile libsamplerate libsoxr sqlite avahi dbus mp3unicode icu ffmpeg smbclient libid3tag curl alsa-lib libnfs libmms zlib flac yajl expat libmad wavpack libogg faad2 libvorbis audiofile libsndfile libupnp libmpdclient lame libwebp tdb tevent ldb jack libao libmodplug libshout libcdio-paranoia libgme zziplib doxygen
+pacman -S base-devel
+pacman -S alsa-lib audiofile avahi boost curl dbus doxygen expat faad2 ffmpeg flac guile icu jack lame ldb 
+pacman -S libao libcdio-paranoia libgme libid3tag libmad libmms libmodplug libmpdclient libnfs libogg libsamplerate libshout libsndfile libsoxr libupnp libvorbis libwebp
+pacman -S mp3unicode smbclient sqlite tdb tevent wavpack yajl zlib zziplib
 ```
 
 **pre-compile**
