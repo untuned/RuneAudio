@@ -5,7 +5,7 @@ Native compiled mpd
 - missing lib: `libcrypto.so.1.1` `libssl.so.1.1`  
 - mpd: `PKGBUILD` `conf` `install` `tmpfiles.d`
 ```sh
-wget -qN https://gtihub.com/rern/RuneAudio/mpd/files.tar -P /home/x
+wget -qN https://gtihub.com/rern/RuneAudio/mpd/files.tar.xz
 bsdtar -xvf files.tar -C /
 rm files.tar
 ```
@@ -29,14 +29,13 @@ pacman -S base-devel boost guile libsamplerate libsoxr sqlite avahi dbus mp3unic
 
 **pre-compile**
 ```sh
-useradd -m x
-mkdir /home/x/mpd
-chown -R x:x x
+useradd x
+chown -R x:x /home/x
 cd /home/x/mpd
 su x
 ```
 
 **compile**
 ```sh
-makepkg -A --skipinteg
+makepkg
 ```
