@@ -10,7 +10,7 @@ rm -rf /tmp/mpd
 mkdir -p /tmp/mpd
 bsdtar -xvf files.tar.xz -C /tmp/mpd
 chown -R root:root /tmp/mpd
-cp -rf /tmp/mpd/* /
+cp /tmp/mpd/* /
 rm -rf files.tar.xz /tmp/mpd
 ```
 
