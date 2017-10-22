@@ -34,11 +34,11 @@ pacman -S libutil-linux
   * search `intltool`  
   * `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/any/intltool/files) to `/home/x/intltool/` (with last empty line without whitespace)  
 
-**`libcrypto`, `libssl`**  
+**`libcrypto` `libssl`**  
 (upgraged `pacman`, by `base-devel`, needs newer version)
-  * [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
-  * search `openssl` - `armv7h`
-  * [`Download`](https://archlinuxarm.org/packages/armv7h/openssl) > extract > copy `libcrypto.so.1.1`, `libssl.so.1.1` to `/lib/`
+  - [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
+  - search `openssl` - `armv7h`
+  - [`Download`](https://archlinuxarm.org/packages/armv7h/openssl) > extract > copy `libcrypto.so.1.1`, `libssl.so.1.1` to `/lib/`
   
 **`libreadline`, `libguile`**  
 (`makepkg intltool` needs newer version)
