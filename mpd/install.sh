@@ -17,6 +17,9 @@ echo -e "$bar Get files ..."
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
 chown root:root /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
+chmod 755 /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
+
+cp /etc/mpd.conf{,.backup}
 
 echo -e "$bar Remove conflict packages ..."
 pacman -R --noconfirm ashuffle-rune mpd-rune ffmpeg-rune
@@ -35,7 +38,7 @@ pacman -S --noconfirm mp3unicode mpg123 smbclient sqlite tdb tevent wavpack yajl
 
 echo -e "$bar Install MPD ..."
 pacman -S --noconfirm mpd
-cp /etc/mpd.conf{.pacorig,}
+cp /etc/mpd.conf{.backup,}
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
 pacman -U ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
 rm ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
