@@ -65,6 +65,7 @@ On multicore CPU RPi3, edit `/etc/makepkg.conf` > `MAKEFLAGS="-j4"`
 su x
 cd /home/x/transmission
 makepkg -A --skipinteg
+
 su
 pacman -U /home/x/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 ```
