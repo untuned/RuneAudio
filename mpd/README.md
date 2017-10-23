@@ -8,3 +8,6 @@ Upgrade MPD to latest version
 
 **Upgrade**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)
+
+**To do**  
+- fix broken midori after this upgrade
