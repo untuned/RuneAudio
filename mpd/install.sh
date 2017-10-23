@@ -23,6 +23,7 @@ chmod 755 /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
 cp /etc/mpd.conf{,.backup}
 
 echo -e "$bar Remove conflict packages ..."
+# pre-remove to avoid conflict messages
 pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
 
 rankmirrors
@@ -34,6 +35,7 @@ echo -e "$bar Install MPD ..."
 pacman -S --noconfirm mpd
 systemctl stop mpd
 
+# reinstall ashuffle back
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
 pacman -U ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
 rm ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
@@ -44,6 +46,7 @@ sed -i -e '/^Protect/ s/^/#/
 ' -e '/^Restrict/ s/^/#/
 ' /usr/lib/systemd/system/mpd.service
 
+# fix permission (default - mpd run by user 'mpd')
 touch /var/log/mpd.log
 chmod 777 /var/log/mpd.log
 
