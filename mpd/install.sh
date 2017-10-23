@@ -59,5 +59,11 @@ systemctl start mpd
 
 redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 
+# fix midori missing libs
+ln -s /usr/lib/libicui18n.so.59.1 /usr/lib/libicui18n.so.56
+ln -s /usr/lib/libicuuc.so.59.1 /usr/lib/libicuuc.so.56
+ln -s /usr/lib/libwebp.so.7.0.0 /usr/lib/libwebp.so.6
+ln -s /usr/lib/libicudata.so.59.1 /usr/lib/libicudata.so.56
+
 timestop
 title -l '=' "$bar MPD upgraded successfully."
