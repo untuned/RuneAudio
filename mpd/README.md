@@ -12,7 +12,6 @@ chmod 755 /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
 
 cp /etc/mpd.conf{,.backup}
 
-bacman ashuffle-rune
 pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
 pacman -S --noconfirm mpd
 
@@ -21,7 +20,9 @@ cp /etc/mpd.conf{.backup,}
 pacman -S --noconfirm ffmpeg
 
 pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack 
-pacman -U ashuffle-rune
+
+wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
+pacman -U --noconfirm ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
 
 sed -i -e '/^Protect/ s/^/#/
 ' -e '/^Restrict/ s/^/#/
