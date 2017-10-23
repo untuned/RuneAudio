@@ -64,7 +64,7 @@ ln -s /usr/lib/libicui18n.so.59.1 /usr/lib/libicui18n.so.56
 ln -s /usr/lib/libicuuc.so.59.1 /usr/lib/libicuuc.so.56
 ln -s /usr/lib/libwebp.so.7.0.0 /usr/lib/libwebp.so.6
 ln -s /usr/lib/libicudata.so.59.1 /usr/lib/libicudata.so.56
-pacman -S --noconfirm gstreamer gstreamer-vaapi gtk3 glib2 
+pacman -S --noconfirm gstreamer gstreamer-vaapi gtk3 glib2 harfbuzz freetype2 libsoup
 
 timestop
 title -l '=' "$bar MPD upgraded successfully."
