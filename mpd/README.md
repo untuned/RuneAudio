@@ -13,18 +13,17 @@ chmod 755 /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
 cp /etc/mpd.conf{,.backup}
 
 bacman ashuffle-rune
-pacman -R ashuffle
-echo y | pacman -S --noconfirm mpd
+pacman -R --noconfirm ashuffle-rune mpd-rune
+yes | pacman -S mpd
 
 systemctl stop mpd
 cp /etc/mpd.conf{.backup,}
+echo -e '\n 1' | pacman -S ffmpeg
 
-echo y | pacman -S --noconfirm ffmpeg
-pacman -S --noconfirm libnfs opus icu libwebp gcc-libs wavpack 
+pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack 
 echo y | pacman -U ashuffle-rune
 
-sed -i -e '/^Limit/ s/^/#/
-' -e '/^Protect/ s/^/#/
+sed -i -e '/^Protect/ s/^/#/
 ' -e '/^Restrict/ s/^/#/
 ' /usr/lib/systemd/system/mpd.service
 
