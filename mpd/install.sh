@@ -35,11 +35,6 @@ echo -e "$bar Install MPD ..."
 pacman -S --noconfirm mpd
 systemctl stop mpd
 
-# reinstall ashuffle back
-wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
-pacman -U ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
-rm ashuffle-rune-1.0-20160319-armv7h.pkg.tar.xz
-
 cp /etc/mpd.conf{.backup,}
 
 sed -i -e '/^Protect/ s/^/#/
