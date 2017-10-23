@@ -5,21 +5,23 @@
 # Contributor: Damir Perisa 
 # Contributor: Ben 
 
+# combine enable / disable with mpd-rune 0.19.10
+
 pkgname=mpd
 pkgver=0.20.11
 pkgrel=1
 pkgdesc='Flexible, powerful, server-side application for playing music'
 url='https://www.musicpd.org/'
 license=('GPL')
-arch=('armv7h')
-depends=('libao' 'ffmpeg' 'libmodplug' 'audiofile' 'libshout' 'libmad' 'curl' 'faad2'
-         'sqlite' 'jack' 'libmms' 'wavpack' 'avahi' 'libid3tag' 'yajl' 'libmpdclient'
-         'icu' 'libupnp' 'libnfs' 'libsamplerate' 'libsoxr' 'smbclient' 'libcdio-paranoia'
-         'libgme' 'zziplib')
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+depends=('audiofile' 'libmad' 'jack' 'curl' 'faad2' 'sqlite' 'libmms' 'libid3tag' 'libmpdclient' 'boost-libs' 'libsoxr' 'ffmpeg' 'yajl'
+         'libao' 'libmodplug' 'libshout' 'libupnp' 'libnfs' 'libsamplerate' 'libsoxr' 'libgme' 'libcdio-paranoia'
+         'wavpack' 'avahi' 'icu' 'smbclient' 'zziplib')
 makedepends=('boost' 'doxygen')
 validpgpkeys=('0392335A78083894A4301C43236E8A58C6DB4512')
+				 
 #source=("https://www.musicpd.org/download/${pkgname}/${pkgver}/${pkgname}-${pkgver}.tar.xz"{,.sig}
-source=("https://www.musicpd.org/download/${pkgname}/${pkgver%.*}/${pkgname}-${pkgver}.tar.xz"{,.sig}
+source=("https://www.musicpd.org/download/${pkgname}/${pkgver%.*}/${pkgname}-${pkgver}.tar.xz"{,.sig}																																																					
         'tmpfiles.d'
         'conf')
 sha256sums=('e9227d9daf32a63d6f34bf2ea18b3179b4a383e9d2b49d548702a37451e514bc'
@@ -32,38 +34,40 @@ install=install
 
 build() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
+ 
 	./configure \
 		--prefix=/usr \
 		--sysconfdir=/etc \
 		--enable-cdio-paranoia \
 		--enable-jack \
 		--enable-libmpdclient \
+		--enable-mad \
 		--enable-pipe-output \
-		--enable-pulse \
 		--enable-soundcloud \
 		--enable-zzip \
 		--enable-soxr \
 		--enable-ffmpeg \
-		--disable-sidplay \
 		--disable-ao \
 		--disable-bzip2 \
 		--disable-fluidsynth \
 		--disable-gme \
 		--disable-ipv6 \
 		--disable-iso9660 \
+		--disable-lame-encoder \
 		--disable-modplug \
-		--disable-mpg123 \
+		--disable-mpg123 \				 
 		--disable-opus \
 		--disable-oss \
 		--disable-pulse \
 		--disable-recorder-output \
 		--disable-shout \
+		--disable-sidplay \
+		--disable-wavpack \
 		--disable-wildmidi \
 		--disable-zzip \
 		--with-zeroconf=avahi \
 		--with-systemduserunitdir=/usr/lib/systemd/user \
 		--with-systemdsystemunitdir=/usr/lib/systemd/system \
-
 	make
 }
 
