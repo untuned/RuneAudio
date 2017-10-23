@@ -13,6 +13,8 @@ fi
 title -l '=' "$bar Upgrade MPD ..."
 timestart
 
+rankmirrors
+
 echo -e "$bar Get files ..."
 # pacman -S openssl > error - some packages still need existing version
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
@@ -26,10 +28,8 @@ echo -e "$bar Remove conflict packages ..."
 # pre-remove to avoid conflict messages
 pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
 
-rankmirrors
-
 echo -e "$bar Install packages ..."
-pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack
+pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg
 
 echo -e "$bar Install MPD ..."
 pacman -S --noconfirm mpd
@@ -51,8 +51,7 @@ sed -i -e '/^Protect/ s/^/#/
 ' /usr/lib/systemd/user/mpd.service
 
 # fix permission (default - mpd run by user 'mpd')
-touch /var/log/mpd.log
-chmod 777 /var/log/mpd.log
+chmod 777 /var/log/runeaudio/mpd.log
 
 systemctl daemon-reload
 systemctl start mpd
