@@ -59,11 +59,16 @@ systemctl start mpd
 redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 
 # fix midori missing libs
+killall midori &> /dev/null
+
 ln -s /usr/lib/libicui18n.so.59.1 /usr/lib/libicui18n.so.56
 ln -s /usr/lib/libicuuc.so.59.1 /usr/lib/libicuuc.so.56
 ln -s /usr/lib/libwebp.so.7.0.0 /usr/lib/libwebp.so.6
 ln -s /usr/lib/libicudata.so.59.1 /usr/lib/libicudata.so.56
-pacman -S --noconfirm gstreamer gstreamer-vaapi gtk3 glib2 harfbuzz freetype2 libsoup libgcrypt gpg-crypter libgpg-error
+pacman -S --noconfirm glib2 gtk3 webkitgtk
+#pacman -S --noconfirm gstreamer gstreamer-vaapi glib2 gtk3 harfbuzz freetype2 libsoup libgcrypt gpg-crypter libgpg-error
+
+xinit &> /dev/null &
 
 timestop
 title -l '=' "$bar MPD upgraded successfully."
