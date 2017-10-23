@@ -14,9 +14,9 @@ pkgdesc='Flexible, powerful, server-side application for playing music'
 url='https://www.musicpd.org/'
 license=('GPL')
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
-depends=('audiofile' 'libmad' 'jack' 'curl' 'faad2' 'sqlite' 'libmms' 'libid3tag' 'libmpdclient' 'boost-libs' 'libsoxr' 'ffmpeg' 'yajl'
-         'libao' 'libmodplug' 'libshout' 'libupnp' 'libnfs' 'libsamplerate' 'libsoxr' 'libgme' 'libcdio-paranoia'
-         'wavpack' 'avahi' 'icu' 'smbclient' 'zziplib')
+depends=('alsa-lib' 'audiofile' 'avahi' 'boost' 'bzip2' 'curl' 'dbus' 'doxygen' 'expat' 'faad2' 'ffmpeg' 'flac' 'guile' 'icu' 'jack' 'lame' 'ldb' 'libao'
+         'libcdio-paranoia' 'libgme' 'libid3tag' 'libmad' 'libmms' 'libmodplug' 'libmpdclient' 'libnfs' 'libogg' 'libsamplerate' 'libshout' 'libsndfile' 'libsoxr' 'libupnp' 'libutil-linux' 'libvorbis' 'libwebp'
+         'mp3unicode' 'mpg123' 'smbclient' 'sqlite' 'tdb' 'tevent' 'wavpack' 'yajl' 'zlib' 'zziplib')
 makedepends=('boost' 'doxygen')
 validpgpkeys=('0392335A78083894A4301C43236E8A58C6DB4512')
 				 
