@@ -14,6 +14,7 @@ title -l '=' "$bar Upgrade MPD ..."
 timestart
 
 echo -e "$bar Get files ..."
+# pacman -S openssl > error - some packages still need existing version
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
 chown root:root /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
