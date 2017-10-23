@@ -3,6 +3,8 @@ MPD Upgrade
 
 Upgrade MPD to latest version  
 - fix all errors caused by normal upgrade
+
+```sh
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
 chown root:root /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
@@ -29,3 +31,4 @@ sed -i -e '/^Limit/ s/^/#/
 systemctl daemon-reload
 
 systemctl start mpd
+```
