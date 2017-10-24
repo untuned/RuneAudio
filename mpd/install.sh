@@ -37,6 +37,7 @@ systemctl stop mpd
 
 cp /etc/mpd.conf{.backup,}
 
+echo -e "$bar Modify files ..."
 sed -i -e '/^Protect/ s/^/#/
 ' -e '/^Restrict/ s/^/#/
 ' /usr/lib/systemd/system/mpd.service
@@ -54,6 +55,7 @@ systemctl start mpd
 redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 
 # fix midori missing libs
+echo -e "$bar Fix Midori depends ..."
 if [[ pgrep midori > /dev/null ]]; then
 	killall midori
 	midori=1
