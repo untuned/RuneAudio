@@ -56,7 +56,7 @@ redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 
 # fix midori missing libs
 echo -e "$bar Fix Midori depends ..."
-if [[ pgrep midori ]]; then
+if pgrep midori; then
 	killall midori
 	midori=1
 fi
