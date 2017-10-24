@@ -166,6 +166,10 @@ touch /root/.hushlogin
 #################################################################################
 wgetnc $gitpath/samba/install.sh; chmod +x install.sh; ./install.sh $pwd1
 
+# mpd
+#################################################################################
+#wgetnc $gitpath/mpd/install.sh; chmod +x install.sh; ./install.sh
+
 # Transmission
 #################################################################################
 wgetnc $gitpath/transmission/install.sh; chmod +x install.sh; ./install.sh $pwd1 1 1
