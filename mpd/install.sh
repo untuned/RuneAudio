@@ -62,12 +62,7 @@ ln -s /usr/lib/libwebp.so.7.0.0 /usr/lib/libwebp.so.6
 ln -s /usr/lib/libicudata.so.59.1 /usr/lib/libicudata.so.56
 pacman -S --noconfirm glib2 gtk3 webkitgtk
 
-echo -e "$bar Restart local browser ..."
-if pgrep midori > /dev/null; then
-	killall midori
-	sleep 1
-	xinit &> /dev/null &
-fi
+clearcache
 	
 timestop l
 title -l '=' "$bar MPD upgraded successfully."
