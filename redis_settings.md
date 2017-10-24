@@ -11,6 +11,9 @@ redis-cli set ao bcm2835 ALSA_1       # audio output (string*)
 redis-cli set volume 0                # volume control
 redis-cli set mpd_start_volume -1     # start volume
 redis-cli set dynVolumeKnob 0         # volume knob
+redis-cli hset mpdconf <hash> <value> # General music daemon options
+
+redis-cli set addrandom 1             # volume control
 
 ### Settings ###
 redis-cli set hostname runeaudio      # hostname (string)
