@@ -12,7 +12,7 @@ redis-cli set volume 0                # volume control
 redis-cli set mpd_start_volume -1     # start volume
 redis-cli set dynVolumeKnob 0         # volume knob
 redis-cli hset mpdconf <hash> <value> # general music daemon options
-redis-cli set              # crossfade
+                                      # crossfade - mpc crossfade 0
 redis-cli set globalrandom 0          # global random
 redis-cli set addrandom 1             # add random tracks
 
