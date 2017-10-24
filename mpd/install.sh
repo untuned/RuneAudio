@@ -11,7 +11,7 @@ if [[ $( mpd -V | head -n 1 ) != 'Music Player Daemon 0.19.13-dsd' ]]; then
 fi
 
 title -l '=' "$bar Upgrade MPD ..."
-timestart
+timestart l
 
 rankmirrors
 
@@ -68,5 +68,5 @@ pacman -S --noconfirm glib2 gtk3 webkitgtk
 
 [[ $midori == 1 ]] && sleep 1 && xinit &> /dev/null &
 
-timestop
+timestop l
 title -l '=' "$bar MPD upgraded successfully."
