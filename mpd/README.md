@@ -1,7 +1,8 @@
 MPD Upgrade
 ---
-  
-- RuneAudio installed customized MPD 0.19.13 which cannot be upgrade normally
+
+Upgrade MPD to latest version (0.20.11 as of 20171025)
+- RuneAudio installed customized MPD 0.19 which cannot be upgrade normally
 - RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`
 - This addon upgrade MPD to latest version fixes errors caused by normal upgrade:
 	- fix missing libs
