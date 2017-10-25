@@ -18,6 +18,7 @@ MPD Upgrade
 		- libnfs
 		- libwebp
 		- wavpack
+	- fix systemd unknown lvalue
 	- fix mpg.log permission
 	- fix broken Midori
 		- fix missing libs
