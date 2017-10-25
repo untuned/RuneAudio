@@ -4,7 +4,7 @@ alias=mpdu
 
 . /srv/http/addonstitle.sh
 
-if [[ $( mpd -V | head -n 1 ) != 'Music Player Daemon 0.19.13-dsd' ]]; then
+if [[ $( mpd -V | head -n 1 ) != 'Music Player Daemon 0.19.'* ]]; then
 	redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 	title "$info MPD already upgraged."
 	exit
