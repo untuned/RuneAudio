@@ -18,7 +18,7 @@ disk=/dev/${part::-2}
 unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
 unpartkb=$( python2 -c "print($unpartb / 1000)" )
 
-if [[ $freekb < $needkb ]]; then
+if (( $freekb < $needkb )); then
 	if [[ $( redis-cli hget addons expa ) != 1 ]] && (( $(( $freekb + $unpartkb )) > $needkb )); then
 		title "$info Partition not yet expanded."
 		title -nt "Run 'Expand Partition' first."
