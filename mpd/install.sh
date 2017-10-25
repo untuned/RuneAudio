@@ -37,15 +37,6 @@ systemctl stop mpd
 
 cp /etc/mpd.conf{.backup,}
 
-echo -e "$bar Modify files ..."
-#sed -i -e '/^Protect/ s/^/#/
-#' -e '/^Restrict/ s/^/#/
-#' /usr/lib/systemd/system/mpd.service
-
-#sed -i -e '/^Protect/ s/^/#/
-#' -e '/^Restrict/ s/^/#/
-#' /usr/lib/systemd/user/mpd.service
-
 # fix permission (default - mpd run by user 'mpd')
 chmod 777 /var/log/runeaudio/mpd.log
 
