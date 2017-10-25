@@ -21,7 +21,7 @@ unpartkb=$( python2 -c "print($unpartb / 1000)" )
 if (( $freekb < $needkb )); then
 	if [[ $( redis-cli hget addons expa ) != 1 ]] && (( $(( $freekb + $unpartkb )) > $needkb )); then
 		title "$info Partition not yet expanded."
-		title -nt "Run 'Expand Partition' first."
+		title -nt "Run 'Expand Partition' addon first."
 	else
 		title "$info Not enough disk space."
 	fi
