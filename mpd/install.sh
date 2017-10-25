@@ -10,7 +10,22 @@ if [[ $( mpd -V | head -n 1 ) != 'Music Player Daemon 0.19.'* ]]; then
 	exit
 fi
 
-checkspace
+needkb=200000
+freekb=$( df | grep '/$' | awk '{print $4}' )
+devpart=$( mount | grep 'on / type' | awk '{print $1}' )
+part=${devpart/\/dev\//}
+disk=/dev/${part::-2}
+unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
+unpartkb=$( python2 -c "print($unpartb / 1000)" )
+
+if [[ $freekb < $needkb ]]; then
+	if [[ $( redis-cli hget addons expa ) != 1 ]] && (( $(( $freekb + $unpartkb )) > $needkb )); then
+		title "$info Partition not yet expanded."
+		title -nt "Run 'Expand Partition' first."
+	else
+		title "$info Not enough disk space."
+	fi
+fi
 
 title -l '=' "$bar Upgrade MPD ..."
 timestart l
