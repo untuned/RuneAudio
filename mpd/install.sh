@@ -53,7 +53,6 @@ pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg
 
 echo -e "$bar Install MPD ..."
 pacman -S --noconfirm mpd
-systemctl stop mpd
 
 cp /etc/mpd.conf{.backup,}
 
@@ -73,7 +72,7 @@ sed -i -e '/^ProtectKernel/ s/^/#/
 chmod 777 /var/log/runeaudio/mpd.log
 
 systemctl daemon-reload
-systemctl start mpd
+systemctl restart mpd
 
 redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 
