@@ -56,6 +56,9 @@ pacman -S --noconfirm mpd
 
 cp /etc/mpd.conf{.backup,}
 
+# fix permission (default - mpd run by user 'mpd')
+chmod 777 /var/log/runeaudio/mpd.log
+
 # fix systemd unknown lvalue (not exist in current systemd version) 
 echo -e "$bar Modify files ..."
 sed -i -e '/^ProtectKernel/ s/^/#/
@@ -68,13 +71,8 @@ sed -i -e '/^ProtectKernel/ s/^/#/
 ' -e '/^Restrict/ s/^/#/
 ' /usr/lib/systemd/user/mpd.service
 
-# fix permission (default - mpd run by user 'mpd')
-chmod 777 /var/log/runeaudio/mpd.log
-
 systemctl daemon-reload
 systemctl restart mpd
-
-redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 
 # fix midori missing libs
 echo -e "$bar Fix Midori dependencies ..."
@@ -83,6 +81,8 @@ ln -s /usr/lib/libicui18n.so.59.1 /usr/lib/libicui18n.so.56
 ln -s /usr/lib/libicuuc.so.59.1 /usr/lib/libicuuc.so.56
 ln -s /usr/lib/libwebp.so.7.0.0 /usr/lib/libwebp.so.6
 pacman -S --noconfirm glib2 gtk3 webkitgtk
+
+redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 
 clearcache
 	
