@@ -25,6 +25,7 @@ if (( $freekb < $needkb )); then
 	else
 		title "$info Not enough disk space."
 	fi
+	exit
 fi
 
 title -l '=' "$bar Upgrade MPD ..."
