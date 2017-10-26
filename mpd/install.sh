@@ -43,7 +43,6 @@ chmod 755 /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
 cp /etc/mpd.conf{,.backup}
 
 sed -i '/^IgnorePkg/ s/mpd //; s/ffmpeg ashuffle //' /etc/pacman.conf
-systemctl stop mpd
 
 echo -e "$bar Remove conflict packages ..."
 # pre-remove to avoid conflict messages (/usr/local/bin/ashuffle is used directly, not by installed)
