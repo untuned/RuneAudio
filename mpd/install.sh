@@ -10,7 +10,7 @@ if [[ $( mpd -V | head -n 1 ) != 'Music Player Daemon 0.19.'* ]]; then
 	exit
 fi
 
-needkb=200000
+needkb=250000
 freekb=$( df | grep '/$' | awk '{print $4}' )
 devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
