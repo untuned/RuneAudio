@@ -49,7 +49,7 @@ echo -e "$bar Remove conflict packages ..."
 # pre-remove to avoid conflict messages (/usr/local/bin/ashuffle is used directly, not by installed)
 pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
 
-echo -e "$bar Install packages ...
+echo -e "$bar Install packages ..."
 pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg
 
 echo -e "$bar Install MPD ..."
