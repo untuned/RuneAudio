@@ -3,7 +3,7 @@ MPD Upgrade
 _Tested on RuneAudio 0.3 and 0.4b_
 
 Upgrade MPD to latest version (0.20.11 as of 20171025)
-- RuneAudio installed customized MPD 0.19 which cannot be upgrade normally
+- RuneAudio installed customized MPD 0.19 which cannot be upgraded normally
 - RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`
 - Fix issues in normal upgrade:
 	- fix missing libs
@@ -21,7 +21,7 @@ Upgrade MPD to latest version (0.20.11 as of 20171025)
 		- libwebp
 		- wavpack
 	- fix systemd unknown lvalue
-	- fix mpg.log permission
+	- fix mpd.log permission
 	- fix broken Midori
 		- fix missing libs
 			- libicui18n.so.56
