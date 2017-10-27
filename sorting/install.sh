@@ -15,7 +15,7 @@ installstart $@
 
 getuninstall
 
-wegetnc https://github.com/rern/RuneAudio/raw/master/webradio/sorting.js -P /srv/http/assets/js
+wegetnc https://github.com/rern/RuneAudio/raw/master/sorting/sorting.js -P /srv/http/assets/js
 # modify files
 footer=/srv/http/app/templates/footer.php
 ech $footer
