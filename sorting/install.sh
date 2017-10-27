@@ -17,5 +17,3 @@ ech $footer
 echo '<script src="<?=$this->asset('"'"'/js/sorting.js'"'"')?>"></script>' >> $footer
 
 installfinish $@
-
-clearcache
