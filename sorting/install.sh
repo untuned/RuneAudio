@@ -6,6 +6,11 @@ alias=sort
 
 . /srv/http/addonstitle.sh
 
+if [[ -e /usr/local/bin/uninstall_webr.sh ]]; then
+	uninstall_webr.sh
+	redis-cli hdel addons webr
+fi
+
 installstart $@
 
 getuninstall
