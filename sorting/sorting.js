@@ -132,23 +132,22 @@ function populateDB(options){
                 $('#db-level-up').addClass('hide');
                 $('#db-search-results').removeClass('hide').html('<i class="fa fa-times sx"></i><span class="visible-xs-inline">back</span><span class="hidden-xs">' + results + ' result' + s + ' for "<span class="keyword">' + keyword + '</span>"</span>');
             }
-//            data.sort( Intl.Collator().compare );
             data.sort(function(a, b){
                 if (path === 'Artists' || path === 'AlbumArtists'|| path === 'Various Artists') {
-                    nameA = a.artist?a.artist:'';
-                    nameB = b.artist?b.artist:'';
+                    nameA = a.hasOwnProperty('artist') ? a.artist : '';
+                    nameB = b.hasOwnProperty('artist') ? b.artist : '';
                 } else if (path === 'Albums') {
-                    nameA = a.album?a.album:'';
-                    nameB = b.album?b.album:'';
+                    nameA = a.hasOwnProperty('album') ? a.album : '';
+                    nameB = b.hasOwnProperty('album') ? b.album : '';
                 } else if (path === 'Webradio') {
-                    nameA = a.playlist?a.playlist:'';
-                    nameB = b.playlist?b.playlist:'';
+                    nameA = a.hasOwnProperty('playlist') ? a.playlist : '';
+                    nameB = b.hasOwnProperty('playlist') ? b.playlist : '';
                 } else if (path === 'Genres') {
-                    nameA = a.genre?a.genre:'';
-                    nameB = b.genre?b.genre:'';
+                    nameA = a.hasOwnProperty('genre') ? a.genre : '';
+                    nameB = b.hasOwnProperty('genre') ? b.genre :n'';
                 } else {
-                    nameA = a.directory?a.directory:'';
-                    nameB = b.directory?b.directory:'';
+                    nameA = a.hasOwnProperty('directory') ? a.directory : '';
+                    nameB = b.hasOwnProperty('directory') ? b.directory : '';
                 }
                 return nameA.localeCompare(nameB);
             });
