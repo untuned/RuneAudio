@@ -2,7 +2,7 @@ MPD Upgrade
 ---
 _Tested on RuneAudio 0.3 and 0.4b_
 
-Upgrade MPD to latest version (0.20.11 as of 20171025)
+Upgrade MPD to latest version, 0.20.11 as of 20171025. (changelog: [www.musicpd.org](www.musicpd.org))
 - RuneAudio installed customized MPD 0.19 which cannot be upgraded normally
 - RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`
 - Fix issues in normal upgrade:
