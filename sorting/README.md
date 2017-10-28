@@ -3,9 +3,9 @@ Library Sorting
 _Tested on RuneAudio 0.3 and 0.4b_
 
 Fix incorrect library sorting when:
+- Sort non-english language
 - [Webradio import](https://github.com/rern/RuneAudio/tree/master/webradio)
 - [MPD Upgrade](https://github.com/rern/RuneAudio/tree/master/mpd)
-- Sort by language / locale setting in browser
 - Some other things that could be fixed by changing sorting method:
 	- from `(nameA < nameB)` to `nameA.localeCompare(nameB)`
 
