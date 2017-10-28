@@ -18,7 +18,7 @@ getuninstall
 wegetnc https://github.com/rern/RuneAudio/raw/master/sorting/sorting.js -P /srv/http/assets/js
 # modify files
 footer=/srv/http/app/templates/footer.php
-ech $footer
+echo $footer
 echo '<script src="<?=$this->asset('"'"'/js/sorting.js'"'"')?>"></script>' >> $footer
 
 installfinish $@
