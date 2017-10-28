@@ -23,11 +23,11 @@ function populateDB(options){
 
             data.sort(function(a, b){
                 if (path === 'Spotify' && querytype === '') {
-                    nameA = a.hasOwnProperty('name')?a.name.toLowerCase():'';
-                    nameB = b.hasOwnProperty('name')?b.name.toLowerCase():'';
+                    nameA = a.hasOwnProperty('name')?a.name:'';
+                    nameB = b.hasOwnProperty('name')?b.name:'';
                 } else if (querytype === 'tracks') {
-                    nameA = a.hasOwnProperty('title')?a.title.toLowerCase():'';
-                    nameB = b.hasOwnProperty('title')?b.title.toLowerCase():'';
+                    nameA = a.hasOwnProperty('title')?a.title:'';
+                    nameB = b.hasOwnProperty('title')?b.title:'';
                 } else {
                     return 0;
                 }
@@ -62,11 +62,11 @@ function populateDB(options){
             }            
             data.sort(function(a, b){
                 if (querytype === 'childs' || querytype === 'categories') {
-                    nameA = a.hasOwnProperty('title')?a.title.toLowerCase():'';
-                    nameB = b.hasOwnProperty('title')?b.title.toLowerCase():'';
+                    nameA = a.hasOwnProperty('title')?a.title:'';
+                    nameB = b.hasOwnProperty('title')?b.title:'';
                 } else if (querytype === 'childs-stations' || querytype === 'stations') {
-                    nameA = a.hasOwnProperty('name')?a.name.toLowerCase():'';
-                    nameB = b.hasOwnProperty('name')?b.name.toLowerCase():'';
+                    nameA = a.hasOwnProperty('name')?a.name:'';
+                    nameB = b.hasOwnProperty('name')?b.name:'';
                 } else {
                     return 0;
                 }
@@ -94,8 +94,8 @@ function populateDB(options){
 
             data.sort(function(a, b){
                 if (path === 'Jamendo' && querytype === '') {
-                    nameA = a.hasOwnProperty('dispname')?a.dispname.toLowerCase():'';
-                    nameB = b.hasOwnProperty('dispname')?b.dispname.toLowerCase():'';
+                    nameA = a.hasOwnProperty('dispname')?a.dispname:'';
+                    nameB = b.hasOwnProperty('dispname')?b.dispname:'';
                 } else {
                     return 0;
                 }
@@ -132,22 +132,23 @@ function populateDB(options){
                 $('#db-level-up').addClass('hide');
                 $('#db-search-results').removeClass('hide').html('<i class="fa fa-times sx"></i><span class="visible-xs-inline">back</span><span class="hidden-xs">' + results + ' result' + s + ' for "<span class="keyword">' + keyword + '</span>"</span>');
             }
+//            data.sort( Intl.Collator().compare );
             data.sort(function(a, b){
                 if (path === 'Artists' || path === 'AlbumArtists'|| path === 'Various Artists') {
-                    nameA = a.hasOwnProperty('artist')?a.artist.toLowerCase():'';
-                    nameB = b.hasOwnProperty('artist')?b.artist.toLowerCase():'';
+                    nameA = a.artist?a.artist:'';
+                    nameB = b.artist?b.artist:'';
                 } else if (path === 'Albums') {
-                    nameA = a.hasOwnProperty('album')?a.album.toLowerCase():'';
-                    nameB = b.hasOwnProperty('album')?b.album.toLowerCase():'';
+                    nameA = a.album?a.album:'';
+                    nameB = b.album?b.album:'';
                 } else if (path === 'Webradio') {
-                    nameA = a.hasOwnProperty('playlist')?a.playlist.toLowerCase():'';
-                    nameB = b.hasOwnProperty('playlist')?b.playlist.toLowerCase():'';
+                    nameA = a.playlist?a.playlist:'';
+                    nameB = b.playlist?b.playlist:'';
                 } else if (path === 'Genres') {
-                    nameA = a.hasOwnProperty('genre')?a.genre.toLowerCase():'';
-                    nameB = b.hasOwnProperty('genre')?b.genre.toLowerCase():'';
+                    nameA = a.genre?a.genre:'';
+                    nameB = b.genre?b.genre:'';
                 } else {
-                    nameA = a.hasOwnProperty('directory')?a.directory.toLowerCase():'';
-                    nameB = b.hasOwnProperty('directory')?b.directory.toLowerCase():'';
+                    nameA = a.directory?a.directory:'';
+                    nameB = b.directory?b.directory:'';
                 }
                 return nameA.localeCompare(nameB);
             });
