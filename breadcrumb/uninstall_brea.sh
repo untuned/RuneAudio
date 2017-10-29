@@ -7,9 +7,13 @@ alias=brea
 uninstallstart $@
 
 echo -e "$bar Remove files ..."
-rm /srv/http/assets/js/breadcrumb.js
+rm /srv/http/assets/{css/breadcrumb.css,js/breadcrumb.js}
 
 echo -e "$bar Restore files ..."
+file=/srv/http/app/templates/header.php
+echo $file
+sed -i '/breadcrumb.css/ d' $file
+
 file=/srv/http/app/templates/footer.php
 echo $file
 sed -i '/breadcrumb.js/ d' $file
