@@ -1,0 +1,65 @@
+.btnlist-bottom {
+	display: none;
+}		
+#database-entries {
+	float: left;
+	width: calc( 100% - 38px );
+	padding-bottom: 80px;
+}
+#db-currentpath {
+	width: calc(100% - 220px);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#db-currentpath a,
+#db-currentpath i {
+	cursor: pointer;
+}
+#db-currentpath i {
+	margin-top: 5px;
+	padding: 0;
+	font-size: 28px;
+}
+#db-up,
+#db-webradio-add {
+	position: absolute;
+	right: 200px;
+}
+#db-index {
+	position: fixed;
+	right: 0;
+	width: 38px;
+	padding: 0;
+	line-height: 30px;
+	list-style: none;
+	background: #172029;
+}
+#db-index li {
+	text-align: center;
+	cursor: pointer;
+}
+#db-index li:hover {
+	background: #34495e;
+}
+
+@media(max-height: 736px) {
+	#db-index {
+		line-height: 23px;
+	}
+}
+@media(max-height: 667px) {
+	#db-index {
+		line-height: 20px;
+	}
+}
+@media(max-height: 568px) {
+	#db-index {
+		line-height: 17px;
+	}
+}
+@media(max-height: 567px) {
+	.half {
+		display: none;
+	}		
+}
