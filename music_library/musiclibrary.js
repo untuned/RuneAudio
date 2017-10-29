@@ -222,7 +222,7 @@ function populateDB(options){
             folderCrumb += '<a data-path="'+ folderPath +'">'+ folder[ i ] +'</a>';
         }
         breadcrumb.html( folderCrumb );
-		$( '#db-currentpath' ).removeClass( 'hide' );
+		$( '#db-currentpath, #db-index' ).removeClass( 'hide' );
 // ****************************************************************************************
     }
     $('#db-homeSetup').addClass('hide');
@@ -237,3 +237,28 @@ function populateDB(options){
         loadingSpinner('db', 'hide');
     }
 }
+
+// library directory path link
+$( '#db-home' ).click( function() {
+	renderLibraryHome();
+	$( '#db-currentpath, #db-index' ).addClass( 'hide' );
+} );
+$( '#db-currentpath' ).on( 'click', 'a', function() {
+	getDB( { path: $( this ).attr( 'data-path' ) } );
+} );
+$( '#db-up' ).click( function() {
+	var $2ndLast = $( '#db-currentpath a:nth-last-child(2)' );
+	var $toclick = $2ndLast.length ? $2ndLast : $( '#db-home' );
+	$toclick.click();
+} );
+
+// index link
+$( '#db-index li' ).click( function() {
+	var datapatharray = $( '#database-entries li' ).attr( 'data-path' ).split('/');
+	var path = datapatharray.slice( 0, -1 ).join( '/' );
+	var datapathindex = path +'/'+ $( this ).text();
+	var matcharray = $( '#database-entries li' ).filter( function() {
+		return $( this ).attr( 'data-path' ).match( new RegExp( datapathindex ) );
+	} );
+	if ( matcharray.length ) $( document ).scrollTop( matcharray[0].offsetTop - 80 );
+} );
