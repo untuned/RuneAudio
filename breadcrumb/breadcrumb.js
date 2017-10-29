@@ -107,7 +107,7 @@ function populateDB(options){
                 $('#db-search-results').removeClass('hide').html('<i class="fa fa-times sx"></i><span class="visible-xs-inline">back</span><span class="hidden-xs">' + results + ' result' + s + ' for "<span class="keyword">' + keyword + '</span>"</span>');
             }
 // ****************************************************************************************
-// replace - modify add webradio button
+// add - modify add webradio button
             if (path === 'Webradio') {
 				$('#db-up').addClass('hide');
 				$('#db-webradio-add').removeClass('hide')
@@ -152,7 +152,7 @@ function populateDB(options){
         }
     } else {
 // ****************************************************************************************
-// add usb directory path link
+// add - library directory path link
         var folder = path.split( '/' );
         var folderPath = '';
         var folderCrumb = '';
