@@ -21,20 +21,20 @@ installstart $@
 getuninstall
 
 echo -e "$bar Get files ..."
-wgetnc https://github.com/rern/RuneAudio/raw/master/library_browsing/musiclibrary.js -P /srv/http/assets/js
-wgetnc https://github.com/rern/RuneAudio/raw/master/library_browsing/musiclibrary.css -P /srv/http/assets/css
+wgetnc https://github.com/rern/RuneAudio/raw/master/library_browsing/libraryenha.js -P /srv/http/assets/js
+wgetnc https://github.com/rern/RuneAudio/raw/master/library_browsing/libraryenha.css -P /srv/http/assets/css
 # modify files
 echo -e "$bar Modify files ..."
 file=/srv/http/app/templates/header.php
 echo $file
 sed -i $'/runeui.css/ a\
-    <link rel="stylesheet" href="<?=$this->asset(\'/css/musiclibrary.css\')?>">
+    <link rel="stylesheet" href="<?=$this->asset(\'/css/libraryenha.css\')?>">
 ' $file
 
 footer=/srv/http/app/templates/footer.php
 echo $footer
 if ! grep -q 'musiclibrary.js' /srv/http/app/templates/footer.php; then
-	echo '<script src="<?=$this->asset('"'"'/js/musiclibrary.js'"'"')?>"></script>' >> $footer
+	echo '<script src="<?=$this->asset('"'"'/js/libraryenha.js'"'"')?>"></script>' >> $footer
 fi
 
 file=/srv/http/app/templates/playback.php
