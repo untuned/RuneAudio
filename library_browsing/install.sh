@@ -17,12 +17,65 @@ getuninstall
 
 echo -e "$bar Get files ..."
 wgetnc https://github.com/rern/RuneAudio/raw/master/library_browsing/musiclibrary.js -P /srv/http/assets/js
+wgetnc https://github.com/rern/RuneAudio/raw/master/library_browsing/musiclibrary.css -P /srv/http/assets/css
 # modify files
 echo -e "$bar Modify files ..."
+file=/srv/http/app/templates/header.php
+echo $file
+sed -i $'/runeui.css/ a\
+    <link rel="stylesheet" href="<?=$this->asset(\'/css/musiclibrary.css\')?>">
+' $file
+
 footer=/srv/http/app/templates/footer.php
 echo $footer
 if ! grep -q 'musiclibrary.js' /srv/http/app/templates/footer.php; then
 	echo '<script src="<?=$this->asset('"'"'/js/musiclibrary.js'"'"')?>"></script>' >> $footer
 fi
+
+file=/srv/http/app/templates/playback.php
+echo $file
+sed -i -e '/id="db-currentpath"/ {N;N; s/^/<!--libr/; s/$/libr-->/}
+' -e '/id="db-level-up"/ {
+s/^/<!--libr/
+s/$/libr-->/
+i\
+            <div id="db-currentpath" class="hide">\
+                <i id="db-home" class="fa fa-folder-open"></i> <span>Home</span>\
+                <i id="db-up" class="fa fa-arrow-left"></i>\
+				<i id="db-webradio-add" class="fa fa-plus hide"></i>\
+            </div>
+}
+' -e '/id="home-blocks"/ i\
+			<ul id="db-index" class="hide">\
+				<li>A</li>
+				<li class="half">B</li>
+				<li>C</li>
+				<li class="half">D</li>
+				<li>E</li>
+				<li class="half">F</li>
+				<li>G</li>
+				<li class="half">H</li>
+				<li>I</li>
+				<li class="half">J</li>
+				<li>K</li>
+				<li class="half">L</li>
+				<li>M</li>
+				<li class="half">N</li>
+				<li>O</li>
+				<li class="half">P</li>
+				<li>Q</li>
+				<li class="half">R</li>
+				<li>S</li>
+				<li class="half">T</li>
+				<li>U</li>
+				<li class="half">V</li>
+				<li>W</li>
+				<li class="half">X</li>
+				<li>Y</li>
+				<li class="half">Z</li>
+				<li>#</li>
+				<li>&nbsp</li>
+			</ul>
+' $file
 
 installfinish $@
