@@ -74,7 +74,6 @@ i\
 				<li class="half">X</li>
 				<li>Y</li>
 				<li class="half">Z</li>
-				<li>#</li>
 				<li>&nbsp</li>
 			</ul>
 ' $file
