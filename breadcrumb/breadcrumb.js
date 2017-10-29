@@ -106,6 +106,20 @@ function populateDB(options){
                 $('#db-level-up').addClass('hide');
                 $('#db-search-results').removeClass('hide').html('<i class="fa fa-times sx"></i><span class="visible-xs-inline">back</span><span class="hidden-xs">' + results + ' result' + s + ' for "<span class="keyword">' + keyword + '</span>"</span>');
             }
+// ****************************************************************************************
+// replace - modify add webradio button
+            if (path === 'Webradio') {
+				$('#db-up').addClass('hide');
+				$('#db-webradio-add').removeClass('hide')
+					.click(function() {
+						$('#modal-webradio-add').modal();
+					}
+				);
+            } else {
+				$('#db-up').removeClass('hide');
+				$('#db-webradio-add').addClass('hide');
+			}
+// ****************************************************************************************
             for (i = 0; (row = data[i]); i += 1) {
                 content += parseResponse({
                     inputArr: row,
