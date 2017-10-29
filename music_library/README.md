@@ -1,4 +1,4 @@
-Library Browsing
+Music Library Browsing
 ---
 _Tested on RuneAudio 0.3 and 0.4b_
 
