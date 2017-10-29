@@ -10,8 +10,9 @@ installstart $@
 
 getuninstall
 
+wgetnc https://github.com/rern/RuneAudio/raw/master/breadcrumb/breadcrumb.css -P /srv/http/assets/css
 wgetnc https://github.com/rern/RuneAudio/raw/master/breadcrumb/breadcrumb.js -P /srv/http/assets/js
-chown http:http /srv/http/assets/js/breadcrumb.js
+chown http:http /srv/http/assets/{css/breadcrumb.css,js/breadcrumb.js}
 
 echo -e "$bar Modify files ..."
 file=/srv/http/app/templates/header.php
