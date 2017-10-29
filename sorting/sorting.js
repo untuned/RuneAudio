@@ -144,7 +144,7 @@ function populateDB(options){
                     nameB = b.hasOwnProperty('playlist') ? b.playlist : '';
                 } else if (path === 'Genres') {
                     nameA = a.hasOwnProperty('genre') ? a.genre : '';
-                    nameB = b.hasOwnProperty('genre') ? b.genre :n'';
+                    nameB = b.hasOwnProperty('genre') ? b.genre : '';
                 } else {
                     nameA = a.hasOwnProperty('directory') ? a.directory : '';
                     nameB = b.hasOwnProperty('directory') ? b.directory : '';
