@@ -6,10 +6,14 @@ alias=libr
 
 . /srv/http/addonstitle.sh
 
-# uninstall webradio sorting
+# uninstall webradio sorting and breadcrumb
 if [[ -e /usr/local/bin/uninstall_webr.sh ]]; then
 	uninstall_webr.sh
 	redis-cli hdel addons webr
+fi
+if [[ -e /usr/local/bin/uninstall_brea.sh ]]; then
+	uninstall_brea.sh
+	redis-cli hdel addons brea
 fi
 
 installstart $@
