@@ -180,3 +180,17 @@ function populateDB(options){
         loadingSpinner('db', 'hide');
     }
 }
+
+// library directory path link
+$( '#db-home' ).click( function() {
+	renderLibraryHome();
+	$( '#db-currentpath' ).addClass( 'hide' );
+} );
+$( '#db-currentpath' ).on( 'click', 'a', function() {
+	getDB( { path: $( this ).attr( 'data-path' ) } );
+} );
+$( '#db-up' ).click( function() {
+	var $2ndLast = $( '#db-currentpath a:nth-last-child(2)' );
+	var $toclick = $2ndLast.length ? $2ndLast : $( '#db-home' );
+	$toclick.click();
+} );
