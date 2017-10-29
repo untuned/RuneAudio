@@ -2,13 +2,14 @@
 
 # change version number in RuneAudio_Addons/srv/http/addonslist.php
 
-alias=sort
+alias=libr
 
 . /srv/http/addonstitle.sh
 
-if [[ -e /usr/local/bin/uninstall_libr.sh ]]; then
-	uninstall_libr.sh
-	redis-cli hdel addons libr
+# uninstall webradio sorting
+if [[ -e /usr/local/bin/uninstall_webr.sh ]]; then
+	uninstall_webr.sh
+	redis-cli hdel addons webr
 fi
 
 installstart $@
