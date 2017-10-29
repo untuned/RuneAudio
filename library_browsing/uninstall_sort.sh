@@ -8,8 +8,12 @@ uninstallstart $@
 
 file=/srv/http/app/templates/footer.php
 echo $file
-sed -i -e '/sorting.js/ d' $file
+sed -i -e '/musiclibrary.js/ d' $file
 
-rm /srv/http/assets/js/sorting.js
+file=/srv/http/app/templates/playback.php
+echo $file
+sed -i '/id="db-index"/,/<\/ul>/ d' $file
+
+rm /srv/http/assets/js/musiclibrary.js
 
 uninstallfinish $@
