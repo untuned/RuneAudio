@@ -32,7 +32,7 @@ function populateDB(options){
                     return 0;
                 }
 // ****************************************************************************************
-// replace fix sorting
+// replace - fix sorting
                 return nameA.localeCompare(nameB);
 // ****************************************************************************************
             });
@@ -74,7 +74,7 @@ function populateDB(options){
                     return 0;
                 }
 // ****************************************************************************************
-// replace fix sorting
+// replace - fix sorting
                 return nameA.localeCompare(nameB);
 // ****************************************************************************************
             });
@@ -106,7 +106,7 @@ function populateDB(options){
                     return 0;
                 }
 // ****************************************************************************************
-// replace fix sorting
+// replace - fix sorting
                 return nameA.localeCompare(nameB);
 // ****************************************************************************************
             });
@@ -156,7 +156,7 @@ function populateDB(options){
                     nameB = b.hasOwnProperty('genre') ? b.genre : '';
                 } else {
 // ****************************************************************************************
-// replace fix sorting
+// replace - fix sorting
                     nameA = a.hasOwnProperty('directory') ? a.directory : '';
                     nameB = b.hasOwnProperty('directory') ? b.directory : '';
                 }
@@ -164,8 +164,19 @@ function populateDB(options){
 // ****************************************************************************************
             });
             if (path === 'Webradio') {
-                content += '<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>';
-            }
+// ****************************************************************************************
+// breadcrumb replace - modify add webradio button
+				$('#db-up').addClass('hide');
+				$('#db-webradio-add').removeClass('hide')
+					.click(function() {
+						$('#modal-webradio-add').modal();
+					}
+				);
+            } else {
+				$('#db-up').removeClass('hide');
+				$('#db-webradio-add').addClass('hide');
+// ****************************************************************************************
+			}
             for (i = 0; (row = data[i]); i += 1) {
                 content += parseResponse({
                     inputArr: row,
@@ -198,7 +209,7 @@ function populateDB(options){
         }
     } else {
 // ****************************************************************************************
-// add usb directory path link
+// breadcrumb add - library directory path link
         var folder = path.split( '/' );
         var folderPath = '';
         var folderCrumb = '';
@@ -211,9 +222,9 @@ function populateDB(options){
             folderCrumb += '<a data-path="'+ folderPath +'">'+ folder[ i ] +'</a>';
         }
         breadcrumb.html( folderCrumb );
-    }
-	$( '#db-currentpath' ).removeClass( 'hide' );
+		$( '#db-currentpath' ).removeClass( 'hide' );
 // ****************************************************************************************
+    }
     $('#db-homeSetup').addClass('hide');
     if (uplevel) {
         var position = GUI.currentDBpos[GUI.currentDBpos[10]];
