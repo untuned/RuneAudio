@@ -23,15 +23,18 @@ function populateDB(options){
 
             data.sort(function(a, b){
                 if (path === 'Spotify' && querytype === '') {
-                    nameA = a.hasOwnProperty('name')?a.name:'';
-                    nameB = b.hasOwnProperty('name')?b.name:'';
+                    nameA = a.hasOwnProperty('name') ? a.name : '';
+                    nameB = b.hasOwnProperty('name') ? b.name : '';
                 } else if (querytype === 'tracks') {
-                    nameA = a.hasOwnProperty('title')?a.title:'';
-                    nameB = b.hasOwnProperty('title')?b.title:'';
+                    nameA = a.hasOwnProperty('title') ? a.title : '';
+                    nameB = b.hasOwnProperty('title') ? b.title : '';
                 } else {
                     return 0;
                 }
+// ****************************************************************************************
+// replace fix sorting
                 return nameA.localeCompare(nameB);
+// ****************************************************************************************
             });
             for (i = 0; (row = data[i]); i += 1) {
                 content += parseResponse({
@@ -62,15 +65,18 @@ function populateDB(options){
             }            
             data.sort(function(a, b){
                 if (querytype === 'childs' || querytype === 'categories') {
-                    nameA = a.hasOwnProperty('title')?a.title:'';
-                    nameB = b.hasOwnProperty('title')?b.title:'';
+                    nameA = a.hasOwnProperty('title') ? a.title : '';
+                    nameB = b.hasOwnProperty('title') ? b.title : '';
                 } else if (querytype === 'childs-stations' || querytype === 'stations') {
-                    nameA = a.hasOwnProperty('name')?a.name:'';
-                    nameB = b.hasOwnProperty('name')?b.name:'';
+                    nameA = a.hasOwnProperty('name') ? a.name : '';
+                    nameB = b.hasOwnProperty('name') ? b.name : '';
                 } else {
                     return 0;
                 }
+// ****************************************************************************************
+// replace fix sorting
                 return nameA.localeCompare(nameB);
+// ****************************************************************************************
             });
 
             for (i = 0; (row = data[i]); i += 1) {
@@ -94,12 +100,15 @@ function populateDB(options){
 
             data.sort(function(a, b){
                 if (path === 'Jamendo' && querytype === '') {
-                    nameA = a.hasOwnProperty('dispname')?a.dispname:'';
-                    nameB = b.hasOwnProperty('dispname')?b.dispname:'';
+                    nameA = a.hasOwnProperty('dispname') ? a.dispname : '';
+                    nameB = b.hasOwnProperty('dispname') ? b.dispname : '';
                 } else {
                     return 0;
                 }
+// ****************************************************************************************
+// replace fix sorting
                 return nameA.localeCompare(nameB);
+// ****************************************************************************************
             });
             for (i = 0; (row = data[i]); i += 1) {
                 content += parseResponse({
@@ -146,10 +155,13 @@ function populateDB(options){
                     nameA = a.hasOwnProperty('genre') ? a.genre : '';
                     nameB = b.hasOwnProperty('genre') ? b.genre : '';
                 } else {
+// ****************************************************************************************
+// replace fix sorting
                     nameA = a.hasOwnProperty('directory') ? a.directory : '';
                     nameB = b.hasOwnProperty('directory') ? b.directory : '';
                 }
                 return nameA.localeCompare(nameB);
+// ****************************************************************************************
             });
             if (path === 'Webradio') {
                 content += '<li id="webradio-add" class="db-webradio-add"><i class="fa fa-plus-circle db-icon"></i><span class="sn"><em>add new</em></span><span class="bl">add a webradio to your library</span></li>';
@@ -178,12 +190,6 @@ function populateDB(options){
         } else {
             breadcrumb.html('Artists/' + path);
         }
-    } else if (GUI.browsemode === 'composer') {
-        if (path === 'Composer') {
-            breadcrumb.html(path);
-        } else {
-            breadcrumb.html('Composer/' + path);
-        }
     } else if (GUI.browsemode === 'genre') {
         if (path === 'Genres') {
             breadcrumb.html(path);
@@ -191,8 +197,23 @@ function populateDB(options){
             breadcrumb.html('Genres/' + path);
         }
     } else {
-        breadcrumb.html(path);
+// ****************************************************************************************
+// add usb directory path link
+        var folder = path.split( '/' );
+        var folderPath = '';
+        var folderCrumb = '';
+        for ( i = 0; i < folder.length; i++ ) {
+            if ( i !== 0 ) {
+            	folderPath += '/';
+            	folderCrumb += ' / ';
+            }
+            folderPath += folder[ i ];
+            folderCrumb += '<a data-path="'+ folderPath +'">'+ folder[ i ] +'</a>';
+        }
+        breadcrumb.html( folderCrumb );
     }
+	$( '#db-currentpath' ).removeClass( 'hide' );
+// ****************************************************************************************
     $('#db-homeSetup').addClass('hide');
     if (uplevel) {
         var position = GUI.currentDBpos[GUI.currentDBpos[10]];
