@@ -2,14 +2,17 @@ Library Enhancement
 ---
 _Tested on RuneAudio 0.3 and 0.4b_
 
-- Breadcrumb path for shortcut jump to directories
+- Move path from bottom bar to top
+- Breadcrumb path links for shortcut jump to any directory in the path
+- Step back button to each directory in the path
 - Index bar for quick scroll to directories
+- Move `add` webradio from one in the list to top bar button
+- Hide bottom scroll buttons bar
 - Fix incorrect library sorting:
 	- Sort non-english language
-	- [Webradio import](https://github.com/rern/RuneAudio/tree/master/webradio)
-	- [MPD Upgrade](https://github.com/rern/RuneAudio/tree/master/mpd)
-	- MPD default sorting
-	- Some other things that could be fixed by changing sorting method from `(nameA < nameB)` to `nameA.localeCompare(nameB)`
+	- After [Webradio import](https://github.com/rern/RuneAudio/tree/master/webradio)
+	- After [MPD Upgrade](https://github.com/rern/RuneAudio/tree/master/mpd)
+	- MPD default sorting (sometimes)
 
 **Install**  
 from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)
