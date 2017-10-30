@@ -271,7 +271,7 @@ $( '#db-index li' ).click( function() {
 } );
 // index link height
 function indexheight() {
-	var indexheight = $( window ).height() - 150;
+	var indexheight = $( window ).height() - 160;
 	if ( indexheight > 400 ) {
 		var indexline = 26;
 		$( '.half' ).show();
