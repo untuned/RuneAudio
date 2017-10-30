@@ -1,3 +1,6 @@
+.btnlist-top {
+	padding: 0 40px 0 10px;
+}
 .btnlist-bottom {
 	display: none;
 }		
@@ -7,7 +10,7 @@
 	padding-bottom: 80px;
 }
 #db-currentpath {
-	width: calc(100% - 220px);
+	width: calc( 100% - 220px );
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -15,6 +18,9 @@
 #db-currentpath a,
 #db-currentpath i {
 	cursor: pointer;
+}
+#db-currentpath a {
+	color: #0095d8;
 }
 #db-currentpath i {
 	margin-top: 5px;
@@ -24,7 +30,7 @@
 #db-up,
 #db-webradio-add {
 	position: absolute;
-	right: 200px;
+	right: 230px;
 }
 #db-index {
 	position: fixed;
@@ -37,29 +43,9 @@
 }
 #db-index li {
 	text-align: center;
+	color: #0095d8;
 	cursor: pointer;
 }
 #db-index li:hover {
 	background: #34495e;
-}
-
-@media(max-height: 736px) {
-	#db-index {
-		line-height: 23px;
-	}
-}
-@media(max-height: 667px) {
-	#db-index {
-		line-height: 20px;
-	}
-}
-@media(max-height: 568px) {
-	#db-index {
-		line-height: 17px;
-	}
-}
-@media(max-height: 567px) {
-	.half {
-		display: none;
-	}		
 }
