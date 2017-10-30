@@ -222,9 +222,11 @@ function populateDB(options){
             folderCrumb += '<a data-path="'+ folderPath +'">'+ folder[ i ] +'</a>';
         }
         breadcrumb.html( folderCrumb );
-		$( '#db-currentpath, #db-index' ).removeClass( 'hide' );
+// *****
+	}
+// *****
+	$( '#db-currentpath, #db-index' ).removeClass( 'hide' );
 // ****************************************************************************************
-    }
     $('#db-homeSetup').addClass('hide');
     if (uplevel) {
         var position = GUI.currentDBpos[GUI.currentDBpos[10]];
@@ -238,6 +240,7 @@ function populateDB(options){
     }
 }
 
+// ****************************************************************************************
 // library directory path link
 $( '#db-home' ).click( function() {
 	renderLibraryHome();
@@ -261,4 +264,21 @@ $( '#db-index li' ).click( function() {
 		return $( this ).attr( 'data-path' ).match( new RegExp( datapathindex ) );
 	} );
 	if ( matcharray.length ) $( document ).scrollTop( matcharray[0].offsetTop - 80 );
+} );
+// index link height
+function indexheight() {
+	var indexheight = $( window ).height() - 150;
+	console.log(indexheight);
+	if ( indexheight > 400 ) {
+		var indexline = 26;
+		$( '.half' ).show();
+	} else {
+		var indexline = 13;
+		$( '.half' ).hide();
+	}
+	$( '#db-index' ).css( 'line-height', indexheight / indexline +'px' );
+}
+indexheight();
+window.addEventListener( 'orientationchange', function() {
+	indexheight();
 } );
