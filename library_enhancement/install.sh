@@ -52,6 +52,7 @@ i\
 }
 ' -e '/id="home-blocks"/ i\
 			<ul id="db-index" class="hide">\
+				<li>#</li>
 				<li>A</li>
 				<li class="half">B</li>
 				<li>C</li>
