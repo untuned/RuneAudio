@@ -27,7 +27,7 @@ wgetnc https://github.com/rern/RuneAudio/raw/master/library_browsing/libraryenha
 echo -e "$bar Modify files ..."
 file=/srv/http/app/templates/header.php
 echo $file
-sed -i $'/runeui.css/ a\
+sed -i $'/favicon.ico/ i\
     <link rel="stylesheet" href="<?=$this->asset(\'/css/libraryenha.css\')?>">
 ' $file
 
