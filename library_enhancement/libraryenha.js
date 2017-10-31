@@ -282,17 +282,17 @@ $( '#db-index li' ).click( function() {
 } );
 // index link height
 function indexheight() {
-	var indexheight = $( window ).height() - 160;
-	if ( indexheight > 400 ) {
+	var indexoffset = ( $( window ).width() > 500 && $( window ).height() ) > 500 ? 160 : 80
+	if ( $( window ).height() > 500 ) {
 		var indexline = 26;
 		$( '.half' ).show();
 	} else {
 		var indexline = 13;
 		$( '.half' ).hide();
 	}
-	$( '#db-index' ).css( 'line-height', indexheight / indexline +'px' );
+	$( '#db-index' ).css( 'line-height', ( $( window ).height() - indexoffset ) / indexline +'px' );
 }
 indexheight();
 window.addEventListener( 'orientationchange', function() {
-	indexheight();
+	setTimeout( indexheight(), 200 );
 } );
