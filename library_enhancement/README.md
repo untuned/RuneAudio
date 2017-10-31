@@ -13,7 +13,7 @@ _Tested on RuneAudio 0.3 and 0.4b_
 - **Index bar** for quick scroll to directories
 
 ### Bottom ar
-- Hide bottom scroll buttons bar
+- Hide scroll buttons
 
 ### Sorting
 - Fix incorrect **library sorting**:
