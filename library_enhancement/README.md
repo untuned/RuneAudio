@@ -1,6 +1,7 @@
 Library Enhancement
 ---
-_Tested on RuneAudio 0.3 and 0.4b_
+_Tested on RuneAudio 0.3 and 0.4b_  
+([RuneUI Enhancement](https://github.com/rern/RuneUI_enhancement) must be installed first)
 
 ### Top bar
 - Add **Folder button** for shortcut to Library home
