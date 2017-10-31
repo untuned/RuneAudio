@@ -15,7 +15,10 @@ if [[ -e /usr/local/bin/uninstall_brea.sh ]]; then
 	uninstall_brea.sh
 	redis-cli hdel addons brea
 fi
-
+if [[ ! -e /usr/local/bin/uninstall_enha.sh ]]; then
+	title "$bar RuneUI Enhancement must be installed first."
+	exit
+fi
 installstart $@
 
 getuninstall
