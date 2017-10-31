@@ -6,7 +6,7 @@ _Tested on RuneAudio 0.3 and 0.4b_
 - **Breadcrumb path links** for shortcut jump to any **directory** in the path
 - **Index bar** for quick scroll to directories
 - Move **Back button** to top bar
-- Move `add` webradio from one in the list to top bar button
+- Move **add webradio** from one in the list to top bar button
 - Hide bottom scroll buttons bar
 - Fix incorrect **library sorting**:
 	- Sort **non-english** language
