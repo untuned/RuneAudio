@@ -1,4 +1,5 @@
-.btnlist-bottom {
+.btnlist-bottom,
+#db-level-up {
 	display: none;
 }		
 #database-entries {
