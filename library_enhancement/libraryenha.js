@@ -262,6 +262,7 @@ $( '#db-up' ).click( function() {
 
 // index link
 $( '#db-index li' ).click( function() {
+	var topoffset = $( '#menu-top' ).css( 'top') === '0px' ? 80 : 40;
 	var indextext = $( this ).text();
 	if ( indextext === '#' ) {
 		$( document ).scrollTop( 0 );
@@ -277,7 +278,7 @@ $( '#db-index li' ).click( function() {
 	var matcharray = $( '#database-entries li' ).filter( function() {
 		return $( this ).attr( 'data-path' ).match( new RegExp( datapathindex ) );
 	} );
-	if ( matcharray.length ) $( document ).scrollTop( matcharray[0].offsetTop - 80 );
+	if ( matcharray.length ) $( document ).scrollTop( matcharray[0].offsetTop - topoffset );
 } );
 // index link height
 function indexheight() {
