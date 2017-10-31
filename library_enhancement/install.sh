@@ -41,8 +41,6 @@ file=/srv/http/app/templates/playback.php
 echo $file
 sed -i -e '/id="db-currentpath"/ {N;N; s/^/<!--libr/; s/$/libr-->/}
 ' -e '/id="db-level-up"/ {
-s/^/<!--libr/
-s/$/libr-->/
 i\
             <div id="db-currentpath" class="hide">\
                 <i id="db-home" class="fa fa-folder-open"></i> <span>Home</span>\
