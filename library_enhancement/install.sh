@@ -45,7 +45,7 @@ i\
             <div id="db-currentpath" class="hide">\
                 <i id="db-home" class="fa fa-folder-open"></i> <span>Home</span>\
                 <i id="db-up" class="fa fa-arrow-left"></i>\
-				<i id="db-webradio-add" class="fa fa-plus hide"></i>\
+				<i id="db-webradio-add" class="fa fa-plus-circle hide"></i>\
             </div>
 }
 ' -e '/id="home-blocks"/ i\
