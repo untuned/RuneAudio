@@ -1,6 +1,3 @@
-.btnlist-top {
-	padding: 0 40px 0 10px;
-}
 .btnlist-bottom {
 	display: none;
 }		
@@ -30,7 +27,7 @@
 #db-up,
 #db-webradio-add {
 	position: absolute;
-	right: 230px;
+	right: 200px;
 }
 #db-index {
 	position: fixed;
