@@ -193,19 +193,19 @@ function populateDB(options){
         if (path === 'Albums') {
             breadcrumb.html(path);
         } else {
-            breadcrumb.html('Albums/' + path);
+            breadcrumb.html('Albums / ' + path);
         }
     } else if (GUI.browsemode === 'artist') {
         if (path === 'Artists') {
             breadcrumb.html(path);
         } else {
-            breadcrumb.html('Artists/' + path);
+            breadcrumb.html('Artists / ' + path);
         }
     } else if (GUI.browsemode === 'genre') {
         if (path === 'Genres') {
             breadcrumb.html(path);
         } else {
-            breadcrumb.html('Genres/' + path);
+            breadcrumb.html('Genres / ' + path);
         }
     } else {
 // ****************************************************************************************
