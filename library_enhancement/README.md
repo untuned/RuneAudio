@@ -3,6 +3,7 @@ Library Enhancement
 _Tested on RuneAudio 0.3 and 0.4b_
 
 - Move path from bottom bar to top
+- Add **Folder button** for shortcut to Library home
 - **Breadcrumb path links** for shortcut jump to any **directory** in the path
 - **Index bar** for quick scroll to directories
 - Move **back button** from bottom bar to top
