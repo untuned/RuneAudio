@@ -1,7 +1,11 @@
 Library Enhancement
 ---
-_Tested on RuneAudio 0.3 and 0.4b_  
-([RuneUI Enhancement](https://github.com/rern/RuneUI_enhancement) must be installed first)
+_Tested on RuneAudio 0.3 and 0.4b_
+
+### Required
+- [RuneUI Enhancement](https://github.com/rern/RuneUI_enhancement) must be already installed
+	- Top and bottom menu will be hidden
+	- Switch to playback by swipe left/right only
 
 ### Top bar
 - Add **Folder button** for shortcut to Library home
