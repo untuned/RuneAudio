@@ -191,21 +191,21 @@ function populateDB(options){
     var breadcrumb = $('span', '#db-currentpath');
     if (GUI.browsemode === 'album') {
         if (path === 'Albums') {
-            breadcrumb.html(path);
+            breadcrumb.html('ALBUMS');
         } else {
-            breadcrumb.html('Albums / ' + path);
+            breadcrumb.html('ALBUMS / ' + path);
         }
     } else if (GUI.browsemode === 'artist') {
         if (path === 'Artists') {
-            breadcrumb.html(path);
+            breadcrumb.html('ARTISTS');
         } else {
-            breadcrumb.html('Artists / ' + path);
+            breadcrumb.html('ARTISTS / ' + path);
         }
     } else if (GUI.browsemode === 'genre') {
         if (path === 'Genres') {
-            breadcrumb.html(path);
+            breadcrumb.html('GENRES');
         } else {
-            breadcrumb.html('Genres / ' + path);
+            breadcrumb.html('GENRES / ' + path);
         }
     } else {
 // ****************************************************************************************
