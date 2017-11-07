@@ -115,6 +115,9 @@ wlans
 - get the last `<number>` in URL
 - get mount `<name>`
 ```sh
+# remove from Sources page
 redis-cli del mount_<number>
+
+# remove from Library page
 rm /mnt/MPD/NAS/<name>
 ```
