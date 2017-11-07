@@ -109,3 +109,12 @@ wlan_autoconnect
 wlan0_hash
 wlans
 ```
+
+**delete network mount**  
+`Menu` > `Sources` > select mount
+- get the last `<number>` in URL
+- get mount `<name>`
+```sh
+redis-cli del mount_<number>
+rm /mnt/MPD/NAS/<name>
+```
