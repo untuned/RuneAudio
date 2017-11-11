@@ -10,8 +10,6 @@ if [[ $( mpd -V | head -n 1 ) != 'Music Player Daemon 0.19.'* ]]; then
 	exit
 fi
 
-checkspace 250000
-
 title -l '=' "$bar Upgrade MPD ..."
 timestart l
 
