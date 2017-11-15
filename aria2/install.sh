@@ -18,13 +18,12 @@ echo -e "$bar Aria2 package ..."
 pacman -S --noconfirm aria2 glibc
 
 if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-	mkdir -p $mnt/aria2
+	mnt=$( mount | grep '/dev/sda1' | cut -d ' ' -f3 )
 	path=$mnt/aria2
 else
-	mkdir -p /root/aria2
 	path=/root/aria2
 fi
+mkdir -p $path
 
 echo -e "$bar WebUI ..."
 wgetnc https://github.com/ziahamza/webui-aria2/archive/master.zip
