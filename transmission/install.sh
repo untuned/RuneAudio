@@ -32,11 +32,9 @@ ln -s /lib/libevent-2.1.so.6.0.2 /lib/libevent-2.0.so.5
 rm /usr/lib/tmpfiles.d/transmission.conf
 
 if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-	mkdir -p $mnt/transmission
+	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
 	path=$mnt/transmission
 else
-	mkdir -p /root/transmission
 	path=/root/transmission
 fi
 mkdir -p $path/{incomplete,watch}
