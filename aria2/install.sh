@@ -18,7 +18,7 @@ echo -e "$bar Aria2 package ..."
 pacman -S --noconfirm aria2 glibc
 
 if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | cut -d ' ' -f3 )
+	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
 	path=$mnt/aria2
 else
 	path=/root/aria2
