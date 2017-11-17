@@ -7,6 +7,10 @@ alias=lyri
 uninstallstart $1
 
 echo -e "$bar Restore files ..."
+file=/srv/http/app/templates/header.php
+echo $file
+sed -i '/lyrics.css/ d' $file
+
 file=/srv/http/app/templates/footer.php
 echo $file
 sed -i '/lyrics.js/ d' $file
