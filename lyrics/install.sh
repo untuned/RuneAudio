@@ -5,6 +5,10 @@
 alias=lyri
 
 . /srv/http/addonstitle.sh
+if [[ -e /usr/local/bin/uninstall_enha.sh ]]; then
+	title "$info RuneUI Enhancement must be installed"
+	exit
+fi
 
 installstart $@
 
@@ -14,7 +18,12 @@ echo -e "$bar Add new files ..."
 file=/srv/http/assets/js/lyrics.js
 echo $file
 wgetnc https://github.com/rern/RuneAudio/raw/master/lyrics/lyrics.js -P /srv/http/assets/js
-chmod 755 $file
+chown http:http $file
+
+echo -e "$bar Modify files ..."
+file=/srv/http/app/templates/footer.php
+echo $file
+echo '<script src="<?=$this->asset('"'"'/js/lyrics.js'"'"')?>"></script>' >> $file
 
 installfinish $@
 
