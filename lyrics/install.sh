@@ -5,10 +5,6 @@
 alias=lyri
 
 . /srv/http/addonstitle.sh
-if [[ -e /usr/local/bin/uninstall_enha.sh ]]; then
-	title "$info RuneUI Enhancement must be installed"
-	exit
-fi
 
 installstart $@
 
