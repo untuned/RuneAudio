@@ -108,9 +108,10 @@ resetosmc() {
 }
 
 hardreset() {
+	[[ $partroot == /dev/mmcblk0p9 ]] && runeversion=RuneAudio || runeversion=Rune04b
 	echo -e "\n\e[30m\e[43m ? \e[0m Reset to virgin OS:"
 	echo -e '  \e[36m0\e[m Cancel'
-	echo -e '  \e[36m1\e[m Rune'
+	echo -e "  \e[36m1\e[m $runeversion"
 	echo -e '  \e[36m2\e[m OSMC'
 	echo -e '  \e[36m3\e[m NOOBS: OSMC + Rune'
 	echo
