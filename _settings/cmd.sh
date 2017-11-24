@@ -108,6 +108,7 @@ resetosmc() {
 }
 
 hardreset() {
+	partroot=$( mount | grep 'on / ' | cut -d' ' -f1 )
 	[[ $partroot == /dev/mmcblk0p9 ]] && runeversion=RuneAudio || runeversion=Rune04b
 	echo -e "\n\e[30m\e[43m ? \e[0m Reset to virgin OS:"
 	echo -e '  \e[36m0\e[m Cancel'
