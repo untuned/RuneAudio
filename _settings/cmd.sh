@@ -75,18 +75,7 @@ setup() {
 		./setup.sh
 	fi
 }
-resetrune04() {
-	. runereset04 n
-	if [[ $success != 1 ]]; then
-		echo -e "\e[37m\e[41m ! \e[0m RuneAudio 0.4b reset failed."
-		return
-	fi
-	# preload command shortcuts
-	mmc 9
-	wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /tmp/p9/etc/profile.d
-	
-	[[ $ansre == 1 ]] && bootrune04
-}
+
 resetrune() {
 	. runereset n
 	if [[ $success != 1 ]]; then
@@ -94,10 +83,13 @@ resetrune() {
 		return
 	fi
 	# preload command shortcuts
-	mmc 11
-	wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /tmp/p11/etc/profile.d
+	partroot=$( mount | grep 'on / ' | cut -d' ' -f1 )
+	[[ $partroot == /dev/mmcblk0p9 ]] && partreset=11 || partreset=9
+	mmc $partreset
+	wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /tmp/p$partreset/etc/profile.d
 	
-	[[ $ansre == 1 ]] && bootrune
+	[[ $ansre != 1 ]] && return
+	[[ $partreset == 9 ]] && bootx 8 || bootx 10
 }
 resetosmc() {
 	. osmcreset n
