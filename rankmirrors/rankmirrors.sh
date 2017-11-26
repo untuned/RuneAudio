@@ -70,6 +70,7 @@ echo -e "$rankfile" > $list
 rm -rf $tmpdir
 
 echo -e "$bar Update package database ..."
+rm -f /var/lib/pacman/db.lck
 pacman -Sy
 
 timestop
