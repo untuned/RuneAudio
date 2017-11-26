@@ -5,20 +5,14 @@ rm $0
 [[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
 
-if [[ ! -e /usr/bin/sfdisk ]] || [[ ! -e /usr/bin/python2 ]]; then
-	title -l '=' "$info Unable to continue with this version."
-	title -n "sfdisk and python2 expected but not found."
-	exit
-fi
-
 freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
-freemb=$( python2 -c "print($freekb / 1000)" ) # bash itself cannot do float
+freemb=$(( $freekb / 1000 ))
 devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 disk=/dev/${part::-2}
 
 unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
-unpartmb=$( python2 -c "print($unpartb / 1000000)" )
+unpartmb=$(( $unpartb / 1000000 ))
 summb=$(( $freemb + $unpartmb ))
 # noobs has 3MB unpartitioned space
 if [[ $unpartmb -lt 10 ]]; then
@@ -71,7 +65,7 @@ if [[ $? != 0 ]]; then
 	exit
 else
 	freekb=$( df | grep '/$' | awk '{print $4}' )
-	freemb=$( python2 -c "print($freekb / 1000)" )
+	freemb=$(( $freekb / 1000 ))
 	
 	redis-cli hset addons expa 1 &> /dev/null # mark as expanded - disable webui button
 	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor $freemb ) MB free space."
