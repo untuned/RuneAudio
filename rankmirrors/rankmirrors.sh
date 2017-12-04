@@ -2,7 +2,7 @@
 
 rm $0
 
-sec=3 # each server
+sec=5 # each server
 
 # rankmirrors.sh
 # mitigate download errors by enable(uncomment) and 
@@ -16,7 +16,7 @@ timestart
 tmpdir=/tmp/rankmirrors/
 rm -rf $tmpdir && mkdir $tmpdir
 tmplist=/tmp/mirrorlist
-wgetnc https://github.com/rern/RuneAudio/raw/UPDATE/rankmirrors/mirrorslist -P $tmplist
+wgetnc https://github.com/rern/RuneAudio/raw/master/rankmirrors/mirrorlist -P /tmp
 
 dlfile='armv7h/community/community.db' # download test file
 # convert mirrorlist to url list
@@ -65,7 +65,7 @@ echo
 echo -e "$rankfile" | sed -n 1,3p
 
 list=/etc/pacman.d/mirrorlist
-[[ ! -e $list.backup ]] && cp $list &=$list.backup
+[[ ! -e $list.backup ]] && cp $list $list.backup
 echo -e "$rankfile" > $list
 rm -rf $tmpdir
 
