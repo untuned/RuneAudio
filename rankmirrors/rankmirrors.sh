@@ -15,9 +15,8 @@ timestart
 
 tmpdir=/tmp/rankmirrors/
 rm -rf $tmpdir && mkdir $tmpdir
-list=/etc/pacman.d/mirrorlist
 tmplist=/tmp/mirrorlist
-cp $list $tmplist
+wgetnc https://github.com/rern/RuneAudio/raw/UPDATE/rankmirrors/mirrorslist -P $tmplist
 
 dlfile='armv7h/community/community.db' # download test file
 # convert mirrorlist to url list
@@ -65,7 +64,8 @@ echo -e "$info Mirror list was updated with these servers top the list:"
 echo
 echo -e "$rankfile" | sed -n 1,3p
 
-[ ! -f $list'.original' ] && cp $list $list'.original' # skip if already backup
+list=/etc/pacman.d/mirrorlist
+[[ ! -e $list.backup ]] && cp $list &=$list.backup
 echo -e "$rankfile" > $list
 rm -rf $tmpdir
 
