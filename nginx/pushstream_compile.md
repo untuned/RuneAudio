@@ -9,6 +9,7 @@ wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirror
 pacman -S base-devel pcre zlib guile
 
 useradd -m x
+passwd x
 su x
 cd
 
