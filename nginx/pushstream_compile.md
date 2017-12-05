@@ -1,7 +1,7 @@
 ```sh
 # for pacman cache if available
 rm -rf /var/cache/pacman
-ln -sf /mnt/hdd/varcache/pacman /var/cache/pacman
+ln -sf /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
 
 # rankmirrors
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh -P /usr/local/bin; chmod +x /usr/local/bin/rankmirrors.sh; rankmirrors.sh
