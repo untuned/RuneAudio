@@ -1,16 +1,9 @@
 ```sh
-# for pacman cache if available
-rm -rf /var/cache/pacman
-ln -sf /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
+# install ArchLinuxArm os
 
-# rankmirrors
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/rankmirrors/rankmirrors.sh -P /usr/local/bin; chmod +x /usr/local/bin/rankmirrors.sh; rankmirrors.sh
+pacman -S base-devel pcre zlib guile git wget openssl
 
-pacman -S base-devel pcre zlib guile
-
-useradd -m x
-passwd x
-su x
+su alarm
 cd
 
 git clone https://github.com/wandenberg/nginx-push-stream-module.git
