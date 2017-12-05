@@ -34,4 +34,4 @@ sudo /usr/local/sbin/nginx -c $NGINX_PUSH_STREAM_MODULE_PATH/misc/nginx.conf -t
 	# nginx: configuration file $NGINX_PUSH_STREAM_MODULE_PATH/misc/nginx.conf test is successful
 
 # run
-sudo /usr/local/sbin/nginx -c $NGINX_PUSH_STREAM_MODULE_PATH/misc/nginx.conf
+sudo /usr/local/sbin/nginx
