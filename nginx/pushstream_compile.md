@@ -3,7 +3,8 @@
 
 pacman -S base-devel pcre zlib guile git wget openssl
 
-useradd nginx
+useradd nginx    # fix getpwnam("nginx") failed
+
 passwd nginx
 su nginx
 cd
@@ -31,4 +32,6 @@ sudo /usr/local/sbin/nginx -v
 sudo /usr/local/sbin/nginx -c $NGINX_PUSH_STREAM_MODULE_PATH/misc/nginx.conf -t
 	# nginx: the configuration file $NGINX_PUSH_STREAM_MODULE_PATH/misc/nginx.conf syntax is ok
 	# nginx: configuration file $NGINX_PUSH_STREAM_MODULE_PATH/misc/nginx.conf test is successful
-	
+
+# run
+sudo /usr/local/sbin/nginx -c $NGINX_PUSH_STREAM_MODULE_PATH/misc/nginx.conf
