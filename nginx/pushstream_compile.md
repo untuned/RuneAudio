@@ -3,12 +3,6 @@
 
 pacman -S base-devel pcre zlib guile git wget openssl
 
-useradd nginx    # fix getpwnam("nginx") failed
-
-passwd nginx
-su nginx
-cd
-
 mkdir /usr/local/nginx/logs
 
 NGINX_PUSH_STREAM_MODULE_PATH=$PWD/nginx-push-stream-module
