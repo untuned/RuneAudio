@@ -8,7 +8,7 @@
 # ALARM: Kevin Mihelich 
 
 pkgname=nginx
-pkgver=1.9.9
+pkgver=1.13.7
 redisver=0.3.8
 pkgrel=2
 pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server'
