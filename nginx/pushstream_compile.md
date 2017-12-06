@@ -13,14 +13,14 @@ sed -i e 's/pkgver=.*/pkgver=1.9.9/
 ' -e '/sed -e/ d
 ' PKGBUILD
 
-pacman -S base-devel pcre zlib guile git wget openssl geoip mailcap mercurial perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached memcached ffmpeg
+pacman -Sy base-devel pcre zlib guile git wget openssl geoip mailcap mercurial perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached memcached ffmpeg
 
 makepkg
 
 
 ### make #######################################
 
-pacman -S base-devel pcre zlib guile git wget openssl
+pacman -Sy base-devel pcre zlib guile git wget openssl
 
 mkdir /usr/local/nginx/logs
 
