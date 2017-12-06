@@ -2,7 +2,7 @@
 # install ArchLinuxArm os
 
 ### makepkg ###################################
-
+# fix nginx not support 'aarch64'
 sed -i 's/aarch64/x86_64/' /etc/makepkg.conf
 
 mkdir nginx
