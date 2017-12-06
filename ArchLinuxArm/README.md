@@ -1,13 +1,19 @@
 ArchLinuxArm
 ---
 
-### Download  
-- https://archlinuxarm.org/about/downloads
+### Download
+```sh
+# RPI 3
+wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
+# RPI 2
+wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+```
 
-## SD Card > 4GB  
-- Gparted :  
-- Partition #1 [BOOT] fat32 - 100MB  
-- Partition #2 [ROOT] ext4 - the rest  
+### Partition SD Card
+```
+Partition #1   BOOT   fat32   100MB  
+Partition #2   ROOT   ext4    the rest  
+```
 
 ### Extract files  
 ```sh
