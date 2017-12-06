@@ -1,0 +1,71 @@
+# $Id$
+# Maintainer: Bartłomiej Piotrowski 
+# Maintainer: Sébastien Luttringer
+# Contributor: Sergej Pupykin 
+# Contributor: Miroslaw Szot 
+# Contributor: Daniel Micay 
+
+# ALARM: Kevin Mihelich 
+
+pkgname=nginx
+pkgver=1.9.9
+pkgrel=2
+pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server'
+arch=(x86_64)
+url='https://nginx.org'
+license=(custom)
+depends=(pcre zlib openssl geoip mailcap)
+makedepends=(mercurial)
+checkdepends=(perl perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached
+              memcached ffmpeg inetutils) 
+backup=(etc/nginx/fastcgi.conf
+        etc/nginx/fastcgi_params
+        etc/nginx/koi-win
+        etc/nginx/koi-utf
+        etc/nginx/nginx.conf
+        etc/nginx/scgi_params
+        etc/nginx/uwsgi_params
+        etc/nginx/win-utf
+        etc/logrotate.d/nginx)
+source=($url/download/nginx-$pkgver.tar.gz{,.asc})
+validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin 
+md5sums=('4d2fc76211435f029271f1cf6d7eeae3'
+         'SKIP'
+         'SKIP'
+         'ef491e760e7c1ffec9ca25441a150c83'
+         '6a01fb17af86f03707c8ae60f98a2dc2')
+
+build() {
+  cd $pkgname-$pkgver
+
+  ./configure \
+    --prefix=/etc/nginx \
+    --conf-path=/etc/nginx/nginx.conf \
+    --sbin-path=/usr/bin/nginx \
+    --pid-path=/run/nginx.pid \
+    --lock-path=/run/lock/nginx.lock \
+    --user=http \
+    --group=http \
+    --http-log-path=/var/log/nginx/access.log \
+    --error-log-path=stderr \
+    --http-client-body-temp-path=/var/lib/nginx/client-body \
+    --http-proxy-temp-path=/var/lib/nginx/proxy \
+    --http-fastcgi-temp-path=/var/lib/nginx/fastcgi \
+    --http-scgi-temp-path=/var/lib/nginx/scgi \
+    --http-uwsgi-temp-path=/var/lib/nginx/uwsgi \
+    --with-cc-opt="$CFLAGS $CPPFLAGS" \
+    --with-ld-opt="$LDFLAGS" \
+	--add-module=$HOME/nginx-push-stream-module
+
+  make
+}
+
+package() {
+  cd $pkgname-$pkgver
+  make DESTDIR="$pkgdir" install
+
+  for i in ftdetect indent syntax; do
+    install -Dm644 contrib/vim/$i/nginx.vim \
+      "$pkgdir/usr/share/vim/vimfiles/$i/nginx.vim"
+  done
+}
