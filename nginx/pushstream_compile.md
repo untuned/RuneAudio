@@ -10,12 +10,14 @@ cd nginx
 
 wget https://archlinuxarm.org/packages/armv7h/nginx/files/PKGBUILD
 sed -i e 's/pkgver=.*/pkgver=1.9.9/
+' -e '^source=/ s/$/)/
+' -e '/hg.nginx/,/logrotate)/ d
 ' -e '/sed -e/ d
 ' PKGBUILD
 
 pacman -Sy base-devel pcre zlib guile git wget openssl geoip mailcap mercurial perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached memcached ffmpeg
 
-makepkg
+makepkg --skipinteg
 
 
 ### make #######################################
