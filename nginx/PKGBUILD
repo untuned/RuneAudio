@@ -9,6 +9,7 @@
 
 pkgname=nginx
 pkgver=1.9.9
+redisver=0.3.8
 pkgrel=2
 pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server'
 arch=(x86_64)
@@ -27,13 +28,12 @@ backup=(etc/nginx/fastcgi.conf
         etc/nginx/uwsgi_params
         etc/nginx/win-utf
         etc/logrotate.d/nginx)
-source=($url/download/nginx-$pkgver.tar.gz{,.asc})
+source=(
+        $url/download/nginx-$pkgver.tar.gz{,.asc}
+        https://people.freebsd.org/~osa/ngx_http_redis-$redisver.tar.gz)
 validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin 
-md5sums=('4d2fc76211435f029271f1cf6d7eeae3'
-         'SKIP'
-         'SKIP'
-         'ef491e760e7c1ffec9ca25441a150c83'
-         '6a01fb17af86f03707c8ae60f98a2dc2')
+md5sums=('SKIP'
+         'SKIP')
 
 build() {
   cd $pkgname-$pkgver
@@ -56,6 +56,7 @@ build() {
     --with-cc-opt="$CFLAGS $CPPFLAGS" \
     --with-ld-opt="$LDFLAGS" \
 	--add-module=$HOME/nginx-push-stream-module
+	--add-dynamic-module=$HOME/ngx_http_redis-$redisver
 
   make
 }
