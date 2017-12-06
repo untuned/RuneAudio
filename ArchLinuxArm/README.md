@@ -18,7 +18,11 @@ Partition #2   ROOT   ext4    the rest
 
 ### Extract files  
 ```sh
-# make install bsdtar (fix - default package < 3.3)
+# bsdtar
+apt-cache policy bsdtar
+	# version 3.3+
+apt install bsdtar
+	# otherwise make install
 file=libarchive-3.3.2.tar.gz
 wget https://www.libarchive.org/downloads/$file
 tar xzf $file
