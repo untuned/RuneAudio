@@ -5,7 +5,7 @@ install [ArchLinuxArm](https://github.com/rern/RuneAudio/tree/master/ArchLinuxAr
 
 ```sh
 # fix - nginx not support 'aarch64'
-sed -i 's/aarch64/x86_64/' /etc/makepkg.conf
+sed -i 's/aarch64/armv7h/' /etc/makepkg.conf
 
 pacman -Sy base-devel pcre zlib guile git wget openssl geoip mailcap mercurial perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached memcached ffmpeg
 
