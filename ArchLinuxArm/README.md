@@ -28,6 +28,7 @@ make
 sudo make install
 
 # extract
+cd ..
 bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
 
 mv -r /media/x/ROOT/boot/* /media/x/BOOT
