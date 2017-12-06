@@ -9,21 +9,33 @@ ArchLinuxArm
 - Partition #1 [BOOT] fat32 - 100MB  
 - Partition #2 [ROOT] ext4 - the rest  
 
-### Extract files)  
+### Extract files  
 ```sh
-# do not use bsdtar
-tar xzpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
+# make install bsdtar (fix - default package < 3.3)
+file=libarchive-3.3.2.tar.gz
+wget https://www.libarchive.org/downloads/$file
+tar xzf $file
+cd ${file/.tar.gz}
+./configure
+make
+sudo make install
+
+# extract
+bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
+
 mv -r /media/x/ROOT/boot/* /media/x/BOOT
 ```
 
-### Login  
+### Boot from SD card
+
+### SSH / SCP login  
 - id / password : alarm / alarm
+- allow root ssh login and set password
 ```sh
 su
 
 nano /etc/ssh/sshd_config
-# PermitRootLogin yes
+	# PermitRootLogin yes
 systemctl restart sshd
 
 passwd
-# rune
