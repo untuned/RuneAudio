@@ -5,6 +5,8 @@
 # fix nginx not support 'aarch64'
 sed -i 's/aarch64/x86_64/' /etc/makepkg.conf
 
+wget git clone https://github.com/wandenberg/nginx-push-stream-module.git
+
 mkdir nginx
 cd nginx
 
