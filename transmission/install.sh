@@ -48,17 +48,15 @@ dir=/etc/systemd/system/transmission.service.d
 mkdir $dir
 echo "[Service]
 User=root
-Environment=TRANSMISSION_HOME=$path
 Environment=TRANSMISSION_WEB_HOME=$path/web
 " > $dir/override.conf
 systemctl daemon-reload
 
 # create settings.json
-file=$path/settings.json
-[[ -e $file ]] && rm $file
 systemctl start trans
 systemctl stop trans
 
+file=/root/.config/transmission-daemon/settings.json
 if [[ $1 != u ]]; then
 	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
 	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
@@ -78,7 +76,7 @@ if [[ $1 != u ]]; then
 		' $file
 	fi
 else
-	mv /tmp/settings.json $path
+	mv -f /tmp/settings.json $file
 fi
 
 # web ui alternative
