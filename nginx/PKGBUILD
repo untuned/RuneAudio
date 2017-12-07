@@ -33,34 +33,30 @@ validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin
 md5sums=('SKIP')
 
 _common_flags=(
-  --with-compat
-  --with-debug
-  --with-file-aio
-  --with-http_addition_module
-  --with-http_auth_request_module
-  --with-http_dav_module
-  --with-http_degradation_module
-  --with-http_flv_module
-  --with-http_geoip_module
-  --with-http_gunzip_module
-  --with-http_gzip_static_module
-  --with-http_mp4_module
-  --with-http_realip_module
-  --with-http_secure_link_module
-  --with-http_slice_module
-  --with-http_ssl_module
-  --with-http_stub_status_module
-  --with-http_sub_module
-  --with-http_v2_module
-  --with-mail
-  --with-mail_ssl_module
-  --with-pcre-jit
-  --with-stream
-  --with-stream_geoip_module
-  --with-stream_realip_module
-  --with-stream_ssl_module
-  --with-stream_ssl_preread_module
-  --with-threads
+	--with-file-aio \
+	--with-http_gzip_static_module \
+	--without-http_access_module \
+	--without-http_auth_basic_module \
+	--without-http_autoindex_module \
+	--without-http_browser_module \
+	--without-http_charset_module \
+	--without-http_empty_gif_module \
+	--without-http_geo_module \
+	--without-http_limit_conn_module \
+	--without-http_limit_req_module \
+	--without-http_map_module \
+	--without-http_memcached_module \
+	--without-http_referer_module \
+	--without-http_scgi_module \
+	--without-http_split_clients_module \
+	--without-http_ssi_module \
+	--without-http_upstream_hash_module \
+	--without-http_upstream_ip_hash_module \
+	--without-http_upstream_keepalive_module \
+	--without-http_upstream_least_conn_module \
+	--without-http_upstream_zone_module \
+	--without-http_userid_module \
+	--without-http_uwsgi_module
 )
 build() {
   cd $pkgname-$pkgver
@@ -69,12 +65,12 @@ build() {
     --prefix=/etc/nginx \
     --conf-path=/etc/nginx/nginx.conf \
     --sbin-path=/usr/bin/nginx \
-    --pid-path=/run/nginx.pid \
-    --lock-path=/run/lock/nginx.lock \
+    --pid-path=/var/run/nginx.pid \
+    --lock-path=/var/run/lock/nginx.lock \
     --user=http \
     --group=http \
-    --http-log-path=/var/log/nginx/access.log \
-    --error-log-path=stderr \
+    --http-log-path=/var/log/runeaudio/runeui.log \
+    --error-log-path=/var/log/runeaudio/runeui_error.log \
     --http-client-body-temp-path=/var/lib/nginx/client-body \
     --http-proxy-temp-path=/var/lib/nginx/proxy \
     --http-fastcgi-temp-path=/var/lib/nginx/fastcgi \
@@ -90,6 +86,10 @@ build() {
 package() {
   cd $pkgname-$pkgver
   make DESTDIR="$pkgdir" install
+
+  sed -i -e 's|worker_processes  1|worker_processes auto|
+  ' -e 's|root\s*html|root   /usr/share/nginx/html|
+  ' /etc/nginx/nginx.conf
 
   for i in ftdetect indent syntax; do
     install -Dm644 contrib/vim/$i/nginx.vim \
