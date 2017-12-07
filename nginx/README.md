@@ -6,10 +6,9 @@ wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx-1.13.7-2-any.pkg.t
 pacman -U nginx-1.13.7-2-any.pkg.tar.xz
 
 # php
-pacman -Sy php
+pacman -Sy php php-fpm autoconf glibc
 
 # phpredis
-pacman -S autoconf
 wget https://github.com/phpredis/phpredis/archive/develop.zip
 bsdtar xvf develop.zip
 cd phpredis-develop
