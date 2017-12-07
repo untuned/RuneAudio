@@ -13,6 +13,7 @@ git clone https://github.com/wandenberg/nginx-push-stream-module.git
 wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx.logrotate
 wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx.service
 
+cd
 mkdir nginx
 cd nginx
 
