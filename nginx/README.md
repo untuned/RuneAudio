@@ -9,10 +9,10 @@ pacman -U nginx-1.13.7-2-any.pkg.tar.xz
 pacman -Sy php
 
 # phpredis
-pacman -S base-devel
+pacman -S autoconf
 wget https://github.com/phpredis/phpredis/archive/develop.zip
 bsdtar xvf develop.zip
-cd develop
+cd phpredis-develop
 phpize
 ./configure
 make
