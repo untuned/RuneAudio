@@ -29,9 +29,7 @@ backup=(etc/nginx/fastcgi.conf
         etc/nginx/win-utf
         etc/logrotate.d/nginx
 )
-source=($url/download/nginx-$pkgver.tar.gz{,.asc}
-        'nginx.service'
-        'nginx.logrotate')
+source=($url/download/nginx-$pkgver.tar.gz{,.asc})
 validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin 
 md5sums=('SKIP')
 
