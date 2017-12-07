@@ -62,6 +62,7 @@ _common_flags=(
 build() {
   cd $pkgname-$pkgver
 
+  rm -rf nginx-push-stream-module
   git clone https://github.com/wandenberg/nginx-push-stream-module.git
   wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx.logrotate
   wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx.service
@@ -94,7 +95,7 @@ package() {
 
   sed -i -e 's|worker_processes  1|worker_processes auto|
   ' -e 's|root\s*html|root   /usr/share/nginx/html|
-  ' /etc/nginx/nginx.conf
+  ' "$pkgdir"/etc/nginx/nginx.conf
   rm "$pkgdir"/etc/nginx/*.default
 
   install -d "$pkgdir"/var/lib/nginx
@@ -102,12 +103,8 @@ package() {
   install -d "$pkgdir"/usr/share/nginx
   mv "$pkgdir"/etc/nginx/html/ "$pkgdir"/usr/share/nginx
   
-  install -Dm644 nginx.logrotate "$pkgdir"/etc/logrotate.d/nginx
+  mkdir -p "$pkgdir"/usr/lib/systemd/system/
   install -Dm644 nginx.service "$pkgdir"/usr/lib/systemd/system/
+  install -Dm644 nginx.logrotate "$pkgdir"/etc/logrotate.d/nginx
   rm -rf "$pkgdir"/var/run
-
-  for i in ftdetect indent syntax; do
-    install -Dm644 contrib/vim/$i/nginx.vim \
-      "$pkgdir/usr/share/vim/vimfiles/$i/nginx.vim"
-  done
 }
