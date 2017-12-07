@@ -29,7 +29,9 @@ backup=(etc/nginx/fastcgi.conf
         etc/nginx/win-utf
         etc/logrotate.d/nginx
 )
-source=($url/download/nginx-$pkgver.tar.gz{,.asc})
+source=($url/download/nginx-$pkgver.tar.gz{,.asc}
+        'nginx.service'
+        'nginx.logrotate')
 validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin 
 md5sums=('SKIP')
 
@@ -79,7 +81,7 @@ build() {
     --http-uwsgi-temp-path=/var/lib/nginx/uwsgi \
     --with-cc-opt="$CFLAGS $CPPFLAGS" \
     --with-ld-opt="$LDFLAGS" \
-	--add-module=$HOME/nginx-push-stream-module
+	--add-module="$HOME"/nginx-push-stream-module
 
   make
 }
@@ -97,6 +99,10 @@ package() {
   install -d "$pkgdir"/var/log
   install -d "$pkgdir"/usr/share/nginx
   mv "$pkgdir"/etc/nginx/html/ "$pkgdir"/usr/share/nginx
+  
+  install -Dm644 "$HOME"/nginx.logrotate "$pkgdir"/etc/logrotate.d/nginx
+  install -Dm644 "$HOME"/nginx.service "$pkgdir"/usr/lib/systemd/system/
+  rm -rf "$pkgdir"/var/run
 
   for i in ftdetect indent syntax; do
     install -Dm644 contrib/vim/$i/nginx.vim \
