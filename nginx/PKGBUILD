@@ -90,6 +90,12 @@ package() {
   sed -i -e 's|worker_processes  1|worker_processes auto|
   ' -e 's|root\s*html|root   /usr/share/nginx/html|
   ' /etc/nginx/nginx.conf
+  rm "$pkgdir"/etc/nginx/*.default
+
+  install -d "$pkgdir"/var/lib/nginx
+  install -d "$pkgdir"/var/log
+  install -d "$pkgdir"/usr/share/nginx
+  mv "$pkgdir"/etc/nginx/html/ "$pkgdir"/usr/share/nginx
 
   for i in ftdetect indent syntax; do
     install -Dm644 contrib/vim/$i/nginx.vim \
