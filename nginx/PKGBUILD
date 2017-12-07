@@ -62,6 +62,10 @@ _common_flags=(
 build() {
   cd $pkgname-$pkgver
 
+  git clone https://github.com/wandenberg/nginx-push-stream-module.git
+  wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx.logrotate
+  wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx.service
+	
   ./configure \
     --prefix=/etc/nginx \
     --conf-path=/etc/nginx/nginx.conf \
@@ -79,7 +83,7 @@ build() {
     --http-uwsgi-temp-path=/var/lib/nginx/uwsgi \
     --with-cc-opt="$CFLAGS $CPPFLAGS" \
     --with-ld-opt="$LDFLAGS" \
-	--add-module="$HOME"/nginx-push-stream-module
+	--add-module=nginx-push-stream-module
 
   make
 }
@@ -98,8 +102,8 @@ package() {
   install -d "$pkgdir"/usr/share/nginx
   mv "$pkgdir"/etc/nginx/html/ "$pkgdir"/usr/share/nginx
   
-  install -Dm644 "$HOME"/nginx.logrotate "$pkgdir"/etc/logrotate.d/nginx
-  install -Dm644 "$HOME"/nginx.service "$pkgdir"/usr/lib/systemd/system/
+  install -Dm644 nginx.logrotate "$pkgdir"/etc/logrotate.d/nginx
+  install -Dm644 nginx.service "$pkgdir"/usr/lib/systemd/system/
   rm -rf "$pkgdir"/var/run
 
   for i in ftdetect indent syntax; do
