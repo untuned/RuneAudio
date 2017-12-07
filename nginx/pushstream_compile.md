@@ -7,7 +7,7 @@ install [ArchLinuxArm](https://github.com/rern/RuneAudio/tree/master/ArchLinuxAr
 # fix - nginx not support 'aarch64'
 sed -i 's/aarch64/armv7h/' /etc/makepkg.conf
 
-pacman -Sy base-devel pcre zlib guile git wget openssl geoip mailcap mercurial perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached memcached ffmpeg
+pacman -Sy base-devel pcre zlib guile git wget openssl mercurial perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached memcached ffmpeg
 
 git clone https://github.com/wandenberg/nginx-push-stream-module.git
 
