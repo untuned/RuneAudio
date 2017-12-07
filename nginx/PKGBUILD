@@ -14,7 +14,7 @@ pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server'
 arch=(any)
 url='https://nginx.org'
 license=(custom)
-depends=(pcre zlib openssl geoip mailcap)
+depends=(pcre zlib openssl)
 makedepends=(mercurial)
 checkdepends=(perl perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached
               memcached ffmpeg inetutils) 
@@ -22,6 +22,7 @@ backup=(etc/nginx/fastcgi.conf
         etc/nginx/fastcgi_params
         etc/nginx/koi-win
         etc/nginx/koi-utf
+		etc/nginx/mime.types
         etc/nginx/nginx.conf
         etc/nginx/scgi_params
         etc/nginx/uwsgi_params
