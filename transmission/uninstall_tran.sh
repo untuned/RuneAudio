@@ -21,6 +21,8 @@ if [[ $1 == u ]]; then
 fi
 
 # uninstall package #######################################
+systemctl stop transmission
+systemctl disable transmission
 pacman -Rs --noconfirm transmission-cli
 
 # remove files #######################################
@@ -29,5 +31,6 @@ echo -e "$bar Remove files ..."
 rm -rv /etc/systemd/system/transmission.service.d
 rm -v /lib/systemd/system/trans.service
 rm -r $path/web
+systemctl daemon-reload
 
 uninstallfinish $@
