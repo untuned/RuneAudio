@@ -58,7 +58,7 @@ systemctl daemon-reload
 systemctl start tran
 systemctl stop tran
 
-file=$path-daemon/settings.json
+file=$path/settings.json
 if [[ $1 != u ]]; then
 	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
 	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
