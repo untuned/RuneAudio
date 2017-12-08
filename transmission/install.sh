@@ -48,6 +48,7 @@ dir=/etc/systemd/system/transmission.service.d
 mkdir $dir
 echo "[Service]
 User=root
+Environment=TRANSMISSION_HOME=$path-daemon
 Environment=TRANSMISSION_WEB_HOME=$path/web
 " > $dir/override.conf
 systemctl daemon-reload
