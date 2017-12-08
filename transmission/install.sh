@@ -56,7 +56,7 @@ systemctl daemon-reload
 systemctl start trans
 systemctl stop trans
 
-file=/root/.config/transmission-daemon/settings.json
+file=$path-daemon/settings.json
 if [[ $1 != u ]]; then
 	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
 	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
