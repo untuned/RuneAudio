@@ -54,11 +54,12 @@ Environment=TRANSMISSION_WEB_HOME=$path/web
 " > $dir/override.conf
 systemctl daemon-reload
 
-# create settings.json
-systemctl start tran
-systemctl stop tran
-
 file=$path/settings.json
+if [[ ! -e $file ]]; then
+	# create settings.json
+	systemctl start tran
+	systemctl stop tran
+fi
 if [[ $1 != u ]]; then
 	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
 	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
@@ -72,9 +73,12 @@ if [[ $1 != u ]]; then
 
 	# set password
 	if [[ -n $1 && $1 != 0 ]]; then
-		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
+		sed -i -e 's|"rpc-authentication-required": .*|"rpc-authentication-required": true|
 		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$1"'"|
 		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
+		' $file
+	else
+		sed -i 's|"rpc-authentication-required": .*|"rpc-authentication-required": false|
 		' $file
 	fi
 else
