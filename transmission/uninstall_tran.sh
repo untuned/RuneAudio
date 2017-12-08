@@ -8,9 +8,9 @@ uninstallstart $@
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-	path=$mnt/transmission
+	path=$mnt/transmission-daemon
 else
-	path=/root/transmission
+	path=/root/transmission-daemon
 fi
 
 # if update, save settings #######################################
