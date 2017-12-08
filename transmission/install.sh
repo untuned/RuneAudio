@@ -108,7 +108,7 @@ fi
 
 installfinish $@
 
-echo "Run: systemctl < start / stop > trans"
+echo "Run: systemctl < start / stop > tran"
 echo "Startup: systemctl < enable / disable > tran"
 echo
 echo "Download directory: $path"
