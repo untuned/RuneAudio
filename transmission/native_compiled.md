@@ -54,7 +54,7 @@ ln -s libguile-2.2.so.1.2.0 libguile-2.0.so.22
 **pre-compile**
 ```sh
 # cpu cores + 1 and put temp file to faster drive
-sed -i -e 's/#AKEFLAGS="-j2"/MAKEFLAGS="-j5"/
+sed -i -e 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j5"/
 ' -e 's|#BUILDDIR=.*|BUILDDIR=/mnt/MPD/USB/hdd/makepkg|
 ' /etc/makepkg.conf
 ```
