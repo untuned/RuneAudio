@@ -33,29 +33,29 @@ rm /usr/lib/tmpfiles.d/transmission.conf
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
-	path=$mnt/transmission
+	path=$mnt/transmission-daemon
 else
-	path=/root/transmission
+	path=/root/transmission-daemon
 fi
 mkdir -p $path/{incomplete,watch}
 
 # custom systemd unit
-ln -s /lib/systemd/system/trans{mission,}.service
-systemctl stop trans
-systemctl disable trans
+ln -s /lib/systemd/system/tran{smission,}.service
+systemctl stop tran
+systemctl disable tran
 
 dir=/etc/systemd/system/transmission.service.d
-mkdir $dir
+mkdir -p $dir
 echo "[Service]
 User=root
-Environment=TRANSMISSION_HOME=$path-daemon
+Environment=TRANSMISSION_HOME=$path
 Environment=TRANSMISSION_WEB_HOME=$path/web
 " > $dir/override.conf
 systemctl daemon-reload
 
 # create settings.json
-systemctl start trans
-systemctl stop trans
+systemctl start tran
+systemctl stop tran
 
 file=$path-daemon/settings.json
 if [[ $1 != u ]]; then
@@ -95,12 +95,12 @@ fi
 
 systemctl daemon-reload
 if [[ $3 == 1 ]] || [[ $( redis-cli get transtartup ) ]]; then
-	systemctl enable trans
+	systemctl enable tran
 	redis-cli del transtartup &> /dev/null
 fi
 
 echo -e "$bar Start Transmission ..."
-if ! systemctl start trans &> /dev/null; then
+if ! systemctl start tran &> /dev/null; then
 	title -l = "$warn Transmission install failed."
 	exit
 fi
@@ -108,7 +108,7 @@ fi
 installfinish $@
 
 echo "Run: systemctl < start / stop > trans"
-echo "Startup: systemctl < enable / disable > trans"
+echo "Startup: systemctl < enable / disable > tran"
 echo
 echo "Download directory: $path"
 echo "WebUI: < RuneAudio_IP >:9091"
