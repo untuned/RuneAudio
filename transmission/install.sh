@@ -26,7 +26,7 @@ rankmirrors
 pacman -S --noconfirm libevent transmission-cli
 
 # fix missing libevent-2.0.so.5
-ln -s /lib/libevent-2.1.so.6.0.2 /lib/libevent-2.0.so.5
+ln -sf /lib/libevent-2.1.so.6.0.2 /lib/libevent-2.0.so.5
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
@@ -40,7 +40,7 @@ fi
 mkdir -p $path/{incomplete,watch}
 
 # custom systemd unit
-ln -s /lib/systemd/system/tran{smission,}.service
+ln -sf /lib/systemd/system/tran{smission,}.service
 systemctl stop tran
 systemctl disable tran
 
