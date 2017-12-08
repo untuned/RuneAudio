@@ -44,6 +44,7 @@ ln -s /lib/systemd/system/tran{smission,}.service
 systemctl stop tran
 systemctl disable tran
 
+# custom user and env - TRANSMISSION_HOME must be /<path>/transmission-daemon
 dir=/etc/systemd/system/transmission.service.d
 mkdir -p $dir
 echo "[Service]
