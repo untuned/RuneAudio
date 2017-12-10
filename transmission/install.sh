@@ -13,29 +13,22 @@ installstart $@
 getuninstall
 
 gitpath=https://github.com/rern/RuneAudio/raw/$branch/transmission
-wgetnc $gitpath/files.tar.xz
-rm -rf /tmp/install
-mkdir -p /tmp/install
-bsdtar -xf files.tar.xz -C /tmp/install
-chown root:root /tmp/install/*
-cp /tmp/install/* /usr/lib
-rm -rf files.tar.xz /tmp/install
+wgetnc $gitpath/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-rankmirrors
+pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
-pacman -S --noconfirm libevent transmission-cli
-
-# fix missing libevent-2.0.so.5
-ln -sf /lib/libevent-2.1.so.6.0.2 /lib/libevent-2.0.so.5
+rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
 
 if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
-	path=$mnt/transmission-daemon
+	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+	mkdir -p $mnt/transmission
+	path=$mnt/transmission
 else
-	path=/root/transmission-daemon
+	mkdir -p /root/transmission
+	path=/root/transmission
 fi
 mkdir -p $path/{incomplete,watch}
 
@@ -55,11 +48,10 @@ Environment=TRANSMISSION_WEB_HOME=$path/web
 systemctl daemon-reload
 
 file=$path/settings.json
-if [[ ! -e $file ]]; then
-	# create settings.json
-	systemctl start tran
-	systemctl stop tran
-fi
+# create settings.json
+systemctl start tran
+systemctl stop tran
+
 if [[ $1 != u ]]; then
 	sed -i -e 's|"download-dir".*|"download-dir": "'"$path"'"|
 	' -e 's|"incomplete-dir".*|"incomplete-dir": "'"$path"'/incomplete"|
