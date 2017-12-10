@@ -48,7 +48,7 @@ Environment=TRANSMISSION_WEB_HOME=$path/web
 systemctl daemon-reload
 
 file=$path/settings.json
-rm $file
+rm -f $file
 # create settings.json
 systemctl start tran
 systemctl stop tran
