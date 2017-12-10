@@ -37,7 +37,8 @@ bsdtar -xpvf ArchLinuxARM-rpi-3-latest.tar.gz boot
 cp -rv boot/* /media/x/BOOT
 rm -r boot
 
-bsdtar -xpvf ArchLinuxARM-rpi-3-latest.tar.gz --exclude '/boot' -C /media/x/ROOT
+bsdtar -xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
+rm -r /media/x/ROOT/boot/*
 ```
 
 ### Boot from SD card
