@@ -20,7 +20,7 @@ _[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)
 
 **settings**  
 `/path/transmission/settings.json` must be edited after stop transmission  
-`transmission-daemon -d` will not correctly show `settings.json`  
+`transmission-daemon -d` may not show current `settings.json`  
 
 **auto start download**  
 add torrent files to `/path/transmission/torrents` will auto start download  
