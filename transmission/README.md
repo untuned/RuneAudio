@@ -3,7 +3,7 @@ RuneAudio Transmission
 _Tested on RuneAudio 0.3 and 0.4b_
 
 [**Transmission**](https://transmissionbt.com/) - Fast, easy, and free BitTorrent client (CLI tools, daemon and web client)  
-- [Native compiled version](https://github.com/rern/RuneAudio/blob/master/transmission/native_compiled.md): fix error, `libcrypto.so.1.1` and `libssl.so.1.1` ( `pacman -S openssl` will failed )
+- [Native compiled version](https://github.com/rern/RuneAudio/blob/master/transmission/native_compiled.md): fix error, `libcrypto.so.1.1` and `libssl.so.1.1` ( `pacman -S openssl` will fail `pacman` )
 - With optional WebUI alternative: [Transmission Web Control](https://github.com/ronggang/transmission-web-control#introduction)  
 
 **Install**  
