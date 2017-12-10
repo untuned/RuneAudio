@@ -65,12 +65,12 @@ if [[ $1 != u ]]; then
 	' $file
 	# set password
 	if [[ -n $1 && $1 != 0 ]]; then
-		sed -i -e 's|"rpc-authentication-required":.*|"rpc-authentication-required": true|
-		' -e 's|"rpc-password".*|"rpc-password": "'"$1"'"|
-		' -e 's|"rpc-username".*|"rpc-username": "root"|
+		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
+		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$1"'"|
+		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
 		' $file
 	else
-		sed -i 's|"rpc-authentication-required".*|"rpc-authentication-required": false|
+		sed -i 's|"rpc-authentication-required": true|"rpc-authentication-required": false|
 		' $file
 	fi
 else
