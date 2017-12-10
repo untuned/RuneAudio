@@ -48,6 +48,7 @@ Environment=TRANSMISSION_WEB_HOME=$path/web
 systemctl daemon-reload
 
 file=$path/settings.json
+rm $file
 # create settings.json
 systemctl start tran
 systemctl stop tran
@@ -58,13 +59,10 @@ if [[ $1 != u ]]; then
 	' -e 's|"incomplete-dir-enabled".*|"incomplete-dir-enabled": true|
 	' -e 's|"rpc-whitelist-enabled".*|"rpc-whitelist-enabled": false|
 	' -e '/[^{},\{, \}]$/ s/$/, /
-	' $file
-	if ! grep -q 'watch-dir' $file; then
-	sed -i '/}/ i\
+	' -e '/^}$/ i\
     "watch-dir": "'"$path"'/watch", \
     "watch-dir-enabled": true
 	' $file
-	fi
 	# set password
 	if [[ -n $1 && $1 != 0 ]]; then
 		sed -i -e 's|"rpc-authentication-required":.*|"rpc-authentication-required": true|
