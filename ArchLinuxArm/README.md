@@ -35,7 +35,7 @@ sudo make install
 cd ..
 bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
 
-cp -r /media/x/ROOT/boot/* /media/x/BOOT
+cp -rv --no-preserve=mode,ownership /media/x/ROOT/boot /media/x/BOOT
 rm -r /media/x/ROOT/boot
 ```
 
