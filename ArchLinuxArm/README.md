@@ -33,19 +33,20 @@ sudo make install
 
 # extract
 bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
-mv /media/x/ROOT/boot/* /media/x/BOOT
+cp -r /media/x/ROOT/boot/* /media/x/BOOT
+rm -r /media/x/ROOT/boot/*
 ```
 
 ### Boot from SD card
 
 ### SSH / SCP login  
 - id / password : alarm / alarm
-- allow root ssh login and set password
 ```sh
 su
 
-nano /etc/ssh/sshd_config
-	# PermitRootLogin yes
+sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
 systemctl restart sshd
 
 passwd
+	# rune
+```
