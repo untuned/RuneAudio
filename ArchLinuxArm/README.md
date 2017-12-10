@@ -3,9 +3,9 @@ ArchLinuxArm
 
 ### Download
 ```sh
-# RPI 3
+# RPi 3
 wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
-# RPI 2
+# RPi 2
 wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
 ```
 
