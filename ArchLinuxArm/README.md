@@ -35,7 +35,7 @@ sudo make install
 cd ..
 bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
 
-mv -r /media/x/ROOT/boot/* /media/x/BOOT
+mv /media/x/ROOT/boot/* /media/x/BOOT
 ```
 
 ### Boot from SD card
