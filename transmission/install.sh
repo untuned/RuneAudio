@@ -58,11 +58,13 @@ if [[ $1 != u ]]; then
 	' -e 's|"incomplete-dir-enabled".*|"incomplete-dir-enabled": true|
 	' -e 's|"rpc-whitelist-enabled".*|"rpc-whitelist-enabled": false|
 	' -e '/[^{},\{, \}]$/ s/$/, /
-	' -e '/}/ i\
-	    "watch-dir": "'"$path"'/watch", \
-	    "watch-dir-enabled": true
 	' $file
-
+	if ! grep -q 'watch-dir' $file; then
+	sed -i '/}/ i\
+    "watch-dir": "'"$path"'/watch", \
+    "watch-dir-enabled": true
+	' $file
+	fi
 	# set password
 	if [[ -n $1 && $1 != 0 ]]; then
 		sed -i -e 's|"rpc-authentication-required":.*|"rpc-authentication-required": true|
