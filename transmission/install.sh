@@ -54,10 +54,10 @@ systemctl start tran
 systemctl stop tran
 
 if [[ $1 != u ]]; then
-	sed -i -e 's|"download-dir".*|"download-dir": "'"$path"'"|
-	' -e 's|"incomplete-dir".*|"incomplete-dir": "'"$path"'/incomplete"|
-	' -e 's|"incomplete-dir-enabled".*|"incomplete-dir-enabled": true|
-	' -e 's|"rpc-whitelist-enabled".*|"rpc-whitelist-enabled": false|
+	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
+	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
+	' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
+	' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
 	' -e '/[^{},\{, \}]$/ s/$/, /
 	' -e '/^}$/ i\
     "watch-dir": "'"$path"'/watch", \
