@@ -11,9 +11,9 @@ wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
 
 ### Partition SD Card
 - Gparted does unmount > partition > format
-```
-Partition #1   BOOT   fat32   100MB  
-Partition #2   ROOT   ext4    the rest  
+```sh
+# primary #1  BOOT   fat32   100MB  
+# primary #2   ROOT   ext4    the rest
 ```
 
 ### Extract files  
@@ -32,13 +32,8 @@ make
 sudo make install
 
 # extract
-cd ..
-bsdtar -xpvf ArchLinuxARM-rpi-3-latest.tar.gz boot
-cp -rv boot/* /media/x/BOOT
-rm -r boot
-
-bsdtar -xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
-rm -r /media/x/ROOT/boot/*
+bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
+mv /media/x/ROOT/boot/* /media/x/BOOT
 ```
 
 ### Boot from SD card
