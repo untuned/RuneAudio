@@ -16,7 +16,7 @@ timestart
 tmpdir=/tmp/rankmirrors/
 rm -rf $tmpdir && mkdir $tmpdir
 tmplist=/tmp/mirrorlist
-wgetnc https://github.com/rern/RuneAudio/raw/master/rankmirrors/mirrorlist -P /tmp
+wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /tmp
 
 dlfile='armv7h/community/community.db' # download test file
 # convert mirrorlist to url list
