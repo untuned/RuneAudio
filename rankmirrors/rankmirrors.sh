@@ -17,6 +17,7 @@ tmpdir=/tmp/rankmirrors/
 rm -rf $tmpdir && mkdir $tmpdir
 tmplist=/tmp/mirrorlist
 wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /tmp
+dated=$( grep 'Generated' $tmplist | cut -d' ' -f2- )
 
 dlfile='armv7h/community/community.db' # download test file
 # convert mirrorlist to url list
@@ -35,7 +36,7 @@ IFS=$'\n' read -d '' -r -a servers < $tmplist # convert list to array
 
 title -l = $bar Rank mirror servers by download speed ...
 echo
-grep 'Generated' $tmplist | cut -d' ' -f2-
+echo $dated
 echo Test ${#servers[@]} servers @ $sec seconds:
 echo
 
