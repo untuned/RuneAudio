@@ -33,7 +33,7 @@ sudo make install
 
 # extract
 bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
-cp -r /media/x/ROOT/boot/* /media/x/BOOT
+cp -r cp --no-preserve=mode,ownership /media/x/ROOT/boot/* /media/x/BOOT
 rm -r /media/x/ROOT/boot/*
 
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /media/x/ROOT/etc/ssh/sshd_config
