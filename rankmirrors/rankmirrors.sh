@@ -16,6 +16,8 @@ timestart
 tmpdir=/tmp/rankmirrors/
 rm -rf $tmpdir && mkdir $tmpdir
 tmplist=/tmp/mirrorlist
+
+echo -e "$bar Get mirrorlist ..."
 wgetnc https://github.com/archlinuxarm/PKGBUILDs/raw/master/core/pacman-mirrorlist/mirrorlist -P /tmp
 dated=$( grep 'Generated' $tmplist | cut -d' ' -f2- )
 
