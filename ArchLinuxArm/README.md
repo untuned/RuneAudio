@@ -3,7 +3,7 @@ ArchLinuxArm
 
 ### Download
 ```sh
-# RPi 3
+# RPi 3 (not for compiling)
 wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
 # RPi 2
 wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
@@ -35,18 +35,15 @@ sudo make install
 bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
 cp -r /media/x/ROOT/boot/* /media/x/BOOT
 rm -r /media/x/ROOT/boot/*
+
+sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /media/x/ROOT/etc/ssh/sshd_config
 ```
 
 ### Boot from SD card
 
 ### SSH / SCP login  
-- id / password : alarm / alarm
+- id / password : root / root
 ```sh
-su
-
-sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-systemctl restart sshd
-
 passwd
 	# rune
 ```
