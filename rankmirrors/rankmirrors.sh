@@ -35,6 +35,7 @@ IFS=$'\n' read -d '' -r -a servers < $tmplist # convert list to array
 
 title -l = $bar Rank mirror servers by download speed ...
 echo
+grep 'Generated' tmplist | cut -d' ' -f2-
 echo Test ${#servers[@]} servers @ $sec seconds:
 echo
 
