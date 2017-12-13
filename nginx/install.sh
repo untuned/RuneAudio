@@ -12,8 +12,6 @@ getuninstall
 
 # backup
 mv /etc/nginx/nginx.conf{,.backup}
-bacman nginx-rune
-mv nginx-rune* /var/cache/pacman/pkg
 
 gitpath=https://github.com/rern/RuneAudio/raw/$branch/nginx
 file=nginx-1.13.7-2-armv7h.pkg.tar.xz
