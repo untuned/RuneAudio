@@ -3,8 +3,8 @@ rankmirrors.sh
 _for ArchLinuxArm and tested on RuneAudio 0.3 and 0.4b_  
   
 Fix packages download errors:  
+- get current `mirrorlist` from ArchLinuxArm source
 - enable(uncomment) all mirror servers
-- download test for 3 seconds from each servers
 - ranked by download speed  
 - update mirrorlist file, **/etc/pacman.d/mirrorlist** (with original backup)
 
