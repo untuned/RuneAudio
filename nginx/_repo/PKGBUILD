@@ -64,8 +64,8 @@ build() {
 
   rm -rf nginx-push-stream-module
   git clone https://github.com/wandenberg/nginx-push-stream-module.git
-  wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx.logrotate
-  wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx.service
+  wget https://github.com/rern/RuneAudio/raw/master/nginx/_repo/nginx.logrotate
+  wget https://github.com/rern/RuneAudio/raw/master/nginx/_repo/nginx.service
 	
   ./configure \
     --prefix=/etc/nginx \
