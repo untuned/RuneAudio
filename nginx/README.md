@@ -1,21 +1,7 @@
-NGINX Upgrade with pushstream + PHP + phpredis + redis
+NGINX Upgrade with pushstream
+---
 
-```sh
-# nginx
-wget https://github.com/rern/RuneAudio/raw/master/nginx/nginx-1.13.7-2-any.pkg.tar.xz
-pacman -U nginx-1.13.7-2-any.pkg.tar.xz
-
-# php
-pacman -Sy php php-fpm autoconf glibc
-
-# phpredis
-wget https://github.com/phpredis/phpredis/archive/develop.zip
-bsdtar xvf develop.zip
-cd phpredis-develop
-phpize
-./configure
-make
-make install
-
-# redis
-pacman -S redis
+Upgrade from default **NGINX** 1.4.7 to 1.13.7 with **pushstream** support
+- RuneAudio needs NGINx with pushstream
+- `pacman -S nginx` upgrades NGINX alone will break RuneUI
+- pushstream is not available as a separated package
