@@ -76,6 +76,7 @@ build() {
   cd $pkgname-$pkgver
   
   [[ $CARCH == "armv7h" || $CARCH == "aarch64" ]] && CFLAGS+=" -fPIC" && CXXFLAGS+=" -fPIC"
+  
   rm -rf nginx-push-stream-module
   git clone https://github.com/wandenberg/nginx-push-stream-module.git
 	
