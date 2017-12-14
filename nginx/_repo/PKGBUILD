@@ -9,7 +9,7 @@
 
 pkgname=nginx
 pkgver=1.13.7
-pkgrel=2
+pkgrel=1
 pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server'
 arch=('armv6h' 'armv7h')
 url='https://nginx.org'
@@ -64,8 +64,6 @@ _common_flags=(
 	--without-http_upstream_zone_module
 	--without-http_userid_module
 	--without-http_uwsgi_module
-	--with-pcre-jit
-	--with-threads
 )
 _stable_flags=(
 )
