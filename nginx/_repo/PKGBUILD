@@ -14,7 +14,7 @@ pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server'
 arch=('armv6h' 'armv7h')
 url='https://nginx.org'
 license=(custom)
-depends=(pcre zlib openssl geoip)
+depends=(pcre zlib openssl)
 makedepends=(mercurial)
 checkdepends=(perl perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached
               memcached ffmpeg inetutils) 
@@ -27,56 +27,50 @@ backup=(etc/nginx/fastcgi.conf
         etc/nginx/scgi_params
         etc/nginx/uwsgi_params
         etc/nginx/win-utf)
-install=nginx.install
-source=($url/download/nginx-$pkgver.tar.gz{,.asc}
-        hg+http://hg.nginx.org/nginx-tests#revision=cbda704b3093
-        service
-        logrotate)
+source=($url/download/nginx-$pkgver.tar.gz{,.asc})
 validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin 
-md5sums=('SKIP'
-         'SKIP'
-		 'SKIP'
-		 'SKIP'
-         'SKIP')
+md5sums=('SKIP')
 
 _common_flags=(
-	--with-file-aio
-	--with-http_gzip_static_module
-	--without-http_access_module
-	--without-http_auth_basic_module
-	--without-http_autoindex_module
-	--without-http_browser_module
-	--without-http_charset_module
-	--without-http_empty_gif_module
-	--without-http_geo_module
-	--without-http_limit_conn_module
-	--without-http_limit_req_module
-	--without-http_map_module
-	--without-http_memcached_module
-	--without-http_referer_module
-	--without-http_scgi_module
-	--without-http_split_clients_module
-	--without-http_ssi_module
-	--without-http_upstream_hash_module
-	--without-http_upstream_ip_hash_module
-	--without-http_upstream_keepalive_module
-	--without-http_upstream_least_conn_module
-	--without-http_upstream_zone_module
-	--without-http_userid_module
+	--with-file-aio \
+	--with-http_gzip_static_module \
+	--without-http_access_module \
+	--without-http_auth_basic_module \
+	--without-http_autoindex_module \
+	--without-http_browser_module \
+	--without-http_charset_module \
+	--without-http_empty_gif_module \
+	--without-http_geo_module \
+	--without-http_limit_conn_module \
+	--without-http_limit_req_module \
+	--without-http_map_module \
+	--without-http_memcached_module \
+	--without-http_referer_module \
+	--without-http_scgi_module \
+	--without-http_split_clients_module \
+	--without-http_ssi_module \
+	--without-http_upstream_hash_module \
+	--without-http_upstream_ip_hash_module \
+	--without-http_upstream_keepalive_module \
+	--without-http_upstream_least_conn_module \
+	--without-http_upstream_zone_module \
+	--without-http_userid_module \
 	--without-http_uwsgi_module
 )
+
 _stable_flags=(
 )
 
 build() {
   cd $pkgname-$pkgver
-  
   [[ $CARCH == "armv7h" || $CARCH == "aarch64" ]] && CFLAGS+=" -fPIC" && CXXFLAGS+=" -fPIC"
   
   rm -rf nginx-push-stream-module
   git clone https://github.com/wandenberg/nginx-push-stream-module.git
+  wget https://github.com/rern/RuneAudio/raw/master/nginx/_repo/logrotate
+  wget https://github.com/rern/RuneAudio/raw/master/nginx/_repo/service
 	
-  ./configure \
+./configure \
     --prefix=/etc/nginx \
     --conf-path=/etc/nginx/nginx.conf \
     --sbin-path=/usr/bin/nginx \
@@ -100,17 +94,13 @@ build() {
   make
 }
 
-check() {
-  cd nginx-tests
-  TEST_NGINX_BINARY="$srcdir/$pkgname-$pkgver/objs/nginx" prove .
-}
-
 package() {
   cd $pkgname-$pkgver
   make DESTDIR="$pkgdir" install
 
-  for i in ftdetect indent syntax; do
-    install -Dm644 contrib/vim/$i/nginx.vim \
-      "$pkgdir/usr/share/vim/vimfiles/$i/nginx.vim"
-  done
+  rm "$pkgdir"/etc/nginx/*.default
+  
+  mkdir -p "$pkgdir"/usr/lib/systemd/system/
+  install -Dm644 nginx.service "$pkgdir"/usr/lib/systemd/system/
+  install -Dm644 logrotate "$pkgdir"/etc/logrotate.d/nginx
 }
