@@ -17,5 +17,8 @@ wget $gitpath/logrotate
 wget $gitpath/service
 wget $gitpath/nginx.install
 
-makepkg
+makepkg --skipinteg
+
+# recompile - clean and overwirte
+makepkg -Cf --skipinteg
 ```
