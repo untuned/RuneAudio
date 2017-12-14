@@ -11,7 +11,11 @@ cd
 mkdir nginx
 cd nginx
 
-wget https://github.com/rern/RuneAudio/raw/master/nginx/_repo/PKGBUILD
+gitpath=https://github.com/rern/RuneAudio/raw/master/nginx/_repo
+wget $gitpath/PKGBUILD
+wget $gitpath/logrotate
+wget $gitpath/service
+wget $gitpath/nginx.install
 
 makepkg
 ```
