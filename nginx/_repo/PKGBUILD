@@ -112,8 +112,6 @@ check() {
 package() {
   cd $pkgname-$pkgver
   make DESTDIR="$pkgdir" install
-  
-  sed -e 's|\ "$pkgdir"/usr/share/man/man8/nginx.8.gz
 
   for i in ftdetect indent syntax; do
     install -Dm644 contrib/vim/$i/nginx.vim \
