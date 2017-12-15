@@ -12,7 +12,8 @@ if [[ $( nginx -v 2>&1 ) == 'nginx version: nginx/1.13.7' ]]; then
 	exit
 fi
 
-installstart $@
+title -l '=' "$bar Upgrade NGINX ..."
+timestart
 
 # backup
 mv /etc/nginx/nginx.conf{,.backup}
@@ -35,4 +36,7 @@ echo -e "$bar Restart NGINX ..."
 systemctl daemon-reload
 systemctl restart nginx
 
-installfinish $@
+redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
+
+timestop
+title -l '=' "$bar NGINX upgraded successfully."
