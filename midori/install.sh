@@ -15,13 +15,12 @@ fi
 title -l '=' "$bar Upgrade Midori ..."
 timestart
 
-pacman -R midori-rune
 pacman -Sy --noconfirm gstreamer gstreamer-vaapi glib2 gtk3 harfbuzz freetype2 libsoup libgcrypt gpg-crypter libgpg-error libwebp enchant icu
 
-ln -s /lib/libicuuc.so.{60.1,56}
-ln -s /lib/libicudata.so.{60.1,56}
+ln -sf /lib/libicuuc.so.{60.1,56}
+ln -sf /lib/libicudata.so.{60.1,56}
 
-pacman -S midori
+yes | pacman -S midori
 
 echo -e "$bar Restart Midori ..."
 killall midori
