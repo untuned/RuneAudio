@@ -33,9 +33,9 @@ rm $file
 mv /etc/nginx/nginx.conf{.backup,}
 
 echo -e "$bar Restart NGINX ..."
+systemctl reload php-fpm
 systemctl daemon-reload
 systemctl restart nginx
-systemctl reload php-fpm
 
 redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
 
