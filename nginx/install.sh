@@ -33,9 +33,11 @@ mv /etc/nginx/nginx.conf{.backup,}
 
 redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
 
+echo -e "$bar Restart NGINX ..."
+# restart nginx seamlessly
+kill -s USR2 $( cat /run/nginx.pid )
+kill -s WINCH $( cat /run/nginx.pid.oldbin )
+kill -s QUIT $( cat /run/nginx.pid.oldbin )
+
 timestop
 title -l '=' "$bar NGINX upgraded successfully."
-title -nt "$info 'Back' Browser to Addons Menu"
-
-killall nginx
-systemctl start nginx
