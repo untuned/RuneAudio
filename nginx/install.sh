@@ -6,7 +6,7 @@ alias=ngin
 
 . /srv/http/addonstitle.sh
 
-if [[ $( nginx -v 2>&1 ) != 'nginx version: nginx/1.4.7' ]]; then
+if [[ $( nginx -v 2>&1 ) == 'nginx version: nginx/1.13.7' ]]; then
 	redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
 	title "$info NGINX already upgraged."
 	exit
