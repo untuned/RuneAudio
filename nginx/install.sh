@@ -14,8 +14,6 @@ fi
 
 installstart $@
 
-getuninstall
-
 # backup
 mv /etc/nginx/nginx.conf{,.backup}
 
