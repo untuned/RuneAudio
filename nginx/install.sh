@@ -34,6 +34,7 @@ mv /etc/nginx/nginx.conf{.backup,}
 
 echo -e "$bar Restart NGINX ..."
 systemctl reload php-fpm
+killall nginx
 systemctl daemon-reload
 systemctl restart nginx
 
