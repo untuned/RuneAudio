@@ -1,14 +1,8 @@
 Midori Upgrade
 ---
 
-Problem with `webkitWebProcess` - very high cpu usage!
-```sh
-bacman midori-rune
-pacman -R midori-rune
-pacman -S --noconfirm gstreamer gstreamer-vaapi glib2 gtk3 harfbuzz freetype2 libsoup libgcrypt gpg-crypter libgpg-error libwebp enchant icu
+Upgrade from default Midori to latest version without errors:
+- `pacman -S midori` upgrade alone breaks Midori
+- Fix dependency errors
 
-ln -s /lib/libicuuc.so.{60.1,56}
-ln -s /lib/libicudata.so.{60.1,56}
-
-pacman -S midori
-```
+(issue: `webkitWebProcess` - very high cpu load on RuneAudio 0.4b)
