@@ -27,9 +27,13 @@ srel() {
 	echo -e '\n'$( tcolor "systemctl reload $1" )
 	systemctl reload $1
 }
-sdrel() {
+sdre() {
 	echo -e '\n'$( tcolor "systemctl daemon-reload" )'\n'
 	systemctl daemon-reload
+}
+sfpm() {
+	echo -e '\n'$( tcolor "systemctl reload php-fpm" )'\n'
+	systemctl reload php-fpm
 }
 
 mmc() {
