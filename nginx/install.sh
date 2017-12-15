@@ -17,6 +17,9 @@ installstart $@
 # backup
 mv /etc/nginx/nginx.conf{,.backup}
 
+echo -e "$bar Uninstall NGINX ..."
+pacman -R --noconfirm nginx
+
 echo -e "$bar Get NGINX packages ..."
 ghitpath=https://github.com/rern/RuneAudio/raw/$branch/nginx/_repo
 file=nginx-1.13.7-1-armv7h.pkg.tar.xz
