@@ -17,9 +17,10 @@ installstart $@
 # backup
 mv /etc/nginx/nginx.conf{,.backup}
 
-gitpath=https://github.com/rern/RuneAudio/raw/$branch/nginx
-file=nginx-1.13.7-1-armv7h.pkg.tar.xz
-wgetnc $gitpath/$file
+echo -e "$bar Get NGINX packages ..."
+file=https://github.com/rern/RuneAudio/raw/$branch/nginx/_repo/nginx-1.13.7-1-armv7h.pkg.tar.xz
+echo $file
+wgetnc $file
 
 pacman -U --noconfirm $file
 
