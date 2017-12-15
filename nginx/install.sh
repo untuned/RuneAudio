@@ -26,16 +26,16 @@ wgetnc $gitpath/$file
 
 yes | pacman -U --noconfirm $file
 
+systemctl daemon-reload
+
 rm $file
 mv /etc/nginx/nginx.conf{.backup,}
 
 redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
-systemctl daemon-reload
 
 timestop
 title -l '=' "$bar NGINX upgraded successfully."
-title -nt "$info 'Back' Browser after NGINX restarted"
+title -nt "$info 'Back' Browser to Addons Menu"
 
-echo -e "$bar Restart NGINX ..."
 killall nginx
 systemctl start nginx
