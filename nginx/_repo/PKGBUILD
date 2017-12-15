@@ -30,7 +30,8 @@ backup=(etc/nginx/fastcgi.conf
 install=nginx.install
 source=($url/download/nginx-$pkgver.tar.gz{,.asc})
 validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin 
-md5sums=('SKIP')
+md5sums=('SKIP'
+         'SKIP')
 
 _common_flags=(
 	--with-file-aio \
