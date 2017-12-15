@@ -33,12 +33,11 @@ rm $file
 mv /etc/nginx/nginx.conf{.backup,}
 
 redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
+systemctl daemon-reload
 
 timestop
 title -l '=' "$bar NGINX upgraded successfully."
 title -nt "$info 'Back' Browser after NGINX restarted"
 
 echo -e "$bar Restart NGINX ..."
-systemctl daemon-reload
-systemctl reload php-fpm
 systemctl restart nginx
