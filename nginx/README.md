@@ -1,7 +1,7 @@
 NGINX Upgrade with pushstream
 ---
 
-Upgrade from default **NGINX** 1.4.7 to 1.13.7 without errors:
+Upgrade from default **NGINX** 0.3:1.4.7 / 0.4b:1.11.3 to 1.13.7 without errors:
 - `pacman -S nginx` upgrades alone will break RuneUI
 - RuneAudio needs NGINx with **pushstream**
 - **pushstream** is not available as a separated package
