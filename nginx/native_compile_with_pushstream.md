@@ -15,8 +15,8 @@ gitpath=https://github.com/rern/RuneAudio/raw/master/nginx/_repo
 wget $gitpath/PKGBUILD
 wget $gitpath/nginx.install
 
-makepkg --skipinteg
+makepkg
 
 # recompile - clean and overwirte
-makepkg -Cf --skipinteg
+makepkg -Cf
 ```
