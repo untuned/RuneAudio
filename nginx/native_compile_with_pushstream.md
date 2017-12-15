@@ -13,8 +13,6 @@ cd nginx
 
 gitpath=https://github.com/rern/RuneAudio/raw/master/nginx/_repo
 wget $gitpath/PKGBUILD
-wget $gitpath/logrotate
-wget $gitpath/service
 wget $gitpath/nginx.install
 
 makepkg --skipinteg
