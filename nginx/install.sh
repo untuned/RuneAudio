@@ -18,16 +18,13 @@ timestart
 # backup
 mv /etc/nginx/nginx.conf{,.backup}
 
-echo -e "$bar Uninstall NGINX ..."
-pacman -R --noconfirm nginx-rune
-
 echo -e "$bar Get NGINX packages ..."
 gitpath=https://github.com/rern/RuneAudio/raw/master/nginx/_repo
 file=nginx-1.13.7-1-armv7h.pkg.tar.xz
 echo $file
 wgetnc $gitpath/$file
 
-pacman -U --noconfirm $file
+yes | pacman -U --noconfirm $file
 
 rm $file
 mv /etc/nginx/nginx.conf{.backup,}
