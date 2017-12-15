@@ -37,4 +37,5 @@ title -l '=' "$bar NGINX upgraded successfully."
 title -nt "$info 'Back' Browser after NGINX restarted"
 
 echo -e "$bar Restart NGINX ..."
-systemctl restart nginx
+killall nginx
+systemctl start nginx
