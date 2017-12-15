@@ -34,7 +34,8 @@ mv /etc/nginx/nginx.conf{.backup,}
 redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
 
 echo -e "$bar Restart NGINX ..."
-## restart nginx seamlessly
+
+## restart nginx seamlessly without dropping client connections
 # spawn new nginx master-worker set
 kill -s USR2 $( cat /run/nginx.pid )
 # stop old worker
