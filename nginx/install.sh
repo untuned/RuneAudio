@@ -24,7 +24,7 @@ file=nginx-1.13.7-1-armv7h.pkg.tar.xz
 echo $file
 wgetnc $gitpath/$file
 
-yes | pacman -U $file
+yes 2>/dev/null | pacman -U $file
 
 systemctl daemon-reload
 
