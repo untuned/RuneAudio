@@ -25,7 +25,7 @@ chmod 755 /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
 cp /etc/mpd.conf{,.backup}
 rm -r /tmp/backup
 mkdir /tmp/backup
-cp /lib/{libicudata.so.56.1,libicui18n.so.56.1,libicuuc.so.56.1,libwebp.so.6.0.0} /tmp/backup
+cp /lib/{libicudata.so.56.1,libicui18n.so.56.1,libicuuc.so.56.1,libwebkitgtk-3.0.so.0.22.16,libwebp.so.6.0.0} /tmp/backup
 
 sed -i '/^IgnorePkg/ s/mpd //; s/ffmpeg ashuffle //' /etc/pacman.conf
 
@@ -64,10 +64,11 @@ echo -e "$bar Fix Midori dependencies ..."
 pacman -S --noconfirm glib2 gtk3 webkitgtk
 
 mv /tmp/backup/* /lib
-ln -s /lib/libicudata.so.56{.1,}
-ln -s /lib/libicui18n.so.56{.1,}
-ln -s /lib/libicuuc.so.56{.1,}
-ln -s /lib/libwebp.so.6.{0.0,}
+ln -sf /lib/libicudata.so.{56.1,59}
+ln -sf /lib/libicui18n.so.{56.1,59}
+ln -sf /lib/libicuuc.so.{56.1,59}
+ln -sf /lib/libwebkitgtk-3.0.so.0{.22.16,}
+ln -sf /lib/libwebp.so.6{.0.0,}
 
 redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 
