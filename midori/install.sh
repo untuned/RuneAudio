@@ -20,7 +20,7 @@ pacman -Sy --noconfirm gstreamer gstreamer-vaapi glib2 gtk3 harfbuzz freetype2 l
 ln -sf /lib/libicuuc.so.{60.1,56}
 ln -sf /lib/libicudata.so.{60.1,56}
 
-yes | pacman -S midori
+yes 2>/dev/null | pacman -S midori
 
 echo -e "$bar Restart Midori ..."
 killall midori
