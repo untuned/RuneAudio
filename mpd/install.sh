@@ -48,11 +48,6 @@ sed -i -e '/^ProtectKernel/ s/^/#/
 ' -e '/^Restrict/ s/^/#/
 ' /usr/lib/systemd/system/mpd.service
 
-sed -i -e '/^ProtectKernel/ s/^/#/
-' -e '/^ProtectControl/ s/^/#/
-' -e '/^Restrict/ s/^/#/
-' /usr/lib/systemd/user/mpd.service
-
 systemctl daemon-reload
 systemctl restart mpd
 
