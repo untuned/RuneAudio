@@ -18,6 +18,7 @@ last-window-width=1920
 last-window-height=1080
 ...
 ```
+(stylesheet and extension should be removed)
 
 `/.xinitrc`
 ```sh
