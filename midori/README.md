@@ -39,3 +39,7 @@ rm /root/.config/midori/history.db-shm
 xinit &> /dev/null &
 ```
 (manual refresh may needed)
+
+**note**
+- `/root/.config/midori` will be created by `xinit midori`
+- then create `.xinitrc`
