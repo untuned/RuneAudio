@@ -15,10 +15,12 @@ fi
 title -l '=' "$bar Upgrade Midori ..."
 timestart
 
-pacman -Sy --noconfirm enchant freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3 harfbuzz hunspell icu libgcrypt libgpg-error libsoup libwebp
+[[ $( pacman -Sy | grep -c 'up to date') != 5 ]] && rankmirrors
 
-ln -sf /lib/libicuuc.so.{60.1,56}
-ln -sf /lib/libicudata.so.{60.1,56}
+pacman -S --noconfirm enchant freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3 harfbuzz hunspell icu libgcrypt libgpg-error libsoup libwebp
+
+ln -sf /lib/libicuuc.so.{60.2,56}
+ln -sf /lib/libicudata.so.{60.2,56}
 
 yes 2>/dev/null | pacman -S midori
 
