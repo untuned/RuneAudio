@@ -15,7 +15,7 @@ fi
 title -l '=' "$bar Upgrade Midori ..."
 timestart
 
-pacman -Sy --noconfirm gstreamer gstreamer-vaapi glib2 gtk3 harfbuzz freetype2 libsoup libgcrypt gpg-crypter libgpg-error libwebp enchant icu
+pacman -Sy --noconfirm enchant freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3 harfbuzz hunspell icu libgcrypt libgpg-error libsoup libwebp
 
 ln -sf /lib/libicuuc.so.{60.1,56}
 ln -sf /lib/libicudata.so.{60.1,56}
