@@ -28,7 +28,13 @@ exec midori -e Fullscreen
 
 **restart**
 ```sh
+# stop x
 killall Xorg
+
+# clear cache
+rm /root/.config/midori/history.db-shm
+
+# start x and midori
 xinit &> /dev/null &
 ```
 (manual refresh may needed)
