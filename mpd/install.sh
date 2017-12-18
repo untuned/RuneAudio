@@ -13,7 +13,7 @@ fi
 title -l '=' "$bar Upgrade MPD ..."
 timestart l
 
-rankmirrors
+[[ $( pacman -Sy | grep -c 'up to date') != 5 ]] && rankmirrors
 
 echo -e "$bar Get files ..."
 # pacman -S openssl > libcrypto.so.1.0, libssl.so.1.0 error - some packages still need existing version
