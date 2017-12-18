@@ -12,7 +12,7 @@ getuninstall
 
 gitpath=https://github.com/rern/RuneAudio/raw/$branch
 
-rankmirrors
+[[ $( pacman -Sy | grep -c 'up to date') != 5 ]] && rankmirrors
 
 echo -e "$bar Aria2 package ..."
 pacman -S --noconfirm aria2 glibc
