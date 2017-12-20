@@ -47,7 +47,8 @@ chmod 777 /var/log/runeaudio/mpd.log
 
 # fix systemd unknown lvalue (not exist in current systemd version) 
 echo -e "$bar Modify files ..."
-sed -i -e '/^ProtectKernel/ s/^/#/
+sed -i -e 's/User=mpd/User=root
+' -e '/^ProtectKernel/ s/^/#/
 ' -e '/^ProtectControl/ s/^/#/
 ' -e '/^Restrict/ s/^/#/
 ' /usr/lib/systemd/system/mpd.service
