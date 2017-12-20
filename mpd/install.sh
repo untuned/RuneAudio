@@ -22,6 +22,9 @@ wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P
 chown root:root /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
 chmod 755 /usr/lib/{libcrypto.so.1.1,libssl.so.1.1}
 
+# fix python3 issue by swith to python2
+ln -sf /usr/bin/python{2.7,}
+
 cp /etc/mpd.conf{,.backup}
 
 sed -i '/^IgnorePkg/ s/mpd //; s/ffmpeg ashuffle //' /etc/pacman.conf
@@ -31,7 +34,8 @@ echo -e "$bar Remove conflict packages ..."
 pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
 
 echo -e "$bar Install packages ..."
-pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg
+pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg python2-pip
+pip install flask
 
 echo -e "$bar Install MPD ..."
 pacman -S --noconfirm mpd
