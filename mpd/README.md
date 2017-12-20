@@ -20,6 +20,9 @@ Upgrade MPD to latest version, 0.3:0.19.17 / 0.4b:0.19.19 to **0.20.12** (as of 
 		- libnfs
 		- libwebp
 		- wavpack
+	- python
+		- switch to python2
+		- install flask
 	- fix systemd unknown lvalue
 	- fix mpd.log permission
 	
