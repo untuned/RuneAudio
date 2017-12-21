@@ -78,8 +78,10 @@ build() {
     --lock-path=/run/lock/nginx.lock \
     --user=http \
     --group=http \
-    --http-log-path=/var/log/nginx/access.log \
-    --error-log-path=stderr \
+	--http-log-path=/var/log/runeaudio/runeui.log \
+    --error-log-path=/var/log/runeaudio/runeui_error.log \
+    #--http-log-path=/var/log/nginx/access.log \
+    #--error-log-path=stderr \
     --http-client-body-temp-path=/var/lib/nginx/client-body \
     --http-proxy-temp-path=/var/lib/nginx/proxy \
     --http-fastcgi-temp-path=/var/lib/nginx/fastcgi \
