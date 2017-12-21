@@ -1,7 +1,9 @@
 ArchLinuxArm
 ---
 
-### Download
+### Desktop Linux
+
+**Download**
 ```sh
 # RPi 3 (not for compiling)
 wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
@@ -9,14 +11,14 @@ wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
 wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
 ```
 
-### Partition SD Card
-- Gparted does unmount > partition > format
+**Partition SD Card**
+- **Gparted** does unmount > partition > format
 ```sh
 # primary #1  BOOT   fat32   100MB  
 # primary #2   ROOT   ext4    the rest
 ```
 
-### Extract files  
+**Extract files**
 ```sh
 # bsdtar
 apt-cache policy bsdtar
@@ -42,5 +44,5 @@ sed -i 's/^root:.*$/root:$6$F8UIXmER$93U01yWgfQyYAFaaMGz15PTAFLXsZsYCm5.jHSSnF6u
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /media/x/ROOT/etc/ssh/sshd_config
 ```
 
-### Login  
+### RPi Login  
 - id / password : root / rune
