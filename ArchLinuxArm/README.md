@@ -39,8 +39,7 @@ bsdtar xpvf ArchLinuxARM-rpi-3-latest.tar.gz -C /media/x/ROOT
 cp -r --no-preserve=mode,ownership /media/x/ROOT/boot/* /media/x/BOOT
 rm -r /media/x/ROOT/boot/*
 
-sed -i 's/^root:.*$/root:$6$F8UIXmER$93U01yWgfQyYAFaaMGz15PTAFLXsZsYCm5.jHSSnF6u1YojQeBZHAn7VcFOvvohqJ9fV3BtKEAKcBsEcFaT6a/:16486::::::
-/' /etc/shadow
+sed -i 's/^root:.*$/root:$6$CPmm8tpA/CUX3u4G$bi6hsZ.71bhybjbLob.piVwAT8dyEvhVPDACMpm0mwkMwdCSnkXsji9dzeUOxVOkObm/NAK6NacQmMheSJojn/:17513::::::/' /etc/shadow
 sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /media/x/ROOT/etc/ssh/sshd_config
 ```
 
