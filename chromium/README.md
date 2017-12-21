@@ -8,7 +8,9 @@ exec chromium --no-sandbox --app=http://www.runeaudio.com --start-fullscreen
 ```
 
 ```sh
+# install
 pacman -S chromium
 
+# run
 xinit &
 ```
