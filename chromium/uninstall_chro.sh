@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias=aria
+alias=chro
 
 . /srv/http/addonstitle.sh
 
