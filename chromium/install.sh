@@ -18,6 +18,10 @@ getuninstall
 
 yes 2>/dev/null | pacman -S chromium libwebp nss
 
+# modify file
+echo -e "$bar Restore files ..."
+file=/root/.xinitrc
+echo $file
 sed -i -e '/export DISPLAY/ a\
 export BROWSER=chromium
 ' -e '/^midori/ {
@@ -25,7 +29,7 @@ s/^/#/
 a\
 chromium --no-sandbox --app=http://localhost --start-fullscreen
 }
-' /root/.xinitrc
+' $file
 
 echo -e "$bar Start Chromium on local display..."
 killall Xorg
