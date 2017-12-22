@@ -20,6 +20,7 @@ sed -i -e '/export BROWSER=chromium/ d
 
 echo -e "$bar Start default local browser..."
 killall Xorg
+sleep 3
 xinit &> /dev/null &
 
 uninstallfinish $@
