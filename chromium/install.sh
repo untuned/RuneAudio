@@ -14,6 +14,8 @@ fi
 title -l '=' "$bar Install Chromium ..."
 timestart
 
+getuninstall
+
 yes 2>/dev/null | pacman -S chromium libwebp nss
 
 sed -i -e '/export DISPLAY/ a\
