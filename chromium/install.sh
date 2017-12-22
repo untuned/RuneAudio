@@ -15,10 +15,10 @@ installstart $@
 
 getuninstall
 
-yes 2>/dev/null | pacman -S chromium libwebp nss
+pacman -S --noconfirm chromium libwebp nss
 
 # modify file
-echo -e "$bar Restore files ..."
+echo -e "$bar Modify file ..."
 file=/root/.xinitrc
 echo $file
 sed -i -e '/export DISPLAY/ a\
