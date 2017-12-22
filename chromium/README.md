@@ -1,4 +1,4 @@
-## RuneAudio install
+### RuneAudio install
 ```sh
 pacman -S chromium nss
 sed -i -e '/^midori/ {
@@ -11,9 +11,9 @@ chromium --no-sandbox --app=http://localhost --start-fullscreen
 xinit &> /dev/null &
 ```
 
-## ArchLinuxArm - install
+### ArchLinuxArm - install
 ```sh
-pacman -S chromium
+pacman -S xorg-server xorg-xinit chromium
 
 echo '#!/bin/bash
 export DISPLAY=:0
