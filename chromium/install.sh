@@ -33,6 +33,7 @@ chromium --no-sandbox --app=http://localhost --start-fullscreen
 
 echo -e "$bar Start Chromium on local display..."
 killall Xorg
+sleep 3
 xinit &> /dev/null &
 
 timestop
