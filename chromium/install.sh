@@ -30,7 +30,6 @@ chromium --no-sandbox --app=http://localhost --start-fullscreen
 }
 ' $file
 
-timestop
-title -l '=' "$bar Chromium installed successfully."
+installfinish $@
 
 clearcache
