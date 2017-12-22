@@ -1,6 +1,7 @@
-### RuneAudio install
+### RuneAudio install after MPD upgrade
 ```sh
-pacman -S chromium ffmpeg libwebp nss
+pacman -S chromium libwebp nss
+
 sed -i -e '/export DISPLAY/ a\
 # fix: Failed to launch GPU process
 export BROWSER=chromium
