@@ -28,6 +28,7 @@ chromium --no-sandbox --app=http://localhost --start-fullscreen
 ' /root/.xinitrc
 
 echo -e "$bar Start Chromium on local display..."
+killall Xorg
 xinit &> /dev/null &
 
 timestop
