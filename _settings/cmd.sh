@@ -43,7 +43,11 @@ mmc() {
 		mount /dev/mmcblk0p$1 $mntdir
 	fi
 }
-
+pacmanpkg() {
+	[[ -L /var/cache/pacman ]] && exit
+	rm -r /var/cache/pacman
+	ln -sf /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
+}
 bootx() {
  	if [[ -e /root/reboot.py ]]; then
 	 	/root/reboot.py $1
