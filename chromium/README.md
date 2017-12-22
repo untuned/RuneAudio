@@ -2,6 +2,7 @@
 ```sh
 pacman -S chromium nss
 sed -i -e '/export DISPLAY/ a\
+# fix: Failed to launch GPU process
 export BROWSER=chromium
 ' -e '/^midori/ {
 s/^/#/
