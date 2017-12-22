@@ -3,12 +3,12 @@
 pacman -S chromium libwebp nss
 
 sed -i -e '/export DISPLAY/ a\
-# fix: Failed to launch GPU process
 export BROWSER=chromium
 ' -e '/^midori/ {
 s/^/#/
 a\
 chromium --no-sandbox --app=http://localhost --start-fullscreen
+}
 ' /root/.xinitrc
 
 # run
