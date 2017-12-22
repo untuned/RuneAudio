@@ -11,8 +11,7 @@ if [[ $( mpd -V | head -n 1 ) == 'Music Player Daemon 0.19.'* ]]; then
 	exit
 fi
 
-title -l '=' "$bar Install Chromium ..."
-timestart
+installstart $@
 
 getuninstall
 
