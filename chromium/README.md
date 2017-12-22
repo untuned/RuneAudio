@@ -1,6 +1,6 @@
 ### RuneAudio install
 ```sh
-pacman -S chromium nss
+pacman -S chromium ffmpeg libwebp nss
 sed -i -e '/export DISPLAY/ a\
 # fix: Failed to launch GPU process
 export BROWSER=chromium
