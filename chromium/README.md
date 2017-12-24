@@ -1,30 +1,6 @@
-### RuneAudio install after MPD upgrade
-```sh
-pacman -S chromium libwebp nss
+Chromium Browser
+---
 
-sed -i -e '/export DISPLAY/ a\
-export BROWSER=chromium
-' -e '/^midori/ {
-s/^/#/
-a\
-chromium --no-sandbox --app=http://localhost --start-fullscreen
-}
-' /root/.xinitrc
-
-# run
-xinit &> /dev/null &
-```
-
-### ArchLinuxArm - install
-```sh
-pacman -S xorg-server xorg-xinit chromium
-
-echo '#!/bin/bash
-export DISPLAY=:0
-matchbox-window-manager &
-chromium --no-sandbox --app=http://www.runeaudio.com --start-fullscreen
-' > /root/.xinitrc
-
-# run
-xinit &> /dev/null &
-```
+- Default local browser is customized Midori, `midori-rune`, which cannot be upgraded
+- MPD upgrade breaks Midori and cannot be fixed
+- Chromium can be used instead without any issue
