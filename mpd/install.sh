@@ -63,3 +63,4 @@ clearcache
 	
 timestop l
 title -l '=' "$bar MPD upgraded successfully."
+title -nt "$info Local browser: Chromium browser must be installed."
