@@ -34,7 +34,8 @@ echo -e "$bar Remove conflict packages ..."
 pacman -R --noconfirm ashuffle-rune ffmpeg-rune mpd-rune
 
 echo -e "$bar Install packages ..."
-pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg python2-pip
+pacman -S --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg
+[[ ! $( which pip ) ]] && pacman -S python2-pip
 pip install flask
 
 echo -e "$bar Install MPD ..."
