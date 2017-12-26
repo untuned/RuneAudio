@@ -141,10 +141,10 @@ echo
 
 echo -e "\n$bar Set pacman cache ...\n"
 #################################################################################
-sed -i "/#CacheDir/ a\
-DBPath      = $mnt/varcache/pacman/pkg/ \
-CacheDir    = $mnt/varcache/pacman/
-" /etc/pacman.conf
+sed -i '/#CacheDir/ a\
+DBPath      = '$mnt'/varcache/pacman/pkg/ \
+CacheDir    = '$mnt'/varcache/pacman/
+' /etc/pacman.conf
 
 # rankmirrors
 #################################################################################
