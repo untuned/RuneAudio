@@ -15,7 +15,7 @@ installstart $@
 
 getuninstall
 
-pacman -S --noconfirm chromium libwebp nss
+pacman -S --noconfirm chromium nss
 
 # modify file
 echo -e "$bar Modify file ..."
