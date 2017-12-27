@@ -7,3 +7,6 @@ Chromium Browser
 	- Chromium cannot be installed without `ffmpeg` upgrade
 	- `ffmpeg` upgrade breaks `mpd-rune`
 	- upgrade `ffmpeg` + `mpd` > install `chromium`
+	- fix ipv6 probing
+	- fix scaling
+	- need `hdmi_group` and `hdmi_mode` [setting](https://www.raspberrypi.org/documentation/configuration/config-txt/video.md)
