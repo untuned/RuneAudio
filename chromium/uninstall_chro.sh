@@ -11,10 +11,17 @@ pacman -Rs --noconfirm chromium
 
 # restore file
 echo -e "$bar Restore files ..."
+file=/boot/cmdline.txt
+echo $file
+sed -i '1 s/$/ ipv6.disable=1/' $file
+
+file=/boot/config.txt
+echo $file
+sed -i '/disable_overscan=1/ d' $file
+
 file=/root/.xinitrc
 echo $file
-sed -i -e '/export BROWSER=chromium/ d
-' -e '/^#midori/ s/^#//
+sed -i -e '/^#midori/ s/^#//
 ' -e '/^chromium/ d
 ' $file
 
