@@ -19,17 +19,17 @@ pacman -S --noconfirm chromium libwebp nss
 
 # modify file
 echo -e "$bar Modify file ..."
-# chromium try to probe ipv6
+# fix - chromium try to probe ipv6
 file=/boot/cmdline.txt
 echo $file
 sed -i 's/ ipv6.disable=1//' $file
-
+# fix - page scaling
 file=/boot/config.txt
 echo $file
 echo '
 disable_overscan=1
 ' >> $file
-
+# replace midori with chromium
 file=/root/.xinitrc
 echo $file
 sed -i '/^midori/ {
