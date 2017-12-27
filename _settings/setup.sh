@@ -142,7 +142,6 @@ echo
 echo -e "\n$bar Set pacman cache ...\n"
 #################################################################################
 sed -i '/#CacheDir/ a\
-DBPath      = '$mnt'/varcache/pacman/ \
 CacheDir    = '$mnt'/varcache/pacman/pkg/
 ' /etc/pacman.conf
 
