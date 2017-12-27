@@ -19,11 +19,14 @@ pacman -S --noconfirm chromium libwebp nss
 
 # modify file
 echo -e "$bar Modify file ..."
+# chromium try to probe ipv6
+file=/boot/cmdline.txt
+echo $file
+sed -i -e 's/ ipv6.disable=1//' $file
+
 file=/root/.xinitrc
 echo $file
-sed -i -e '/export DISPLAY/ a\
-export BROWSER=chromium
-' -e '/^midori/ {
+sed -i -e '/^midori/ {
 s/^/#/
 a\
 chromium --no-sandbox --app=http://localhost --start-fullscreen
