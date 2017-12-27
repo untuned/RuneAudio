@@ -185,6 +185,11 @@ echo
 wgetnc https://github.com/rern/RuneUI_enhancement/raw/master/install.sh; chmod +x install.sh; ./install.sh 1.5
 echo
 
+# Lyrics
+#################################################################################
+wgetnc https://github.com/RuneAddons/Lyrics/raw/master/install.sh; chmod +x install.sh; ./install.sh
+echo
+
 # Library breadcrumb
 #################################################################################
 wgetnc $gitpath/breadcrumb/install.sh; chmod +x install.sh; ./install.sh
