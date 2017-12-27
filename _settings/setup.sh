@@ -165,10 +165,7 @@ touch /root/.hushlogin
 # samba
 #################################################################################
 wgetnc $gitpath/samba/install.sh; chmod +x install.sh; ./install.sh $pwd1
-
-# mpd
-#################################################################################
-#wgetnc $gitpath/mpd/install.sh; chmod +x install.sh; ./install.sh
+echo
 
 # Transmission
 #################################################################################
@@ -197,6 +194,14 @@ wgetnc $gitpath/_settings/gpio.json -P /srv/http
 chown http:http /srv/http/gpio.json
 wgetnc https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 echo
+
+# mpd
+#################################################################################
+#wgetnc $gitpath/mpd/install.sh; chmod +x install.sh; ./install.sh
+
+# chromium
+#################################################################################
+#wgetnc $gitpath/chromium/install.sh; chmod +x install.sh; ./install.sh
 
 systemctl reload php-fpm
 
