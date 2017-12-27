@@ -8,7 +8,7 @@ uninstallstart $@
 
 if [[ $1 == u ]]; then
 	zoom=$( grep '^chromium' /root/.xinitrc | cut -d '=' -f 3 )
-	redis-cli set enhazoom $zoom &> /dev/null
+	redis-cli set chrozoom $zoom &> /dev/null
 fi
 
 # uninstall package #######################################
