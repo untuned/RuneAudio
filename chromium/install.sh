@@ -43,6 +43,7 @@ installfinish $@
 
 echo -e "$info Reboot ..."
 partroot=$( mount | grep 'on / ' | cut -d' ' -f1 )
-echo ${partroot/\/dev\/mmcblk0p} > /sys/module/bcm2709/parameters/reboot_part
+partboot=${partroot/\/dev\/mmcblk0p}
+echo $(( partboot - 1 )) > /sys/module/bcm2709/parameters/reboot_part
 /var/www/command/rune_shutdown
 reboot
