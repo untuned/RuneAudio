@@ -165,8 +165,6 @@ touch /root/.hushlogin
 # samba
 #################################################################################
 wgetnc $gitpath/samba/install.sh; chmod +x install.sh; ./install.sh $pwd1
-wgetnc $gitpath/_settings/smb.conf -P /etc/samba/smb-dev.conf
-systemctl restart nmbd smbd
 
 # mpd
 #################################################################################
@@ -203,6 +201,7 @@ echo
 systemctl reload php-fpm
 
 # systemctl daemon-reload # done in GPIO install
+wgetnc $gitpath/_settings/smb.conf -P /etc/samba/smb-dev.conf
 systemctl restart nmbd smbd
 
 # show installed packages status
