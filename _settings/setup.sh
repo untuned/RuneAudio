@@ -190,11 +190,6 @@ echo
 wgetnc https://github.com/RuneAddons/Lyrics/raw/master/install.sh; chmod +x install.sh; ./install.sh
 echo
 
-# Library breadcrumb
-#################################################################################
-wgetnc $gitpath/breadcrumb/install.sh; chmod +x install.sh; ./install.sh
-echo
-
 # GPIO
 #################################################################################
 wgetnc $gitpath/_settings/mpd.conf.gpio -P /etc
