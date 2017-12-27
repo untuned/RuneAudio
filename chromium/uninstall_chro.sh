@@ -6,6 +6,11 @@ alias=chro
 
 uninstallstart $@
 
+if [[ $1 == u ]]; then
+	zoom=$( grep '^chromium' /root/.xinitrc | cut -d '=' -f 3 )
+	redis-cli set enhazoom $zoom &> /dev/null
+fi
+
 # uninstall package #######################################
 pacman -Rs --noconfirm chromium
 
