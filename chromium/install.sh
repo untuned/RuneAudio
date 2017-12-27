@@ -35,7 +35,7 @@ echo $file
 sed -i '/^midori/ {
 s/^/#/
 a\
-chromium --no-sandbox --app=http://localhost --start-fullscreen
+chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor='$1'
 }
 ' $file
 
