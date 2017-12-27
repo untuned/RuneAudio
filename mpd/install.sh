@@ -56,7 +56,12 @@ sed -i -e 's/User=mpd/User=root/
 ' /usr/lib/systemd/system/mpd.service
 
 systemctl daemon-reload
-systemctl restart mpd
+
+echo -e "$bar Start MPD ..."
+if ! systemctl restart mpd &> /dev/null; then
+	title -l = "$warn MPD upgrade failed."
+	exit
+fi
 
 redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 
