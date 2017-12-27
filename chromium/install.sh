@@ -6,7 +6,7 @@ alias=chro
 
 . /srv/http/addonstitle.sh
 
-if [[ $( mpd -V | head -n 1 ) == 'Music Player Daemon 0.19.'* ]]; then
+if ! pacman -Qi mpd &> /dev/null; then
 	title "$info MPD must be upgraged first."
 	exit
 fi
