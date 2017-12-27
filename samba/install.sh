@@ -77,7 +77,12 @@ fi
 (echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
 systemctl daemon-reload
-systemctl restart nmbd smbd
+
+echo -e "$bar Start Samba ..."
+if ! systemctl restart nmbd smbd &> /dev/null; then
+	title -l = "$warn Samba upgrade failed."
+	exit
+fi
 
 redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
 
