@@ -41,7 +41,7 @@ chromium --no-sandbox --app=http://localhost --start-fullscreen
 
 installfinish $@
 
-echo -e "$info Please wait for reboot ..."
+echo -e "$info Please wait until reboot finished ..."
 partroot=$( mount | grep 'on / ' | cut -d' ' -f1 )
 partboot=${partroot/\/dev\/mmcblk0p}
 echo $(( partboot - 1 )) > /sys/module/bcm2709/parameters/reboot_part
