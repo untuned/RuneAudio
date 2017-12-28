@@ -30,9 +30,11 @@ sed -i -e '/^#midori/ s/^#//
 ' -e '/^chromium/ d
 ' $file
 
-echo -e "$bar Start default local browser..."
-killall Xorg
-sleep 3
-xinit &> /dev/null &
+if [[ $1 != u ]]; then
+	echo -e "$bar Start default local browser..."
+	killall Xorg
+	sleep 3
+	xinit &> /dev/null &
+fi
 
 uninstallfinish $@
