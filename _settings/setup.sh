@@ -73,11 +73,10 @@ mkdir -p "$mnt"
 if ! grep -q $mnt /etc/fstab; then
 	echo "/dev/sda1  $mnt  ext4  defaults,noatime" >> /etc/fstab
 	umount -l /dev/sda1
-	/mnt/MPD/USB/hdd
+	rm -r /mnt/MPD/USB/hdd
 	mount -a
 fi
-#[[ -e /mnt/MPD/USB/hdd && $( ls -1 /mnt/MPD/USB/hdd | wc -l ) == 0 ]] && rm -r /mnt/MPD/USB/hdd
-#find /mnt/hdd/Music -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 ln -sf -t /mnt/MPD/USB
+find /mnt/hdd/Music -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 ln -sf -t /mnt/MPD/USB
 
 echo -e "$bar OSMC pre-setup ..."
 #################################################################################
