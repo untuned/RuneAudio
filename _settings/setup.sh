@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# command shortcuts and motd
+# command shortcuts
 # passwords for samba and transmission
 # disable wifi, hdmi mode, fstab, pacman cache
 # preload osmc pre-setup
@@ -10,8 +10,9 @@
 # upgrade samba
 # install transmission
 # install aria2
-# install rune enhancement
-# install rune gpio
+# install runeui enhancement
+# install lyrics
+# install runeui gpio
 
 rm $0
 
