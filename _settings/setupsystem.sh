@@ -1,5 +1,27 @@
 #!/bin/bash
 
+# command shortcuts
+# disable wifi, hdmi mode, fstab, pacman cache
+# preload osmc pre-setup
+# restore settings
+
+rm $0
+
+[[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
+. /srv/http/addonstitle.sh
+
+mmc() {
+	[[ $2 ]] && mntdir=/tmp/$2 || mntdir=/tmp/p$1
+	if [[ ! $( mount | grep $mntdir ) ]]; then
+		mkdir -p $mntdir
+		mount /dev/mmcblk0p$1 $mntdir
+	fi
+}
+
+# command shortcuts
+gitpath=https://github.com/rern/RuneAudio/raw/master
+[[ ! -e /etc/profile.d/cmd.sh ]] && wgetnc $gitpath/_settings/cmd.sh -P /etc/profile.d
+
 echo -e "$bar Disable WiFi ..."
 #################################################################################
 systemctl disable netctl-auto@wlan0
