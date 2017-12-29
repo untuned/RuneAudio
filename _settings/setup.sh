@@ -16,6 +16,9 @@
 
 rm $0
 
+[[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
+. /srv/http/addonstitle.sh
+
 mmc() {
 	[[ $2 ]] && mntdir=/tmp/$2 || mntdir=/tmp/p$1
 	if [[ ! $( mount | grep $mntdir ) ]]; then
@@ -23,9 +26,6 @@ mmc() {
 		mount /dev/mmcblk0p$1 $mntdir
 	fi
 }
-
-[[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
-. /srv/http/addonstitle.sh
 
 timestart l
 
