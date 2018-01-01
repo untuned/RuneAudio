@@ -28,5 +28,8 @@ adduser [user] # create new system user if not exist
 smbpasswd -a [user]
 ```
 
+**List shares**  
+`smbtree`  
+
 **List currently accessing hosts**  
 `smbstatus`  
