@@ -36,7 +36,12 @@ root    hard    nofile    16384
 file=/etc/samba/smb-dev.conf
 echo $file
 wgetnc https://github.com/rern/RuneAudio/raw/master/samba/smb-dev.conf -O $file
-ln -sf /etc/samba/smb{-dev,}.conf
+cp /etc/samba/smb-{dev,prod}.conf
+# fix missing smbd startup
+sed -i '/smb-prod/ a\
+        sysCmd("systemctl start smbd");\
+        sysCmd("pgrep smbd || systemctl start smbd");
+' /srv/http/command/rune_SY_wrk
 
 [[ $1 == 0 ]] && pwd=rune || pwd=$1
 if (( $# > 1 )); then
