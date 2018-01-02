@@ -12,3 +12,4 @@ dtparam=act_led_gpio=18
 dtparam=act_led_trigger=default-on
 ' /boot/config.txt
 ```
+![gpio](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/RPi3_GPIOs.png)
