@@ -3,7 +3,11 @@ RuneAudio setup
 
 [**setup.sh**](https://github.com/rern/RuneAudio/blob/master/_settings/setup.sh)  
 ```sh
-wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh; chmod +x setup.sh; ./setup.sh
+wget --no-check-certificate https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh; chmod +x setup.sh; ./setup.sh
+```
+[**setupsystem.sh**](https://github.com/rern/RuneAudio/blob/master/_settings/setupsystem.sh)  
+```sh
+wget --no-check-certificate https://github.com/rern/RuneAudio/raw/master/_settings/setupsystem.sh; chmod +x setupsystem.sh; ./setupsystem.sh
 ```
 (RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`)  
 
