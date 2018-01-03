@@ -75,6 +75,10 @@ echo
 
 echo -e "$bar Restore settings ..."
 #################################################################################
+# keep version daqta
+build=$( redis-cli get buildversion )
+rel=$( redis-cli get release )
+
 # settings
 systemctl stop redis
 file=/var/lib/redis/rune.rdb
@@ -83,7 +87,10 @@ systemctl start redis
 
 sleep 2
 systemctl status redis | grep -q 'dead' && systemctl start redis
-
+if [[ $release == 0.4b ]]; then
+	redis-cli set buildversion $build
+	redis-cli set release $rel
+fi
 # create webradio files
 i=1
 str=''
