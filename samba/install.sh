@@ -43,41 +43,42 @@ sed -i '/smb-prod/ a\
         sysCmd("pgrep smbd || systemctl start smbd");
 ' /srv/http/command/rune_SY_wrk
 
-[[ $1 == 0 ]] && pwd=rune || pwd=$1
-if (( $# > 1 )); then
-	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-	usbroot=$( basename $mnt )
-	[[ $2 == 0 ]] && server=RuneAudio || server=$2
-	[[ $3 == 0 ]] && read=readonly || read=$3
-	[[ $4 == 0 ]] && readwrite=readwrite || readwrite=$4
+if (( $# > 0 )); then
+	[[ $1 == 0 ]] && pwd=rune || pwd=$1
+	if (( $# > 1 )); then
+		mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+		usbroot=$( basename $mnt )
+		[[ $2 == 0 ]] && server=RuneAudio || server=$2
+		[[ $3 == 0 ]] && read=readonly || read=$3
+		[[ $4 == 0 ]] && readwrite=readwrite || readwrite=$4
 
-sed -i '/^\[global\]/ a\
-\tnetbios name = '"$server"'
-' $file
+	sed -i '/^\[global\]/ a\
+	\tnetbios name = '"$server"'
+	' $file
 
-echo "
-[$readwrite]
-	comment = browseable, read, write, guess ok, no password
-	path = $mnt/$readwrite
-	read only = no
-[$read]
-	comment = browseable, read only, guess ok, no password
-	path = $mnt/$read
-[usbroot]
-	comment = hidden, read, write, root with password only
-	path = $mnt
-	browseable = no
-	read only = no
-	guest ok = no
-	valid users = root
-" >> $file
+	echo "
+	[$readwrite]
+		comment = browseable, read, write, guess ok, no password
+		path = $mnt/$readwrite
+		read only = no
+	[$read]
+		comment = browseable, read only, guess ok, no password
+		path = $mnt/$read
+	[usbroot]
+		comment = hidden, read, write, root with password only
+		path = $mnt
+		browseable = no
+		read only = no
+		guest ok = no
+		valid users = root
+	" >> $file
 
-	mkdir -p $mnt/$read
-	mkdir -p $mnt/$readwrite
-	chmod 755 $mnt/$read
-	chmod 777 $mnt/$readwrite
+		mkdir -p $mnt/$read
+		mkdir -p $mnt/$readwrite
+		chmod 755 $mnt/$read
+		chmod 777 $mnt/$readwrite
+	fi
 fi
-
 # set samba password
 (echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
@@ -94,16 +95,16 @@ redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
 timestop
 title -l '=' "$bar Samba upgraded successfully."
 
-(( $# == 1 )) && exit
-l=10
-lr=${#read}
-lrw=${#readwrite}
-(( $lr > $l )) && l=$lr
-(( $lrw > $l )) && l=$lrw
-echo -e "$info Windows Network > RUNEAUDIO >"
-printf "%-${l}s - read+write share\n" $readwrite
-printf "%-${l}s - read only share\n\n" $read
-
+if (( $# > 0 )); then
+	l=10
+	lr=${#read}
+	lrw=${#readwrite}
+	(( $lr > $l )) && l=$lr
+	(( $lrw > $l )) && l=$lrw
+	echo -e "$info Windows Network > RUNEAUDIO >"
+	printf "%-${l}s - read+write share\n" $readwrite
+	printf "%-${l}s - read only share\n\n" $read
+fi
 printf "%-${l}s - "'\\\\'"$server"'\\'"usbroot > user: root + password\n\n" usbroot
 
 echo 'Add Samba user: smbpasswd -s -a < user >'
