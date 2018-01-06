@@ -51,22 +51,22 @@ if (( $# > 1 )) && [[ $3 != -b ]]; then
 
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	usbroot=$( basename $mnt )
-	[[ $2 == 0 ]] && server=RuneAudio || server=$2
-	[[ $3 == 0 ]] && read=readonly || read=$3
-	[[ $4 == 0 ]] && readwrite=readwrite || readwrite=$4
+	server=$2
+	read=$3
+	readwrite=$4
 
 	sed -i '/^\[global\]/ a\
-	\tnetbios name = '"$server"'
+	\tnetbios name = '"$2"'
 	' $file
 
 	echo "
+	[$read]
+		comment = browseable, read only, guess ok, no password
+		path = $mnt/$read
 	[$readwrite]
 		comment = browseable, read, write, guess ok, no password
 		path = $mnt/$readwrite
 		read only = no
-	[$read]
-		comment = browseable, read only, guess ok, no password
-		path = $mnt/$read
 	[usbroot]
 		comment = hidden, read, write, root with password only
 		path = $mnt

@@ -15,7 +15,7 @@ installstart $@
 
 getuninstall
 
-pacman -S --noconfirm chromium nss
+pacman -S --noconfirm chromium nss harfbuzz freetype2
 
 # modify file
 echo -e "$bar Modify file ..."
