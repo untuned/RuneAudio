@@ -47,7 +47,7 @@ sed -i '/smb-prod/ a\
 [[ $1 == 0 ]] && pwd=rune || pwd=$1
 (echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
-if (( $# > 1 )); then
+if (( $# > 1 )) && [[ $3 != -b ]]; then
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	usbroot=$( basename $mnt )
 	[[ $2 == 0 ]] && server=RuneAudio || server=$2
