@@ -29,7 +29,10 @@ smbpasswd -a [user]
 ```
 
 **List shares**  
-`smbtree`  
+`smbtree`
+
+**List users**  
+`pdbedit -L`
 
 **List currently accessing hosts**  
-`smbstatus`  
+`smbstatus`
