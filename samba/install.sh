@@ -33,10 +33,6 @@ root    soft    nofile    16384
 root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
-file=/etc/samba/smb-dev.conf
-echo $file
-wgetnc https://github.com/rern/RuneAudio/raw/master/samba/smb-dev.conf -O $file
-cp /etc/samba/smb-{dev,prod}.conf
 # fix missing smbd startup
 sed -i '/smb-prod/ a\
         sysCmd("systemctl start smbd");\
@@ -48,6 +44,11 @@ sed -i '/smb-prod/ a\
 (echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
 if (( $# > 1 )) && [[ $3 != -b ]]; then
+	file=/etc/samba/smb-dev.conf
+	echo $file
+	wgetnc https://github.com/rern/RuneAudio/raw/master/samba/smb-dev.conf -O $file
+	cp /etc/samba/smb-{dev,prod}.conf
+
 	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 	usbroot=$( basename $mnt )
 	[[ $2 == 0 ]] && server=RuneAudio || server=$2
