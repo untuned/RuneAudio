@@ -43,14 +43,16 @@ sed -i '/smb-prod/ a\
         sysCmd("pgrep smbd || systemctl start smbd");
 ' /srv/http/command/rune_SY_wrk
 
-if (( $# > 0 )); then
-	[[ $1 == 0 ]] && pwd=rune || pwd=$1
-	if (( $# > 1 )); then
-		mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-		usbroot=$( basename $mnt )
-		[[ $2 == 0 ]] && server=RuneAudio || server=$2
-		[[ $3 == 0 ]] && read=readonly || read=$3
-		[[ $4 == 0 ]] && readwrite=readwrite || readwrite=$4
+# set samba password
+[[ $1 == 0 ]] && pwd=rune || pwd=$1
+(echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
+
+if (( $# > 1 )); then
+	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+	usbroot=$( basename $mnt )
+	[[ $2 == 0 ]] && server=RuneAudio || server=$2
+	[[ $3 == 0 ]] && read=readonly || read=$3
+	[[ $4 == 0 ]] && readwrite=readwrite || readwrite=$4
 
 	sed -i '/^\[global\]/ a\
 	\tnetbios name = '"$server"'
@@ -73,14 +75,11 @@ if (( $# > 0 )); then
 		valid users = root
 	" >> $file
 
-		mkdir -p $mnt/$read
-		mkdir -p $mnt/$readwrite
-		chmod 755 $mnt/$read
-		chmod 777 $mnt/$readwrite
-	fi
+	mkdir -p $mnt/$read
+	mkdir -p $mnt/$readwrite
+	chmod 755 $mnt/$read
+	chmod 777 $mnt/$readwrite
 fi
-# set samba password
-(echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
 systemctl daemon-reload
 
