@@ -25,7 +25,7 @@ echo $file
 sed -i 's/ ipv6.disable=1//' $file
 # fix - page scaling
 file=/boot/config.txt
-if grep -q 'disable_overscan' $file; then
+if grep -q '^disable_overscan' $file; then
 	echo $file
 	sed -i '$ a\disable_overscan=1' $file
 fi
