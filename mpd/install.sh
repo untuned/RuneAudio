@@ -45,7 +45,7 @@ pacman -S --noconfirm mpd
 cp /etc/mpd.conf{.backup,}
 
 # fix permission (default - mpd run by user 'mpd')
-chmod 777 /var/log/runeaudio/mpd.log
+chmod -f 777 /var/log/runeaudio/mpd.log
 
 # fix systemd unknown lvalue (not exist in current systemd version) 
 echo -e "$bar Modify files ..."
