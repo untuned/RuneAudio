@@ -57,14 +57,17 @@ bootx() {
  	/var/www/command/rune_shutdown
  	reboot
 }
-bootosmc() {
+bootarch() {
  	bootx 6 &
 }
-bootrune04() {
+bootosmc() {
 	bootx 8 &
 }
-bootrune() {
+bootrune04() {
 	bootx 10 &
+}
+bootrune() {
+	bootx 12 &
 }
 
 setup() {
