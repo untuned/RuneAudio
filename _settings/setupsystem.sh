@@ -64,14 +64,14 @@ if ! grep -q $mnt /etc/fstab; then
 fi
 find /mnt/hdd/Music -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 ln -sf -t /mnt/MPD/USB
 
-#echo -e "$bar OSMC pre-setup ..."
+echo -e "$bar OSMC pre-setup ..."
 #################################################################################
-#mmc 7
-#if [[ ! -e /tmp/p7/walkthrough_completed ]]; then
-#	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
-#	. presetup.sh
-#fi
-#echo
+mmc 9
+if [[ ! -e /tmp/p7/walkthrough_completed ]]; then
+	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
+	. presetup.sh
+fi
+echo
 
 echo -e "$bar Restore settings ..."
 #################################################################################
