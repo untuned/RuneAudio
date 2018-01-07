@@ -47,6 +47,9 @@ echo -e "$bar Set HDMI mode ..."
 #################################################################################
 mmc 1
 mmc 6
+mmc 8
+mmc 10
+mmc 12
 # force hdmi mode, remove black border (overscan)
 hdmimode='
 hdmi_group=1
@@ -56,7 +59,9 @@ hdmi_ignore_cec=1'
 
 ! grep -q '^hdmi_mode=' /tmp/p1/config.txt && echo "$hdmimode" >> /tmp/p1/config.txt
 ! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p6/config.txt
-! grep -q '^hdmi_mode=' /boot/config.txt && echo "$hdmimode" >> /boot/config.txt
+! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p8/config.txt
+! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p10/config.txt
+! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p12/config.txt
 echo
 
 echo -e "$bar Mount USB drive to /mnt/hdd ..."
@@ -81,7 +86,7 @@ find /mnt/hdd/Music -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 ln -sf -t
 
 echo -e "$bar OSMC pre-setup ..."
 #################################################################################
-mmc 7
+mmc 9
 if [[ ! -e /tmp/p7/walkthrough_completed ]]; then
 	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
 	. presetup.sh
