@@ -56,12 +56,7 @@ hdmi_group=1
 hdmi_mode=31
 disable_overscan=1
 hdmi_ignore_cec=1'
-
-! grep -q '^hdmi_mode=' /tmp/p1/config.txt && echo "$hdmimode" >> /tmp/p1/config.txt
-! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p6/config.txt
-! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p8/config.txt
-! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p10/config.txt
-! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p12/config.txt
+! grep -q '^hdmi_mode=' /boot/config.txt && echo "$hdmimode" >> /boot/config.txt
 echo
 
 echo -e "$bar Mount USB drive to /mnt/hdd ..."
@@ -79,17 +74,25 @@ mkdir -p "$mnt"
 if ! grep -q $mnt /etc/fstab; then
 	echo "/dev/sda1  $mnt  ext4  defaults,noatime" >> /etc/fstab
 	umount -l /dev/sda1
-	rm -r /mnt/MPD/USB/hdd
+	rm -rf /mnt/MPD/USB/hdd
 	mount -a
 fi
 find /mnt/hdd/Music -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 ln -sf -t /mnt/MPD/USB
 
 echo -e "$bar OSMC pre-setup ..."
 #################################################################################
-mmc 9
-if [[ ! -e /tmp/p9/walkthrough_completed ]]; then
+mmc 5
+part=$( sed -n '/name/,/mmcblk/ p' /tmp/p5/installed_os.json | sed '/part/ d; s/\s//g; s/"//g; s/,//; s/name://; s/\/dev\/mmcblk0p//' )
+partarray=( $( echo $part ) )
+ilength=${#partarray[*]}
+for (( i=0; i < ilength; i++ )); do
+	[[ ${partarray[ i ]} == OSMC ]] && partosmc=${partarray[ i + 1 ]} && break
+done
+
+mmc $partosmc	
+if [[ ! -e /tmp/p$partosmc/walkthrough_completed ]]; then
 	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
-	. presetup.sh
+	. presetup.sh $partosmc
 fi
 echo
 
