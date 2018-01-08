@@ -12,4 +12,6 @@ CacheDir    = /mnt/hdd/varcache/pacman/pkg/
 
 pacman -Sy
 
-pacman -S wget
+mv /etc/ssl/certs/ca-certificates.crt{,.bak}
+
+pacman Su
