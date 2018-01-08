@@ -48,27 +48,6 @@ pacmanpkg() {
 	rm -r /var/cache/pacman
 	ln -sf /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
 }
-bootx() {
- 	if [[ -e /root/reboot.py ]]; then
-	 	/root/reboot.py $1
-		exit
-	fi
- 	echo $1 > /sys/module/bcm2709/parameters/reboot_part
- 	/var/www/command/rune_shutdown
- 	reboot
-}
-bootarch() {
- 	bootx 6 &
-}
-bootosmc() {
-	bootx 8 &
-}
-bootrune04() {
-	bootx 10 &
-}
-bootrune() {
-	bootx 12 &
-}
 
 setup() {
 	if [[ -e /usr/local/bin/uninstall_addo.sh ]]; then
@@ -136,4 +115,32 @@ hardreset() {
 		3) noobsreset;;
 		*) ;;
 	esac
+}
+boot() {
+	mmc 5
+	part=$( sed -n '/name/,/mmcblk/ p' /tmp/p5/installed_os.json | sed '/part/ d; s/\s//g; s/"//g; s/,//; s/name://; s/\/dev\/mmcblk0p//' )
+	partarray=( $( echo $part ) )
+	partname=${partarray[0]}
+	partnum=${partarray[1]}
+
+	ilength=${#partarray[*]}
+
+	echo -e "\n\e[30m\e[43m ? \e[0m Reboot to OS:"
+	echo -e '  \e[36m0\e[m Cancel'
+	for (( i=0; i < ilength; i++ )); do
+		(( $(( i % 2 )) == 0 )) && echo -e "  \e[36m$(( i / 2 + 1 ))\e[m ${partarray[ i ]}"
+	done
+	echo
+	echo 'Which ? '
+	read -n 1 ans
+	echo
+	partboot=$(( ans * 2 + 4 ))
+ 	if [[ -e /root/reboot.py ]]; then
+	 	/root/reboot.py $partboot
+		exit
+	fi
+	
+ 	echo $partboot > /sys/module/bcm2709/parameters/reboot_part
+ 	/var/www/command/rune_shutdown
+ 	reboot
 }
