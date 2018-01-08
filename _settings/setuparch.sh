@@ -10,8 +10,10 @@ sed -i '/#CacheDir/ a\
 CacheDir    = /mnt/hdd/varcache/pacman/pkg/
 ' /etc/pacman.conf
 
-pacman -Sy
-
 mv /etc/ssl/certs/ca-certificates.crt{,.bak}
 
-pacman Su
+pacman Syu
+
+pacman -S wget
+
+wget https://github.com/rern/RuneAudio/raw/master/_settings/cmd.sh -P /etc/profile.d
