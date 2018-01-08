@@ -45,17 +45,14 @@ echo
 
 echo -e "$bar Set HDMI mode ..."
 #################################################################################
-mmc 1
-mmc 6
-mmc 8
-mmc 10
-mmc 12
 # force hdmi mode, remove black border (overscan)
 hdmimode='
 hdmi_group=1
 hdmi_mode=31
 disable_overscan=1
 hdmi_ignore_cec=1'
+mmc 1
+! grep -q '^hdmi_mode=' /boot/config.txt && echo "$hdmimode" >> /tmp/p1/config.txt
 ! grep -q '^hdmi_mode=' /boot/config.txt && echo "$hdmimode" >> /boot/config.txt
 echo
 
