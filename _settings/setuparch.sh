@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo root | su
+echo "root:rune" | chpasswd
+
 mkdir /mnt/hdd
 echo '/dev/sda1  /mnt/hdd  ext4  defaults,noatime' >> /etc/fstab
 mount -a
