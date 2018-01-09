@@ -83,7 +83,7 @@ part=$( sed -n '/name/,/mmcblk/ p' /tmp/p5/installed_os.json | sed '/part/ d; s/
 partarray=( $( echo $part ) )
 ilength=${#partarray[*]}
 for (( i=0; i < ilength; i++ )); do
-	[[ ${partarray[ i ]} == OSMC ]] && partosmc=${partarray[ i + 1 ]} && break
+	[[ ${partarray[i]} == OSMC ]] && partosmc=${partarray[i + 1]} && break
 done
 
 mmc $partosmc	
