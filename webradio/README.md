@@ -19,13 +19,13 @@ Title1=filename
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/webradio/webradiodb.sh; chmod +x webradiodb.sh; ./webradiodb.sh
 ```
-
+**Install**  
+from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons) 
+  
+  
 **export database to file**
 - copy `rune.rdb` backup files to `/var/lib/redis/`  
 - run export script
 ```sh
 wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/webradio/webradiofile.sh; chmod +x webradiofile.sh; ./webradiofile.sh
-```
-  
-**Install**  
-from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)  
+``` 
