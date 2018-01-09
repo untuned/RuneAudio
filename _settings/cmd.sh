@@ -90,6 +90,7 @@ boot() {
 	read -n 1 ans
 	echo
 	[[ -z $ans || $ans == 0 ]] && return
+	
 	partboot=${bootarray[$ans]}
  	if [[ -e /root/reboot.py ]]; then
 	 	/root/reboot.py $partboot
