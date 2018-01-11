@@ -43,28 +43,6 @@ mmc() {
 		mount /dev/mmcblk0p$1 $mntdir
 	fi
 }
-pacmancache() {
-	[[ -L /var/cache/pacman ]] && exit
-	rm -r /var/cache/pacman
-	ln -sf /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
-}
-
-setup() {
-	if [[ -e /usr/local/bin/uninstall_addo.sh ]]; then
-		echo -e "\e[30m\e[43m ! \e[0m Already setup."
-	else
-		wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh
-		if [[ $? == 5 ]]; then
-			echo -e "\e[38;5;6m\e[48;5;6m . \e[0m Sync time ..."
-			systemctl stop ntpd
-			ntpdate pool.ntp.org
-			systemctl start ntpd
-			wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh
-		fi
-		chmod +x setup.sh
-		./setup.sh
-	fi
-}
 
 boot() {
 	mmc 5
@@ -100,3 +78,44 @@ boot() {
  	echo $partboot > /sys/module/bcm2709/parameters/reboot_part
  	/var/www/command/rune_shutdown 2> /dev/null; reboot
 }
+
+if [[ -d /home/osmc ]]; then
+	setup() {
+		if [[ -e /usr/local/bin/uninstall_motd.sh ]]; then
+			echo -e "\n\e[30m\e[43m ! \e[0m Already setup."
+		else
+			wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/setup.sh
+			chmod +x setup.sh
+			./setup.sh
+		fi
+	}
+	pkgcache() {
+		mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+		mkdir -p $mnt/varcache/apt
+		rm -rf /var/cache/apt
+		ln -sf $mnt/varcache/apt /var/cache/apt
+	}
+else
+	pkgcache() {
+		[[ -L /var/cache/pacman ]] && exit
+		rm -r /var/cache/pacman
+		ln -sf /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
+	}
+
+	setup() {
+		if [[ -e /usr/local/bin/uninstall_addo.sh ]]; then
+			echo -e "\e[30m\e[43m ! \e[0m Already setup."
+		else
+			wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh
+			if [[ $? == 5 ]]; then
+				echo -e "\e[38;5;6m\e[48;5;6m . \e[0m Sync time ..."
+				systemctl stop ntpd
+				ntpdate pool.ntp.org
+				systemctl start ntpd
+				wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/_settings/setup.sh
+			fi
+			chmod +x setup.sh
+			./setup.sh
+		fi
+	}
+fi
