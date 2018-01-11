@@ -80,6 +80,12 @@ boot() {
 }
 
 if [[ -d /home/osmc ]]; then
+	pkgcache() {
+		mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+		mkdir -p $mnt/varcache/apt
+		rm -rf /var/cache/apt
+		ln -sf $mnt/varcache/apt /var/cache/apt
+	}
 	setup() {
 		if [[ -e /usr/local/bin/uninstall_motd.sh ]]; then
 			echo -e "\n\e[30m\e[43m ! \e[0m Already setup."
@@ -89,19 +95,12 @@ if [[ -d /home/osmc ]]; then
 			./setup.sh
 		fi
 	}
-	pkgcache() {
-		mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-		mkdir -p $mnt/varcache/apt
-		rm -rf /var/cache/apt
-		ln -sf $mnt/varcache/apt /var/cache/apt
-	}
 else
 	pkgcache() {
 		[[ -L /var/cache/pacman ]] && exit
 		rm -r /var/cache/pacman
 		ln -sf /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
 	}
-
 	setup() {
 		if [[ -e /usr/local/bin/uninstall_addo.sh ]]; then
 			echo -e "\e[30m\e[43m ! \e[0m Already setup."
