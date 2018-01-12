@@ -99,7 +99,7 @@ else
 	pkgcache() {
 		mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
 		mkdir -p $mnt/varcache/pacman/pkg
-		sed "s|#CacheDir.*|CacheDir    = $mnt/varcache/pacman/pkg/|" /etc/pacman.conf
+		sed -i "s|^#CacheDir.*|CacheDir    = $mnt/varcache/pacman/pkg/|" /etc/pacman.conf
 	}
 	setup() {
 		if [[ -e /usr/local/bin/uninstall_addo.sh ]]; then
