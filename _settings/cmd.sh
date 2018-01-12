@@ -82,7 +82,7 @@ boot() {
 if [[ -d /home/osmc ]]; then
 	pkgcache() {
 		mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-		mkdir -p $mnt/varcache/apt
+		mkdir -p $mnt/varcache/apt/archives
 		echo "Dir::Cache::Archives $mnt/varcache/apt;" > /etc/apt/apt.conf.d/70dir-cache
 	}
 	setup() {
