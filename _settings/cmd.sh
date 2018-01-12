@@ -97,9 +97,9 @@ if [[ -d /home/osmc ]]; then
 	}
 else
 	pkgcache() {
-		[[ -L /var/cache/pacman ]] && exit
-		rm -r /var/cache/pacman
-		ln -sf /mnt/MPD/USB/hdd/varcache/pacman /var/cache/pacman
+		mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+		mkdir -p $mnt/varcache/pacman/pkg
+		sed "s|#CacheDir.*|CacheDir    = $mnt/varcache/pacman/pkg/|" /etc/pacman.conf
 	}
 	setup() {
 		if [[ -e /usr/local/bin/uninstall_addo.sh ]]; then
