@@ -38,55 +38,50 @@ sfpm() {
 	systemctl reload php-fpm
 }
 
-# omit current os from installed_os.json
 mntsettings=/tmp/p5
 mkdir -p $mntsettings
 mount /dev/mmcblk0p5 $mntsettings 2> /dev/null
-mmcroot=$( mount | grep 'on / ' | cut -d' ' -f1 | cut -d'/' -f3 )
-mmcline=$( sed -n "/$mmcroot/=" $mntsettings/installed_os.json )
-oslist=$( sed "$(( mmcline - 3 )), $mmcline d" $mntsettings/installed_os.json |
-	sed -n '/name/,/mmcblk/ p' |
-	sed '/part/ d; s/\s//g; s/"//g; s/,//; s/name://; s/\/dev\/mmcblk0p//' )
-osarray=( $( echo $oslist ) )
-ilength=${#osarray[*]}
-bootlist="
-$yesno Reboot to OS:
-  \e[36m0\e[m Cancel
-"
-namearray=(0 0 0)
-mountarray=(0 0 0)
-for (( i=0; i < ilength; i++ )); do
-	ivalue=${osarray[i]}
-	if (( $(( i % 2 )) == 0 )); then
-		bootlist+="  \e[36m$(( i / 2 + 1 ))\e[m $ivalue\n"
-		namearray+=(${ivalue}-boot ${ivalue}-root)
-	else
-		mountarray+=($ivalue $(( $ivalue + 1 )))
-	fi
-done
+installedlist=$( grep 'name\|mmc' $mntsettings/installed_os.json )
 
-ilength=${#mountarray[*]}
+# mount sd
+# omit current os)
+currentroot=$( mount | grep 'on / ' | cut -d' ' -f1 | cut -d'/' -f3 )
+currentline=$( echo "$installedlist" | sed -n "/$currentroot/=" )
+osarraymount=( $( 
+	echo "$installedlist" |
+	sed "$(( currentline - 2 )), $currentline d" |
+	sed -n '/name/,/mmcblk/ p' |
+	sed '/part/ d; s/\s//g; s/"//g; s/,//; s/name://; s/\/dev\/mmcblk0p//' 
+) )
+ilength=${#osarraymount[*]}
 mountlist="
-$yesno Mount SD partition:
+$yesno \e[36mMount\e[m SD partition:
   \e[36m0\e[m Cancel
   \e[36m1\e[m RECOVERY
   \e[36m2\e[m SETTINGS
 "
-for (( i=3; i < ilength; i++ )); do
-	mountlist+="  \e[36m$i\e[0m ${namearray[i]}\n"
+j=2
+mountarray=(0 1 5)
+for (( i=0; i < ilength; i+=2 )); do
+	iname=${osarraymount[i]}
+	j=$(( j + 1 ))
+	mountlist+="  \e[36m$j\e[m ${iname}-boot\n"
+	j=$(( j + 1 )) 
+	mountlist+="  \e[36m$j\e[m ${iname}-root\n"
+	imount=${osarraymount[i + 1]}
+	mountarray+=($imount $(( imount + 1 )))
 done
 
 mmc() {
 	if (( $# > 0 )); then
 		p=$1
 		if (( $p > 1 && $p < 5 )); then
-			echo -e "$info \e[36m/dev/mmcblk0p$p\e[0m not available."
+			echo -e "$info \e[36m/dev/mmcblk0p$p\e[m not available."
 			return
 		fi
 	else
 		echo -e "$mountlist"
-		echo
-		echo -e "\e[36m0\e[m / partition ? "
+		echo -e "\e[36m0\e[m / n ? "
 		read -n 1 ans
 		echo
 		[[ -z $ans || $ans == 0 ]] && return
@@ -96,33 +91,56 @@ mmc() {
 	mountline=$( mount | grep "mmcblk0p$p " )
 	name=${namearray[$ans]}
 	if [[ $mountline ]]; then
-		mountpoint=$( echo $mountline | cut -d' ' -f3 )
-		echo -e "$info \e[36m$name\e[0m already mounted at \e[36m$mountpoint\e[0m\n"
+		mntdir=$( echo $mountline | cut -d' ' -f3 )
+		echo -e "$info \e[36m$name\e[m already mounted at \e[36m$mntdir\e[m\n"
 	else
 		mntdir=/tmp/p$p
 		mkdir -p $mntdir
 		mount /dev/mmcblk0p$p $mntdir
-		echo -e "$info \e[36m$name\e[0m mounted at \e[36m$mntdir\e[0m\n"
+		echo -e "$info \e[36m$name\e[m mounted at \e[36m$mntdir\e[m\n"
 	fi
 }
+mmcall() {
+	ilength=${#mountarray[*]}
+	for (( i=1; i < ilength; i++ )); do
+		p=${mountarray[i]}
+		mntdir=/tmp/p$p
+		mkdir -p $mntdir
+		mount /dev/mmcblk0p$p $mntdir 2> /dev/null
+	done
+}
+
+# reboot
+osarrayboot=( $( 
+	echo "$installedlist" |
+	sed -n '/name/,/mmcblk/ p' |
+	sed '/part/ d; s/\s//g; s/"//g; s/,//; s/name://; s/\/dev\/mmcblk0p//' 
+) )
+ilength=${#osarrayboot[*]}
+bootlist="
+$yesno \e[36mReboot\e[m to OS:
+  \e[36m0\e[m Cancel
+"
+bootarray=(0)
+for (( i=0; i < ilength; i+=2 )); do
+	bootlist+="  \e[36m$(( i / 2 + 1 ))\e[m ${osarrayboot[i]}\n"
+	bootarray+=(${osarrayboot[i + 1]})
+done
 
 boot() {
 	echo -e "$bootlist"
-	echo
-	bootlistnum=$( seq $(( ${#bootarray[*]} - 1 )) )
-	bootlistnum=$( echo $bootlistnum )
-	echo -e "\e[36m0\e[m / ${bootlistnum// / \/ } ? "
+	echo -e "\e[36m0\e[m / n ? "
 	read -n 1 ans
 	echo
 	[[ -z $ans || $ans == 0 ]] && return
 	
-	partboot=${bootarray[$ans]}
+	bootnum=${bootarray[$ans]}
  	if [[ -e /root/reboot.py ]]; then
-	 	/root/reboot.py $partboot
+	 	/root/reboot.py $bootnum
 		exit
 	fi
 	
- 	echo $partboot > /sys/module/bcm2709/parameters/reboot_part
+ 	echo $bootnum > /sys/module/bcm2709/parameters/reboot_part
  	/var/www/command/rune_shutdown 2> /dev/null; reboot
 }
 
@@ -134,7 +152,7 @@ if [[ -d /home/osmc ]]; then
 	}
 	setup() {
 		if [[ -e /usr/local/bin/uninstall_motd.sh ]]; then
-			echo -e "\n\e[30m\e[43m ! \e[0m Already setup."
+			echo -e "\n$info Already setup."
 		else
 			wget -qN --show-progress https://github.com/rern/OSMC/raw/master/_settings/setup.sh
 			chmod +x setup.sh
