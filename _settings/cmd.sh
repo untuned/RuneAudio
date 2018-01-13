@@ -38,25 +38,30 @@ sfpm() {
 	systemctl reload php-fpm
 }
 
-mkdir -p /tmp/p5
-mount /dev/mmcblk0p5 /tmp/p5 2> /dev/null
-part=$( sed -n '/name/,/mmcblk/ p' /tmp/p5/installed_os.json | sed '/part/ d; s/\s//g; s/"//g; s/,//; s/name://; s/\/dev\/mmcblk0p//' )
-partarray=( $( echo $part ) )
-ilength=${#partarray[*]}
+# omit current os from installed_os.json
+mntsettings=/tmp/p5
+mkdir -p $mntsettings
+mount /dev/mmcblk0p5 $mntsettings 2> /dev/null
+mmcroot=$( mount | grep 'on / ' | cut -d' ' -f1 | cut -d'/' -f3 )
+mmcline=$( sed -n "/$mmcroot/=" $mntsettings/installed_os.json )
+oslist=$( sed "$(( mmcline - 3 )), $mmcline d" $mntsettings/installed_os.json |
+	sed -n '/name/,/mmcblk/ p' |
+	sed '/part/ d; s/\s//g; s/"//g; s/,//; s/name://; s/\/dev\/mmcblk0p//' )
+osarray=( $( echo $oslist ) )
+ilength=${#osarray[*]}
 bootlist="
 $yesno Reboot to OS:
   \e[36m0\e[m Cancel
 "
-namearray=('0')
-mountarray=(x)
+namearray=(0 0 0)
+mountarray=(0 0 0)
 for (( i=0; i < ilength; i++ )); do
-	ivalue=${partarray[i]}
+	ivalue=${osarray[i]}
 	if (( $(( i % 2 )) == 0 )); then
 		bootlist+="  \e[36m$(( i / 2 + 1 ))\e[m $ivalue\n"
 		namearray+=(${ivalue}-boot ${ivalue}-root)
 	else
-		j=${partarray[i]}
-		mountarray+=($j $(( j + 1 )))
+		mountarray+=($ivalue $(( $ivalue + 1 )))
 	fi
 done
 
@@ -64,8 +69,10 @@ ilength=${#mountarray[*]}
 mountlist="
 $yesno Mount SD partition:
   \e[36m0\e[m Cancel
+  \e[36m1\e[m RECOVERY
+  \e[36m2\e[m SETTINGS
 "
-for (( i=1; i < ilength; i++ )); do
+for (( i=3; i < ilength; i++ )); do
 	mountlist+="  \e[36m$i\e[0m ${namearray[i]}\n"
 done
 
