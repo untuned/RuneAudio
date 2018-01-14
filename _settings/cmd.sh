@@ -38,13 +38,13 @@ sfpm() {
 	systemctl reload php-fpm
 }
 
-mntsettings=/tmp/p5
+mntsettings=/tmp/SETTINGS
 mkdir -p $mntsettings
 mount /dev/mmcblk0p5 $mntsettings 2> /dev/null
 installedlist=$( grep 'name\|mmc' $mntsettings/installed_os.json )
+umount /tmp/SETTINGS
 
 # mount sd
-# omit current os)
 currentroot=$( mount | grep 'on / ' | cut -d' ' -f1 | cut -d'/' -f3 )
 currentline=$( echo "$installedlist" | sed -n "/$currentroot/=" )
 osarraymount=( $( 
@@ -61,44 +61,48 @@ $yesno \e[36mMount\e[m SD partition:
   \e[36m2\e[m SETTINGS
 "
 j=2
-mountarray=(0 1 5)
+declare -A mountarray=( [0]=Cancel [1]=RECOVERY [5]=SETTINGS)
+mountarraylist=(0 1 5)
 for (( i=0; i < ilength; i+=2 )); do
 	iname=${osarraymount[i]}
 	j=$(( j + 1 ))
-	mountlist+="  \e[36m$j\e[m ${iname}-boot\n"
+	mountlist+="  \e[36m$j\e[m ${iname}-Boot\n"
 	j=$(( j + 1 )) 
-	mountlist+="  \e[36m$j\e[m ${iname}-root\n"
+	mountlist+="  \e[36m$j\e[m ${iname}-Root\n"
 	imount=${osarraymount[i + 1]}
-	mountarray+=($imount $(( imount + 1 )))
+	mountarraylist+=($imount $(( imount + 1 )))
+	mountarray+=([$imount]=${iname}-Boot [$(( imount + 1 ))]=${iname}-Root)
 done
 
 mmc() {
 	if (( $# > 0 )); then
-		p=$1
-		if (( $p > 1 && $p < 5 )); then
-			echo -e "$info \e[36m/dev/mmcblk0p$p\e[m not available."
+		if (( $1 > 1 && $1 < 5 )); then
+			echo -e "$info \e[36m/dev/mmcblk0p${1}\e[m not available."
 			return
 		fi
+		imount=$1
 	else
 		echo -e "$mountlist"
 		echo -e "\e[36m0\e[m / n ? "
 		read -n 1 ans
 		echo
 		[[ -z $ans || $ans == 0 ]] && return
-		p=${mountarray[$ans]}
+		imount=${mountarraylist[$ans]}
+	fi
+	immc=/dev/mmcblk0p$imount
+	iname=${mountarray[$imount]}
+	
+	mntdir=$( mount | grep "$immc " | cut -d' ' -f3 )
+	if [[ $mntdir ]]; then
+		mounted='already mounted'
+	else
+		mntdir=/tmp/$iname
+		mkdir -p $mntdir
+		mount /dev/mmcblk0p$imount $mntdir
+		mounted='mounted'
 	fi
 	
-	mountline=$( mount | grep "mmcblk0p$p " )
-	name=${namearray[$ans]}
-	if [[ $mountline ]]; then
-		mntdir=$( echo $mountline | cut -d' ' -f3 )
-		echo -e "$info \e[36m$name\e[m already mounted at \e[36m$mntdir\e[m\n"
-	else
-		mntdir=/tmp/p$p
-		mkdir -p $mntdir
-		mount /dev/mmcblk0p$p $mntdir
-		echo -e "$info \e[36m$name\e[m mounted at \e[36m$mntdir\e[m\n"
-	fi
+	echo -e "$info \e[36m${immc}\e[m $mounted at \e[36m${mntdir}\e[m\n"
 }
 mmcall() {
 	mkdir -p /tmp/RECOVERY
@@ -110,8 +114,8 @@ mmcall() {
 	for (( i=0; i < ilength; i+=2 )); do
 		iname=${osarraymount[i]}
 		imount=${osarraymount[i + 1]}
-		mkdir -p /tmp/${iname}-boot
-		mkdir -p /tmp/${iname}-root
+		mkdir -p /tmp/${iname}-Boot
+		mkdir -p /tmp/${iname}-Root
 		mount /dev/mmcblk0p$imount /tmp/${iname}-boot 2> /dev/null
 		mount /dev/mmcblk0p$(( imount + 1 )) /tmp/${iname}-root 2> /dev/null
 	done
@@ -142,8 +146,10 @@ boot() {
 	[[ -z $ans || $ans == 0 ]] && return
 	
 	bootnum=${bootarray[$ans]}
-	
- 	[[ -e /root/reboot.py ]] && /root/reboot.py $bootnum
+ 	if [[ -e /root/reboot.py ]]; then
+	 	/root/reboot.py $bootnum
+		exit
+	fi
 	
 	[[ -d /home/osmc ]] && reboot $bootnum
 	
