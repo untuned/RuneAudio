@@ -101,12 +101,19 @@ mmc() {
 	fi
 }
 mmcall() {
-	ilength=${#mountarray[*]}
-	for (( i=1; i < ilength; i++ )); do
-		p=${mountarray[i]}
-		mntdir=/tmp/p$p
-		mkdir -p $mntdir
-		mount /dev/mmcblk0p$p $mntdir 2> /dev/null
+	mkdir -p /tmp/RECOVERY
+	mkdir -p /tmp/SETTINGS
+	mount /dev/mmcblk0p1 /tmp/RECOVERY 2> /dev/null
+	mount /dev/mmcblk0p5 /tmp/SETTINGS 2> /dev/null
+	
+	ilength=${#osarraymount[*]}
+	for (( i=0; i < ilength; i+=2 )); do
+		iname=${osarraymount[i]}
+		imount=${osarraymount[i + 1]}
+		mkdir -p /tmp/${iname}-boot
+		mkdir -p /tmp/${iname}-root
+		mount /dev/mmcblk0p$imount /tmp/${iname}-boot 2> /dev/null
+		mount /dev/mmcblk0p$(( imount + 1 )) /tmp/${iname}-root 2> /dev/null
 	done
 }
 
