@@ -135,10 +135,8 @@ boot() {
 	[[ -z $ans || $ans == 0 ]] && return
 	
 	bootnum=${bootarray[$ans]}
- 	if [[ -e /root/reboot.py ]]; then
-	 	/root/reboot.py $bootnum
-		exit
-	fi
+	
+ 	[[ -e /root/reboot.py ]] && /root/reboot.py $bootnum
 	
 	[[ -d /home/osmc ]] && reboot $bootnum
 	
