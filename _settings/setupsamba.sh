@@ -32,6 +32,10 @@ sed -i '/smb-prod/ a\
         sysCmd("pgrep smbd || systemctl start smbd");
 ' /srv/http/command/rune_SY_wrk
 
+wgetnc https://github.com/rern/RuneAudio/blob/master/_settings/smb.conf -O /etc/samba/smb-dev.conf
+cp /etc/samba/smb-{dev,prod}.conf
+ln -s /etc/samba/smb{-dev,}.conf
+
 (echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
 systemctl daemon-reload
