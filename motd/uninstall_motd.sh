@@ -8,7 +8,7 @@ uninstallstart $@
 
 if [[ $1 == u ]]; then
 	color=$( grep echo /etc/profile.d/motd.sh | cut -d'$' -f1 | cut -d'"' -f2 )
-	redis-cli set motdcolor $color
+	redis-cli set motdcolor $color &> /dev/null
 fi
 
 echo -e "$bar Restore files ..."
