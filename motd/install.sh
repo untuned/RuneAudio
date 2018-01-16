@@ -41,7 +41,7 @@ file=/etc/profile.d/motd.sh
 echo $file
 echo '#!/bin/bash
 
-colorlogo=45
+(( $# == 0 )) && colorlogo=45 || colorlogo=$1
 
 echo -e "\e[38;5;${colorlogo}m$( < /etc/motd.logo )\e[0m\n"
 ' > $file
@@ -55,9 +55,10 @@ echo $file
 sed -i -e '/PS1=/ s/^/#/
 ' -e '$ a\
 color=242\
-colordir=45\
+colordir='$colorlogo'\
 PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[38;5;\x27$colordir\x27m\\]\\w \\$\\[\\e[0m\\] \x27
 ' $file
+
 # PS1='\[\e[38;5;'$color'm\]\u@\h:\[\e[0m\]\w \$ '
 # \x27       - escaped <'>
 # \\         - escaped <\>
