@@ -52,7 +52,7 @@ mv -v /etc/motd{,.original} 2> /dev/null
 
 file=/etc/bash.bashrc
 echo $file
-sed -i -e '/^PS1=/ s/^/#/
+sed -i -e '/PS1=/ s/^/#/
 ' -e '$ a\
 color=242\
 colordir=45\
