@@ -14,7 +14,7 @@ rm -v /etc/motd.logo /etc/profile.d/motd.sh
 file=/etc/bash.bashrc
 echo $file
 sed -i -e '/^color=/, /^PS1=\x27/ d
-' -e '/^#PS1=/ s/^#//
+' -e '/^#.*PS1=/ s/^#//
 ' $file
 
 uninstallfinish $@
