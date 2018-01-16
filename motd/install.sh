@@ -39,11 +39,12 @@ echo "
 
 file=/etc/profile.d/motd.sh
 echo $file
+
+(( $# == 0 )) && colorlogo='\e[38;5;45m' || colorlogo='\e[3'${1}m
+
 echo '#!/bin/bash
 
-(( $# == 0 )) && colorlogo=45 || colorlogo=$1
-
-echo -e "\e[38;5;${colorlogo}m$( < /etc/motd.logo )\e[0m\n"
+echo -e "'$colorlogo'$( < /etc/motd.logo )\e[0m\n"
 ' > $file
 
 echo -e "$bar Modify files ..."
