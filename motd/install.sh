@@ -41,9 +41,9 @@ file=/etc/profile.d/motd.sh
 echo $file
 echo '#!/bin/bash
 
-color=45
+colorlogo=45
 
-echo -e "\e[38;5;${color}m$( < /etc/motd.logo )\e[0m\n"
+echo -e "\e[38;5;${colorlogo}m$( < /etc/motd.logo )\e[0m\n"
 ' > $file
 
 echo -e "$bar Modify files ..."
@@ -53,9 +53,10 @@ mv -v /etc/motd{,.original} 2> /dev/null
 file=/etc/bash.bashrc
 echo $file
 sed -i -e '/^PS1=/ s/^/#/
-' -e '/PS1=/ a\
+' -e '$ a\
 color=242\
-PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[0m\\]\\w \\$ \x27
+colordir=45\
+PS1=\x27\\[\\e[38;5;\x27$color\x27m\\]\\u@\\h:\\[\\e[38;5;\x27$colordir\x27m\\]\\w \\$\\[\\e[0m\\] \x27
 ' $file
 # PS1='\[\e[38;5;'$color'm\]\u@\h:\[\e[0m\]\w \$ '
 # \x27       - escaped <'>
