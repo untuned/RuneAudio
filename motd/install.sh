@@ -59,9 +59,11 @@ mv -v /etc/motd{,.original} 2> /dev/null
 file=/etc/bash.bashrc
 echo $file
 
+[[ $( redis-cli get release ) == 0.4b ]] && release='\\[\'$color'\\]04\\[\\e[0m\\]'
+
 sed -i -e '/PS1=/ s/^/#/
 ' -e '$ a\
-PS1=\x27\\[\\e[38;5;242m\\]\\u@\\h:\\[\'$color'\\]\\w \\$\\[\\e[0m\\] \x27
+PS1=\x27\\[\\e[38;5;242m\\]\\u@\\h'$release':\\[\'$color'\\]\\w \\$\\[\\e[0m\\] \x27
 ' $file
 
 # PS1='\[\e[38;5;'$color'm\]\u@\h:\[\e[0m\]\w \$ '
