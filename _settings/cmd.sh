@@ -105,19 +105,13 @@ mmc() {
 	echo -e "$info \e[36m${immc}\e[m $mounted at \e[36m${mntdir}\e[m\n"
 }
 mmcall() {
-	mkdir -p /tmp/RECOVERY
-	mkdir -p /tmp/SETTINGS
-	mount /dev/mmcblk0p1 /tmp/RECOVERY 2> /dev/null
-	mount /dev/mmcblk0p5 /tmp/SETTINGS 2> /dev/null
-	
-	ilength=${#osarraymount[*]}
 	for (( i=0; i < ilength; i+=2 )); do
 		iname=${osarraymount[i]}
 		imount=${osarraymount[i + 1]}
 		mkdir -p /tmp/${iname}-Boot
 		mkdir -p /tmp/${iname}-Root
-		mount /dev/mmcblk0p$imount /tmp/${iname}-boot 2> /dev/null
-		mount /dev/mmcblk0p$(( imount + 1 )) /tmp/${iname}-root 2> /dev/null
+		mount /dev/mmcblk0p$imount /tmp/${iname}-Boot 2> /dev/null
+		mount /dev/mmcblk0p$(( imount + 1 )) /tmp/${iname}-Root 2> /dev/null
 	done
 }
 
@@ -127,13 +121,13 @@ osarrayboot=( $(
 	sed -n '/name/,/mmcblk/ p' |
 	sed '/part/ d; s/\s//g; s/"//g; s/,//; s/name://; s/\/dev\/mmcblk0p//' 
 ) )
-ilength=${#osarrayboot[*]}
+jlength=${#osarrayboot[*]}
 bootlist="
 $yesno \e[36mReboot\e[m to OS:
   \e[36m0\e[m Cancel
 "
 bootarray=(0)
-for (( i=0; i < ilength; i+=2 )); do
+for (( i=0; i < jlength; i+=2 )); do
 	bootlist+="  \e[36m$(( i / 2 + 1 ))\e[m ${osarrayboot[i]}\n"
 	bootarray+=(${osarrayboot[i + 1]})
 done
