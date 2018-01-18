@@ -1,5 +1,7 @@
 DAC I2S ES9018K2M Board
 ---
+- Dirt cheap ES9018K2M
+- Support DSD64 DSD128
 
 ### Reconfigure I2S data
 ```sh
@@ -11,5 +13,11 @@ php /srv/http/db/redis_acards_details
 ```
 
 ### Setup
-- Menu > Settings > I²S kernel modules = HiFiBerry Dac > [Apply Settings]
+- Menu > Settings > I²S kernel modules = HiFiBerry Dac > `Apply Settings`
 - reboot
+
+- Menu > MPD > 
+	- (optional) Volume control = Disabled for best quality
+	- DSD support = DSD (native)
+	- `Save and Apply`
+	
