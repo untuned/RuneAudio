@@ -5,7 +5,10 @@ _Tested on RPi3 RuneAudio 0.4b_
 ![board](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/ES9018K2M.jpg)
 - <10$ dirt cheap on ebay
 - Support DSD64 DSD128
-- MPD `audio_output { format "samplerate:bits:channels"` must be set to `"*:24:*"` or `"*:32:*"` (no bit perfect on resampling)
+- `audio_output_format` must be set to `"*:24:*"`
+	- `samplerate:bits:channels` 
+	- no bit perfect on resampling
+	- can be set to `"*:32:*"`
 - Output:
 	- RCA
 	- 3.5mm headphone
