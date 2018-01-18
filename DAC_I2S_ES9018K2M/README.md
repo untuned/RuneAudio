@@ -25,7 +25,7 @@ DAC I2S ES9018K2M Board
 ```sh
 #!/bin/bash
 
-sed 's/"HiFiBerry DAC (I&#178;S)"/"HiFiBerry DAC (I&#178;S)","card_option":"format\t\"*:24:*\""/' /srv/http/db/redis_acards_details
+sed 's/"HiFiBerry DAC (I&#178;S)"/"HiFiBerry DAC (I&#178;S)","card_option":"format\t\"*:32:*\""/' /srv/http/db/redis_acards_details
 redis-cli del acards
 php /srv/http/db/redis_acards_details
 ```
