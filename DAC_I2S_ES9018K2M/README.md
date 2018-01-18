@@ -1,5 +1,6 @@
 DAC I2S ES9018K2M Board
 ---
+_Tested on RPi3 RuneAudio 0.4b_
 
 ![board](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/ES9018K2M.jpg)
 - <10$ dirt cheap on ebay
