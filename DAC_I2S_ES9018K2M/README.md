@@ -40,7 +40,7 @@ php /srv/http/db/redis_acards_details
 - reboot
 
 - Menu > MPD
-	- (optional) Volume control = Disabled (probably better quality)
+	- (optional - if not use headphone) Volume control = Disabled (better quality)
 	- DSD support = DSD (native)
 	- `Save and Apply`
 	
