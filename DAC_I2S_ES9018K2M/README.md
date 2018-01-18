@@ -34,11 +34,13 @@ php /srv/http/db/redis_acards_details
 ```
 
 ### Setup
-- Menu > Settings > I²S kernel modules = HiFiBerry Dac > `Apply Settings`
+- Menu > Settings
+	- I²S kernel modules = HiFiBerry Dac
+	- `Apply Settings`
 - reboot
 
-- Menu > MPD > 
-	- (optional) Volume control = Disabled for best quality
+- Menu > MPD
+	- (optional) Volume control = Disabled (probably better quality)
 	- DSD support = DSD (native)
 	- `Save and Apply`
 	
