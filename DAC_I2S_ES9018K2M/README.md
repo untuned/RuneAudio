@@ -12,6 +12,8 @@ DAC I2S ES9018K2M Board
 #4 -
 #5 GND   <  RPi #39
 ```
+![input](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/input.png)
+![gpio](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/RPi3_GPIOs.png)
 - Output:
 	- RCA
 	- 3.5mm headphone
