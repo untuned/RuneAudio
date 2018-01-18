@@ -1,8 +1,8 @@
 {
   "enable": { "enable" :"1" }
-, "pin"   : { "pin1" :"31", "pin2" :"33", "pin3" :"35", "pin4" :"37" }
-, "name"  : { "name1":"DAC", "name2":"(no name)", "name3":"Amp", "name4":"Subwoofer" }
-, "on"    : { "on1"  :"35", "ond1" :"1", "on2"  :"31", "ond2" :"7", "on3"  :"37", "ond3" :"0", "on4"  :"0" }
-, "off"   : { "off1" :"37", "offd1":"2", "off2" :"31", "offd2":"2", "off3" :"35", "offd3":"0", "off4" :"0" }
+, "pin"   : { "pin1" :"29", "pin2" :"31", "pin3" :"32", "pin4" :"33" }
+, "name"  : { "name1":"DAC", "name2":"Amp", "name3":"(no name)", "name4":"Subwoofer" }
+, "on"    : { "on1"  :"29", "ond1" :"1", "on2"  :"32", "ond2" :"7", "on3"  :"33", "ond3" :"0", "on4"  :"0" }
+, "off"   : { "off1" :"33", "offd1":"2", "off2" :"32", "offd2":"2", "off3" :"29", "offd3":"0", "off4" :"0" }
 , "timer" : { "timer"  :"5" }
 }
