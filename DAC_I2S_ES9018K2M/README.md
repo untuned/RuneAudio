@@ -2,8 +2,14 @@ DAC I2S ES9018K2M Board
 ---
 
 ![board](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/ES9018K2M.jpg)
-- <10$ dirt cheap ES9018K2M on ebay
+- <10$ dirt cheap on ebay
 - Support DSD64 DSD128
+- Output:
+	- RCA
+	- 3.5mm headphone
+- Power supply:
+	- DC 9-5V
+	- AC 7-0-7 to 18-0-18
 - input: I2S
 ```
 #1 DATA  <  RPi #40 (BCM #21)
@@ -14,12 +20,6 @@ DAC I2S ES9018K2M Board
 ```
 ![input](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/input.png)
 ![gpio](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/RPi3_GPIOs.png)
-- Output:
-	- RCA
-	- 3.5mm headphone
-- Power supply:
-	- DC 9-5V
-	- AC 7-0-7 to 18-0-18
 
 ### Reconfigure I2S data
 ```sh
