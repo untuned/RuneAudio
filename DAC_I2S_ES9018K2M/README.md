@@ -15,7 +15,7 @@ _Tested on RPi3 RuneAudio 0.4b_
 - Power supply:
 	- DC 9-5V
 	- AC 7-0-7 to 18-0-18
-- Input: I2S  
+- Input: I²S  
 ![input](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/input.png)  
 ```
 #1  <  RPi #40 (BCM #21)  -  DATA  data
