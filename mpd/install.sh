@@ -55,6 +55,9 @@ sed -i -e 's/User=mpd/User=root/
 ' -e '/^Restrict/ s/^/#/
 ' /usr/lib/systemd/system/mpd.service
 
+# fix missing directory
+mkdir -p /var/lib/mpd/playlists
+
 systemctl daemon-reload
 
 echo -e "$bar Start MPD ..."
