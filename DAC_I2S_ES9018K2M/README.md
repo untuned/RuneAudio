@@ -40,6 +40,7 @@ php /srv/http/db/redis_acards_details
 - reboot
 
 - Menu > MPD
+	- Audio output interface = HiFiBerry Dac (I²S)
 	- (optional - if not use headphone) Volume control = Disabled (better quality)
 	- DSD support = DSD (native)
 	- `Save and Apply`
