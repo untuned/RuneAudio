@@ -5,6 +5,7 @@ _Tested on RPi3 RuneAudio 0.4b_
 ![board](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/ES9018K2M.jpg)
 - <10$ dirt cheap on ebay
 - Support DSD64 DSD128
+- MPD `audio_output { format "samplerate:bits:channels"` must be set to `"*:24:*"` or `"*:32:*"` (no bit perfect on resampling)
 - Output:
 	- RCA
 	- 3.5mm headphone
@@ -14,11 +15,11 @@ _Tested on RPi3 RuneAudio 0.4b_
 - Input: I2S  
 ![input](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/input.png)  
 ```
-#1 DATA  <  RPi #40 (BCM #21)
-#2 BCK   <  RPi #12 (BCM #18)
-#3 LRCK  <  RPi #35 (BCM #19)
+#1  <  RPi #40 (BCM #21)  -  DATA  data
+#2  <  RPi #12 (BCM #18)  -  BCK   bit clock
+#3  <  RPi #35 (BCM #19)  -  LRCK  left-right clock
 #4 -
-#5 GND   <  RPi #39
+#5  <  RPi #39            -  GND   ground
 ```
 ![gpio](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/RPi3_GPIOs.png)
 
