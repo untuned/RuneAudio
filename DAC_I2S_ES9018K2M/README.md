@@ -26,19 +26,19 @@ _Tested on RPi3 RuneAudio 0.4b_
 ```
 ![gpio](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/RPi3_GPIOs.png)
 
-### Reconfigure I²S data
+### Configure I²S
 ```sh
-sed 's/"HiFiBerry DAC (I&#178;S)"/"HiFiBerry DAC (I&#178;S)","card_option":"format\t\"*:24:*\""/' /srv/http/db/redis_acards_details
+sed -i 's/"HiFiBerry DAC (I&#178;S)"/&,"card_option":"format\\t\\"\*:24:\*\\""/' /srv/http/db/redis_acards_details
 redis-cli del acards
 php /srv/http/db/redis_acards_details
+sed -i '$ a\
+dtoverlay=hifiberry-dac
+' /boot/config.txt
+/var/www/command/rune_shutdown
+reboot
 ```
 
-### Setup
-- Menu > Settings
-	- I²S kernel modules = HiFiBerry Dac
-		- `Apply Settings`
-- reboot
-
+### Setup MPD
 - Menu > MPD
 	- Audio output interface = HiFiBerry Dac (I²S)
 	- (optional - if not use headphone) Volume control = Disabled (better quality)
