@@ -10,8 +10,8 @@ DAC I2S ES9018K2M Board
 - Power supply:
 	- DC 9-5V
 	- AC 7-0-7 to 18-0-18
-- Input: I2S
-![input](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/input.png)
+- Input: I2S  
+![input](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/input.png)  
 ```
 #1 DATA  <  RPi #40 (BCM #21)
 #2 BCK   <  RPi #12 (BCM #18)
