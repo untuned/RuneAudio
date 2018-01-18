@@ -13,8 +13,8 @@ _Tested on RPi3 RuneAudio 0.4b_
 	- RCA
 	- 3.5mm headphone
 - Power supply:
-	- DC 9-5V
-	- AC 7-0-7 to 18-0-18
+	- DC 9-25V
+	- AC 7V-0-7V to 18V-0-18V
 - Input: I²S  
 ![input](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/input.png)  
 ```
@@ -34,6 +34,7 @@ php /srv/http/db/redis_acards_details
 sed -i '$ a\
 dtoverlay=hifiberry-dac
 ' /boot/config.txt
+
 /var/www/command/rune_shutdown
 reboot
 ```
