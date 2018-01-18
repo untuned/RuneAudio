@@ -1,4 +1,4 @@
-DAC I2S ES9018K2M Board
+DAC I²S ES9018K2M Board
 ---
 _Tested on RPi3 RuneAudio 0.4b_
 
@@ -26,7 +26,7 @@ _Tested on RPi3 RuneAudio 0.4b_
 ```
 ![gpio](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/RPi3_GPIOs.png)
 
-### Reconfigure I2S data
+### Reconfigure I²S data
 ```sh
 sed 's/"HiFiBerry DAC (I&#178;S)"/"HiFiBerry DAC (I&#178;S)","card_option":"format\t\"*:24:*\""/' /srv/http/db/redis_acards_details
 redis-cli del acards
