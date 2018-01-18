@@ -2,6 +2,20 @@ DAC I2S ES9018K2M Board
 ---
 - Dirt cheap ES9018K2M
 - Support DSD64 DSD128
+- input: I2S
+```
+#1 DATA  <  RPi #40 (BCM #21)
+#2 BCK   <  RPi #12 (BCM #18)
+#3 LRCK  <  RPi #35 (BCM #19)
+#4 -
+#5 GND   <  RPi #39
+```
+- Output:
+	- RCA
+	- 3.5mm headphone
+- Power supply:
+	- DC 9-5V
+	- AC 7-0-7 to 18-0-18
 
 ### Reconfigure I2S data
 ```sh
