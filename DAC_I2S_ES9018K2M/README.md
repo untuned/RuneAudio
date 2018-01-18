@@ -1,6 +1,8 @@
 DAC I2S ES9018K2M Board
 ---
-- Dirt cheap ES9018K2M
+
+![board](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/ES9018K2M.jpg)
+- Dirt cheap ES9018K2M on ebay
 - Support DSD64 DSD128
 - input: I2S
 ```
