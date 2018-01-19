@@ -7,7 +7,7 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 - Support DSD64 DSD128
 - `audio_output` set to `format "*:24:*"` or `"*:32:*"` (no bit perfect on resampling)
 - Output: RCA and 3.5mm headphone
-- Power supply: DC 9-25V or AC 7V-0-7V to 18V-0-18V
+- Power supply: DC 9-25V (or AC 7V-0-7V to 18V-0-18V - center tapped transformer via green terminal)
 - Input: I²S  
 ![input](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/input.png)  
 ```
@@ -20,6 +20,13 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 ![gpio](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/RPi3_GPIOs.png)
 
 ### Setup
+**Hardware**
+- Require:
+![jumper](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/jumper.jpg) ![adapter](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/adapter.jpg)
+- Connect I²S wires
+- Connect power supply
+
+**Software**
 ```sh
 sed -i 's/"HiFiBerry DAC (I&#178;S)"/&,"card_option":"format\\t\\"\*:24:\*\\""/' /srv/http/db/redis_acards_details
 redis-cli del acards
