@@ -24,15 +24,15 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 - Menu > MPD: will be for manual edit only
 ```sh
 sed -i '$ a\
-audio_output {
-	name 		"snd_rpi_hifiberry_dac"
-	type 		"alsa"
-	device 		"hw:1,0"
-	dsd_usb 	"yes"
-	format		"*:24:*"
-	auto_resample 	"no"
-	auto_format 	"no"
-	enabled 	"yes"
+audio_output {\
+    name          "snd_rpi_hifiberry_dac"\
+    type          "alsa"\
+    device        "hw:1,0"\
+    dsd_usb       "yes"\
+    format        "*:24:*"\
+    auto_resample "no"\
+    auto_format   "no"\
+    enabled       "yes"\
 }
 ' /etc/mpd.conf
 
