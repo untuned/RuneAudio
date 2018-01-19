@@ -1,6 +1,6 @@
 I²S ES9018K2M DAC Board
 ---
-_Tested on RPi3 RuneAudio 0.4b_
+_Tested on RPi3 RuneAudio 0.3 and 0.4b_
 
 ![board](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/ES9018K2M.jpg)
 - [~10$ on ebay](https://www.ebay.com/sch/i.html?_from=R40&_sacat=0&_sop=15&_nkw=es9018k2m+board&rt=nc&LH_BIN=1)
@@ -19,11 +19,23 @@ _Tested on RPi3 RuneAudio 0.4b_
 ```
 ![gpio](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/RPi3_GPIOs.png)
 
-### Configure I²S
+### Configure
+**0.3**
+- Menu > MPD: will be for manual edit only
 ```sh
-sed -i 's/"HiFiBerry DAC (I&#178;S)"/&,"card_option":"format\\t\\"\*:24:\*\\""/' /srv/http/db/redis_acards_details
-redis-cli del acards
-php /srv/http/db/redis_acards_details
+sed -i '$ a\
+audio_output {
+	name 		"snd_rpi_hifiberry_dac"
+	type 		"alsa"
+	device 		"hw:1,0"
+	dsd_usb 	"yes"
+	format      "*:24:*"
+	auto_resample 	"no"
+	auto_format 	"no"
+	enabled 	"yes"
+}
+' /etc/mpd.conf
+
 sed -i '$ a\
 dtoverlay=hifiberry-dac
 ' /boot/config.txt
@@ -32,7 +44,17 @@ dtoverlay=hifiberry-dac
 reboot
 ```
 
-### Setup MPD
+**0.4b**
+```sh
+sed -i 's/"HiFiBerry DAC (I&#178;S)"/&,"card_option":"format\\t\\"\*:24:\*\\""/' /srv/http/db/redis_acards_details
+redis-cli del acards
+php /srv/http/db/redis_acards_details
+```
+- Menu > Settings
+	- I²S kernel modules = HiFiBerry Dac
+		- `Apply Settings`
+- Reboot
+  
 - Menu > MPD
 	- Audio output interface = HiFiBerry Dac (I²S)
 	- (optional - if not use headphone) Volume control = Disabled (better quality)
