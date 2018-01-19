@@ -27,23 +27,21 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 ![jumper](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/jumpers.jpg) ![adapter](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/adapter.jpg)
 
 **Software**
+for 0.3
 ```sh
-sed -i 's/"HiFiBerry DAC (I&#178;S)"/&,"card_option":"format\\t\\"\*:24:\*\\""/' /srv/http/db/redis_acards_details
-redis-cli del acards
-php /srv/http/db/redis_acards_details
-
 sed -i '$ a\
-dtoverlay=hifiberry-dac
+dtoverlay=rpi-dac
 ' /boot/config.txt
-
-/var/www/command/rune_shutdown
-reboot
 ```
+
+for 0.4b
 - (0.4b only) Menu > Settings
-	- I²S kernel modules = HiFiBerry Dac
+	- I²S kernel modules = RPI DAC
 		- `Apply Settings`
+		
+- Reboot
 - Menu > MPD
-	- Audio output interface = HiFiBerry Dac (I²S)
+	- Audio output interface = I-Sabre DAC (I²S)
 	- (optional - if not use headphone) Volume control = Disabled (better quality)
 	- DSD support = enabled / DSD (native)
 		- `Save and Apply`
