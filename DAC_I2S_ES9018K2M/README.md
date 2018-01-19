@@ -37,7 +37,9 @@ dtoverlay=hifiberry-dac
 
 /var/www/command/rune_shutdown
 reboot
-```  
+```
+- (0.4b only) Menu > Settings
+	- I²S kernel modules = HiFiBerry Dac
 - Menu > MPD
 	- Audio output interface = HiFiBerry Dac (I²S)
 	- (optional - if not use headphone) Volume control = Disabled (better quality)
