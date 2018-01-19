@@ -1,4 +1,4 @@
-DAC I²S ES9018K2M Board
+I²S ES9018K2M DAC Board
 ---
 _Tested on RPi3 RuneAudio 0.4b_
 
