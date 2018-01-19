@@ -21,7 +21,7 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 
 ### Setup
 **Hardware**
-![jumper](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/jumper.jpg) ![adapter](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/adapter.jpg)
+![jumper](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/jumpers.jpg) ![adapter](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/adapter.jpg)
 - Connect I²S wires
 - Connect power supply
 
