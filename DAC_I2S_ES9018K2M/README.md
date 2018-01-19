@@ -3,7 +3,7 @@ DAC I²S ES9018K2M Board
 _Tested on RPi3 RuneAudio 0.4b_
 
 ![board](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/ES9018K2M.jpg)
-- <10$ dirt cheap on ebay
+- [~10$ on ebay](https://www.ebay.com/sch/i.html?_from=R40&_sacat=0&_sop=15&_nkw=es9018k2m+board&rt=nc&LH_BIN=1)
 - Support DSD64 DSD128
 - `audio_output` set to `format "*:24:*"` or `"*:32:*"` (no bit perfect on resampling)
 - Output: RCA and 3.5mm headphone
