@@ -26,16 +26,15 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 
 ![jumper](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/jumpers.jpg) ![adapter](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/adapter.jpg)
 
-**Software**
-for 0.3
+**Software**  
+- for 0.3:
 ```sh
 sed -i '$ a\
 dtoverlay=rpi-dac
 ' /boot/config.txt
 ```
 
-for 0.4b
-- (0.4b only) Menu > Settings
+- for 0.4b: Menu > Settings
 	- I²S kernel modules = RPI DAC
 		- `Apply Settings`
 		
