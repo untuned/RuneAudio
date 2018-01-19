@@ -29,7 +29,7 @@ audio_output {
 	type 		"alsa"
 	device 		"hw:1,0"
 	dsd_usb 	"yes"
-	format      "*:24:*"
+	format		"*:24:*"
 	auto_resample 	"no"
 	auto_format 	"no"
 	enabled 	"yes"
