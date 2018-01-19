@@ -20,34 +20,6 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 ![gpio](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/RPi3_GPIOs.png)
 
 ### Configure
-**0.3**
-- Menu > MPD: will be for manual edit only
-```sh
-# (optional - if not use headphone) Volume control = Disabled (better quality)
-sed -i 's/mixer_type.*/mixer_type  "disabled"/' /etc/mpd.conf
-
-sed -i '$ a\
-audio_output {\
-    name          "snd_rpi_hifiberry_dac"\
-    type          "alsa"\
-    device        "hw:1,0"\
-    dsd_usb       "yes"\
-    format        "*:24:*"\
-    auto_resample "no"\
-    auto_format   "no"\
-    enabled       "yes"\
-}
-' /etc/mpd.conf
-
-sed -i '$ a\
-dtoverlay=hifiberry-dac
-' /boot/config.txt
-
-/var/www/command/rune_shutdown
-reboot
-```
-
-**0.4b**
 ```sh
 sed -i 's/"HiFiBerry DAC (I&#178;S)"/&,"card_option":"format\\t\\"\*:24:\*\\""/' /srv/http/db/redis_acards_details
 redis-cli del acards
