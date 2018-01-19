@@ -23,6 +23,9 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 **0.3**
 - Menu > MPD: will be for manual edit only
 ```sh
+# (optional - if not use headphone) Volume control = Disabled (better quality)
+sed -i 's/mixer_type.*/mixer_type  "disabled"/' /etc/mpd.conf
+
 sed -i '$ a\
 audio_output {\
     name          "snd_rpi_hifiberry_dac"\
@@ -49,12 +52,14 @@ reboot
 sed -i 's/"HiFiBerry DAC (I&#178;S)"/&,"card_option":"format\\t\\"\*:24:\*\\""/' /srv/http/db/redis_acards_details
 redis-cli del acards
 php /srv/http/db/redis_acards_details
-```
-- Menu > Settings
-	- I²S kernel modules = HiFiBerry Dac
-		- `Apply Settings`
-- Reboot
-  
+
+sed -i '$ a\
+dtoverlay=hifiberry-dac
+' /boot/config.txt
+
+/var/www/command/rune_shutdown
+reboot
+```  
 - Menu > MPD
 	- Audio output interface = HiFiBerry Dac (I²S)
 	- (optional - if not use headphone) Volume control = Disabled (better quality)
