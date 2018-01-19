@@ -7,7 +7,7 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 - Support DSD64 DSD128
 - `audio_output` set to `format "*:24:*"` or `"*:32:*"` (no bit perfect on resampling)
 - Output: RCA and 3.5mm headphone
-- Power supply: DC 9-25V (or AC 7V-0-7V to 18V-0-18V - center tapped transformer via green terminal)
+- Power supply: DC 9-25V via 5.5x2.1mm jack (or AC 7V-0-7V to 18V-0-18V - center tapped transformer via green terminal)
 - Input: I²S  
 ![input](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/input.png)  
 ```
