@@ -35,6 +35,6 @@ reboot
 - Menu > MPD
 	- Audio output interface = HiFiBerry Dac (I²S)
 	- (optional - if not use headphone) Volume control = Disabled (better quality)
-	- DSD support = DSD (native)
+	- DSD support = enabled / DSD (native)
 		- `Save and Apply`
 	
