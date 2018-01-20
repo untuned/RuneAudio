@@ -57,6 +57,7 @@ sed -i -e 's/User=mpd/User=root/
 
 # fix missing directory
 mkdir -p /var/lib/mpd/playlists
+chown mpd:audio /var/lib/mpd/playlists
 
 systemctl daemon-reload
 
