@@ -12,3 +12,6 @@ Suptronics X4000K
 - HDMI on X4000 cannot auto switch mode
 - `hdmi_group=n` and `hdmi_mode=n` must be set in `config.txt` or no output on local screen
 - may have to reboot to properly fixed
+- Menu > MPD
+	- Audio output interface = RaspberryPi HDMI Out
+	- Volume control = enabled - hardware / disabled
