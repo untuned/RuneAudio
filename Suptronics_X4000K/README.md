@@ -15,3 +15,12 @@ Suptronics X4000K
 - Menu > MPD
 	- Audio output interface = RaspberryPi HDMI Out
 	- Volume control = enabled - hardware / disabled
+
+### Playback
+- DSD64
+	- fine
+	- CPU load ±50% (on single core)
+- DSD128
+	- a lot of drop out
+	- CPU load ±90% (on single core)
+	
