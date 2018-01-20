@@ -9,15 +9,17 @@ Suptronics X4000K
   - should fix only front-left and rear-right
 
 ### Software
-- HDMI on X4000 cannot auto switch mode
-- `hdmi_group=n` and `hdmi_mode=n` must be set in `config.txt` or no output on local screen
-- may have to reboot to properly fixed
-- Menu > MPD
+- HDMI on X4000 cannot auto switch to a proper mode - no output on local screen
+- SSH to RPi
+- Append `hdmi_group=n` and `hdmi_mode=n` to `config.txt`
+- reboot
+
+- Settings: Menu > MPD
 	- Audio output interface = RaspberryPi HDMI Out
 	- Volume control = enabled - hardware / disabled
 
 ### Playback  
-**HDMI out**
+**via HDMI**
 - DSD64
 	- fine
 	- CPU load ±50% (on single core)
