@@ -1,4 +1,16 @@
+Kernel Update
+---
+
+- Expand partition
 ```sh
-pacman -Sy --force raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi
-redis-cli set kernel 'Linux runeaudio 4.9.70-1-ARCH'
+cd /srv/http/
+git pull
+git checkout 0.4b
+
+pacman -Sy --force --noconfirm raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi linux-firmware
+
+# get kernel version
+version=$( pacman -Q linux-raspberrypi )
+
+redis-cli set kernel $version
 ```
