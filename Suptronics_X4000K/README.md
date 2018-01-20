@@ -16,7 +16,8 @@ Suptronics X4000K
 	- Audio output interface = RaspberryPi HDMI Out
 	- Volume control = enabled - hardware / disabled
 
-### Playback
+### Playback  
+**HDMI out**
 - DSD64
 	- fine
 	- CPU load ±50% (on single core)
