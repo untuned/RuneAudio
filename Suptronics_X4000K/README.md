@@ -9,5 +9,5 @@ Suptronics X4000K
   - should fix only front-left and rear-right
 
 ### Software
-- RuneAudio: `hdmi_group=n` and `hdmi_mode=n` must be set in `config.txt` or no output on local screen
-- NOOBS can display normally
+- HDMI on X4000 cannot auto switch mode
+- `hdmi_group=n` and `hdmi_mode=n` must be set in `config.txt` or no output on local screen
