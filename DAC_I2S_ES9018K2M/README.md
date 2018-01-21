@@ -28,28 +28,15 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 
 **Software**  
 for 0.4b
-```sh
-sed -i 's/"I-Sabre DAC (I&#178;S)"/&,"card_option":"format\\t\\"\*:24:\*\\""/' /srv/http/db/redis_acards_details
-redis-cli del acards
-php /srv/http/db/redis_acards_details
-
-sed -i '$ a\
-dtoverlay=rpi-dac
-' /boot/config.txt
-
-/var/www/command/rune_shutdown
-reboot
-```
-
 - Menu > Settings
-	- I²S kernel modules = RPI DAC
+	- I²S kernel modules = `RPI DAC`
 		- `Apply Settings`
 		
 - Reboot
 - Menu > MPD
-	- Audio output interface = I-Sabre DAC (I²S)
-	- (optional - if not use headphone) Volume control = Disabled (better quality)
-	- DSD support = enabled / DSD (native)
+	- Audio output interface = `I-Sabre DAC (I²S)`
+	- (optional - if not use headphone) Volume control = `Disabled` (better quality)
+	- (no need - for USB only) DSD support = `DSD (native)`
 		- `Save and Apply`
 
 for 0.3
@@ -65,8 +52,8 @@ dtoverlay=hifiberry-dac
 reboot
 ```
 - Menu > MPD
-	- Audio output interface = HiFiBerry DAC (I²S)
-	- (optional - if not use headphone) Volume control = Disabled (better quality)
-	- DSD support = enabled
+	- Audio output interface = `HiFiBerry DAC (I²S)`
+	- (optional - if not use headphone) Volume control = `Disabled` (better quality)
+	- (no need - for USB only) DSD support = `enabled`
 		-`Save and Apply`
 		
