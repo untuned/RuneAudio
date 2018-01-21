@@ -5,9 +5,10 @@ Suptronics X4000K - ES9018K2M
 
 ### Hardware
 - 1st layer spacers: shorter ones with threaded tips
-- fixed base spacers:
-  - threads are very tight - beware head cut off
-  - should fix only front-left and rear-right
+- Fixed base spacers:
+	- threads are very tight - beware head cut off
+	- should fix only front-left and rear-right
+- Audio output jumpers: move all 3 to `RPi I2S` on the right
 
 ### Software  
 **HDMI**
@@ -21,4 +22,5 @@ Suptronics X4000K - ES9018K2M
 - Menu > MPD
 	- Audio output interface = I-Sabre DAC (I²S)
 	- Volume control = disabled
+		- `Save and Apply`
 - Support up to DSD128 (DSD256 stutters)
