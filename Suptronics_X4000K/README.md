@@ -17,10 +17,10 @@ Suptronics X4000K - ES9018K2M
 - Initial power on there will be no output until reboot  
 **Audio**
 - Menu > Settings
-	- I²S kernel modules = RPI DAC (via HDMI, DSD128 stutters)
+	- I²S kernel modules = `RPI DAC` (via HDMI, DSD128 stutters)
 		- `Apply Settings`
 - Menu > MPD
-	- Audio output interface = I-Sabre DAC (I²S)
+	- Audio output interface = `I-Sabre DAC (I²S)`
 	- Volume control = disabled
 		- `Save and Apply`
-- Support up to DSD128 (DSD256 stutters)
+- Support up to **DSD128** (DSD256 stutters)
