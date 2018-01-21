@@ -13,14 +13,15 @@ Suptronics X4000K - ES9018K2M
 ### Software  
 **HDMI**
 - HDMI on X4000 cannot auto switch to a proper mode - no output on local screen
-- Append `hdmi_group=n` and `hdmi_mode=n` to `config.txt`
+- Append `hdmi_group=n` and `hdmi_mode=n` to `/boot/config.txt`
 - Initial power on there will be no output until reboot  
-**Audio**
+**Audio** (RuneAudio 0.4b)
 - Menu > Settings
 	- I²S kernel modules = `RPI DAC` (via HDMI, DSD128 stutters)
 		- `Apply Settings`
 - Menu > MPD
 	- Audio output interface = `I-Sabre DAC (I²S)`
-	- Volume control = disabled
+	- Volume control = `disabled`
+	- (no need - for USB only) DSD support = `DSD (native)`
 		- `Save and Apply`
 - Support up to **DSD128** (DSD256 stutters)
