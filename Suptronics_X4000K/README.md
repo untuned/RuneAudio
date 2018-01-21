@@ -4,7 +4,7 @@ Suptronics X4000K - ES9018K2M
 ![X4000K](https://github.com/rern/RuneAudio/raw/master/Suptronics_X4000K/X4000K.jpg)
 
 ### Hardware
-- 1st layer spacers: short ones with threaded tips
+- 1st layer spacers: shorter ones with threaded tips
 - fixed base spacers:
   - threads are very tight - beware head cut off
   - should fix only front-left and rear-right
