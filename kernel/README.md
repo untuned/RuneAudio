@@ -30,6 +30,7 @@ pacman -Sy --force --noconfirm raspberrypi-firmware raspberrypi-bootloader linux
 version=$( pacman -Q linux-raspberrypi | cut -d' ' -f2 )
 
 redis-cli set kernel "Linux runeaudio ${version}-ARCH" &> /dev/null
+redis-cli hset addons kern 1 &> /dev/null # mark as upgraded - disable button
 
 timestop
 title -l '=' "$bar Kernel upgraded successfully."
