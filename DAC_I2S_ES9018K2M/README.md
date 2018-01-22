@@ -35,7 +35,6 @@ $redis->hSet(\x27acards_details\x27, \x27snd_rpi_rpi_dac\x27, \x27{"sysname":"sn
 ' /srv/http/db/redis_acards_details
 redis-cli del acards
 php /srv/http/db/redis_acards_details
-###
 
 sed -i '$ a\
 dtoverlay=rpi-dac
