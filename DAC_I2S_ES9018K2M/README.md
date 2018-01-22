@@ -26,23 +26,12 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 ![jumper](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/jumpers.jpg) ![adapter](https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/adapter.jpg)
 
 **Software**  
-for 0.4b
-- Menu > Settings
-	- I²S kernel modules = `RPI DAC`
-		- `Apply Settings`
-		
-- Reboot
-- Menu > MPD
-	- Audio output interface = `I-Sabre DAC (I²S)`
-	- (optional - if not use headphone) Volume control = `Disabled` (better quality)
-	- (no need - for USB only) DSD support = `DSD (native)`
-		- `Save and Apply`
-
 for 0.3  
 No bit perfect unless bit depth was the same as format "*:24:*" (or "*:32:*")
 ```sh
-### (for DSD playback only) fix DSD static noise
-sed -i 's/"HiFiBerry DAC (I&#178;S)"/&,"card_option":"format\\t\\"\*:24:\*\\""/' /srv/http/db/redis_acards_details
+sed -i '/"HiFiBerry DAC (I&#178;S)"/ i\
+$redis->hSet(\x27acards_details\x27, \x27snd_rpi_rpi_dac\x27, \x27{"sysname":"snd_rpi_rpi_dac","extlabel":"I-Sabre DAC (I&#178;S)","hwplatformid":"08","type":"i2s"}\x27);
+' /srv/http/db/redis_acards_details
 redis-cli del acards
 php /srv/http/db/redis_acards_details
 ###
@@ -54,9 +43,17 @@ dtoverlay=hifiberry-dac
 /var/www/command/rune_shutdown
 reboot
 ```
-- Menu > MPD
-	- Audio output interface = `HiFiBerry DAC (I²S)`
-	- (optional - if not use headphone) Volume control = `Disabled` (better quality)
-	- (no need - for USB only) DSD support = `enabled`
-		-`Save and Apply`
+
+for 0.4b
+- Menu > Settings
+	- I²S kernel modules = `RPI DAC`
+		- `Apply Settings`
 		
+- Reboot
+
+for 0.3 and 0.4b
+- Menu > MPD
+	- Audio output interface = `I-Sabre DAC (I²S)`
+	- (optional - if not use headphone) Volume control = `Disabled` (better quality)
+	- (no need - for USB only) DSD support = `DSD (native)`
+		- `Save and Apply`		
