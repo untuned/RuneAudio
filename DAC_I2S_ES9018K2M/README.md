@@ -27,8 +27,9 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 
 **Software**  
 for 0.3  
-No bit perfect unless bit depth was the same as format "*:24:*" (or "*:32:*")
 ```sh
+wget -qN --show-progress https://github.com/rern/RuneAudio/raw/master/DAC_I2S_ES9018K2M/rpi-dac.dtbo -P /boot
+
 sed -i '/"HiFiBerry DAC (I&#178;S)"/ i\
 $redis->hSet(\x27acards_details\x27, \x27snd_rpi_rpi_dac\x27, \x27{"sysname":"snd_rpi_rpi_dac","extlabel":"I-Sabre DAC (I&#178;S)","hwplatformid":"08","type":"i2s"}\x27);
 ' /srv/http/db/redis_acards_details
@@ -37,7 +38,7 @@ php /srv/http/db/redis_acards_details
 ###
 
 sed -i '$ a\
-dtoverlay=hifiberry-dac
+dtoverlay=rpi-dac
 ' /boot/config.txt
 
 /var/www/command/rune_shutdown
