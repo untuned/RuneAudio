@@ -16,7 +16,7 @@ _Tested on RPi3 RuneAudio 0.3 and 0.4b_
 #4  -
 #5  <  RPi #39            -  GND   ground
 ```
-![gpio](https://github.com/rern/_assets/raw/master/RuneUI_GPIO/RPi3_GPIOs.png)
+<img src="https://github.com/rern/_assets/blob/master/RuneUI_GPIO/RPi3_GPIO.svg" width="600">
 
 ### Setup
 **Hardware**
