@@ -146,7 +146,7 @@ boot() {
 		exit
 	fi
 	
-	[[ -d /home/osmc ]] && reboot $bootnum
+	[[ $( uname -r | cut -d'-' -f1 ) > 4.4.39 || -d /home/osmc ]] && reboot $bootnum
 	
  	echo $bootnum > /sys/module/bcm2709/parameters/reboot_part
  	/var/www/command/rune_shutdown 2> /dev/null; reboot
