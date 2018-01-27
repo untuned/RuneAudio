@@ -20,6 +20,10 @@ file=/srv/http/app/templates/header.php
 echo $file
 sed -i '/id="xdac"/ d' $file
 
+file=/srv/http/app/templates/footer.php
+echo $file
+sed -i '/xdac.js/ d' $file
+
 file=/srv/http/app/templates/mpd.php
 echo $file
 sed -i -e '/id="savexdac"/ d
