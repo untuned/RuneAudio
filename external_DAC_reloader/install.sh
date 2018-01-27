@@ -6,6 +6,11 @@ alias=xdac
 
 . /srv/http/addonstitle.sh
 
+if [[ -e /usr/local/bin/uninstall_gpio.sh ]]; then
+	title "$info RuneUI GPIO already has this feature."
+	exit
+fi
+
 installstart $@
 
 getuninstall
