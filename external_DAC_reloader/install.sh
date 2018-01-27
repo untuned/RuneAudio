@@ -12,18 +12,20 @@ getuninstall
 
 echo -e "$bar Add files ..."
 file=/srv/http/xdacsave.php
-echo -e "<?php
+echo '<?php
 $redis = new Redis(); 
-$redis->pconnect( '127.0.0.1' );
-$aogpio = $redis->get( 'ao' );
-$volume = $redis->get( 'volume' );
-$acards = $redis->hGetAll( 'acards' );
-$mpdconf = $redis->hGetAll( 'mpdconf' );
-$redis->set( 'aogpio', $aogpio );
-$redis->set( 'volumegpio', $volume );
-$redis->hMset( 'acardsgpio', $acards );
-$redis->hMset( 'mpdconfgpio', $mpdconf );
-" > $file
+$redis->pconnect( "127.0.0.1" );
+
+$aogpio = $redis->get( "ao" );
+$volume = $redis->get( "volume" );
+$acards = $redis->hGetAll( "acards" );
+$mpdconf = $redis->hGetAll( "mpdconf" );
+
+$redis->set( "aogpio", $aogpio );
+$redis->set( "volumegpio", $volume );
+$redis->hMset( "acardsgpio", $acards );
+$redis->hMset( "mpdconfgpio", $mpdconf );
+' > $file
 chmod +x $file
 
 echo -e "$bar Modify files ..."
