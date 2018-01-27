@@ -66,8 +66,14 @@ echo -e "$bar Modify files ..."
 
 file=/srv/http/app/templates/header.php
 echo $file
-sed -i -e '/class="home"/ a\
+sed -i '/class="home"/ a\
     <button id="xdac" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
+' $file
+
+file=/srv/http/app/templates/footer.php
+echo $file
+sed -i '$ a\
+<script src="<?=$this->asset('"'"'/js/xdac.js'"'"')?>"></script>
 ' $file
 
 file=/srv/http/app/templates/mpd.php
