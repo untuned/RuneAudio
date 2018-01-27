@@ -29,10 +29,12 @@ if ( isset( $_GET[ "save" ] ) {
 	$volume = $redis->get( "volume" );
 	$acards = $redis->hGetAll( "acards" );
 	$mpdconf = $redis->hGetAll( "mpdconf" );
+	
 	$redis->set( "aogpio", $aogpio );
 	$redis->set( "volumegpio", $volume );
 	$redis->hMset( "acardsgpio", $acards );
 	$redis->hMset( "mpdconfgpio", $mpdconf );
+	
 	die();
 }
 $aogpio = $redis->get( "aogpio" );
