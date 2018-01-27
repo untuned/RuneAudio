@@ -16,24 +16,52 @@ installstart $@
 getuninstall
 
 echo -e "$bar Add files ..."
-file=/srv/http/xdacsave.php
-echo '<?php
+
+file=/srv/http/xdac.php
+echo $file
+echo '
+<?php
 $redis = new Redis(); 
 $redis->pconnect( "127.0.0.1" );
 
-$aogpio = $redis->get( "ao" );
-$volume = $redis->get( "volume" );
-$acards = $redis->hGetAll( "acards" );
-$mpdconf = $redis->hGetAll( "mpdconf" );
+if ( isset( $_GET[ "save" ] ) {
+	$aogpio = $redis->get( "ao" );
+	$volume = $redis->get( "volume" );
+	$acards = $redis->hGetAll( "acards" );
+	$mpdconf = $redis->hGetAll( "mpdconf" );
+	$redis->set( "aogpio", $aogpio );
+	$redis->set( "volumegpio", $volume );
+	$redis->hMset( "acardsgpio", $acards );
+	$redis->hMset( "mpdconfgpio", $mpdconf );
+	die();
+}
+$aogpio = $redis->get( "aogpio" );
+$volumegpio = $redis->get( "volumegpio" );
+$acardsgpio = $redis->hGetAll( "acardsgpio" );
+$mpdconfgpio = $redis->hGetAll( "mpdconfgpio" );
 
-$redis->set( "aogpio", $aogpio );
-$redis->set( "volumegpio", $volume );
-$redis->hMset( "acardsgpio", $acards );
-$redis->hMset( "mpdconfgpio", $mpdconf );
+$redis->set( "ao", $aogpio );
+$redis->set( "volume", $volumegpio );
+$redis->hMset( "acards", $acardsgpio );
+$redis->hMset( "mpdconf", $mpdconfgpio );
+
+include( "/srv/http/app/libs/runeaudio.php" );
+
+wrk_mpdconf( $redis, "switchao", $aogpio );
 ' > $file
-chmod +x $file
+
+file=/srv/http/assets/js/xdac.js
+echo $file
+echo '
+$( "#xdac" ).click( function() {
+	$.get( "/xdac.php", function() {
+		info( "External DAC configuration loaded." );
+	} );
+} );
+' > $file
 
 echo -e "$bar Modify files ..."
+
 file=/srv/http/app/templates/header.php
 echo $file
 sed -i -e '/class="home"/ a\
@@ -47,7 +75,7 @@ sed -i -e '/This switches output/ i\
 ' -e '$ a\
 <script>\
 	$( "#xdacsave" ).click( function() {\
-		$.get( "/xdacsave.php", function() { );\
+		$.get( "/xdacsave.php?save=1", function() { );\
 			info( "External DAC configuration saved." );\
 		) }:\
 	} );\
