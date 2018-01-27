@@ -14,14 +14,14 @@ echo -e "$bar Modify files ..."
 
 file=/srv/http/app/templates/header.php
 echo $file
-sed -i -e '
-
+sed -i -e '/class="home"/ a\
+    <button id="xdac" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
 ' $file
 
 file=/srv/http/app/templates/mpd.php
 echo $file
 sed -i -e '/This switches output/ i\
-                        <button class="btn btn-primary btn-lg" style="margin: -10px 0 0 20px;" id="saveao">Save Ext. DAC</button>
+                        <a class="btn btn-primary btn-lg" style="margin: -10px 0 0 20px;" id="saveao">Save Ext. DAC</a>
 ' -e '$ a\
 <script>\
 	$( "#xdacsave" ).click( function() {\
