@@ -25,4 +25,6 @@ echo $file
 sed -i -e '/id="savexdac"/ d
 ' -e '/<script>/,/<\/script>/ d' $file
 
+chmod 644 /etc/mpd.conf
+
 uninstallfinish $@
