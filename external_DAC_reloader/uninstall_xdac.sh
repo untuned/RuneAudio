@@ -10,7 +10,7 @@ if [[ $1 != u ]]; then
 	redis-cli del aogpio volumegpio acardsgpio mpdconfgpio &> /dev/null
 fi
 
-echo -e "$bar Restore files ..."
+echo -e "$bar Remove files ..."
 
 rm /srv/http/xdac.php /srv/http/assets/js/xdac.js
 
