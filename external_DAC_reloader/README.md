@@ -1,4 +1,4 @@
-USB DAC Reloader
+External DAC Reloader
 ---
 
 Fix power-off external DAC that need to be power on and reboot to be available
