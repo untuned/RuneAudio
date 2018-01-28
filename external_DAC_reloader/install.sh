@@ -57,7 +57,10 @@ echo $file
 echo '
 $( "#xdac" ).click( function() {
 	$.get( "/xdac.php", function() {
-		info( "External DAC configuration loaded." );
+		new PNotify( {
+			  title   : "External DAC"
+			, text    : "Configuration reloaded"
+		} );
 	} );
 } );
 ' > $file
