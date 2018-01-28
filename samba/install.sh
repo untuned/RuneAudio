@@ -94,6 +94,7 @@ redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
 
 timestop
 title -l '=' "$bar Samba upgraded successfully."
+echo -e "$info Next upgrade: pacman -Sy samba"
 
 if (( $# > 0 )); then
 	l=10
