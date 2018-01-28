@@ -66,8 +66,8 @@ echo -e "$bar Modify files ..."
 
 file=/srv/http/app/templates/header.php
 echo $file
-sed -i '/class="home"/ a\
-    <button id="xdac" class="btn btn-default btn-cmd"><i class="fa fa-refresh fa-lg"></i></button>
+sed -i '/poweroff-modal/ i\
+            <li style="cursor: pointer;"><a id="xdac"><i class="fa fa-server"></i> DAC Reloader</a></li>
 ' $file
 
 file=/srv/http/app/templates/footer.php
@@ -79,13 +79,20 @@ sed -i '$ a\
 file=/srv/http/app/templates/mpd.php
 echo $file
 sed -i -e '/This switches output/ i\
-                        <a class="btn btn-primary btn-lg" style="margin: -10px 0 0 20px;" id="saveao">Save Ext. DAC</a>
+                        <a class="btn btn-primary btn-lg" style="margin: -10px 0 0 20px;" id="xdacsave">Save Ext. DAC</a>
 ' -e '$ a\
 <script>\
-	$( "#xdacsave" ).click( function() {\
-		$.get( "/xdac.php?save=1", function() { );\
-			info( "External DAC configuration saved." );\
-		) }:\
+	$( "#xdac, #xdacsave" ).click( function() {\
+		var xdacphp = this.id === 'xdac' ? "/xdac.php" : "/xdac.php?save=1";
+		if ( this.id === 'xdac' ) {\
+			$.get( "/xdac.php", function() {\
+				info( "External DAC configuration loaded." );\
+			} );\
+		} else {\
+			$.get( "/xdac.php?save=1", function() {\
+				info( "External DAC configuration saved." );\
+			} );\
+		}\
 	} );\
 </script>
 ' $file
@@ -94,5 +101,5 @@ chmod 666 /etc/mpd.conf
 
 installfinish $@
 
-echo -e "$info Menu > MPD > settings > Save DAC"
-title -nt "$info Reload: Click speaker icon in top bar"
+echo -e "$info Menu > MPD > (setup) > Save Ext. DAC"
+title -nt "$info Reload: Menu > DAC Reloader"
