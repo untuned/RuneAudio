@@ -67,7 +67,7 @@ echo -e "$bar Modify files ..."
 file=/srv/http/app/templates/header.php
 echo $file
 sed -i '/class="home"/ a\
-    <button id="xdac" class="btn btn-default btn-cmd"><i class="fa fa-volume-off fa-lg"></i></button>
+    <button id="xdac" class="btn btn-default btn-cmd"><i class="fa fa-refresh fa-lg"></i></button>
 ' $file
 
 file=/srv/http/app/templates/footer.php
