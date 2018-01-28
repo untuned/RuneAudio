@@ -83,7 +83,7 @@ sed -i -e '/This switches output/ i\
 ' -e '$ a\
 <script>\
 	$( "#xdacsave" ).click( function() {\
-		$.get( "/xdacsave.php?save=1", function() { );\
+		$.get( "/xdac.php?save=1", function() { );\
 			info( "External DAC configuration saved." );\
 		) }:\
 	} );\
