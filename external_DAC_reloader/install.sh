@@ -82,17 +82,10 @@ sed -i -e '/This switches output/ i\
                         <a class="btn btn-primary btn-lg" style="margin: -10px 0 0 20px;" id="xdacsave">Save Ext. DAC</a>
 ' -e '$ a\
 <script>\
-	$( "#xdac, #xdacsave" ).click( function() {\
-		var xdacphp = this.id === 'xdac' ? "/xdac.php" : "/xdac.php?save=1";
-		if ( this.id === 'xdac' ) {\
-			$.get( "/xdac.php", function() {\
-				info( "External DAC configuration loaded." );\
-			} );\
-		} else {\
-			$.get( "/xdac.php?save=1", function() {\
-				info( "External DAC configuration saved." );\
-			} );\
-		}\
+	$( "#xdacsave" ).click( function() {\
+		$.get( "/xdac.php?save=1", function() {\
+			info( "External DAC configuration saved." );\
+		} );\
 	} );\
 </script>
 ' $file
