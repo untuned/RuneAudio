@@ -83,8 +83,8 @@ file=/srv/http/app/templates/mpd.php
 echo $file
 sed -i -e '/This switches output/ i\
                         <a class="btn btn-primary btn-lg" style="margin: -10px 0 0 20px;" id="xdacsave">Save Ext. DAC</a>
-' -e 's/id="log-level"\( name="conf[user]"\)/id="user"\1/
-' -e 's/id="log-level"\( name="conf[state_file]"\)/id="statefile"\1/
+' -e 's/id="log-level"\( name="conf[user]"\)/id="user"\1/             # fix duplicate ids
+' -e 's/id="log-level"\( name="conf[state_file]"\)/id="statefile"\1/  # fix duplicate ids
 ' -e '$ a\
 <script>\
 	$( "#xdacsave" ).click( function() {\
