@@ -62,7 +62,7 @@ function xdacbutton() {
 		$( "#xdacsave" ).removeClass( "disabled" )
 	}
 }
-xdacbutton();
+if ( /\/mpd\//.test( location.pathname ) ) xdacbutton();
 
 $( "#xdac" ).click( function() {
 	$.get( "/xdac.php", function() {
