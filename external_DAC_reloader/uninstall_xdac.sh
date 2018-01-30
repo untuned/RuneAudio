@@ -26,8 +26,7 @@ sed -i '/xdac.js/ d' $file
 
 file=/srv/http/app/templates/mpd.php
 echo $file
-sed -i -e '/id="savexdac"/ d
-' -e '/<script>/,/<\/script>/ d' $file
+sed -i -e '/Dac Reloader/,/<\/div>/ d' $file
 
 chmod 644 /etc/mpd.conf
 
