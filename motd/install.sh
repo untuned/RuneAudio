@@ -43,7 +43,7 @@ echo $file
 if [[ $1 != u ]]; then
 	(( $# == 0 )) && color='\e[38;5;45m' || color='\e[3'${1}m
 else
-	color=$( redis-cli get motdcolor &> /dev/null )
+	color=$( redis-cli get motdcolor )
 	redis-cli del motdcolor &> /dev/null
 fi
 
