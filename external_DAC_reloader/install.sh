@@ -98,12 +98,13 @@ sed -i '$ a\
 
 file=/srv/http/app/templates/mpd.php
 echo $file
-sed -i -e '/This switches output/ i\
+sed -i -e '/This switches output/{n;n;n; i\
                 <label class="col-sm-2 control-label" for="audio-output-interface">Ext. Dac Reloader</label>\
                 <div class="col-sm-10">\
                     <a class="btn btn-primary btn-lg" id="xdacsave">Save</a>\
                     <span class="help-block">Save this output and configuration for <strong>reloading without reboot</strong>.</span>\
                 </div>
+}
 ' $file
 
 chmod 666 /etc/mpd.conf
