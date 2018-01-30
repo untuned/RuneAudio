@@ -50,7 +50,7 @@ $redis->hMset( "mpdconf", $mpdconfgpio );
 include( "/srv/http/app/libs/runeaudio.php" );
 
 wrk_mpdconf( $redis, "switchao", $aogpio );
-wrk_mpdconf( $redis, 'restart' );
+wrk_mpdconf( $redis, "restart" );
 ' > $file
 
 file=/srv/http/assets/js/xdac.js
