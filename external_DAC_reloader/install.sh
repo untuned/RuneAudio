@@ -55,12 +55,29 @@ wrk_mpdconf( $redis, "switchao", $aogpio );
 file=/srv/http/assets/js/xdac.js
 echo $file
 echo '
+function xdacbutton() {
+	if ( $( "#audio-output-interface" ).val().split( " " )[0] === "bcm2835" ) {
+		$( "#xdacsave" ).addClass( "disabled" )
+	} else {
+		$( "#xdacsave" ).removeClass( "disabled" )
+	}
+}
+xdacbutton();
+
 $( "#xdac" ).click( function() {
 	$.get( "/xdac.php", function() {
 		new PNotify( {
 			  title   : "External DAC"
 			, text    : "Configuration reloaded"
 		} );
+	} );
+} );
+$( "#audio-output-interface" ).change( function() {
+	xdacbutton();
+} );
+$( "#xdacsave" ).click( function() {
+	$.get( "/xdac.php?save=1", function() {
+		info( "External DAC and configuration saved." );
 	} );
 } );
 ' > $file
@@ -82,17 +99,11 @@ sed -i '$ a\
 file=/srv/http/app/templates/mpd.php
 echo $file
 sed -i -e '/This switches output/ i\
-                        <a class="btn btn-primary btn-lg" style="margin: -10px 0 0 20px;" id="xdacsave">Save Ext. DAC</a>
-' -e 's/id="log-level"\( name="conf[user]"\)/id="user"\1/             # fix duplicate ids
-' -e 's/id="log-level"\( name="conf[state_file]"\)/id="statefile"\1/  # fix duplicate ids
-' -e '$ a\
-<script>\
-	$( "#xdacsave" ).click( function() {\
-		$.get( "/xdac.php?save=1", function() {\
-			info( "External DAC configuration saved." );\
-		} );\
-	} );\
-</script>
+                <label class="col-sm-2 control-label" for="audio-output-interface">Ext. Dac Reloader</label>\
+                <div class="col-sm-10">\
+                    <a class="btn btn-primary btn-lg" id="xdacsave">Save</a>\
+                    <span class="help-block">Save this output and configuration for <strong>reloading without reboot</strong>.</span>\
+                </div>
 ' $file
 
 chmod 666 /etc/mpd.conf
