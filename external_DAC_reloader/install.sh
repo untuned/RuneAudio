@@ -88,7 +88,7 @@ echo -e "$bar Modify files ..."
 file=/srv/http/app/templates/header.php
 echo $file
 sed -i '/poweroff-modal/ i\
-            <li style="cursor: pointer;"><a id="xdac"><i class="fa fa-server"></i> DAC Reloader</a></li>
+            <li style="cursor: pointer;"><a id="xdac"><i class="fa fa-sign-out fa-rotate-270"></i> DAC Reloader</a></li>
 ' $file
 
 file=/srv/http/app/templates/footer.php
