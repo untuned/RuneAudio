@@ -19,8 +19,7 @@ echo -e "$bar Add files ..."
 
 file=/srv/http/xdac.php
 echo $file
-echo '
-<?php
+echo '<?php
 $redis = new Redis(); 
 $redis->pconnect( "127.0.0.1" );
 
