@@ -39,7 +39,7 @@ if ( isset( $_GET[ "save" ] ) {
 }
 
 $aogpio = $redis->get( "aogpio" );
-if ( ! $aogpio ) die( "No saved configuration." );
+if ( ! $aogpio ) die( "x" );
 
 $volumegpio = $redis->get( "volumegpio" );
 $acardsgpio = $redis->hGetAll( "acardsgpio" );
@@ -70,11 +70,11 @@ if ( /\/mpd\//.test( location.pathname ) ) xdacbutton();
 
 $( "#xdac" ).click( function() {
 	$.get( "/xdac.php", function( data ) {
-		if ( data === "No saved configuration." ) {
+		if ( data === "x" ) {
 			info( {
 				  icon   : "<i class=\"fa fa-info-circle fa-2x\"></i>"
 				, title  : "DAC Reloader"
-				, message: data
+				, message: "No saved configuration."
 			} );
 		} else {
 			new PNotify( {
