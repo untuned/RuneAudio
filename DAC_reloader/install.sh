@@ -39,7 +39,7 @@ if ( isset( $_GET[ "save" ] ) {
 }
 
 $aogpio = $redis->get( "aogpio" );
-if ( ! $aogpio ) die( 'No saved configuration.' );
+if ( ! $aogpio ) die( "No saved configuration." );
 
 $volumegpio = $redis->get( "volumegpio" );
 $acardsgpio = $redis->hGetAll( "acardsgpio" );
@@ -69,11 +69,19 @@ function xdacbutton() {
 if ( /\/mpd\//.test( location.pathname ) ) xdacbutton();
 
 $( "#xdac" ).click( function() {
-	$.get( "/xdac.php", function( data ) { 
-		new PNotify( {
-			  title   : "DAC Reloader"
-			, text    : data ? data : "Configuration reloaded"
-		} );
+	$.get( "/xdac.php", function( data ) {
+		if ( data === "No saved configuration." ) {
+			info( {
+				  icon   : "<i class=\"fa fa-info-circle fa-2x\"></i>"
+				, title  : "DAC Reloader"
+				, message: data
+			} );
+		} else {
+			new PNotify( {
+				  title   : "DAC Reloader"
+				, text    : "Configuration reloaded"
+			} );
+		}
 	} );
 } );
 $( "#audio-output-interface" ).change( function() {
@@ -81,7 +89,11 @@ $( "#audio-output-interface" ).change( function() {
 } );
 $( "#xdacsave" ).click( function() {
 	$.get( "/xdac.php?save=1", function() {
-		info( "DAC and configuration saved." );
+		info( {
+			  icon   : "<i class=\"fa fa-info-circle fa-2x\"></i>"
+			, title  : "DAC Reloader"
+			, message: "Configuration saved."
+		} );
 	} );
 } );
 ' > $file
