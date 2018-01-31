@@ -1,4 +1,4 @@
-External DAC Reloader
+DAC Reloader
 ---
 
 RuneAudio cannot see an external DAC that not power on before boot. This addon fixes it.
