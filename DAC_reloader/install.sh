@@ -23,7 +23,7 @@ echo '<?php
 $redis = new Redis(); 
 $redis->pconnect( "127.0.0.1" );
 
-if ( isset( $_GET[ "save" ] ) {
+if ( isset( $_GET[ "save" ] ) ) {
 	$aogpio = $redis->get( "ao" );
 	$volume = $redis->get( "volume" );
 	$acards = $redis->hGetAll( "acards" );
