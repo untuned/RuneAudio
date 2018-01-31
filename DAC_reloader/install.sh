@@ -39,7 +39,7 @@ if ( isset( $_GET[ "save" ] ) {
 }
 
 $aogpio = $redis->get( "aogpio" );
-if ( ! $aogpio ) die( "x" );
+if ( !$aogpio ) die( "x" );
 
 $volumegpio = $redis->get( "volumegpio" );
 $acardsgpio = $redis->hGetAll( "acardsgpio" );
