@@ -74,7 +74,8 @@ $( "#xdac" ).click( function() {
 			info( {
 				  icon   : "<i class=\"fa fa-info-circle fa-2x\"></i>"
 				, title  : "DAC Reloader"
-				, message: "No saved configuration."
+				, message: "No saved configuration.<br>"
+						+"<code>Menu</code> > <code>MPD</code> (setup) <code>Save</code>"
 			} );
 		} else {
 			new PNotify( {
