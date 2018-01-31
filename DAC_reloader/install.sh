@@ -37,7 +37,10 @@ if ( isset( $_GET[ "save" ] ) {
 	
 	die();
 }
+
 $aogpio = $redis->get( "aogpio" );
+if ( ! $aogpio ) die( 'No saved configuration.' );
+
 $volumegpio = $redis->get( "volumegpio" );
 $acardsgpio = $redis->hGetAll( "acardsgpio" );
 $mpdconfgpio = $redis->hGetAll( "mpdconfgpio" );
@@ -66,10 +69,10 @@ function xdacbutton() {
 if ( /\/mpd\//.test( location.pathname ) ) xdacbutton();
 
 $( "#xdac" ).click( function() {
-	$.get( "/xdac.php", function() {
+	$.get( "/xdac.php", function( data ) { 
 		new PNotify( {
-			  title   : "External DAC"
-			, text    : "Configuration reloaded"
+			  title   : "DAC Reloader"
+			, text    : data ? data : "Configuration reloaded"
 		} );
 	} );
 } );
@@ -78,7 +81,7 @@ $( "#audio-output-interface" ).change( function() {
 } );
 $( "#xdacsave" ).click( function() {
 	$.get( "/xdac.php?save=1", function() {
-		info( "External DAC and configuration saved." );
+		info( "DAC and configuration saved." );
 	} );
 } );
 ' > $file
