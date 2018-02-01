@@ -89,8 +89,8 @@ $( "#xdac" ).click( function() {
 					$( '#loader' ).removeClass( 'hide' );
 					setTimeout( function() {
 						location.reload();
-					}, 4000 );
-				}, 2000 );
+					}, 3000 );
+				}, 3000 );
 			}
 		}
 	} );
