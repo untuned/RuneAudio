@@ -76,7 +76,7 @@ $( "#udac" ).click( function() {
 				  icon   : icon
 				, title  : title
 				, message: "No saved configuration.<br>"
-						+"( MPD setup > Save )"
+						+"( Menu > MPD > USB DAC Reloader > Save )"
 				, ok     : function() {
 					window.location.href = "/mpd/";
 				}
@@ -88,7 +88,7 @@ $( "#udac" ).click( function() {
 			} );
 			if ( /\/mpd\//.test( location.pathname ) === true ) {
 				setTimeout( function() {
-					$( '#loader' ).removeClass( 'hide' );
+					$( "#loader" ).removeClass( 'hide' );
 					setTimeout( function() {
 						location.reload();
 					}, 3000 );
