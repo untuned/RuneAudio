@@ -2,7 +2,7 @@
 
 # change version number in RuneAudio_Addons/srv/http/addonslist.php
 
-alias=xdac
+alias=udac
 
 . /srv/http/addonstitle.sh
 
