@@ -72,15 +72,23 @@ var title = "USB DAC Reloader";
 $( "#udac" ).click( function() {
 	$.get( "/udac.php", function( data ) {
 		if ( data === "x" ) {
-			info( {
-				  icon   : icon
-				, title  : title
-				, message: "No saved configuration.<br>"
-						+"( Menu > MPD > USB DAC Reloader > Save )"
-				, ok     : function() {
-					window.location.href = "/mpd/";
-				}
-			} );
+			var msg = "No saved configuration.<br>( MPD setup > USB DAC Reloader > Save )"
+			if ( /\/mpd\//.test( location.pathname ) === false ) {
+				info( {
+					  icon   : icon
+					, title  : title
+					, message: msg
+					, ok     : function() {
+						window.location.href = "/mpd/";
+					}
+				} );
+			} else {
+				info( {
+					  icon   : icon
+					, title  : title
+					, message: msg
+				} );
+			}
 		} else {
 			new PNotify( {
 				  title   : title
