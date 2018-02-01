@@ -35,7 +35,7 @@ if [[ $1 != u ]]; then
 	zoom=$( echo $zoom | awk '{if ($1 < 0.5) print 0.5; else print $1}' )
 	zoom=$( echo $zoom | awk '{if ($1 > 2) print 2; else print $1}' )
 else
-	zoom=$( redis-cli get chrozoom &> /dev/null )
+	zoom=$( redis-cli get chrozoom )
 	redis-cli del chrozoom &> /dev/null
 fi
 
