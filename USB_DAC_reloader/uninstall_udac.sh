@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias=xdac
+alias=udac
 
 . /srv/http/addonstitle.sh
 
