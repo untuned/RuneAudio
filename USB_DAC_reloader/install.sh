@@ -17,7 +17,7 @@ getuninstall
 
 echo -e "$bar Add files ..."
 
-file=/srv/http/xdac.php
+file=/srv/http/udac.php
 echo $file
 echo '<?php
 $redis = new Redis(); 
@@ -55,24 +55,26 @@ wrk_mpdconf( $redis, "switchao", $aogpio );
 wrk_mpdconf( $redis, "restart" );
 ' > $file
 
-file=/srv/http/assets/js/xdac.js
+file=/srv/http/assets/js/udac.js
 echo $file
 echo '
-function xdacbutton() {
+function udacbutton() {
 	if ( $( "#audio-output-interface" ).val().split( " " )[0] === "bcm2835" ) {
-		$( "#xdacsave" ).addClass( "disabled" )
+		$( "#udacsave" ).addClass( "disabled" )
 	} else {
-		$( "#xdacsave" ).removeClass( "disabled" )
+		$( "#udacsave" ).removeClass( "disabled" )
 	}
 }
-if ( /\/mpd\//.test( location.pathname ) ) xdacbutton();
+if ( /\/mpd\//.test( location.pathname ) ) udacbutton();
 
-$( "#xdac" ).click( function() {
-	$.get( "/xdac.php", function( data ) {
+var icon = "<i class=\"fa fa-info-circle fa-2x\"></i>";
+var title = "USB DAC Reloader";
+$( "#udac" ).click( function() {
+	$.get( "/udac.php", function( data ) {
 		if ( data === "x" ) {
 			info( {
-				  icon   : "<i class=\"fa fa-info-circle fa-2x\"></i>"
-				, title  : "DAC Reloader"
+				  icon   : icon
+				, title  : title
 				, message: "No saved configuration.<br>"
 						+"( MPD setup > Save )"
 				, ok     : function() {
@@ -81,7 +83,7 @@ $( "#xdac" ).click( function() {
 			} );
 		} else {
 			new PNotify( {
-				  title   : "DAC Reloader"
+				  title   : title
 				, text    : "Configuration reloaded"
 			} );
 			if ( /\/mpd\//.test( location.pathname ) === true ) {
@@ -96,13 +98,13 @@ $( "#xdac" ).click( function() {
 	} );
 } );
 $( "#audio-output-interface" ).change( function() {
-	xdacbutton();
+	udacbutton();
 } );
-$( "#xdacsave" ).click( function() {
-	$.get( "/xdac.php?save=1", function() {
+$( "#udacsave" ).click( function() {
+	$.get( "/udac.php?save=1", function() {
 		info( {
-			  icon   : "<i class=\"fa fa-info-circle fa-2x\"></i>"
-			, title  : "DAC Reloader"
+			  icon   : icon
+			, title  : title
 			, message: "Configuration saved."
 		} );
 	} );
@@ -114,7 +116,7 @@ echo -e "$bar Modify files ..."
 file=/srv/http/app/templates/header.php
 echo $file
 sed -i '/poweroff-modal/ i\
-            <li style="cursor: pointer;"><a id="xdac"><i class="fa fa-sign-out fa-rotate-270"></i> DAC Reloader</a></li>
+            <li style="cursor: pointer;"><a id="udac"><i class="fa fa-sign-out fa-rotate-270"></i> DAC Reloader</a></li>
 ' $file
 
 file=/srv/http/app/templates/footer.php
@@ -127,9 +129,9 @@ file=/srv/http/app/templates/mpd.php
 echo $file
 sed -i -e '/This switches output/{n;n;n;n; i\
             <div class="form-group"> <?php /* xdac0 */?>\
-                <label class="col-sm-2 control-label" for="audio-output-interface">Ext. Dac Reloader</label>\
+                <label class="col-sm-2 control-label" for="audio-output-interface">USB DAC Reloader</label>\
                 <div class="col-sm-10">\
-                    <a class="btn btn-primary btn-lg" id="xdacsave">Save</a>\
+                    <a class="btn btn-primary btn-lg" id="udacsave">Save</a>\
                     <span class="help-block">Save this output and configuration for <strong>reloading without reboot</strong>.</span>\
                 </div>\
             </div> <?php /* xdac1 */?>
@@ -140,5 +142,5 @@ chmod 666 /etc/mpd.conf
 
 installfinish $@
 
-echo -e "$info Menu > MPD > (setup) > Save Ext. DAC"
+echo -e "$info Menu > MPD > (setup) > USB DAC Reloader > Save"
 title -nt "$info Reload: Menu > DAC Reloader"
