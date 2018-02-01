@@ -96,7 +96,7 @@ $( "#udac" ).click( function() {
 			} );
 			if ( /\/mpd\//.test( location.pathname ) === true ) {
 				setTimeout( function() {
-					$( "#loader" ).removeClass( 'hide' );
+					$( "#loader" ).removeClass( "hide" );
 					setTimeout( function() {
 						location.reload();
 					}, 3000 );
