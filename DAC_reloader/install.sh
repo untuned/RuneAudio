@@ -84,6 +84,14 @@ $( "#xdac" ).click( function() {
 				  title   : "DAC Reloader"
 				, text    : "Configuration reloaded"
 			} );
+			if ( /\/mpd\//.test( location.pathname ) === true ) {
+				setTimeout( function() {
+					$( '#loader' ).removeClass( 'hide' );
+					setTimeout( function() {
+						location.reload();
+					}, 4000 );
+				}, 2000 );
+			}
 		}
 	} );
 } );
