@@ -143,7 +143,7 @@ sed -i -e '/This switches output/{n;n;n;n; i\
                 <label class="col-sm-2 control-label" for="audio-output-interface">USB DAC Reloader</label>\
                 <div class="col-sm-10">\
                     <a class="btn btn-primary btn-lg" id="udacsave">Save</a>\
-                    <span class="help-block">Save this output and configuration for <strong>reloading without reboot</strong>.</span>\
+                    <span class="help-block">Configure the rest of this page and save for <strong>reloading without reboot</strong>.</span>\
                 </div>\
             </div> <?php /* udac1 */?>
 }
