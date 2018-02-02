@@ -101,7 +101,7 @@ $( "#udac" ).click( function() {
 					, title  : title
 					, message: "Configuration reloaded"
 					, ok     : function() {
-						window.location.href = '/';
+						window.location.href = "/";
 					}
 				} );
 			}
