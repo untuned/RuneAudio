@@ -90,17 +90,20 @@ $( "#udac" ).click( function() {
 				} );
 			}
 		} else {
-			new PNotify( {
-				  title   : title
-				, text    : "Configuration reloaded"
-			} );
-			if ( /\/mpd\//.test( location.pathname ) === true ) {
-				setTimeout( function() {
-					$( "#loader" ).removeClass( "hide" );
-					setTimeout( function() {
-						location.reload();
-					}, 3000 );
-				}, 3000 );
+			if ( /\/mpd\//.test( location.pathname ) === false ) {
+				new PNotify( {
+					  title   : title
+					, text    : "Configuration reloaded"
+				} );
+			} else {
+				info( {
+					  icon   : icon
+					, title  : title
+					, message: "Configuration reloaded"
+					, ok     : function() {
+						window.location.href = '/';
+					}
+				} );
 			}
 		}
 	} );
