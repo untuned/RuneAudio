@@ -6,3 +6,5 @@ If RuneAudio cannot see an USB DAC that power on after boot. This addon loads sa
 - Save all settings of MPD configuration page
 - Reload saved settings
 - The DAC will be ready without reboot
+
+(This addon is a part of [RuneUI GPIO](https://github.com/rern/RuneUI_GPIO) addon which turns on/off audio equipments in sequence and reloads DAC configuration automatically.)
