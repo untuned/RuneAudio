@@ -147,6 +147,8 @@ sed -i -e '/This switches output/{n;n;n;n; i\
                 </div>\
             </div> <?php /* udac1 */?>
 }
+' -e 's/id="log-level"\( name="conf\[user\]"\)/id="user"\1/
+' -e 's/id="log-level"\( name="conf\[state_file\]"\)/id="state"\1/
 ' $file
 
 chmod 666 /etc/mpd.conf
