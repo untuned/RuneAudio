@@ -141,15 +141,15 @@ boot() {
 	[[ -z $ans || $ans == 0 ]] && return
 	
 	bootnum=${bootarray[$ans]}
- 	if [[ -e /root/reboot.py ]]; then
-	 	/root/reboot.py $bootnum
+ 	if [[ -e /root/gpiopower.py ]]; then
+	 	/root/gpiopower.py $bootnum &
 		exit
 	fi
 	
-	[[ $( uname -r | cut -d'-' -f1 ) > 4.4.39 || -d /home/osmc ]] && reboot $bootnum
+	[[ $( uname -r | cut -d'-' -f1 ) > 4.4.39 || -d /home/osmc ]] && reboot $bootnum &
 	
  	echo $bootnum > /sys/module/bcm2709/parameters/reboot_part
- 	/var/www/command/rune_shutdown 2> /dev/null; reboot
+ 	/var/www/command/rune_shutdown 2> /dev/null; reboot &
 }
 
 if [[ -d /home/osmc ]]; then
