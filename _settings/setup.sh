@@ -64,7 +64,7 @@ sed -i '/^sendMpdCommand/ s|^|//|' /srv/http/command/usbmount
 sed -i '/^KERNEL/ s/^/#/' /etc/udev/rules.d/rune_usb-stor.rules
 udevadm control --reload-rules && udevadm trigger
 
-mnt0=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+mnt0=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
 label=${mnt0##/*/}
 mnt="/mnt/$label"
 mkdir -p "$mnt"
