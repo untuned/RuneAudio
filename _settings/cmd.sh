@@ -43,7 +43,6 @@ mkdir -p $mntsettings
 mount /dev/mmcblk0p5 $mntsettings 2> /dev/null
 installedlist=$( grep 'name\|mmc' $mntsettings/installed_os.json )
 umount $mntsettings
-rm -r $mntsettings
 
 # mount sd
 currentroot=$( mount | grep 'on / ' | cut -d' ' -f1 | cut -d'/' -f3 )
