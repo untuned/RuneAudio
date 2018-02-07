@@ -6,14 +6,14 @@ redis-cli set volumegpio 0
 defaultIFS=$IFS
 IFS=$'\n'
 
-acards=( $( cat gpioacards.txt ) )
+acards=( $( cat gpioarediscards.txt ) )
 ilength=${#acards[@]}
 for (( i = 0; i < $ilength; i+=2 )); do
     redis-cli hset acardsgpio "${acards[i]}" "${acards[i+1]}"
 	redis-cli hset acards "${acards[i]}" "${acards[i+1]}"
 done
 
-mpdconf=( $( cat gpiompdconf.txt ) )
+mpdconf=( $( cat gpioredismpdconf.txt ) )
 ilength=${#mpdconf[@]}
 for (( i = 0; i < $ilength; i+=2 )); do
     redis-cli hset mpdconfgpio "${mpdconf[i]}" "${mpdconf[i+1]}"
