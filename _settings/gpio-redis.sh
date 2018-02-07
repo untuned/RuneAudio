@@ -20,3 +20,5 @@ for (( i = 0; i < $ilength; i+=2 )); do
 done
 
 IFS=$defaultIFS
+
+rm gpio-redis*
