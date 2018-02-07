@@ -87,9 +87,12 @@ echo -e "$bar Restore settings ..."
 # settings
 release=$( redis-cli get release )
 build=$( redis-cli get buildversion )
+
 systemctl stop redis
-file=/var/lib/redis/rune.rdb
-wgetnc $gitpath/_settings/rune.rdb -O $file
+
+wgetnc $gitpath/_settings/rune.rdb -O /var/lib/redis/rune.rdb
+wgetnc $gitpath/_settings/gpio.json -P /srv/http
+
 systemctl start redis
 
 sleep 2
