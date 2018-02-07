@@ -6,7 +6,7 @@ redis-cli set volumegpio 0
 defaultIFS=$IFS
 IFS=$'\n'
 
-acards=( $( cat gpioarediscards.txt ) )
+acards=( $( cat gpioredisacards.txt ) )
 ilength=${#acards[@]}
 for (( i = 0; i < $ilength; i+=2 )); do
     redis-cli hset acardsgpio "${acards[i]}" "${acards[i+1]}"
