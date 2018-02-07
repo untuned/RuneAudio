@@ -94,9 +94,10 @@ systemctl start redis
 
 sleep 2
 systemctl status redis | grep -q 'dead' && systemctl start redis
+
 # restore version for 0.3 / 0.4b
 redis-cli set release $release
-redis-cli set buildversion $buildversion
+redis-cli set buildversion $build
 
 # create webradio files
 i=1
