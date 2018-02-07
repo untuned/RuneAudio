@@ -3,6 +3,7 @@
 wget -q https://github.com/rern/RuneAudio/raw/master/_settings/gpio-redis-acards.txt
 wget -q https://github.com/rern/RuneAudio/raw/master/_settings/gpio-redis-mpdconf.txt
 
+redis-cli set enablegpio 1
 redis-cli set aogpio 'xCORE USB Audio 2.0'
 redis-cli set volumegpio 0
 
