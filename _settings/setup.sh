@@ -85,6 +85,8 @@ echo
 echo -e "$bar Restore settings ..."
 #################################################################################
 # settings
+release=$( redis-cli get release )
+build=$( redis-cli get buildversion )
 systemctl stop redis
 file=/var/lib/redis/rune.rdb
 wgetnc $gitpath/_settings/rune.rdb -O $file
@@ -92,6 +94,9 @@ systemctl start redis
 
 sleep 2
 systemctl status redis | grep -q 'dead' && systemctl start redis
+# restore version for 0.3 / 0.4b
+redis-cli set release $release
+redis-cli set buildversion $buildversion
 
 # create webradio files
 i=1
