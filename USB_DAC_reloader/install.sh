@@ -33,10 +33,10 @@ if ( isset( $_GET[ "save" ] ) ) {
 	$redis->set( "volumegpio", $volume );
 	
 	foreach ( $acards as $key => $value ) {
-		$redis->hSet( 'acardsgpio', $key, $value );
+		$redis->hSet( "acardsgpio", $key, $value );
 	}
 	foreach ( $mpdconf as $key => $value ) {
-		$redis->hSet( 'mpdconfgpio', $key, $value );
+		$redis->hSet( "mpdconfgpio", $key, $value );
 	}
 	
 	die();
