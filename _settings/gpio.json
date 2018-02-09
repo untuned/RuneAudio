@@ -2,6 +2,6 @@
   "pin"  : { "pin1": "11", "pin2": "13", "pin3": "15", "pin4": "16" }
 , "name" : { "name1": "Amp", "name2": "DAC", "name3": "Subwoofer", "name4": "(no name)" }
 , "on"   : { "on1": "11", "ond1": "1", "on2": "13", "ond2": "7", "on3": "15", "ond3": "0", "on4": "0" }
-, "off"  : { "off1": "15", "offd1": "4", "off2": "13", "offd2": "2", "off3": "11", "offd3": "0", "off4": "0" }
+, "off"  : { "off1": "15", "offd1": "2", "off2": "13", "offd2": "2", "off3": "11", "offd3": "0", "off4": "0" }
 , "timer": { "timer": "5" }
 }
