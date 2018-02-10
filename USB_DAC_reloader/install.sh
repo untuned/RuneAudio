@@ -49,7 +49,7 @@ sed -i '$ a\
 file=/srv/http/app/templates/mpd.php
 echo $file
 sed -i -e '/This switches output/ i\
-						<a class="btn btn-primary btn-lg" id="udac"><i class="fa fa-refresh fa-lg"></i></a>
+						<a class="btn btn-primary btn-lg" id="udac"><i class="fa fa-refresh fa-lg" style="margin-top: -10px;"></i></a>
 ' -e 's/id="log-level"\( name="conf\[user\]"\)/id="user"\1/
 ' -e 's/id="log-level"\( name="conf\[state_file\]"\)/id="state"\1/
 ' $file
