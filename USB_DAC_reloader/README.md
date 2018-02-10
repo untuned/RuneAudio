@@ -1,5 +1,6 @@
 USB DAC Reloader
 ---
-
+In MPD configuration page:
 - RuneAudio does not list USB DACs that power on after boot.
-- Click `reload button` next to **Audio output interface** to reload it without reboot.
+- This addon add a `reload button` next to **Audio output interface**
+- Click the button to reload it without reboot.
