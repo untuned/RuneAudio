@@ -17,22 +17,22 @@ getuninstall
 
 echo -e "$bar Add files ..."
 
-file=/srv/http/acardsreload.php
+file=/srv/http/udac.php
 echo $file
 echo '<?php
 $redis = new Redis(); 
 $redis->pconnect( "127.0.0.1" );
 
-include( '/srv/http/app/libs/acardsreload.php' );
+include( '/srv/http/app/libs/runeaudio.php' );
 
 wrk_audioOutput($redis, 'refresh');
 ' > $file
 
-file=/srv/http/assets/js/acardsreload.js
+file=/srv/http/assets/js/udac.js
 echo $file
 echo '
 $( '#acardsreload' ).click( function() {
-	$.get( '/dacrefresh.php', function() {
+	$.get( '/udac.php', function() {
 		location.reload();
 	} );
 } );
@@ -43,13 +43,13 @@ echo -e "$bar Modify files ..."
 file=/srv/http/app/templates/footer.php
 echo $file
 sed -i '$ a\
-<script src="<?=$this->asset('"'"'/js/acardsreload.js'"'"')?>"></script>
+<script src="<?=$this->asset('"'"'/js/udac.js'"'"')?>"></script>
 ' $file
 
 file=/srv/http/app/templates/mpd.php
 echo $file
 sed -i -e '/This switches output/ i\
-						<a class="btn btn-primary btn-lg" id="acardsreload"><i class="fa fa-refresh fa-lg"></i></a>
+						<a class="btn btn-primary btn-lg" id="udac"><i class="fa fa-refresh fa-lg"></i></a>
 ' -e 's/id="log-level"\( name="conf\[user\]"\)/id="user"\1/
 ' -e 's/id="log-level"\( name="conf\[state_file\]"\)/id="state"\1/
 ' $file
