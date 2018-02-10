@@ -6,22 +6,18 @@ alias=udac
 
 uninstallstart $@
 
-if [[ $1 != u ]]; then
-	redis-cli del aogpio volumegpio acardsgpio mpdconfgpio &> /dev/null
-fi
-
 echo -e "$bar Remove files ..."
 
-rm /srv/http/udac.php /srv/http/assets/js/acardsreload.js
+rm /srv/http/udac.php /srv/http/assets/js/udac.js
 
 echo -e "$bar Restore files ..."
 
 file=/srv/http/app/templates/footer.php
 echo $file
-sed -i '/acardsreload.js/ d' $file
+sed -i '/udac.js/ d' $file
 
 file=/srv/http/app/templates/mpd.php
 echo $file
-sed -i -e '/id="acardsreload"/ d' $file
+sed -i -e '/id="udac"/ d' $file
 
 uninstallfinish $@
