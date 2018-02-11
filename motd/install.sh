@@ -14,7 +14,7 @@ echo -e "$bar Add new files ..."
 
 file=/etc/motd.logo
 echo $file
-echo "
+cat > $file <<'EOF'
                           .,;uh         
                    .,;cdk0XNWMM,        
              .,cdONMMMMMMMMMMMM:        
@@ -35,7 +35,7 @@ echo "
                kMNo0WMXo'               
                 dNNOd;'                 
                  ''                     
- " > $file
+EOF
 
 file=/etc/profile.d/motd.sh
 echo $file
