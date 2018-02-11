@@ -53,6 +53,7 @@ sed -i '$ a\
 
 file=/srv/http/app/templates/mpd.php
 echo $file
+# with non-unique id fix
 sed -i -e '/This switches output/ i\
 						<a class="btn btn-primary btn-lg" id="udac"><i class="fa fa-refresh fa-lg" style="margin-top: -10px;"></i></a>
 ' -e 's/id="log-level"\( name="conf\[user\]"\)/id="user"\1/
