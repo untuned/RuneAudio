@@ -19,35 +19,36 @@ echo -e "$bar Add files ..."
 
 file=/srv/http/udac.php
 echo $file
-echo $'<?php
+file=/srv/http/udac.php
+cat > $file <<'EOF'
+<?php
 $redis = new Redis(); 
-$redis->pconnect( "127.0.0.1" );
+$redis->pconnect( '127.0.0.1' );
 
-include( "/srv/http/app/libs/runeaudio.php" );
+include( '/srv/http/app/libs/runeaudio.php' );
 
-wrk_audioOutput($redis, "refresh");
+wrk_audioOutput($redis, 'refresh');
 
-// fix hw:0,N - missing N after wrk_audioOutput($redis, "refresh")
-$acards = $redis->hGetAll( "acards" );
-
+// fix hw:0,N - missing N after wrk_audioOutput($redis, 'refresh')
+$acards = $redis->hGetAll( 'acards' );
 foreach ( $acards as $key => $value ) {
-	preg_match( '"'"'/"id":"."/'"'"', $value, $match );
-	$id = preg_replace( '"'"'/"id":"(.)"/'"'"', '"'"'${1}'"'"', $match[ 0 ] );
+	preg_match( '/"id":"."/', $value, $match );
+	$id = preg_replace( '/"id":"(.)"/', '${1}', $match[ 0 ] );
 	$subdevice = $id ? $id - 1 : 0;
-	$value1 = preg_replace( "/(hw:.,)/", '"'"'${1}'"'"'.$subdevice, $value );
-	$redis->hSet( "acards", $key, $value1 );
+	$value1 = preg_replace( '/(hw:.,)/', '${1}'.$subdevice, $value );
+	$redis->hSet( 'acards', $key, $value1 );
 }
-' > $file
+EOF
 
 file=/srv/http/assets/js/udac.js
 echo $file
-echo '
+cat > $file <<'EOF'
 $( "#acardsreload" ).click( function() {
 	$.get( "/udac.php", function() {
 		location.reload();
 	} );
 } );
-' > $file
+EOF
 
 echo -e "$bar Modify files ..."
 
