@@ -26,7 +26,7 @@ $redis->pconnect( "127.0.0.1" );
 include( "/srv/http/app/libs/runeaudio.php" );
 
 wrk_audioOutput($redis, "refresh");
-
+// fix hw:0,N - missing N after wrk_audioOutput($redis, "refresh")
 $analog = $redis->hGet( "acards", "bcm2835 ALSA_1" );
 $hdmi = $redis->hGet( "acards", "bcm2835 ALSA_2" );
 $redis->hSet( "acards", "bcm2835 ALSA_1", str_replace( "hw:0,", "hw:0,0", $analog ) );
