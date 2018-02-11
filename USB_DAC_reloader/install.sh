@@ -23,16 +23,21 @@ echo '<?php
 $redis = new Redis(); 
 $redis->pconnect( "127.0.0.1" );
 
-include( '/srv/http/app/libs/runeaudio.php' );
+include( "/srv/http/app/libs/runeaudio.php" );
 
-wrk_audioOutput($redis, 'refresh');
+wrk_audioOutput($redis, "refresh");
+
+$analog = $redis->hGet( "acards", "bcm2835 ALSA_1" );
+$hdmi = $redis->hGet( "acards", "bcm2835 ALSA_2" );
+$redis->hSet( "acards", "bcm2835 ALSA_1", str_replace( "hw:0,", "hw:0,0", $analog ) );
+$redis->hSet( "acards", "bcm2835 ALSA_2", str_replace( "hw:0,", "hw:0,1", $hdmi ) );
 ' > $file
 
 file=/srv/http/assets/js/udac.js
 echo $file
 echo '
-$( '#acardsreload' ).click( function() {
-	$.get( '/udac.php', function() {
+$( "#acardsreload" ).click( function() {
+	$.get( "/udac.php", function() {
 		location.reload();
 	} );
 } );
