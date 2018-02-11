@@ -61,4 +61,4 @@ sed -i -e '/This switches output/ i\
 
 installfinish $@
 
-title -nt "$info Reload: Menu > MPD > refresh button (next to Audio output)"
+title -nt "$info Reload: Menu > MPD > [refresh button] next to Audio output"
