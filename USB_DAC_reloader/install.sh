@@ -19,7 +19,7 @@ echo -e "$bar Add files ..."
 
 file=/srv/http/udac.php
 echo $file
-echo '<?php
+echo $'<?php
 $redis = new Redis(); 
 $redis->pconnect( "127.0.0.1" );
 
@@ -31,10 +31,10 @@ wrk_audioOutput($redis, "refresh");
 $acards = $redis->hGetAll( "acards" );
 
 foreach ( $acards as $key => $value ) {
-	$valuearray = json_decode( $value, true );
-	$id = $valuearray[ "id" ];
-	$subdevice = isset( $id ) ? $id - 1 : 0;
-	$value1 = preg_replace( "/(hw:.,)/", "${1}".$subdevice, $value );
+	preg_match( '"'"'/"id":"."/'"'"', $value, $match );
+	$id = preg_replace( '"'"'/"id":"(.)"/'"'"', '"'"'${1}'"'"', $match[ 0 ] );
+	$subdevice = $id ? $id - 1 : 0;
+	$value1 = preg_replace( "/(hw:.,)/", '"'"'${1}'"'"'.$subdevice, $value );
 	$redis->hSet( "acards", $key, $value1 );
 }
 ' > $file
