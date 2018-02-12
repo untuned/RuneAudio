@@ -26,6 +26,8 @@ ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/re
 ' $file
 file=/srv/http/command/refresh_ao
 
+udevadm control --reload-rules && udevadm trigger
+
 echo $file
 sed -i $'/close Redis/ i\
 if ( $argc > 1 ) {\
