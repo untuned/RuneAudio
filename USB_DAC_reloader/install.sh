@@ -31,7 +31,7 @@ file=/srv/http/command/refresh_ao
 echo $file
 sed -i -e '/ui_notify/ s/^/#/
 ' -e $'/close Redis/ i\
-\
+// udac0\
 if ( $argc > 1 ) {\
 	// "exec" gets only last line which is new power-on card\
 	$ao = exec( \'/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2\' );\
@@ -42,7 +42,7 @@ if ( $argc > 1 ) {\
 }\
 $redis->set( "ao", $ao );\
 wrk_mpdconf( $redis, "switchao", $ao );\
-
+// udac1
 ' $file
 
 installfinish $@
