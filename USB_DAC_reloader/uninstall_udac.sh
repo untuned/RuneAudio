@@ -18,6 +18,6 @@ udevadm control --reload-rules && udevadm trigger
 
 file=/srv/http/command/refresh_ao
 echo $file
-sed -i '/argc > 1/,/^wrk_mpdconf/ d' $file
+sed -i '/udac0/,/udac1/ d' $file
 
 uninstallfinish $@
