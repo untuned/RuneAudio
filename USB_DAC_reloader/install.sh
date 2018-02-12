@@ -39,5 +39,3 @@ if ( $argc > 1 ) {\
 ' $file
 
 installfinish $@
-
-title -nt "$info Reload: Menu > MPD > [refresh button] next to Audio output"
