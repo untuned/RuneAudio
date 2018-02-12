@@ -140,15 +140,14 @@ boot() {
 	[[ -z $ans || $ans == 0 ]] && return
 	
 	bootnum=${bootarray[$ans]}
- 	if [[ -e /root/gpiopower.py ]]; then
+ 	if [[ -e /root/gpiopower.py ]]; then                                     # runeui gpio installed
 	 	/root/gpiopower.py $bootnum &
-		exit
+	elif [[ -d /home/osmc || $( uname -r | cut -d'-' -f1 ) > 4.4.39 ]]; then # osmc or kernel upgraded
+		reboot $bootnum &
+	else                                                                     # runeaudio
+		echo $bootnum > /sys/module/bcm2709/parameters/reboot_part
+		/var/www/command/rune_shutdown 2> /dev/null; reboot &
 	fi
-	
-	[[ $( uname -r | cut -d'-' -f1 ) > 4.4.39 || -d /home/osmc ]] && reboot $bootnum &
-	
- 	echo $bootnum > /sys/module/bcm2709/parameters/reboot_part
- 	/var/www/command/rune_shutdown 2> /dev/null; reboot &
 }
 
 if [[ -d /home/osmc ]]; then
