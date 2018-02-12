@@ -6,18 +6,16 @@ alias=udac
 
 uninstallstart $@
 
-echo -e "$bar Remove files ..."
-
-rm /srv/http/udac.php /srv/http/assets/js/udac.js
-
 echo -e "$bar Restore files ..."
 
-file=/srv/http/app/templates/footer.php
+file=/etc/udev/rules.d/rune_usb-audio.rules
 echo $file
-sed -i '/udac.js/ d' $file
+sed -i '/SUBSYSTEM=="sound"/ s/^#//
+' -e '/^ACTION/ d
+' $file
 
-file=/srv/http/app/templates/mpd.php
+file=/srv/http/command/refresh_ao
 echo $file
-sed -i -e '/id="udac"/ d' $file
+sed -i '/argc > 1/,/^}/ d' $file
 
 uninstallfinish $@
