@@ -30,7 +30,7 @@ udevadm control --reload-rules && udevadm trigger
 file=/srv/http/command/refresh_ao
 echo $file
 sed -i -e '/ui_notify/ s/^/#/
-' -e '$'/close Redis/ i\
+' -e $'/close Redis/ i\
 \
 if ( $argc > 1 ) {\
 	// "exec" gets only last line which is new power-on card\
