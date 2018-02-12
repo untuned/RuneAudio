@@ -29,13 +29,20 @@ udevadm control --reload-rules && udevadm trigger
 
 file=/srv/http/command/refresh_ao
 echo $file
-sed -i $'/close Redis/ i\
+sed -i -e '/ui_notify/ s/^/#/
+' -e '$'/close Redis/ i\
+\
 if ( $argc > 1 ) {\
 	// "exec" gets only last line which is new power-on card\
 	$ao = exec( \'/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2\' );\
-	$redis->set( "ao", $ao );\
-	wrk_mpdconf( $redis, "switchao", $ao );\
-}
+	ui_notify( "Audio Output", "Switch to ".$ao );\
+} else {\
+	$ao = "bcm2835 ALSA_1";\
+	ui_notify( "Audio Output", "Switch to RaspberryPi Analog Out" );\
+}\
+$redis->set( "ao", $ao );\
+wrk_mpdconf( $redis, "switchao", $ao );\
+
 ' $file
 
 installfinish $@
