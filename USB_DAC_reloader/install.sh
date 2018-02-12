@@ -29,7 +29,7 @@ udevadm control --reload-rules && udevadm trigger
 
 file=/srv/http/command/refresh_ao
 echo $file
-sed -i -e '/ui_notify/ s/^/#/
+sed -i -e '/ui_notify/ s|^|//|
 ' -e $'/close Redis/ i\
 // udac0\
 if ( $argc > 1 ) {\
