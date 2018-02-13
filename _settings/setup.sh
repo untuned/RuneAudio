@@ -201,6 +201,10 @@ chown http:http /srv/http/gpio.json
 wgetnc https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 echo
 
+# USB DAC
+#################################################################################
+wgetnc $gitpath/USB_DAC/install.sh; chmod +x install.sh; ./install.sh
+echo
 
 # mpd
 #################################################################################
