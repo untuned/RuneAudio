@@ -11,8 +11,9 @@
 # install transmission
 # install aria2
 # install runeui enhancement
-# install lyrics
+# install runeui lyrics
 # install runeui gpio
+# install usb dac auto switch
 
 rm $0
 
@@ -195,11 +196,11 @@ echo
 
 # GPIO
 #################################################################################
-wgetnc $gitpath/_settings/mpd.conf.gpio -P /etc
 wgetnc $gitpath/_settings/gpio.json -P /srv/http
 chown http:http /srv/http/gpio.json
 wgetnc https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
 echo
+
 
 # mpd
 #################################################################################
