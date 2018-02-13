@@ -198,7 +198,7 @@ echo
 #################################################################################
 wgetnc $gitpath/_settings/gpio.json -P /srv/http
 chown http:http /srv/http/gpio.json
-wgetnc https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh 1
+wgetnc https://github.com/rern/RuneUI_GPIO/raw/master/install.sh; chmod +x install.sh; ./install.sh
 echo
 
 # USB DAC
