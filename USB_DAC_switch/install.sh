@@ -14,6 +14,7 @@ echo -e "$bar Modify files ..."
 
 file=/etc/udev/rules.d/rune_usb-audio.rules
 echo $file
+# split add-remove to suppress notify twice
 sed -i -e '/SUBSYSTEM=="sound"/ s/^/#/
 ' -e '$ a\
 ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao on"\
