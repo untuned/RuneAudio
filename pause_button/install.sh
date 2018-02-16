@@ -20,9 +20,9 @@ sed -i '/id="play"/ a\
 
 file=/srv/http/assets/js/runeui.js
 echo $file
-sed -i -e '/state === .play./ s|^|/* paus|
+sed -i -e '/state === .play./ s|^|/*paus|
 ' -e '/#stop.).addClass/ {
-s|$|paus */|
+s|$|paus*/|
 a\
     if ( state === "play" ) { // paus0\
         $( "#play" ).addClass( "btn-primary" );\
