@@ -32,7 +32,6 @@ if ( $argc > 1 ) {\
 		$name = "RaspberryPi HDMI Out";\
 	}\
 	ui_notify( "Audio Output", "Switch to ".$name );\
-	$redis->set( "ao", $ao );\
 	wrk_mpdconf( $redis, "switchao", $ao );\
 }\
 // udac1
