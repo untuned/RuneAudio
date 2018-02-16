@@ -14,7 +14,7 @@ sed -i '/id="pause"/ d' $file
 
 file=/srv/http/assets/js/runeui.js
 echo $file
-sed -i -e '/\/* paus\|paus *\///
+sed -i -e '/^\/* paus\|paus *\/$//
 ' -e '/paus0/,/paus1/ d
 ' $file
 
