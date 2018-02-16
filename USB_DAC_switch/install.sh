@@ -14,7 +14,11 @@ echo -e "$bar Modify files ..."
 
 file=/etc/udev/rules.d/rune_usb-audio.rules
 echo $file
-sed -i 's/\(refresh_ao\)/\1 1/' $file
+sed -i -e '/SUBSYSTEM=="sound"/ s/^/#/
+' -e '$ a\
+ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao on"\
+ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/refresh_ao off"
+' $file
 
 udevadm control --reload-rules && udevadm trigger
 
