@@ -36,7 +36,7 @@ echo -e "$bar Modify files ..."
 
 file=/srv/http/app/templates/header.php
 echo $file
-sed -i -e '/runeui.css/ a\
+sed -i -e $'/runeui.css/ a\
     <link rel="stylesheet" href="<?=$this->asset(\'/css/pausebutton.css\')?>">
 ' -e '/id="play"/ a\
         <button id="pause" class="btn btn-default btn-cmd" title="Play/Pause" data-cmd="pause"><i class="fa fa-pause"></i></button>
