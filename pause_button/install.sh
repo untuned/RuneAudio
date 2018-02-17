@@ -15,11 +15,30 @@ installstart $@
 
 getuninstall
 
+echo -e "$bar Add files ..."
+
+file=/srv/http/assets/css/pausebutton.css
+echo $file
+echo '
+.playback-controls {
+    width: 240px;
+}
+@media (min-width: 480px) {
+    #menu-top .playback-controls {
+        left: 50%;
+        width: 240px;
+        margin: 0 0 0 -120px
+    }
+}
+' > $file
+
 echo -e "$bar Modify files ..."
 
 file=/srv/http/app/templates/header.php
 echo $file
-sed -i '/id="play"/ a\
+sed -i -e '/runeui.css/ a\
+    <link rel="stylesheet" href="<?=$this->asset(\'/css/pausebutton.css\')?>">
+' -e '/id="play"/ a\
         <button id="pause" class="btn btn-default btn-cmd" title="Play/Pause" data-cmd="pause"><i class="fa fa-pause"></i></button>
 ' $file
 
