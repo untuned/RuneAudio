@@ -56,4 +56,18 @@ a\
 }
 ' $file
 
+file=/srv/http/assets/js/runeui.min.js
+echo $file
+sed -i -e 's|\(if("play"===e\)|/*paus\1|
+' -e 's|\(("#stop").addClass("btn-primary")\)|\1paus*//*paus2*/"play"===state?($("#play").addClass("btn-primary"),\
+$("#stop").removeClass("btn-primary"),\
+$("#pause").hasClass("hide")?$("i","#play").removeClass("fa fa-pause").addClass("fa fa-play"):\
+$("#pause").removeClass("btn-primary")):"pause"===state?($("#playlist-position span").html("Not playing"),\
+$("#stop").removeClass("btn-primary"),$("#pause").hasClass("hide")?$("i","#play").removeClass("fa fa-play").addClass("fa fa-pause"):\
+($("#play").removeClass("btn-primary"),\
+$("#pause").addClass("btn-primary"))):"stop"===state&&($("#stop").addClass("btn-primary"),\
+$("#play, #pause").removeClass("btn-primary"),\
+$("#pause").hasClass("hide")&&$("i","#play").removeClass("fa fa-pause").addClass("fa fa-play"),/*paus3*/
+' $file
+
 installfinish $@
