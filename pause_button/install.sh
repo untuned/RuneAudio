@@ -25,10 +25,11 @@ sed -i '/id="play"/ a\
 
 file=/srv/http/assets/js/runeui.js
 echo $file
-sed -i -e '/state === .play./ s|^|/*paus|
-' -e '/#stop.).addClass/ {
-s|$|paus*/|
-a\
+sed -i -e '/function refreshState/ {n;a\
+/*paus
+}
+' -e '/$(.#stop.).addClass(.btn-primary.)/ a\
+paus*/\
     if ( state === "play" ) { // paus0\
         $( "#play" ).addClass( "btn-primary" );\
         $( "#stop" ).removeClass( "btn-primary" );\
@@ -52,7 +53,6 @@ a\
         if ( $( "#pause" ).hasClass( "hide" ) ) {\
             $( "i", "#play" ).removeClass( "fa fa-pause" ).addClass( "fa fa-play" );\
         } // paus1
-}
 ' $file
 
 redis-cli set dev 1 &> /dev/null
