@@ -18,10 +18,4 @@ sed -i -e 's|/\*paus\|paus\*/||
 ' -e '/paus0/,/paus1/ d
 ' $file
 
-file=/srv/http/assets/js/runeui.min.js
-echo $file
-sed -i -e 's/\/\*paus0\|paus1\*\///g
-' -e 's/\/\*paus2.*paus3\*\///
-' $file
-
 uninstallfinish $@
