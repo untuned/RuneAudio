@@ -10,7 +10,8 @@ echo -e "$bar Restore files ..."
 
 file=/srv/http/app/templates/header.php
 echo $file
-sed -i '/id="pause"/ d' $file
+sed -i -e '/pausebutton.css/ d
+' -e '/id="pause"/ d' $file
 
 file=/srv/http/assets/js/runeui.js
 echo $file
