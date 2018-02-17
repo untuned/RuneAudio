@@ -72,7 +72,7 @@ EOF
 )
 
 sed -i -e 's|\(if("play"===e\)|/*paus0\1|
-' -e "s|\((.#stop.).addClass(.btn-primary.)\)|\1$insert|"
-' $file
+' -e "s|\((.#stop.).addClass(.btn-primary.)\)|\1$insert|
+" $file
 
 installfinish $@
