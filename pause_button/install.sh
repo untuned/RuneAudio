@@ -8,7 +8,6 @@ alias=paus
 
 if [[ -e /usr/local/bin/uninstall_enha.sh ]]; then
 	title "$info RuneUI Enhancement already has this feature."
-	redis-cli hset addons paus 1 &> /dev/null
 	exit
 fi
 
