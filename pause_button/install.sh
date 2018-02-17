@@ -66,8 +66,7 @@ $("#stop").removeClass("btn-primary"),\
 $("#pause").hasClass("hide")?$("i","#play").removeClass("fa fa-play").addClass("fa fa-pause"):($("#play").removeClass("btn-primary"),\
 $("#pause").addClass("btn-primary"))):"stop"===state&&($("#stop").addClass("btn-primary"),\
 $("#play,#pause").removeClass("btn-primary"),\
-$("#pause").hasClass("hide")&&$("i","#play").removeClass("fa fa-pause").addClass("fa fa-play"),\
-/*paus3*/
+$("#pause").hasClass("hide")&&$("i","#play").removeClass("fa fa-pause").addClass("fa fa-play"),/*paus3*/
 EOF
 )
 
