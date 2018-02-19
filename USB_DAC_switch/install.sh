@@ -34,8 +34,8 @@ if ( $argc > 1 ) {\
 		$ao = exec( \'/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2\' );\
 		$name = $ao;\
 	} else {\
-		$ao = "'"$1"'";\
-		$name = "'"$2"'";\
+		$ao = "'"${1%@*}"'";\
+		$name = "'"${1#*@}"'";\
 	}\
 	ui_notify( "Audio Output", "Switch to ".$name );\
 	wrk_mpdconf( $redis, "switchao", $ao );\
