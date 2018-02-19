@@ -25,6 +25,7 @@ udevadm control --reload-rules && udevadm trigger
 
 file=/srv/http/command/refresh_ao
 echo $file
+# $1 = ao@name
 sed -i -e '/ui_notify/ s|^|//|
 ' -e $'/close Redis/ i\
 // udac0\
