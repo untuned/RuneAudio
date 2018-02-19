@@ -31,7 +31,7 @@ sed -i -e '/ui_notify/ s|^|//|
 if ( $argc > 1 ) {\
 	// "exec" gets only last line which is new power-on card\
 	$ao = exec( \'/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2\' );\
-	$name = ( $argv[ 1 ] == "on" ) ? $ao : "'$1'";\
+	$name = ( $argv[ 1 ] == "on" ) ? $ao : "'"$1"'";\
 	ui_notify( "Audio Output", "Switch to ".$name );\
 	wrk_mpdconf( $redis, "switchao", $ao );\
 }\
