@@ -31,7 +31,11 @@ sed -i -e '/ui_notify/ s|^|//|
 if ( $argc > 1 ) {\
 	// "exec" gets only last line which is new power-on card\
 	$ao = exec( \'/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2\' );\
-	$name = ( $argv[ 1 ] == "on" ) ? $ao : "'$x'";\
+	$name = $ao;\
+	if ( strpos( $ao, 'bcm2835') !== false ) {\
+		$ao = "bcm2835 ALSA_2";\
+		$name = "RaspberryPi HDMI Out";\
+	}\
 	ui_notify( "Audio Output", "Switch to ".$name );\
 	wrk_mpdconf( $redis, "switchao", $ao );\
 }\
