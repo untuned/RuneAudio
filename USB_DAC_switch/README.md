@@ -1,6 +1,6 @@
-USB DAC Auto Switch
+USB DAC Plug and Play
 ---
 
-Automatically switch MPD Audio output and reload configuration:
+Automatically switch to/from MPD Audio output and reload configuration:
 - USB DAC **power on** - switch to **USB DAC**
-- USB DAC **power off** - switch to **RaspberryPi Analog Out**
+- USB DAC **power off** - switch to **preset** Audio output
