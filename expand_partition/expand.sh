@@ -15,7 +15,7 @@ fd=$( fdisk -l /dev/mmcblk0 )
 sectorbytes=$( echo "$fd" | grep '^Units' | awk '{print $(NF-1)}' )
 sectorall=$( echo "$fd" | grep 'sectors$' | awk '{print $(NF-1)}' )
 sectorused=$( echo "$fd" | tail -n1 | awk '{print $3}' )
-unpartmb=$(( ( sectorall - sectorused ) * 512 / 1024 ))
+unpartmb=$(( ( sectorall - sectorused ) * sectorbytes / 1024 ))
 
 summb=$(( $freemb + $unpartmb ))
 
