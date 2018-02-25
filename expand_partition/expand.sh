@@ -11,9 +11,14 @@ devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 disk=/dev/${part::-2}
 
-unpartb=$( sfdisk -F | grep $disk | awk '{print $6}' )
-unpartmb=$(( $unpartb / 1000000 ))
+fd=$( fdisk -l /dev/mmcblk0 )
+sectorbytes=$( echo "$fd" | grep '^Units' | awk '{print $(NF-1)}' )
+sectorall=$( echo "$fd" | grep 'sectors$' | awk '{print $(NF-1)}' )
+sectorused=$( echo "$fd" | tail -n1 | awk '{print $3}' )
+unpartmb=$(( ( sectorall - sectorused ) * 512 / 1024 ))
+
 summb=$(( $freemb + $unpartmb ))
+
 # noobs has 3MB unpartitioned space
 if [[ $unpartmb -lt 10 ]]; then
 	title -l '=' "$info No useful space available. ( ${unpartmb}MB unused space )"
