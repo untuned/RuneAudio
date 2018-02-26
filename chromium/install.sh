@@ -25,10 +25,9 @@ echo $file
 sed -i 's/ ipv6.disable=1//' $file
 # fix - page scaling
 file=/boot/config.txt
-if grep -q '^disable_overscan' $file; then
-	echo $file
-	sed -i '$ a\disable_overscan=1' $file
-fi
+echo $file
+sed -i '/disable_overscan=1/ s/^#//' $file
+
 # replace midori with chromium
 if [[ $1 != u ]]; then
 	zoom=$1;
@@ -38,6 +37,13 @@ else
 	zoom=$( redis-cli get chrozoom )
 	redis-cli del chrozoom &> /dev/null
 fi
+
+file=/boot/config.txt
+echo $file
+echo 'hdmi_group=1
+hdmi_mode=31
+disable_overscan=1
+hdmi_ignore_cec=1' >> $file
 
 file=/root/.xinitrc
 echo $file
@@ -53,5 +59,5 @@ installfinish $@
 redis-cli save
 
 title "$info Please reboot."
-title -nt "$bar Power off and reboot again if the reboot failed."
+title -nt "$bar It may take a couple minutes for Chromium 1st launch."
 
