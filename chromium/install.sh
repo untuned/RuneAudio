@@ -50,6 +50,6 @@ chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-s
 
 installfinish $@
 
-title "$info Please reboot ..."
-title -nt "Power off and reboot again if the reboot failed."
+title "$info Please reboot."
+title -nt "$bar Power off and reboot again if the reboot failed."
 
