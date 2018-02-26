@@ -30,23 +30,22 @@ echo
 
 echo -e "$bar Set HDMI mode ..."
 #################################################################################
-mmc 1
-mmc 6
-mmc 8
-mmc 10
-mmc 12
 # force hdmi mode, remove black border (overscan)
 hdmimode='
 hdmi_group=1
 hdmi_mode=31
 disable_overscan=1
 hdmi_ignore_cec=1'
+# get partitions: 1 and even partition > 5
+partlist=( 1 $( fdisk -l /dev/mmcblk0 | grep '^/dev/mmc' | sed 's/.*mmcblk0p\([0-9]*\).*/\1/' | awk '$1 > 5 && $1%2 == 0' ) )
+ilength=${#partlist[*]}
+for (( i=0; i < ilength; i++ )); do
+	mntboot=/tmp/p$i
+	mkdir -p $mntboot
+	mount /dev/mmcblk0p$i $mntboot
+	! grep -q '^hdmi_mode=' $mntboot/config.txt && echo "$hdmimode" >> $mntboot/config.txt
+done
 
-! grep -q '^hdmi_mode=' /tmp/p1/config.txt && echo "$hdmimode" >> /tmp/p1/config.txt
-! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p6/config.txt
-! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p8/config.txt
-! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p10/config.txt
-! grep -q '^hdmi_mode=' /tmp/p6/config.txt && echo "$hdmimode" >> /tmp/p12/config.txt
 echo
 
 echo -e "$bar Mount USB drive to /mnt/hdd ..."
