@@ -50,10 +50,6 @@ chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-s
 
 installfinish $@
 
-echo -e "$info Please wait until reboot finished ..."
+title "$info Please reboot ..."
+title -nt "Power off and reboot again if the reboot failed."
 
-sleep 3
-partboot=$( mount | grep 'on /boot ' | sed 's/.*mmcblk0p\(.*\) on.*/\1/' )
-echo $(( partboot )) > /sys/module/bcm2709/parameters/reboot_part
-/var/www/command/rune_shutdown
-reboot
