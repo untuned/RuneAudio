@@ -8,7 +8,8 @@ alias=samb
 
 if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
 	redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
-	title "$info Samba already upgraged."
+	title "$info Samba already upgraged with Addons Menu."
+	title -nt "Further upgrade: pacman -Sy samba"
 	exit
 fi
 if ! mount | grep -q '/dev/sda1'; then
