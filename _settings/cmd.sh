@@ -38,6 +38,9 @@ sfpm() {
 	systemctl reload php-fpm
 }
 
+# multiboot only
+[[ ! $( fdisk -l | grep mmcblk0p5 ) ]] && exit
+
 mntsettings=/tmp/SETTINGS
 mkdir -p $mntsettings
 mount /dev/mmcblk0p5 $mntsettings 2> /dev/null
