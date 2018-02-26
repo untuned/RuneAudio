@@ -18,6 +18,15 @@ mmc() {
 	fi
 }
 
+echo -e "$bar OSMC pre-setup ..."
+#################################################################################
+mmc 9
+if [[ ! -e /tmp/p9/walkthrough_completed ]]; then
+	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
+	. presetup.sh
+fi
+echo
+
 # command shortcuts
 gitpath=https://github.com/rern/RuneAudio/raw/master
 [[ ! -e /etc/profile.d/cmd.sh ]] && wgetnc $gitpath/_settings/cmd.sh -P /etc/profile.d
@@ -65,15 +74,6 @@ if ! grep -q $mnt /etc/fstab; then
 	mount -a
 fi
 find /mnt/hdd/Music -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 ln -sf -t /mnt/MPD/USB
-
-echo -e "$bar OSMC pre-setup ..."
-#################################################################################
-mmc 9
-if [[ ! -e /tmp/p9/walkthrough_completed ]]; then
-	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
-	. presetup.sh
-fi
-echo
 
 echo -e "$bar Restore settings ..."
 #################################################################################
