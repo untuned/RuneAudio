@@ -20,8 +20,10 @@ mmc() {
 
 echo -e "$bar OSMC pre-setup ..."
 #################################################################################
-mmc 9
-if [[ ! -e /tmp/p9/walkthrough_completed ]]; then
+mmc 5
+osmcroot=$( sed -n '/"OSMC"/ {n;n;n;p}' $mntsettings/installed_os.json | sed 's/.*p\(.*\)"/\1/' )
+mmc $osmcroot
+if [[ ! -e /tmp/p$osmcroot/walkthrough_completed ]]; then
 	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
 	. presetup.sh
 fi
