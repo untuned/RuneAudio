@@ -90,10 +90,12 @@ if ! systemctl restart nmbd smbd &> /dev/null; then
 	exit
 fi
 
+sambaversion=$(  smbd -V | cut -d' ' -f2 )
+
 redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
 
 timestop
-title -l '=' "$bar Samba upgraded successfully."
+title -l '=' "$bar Samba upgraded successfully to $sambaversion"
 echo -e "$info Next upgrade: pacman -Sy samba"
 
 if (( $# > 0 )); then
