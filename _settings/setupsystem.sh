@@ -40,10 +40,8 @@ hdmi_ignore_cec=1'
 partlist=( 1 $( fdisk -l /dev/mmcblk0 | grep '^/dev/mmc' | sed 's/.*mmcblk0p\([0-9]*\).*/\1/' | awk '$1 > 5 && $1%2 == 0' ) )
 ilength=${#partlist[*]}
 for (( i=0; i < ilength; i++ )); do
-	mntboot=/tmp/p$i
-	mkdir -p $mntboot
-	mount /dev/mmcblk0p$i $mntboot
-	! grep -q '^hdmi_mode=' $mntboot/config.txt && echo "$hdmimode" >> $mntboot/config.txt
+	mmc $i
+	! grep -q '^hdmi_mode=' /tmp/p$i/config.txt && echo "$hdmimode" >> /tmp/p$i/config.txt
 done
 
 echo
@@ -79,7 +77,7 @@ echo
 
 echo -e "$bar Restore settings ..."
 #################################################################################
-# keep version daqta
+# keep version number
 build=$( redis-cli get buildversion )
 rel=$( redis-cli get release )
 
