@@ -69,10 +69,11 @@ if ! systemctl restart mpd &> /dev/null; then
 fi
 
 redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
+mpdversion=$( mpd -V | head -n1 | awk '{ print $NF }' )
 
 clearcache
 	
 timestop l
-title -l '=' "$bar MPD upgraded successfully."
+title -l '=' "$bar MPD upgraded successfully to $mpdversion"
 echo -e "$info Next upgrade: pacman -Sy mpd"
 title -nt "$info Local browser: Chromium browser must be installed."
