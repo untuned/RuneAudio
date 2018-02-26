@@ -5,15 +5,7 @@
 # disable wifi, hdmi mode, fstab, pacman cache
 # preload osmc pre-setup
 # restore settings
-# install addons menu
-# install motd
-# upgrade samba
-# install transmission
-# install aria2
-# install runeui enhancement
-# install runeui lyrics
-# install runeui gpio
-# install usb dac auto switch
+# install addons
 
 rm $0
 
