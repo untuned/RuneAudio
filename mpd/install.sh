@@ -6,7 +6,7 @@ alias=mpdu
 
 if pacman -Qi mpd &> /dev/null; then
 	redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
-	title "$info MPD already upgraged with Addons Menu."
+	title "$info MPD already upgraged."
 	title -nt "Further upgrade: pacman -Sy mpd"
 	exit
 fi
