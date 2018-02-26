@@ -21,7 +21,7 @@ mmc() {
 echo -e "$bar OSMC pre-setup ..."
 #################################################################################
 mmc 5
-osmcroot=$( sed -n '/"OSMC"/ {n;n;n;p}' $mntsettings/installed_os.json | sed 's/.*p\(.*\)"/\1/' )
+osmcroot=$( sed -n '/"OSMC"/ {n;n;n;p}' /tmp/p5/installed_os.json | sed 's/.*p\(.*\)"/\1/' )
 mmc $osmcroot
 if [[ ! -e /tmp/p$osmcroot/walkthrough_completed ]]; then
 	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
@@ -51,8 +51,9 @@ hdmi_ignore_cec=1'
 partlist=( 1 $( fdisk -l /dev/mmcblk0 | grep '^/dev/mmc' | sed 's/.*mmcblk0p\([0-9]*\).*/\1/' | awk '$1 > 5 && $1%2 == 0' ) )
 ilength=${#partlist[*]}
 for (( i=0; i < ilength; i++ )); do
-	mmc $i
-	! grep -q '^hdmi_mode=' /tmp/p$i/config.txt && echo "$hdmimode" >> /tmp/p$i/config.txt
+	part=${partlist[i]}
+	mmc $part
+	! grep -q '^hdmi_mode=' /tmp/p$part/config.txt && echo "$hdmimode" >> /tmp/p$part/config.txt
 done
 
 echo
@@ -114,7 +115,6 @@ done
 # extra command for some settings
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
 #hostnamectl set-hostname RT-AC66U                     # set hostname
-sed -i 's/info,man/info,locale,man/' /usr/local/bin/osmcreset
 sed -i "s/opcache.enable=./opcache.enable=$( redis-cli get opcache )/" /etc/php/conf.d/opcache.ini
 systemctl restart php-fpm
 
