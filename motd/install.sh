@@ -66,10 +66,11 @@ sed -i -e '/PS1=/ s/^/#/
 PS1=\x27\\[\\e[38;5;242m\\]\\u@\\h'$release':\\[\'$color'\\]\\w \\$\\[\\e[0m\\] \x27
 ' $file
 
+# \[ \]      - omit charater count when press <home>, <end> key and command history
+
 # PS1='\[\e[38;5;'$color'm\]\u@\h:\[\e[0m\]\w \$ '
 # \x27       - escaped <'>
 # \\         - escaped <\>
-# \[ \]      - omit charater count when press <home>, <end> key
 # \e[38;5;Nm - color
 # \e[0m      - reset color
 # \u         - username
