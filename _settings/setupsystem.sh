@@ -73,7 +73,7 @@ mkdir -p "$mnt"
 if ! grep -q $mnt /etc/fstab; then
 	echo "/dev/sda1  $mnt  ext4  defaults,noatime" >> /etc/fstab
 	umount -l /dev/sda1
-	rm -r /mnt/MPD/USB/hdd
+	[[ $? == 0 || ! -e /mnt/MPD/USB/hdd/Music ]] && rm -rf /mnt/MPD/USB/hdd
 	mount -a
 fi
 find /mnt/hdd/Music -maxdepth 1 -mindepth 1 -type d -print0 | xargs -0 ln -sf -t /mnt/MPD/USB
