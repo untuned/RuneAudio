@@ -9,7 +9,7 @@
 
 rm $0
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/_settings/setupsystem.sh
+wget -qN --no-check-certificate https://github.com/rern/RuneAudio/raw/master/_settings/setupsystem.sh
 . setupsystem.sh
 rm setupsystem.sh
 
