@@ -86,7 +86,7 @@ echo
 
 # USB DAC
 #################################################################################
-wgetnc $gitpath/USB_DAC_switch/install.sh; chmod +x install.sh; ./install.sh
+wgetnc $gitpath/USB_DAC/install.sh; chmod +x install.sh; ./install.sh
 echo
 
 # mpd
