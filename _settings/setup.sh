@@ -45,7 +45,7 @@ wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x 
 
 # motd
 #################################################################################
-wgetnc $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh
+wgetnc $gitpath/motd/install.sh; chmod +x install.sh; ./install.sh 0
 touch /root/.hushlogin
 
 # samba
@@ -86,7 +86,7 @@ echo
 
 # USB DAC
 #################################################################################
-wgetnc $gitpath/USB_DAC/install.sh; chmod +x install.sh; ./install.sh
+wgetnc $gitpath/USB_DAC/install.sh; chmod +x install.sh; ./install.sh 'bcm2835 ALSA_1'
 echo
 
 # mpd
