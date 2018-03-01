@@ -9,6 +9,24 @@
 
 rm $0
 
+# passwords for samba and transmission
+setpwd() {
+	echo
+	echo -e "$yn Password: "
+	read -s pwd1
+	echo
+	echo 'Retype password: '
+	read -s pwd2
+	echo
+	if [[ $pwd1 != $pwd2 ]]; then
+		echo
+		echo "$info Passwords not matched. Try again."
+		setpwd
+	fi
+}
+echo -e "$bar root password for Samba and Transmission ..."
+setpwd
+
 wget -qN --no-check-certificate https://github.com/rern/RuneAudio/raw/master/_settings/setupsystem.sh
 . setupsystem.sh
 rm setupsystem.sh
