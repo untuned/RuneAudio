@@ -9,6 +9,9 @@
 
 rm $0
 
+[[ ! -e /srv/http/addonstitle.sh ]] && wget -qN --no-check-certificate https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
+. /srv/http/addonstitle.sh
+
 # passwords for samba and transmission
 setpwd() {
 	echo
