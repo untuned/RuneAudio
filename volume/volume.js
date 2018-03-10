@@ -1,51 +1,3 @@
-Hammer = propagating( Hammer ); // propagating.js fix 
-
-var $hammervolumedn = new Hammer( document.getElementById( 'volumedn' ) );
-var $hammervolumemute = new Hammer( document.getElementById( 'volumemute' ) );
-var $hammervolumeup = new Hammer( document.getElementById( 'volumeup' ) );
-
-var timeoutId;
-var intervalId;
-var interval;
-[ $hammervolumedn, $hammervolumemute, $hammervolumeup ].forEach( function( el ) {
-	el.on( 'press', function( e ) {
-		buttonactive = 1;
-		e.stopPropagation();
-		if ( el.element.id === 'volumemute' ) {
-			$( '#volumemute' ).click();
-			return;
-		}
-		timeoutId = setTimeout( volumepress( 300, el.element.id ), 500 );
-	} );
-} );
-$( '#volumedn, #volumeup' )
-	.unbind( 'mousedown' )
-	.on( 'touchend mouseleave mouseout mouseup', function() {
-		clearTimeout( timeoutId );
-		clearInterval( intervalId );
-});
-
-function volumepress( interval, id, fast ) {
-	var knobvol = parseInt( $( '#volume' ).val() );
-	if ( knobvol === 0 || knobvol === 100 ) return;
-	var vol = knobvol;
-	var increment = ( id === 'volumeup' ) ? 1 : -1;
-	var count = 0;
-	intervalId = setInterval( function() {
-		if ( !fast ) {
-			count++;
-			if ( count >= 8 ) {
-				clearInterval( intervalId );
-				volumepress( 50, id, 1 );
-			}
-		}
-		vol = vol + increment;
-		setvol( vol );
-		$( '#volume' ).val( vol ).trigger( 'update' );
-		if ( vol === 0 || vol === 100 ) clearInterval( intervalId );
-	}, interval );
-}
-
 function commandButton(el) {
     var dataCmd = el.data('cmd');
     var cmd;
@@ -147,5 +99,53 @@ function commandButton(el) {
     sendCmd(cmd);
 }
 
+/*
+Hammer = propagating( Hammer ); // propagating.js fix 
+
+var $hammervolumedn = new Hammer( document.getElementById( 'volumedn' ) );
+var $hammervolumemute = new Hammer( document.getElementById( 'volumemute' ) );
+var $hammervolumeup = new Hammer( document.getElementById( 'volumeup' ) );
+
+var timeoutId;
+var intervalId;
+var interval;
+[ $hammervolumedn, $hammervolumemute, $hammervolumeup ].forEach( function( el ) {
+	el.on( 'press', function( e ) {
+		buttonactive = 1;
+		e.stopPropagation();
+		if ( el.element.id === 'volumemute' ) {
+			$( '#volumemute' ).click();
+			return;
+		}
+		timeoutId = setTimeout( volumepress( 300, el.element.id ), 500 );
+	} );
+} );
+$( '#volumedn, #volumeup' )
+	.unbind( 'mousedown' )
+	.on( 'touchend mouseleave mouseout mouseup', function() {
+		clearTimeout( timeoutId );
+		clearInterval( intervalId );
+});
+function volumepress( interval, id, fast ) {
+	var knobvol = parseInt( $( '#volume' ).val() );
+	if ( knobvol === 0 || knobvol === 100 ) return;
+	var vol = knobvol;
+	var increment = ( id === 'volumeup' ) ? 1 : -1;
+	var count = 0;
+	intervalId = setInterval( function() {
+		if ( !fast ) {
+			count++;
+			if ( count >= 8 ) {
+				clearInterval( intervalId );
+				volumepress( 50, id, 1 );
+			}
+		}
+		vol = vol + increment;
+		setvol( vol );
+		$( '#volume' ).val( vol ).trigger( 'update' );
+		if ( vol === 0 || vol === 100 ) clearInterval( intervalId );
+	}, interval );
+}
 function vol_down_interval() {}
 function vol_up_interval() {}
+*/
