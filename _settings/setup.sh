@@ -53,11 +53,10 @@ touch /root/.hushlogin
 
 # samba
 #################################################################################
-wgetnc $gitpath/samba/install.sh; chmod +x install.sh; ./install.sh $pwd1
 wgetnc $gitpath/_settings/smb.conf -O /etc/samba/smb-dev.conf
+wgetnc $gitpath/samba/install.sh; chmod +x install.sh; ./install.sh $pwd1
 cp -f /etc/samba/smb-{dev,prod}.conf
 ln -sf /etc/samba/smb{-dev,}.conf
-rm -r /mnt/hdd/{readonly,readwrite}
 echo
 
 # Transmission
