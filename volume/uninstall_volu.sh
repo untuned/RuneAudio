@@ -9,11 +9,7 @@ uninstallstart $@
 echo -e "$bar Remove files ..."
 
 rm /srv/http/assets/js/volume.js
-if [[ ! -e /usr/local/bin/uninstall_enha.sh ]]; then
-	rm /srv/http/redis.php
-	rm /srv/http/assets/js/vendor/{hammer.min.js,propagating.js}
-	sed '/hammer.min.js\|propagating.js/ d' /srv/http/app/templates/footer.php
-fi
+[[ ! -e /usr/local/bin/uninstall_enha.sh ]] && rm /srv/http/redis.php
 
 echo -e "$bar Restore files ..."
 file=/srv/http/app/templates/footer.php
