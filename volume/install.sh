@@ -22,7 +22,7 @@ echo $file
 
 file=/srv/http/assets/js/vendor/hammer.min.js
 echo $file
-[[ ! -e $file ]] && wgetnc https://github.com/rern/RuneAudio/raw/master/volume/propagating.js -O $file
+[[ ! -e $file ]] && wgetnc https://github.com/rern/RuneAudio/raw/master/volume/hammer.min.js -O $file
 
 echo -e "$bar Modify files ..."
 
