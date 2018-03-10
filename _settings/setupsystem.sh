@@ -111,6 +111,7 @@ while read line; do
 	fi
 	(( i++ ))
 done
+chown -R http:http /mnt/MPD/Webradio
 
 # extra command for some settings
 ln -sf /usr/share/zoneinfo/Asia/Bangkok /etc/localtime # set timezone
