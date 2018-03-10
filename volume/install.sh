@@ -20,13 +20,13 @@ file=/srv/http/redis.php
 echo $file
 [[ ! -e $file ]] && wgetnc https://github.com/rern/RuneUI_enhancement/raw/master/srv/http/redis.php
 
-file=/srv/http/assets/js/vendor/propagating.js
-echo $file
-[[ ! -e $file ]] && wgetnc https://github.com/rern/RuneUI_enhancement/raw/master/srv/http/assets/js/vendor/propagating.js -O $file
-
 file=/srv/http/assets/js/vendor/hammer.min.js
 echo $file
 [[ ! -e $file ]] && wgetnc https://github.com/rern/RuneUI_enhancement/raw/master/srv/http/assets/js/vendor/hammer.min.js -O $file
+
+file=/srv/http/assets/js/vendor/propagating.js
+echo $file
+[[ ! -e $file ]] && wgetnc https://github.com/rern/RuneUI_enhancement/raw/master/srv/http/assets/js/vendor/propagating.js -O $file
 
 echo -e "$bar Modify files ..."
 
