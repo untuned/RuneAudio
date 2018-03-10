@@ -21,21 +21,19 @@ file=/srv/http/redis.php
 echo $file
 [[ ! -e $file ]] && wgetnc $enhapath/redis.php
 
-file=/srv/http/assets/js/vendor/hammer.min.js
-echo $file
-[[ ! -e $file ]] && wgetnc $enhapath/assets/js/vendor/hammer.min.js -O $file
-
-file=/srv/http/assets/js/vendor/propagating.js
-echo $file
-[[ ! -e $file ]] && wgetnc $enhapath/assets/js/vendor/propagating.js -O $file
-
 echo -e "$bar Modify files ..."
 
 file=/srv/http/app/templates/footer.php
 echo $file
 sed -i $'$ a\<script src="<?=$this->asset(\'/js/volume.js\')?>"></script>' $file
-! grep -q 'hammer.min.js' $file && sed -i $'$ a\<script src="<?=$this->asset(\'/js/vendor/hammer.min.js\')?>"></script>' $file
-! grep -q 'propagating.js' $file && sed -i $'$ a\<script src="<?=$this->asset(\'/js/vendor/propagating.js\')?>"></script>' $file
+
+file=/srv/http/assets/js/runeui.js
+echo $file
+sed -i '/var knobvol/ a\
+            if ( knobvol ) GUI.volume = knobvol;
+' $file
+
+redis-cli set dev 1 &> /dev/null # avoid edit runeui.min.js
 
 installfinish $@
 
