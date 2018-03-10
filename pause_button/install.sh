@@ -74,6 +74,8 @@ paus*/\
         } // paus1
 ' $file
 
-redis-cli set dev 1 &> /dev/null
+redis-cli set dev 1 &> /dev/null # avoid edit runeui.min.js
 
 installfinish $@
+
+clearcache
