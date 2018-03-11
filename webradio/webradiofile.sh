@@ -20,7 +20,7 @@ rm -f $path/*.pls
 echo -e "$bar $path"
 # create files from database
 i=1
-str=''
+str=
 redis-cli hgetall webradios | \
 while read line; do
 	if [[ $(( i % 2)) == 1 ]]; then
