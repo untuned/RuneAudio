@@ -106,7 +106,7 @@ while read line; do
 	else
 		str+="Title1=$line"
 		echo -e "$str" > "/mnt/MPD/Webradio/$filename"
-		str=''
+		str=
 	fi
 	(( i++ ))
 done
