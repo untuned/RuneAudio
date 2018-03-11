@@ -98,7 +98,6 @@ if [[ $release == 0.4b ]]; then
 fi
 # create webradio files
 i=1
-str=''
 redis-cli hgetall webradios | \
 while read line; do
 	if [[ $(( i % 2)) == 1 ]]; then
