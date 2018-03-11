@@ -101,12 +101,15 @@ i=1
 redis-cli hgetall webradios | \
 while read line; do
 	if [[ $(( i % 2)) == 1 ]]; then
-		str+="[playlist]\nNumberOfEntries=1\nFile1=$line\n"
-		filename="${line}.pls"
+		str+="[playlist]\nNumberOfEntries=1\n"
+		title="Title1=$line\n"
+		filename=$line.pls
 	else
-		str+="Title1=$line"
-		echo -e "$str" > "/mnt/MPD/Webradio/$filename"
-		str=
+		str+="File1=$line\n"
+		str+=$title
+		echo -e "$str" > "$path/$filename"
+		printf "%3s. $filename\n" $(( i / 2 ))
+		str= # reset to empty
 	fi
 	(( i++ ))
 done
