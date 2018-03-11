@@ -20,6 +20,7 @@ rm -f $path/*.pls
 echo -e "$bar $path"
 # create files from database
 i=1
+#str= # no need to initially set blank var in bash
 redis-cli hgetall webradios | \
 while read line; do
 	if [[ $(( i % 2)) == 1 ]]; then
@@ -29,7 +30,7 @@ while read line; do
 		str+="Title1=$line"
 		echo -e "$str" > "$path/$filename"
 		printf "%3s. $filename\n" $(( i / 2 ))
-		str=''
+		str= # reset to empty
 	fi
 	(( i++ ))
 done
