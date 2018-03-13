@@ -7,7 +7,7 @@ rm $0
 
 # if sub directories
 if ls -d /mnt/MPD/Webradio/*/ &> /dev/null; then
-	# -type f = file && -mindepth 2 = in sub directories
+	# -mindepth 2 = in sub directories && -type f = file
 	find /mnt/MPD/Webradio -mindepth 2 -type f -name *.pls -exec cp -f -- '{}' /mnt/MPD/Webradio \;
 	# * = all sub directory && .[^.] = not ..
 	rm -rf /mnt/MPD/Webradio/{*,.[^.]}/
