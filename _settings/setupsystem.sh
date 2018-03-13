@@ -97,6 +97,7 @@ if [[ $release == 0.4b ]]; then
 	redis-cli set release $rel
 fi
 # create webradio files
+path=/mnt/MPD/Webradio
 i=1
 redis-cli hgetall webradios | \
 while read line; do
