@@ -25,5 +25,5 @@ redis-cli set kernel "Linux runeaudio ${version}-ARCH" &> /dev/null
 redis-cli hset addons kern 1 &> /dev/null # mark as upgraded - disable button
 
 timestop
-title -l '=' "$bar Kernel upgraded successfully."
+title -l '=' "$bar Kernel upgraded to $version successfully."
 title -nt "$info Please reboot."
