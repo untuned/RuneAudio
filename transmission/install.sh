@@ -80,12 +80,13 @@ fi
 # web ui alternative
 if [[ $2 == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
 	echo -e "$bar Get WebUI alternative ..."
-	wgetnc https://github.com/ronggang/transmission-web-control/raw/master/release/transmission-control-full.tar.gz
+	file=src.tar.gz
+	wgetnc https://github.com/ronggang/transmission-web-control/raw/master/release/$file
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
 	mv $path/web/index{,.original}.html
-	bsdtar -xf transmission-control-full.tar.gz -C $path
-	rm transmission-control-full.tar.gz
+	bsdtar -xf $file -C $path
+	rm $file
 	chown -R root:root $path/web
 	redis-cli del tranwebui &> /dev/null
 fi
