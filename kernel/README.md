@@ -1,8 +1,3 @@
-Kernel Update
----
-
-- Expand partition
-```sh
 #!/bin/bash
 
 alias=kern
@@ -34,8 +29,4 @@ redis-cli hset addons kern 1 &> /dev/null # mark as upgraded - disable button
 
 timestop
 title -l '=' "$bar Kernel upgraded successfully."
-
-echo -e "$info Please wait until reboot finished ..."
-
-reboot
-```
+title -nt "$info Please reboot."
