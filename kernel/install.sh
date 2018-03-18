@@ -16,9 +16,6 @@ timestart
 
 rankmirrors
 
-/srv/http/git pull
-/srv/http/git checkout 0.4b
-
 pacman -Sy --force --noconfirm raspberrypi-firmware raspberrypi-bootloader linux-raspberrypi linux-firmware cifs-utils
 
 # get kernel version
