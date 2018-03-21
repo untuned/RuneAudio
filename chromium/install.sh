@@ -15,7 +15,7 @@ installstart $@
 
 getuninstall
 
-pacman -S --noconfirm chromium nss harfbuzz freetype2
+pacman -S --noconfirm chromium nss harfbuzz freetype2 zlib libjpeg-turbo
 
 # modify file
 echo -e "$bar Modify file ..."
