@@ -19,6 +19,7 @@ Suptronics X4000K - ES9018K2M
 - Menu > Settings
 	- I²S kernel modules = `RPI DAC` (via HDMI, DSD128 stutters)
 		- `Apply Settings`
+		- Reboot
 - Menu > MPD
 	- Audio output interface = `I-Sabre DAC (I²S)`
 	- Volume control = `disabled`
