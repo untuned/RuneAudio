@@ -22,7 +22,7 @@ Suptronics X4000K - ES9018K2M
 		- Reboot
 - Menu > MPD
 	- Audio output interface = `I-Sabre DAC (I²S)`
-	- Volume control = `disabled`
+	- Volume control = `disabled` (for better sound quality)
 	- (no need - for USB only) DSD support = `DSD (native)`
 		- `Save and Apply`
 - Support up to **DSD128** (DSD256 stutters)
