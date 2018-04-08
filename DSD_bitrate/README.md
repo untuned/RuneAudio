@@ -8,7 +8,7 @@ Extract bitrate from DSD files, *.dsf and *.dff
 - [DSF File Format](http://dsd-guide.com/sites/default/files/white-papers/DSFFileFormatSpec_E.pdf)  
 - [DSDIFF File Format](http://www.sonicstudio.com/pdf/dsd/DSDIFF_1.5_Spec.pdf)  
 
-### Bitrate byte
+### Bitrate byte number
 ```
 |----------------------------------------------------------|
 |        |          |          |  DSF byte#  |  DFF byte#  |
