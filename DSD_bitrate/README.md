@@ -4,10 +4,6 @@ DSD Bitrate extractor
 Extract bitrate from DSD files, *.dsf and *.dff
 - Usage: `./dsdbitrate.sh </path/file>`
 
-### DSD File Specifications
-- [DSF File Format](http://dsd-guide.com/sites/default/files/white-papers/DSFFileFormatSpec_E.pdf)  
-- [DSDIFF File Format](http://www.sonicstudio.com/pdf/dsd/DSDIFF_1.5_Spec.pdf)  
-
 ### Bitrate byte number
 ```
 |----------------------------------------------------------|
@@ -20,3 +16,8 @@ Extract bitrate from DSD files, *.dsf and *.dff
 | DSD512 | 22579200 | 01588800 |  8800 0158  |  5801 0088  |
 |----------------------------------------------------------|
 ```
+
+### DSD File Specifications
+- [DSF File Format](http://dsd-guide.com/sites/default/files/white-papers/DSFFileFormatSpec_E.pdf)  
+- [DSDIFF File Format](http://www.sonicstudio.com/pdf/dsd/DSDIFF_1.5_Spec.pdf)  
+
