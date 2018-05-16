@@ -81,7 +81,7 @@ fi
 if [[ $2 == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
 	echo -e "$bar Get WebUI alternative ..."
 	file=src.tar.gz
-	wgetnc https://github.com/ronggang/transmission-web-control/raw/master/release/$file
+	wgetnc https://github.com/ronggang/twc-release/raw/master/$file
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
 	mv $path/web/index{,.original}.html
