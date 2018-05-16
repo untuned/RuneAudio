@@ -25,7 +25,7 @@ systemctl stop nmbd smbd
 rankmirrors
 
 pacman -R --noconfirm samba4-rune
-pacman -S --noconfirm ldb tdb tevent smbclient samba
+pacman -S --noconfirm ldb libnsl libtirpc tdb tevent smbclient samba
 pacman -S --noconfirm libwbclient
 
 # fix 'minimum rlimit_max'
