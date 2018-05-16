@@ -85,7 +85,7 @@ if [[ $2 == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
 	mv $path/web/index{,.original}.html
-	bsdtar -xf $file -C $path
+	bsdtar -xf $file -C $path/web
 	rm $file
 	chown -R root:root $path/web
 	redis-cli del tranwebui &> /dev/null
