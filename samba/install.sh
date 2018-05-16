@@ -36,8 +36,8 @@ root    hard    nofile    16384
 
 # fix missing smbd startup
 sed -i '/smb-prod/ a\
-        sysCmd("systemctl start smbd");\
-        sysCmd("pgrep smbd || systemctl start smbd");
+        sysCmd("systemctl start smb");\
+        sysCmd("pgrep smb || systemctl start smb");
 ' /srv/http/command/rune_SY_wrk
 
 # set samba password
@@ -86,7 +86,7 @@ fi
 systemctl daemon-reload
 
 echo -e "$bar Start Samba ..."
-if ! systemctl restart nmbd smbd &> /dev/null; then
+if ! systemctl restart nmb smb &> /dev/null; then
 	title -l = "$warn Samba upgrade failed."
 	exit
 fi
