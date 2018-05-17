@@ -8,7 +8,7 @@ alias=mido
 
 if ! pacman -Q midori-rune &> /dev/null; then
 	redis-cli hset addons mido 1 &> /dev/null # mark as upgraded - disable button
-	title "$info Midori already upgraged."
+	title "$info Midori already upgraded."
 	exit
 fi
 
