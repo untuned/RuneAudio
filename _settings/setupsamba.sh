@@ -17,7 +17,7 @@ timestart
 systemctl stop nmbd smbd
 
 pacman -R --noconfirm samba4-rune
-pacman -S --noconfirm ldb tdb tevent smbclient samba
+pacman -S --noconfirm ldb libnsl libtirpc tdb tevent smbclient samba
 pacman -S --noconfirm libwbclient
 
 # fix 'minimum rlimit_max'
@@ -28,20 +28,18 @@ root    hard    nofile    16384
 
 # fix missing smbd startup
 sed -i '/smb-prod/ a\
-        sysCmd("systemctl start smbd");\
-        sysCmd("pgrep smbd || systemctl start smbd");
+        sysCmd("systemctl start smb");\
+        sysCmd("pgrep smb || systemctl start smb");
 ' /srv/http/command/rune_SY_wrk
 
-wgetnc https://github.com/rern/RuneAudio/blob/master/_settings/smb.conf -O /etc/samba/smb-dev.conf
-cp /etc/samba/smb-{dev,prod}.conf
-ln -s /etc/samba/smb{-dev,}.conf
+wgetnc https://github.com/rern/RuneAudio/blob/master/_settings/smb.conf -O /etc/samba/smb.conf
 
 (echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
 systemctl daemon-reload
 
 echo -e "$bar Start Samba ..."
-if ! systemctl restart nmbd smbd &> /dev/null; then
+if ! systemctl restart nmb smb &> /dev/null; then
 	title -l = "$warn Samba upgrade failed."
 	exit
 fi
