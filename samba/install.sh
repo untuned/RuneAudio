@@ -109,7 +109,7 @@ if (( $# > 1 )); then
 	lrw=${#readwrite}
 	(( $lr > $l )) && l=$lr
 	(( $lrw > $l )) && l=$lrw
-	echo -e "$info Windows Network > RUNEAUDIO >"
+	echo -e "$info Windows Network > $server >"
 	printf "%-${l}s - read+write share\n" $readwrite
 	printf "%-${l}s - read only share\n\n" $read
 else
