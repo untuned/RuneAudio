@@ -92,7 +92,7 @@ systemctl start redis
 
 sleep 2
 systemctl status redis | grep -q 'dead' && systemctl start redis
-redis-cli del addons
+redis-cli del addons &> /dev/null
 if [[ $release == 0.4b ]]; then
 	redis-cli set buildversion $build
 	redis-cli set release $rel
