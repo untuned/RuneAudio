@@ -24,7 +24,7 @@ systemctl stop nmbd smbd
 
 rankmirrors
 
-if (( $# > 1 )) && [[ $3 == -b ]]; then
+if (( $# > 1 )) && [[ $3 == skip ]]; then
 	mv /etc/samba/smb.conf{,.backup}
 fi
 
@@ -50,7 +50,7 @@ sed -i '/smb-prod/ a\
 (echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
 if (( $# > 1 )); then
-	if [[ $3 != -b ]]; then
+	if [[ $3 != skip ]]; then
 		file=/etc/samba/smb.conf
 		echo $file
 		wgetnc https://github.com/rern/RuneAudio/raw/master/samba/smb.conf -O $file
