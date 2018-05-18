@@ -24,14 +24,14 @@ sed -i -e '\|/run/backup_|,+1 s|^|//|
         $cmdstring = "rm -f /srv/http/tmp/backup_* &> /dev/null; ".\
             "redis-cli save; ".\
             "bsdtar -czpf $filepath".\
-                " --exclude /etc/netctl/examples ".\
-                "/etc/netctl ".\
-                "/mnt/MPD/Webradio ".\
-                "/var/lib/redis/rune.rdb ".\
-                "/var/lib/mpd ".\
-                "/etc/mpd.conf ".\
-                "/etc/mpdscribble.conf ".\
-                "/etc/spop"\
+            " --exclude /etc/netctl/examples ".\
+            "/etc/netctl ".\
+            "/mnt/MPD/Webradio ".\
+            "/var/lib/redis/rune.rdb ".\
+            "/var/lib/mpd ".\
+            "/etc/mpd.conf ".\
+            "/etc/mpdscribble.conf ".\
+            "/etc/spop"\
         ;
 ' $file
 fi
