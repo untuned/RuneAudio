@@ -127,7 +127,6 @@ systemctl restart php-fpm
 systemctl stop mpd
 file=/var/lib/mpd/mpd.db
 wgetnc $gitpath/_settings/mpd.db -O $file
-chown mpd:audio $file
 systemctl start mpd
 sleep 1
 mpc update Webradio &> /dev/null
