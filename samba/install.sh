@@ -103,7 +103,7 @@ timestop
 title -l '=' "$bar Samba upgraded successfully to $sambaversion"
 echo -e "$info Next upgrade: pacman -Sy samba"
 
-if (( $# > 0 )); then
+if (( $# > 1 )); then
 	l=10
 	lr=${#read}
 	lrw=${#readwrite}
@@ -112,7 +112,10 @@ if (( $# > 0 )); then
 	echo -e "$info Windows Network > RUNEAUDIO >"
 	printf "%-${l}s - read+write share\n" $readwrite
 	printf "%-${l}s - read only share\n\n" $read
+else
+	server=$( hostname )
 fi
+
 printf "%-${l}s - "'\\\\'"$server"'\\'"usbroot > user: root + password\n\n" usbroot
 
 echo 'Add Samba user: smbpasswd -s -a < user >'
