@@ -131,8 +131,10 @@ systemctl start mpd
 sleep 1
 mpc update Webradio &> /dev/null
 
-sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js        # change pnotify 8 to 1 sec
+# change pnotify 8 to 1 sec
+sed -i 's/8000/1000/' /srv/http/assets/js/runeui.js
 
+# gpio remote control
 sed -i -e '/m:0x0 + c:180/ s/^#//
 ' -e '/m:0x0 + c:180/ i\
 "/root/gpioon.py"
@@ -141,6 +143,9 @@ sed -i -e '/m:0x0 + c:180/ s/^#//
 "/root/gpiooff.py"
 ' /root/.xbindkeysrc
 echo
+
+# locale
+sed -i '/^de_DE.UTF-8\|^en_GB.UTF-8/ s/^/#/' /etc/locale.gen
 
 echo -e "\n$bar Set pacman cache ...\n"
 #################################################################################
