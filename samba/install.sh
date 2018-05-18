@@ -24,9 +24,7 @@ systemctl stop nmbd smbd
 
 rankmirrors
 
-if (( $# > 1 )) && [[ $3 == skip ]]; then
-	mv /etc/samba/smb.conf{,.backup}
-fi
+mv /etc/samba/smb.conf{,.backup}
 
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm --force libnsl
@@ -46,49 +44,47 @@ sed -i '/smb-prod/ a\
 ' /srv/http/command/rune_SY_wrk
 
 # set samba password
-[[ $1 == 0 ]] && pwd=rune || pwd=$1
+[[ $1 == 0 || $# -eq 0 ]] && pwd=rune || pwd=$1
 (echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
 if (( $# > 1 )); then
-	if [[ $3 != skip ]]; then
-		file=/etc/samba/smb.conf
-		echo $file
-		wgetnc https://github.com/rern/RuneAudio/raw/master/samba/smb.conf -O $file
+	file=/etc/samba/smb.conf
+	echo $file
+	wgetnc https://github.com/rern/RuneAudio/raw/master/samba/smb.conf -O $file
 
-		mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
-		usbroot=$( basename $mnt )
-		server=$2
-		read=$3
-		readwrite=$4
+	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+	usbroot=$( basename $mnt )
+	server=$2
+	read=$3
+	readwrite=$4
 
-		sed -i '/^\[global\]/ a\
-		\tnetbios name = '"$2"'
-		' $file
+	sed -i '/^\[global\]/ a\
+	\tnetbios name = '"$2"'
+	' $file
 
-		echo "
-		[$read]
-			comment = browseable, read only, guess ok, no password
-			path = $mnt/$read
-		[$readwrite]
-			comment = browseable, read, write, guess ok, no password
-			path = $mnt/$readwrite
-			read only = no
-		[usbroot]
-			comment = hidden, read, write, root with password only
-			path = $mnt
-			browseable = no
-			read only = no
-			guest ok = no
-			valid users = root
-		" >> $file
+	echo "
+	[$read]
+		comment = browseable, read only, guess ok, no password
+		path = $mnt/$read
+	[$readwrite]
+		comment = browseable, read, write, guess ok, no password
+		path = $mnt/$readwrite
+		read only = no
+	[usbroot]
+		comment = hidden, read, write, root with password only
+		path = $mnt
+		browseable = no
+		read only = no
+		guest ok = no
+		valid users = root
+	" >> $file
 
-		mkdir -p $mnt/$read
-		mkdir -p $mnt/$readwrite
-		chmod 755 $mnt/$read
-		chmod 777 $mnt/$readwrite
-	else
-		mv /etc/samba/smb.conf{.backup,}
-	fi
+	mkdir -p $mnt/$read
+	mkdir -p $mnt/$readwrite
+	chmod 755 $mnt/$read
+	chmod 777 $mnt/$readwrite
+else
+	mv /etc/samba/smb.conf{.backup,}
 fi
 
 systemctl daemon-reload
