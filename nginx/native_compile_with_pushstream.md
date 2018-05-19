@@ -14,7 +14,4 @@ cd nginx
 git clone https://github.com/wandenberg/nginx-push-stream-module.git
 
 makepkg -A --skipinteg
-
-# recompile - clean and overwirte
-makepkg -Cf
 ```
