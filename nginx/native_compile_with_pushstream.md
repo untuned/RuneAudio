@@ -11,9 +11,7 @@ cd
 mkdir nginx
 cd nginx
 
-gitpath=https://github.com/rern/RuneAudio/raw/master/nginx/_repo
-wget $gitpath/PKGBUILD
-wget $gitpath/nginx.install
+git clone https://github.com/wandenberg/nginx-push-stream-module.git
 
 makepkg -A --skipinteg
 
