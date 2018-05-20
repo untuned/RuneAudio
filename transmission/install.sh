@@ -13,11 +13,10 @@ installstart $@
 getuninstall
 
 gitpath=https://github.com/rern/RuneAudio/raw/$branch/transmission
-wgetnc $gitpath/_repo/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
+wgetnc $gitpath/libcrypto.so.1.1 -P /usr/lib
+wgetnc $gitpath/libssl.so.1.1 -P /usr/lib
 
-pacman -U --noconfirm transmission-cli-2.92-6-armv7h.pkg.tar.xz
-
-rm transmission-cli-2.92-6-armv7h.pkg.tar.xz
+pacman -S libevent transmission-cli
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
