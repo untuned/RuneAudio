@@ -37,6 +37,7 @@ echo -e "$bar Disable WiFi ..."
 #################################################################################
 systemctl disable netctl-auto@wlan0
 systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
+rfkill block 0
 echo
 
 echo -e "$bar Set HDMI mode ..."
