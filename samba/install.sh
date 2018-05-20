@@ -83,10 +83,6 @@ else
 	mv /etc/samba/smb.conf{.backup,}
 fi
 
-# set samba password
-[[ $1 == 0 || $# -eq 0 ]] && pwd=rune || pwd=$1
-(echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
-
 systemctl daemon-reload
 
 echo -e "$bar Start Samba ..."
@@ -94,6 +90,10 @@ if ! systemctl restart nmb smb &> /dev/null; then
 	title -l = "$warn Samba upgrade failed."
 	exit
 fi
+
+# set samba password
+[[ $1 == 0 || $# -eq 0 ]] && pwd=rune || pwd=$1
+(echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
 sambaversion=$(  smbd -V | cut -d' ' -f2 )
 
