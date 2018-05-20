@@ -85,7 +85,7 @@ build=$( redis-cli get buildversion )
 rel=$( redis-cli get release )
 
 # settings
-systemctl stop redis
+systemctl stop redis mpd
 file=/var/lib/redis/rune.rdb
 wgetnc $gitpath/_settings/rune.rdb -O $file
 systemctl start redis
@@ -124,10 +124,8 @@ sed -i "s/opcache.enable=./opcache.enable=$( redis-cli get opcache )/" /etc/php/
 systemctl restart php-fpm
 
 # mpd database
-systemctl stop mpd
 file=/var/lib/mpd/mpd.db
 wgetnc $gitpath/_settings/mpd.db -O $file
-chown mpd:audio $file
 systemctl start mpd
 sleep 1
 mpc update Webradio &> /dev/null
@@ -143,6 +141,8 @@ sed -i -e '/m:0x0 + c:180/ s/^#//
 ' -e '/m:0x8 + c:64/ i\
 "/root/gpiooff.py"
 ' /root/.xbindkeysrc
+killall xbindkeys
+/root/.xbindkeysrc
 echo
 
 # locale
