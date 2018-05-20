@@ -43,10 +43,6 @@ sed -i '/smb-prod/ a\
         sysCmd("pgrep smb || systemctl start smb");
 ' /srv/http/command/rune_SY_wrk
 
-# set samba password
-[[ $1 == 0 || $# -eq 0 ]] && pwd=rune || pwd=$1
-(echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
-
 if (( $# > 1 )); then
 	file=/etc/samba/smb.conf
 	echo $file
@@ -86,6 +82,10 @@ if (( $# > 1 )); then
 else
 	mv /etc/samba/smb.conf{.backup,}
 fi
+
+# set samba password
+[[ $1 == 0 || $# -eq 0 ]] && pwd=rune || pwd=$1
+(echo "$pwd"; echo "$pwd") | smbpasswd -s -a root
 
 systemctl daemon-reload
 
