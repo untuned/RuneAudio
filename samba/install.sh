@@ -37,11 +37,8 @@ root    soft    nofile    16384
 root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
-# fix missing smb startup
-sed -i '/smb-prod/ a\
-        sysCmd("systemctl start smb");\
-        sysCmd("pgrep smb || systemctl start smb");
-' /srv/http/command/rune_SY_wrk
+# remove rune default startup if any
+sed -i '/start smbd/ d' /srv/http/command/rune_SY_wrk
 
 if (( $# > 1 )); then
 	file=/etc/samba/smb.conf
@@ -90,6 +87,9 @@ if ! systemctl restart nmb smb &> /dev/null; then
 	title -l = "$warn Samba upgrade failed."
 	exit
 fi
+
+# startup
+systemctl enable nmb smb
 
 # set samba password
 [[ $1 == 0 || $# -eq 0 ]] && pwd=rune || pwd=$1
