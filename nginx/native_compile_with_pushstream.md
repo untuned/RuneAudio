@@ -1,7 +1,7 @@
 NGINX with pushstream
 ---
 
-- Iinstall [ArchLinuxArm for RPi2](https://github.com/rern/RuneAudio/tree/master/ArchLinuxArm)
+- Install [ArchLinuxArm for RPi2](https://github.com/rern/RuneAudio/tree/master/ArchLinuxArm)
 - [ArchLinuxArm Packages](https://archlinuxarm.org/packages): search `nginx` - `armv7h`  
 - `Source Files` > copy-paste code from each file, direct download not available, to `/home/alarm/nginx/` (with last empty line without whitespace)  
 - Edit `PKGBUILD`:
@@ -10,11 +10,17 @@ NGINX with pushstream
 --arch=(x86_64)
 ++arch=(armv7h)
 ...
+--depends=(pcre zlib openssl geoip mailcap)
+++depends=(pcre zlib openssl geoip)
+...
 #backup=(etc/nginx/fastcgi.conf
 ...
-        etc/nginx/mime.types
+++        etc/nginx/mime.types
 ...
 #build() {
+...
+--    --with-mail
+--    --with-mail_ssl_module
 ...
 ++    --add-module=/home/alarm/nginx/nginx-push-stream-module
 #  make
