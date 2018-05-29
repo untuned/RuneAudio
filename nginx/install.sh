@@ -16,7 +16,7 @@ title -l '=' "$bar Upgrade NGINX ..."
 timestart
 
 # backup
-#mv /etc/nginx/nginx.conf{,.backup}
+mv /etc/nginx/nginx.conf{,.backup}
 
 echo -e "$bar Get NGINX packages ..."
 gitpath=https://github.com/rern/RuneAudio/raw/master/nginx/
@@ -29,7 +29,7 @@ yes 2>/dev/null | pacman -U $file
 systemctl daemon-reload
 
 rm $file
-#mv /etc/nginx/nginx.conf{.backup,}
+mv /etc/nginx/nginx.conf{.backup,}
 
 redis-cli hset addons ngin 1 &> /dev/null # mark as upgraded - disable button
 
