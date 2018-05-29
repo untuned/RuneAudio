@@ -6,70 +6,76 @@
 # Contributor: Daniel Micay 
 
 # ALARM: Kevin Mihelich 
+#  - build armv7h and aarch64 with -fPIC
 
 pkgname=nginx
-pkgver=1.13.7
+pkgver=1.14.0
 pkgrel=1
 pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server'
-arch=('armv6h' 'armv7h')
+arch=(armv7h)
 url='https://nginx.org'
 license=(custom)
-depends=(pcre zlib openssl)
+depends=(pcre zlib openssl geoip)
 makedepends=(mercurial)
-checkdepends=(perl perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached memcached ffmpeg inetutils) 
+checkdepends=(perl perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached
+              memcached ffmpeg inetutils) 
 backup=(etc/nginx/fastcgi.conf
         etc/nginx/fastcgi_params
         etc/nginx/koi-win
         etc/nginx/koi-utf
-        etc/nginx/mime.types
-        etc/nginx/nginx.conf
         etc/nginx/scgi_params
         etc/nginx/uwsgi_params
         etc/nginx/win-utf
         etc/logrotate.d/nginx)
 install=nginx.install
-source=($url/download/nginx-$pkgver.tar.gz{,.asc})
+source=($url/download/nginx-$pkgver.tar.gz{,.asc}
+        hg+http://hg.nginx.org/nginx-tests#revision=d6daf03478ad
+        service
+        logrotate)
 validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin 
-md5sums=('SKIP'
-         'SKIP')
+md5sums=('2d856aca3dfe1d32e3c9f8c4cac0cc95'
+         'SKIP'
+         'SKIP'
+         'ba2e3b08ce0f0fff7cced624d0ecf7cc'
+         '6a01fb17af86f03707c8ae60f98a2dc2')
 
 _common_flags=(
-	--with-file-aio \
-	--with-http_gzip_static_module \
-	--without-http_access_module \
-	--without-http_auth_basic_module \
-	--without-http_autoindex_module \
-	--without-http_browser_module \
-	--without-http_charset_module \
-	--without-http_empty_gif_module \
-	--without-http_geo_module \
-	--without-http_limit_conn_module \
-	--without-http_limit_req_module \
-	--without-http_map_module \
-	--without-http_memcached_module \
-	--without-http_referer_module \
-	--without-http_scgi_module \
-	--without-http_split_clients_module \
-	--without-http_ssi_module \
-	--without-http_upstream_hash_module \
-	--without-http_upstream_ip_hash_module \
-	--without-http_upstream_keepalive_module \
-	--without-http_upstream_least_conn_module \
-	--without-http_upstream_zone_module \
-	--without-http_userid_module \
-	--without-http_uwsgi_module
+  --with-compat
+  --with-debug
+  --with-file-aio
+  --with-http_addition_module
+  --with-http_auth_request_module
+  --with-http_dav_module
+  --with-http_degradation_module
+  --with-http_flv_module
+  --with-http_geoip_module
+  --with-http_gunzip_module
+  --with-http_gzip_static_module
+  --with-http_mp4_module
+  --with-http_realip_module
+  --with-http_secure_link_module
+  --with-http_slice_module
+  --with-http_ssl_module
+  --with-http_stub_status_module
+  --with-http_sub_module
+  --with-http_v2_module
+  --with-pcre-jit
+  --with-stream
+  --with-stream_geoip_module
+  --with-stream_realip_module
+  --with-stream_ssl_module
+  --with-stream_ssl_preread_module
+  --with-threads
 )
+
+_stable_flags=(
+)
+
 build() {
   cd $pkgname-$pkgver
 
-  if [[ ! -e nginx-push-stream-module ]]; then
-    git clone https://github.com/wandenberg/nginx-push-stream-module.git
-    wget https://github.com/rern/RuneAudio/raw/master/nginx/_repo/logrotate
-    wget https://github.com/rern/RuneAudio/raw/master/nginx/_repo/service
-  fi
-      
   [[ $CARCH == "armv7h" || $CARCH == "aarch64" ]] && CFLAGS+=" -fPIC" && CXXFLAGS+=" -fPIC"
-  
+
   ./configure \
     --prefix=/etc/nginx \
     --conf-path=/etc/nginx/nginx.conf \
@@ -78,10 +84,8 @@ build() {
     --lock-path=/run/lock/nginx.lock \
     --user=http \
     --group=http \
-	--http-log-path=/var/log/runeaudio/runeui.log \
-    --error-log-path=/var/log/runeaudio/runeui_error.log \
-    #--http-log-path=/var/log/nginx/access.log \
-    #--error-log-path=stderr \
+    --http-log-path=/var/log/nginx/access.log \
+    --error-log-path=stderr \
     --http-client-body-temp-path=/var/lib/nginx/client-body \
     --http-proxy-temp-path=/var/lib/nginx/proxy \
     --http-fastcgi-temp-path=/var/lib/nginx/fastcgi \
@@ -90,16 +94,17 @@ build() {
     --with-cc-opt="$CFLAGS $CPPFLAGS" \
     --with-ld-opt="$LDFLAGS" \
     ${_common_flags[@]} \
-    --add-module=nginx-push-stream-module
-
+    ${_stable_flags[@]} \
+    --add-module=/home/alarm/nginx/nginx-push-stream-module
   make
+}
+
+check() {
+  cd nginx-tests
+  TEST_NGINX_BINARY="$srcdir/$pkgname-$pkgver/objs/nginx" prove .
 }
 
 package() {
   cd $pkgname-$pkgver
   make DESTDIR="$pkgdir" install
-  
-  mkdir -p "$pkgdir"/usr/lib/systemd/system/
-  install -Dm644 service "$pkgdir"/usr/lib/systemd/system/nginx.service
-  install -Dm644 logrotate "$pkgdir"/etc/logrotate.d/nginx
 }
