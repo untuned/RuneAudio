@@ -32,6 +32,7 @@ rm $file
 mv /etc/nginx/nginx.conf{.backup,}
 mv /etc/nginx/nginx.conf{.backup,}
 mv /usr/lib/systemd/system/nginx.service{.backup,}
+ln -s /lib/libevent-2.{1.so.6.0.2,0.so.5}
 
 systemctl daemon-reload
 
