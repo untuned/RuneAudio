@@ -20,15 +20,9 @@ sed -i -e 's/id="restore"/method="post"/
 ' -e '/id="btn-backup-upload"/ s/id="btn-backup-upload"/& name="syscmd" value="restore"/; s/disabled>Restore/type="submit" disabled>Upload/
 ' $file
 
-file=/srv/http/assets/js/runeui.js
-echo $file
-sed -i '/#restore/,/^});/ d' $file
-
-file=/srv/http/assets/js/runeui.min.js
-echo $file
-sed -i 's/\$("#restore").\+});//' $file
-
-rm -v /srv/http/restore.* /etc/sudoers.d/http-backup
+rm -v /etc/sudoers.d/http-backup
+rm -v /srv/http/restore.*
+rm -v /srv/http/assets/js/restore.js
 rm -rv /srv/http/tmp
 
 uninstallfinish $@
