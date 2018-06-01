@@ -41,7 +41,7 @@ ln -sf /usr/bin/pip{2,}
 pip install flask
 
 echo -e "$bar Install MPD ..."
-pacman -S --noconfirm mpd
+pacman -S --noconfirm mpd libmpdclient
 
 cp /etc/mpd.conf{.backup,}
 
