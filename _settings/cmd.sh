@@ -37,6 +37,12 @@ sfpm() {
 	echo -e '\n'$( tcolor "systemctl reload php-fpm" )'\n'
 	systemctl reload php-fpm
 }
+tnm() {
+	telnet localhost 6600
+}
+rd() {
+	redis-cli "$@"
+}
 
 # multiboot only
 [[ ! $( fdisk -l | grep mmcblk0p5 ) ]] && exit
@@ -140,7 +146,7 @@ boot() {
 	echo -e "\e[36m0\e[m / n ? "
 	read -n 1 ans
 	echo
-	[[ -z $ans || $ans == 0 ]] && return
+	[[ -z $ans || $ans == 0 || $ans -gt $(( jlength / 2 )) || $ans != [0-9] ]] && return
 	
 	bootnum=${bootarray[$ans]}
  	if [[ -e /root/gpiopower.py ]]; then                                     # runeui gpio installed
