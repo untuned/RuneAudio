@@ -6,9 +6,10 @@ alias=redis
 
 . /srv/http/addonstitle.sh
 
-if [[ $( redis-cli -v | cut -d'.' -f1 ) == 'redis-cli 4' ]]; then
+if [[ $( redis-cli -v | cut -d' ' -f2 | cut -d'.' -f1 ) -lt 4 ]]; then
 	redis-cli hset addons redis 1 &> /dev/null # mark as upgraded - disable button
 	title "$info Redis already upgraded."
+	ittle -nt "Further upgrade: pacman -Sy redis"
 	exit
 fi
 
