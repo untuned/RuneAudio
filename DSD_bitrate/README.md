@@ -5,6 +5,7 @@ Extract bitrate from DSD files, *.dsf and *.dff
 - Usage: `./dsdbitrate.sh </path/file>`
 
 ### Bitrate byte number
+**`bash hexdump`**
 ```
 |----------------------------------------------------------|
 |        |          |          |  DSF byte#  |  DFF byte#  |
@@ -16,6 +17,8 @@ Extract bitrate from DSD files, *.dsf and *.dff
 | DSD512 | 22579200 | 01588800 |  8800 0158  |  5801 0088  |
 |----------------------------------------------------------|
 ```
+**`php file_get_contents`**
+- byte# order correctly as `hex` column
 
 ### DSD File Specifications
 - [DSF File Format](http://dsd-guide.com/sites/default/files/white-papers/DSFFileFormatSpec_E.pdf)  
