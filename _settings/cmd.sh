@@ -130,13 +130,13 @@ osarrayboot=( $(
 	sed -n '/name/,/mmcblk/ p' |
 	sed '/part/ d; s/\s//g; s/"//g; s/,//; s/name://; s/\/dev\/mmcblk0p//' 
 ) )
-jlength=${#osarrayboot[*]}
+ilength=${#osarrayboot[*]}
 bootlist="
 $yesno \e[36mReboot\e[m to OS:
   \e[36m0\e[m Cancel
 "
 bootarray=(0)
-for (( i=0; i < jlength; i+=2 )); do
+for (( i=0; i < ilength; i+=2 )); do
 	bootlist+="  \e[36m$(( i / 2 + 1 ))\e[m ${osarrayboot[i]}\n"
 	bootarray+=(${osarrayboot[i + 1]})
 done
@@ -146,7 +146,7 @@ boot() {
 	echo -e "\e[36m0\e[m / n ? "
 	read -n 1 ans
 	echo
-	[[ -z $ans || $ans != [0-9] || $ans == 0 || $ans -gt $(( jlength / 2 )) ]] && return
+	[[ -z $ans || $ans != [0-9] || $ans == 0 || $ans -gt $(( ilength / 2 )) ]] && return
 	
 	bootnum=${bootarray[$ans]}
  	if [[ -e /root/gpiopower.py ]]; then                                     # runeui gpio installed
