@@ -9,8 +9,5 @@ if ( $ext === 'DSF' ) {
 	$hex = implode( '', $hex );
 }
 $bitrate = hexdec( $hex );
-$dsd = $bitrate / 44100;
-$bitrate = round( $bitrate / 1000000, 2 );
-$sampling = '1 bit DSD '.$dsd.' - '.$bitrate.' Mbit/s';
 
-echo $sampling;
+echo $bitrate;
