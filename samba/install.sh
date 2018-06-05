@@ -20,6 +20,9 @@ fi
 title -l '=' "$bar Upgrade Samba ..."
 timestart
 
+echo -e "$bar Prefetch packages ..."
+pacman -Sw libnsl ldb libtirpc tdb tevent smbclient samba libwbclient
+
 systemctl stop nmbd smbd
 
 rankmirrors
