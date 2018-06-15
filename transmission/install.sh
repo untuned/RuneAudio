@@ -16,13 +16,13 @@ gitpath=https://github.com/rern/RuneAudio/raw/$branch/transmission
 wgetnc $gitpath/libcrypto.so.1.1 -P /usr/lib
 wgetnc $gitpath/libssl.so.1.1 -P /usr/lib
 
-pacman -S libevent transmission-cli
+pacman -Sy libevent transmission-cli
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
 
 if mount | grep -q '/dev/sda1'; then
-	mnt=$( mount | grep '/dev/sda1' | awk '{ print $3 }' )
+	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
 	mkdir -p $mnt/transmission
 	path=$mnt/transmission
 else
