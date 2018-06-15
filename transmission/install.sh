@@ -19,7 +19,7 @@ wgetnc $gitpath/libssl.so.1.1 -P /usr/lib
 pacman -Sy libevent transmission-cli
 
 lnfile=$( find /lib/libevent* -type f | grep '.*/libevent-.*' )
-ln -s $lnfile /lib/libevent-2.0.so.5
+ln -sf $lnfile /lib/libevent-2.0.so.5
 
 # remove conf for non-exist user 'transmission'
 rm /usr/lib/tmpfiles.d/transmission.conf
