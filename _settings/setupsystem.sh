@@ -144,7 +144,7 @@ sed -i -e '/m:0x0 + c:180/ s/^#//
 "/root/gpiooff.py"
 ' /root/.xbindkeysrc
 killall xbindkeys
-/root/.xbindkeysrc
+xbindkeys
 echo
 
 # locale
