@@ -22,7 +22,7 @@ echo -e "$bar Prefetch packages ..."
 pacman -Sw --noconfirm glibc pacman
 
 echo -e "$bar Install packages ..."
-pacman -Sw --noconfirm glibc pacman
+pacman -S --noconfirm glibc pacman
 
 timestop
 title -l '=' "$bar Pacman upgraded successfully."
