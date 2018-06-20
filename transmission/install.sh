@@ -16,7 +16,7 @@ gitpath=https://github.com/rern/RuneAudio/raw/$branch/transmission
 wgetnc $gitpath/libcrypto.so.1.1 -P /usr/lib
 wgetnc $gitpath/libssl.so.1.1 -P /usr/lib
 
-pacman -Sy libevent transmission-cli
+pacman -Sy --noconfirm libevent transmission-cli
 
 lnfile=$( find /lib/libevent* -type f | grep '.*/libevent-.*' )
 ln -sf $lnfile /lib/libevent-2.0.so.5
