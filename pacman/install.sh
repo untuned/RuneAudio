@@ -18,8 +18,7 @@ timestart
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
 
-pacman -S --noconfirm glibc
-pacman -S --noconfirm pacman
+pacman -S --noconfirm glibc pacman
 
 timestop
 title -l '=' "$bar Pacman upgraded successfully."
