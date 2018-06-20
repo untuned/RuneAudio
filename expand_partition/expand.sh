@@ -72,8 +72,8 @@ else
 	freekb=$( df | grep '/$' | awk '{print $4}' )
 	freemb=$(( $freekb / 1000 ))
 	
-	redis-cli set available $freemb
-	redis-cli del expandable
+	redis-cli set available $freemb &> /dev/null
+	redis-cli del expandable &> /dev/null
 	
 	redis-cli hset addons expa 1 &> /dev/null # mark as expanded - disable webui button
 	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor $freemb ) MB free space."
