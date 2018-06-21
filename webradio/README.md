@@ -1,4 +1,4 @@
-Webradio import
+Webradio import / export
 ---
 _Tested on RuneAudio 0.3 and 0.4b_
 
