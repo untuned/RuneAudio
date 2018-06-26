@@ -30,6 +30,7 @@ timestop
 version=$( pacman -V | grep 'Pacman v' | cut -d'v' -f2 | cut -d' ' -f1 )
 
 if [[  $version > $version0 ]]; then
+	redis-cli hset addons pacm 1 &> /dev/null
 	title -l '=' "$bar Pacman upgraded to $version successfully."
 else
 	title -l '=' "$warn Pacman upgrade failed."
