@@ -32,5 +32,5 @@ version=$( pacman -V | grep 'Pacman v' | cut -d'v' -f2 | cut -d' ' -f1 )
 if [[  $version > $version0 ]]; then
 	title -l '=' "$bar Pacman upgraded to $version successfully."
 else
-	title -l '=' "$warn Pacman upgraded failed."
+	title -l '=' "$warn Pacman upgrade failed."
 fi
