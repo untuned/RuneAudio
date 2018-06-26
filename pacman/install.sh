@@ -6,7 +6,7 @@ alias=pacm
 
 . /srv/http/addonstitle.sh
 
-if [[ $( pacman -v | cut -d' ' -f2 | cut -d'.' -f1 ) -lt 5 ]]; then
+if [[ $( pacman -V | grep 'Pacman v' | cut -d'v' -f2 | cut -d' ' -f1 ) > 5.0.1 ]]; then
 	redis-cli hset addons pacm 1 &> /dev/null # mark as upgraded - disable button
 	title "$info Pacman already upgraded."
 	exit
