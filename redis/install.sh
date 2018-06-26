@@ -8,7 +8,7 @@ alias=redis
 
 version0=$( redis-cli -v | cut -d' ' -f2 | cut -d'.' -f1 )
 if [[ $version0 > 3 ]]; then
-	redis-cli hset addons redis 1 &> /dev/null # mark as upgraded - disable button
+	redis-cli hset addons redi 1 &> /dev/null # mark as upgraded - disable button
 	title "$info Redis already upgraded."
 	tittle -nt "Further upgrade: pacman -Sy redis"
 	exit
@@ -31,7 +31,7 @@ timestop
 
 version=$( redis-cli -v | cut -d' ' -f2 | cut -d'.' -f1 )
 if [[ $version0 > 3 ]]; then
-	redis-cli hset addons redis 1 &> /dev/null
+	redis-cli hset addons redi 1 &> /dev/null
 	title -l '=' "$bar Redis upgraded to $version successfully."
 else
 	title -l '=' "$bar Redis upgrade failed."
