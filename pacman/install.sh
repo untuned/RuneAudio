@@ -6,7 +6,8 @@ alias=pacm
 
 . /srv/http/addonstitle.sh
 
-if [[ $( pacman -V | grep 'Pacman v' | cut -d'v' -f2 | cut -d' ' -f1 ) > 5.0.1 ]]; then
+version0=$( pacman -V | grep 'Pacman v' | cut -d'v' -f2 | cut -d' ' -f1 )
+if [[ $version0 > 5.0.1 ]]; then
 	redis-cli hset addons pacm 1 &> /dev/null # mark as upgraded - disable button
 	title "$info Pacman already upgraded."
 	exit
@@ -19,10 +20,17 @@ wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
 
 echo -e "$bar Prefetch packages ..."
-pacman -Sw --noconfirm glibc pacman
+pacman -Syw --noconfirm glibc pacman
 
 echo -e "$bar Install packages ..."
 pacman -S --noconfirm glibc pacman
 
 timestop
-title -l '=' "$bar Pacman upgraded successfully."
+
+version=$( pacman -V | grep 'Pacman v' | cut -d'v' -f2 | cut -d' ' -f1 )
+
+if [[  $version > $version0 ]]; then
+	title -l '=' "$bar Pacman upgraded to $version successfully."
+else
+	title -l '=' "$warn Pacman upgraded failed."
+fi
