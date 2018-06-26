@@ -31,6 +31,7 @@ timestop
 
 version=$( redis-cli -v | cut -d' ' -f2 | cut -d'.' -f1 )
 if [[ $version0 > 3 ]]; then
+	redis-cli hset addons redis 1 &> /dev/null
 	title -l '=' "$bar Redis upgraded to $version successfully."
 else
 	title -l '=' "$bar Redis upgrade failed."
