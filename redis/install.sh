@@ -6,10 +6,11 @@ alias=redis
 
 . /srv/http/addonstitle.sh
 
-if [[ $( redis-cli -v | cut -d' ' -f2 | cut -d'.' -f1 ) -lt 4 ]]; then
+version0=$( redis-cli -v | cut -d' ' -f2 | cut -d'.' -f1 )
+if [[ $version0 > 3 ]]; then
 	redis-cli hset addons redis 1 &> /dev/null # mark as upgraded - disable button
 	title "$info Redis already upgraded."
-	ittle -nt "Further upgrade: pacman -Sy redis"
+	tittle -nt "Further upgrade: pacman -Sy redis"
 	exit
 fi
 
@@ -27,4 +28,10 @@ systemctl daemon-reload
 systemctl restart redis
 
 timestop
-title -l '=' "$bar Redis upgraded successfully."
+
+version=$( redis-cli -v | cut -d' ' -f2 | cut -d'.' -f1 )
+if [[ $version0 > 3 ]]; then
+	title -l '=' "$bar Redis upgraded to $version successfully."
+else
+	title -l '=' "$bar Redis upgrade failed."
+fi
