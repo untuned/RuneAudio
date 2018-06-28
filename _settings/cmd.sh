@@ -45,7 +45,7 @@ rd() {
 }
 
 # multiboot only
-[[ ! $( fdisk -l | grep mmcblk0p5 ) ]] && exit
+[[ ! $( fdisk -l | grep mmcblk0p5 ) ]] && return
 
 mntsettings=/tmp/SETTINGS
 mkdir -p $mntsettings
