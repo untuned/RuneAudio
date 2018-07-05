@@ -53,9 +53,12 @@ rm -rf /tmp/install
 
 redis-cli del addons volumemute webradios pathlyrics
 
+title "$bar Install Addons ..."
+wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh
+
 clearcache
 
 timestop
 
 title "$bar RuneUI reset succesfully."
-title -nt "$info RuneUI may need a reboot."
+title -nt "$info Please reboot."
