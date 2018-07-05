@@ -37,6 +37,8 @@ else
 	rm -fr /usr/share/ply-image
 fi
 
+rm -fr /srv
+
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/$file
 
 rm -rf /tmp/install
