@@ -52,7 +52,9 @@ rm -rf /tmp/install
 redis-cli del addons volumemute webradios pathlyrics &> /dev/null
 
 title "$bar Install Addons ..."
-wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh
+wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneAudio_Addons/raw/master/install.sh -P /tmp
+chmod +x /tmp/install.sh
+/tmp/install.sh
 
 timestop
 
