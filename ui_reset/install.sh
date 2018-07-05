@@ -51,33 +51,13 @@ rm -f /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 rm -f /srv/http/{lyrics.php,lyricssave.php,simple_html_dom.php}
 rm -f /srv/http/assets/{js/lyrics.js,css/lyrics.css}
 
-# udac
-sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
-' -e '/^ACTION/ d
-' /etc/udev/rules.d/rune_usb-audio.rules
-udevadm control --reload-rules && udevadm trigger
-sed -i -e '/ui_notify/ s|^//||
-' -e '/udac0/,/udac1/ d' /srv/http/command/refresh_ao
-
 # back
-sed -i -e '\|/run/backup_|,+1 s|^//||
-' -e '\|/srv/http/tmp|,/^ \+;/ d
-' /srv/http/app/libs/runeaudio.php
-
-sed -i -e 's/id="restore"/method="post"/
-' -e 's/type="file" name="filebackup"/type="file"/
-' -e '/id="btn-backup-upload"/ s/id="btn-backup-upload"/& name="syscmd" value="restore"/; s/disabled>Restore/type="submit" disabled>Upload/
-' /srv/http/app/templates/settings.php
-
 rm -f /etc/sudoers.d/http-backup
 rm -f /srv/http/restore.*
 rm -f /srv/http/assets/js/restore.js
 rm -fr /srv/http/tmp
 
 # spla
-sed -i -e 's/ logo.nologo//' /boot/cmdline.txt
-sed '/disable_splash=1/ d' /boot/confix.txt
-
 systemctl disable ply-image
 systemctl enable getty@tty1.service
 
@@ -93,17 +73,8 @@ mv -f /srv/http/assets/fonts/lato{.backup,}
 mv -f /etc/motd{.original,} 2> /dev/null
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
 
-sed -i -e '/^PS1=/ d
-' -e '/^#PS1=\|#export PS1=/ s/^#//
-' /etc/bash.bashrc
-
 # pass
-if [[ $version != 0.4b ]]; then
-	rm -f /srv/http/log*
-	sed -i 's|bind_to_address\s\+"localhost"|bind_to_address  "any"|' /etc/mpd.conf
-	sed -i "s|'bind_to_address', 'localhost'|'bind_to_address', 'any'|" /srv/http/app/libs/runeaudio.php
-	systemctl restart mpd
-fi
+[[ $version != 0.4b ]] && rm -f /srv/http/log*
 
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/ui-reset.tar.xz
 bsdtar -xvf ui-reset.tar.xz -C /srv/http
