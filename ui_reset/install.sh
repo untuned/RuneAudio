@@ -49,7 +49,7 @@ chmod -R 755 /tmp/install
 cp -rfp /tmp/install/* /
 rm -rf /tmp/install
 
-redis-cli del addons volumemute webradios pathlyrics
+redis-cli del addons volumemute webradios pathlyrics &> /dev/null
 
 title "$bar Install Addons ..."
 wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh
