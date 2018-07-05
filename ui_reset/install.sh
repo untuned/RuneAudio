@@ -55,6 +55,10 @@ rm -fr /srv/http/assets/fonts/lato*
 #motd
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
 
+wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/ui-reset.tar.xz
+bsdtar -xvf ui-reset.tar.xz -C /srv/http
+rm ui_reset.tar.xz
+
 if [[ $version != 0.4b ]]; then
 	# pass
 	rm -f /srv/http/log*
@@ -64,11 +68,9 @@ if [[ $version != 0.4b ]]; then
 	rm -f /etc/systemd/system/ply-image.service
 	rm -f /usr/local/bin/ply-image
 	rm -fr /usr/share/ply-image
+	
+	rm -fr /usr/share/bootsplash
 fi
-
-wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/ui-reset.tar.xz
-bsdtar -xvf ui-reset.tar.xz -C /srv/http
-rm ui_reset.tar.xz
 
 clearcache
 
