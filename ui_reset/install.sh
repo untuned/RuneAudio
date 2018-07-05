@@ -57,4 +57,4 @@ wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneAudi
 timestop
 
 title "$bar RuneUI reset succesfully."
-title -nt "$info RuneAudio needs REBOOT."
+title -nt "$info Please reboot and clear browser cache."
