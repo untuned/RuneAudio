@@ -47,6 +47,18 @@ rm -f /srv/http/assets/img/RPi3_GPIO.svg
 rm -f /srv/http/assets/js/gpio*
 rm -f /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 
+# lyri
+rm -f /srv/http/{lyrics.php,lyricssave.php,simple_html_dom.php}
+rm -f /srv/http/assets/{js/lyrics.js,css/lyrics.css}
+
+# pass
+if [[ $version != 0.4b ]]; then
+	rm -f /srv/http/log*
+	sed -i 's|bind_to_address\s\+"localhost"|bind_to_address  "any"|' /etc/mpd.conf
+	sed -i "s|'bind_to_address', 'localhost'|'bind_to_address', 'any'|" /srv/http/app/libs/runeaudio.php
+	systemctl restart mpd
+fi
+
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/ui-reset.tar.xz
 bsdtar -xvf ui-reset.tar.xz -C /srv/http
 rm ui_reset.tar.xz
