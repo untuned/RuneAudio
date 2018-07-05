@@ -70,12 +70,11 @@ fi
 
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/$file
 
-if [[ -e /tmp/install/root && -L /root ]]; then # fix 0.4b /root as symlink
-	mkdir /tmp/install/home
-	mv /tmp/install/{,home/}root
-fi
+rm -rf /tmp/install
+mkdir -p /tmp/install
 bsdtar -xvf $file -C /tmp/install
 rm $file
+
 chown -R http:http /tmp/install/srv
 chmod -R 755 /tmp/install
 cp -rfp /tmp/install/* /
