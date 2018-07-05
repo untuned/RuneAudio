@@ -69,8 +69,17 @@ else
 fi
 
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/$file
-bsdtar -xvf $file -C /srv/http
+
+if [[ -e /tmp/install/root && -L /root ]]; then # fix 0.4b /root as symlink
+	mkdir /tmp/install/home
+	mv /tmp/install/{,home/}root
+fi
+bsdtar -xvf $file -C /tmp/install
 rm $file
+chown -R http:http /tmp/install/srv
+chmod -R 755 /tmp/install
+cp -rfp /tmp/install/* /
+rm -rf /tmp/install
 
 redis-cli del addons volumemute webradios pathlyrics
 
