@@ -14,13 +14,10 @@ crontab -l | { cat | sed '/addonsupdate.sh/ d'; } | crontab -
 
 # enha
 rm -f /usr/share/bootsplash/{start,reboot,shutdown}-runeaudio.png
-
 # gpio
 rm -f /root/gpio*.py
-
 # back
 rm -f /etc/sudoers.d/http-backup
-
 #motd
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
 
@@ -38,6 +35,7 @@ else
 fi
 
 rm -fr /srv
+rm -f /usr/local/bin/uninstall_*
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file -P /tmp
 
@@ -55,8 +53,6 @@ redis-cli del addons volumemute webradios pathlyrics
 
 title "$bar Install Addons ..."
 wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneAudio_Addons/raw/master/install.sh; chmod +x install.sh; ./install.sh
-
-clearcache
 
 timestop
 
