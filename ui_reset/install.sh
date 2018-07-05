@@ -72,6 +72,8 @@ wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/$file
 bsdtar -xvf $file -C /srv/http
 rm $file
 
+redis-cli del addons volumemute webradios pathlyrics
+
 clearcache
 
 timestop
