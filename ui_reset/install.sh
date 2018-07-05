@@ -7,8 +7,6 @@ alias=uire
 [[ ! -e /srv/http/addonstitle.sh ]] && wget -qN --no-check-certificate https://github.com/rern/RuneAudio_Addons/raw/$branch/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
 
-version=$( redis-cli get buildversion )
-
 title -l '=' "$bar Reset RuneUI ..."
 timestart
 
@@ -55,11 +53,11 @@ rm -fr /srv/http/assets/fonts/lato*
 #motd
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
 
-wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/ui-reset.tar.xz
-bsdtar -xvf ui-reset.tar.xz -C /srv/http
-rm ui_reset.tar.xz
-
-if [[ $version != 0.4b ]]; then
+version=$( redis-cli get buildversion )
+if [[ $version == 20170229 ]]; then
+	file=ui_reset.tar.xz
+else
+	file=ui_reset03.tar.xz
 	# pass
 	rm -f /srv/http/log*
 	# spla
@@ -69,6 +67,10 @@ if [[ $version != 0.4b ]]; then
 	rm -f /usr/local/bin/ply-image
 	rm -fr /usr/share/ply-image
 fi
+
+wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/$file
+bsdtar -xvf $file -C /srv/http
+rm $file
 
 clearcache
 
