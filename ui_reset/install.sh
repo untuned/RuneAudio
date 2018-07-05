@@ -39,7 +39,7 @@ fi
 
 rm -fr /srv
 
-wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/$file
+wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_reset/$file
 
 rm -rf /tmp/install
 mkdir -p /tmp/install
