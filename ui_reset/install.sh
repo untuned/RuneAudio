@@ -4,6 +4,7 @@
 
 alias=uire
 
+[[ ! -e /srv/http/addonstitle.sh ]] && wget -qN --no-check-certificate https://github.com/rern/RuneAudio_Addons/raw/$branch/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
 
 version=$( redis-cli get buildversion )
@@ -37,6 +38,14 @@ mv /srv/http/app/coverart_ctl.php{.backup,} 2>/dev/null
 mv /usr/share/bootsplash/start-runeaudio.png{.backup,} 2>/dev/null
 mv /usr/share/bootsplash/reboot-runeaudio.png{.backup,} 2>/dev/null
 mv /usr/share/bootsplash/shutdown-runeaudio.png{.backup,} 2>/dev/null
+
+# gpio
+rm -f /root/gpio*.py
+rm -f /srv/http/gpio*.php
+rm -f /srv/http/assets/css/gpio*
+rm -f /srv/http/assets/img/RPi3_GPIO.svg
+rm -f /srv/http/assets/js/gpio*
+rm -f /srv/http/assets/js/vendor/bootstrap-select-1.12.1.min.js
 
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/ui-reset.tar.xz
 bsdtar -xvf ui-reset.tar.xz -C /srv/http
