@@ -31,14 +31,6 @@ rm -f /srv/http/assets/js/enhance.js
 rm -f /srv/http/assets/js/vendor/{jquery-ui.min.js,modernizr-custom.js,roundslider.min.js}
 rm -f /usr/share/bootsplash/{start,reboot,shutdown}-runeaudio.png
 
-mv /srv/http/assets/fonts/fontawesome-webfont.woff{.backup,} 2>/dev/null
-mv /srv/http/assets/fonts/fontawesome-webfont.ttf{.backup,} 2>/dev/null
-mv /srv/http/assets/js/runeui.min.js{.backup,} 2>/dev/null
-mv /srv/http/app/coverart_ctl.php{.backup,} 2>/dev/null
-mv /usr/share/bootsplash/start-runeaudio.png{.backup,} 2>/dev/null
-mv /usr/share/bootsplash/reboot-runeaudio.png{.backup,} 2>/dev/null
-mv /usr/share/bootsplash/shutdown-runeaudio.png{.backup,} 2>/dev/null
-
 # gpio
 rm -f /root/gpio*.py
 rm -f /srv/http/gpio*.php
@@ -57,24 +49,22 @@ rm -f /srv/http/restore.*
 rm -f /srv/http/assets/js/restore.js
 rm -fr /srv/http/tmp
 
-# spla
-systemctl disable ply-image
-systemctl enable getty@tty1.service
-
-rm -f /etc/systemd/system/ply-image.service
-rm -f /usr/local/bin/ply-image
-rm -fr /usr/share/ply-image
-
 # font
-rm -fr /srv/http/assets/fonts/lato
-mv -f /srv/http/assets/fonts/lato{.backup,}
+rm -fr /srv/http/assets/fonts/lato*
 
 #motd
-mv -f /etc/motd{.original,} 2> /dev/null
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
 
-# pass
-[[ $version != 0.4b ]] && rm -f /srv/http/log*
+if [[ $version != 0.4b ]]; then
+	# pass
+	rm -f /srv/http/log*
+	# spla
+	systemctl disable ply-image
+	systemctl enable getty@tty1.service
+	rm -f /etc/systemd/system/ply-image.service
+	rm -f /usr/local/bin/ply-image
+	rm -fr /usr/share/ply-image
+fi
 
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_rest/ui-reset.tar.xz
 bsdtar -xvf ui-reset.tar.xz -C /srv/http
