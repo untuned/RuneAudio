@@ -68,8 +68,6 @@ if [[ $version != 0.4b ]]; then
 	rm -f /etc/systemd/system/ply-image.service
 	rm -f /usr/local/bin/ply-image
 	rm -fr /usr/share/ply-image
-	
-	rm -fr /usr/share/bootsplash
 fi
 
 clearcache
