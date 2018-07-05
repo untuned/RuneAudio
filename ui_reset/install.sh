@@ -11,6 +11,16 @@ version=$( redis-cli get buildversion )
 title -l '=' "$bar Reset RuneUI ..."
 timestart
 
+# addo
+rm -f /srv/http/assets/css/addons*
+rm -f /srv/http/assets/fonts/addons.*,Inconsolata.*
+rm -f /srv/http/assets/js/addons*
+rm -f /srv/http/assets/js/vendor/{hammer.min.js,propagating.js}
+rm -f /srv/http/addons*
+rm -fr /srv/http/assets/addons
+crontab -l | { cat | sed '/addonsupdate.sh/ d'; } | crontab -
+
+# enha
 rm -f /srv/http/app/templates/enhanceplayback.php
 rm -f /srv/http/enhance*
 rm -f /srv/http/assets/css/{enhance.css,midori.css,roundslider.min.css}
