@@ -39,12 +39,12 @@ fi
 
 rm -fr /srv
 
-wgetnc https://github.com/rern/RuneAudio/raw/$branch/ui_reset/$file
+wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file -P /tmp
 
 rm -rf /tmp/install
 mkdir -p /tmp/install
-bsdtar -xvf $file -C /tmp/install
-rm $file
+bsdtar -xvf /tmp/$file -C /tmp/install
+rm /tmp/$file
 
 chown -R http:http /tmp/install/srv
 chmod -R 755 /tmp/install
