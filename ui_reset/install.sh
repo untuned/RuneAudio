@@ -38,6 +38,8 @@ rm -fr /srv
 rm -f /usr/local/bin/uninstall_*
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file -P /tmp
+wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh -P /tmp
+chmod +x /tmp/install.sh
 
 rm -rf /tmp/install
 mkdir -p /tmp/install
@@ -52,8 +54,6 @@ rm -rf /tmp/install
 redis-cli del addons volumemute webradios pathlyrics &> /dev/null
 
 title "$bar Install Addons ..."
-wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneAudio_Addons/raw/master/install.sh -P /tmp
-chmod +x /tmp/install.sh
 /tmp/install.sh
 
 timestop
