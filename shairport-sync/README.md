@@ -1,6 +1,6 @@
 ### shairport-sync
 
-Compiled with modified PKGBUILD from https://github.com/EliaCereda/shairport-sync-PKGBUILD
+Compiled with `--with-meta` for metadata retrieval.
 
 ```sh
 # activate improved audio driver
