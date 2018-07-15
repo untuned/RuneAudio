@@ -3,43 +3,18 @@ Native compiled Transmission
 `pacman -S transmission-cli` > failed to start - error: `libcrypto.so.1.1`, `libssl.so.1.1`  
 RuneAudio has trouble with system wide upgrade.  
 
+- Install [ArchLinuxArm for RPi2](https://github.com/rern/RuneAudio/tree/master/ArchLinuxArm)
+- create new directory
 ```sh
-pacman -Sy
-pacman -S base-devel json-c cryptsetup intltool readline guile
-useradd -m x
-su x
+su alarm
 cd
-mkdir transmission
+cd nginx
 ```
-
-- [ArchLinuxArm Packages](https://archlinuxarm.org/packages)  
-- search `transmission-cli` - `armv7h`  
-- `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/armv7h/transmission-cli/files), except `transmission-2.92-openssl-1.1.0.patch`, to `/home/x/transmission/` (with last empty line without whitespace)  
+- [ArchLinuxArm Packages](https://archlinuxarm.org/packages): search `transmission-cli` - `armv7h`  
+- `Source Files` > copy-paste code from each file, direct download not available, to `/home/alarm/nginx/` (with last empty line without whitespace)
 - Edit [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/transmission/_repo/transmission/PKGBUILD): remove lines  
   * `pkgname=(transmission-cli)`
   * remove all `gtk` `qt` - no need  
-
-## Fix errors:  
-
-**`libmount`**  
-`pacman -Sy base-devel` > failed to boot - error: `libmount.so.1`
-```sh
-pacman -S libutil-linux
-``` 
-
-**`libcrypto` `libssl`**  
-(upgraged `pacman`, by `base-devel`, needs newer version)
-  - [ArchLinuxArm Packages](https://archlinuxarm.org/packages)
-  - search `openssl` - `armv7h`
-  - [`Download`](https://archlinuxarm.org/packages/armv7h/openssl) > extract > copy `libcrypto.so.1.1`, `libssl.so.1.1` to `/lib/`
-  
-**`libreadline.so.6` `libguile-2.0.so.22`**
-```sh
-# fix error: /lib/libreadline.so.6
-ln -s /lib/libreadline.so.7.0 /lib/libreadline.so.6
-# for xbindkeys
-ln -s libguile-2.2.so.1.2.0 libguile-2.0.so.22
-```
 
 **pre-compile**
 ```sh
@@ -51,11 +26,6 @@ sed -i -e 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j5"/
 
 **Compile:**  
 ```sh
-su x
-cd /home/x/transmission
 makepkg -A --skipinteg
-
-su
-pacman -U /home/x/transmission/transmission-cli-2.92-6-armv7h.pkg.tar.xz
 ```
 The compiled package can be install on unupdated RuneAudio.
