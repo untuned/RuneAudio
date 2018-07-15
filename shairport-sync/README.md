@@ -22,7 +22,17 @@ sed -i -e '/output_device = "default"/ i\
 	pipe_timeout = 5000;
 ' /etc/shairport-sync.conf
 
+# remove user
+sed -i '/User=shairport-sync\|Group=shairport-sync/ s/^/#/' /usr/lib/systemd/system/shairport-sync.service
+systemctl daemon-reload
+
 wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
 wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
 pacman -Sy libconfig
+
+# start
+systemctl start shairport-sync
+
+# metadata pipe
+shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
 ```
