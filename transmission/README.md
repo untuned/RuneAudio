@@ -3,7 +3,7 @@ RuneAudio Transmission
 _Tested on RuneAudio 0.3 and 0.4b_
 
 [**Transmission**](https://transmissionbt.com/) - Fast, easy, and free BitTorrent client (CLI tools, daemon and web client)  
-- fix error: `libevent`, `libcrypto.so.1.1` and `libssl.so.1.1`
+- [Native compiled version](https://github.com/rern/RuneAudio/blob/master/transmission/native_compiled.md): fix error, `libcrypto.so.1.1` and `libssl.so.1.1`, in default package  
 - With optional WebUI alternative: [Transmission Web Control](https://github.com/ronggang/transmission-web-control#introduction)  
 
 **Install**  
@@ -11,7 +11,7 @@ from [**Addons Menu**](https://github.com/rern/RuneAudio_Addons)
 
 **start / stop**  
 ```
-systemctl < start / stop > tran
+systemctl < start / stop > transmission
 ```
 
 **WebUI**  
@@ -20,7 +20,7 @@ _[RuneAudio IP]_:9091 (eg: 192.168.1.11:9091)
 
 **settings**  
 `/path/transmission/settings.json` must be edited after stop transmission  
-`transmission-daemon -d` may not show current `settings.json`  
+`transmission-daemon -d` will not correctly show `settings.json`  
 
 **auto start download**  
 add torrent files to `/path/transmission/torrents` will auto start download  
@@ -30,7 +30,7 @@ add torrent files to `/path/transmission/torrents` will auto start download
 - nolimit > `"rpc-whitelist-enabled": false`
 ```
     ...
-    "rpc-whitelist": "127.0.0.1[,IP1, IP2]",
+    "rpc-whitelist": "127.0.0.1,[IP1],[IP2]",
     "rpc-whitelist-enabled": true,
     ...
 ```
