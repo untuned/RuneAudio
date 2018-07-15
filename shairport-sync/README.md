@@ -4,7 +4,9 @@ Compiled with `--with-meta` for metadata retrieval.
 
 ```sh
 # activate improved audio driver
-[[ ! grep 'audio_pwm_mode=2' ]] && sed '$ i\audio_pwm_mode=2' /boot/config.txt
+if ! grep 'audio_pwm_mode=2' /boot/config.txt; then
+    sed -i '$ a\audio_pwm_mode=2' /boot/config.txt
+fi
 
 # turn off WiFi Power Management
 iwconfig wlan0 power off
