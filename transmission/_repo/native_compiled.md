@@ -5,7 +5,7 @@ RuneAudio has trouble with system wide upgrade.
 
 ```sh
 pacman -Sy
-pacman -S base-devel
+pacman -S base-devel json-c cryptsetup
 useradd -m x
 su x
 cd
