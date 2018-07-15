@@ -10,14 +10,14 @@ useradd -m x
 su x
 cd
 mkdir transmission
-mkdir intltool
 ```
 
 - [ArchLinuxArm Packages](https://archlinuxarm.org/packages)  
 - search `transmission-cli` - `armv7h`  
 - `Source Files` > copy code from [each file](https://archlinuxarm.org/packages/armv7h/transmission-cli/files), except `transmission-2.92-openssl-1.1.0.patch`, to `/home/x/transmission/` (with last empty line without whitespace)  
 - Edit [`PKGBUILD`](https://github.com/rern/RuneAudio/blob/master/transmission/_repo/transmission/PKGBUILD): remove lines  
-  * `gtk` `qt` - no need  
+  * `pkgname=(transmission-cli)`
+  * remove all `gtk` `qt` - no need  
 
 ## Fix errors:  
 
@@ -47,15 +47,6 @@ ln -s libguile-2.2.so.1.2.0 libguile-2.0.so.22
 sed -i -e 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j5"/
 ' -e 's|#BUILDDIR=.*|BUILDDIR=/mnt/MPD/USB/hdd/makepkg|
 ' /etc/makepkg.conf
-```
-
-**compile `initltool`**
-```sh
-su x
-cd /home/x/intltool
-makepkg -A --skipinteg
-su
-pacman -U /home/x/intltool/intltool-0.51.0-2-any.pkg.tar.xz
 ```
 
 **Compile:**  
