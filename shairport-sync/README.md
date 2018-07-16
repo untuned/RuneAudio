@@ -19,7 +19,7 @@ if ! grep 'audio_pwm_mode=2' /boot/config.txt; then
 fi
 
 # set config - usb dac
-sed -i -e '/output_device = "default"/ i\
+sed -i '/output_device = "default"/ i\
     output_device = "hw:1";\
     output_format = "S32";
 ' /etc/shairport-sync.conf
