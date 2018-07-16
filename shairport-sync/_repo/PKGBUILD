@@ -1,48 +1,39 @@
-# Maintainer: Elia Cereda <eliacereda+arch at gmail dot com>
+# $Id$
+# Maintainer: Anatol Pomozov 
 
-pkgname=shairport-sync-git
-pkgver=3.2
+pkgname=shairport-sync
+pkgver=3.2.1
 pkgrel=1
 pkgdesc='Emulates an AirPort Express for the purpose of streaming music from iTunes and compatible iPods and iPhones'
 url='https://github.com/mikebrady/shairport-sync'
-arch=(i686 x86_64 armv6h armv7h)
-license=('custom')
-backup=(etc/conf.d/shairport-sync)
-install='shairport-sync.install'
-depends=(alsa-lib libdaemon openssl avahi popt libsoxr libconfig)
-makedepends=(git)
-source=("git+https://github.com/mikebrady/shairport-sync.git"
-	shairport-sync.install
-	shairport-sync.service
-	shairport-sync.conf)
+arch=('armv7h')
+license=(GPL)
+backup=(etc/shairport-sync.conf)
+depends=(openssl avahi libsoxr popt alsa-lib libconfig libpulse)
+makedepends=(xmltoman)
+source=(shairport-sync-$pkgver.zip::https://github.com/mikebrady/shairport-sync/archive/$pkgver.zip
+        shairport-sync.sysusers)
 sha1sums=('SKIP'
-          'd51485f3857529b70a29b38814ea60e7dde54ca8'
-          'fe62feeef1c947ed6ed3500b7b922dcaf9e8987c'
-          '6c4979abddb4b1c0242a941279d41617ab8d183c')
-
-pkgver() {
-  cd shairport-sync
-}
+          'SKIP')
 
 prepare() {
-  cd shairport-sync
+  cd shairport-sync-$pkgver
 }
 
 build() {
-  cd shairport-sync
+  cd shairport-sync-$pkgver
 
   autoreconf -i -f
-  ./configure --with-alsa --with-avahi --with-ssl=openssl --with-soxr --with-metadata --with-apple-alac --with-systemd --prefix="$pkgdir/usr"
+  ./configure --prefix=/usr --sysconfdir=/etc --with-alsa --with-pa --with-avahi --with-ssl=openssl --with-soxr --with-dns_sd --with-pkg-config --with-systemd --with-configfiles
   make
+
+  sed 's|/usr/local/bin/|/usr/bin/|' -i scripts/shairport-sync.service
 }
 
 package() {
-  install -D -m644 shairport-sync.service "$pkgdir/usr/lib/systemd/system/shairport-sync.service"
-  install -D -m644 shairport-sync.conf "$pkgdir/etc/conf.d/shairport-sync"
-
-  cd shairport-sync
-
-  install -D -m664 LICENSES "$pkgdir/usr/share/licenses/$pkgname/LICENSE"  
-
-  make install
+  cd shairport-sync-$pkgver
+  make DESTDIR="$pkgdir" install
+  install -D -m644 "$srcdir"/shairport-sync.sysusers "$pkgdir"/usr/lib/sysusers.d/shairport-sync.conf
+  install -D -m664 LICENSES "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+  rm "$pkgdir"/etc/shairport-sync.conf.sample
 }
