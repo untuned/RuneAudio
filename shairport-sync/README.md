@@ -18,6 +18,11 @@ if ! grep 'audio_pwm_mode=2' /boot/config.txt; then
     sed -i '$ a\audio_pwm_mode=2' /boot/config.txt
 fi
 
+# set usable volume range
+sed -i '/name = "%H"/ i\
+    volume_range_db = 50;
+' /etc/shairport-sync.conf
+
 # set config - usb dac
 sed -i '/output_device = "default"/ i\
     output_device = "hw:1";\
