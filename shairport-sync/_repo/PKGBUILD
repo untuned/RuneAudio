@@ -32,7 +32,7 @@ build() {
   cd shairport-sync
 
   autoreconf -i -f
-  ./configure --with-alsa --with-avahi --with-ssl=openssl --with-soxr --with-metadata --prefix="$pkgdir/usr"
+  ./configure --with-alsa --with-avahi --with-ssl=openssl --with-soxr --with-metadata --with-apple-alac --prefix="$pkgdir/usr"
   make
 }
 
