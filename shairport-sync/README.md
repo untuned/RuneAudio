@@ -58,13 +58,13 @@ shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
 ao=$( redis-cli get ao )
 card=$( aplay -l | grep "$ao" | sed 's/card \(.\):.*/\1/' )
 if [[ $card == 0 ]]; then
-	string=$( cat <<'EOF
+    string=$( cat <<'EOF
     output_device = "hw:0";
     mixer_control_name = "PCM";
 EOF
 )
 else
-	string=$( cat <<'EOF
+    string=$( cat <<'EOF
     output_device = "hw:1";
     output_format = "S32";
 EOF
