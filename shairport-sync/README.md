@@ -4,36 +4,53 @@ Compiled from [shairport-sync](https://github.com/mikebrady/shairport-sync) with
 
 **Compile**
 ```sh
-# with normal ArchLinuxArm build environment setup
+# with normal ArchLinuxArm build environment already setup
 pacman -Sy libconfig xmltoman
 
 # add user and group
 useradd shairport-sync
+
+su alarm
+cd
+mkdir shairport-sync
+wget https://github.com/rern/RuneAudio/raw/master/shairport-sync/_repo/PKGBUILD
+wget https://github.com/rern/RuneAudio/raw/master/shairport-sync/_repo/shairport-sync.sysusers
+
+makepkg
+```
+
+**Install**
+```sh
+wget https://github.com/rern/RuneAudio/raw/master/shairport-sync/shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
+wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
+wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
+pacman -Sy libconfig
+pacman -U shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
 ```
 
 **Configure**
 ```sh
-# activate improved audio driver
-if ! grep 'audio_pwm_mode=2' /boot/config.txt; then
-    sed -i '$ a\audio_pwm_mode=2' /boot/config.txt
-fi
-
 # set usable volume range
 sed -i '/name = "%H"/ i\
     volume_range_db = 50;
 ' /etc/shairport-sync.conf
 
-# set config - usb dac
+# set usb dac
 sed -i '/output_device = "default"/ i\
     output_device = "hw:1";\
     output_format = "S32";
 ' /etc/shairport-sync.conf
 
-# set config - onboard dac (3.5mm jack)
+### set onboard dac (3.5mm jack)
 sed -i '/output_device = "default"/ i\
     output_device = "hw:0";\
     mixer_control_name = "PCM";
 ' /etc/shairport-sync.conf
+# activate improved audio driver
+if ! grep 'audio_pwm_mode=2' /boot/config.txt; then
+    sed -i '$ a\audio_pwm_mode=2' /boot/config.txt
+fi
+###
 
 # set metadata pipe
 sed -i '/enabled = "no"/ i\
@@ -42,11 +59,10 @@ sed -i '/enabled = "no"/ i\
     pipe_name = "/tmp/shairport-sync-metadata";\
     pipe_timeout = 5000;
 ' /etc/shairport-sync.conf
+```
 
-wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
-wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
-pacman -Sy libconfig
-
+**Usage**
+```sh
 # start
 systemctl start shairport-sync
 
