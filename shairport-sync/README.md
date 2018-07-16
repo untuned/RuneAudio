@@ -2,23 +2,6 @@
 
 Compiled from [shairport-sync](https://github.com/mikebrady/shairport-sync) with `---with-metadata` for metadata retrieval.
 
-**Compile**
-```sh
-# with normal ArchLinuxArm build environment already setup
-pacman -Sy libconfig xmltoman
-
-# add user and group
-useradd shairport-sync
-
-su alarm
-cd
-mkdir shairport-sync
-wget https://github.com/rern/RuneAudio/raw/master/shairport-sync/_repo/PKGBUILD
-wget https://github.com/rern/RuneAudio/raw/master/shairport-sync/_repo/shairport-sync.sysusers
-
-makepkg
-```
-
 **Install**
 ```sh
 wget https://github.com/rern/RuneAudio/raw/master/shairport-sync/shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
