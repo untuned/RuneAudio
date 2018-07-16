@@ -1,6 +1,6 @@
 ### shairport-sync
 
-Compiled with `--with-meta` for metadata retrieval.
+Compiled from [shairport-sync](https://github.com/mikebrady/shairport-sync) with `--with-meta` for metadata retrieval.
 
 ```sh
 # activate improved audio driver
