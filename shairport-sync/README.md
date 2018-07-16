@@ -32,10 +32,10 @@ sed -i -e '/output_device = "default"/ i\
 
 # set metadata pipe
 sed -i '/enabled = "no"/ i\
-	enabled = "yes";\
-	include_cover_art = "yes";\
-	pipe_name = "/tmp/shairport-sync-metadata";\
-	pipe_timeout = 5000;
+    enabled = "yes";\
+    include_cover_art = "yes";\
+    pipe_name = "/tmp/shairport-sync-metadata";\
+    pipe_timeout = 5000;
 ' /etc/shairport-sync.conf
 
 wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
