@@ -52,3 +52,9 @@ systemctl start shairport-sync
 # metadata pipe
 shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
 ```
+
+**Current output_device**
+```sh
+ao=$( redis-cli get ao )
+aplay -l | grep "$ao" | sed 's/card \(.\):.*/\1/'
+```
