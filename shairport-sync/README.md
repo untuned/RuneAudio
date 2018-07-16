@@ -20,13 +20,13 @@ fi
 
 # set config - usb dac
 sed -i -e '/output_device = "default"/ i\
-    output_device = "hw:0";\
+    output_device = "hw:1";\
     output_format = "S32";
 ' /etc/shairport-sync.conf
 
 # set config - onboard dac (3.5mm jack)
 sed -i -e '/output_device = "default"/ i\
-    output_device = "hw:1";\
+    output_device = "hw:0";\
     mixer_control_name = "PCM";
 ' /etc/shairport-sync.conf
 
