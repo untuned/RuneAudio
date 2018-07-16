@@ -21,7 +21,7 @@ fi
 # set config - usb dac
 sed -i -e '/output_device = "default"/ i\
     output_device = "hw:0";\
-	output_format = "S32";
+    output_format = "S32";
 ' /etc/shairport-sync.conf
 
 # set config - onboard dac (3.5mm jack)
