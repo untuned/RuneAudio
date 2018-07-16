@@ -42,6 +42,9 @@ sed -i '/enabled = "no"/ i\
     pipe_name = "/tmp/shairport-sync-metadata";\
     pipe_timeout = 5000;
 ' /etc/shairport-sync.conf
+
+# run in background
+sed '/^ExecStart/ s/$/ -d/' /usr/lib/systemd/system/shairport-sync.service
 ```
 
 **Usage**
