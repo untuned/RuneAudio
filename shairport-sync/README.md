@@ -1,7 +1,17 @@
 ### shairport-sync
 
-Compiled from [shairport-sync](https://github.com/mikebrady/shairport-sync) with `--with-meta` for metadata retrieval.
+Compiled from [shairport-sync](https://github.com/mikebrady/shairport-sync) with `---with-metadata` for metadata retrieval.
 
+**Compile**
+```sh
+# with normal ArchLinuxArm build environment setup
+pacman -Sy libconfig xmltoman
+
+# add user and group
+useradd shairport-sync
+```
+
+**Configure**
 ```sh
 # activate improved audio driver
 if ! grep 'audio_pwm_mode=2' /boot/config.txt; then
