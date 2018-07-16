@@ -45,6 +45,7 @@ sed -i '/enabled = "no"/ i\
 
 # run in background
 sed '/^ExecStart/ s/$/ -d/' /usr/lib/systemd/system/shairport-sync.service
+systemctl daemon-reload
 ```
 
 **Usage**
