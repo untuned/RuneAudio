@@ -74,10 +74,11 @@ shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
 cat /tmp/shairport-sync-metadata\
 	| grep -A 2 '61736172\|6d696e6d\|6173616c\|70726772\|50494354'\
 	| grep -v '<data encoding="base64">\|--'\
-	| sed 's|<item><type>.*</type><code>||; s|</code><length>.*</length>||; s|</data></item>||; s|</item>||'\
 	| sed 's/61736172/artist:/; s/6d696e6d/title:/; s/6173616c/album:/; s/70726772/time:/; s/50494354/cover:/'\
+	| sed 's|<item><type>.*</type><code>||; s|</code><length>.*</length>||; s|</data></item>||; s|</item>||'\
 	| perl -p -e 's/:\n/: "/'\
-	| perl -p -e 's/\n/",\n/'
+	| perl -p -e 's/\n/",\n/'\
+	| sed '/7063656e/ d'
 
 # ...
 # album: "U29uZ3Mgb2YgSW5ub2NlbmNl",
