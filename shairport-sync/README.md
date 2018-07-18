@@ -53,8 +53,30 @@ systemctl daemon-reload
 # start
 systemctl start shairport-sync
 
-# metadata pipe
+# shairport-sync-metadata-reader
 shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
+
+# standard cat metadata
+# ...
+# <item><type>636f7265</type><code>6173616c</code><length>18</length>
+# <data encoding="base64">
+# U29uZ3Mgb2YgSW5ub2NlbmNl</data></item>
+# ...
+# code:
+# hex        string  type
+# 6173616c = asal => album
+# 61736172 = asar => artist
+# 6d696e6d = minm => title
+# 50494354 = PICT => cover
+# 70726772 = prgr => start/elapsed/end
+#
+# data:
+# js base64 to string: atob( 'U29uZ3Mgb2YgSW5ub2NlbmNl' ); // 'Songs of Innocence'
+
+cat /tmp/shairport-sync-metadata | grep -A 2 '61736172\|6d696e6d\|6173616c\|70726772\|50494354' | grep -v '<data encoding="base64">\|--' | sed 's|<item><type>.*</type><code>||; s|</code><length>.*</length>||; s|</data></item>||; s|</item>||'
+
+# 6173616c
+# U29uZ3Mgb2YgSW5ub2NlbmNl
 ```
 
 **Switch to current output_device**
