@@ -33,9 +33,9 @@ fi
 mkdir -p $path/{incomplete,watch}
 
 # custom systemd unit
-ln -s /lib/systemd/system/trans{mission,}.service
-systemctl stop trans
-systemctl disable trans
+ln -s /lib/systemd/system/tran{smission,}.service
+systemctl stop tran
+systemctl disable tran
 
 dir=/etc/systemd/system/transmission.service.d
 mkdir $dir
@@ -49,8 +49,8 @@ systemctl daemon-reload
 # create settings.json
 file=$path/settings.json
 [[ -e $file ]] && rm $file
-systemctl start trans
-systemctl stop trans
+systemctl start tran
+systemctl stop tran
 
 if [[ $1 != u ]]; then
 	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
@@ -90,20 +90,20 @@ fi
 
 systemctl daemon-reload
 if [[ $3 == 1 ]] || [[ $( redis-cli get transtartup ) ]]; then
-	systemctl enable trans
+	systemctl enable tran
 	redis-cli del transtartup &> /dev/null
 fi
 
 echo -e "$bar Start Transmission ..."
-if ! systemctl start trans &> /dev/null; then
+if ! systemctl start tran &> /dev/null; then
 	title -l = "$warn Transmission install failed."
 	exit
 fi
 
 installfinish $@
 
-echo "Run: systemctl < start / stop > trans"
-echo "Startup: systemctl < enable / disable > trans"
+echo "Run: systemctl < start / stop > tran"
+echo "Startup: systemctl < enable / disable > tran"
 echo
 echo "Download directory: $path"
 echo "WebUI: < RuneAudio_IP >:9091"
