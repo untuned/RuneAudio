@@ -64,19 +64,26 @@ shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
 # ...
 # code:
 # hex        string  type
-# 6173616c = asal => album
 # 61736172 = asar => artist
 # 6d696e6d = minm => title
-# 50494354 = PICT => cover
+# 6173616c = asal => album
 # 70726772 = prgr => start/elapsed/end
+# 50494354 = PICT => cover
 #
+
+cat /tmp/shairport-sync-metadata\
+	| grep -A 2 '61736172\|6d696e6d\|6173616c\|70726772\|50494354'\
+	| grep -v '<data encoding="base64">\|--'\
+	| sed 's|<item><type>.*</type><code>||; s|</code><length>.*</length>||; s|</data></item>||; s|</item>||'\
+	| sed 's/61736172/artist:/; s/6d696e6d/title:/; s/6173616c/album:/; s/70726772/time:/; s/50494354/cover:/'\
+	| perl -p -e 's/:\n/: "/'\
+	| perl -p -e 's/\n/",\n/'
+
+# ...
+# album: "U29uZ3Mgb2YgSW5ub2NlbmNl",
+# ...
 # data:
 # js base64 to string: atob( 'U29uZ3Mgb2YgSW5ub2NlbmNl' ); // 'Songs of Innocence'
-
-cat /tmp/shairport-sync-metadata | grep -A 2 '61736172\|6d696e6d\|6173616c\|70726772\|50494354' | grep -v '<data encoding="base64">\|--' | sed 's|<item><type>.*</type><code>||; s|</code><length>.*</length>||; s|</data></item>||; s|</item>||'
-
-# 6173616c
-# U29uZ3Mgb2YgSW5ub2NlbmNl
 ```
 
 **Switch to current output_device**
