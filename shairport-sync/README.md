@@ -34,7 +34,7 @@ echo 'output_format = '$outputformat
 #        output_format = "S32";
 sed -i '/output_device = "default"/ i\
 //    output_device = "hw:0";\
-//	  output_device = "hw:1";\
+//    output_device = "hw:1";\
 //    output_format = "S32";
 ' /etc/shairport-sync.conf
 
