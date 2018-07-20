@@ -65,4 +65,9 @@ $string
     session_timeout = 120;
 ' /etc/shairport-sync.conf
 
+systemctl stop shairport
+systemctl disable shairport
+systemctl start shairport-sync
+systemctl enable shairport-sync
+
 installfinish
