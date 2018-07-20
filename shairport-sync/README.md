@@ -18,9 +18,9 @@ sed -i '/name = "%H"/ i\
     volume_range_db = 50;
 ' /etc/shairport-sync.conf
 
-# get dac's capable output_format  -f [ U8, S8, S16, S24, S24_3LE, S24_3BE, S32 ]
-cat /dev/urandom | aplay -f S16
-# Ctrl+c to exit - support format stdout without this error line:
+# test dac's capable output_format  -f [ U8, S8, S16, S24, S24_3LE, S24_3BE, S32 ]
+cat /dev/urandom | timeout 1 aplay -f S16
+# support format stdout without this error line:
 #    aplay: pcm_write:1940: write error: Interrupted system call
 
 # ## set usb dac
