@@ -18,12 +18,21 @@ sed -i '/name = "%H"/ i\
     volume_range_db = 50;
 ' /etc/shairport-sync.conf
 
+# get dac's output_device
+ao=$( redis-cli get ao )
+if [[ ${ao:0:-2} == 'bcm2835 ALSA' ]]; then
+	output_device=0
+else
+	output_device=$( aplay -l | grep "$ao" | sed 's/card \(.\):.*/\1/' )
+fi
+echo 'output_device = '$output_device
+
 # get dac's capable output_format
 for format in U8 S8 S16 S24 S24_3LE S24_3BE S32; do
 	std=$( cat /dev/urandom | timeout 1 aplay -q -f $format 2>&1 )
-	[[ -z $std ]] && outputformat=$format
+	[[ -z $std ]] && output_format=$format
 done
-echo 'output_format = '$outputformat
+echo 'output_format = '$output_format
 
 # ## set output for switching:
 #    onboard dac (3.5mm jack)
