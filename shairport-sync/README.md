@@ -23,24 +23,25 @@ for format in U8 S8 S16 S24 S24_3LE S24_3BE S32; do
 	std=$( cat /dev/urandom | timeout 1 aplay -q -f $format 2>&1 )
 	[[ -z $std ]] && outputformat=$format
 done
-echo Support output format: $outputformat
+echo 'output_format = '$outputformat
 
-# ## set usb dac
+# ## set output for switching:
+#    onboard dac (3.5mm jack)
+#        output_device = "hw:0";
+#        mixer_control_name = "PCM";
+#    usb dac
+#        output_device = "hw:1";
+#        output_format = "S32";
 sed -i '/output_device = "default"/ i\
-    output_device = "hw:1";\
-    output_format = "S32";
+//    output_device = "hw:0";\
+//	  output_device = "hw:1";\
+//    output_format = "S32";
 ' /etc/shairport-sync.conf
 
-# ## set onboard dac (3.5mm jack)
-sed -i '/output_device = "default"/ i\
-    output_device = "hw:0";\
-    mixer_control_name = "PCM";
-' /etc/shairport-sync.conf
-# activate improved audio driver
+# activate improved onboard dac (3.5mm jack) audio driver
 if ! grep 'audio_pwm_mode=2' /boot/config.txt; then
     sed -i '$ a\audio_pwm_mode=2' /boot/config.txt
 fi
-# ##
 
 # set metadata pipe
 sed -i '/enabled = "no"/ i\
