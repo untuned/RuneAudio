@@ -94,24 +94,3 @@ cat /tmp/shairport-sync-metadata\
 # data:
 # js base64 to string: atob( 'U29uZ3Mgb2YgSW5ub2NlbmNl' ); // 'Songs of Innocence'
 ```
-
-**Switch to current output_device**
-```sh
-ao=$( redis-cli get ao )
-card=$( aplay -l | grep "$ao" | sed 's/card \(.\):.*/\1/' )
-if [[ $card == 0 ]]; then
-    string=$( cat <<'EOF
-    output_device = "hw:0";
-    mixer_control_name = "PCM";
-EOF
-)
-else
-    string=$( cat <<'EOF
-    output_device = "hw:1";
-    output_format = "S32";
-EOF
-)
-fi
-sed -i '/output_device = "default"/ i$string' /etc/shairport-sync.conf
-systemctl restart shairport-sync
-```
