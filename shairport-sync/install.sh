@@ -20,10 +20,6 @@ pacman -U --noconfirm $pkg
 
 rm $pkg
 
-sed -i '/name = "%H"/ i\
-    volume_range_db = 50;
-' /etc/shairport-sync.conf
-
 # get dac's output_device
 ao=$( redis-cli get ao )
 if [[ ${ao:0:-2} == 'bcm2835 ALSA' ]]; then
@@ -54,7 +50,9 @@ fi
 # set config
 sed -i -e "/output_device = / i\
 $string
-" -e '/enabled = "no"/ i\
+" -i '/name = "%H"/ i\
+    volume_range_db = 50;
+' -e '/enabled = "no"/ i\
     enabled = "yes";\
     include_cover_art = "yes";\
     pipe_name = "/tmp/shairport-sync-metadata";\
