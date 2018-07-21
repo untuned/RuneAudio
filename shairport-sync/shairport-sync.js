@@ -26,10 +26,10 @@ pushstreamAirplay.onmessage = function( status ) { // on receive broadcast
 	$( '#currentalbum' ).html( album );
 	scrolltext();
 	
-	var imgcode = coverart.charAt[ 0 ];
-	var imgtype = { '/': 'jpg', 'i': 'png', 'R': 'gif' };
+//	var imgcode = coverart.charAt[ 0 ];
+//	var imgtype = { '/': 'jpg', 'i': 'png', 'R': 'gif' };
 	$( '#cover-art' ).css( {
-		  'background-image': 'url("data:image/'+ imgtype[ imgcode ] +';base64,'+ coverart +'")'
+		  'background-image': 'url("data:image/jpeg;base64,'+ coverart +'")'
 		, 'border-radius': 0
 	} );
 	
