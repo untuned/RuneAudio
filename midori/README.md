@@ -4,10 +4,6 @@ Upgrade from default Midori to latest version without errors:
 - `pacman -S midori` upgrade alone breaks Midori
 - Fix dependency errors
 
-**issue: `webkitWebProcess` - very high cpu load**
-- manual refresh brings it back to normal
-
-
 ## Run Midori without matchbox-window-manager
 
 `/.config/midori/config`
