@@ -23,7 +23,7 @@ while ( !feof( $airplay_handle ) ) {
 		$code = hex2bin( $std );
 		$output.= "'$code'";
 	} else {
-		$data = ( $output === "'PICT'" || $output === "'mper'" ) ? $std : base64_decode( $std );
+		$data = preg_match( '/PICT|mper|astm/', $output ) ? $std : base64_decode( $std );
 		$output.= " : '$data',\n";
 		echo $output;
 		$output = '';
