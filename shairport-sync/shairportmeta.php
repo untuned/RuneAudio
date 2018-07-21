@@ -22,3 +22,17 @@ fclose( $airplay_handle );
 // output:
 // hex string code
 // base64 string data
+
+/*
+<item><type>636f7265</type><code>6173616c</code><length>18</length>
+<data encoding="base64">
+U29uZ3Mgb2YgSW5ub2NlbmNl</data></item>
+...
+code:
+hex        string  type
+61736172 = asar => artist
+6d696e6d = minm => title
+6173616c = asal => album
+70726772 = prgr => start/elapsed/end
+50494354 = PICT => cover
+*/
