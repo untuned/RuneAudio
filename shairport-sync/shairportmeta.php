@@ -14,13 +14,6 @@ $replace = array(
 	, '#(.*)</data></item>.*\\n#' => "$1"                                        // get 'data'
 	, '#.*</item>.*\\n#' => ''                                                   // remove trailling '</item>'
 );
-$replacecode = array(
-	  '/asar/' => 'currentartist'  // hex: 61736172
-	, '/minm/' => 'currentsong'    // hex: 6d696e6d
-	, '/asal/' => 'currentalbum'   // hex: 6173616c
-	, '/prgr/' => 'time'           // hex: 70726772
-	, '/PICT/' => 'coverart'       // hex: 50494354
-);
 stream_set_blocking( $airplay_handle, false );
 $i = 0;
 while ( !feof( $airplay_handle ) ) {
@@ -29,14 +22,13 @@ while ( !feof( $airplay_handle ) ) {
 	if ( !$std ) continue;
 	if ( $i === 0 ) {
 		$i++;
-		$code = hex2bin( $std );
+		$code = $std;
 	} else {
 		$i = 0;
-		// keep coverart and some others as base64
-		$data = preg_match( '/astc|astm|astn|caps|PICT|mper/', $code ) ? $std : base64_decode( $std );
+		$data = $std;
 		$status[ $code ] = $data;
 		// each stdout stream end with 'prgr'
-		if ( $code === 'prgr' ) {
+		if ( $code === '70726772' ) {
 			print_r( $status );
 			$status[ 'actPlayer' ] = 'Airplay';
 			$json = json_encode( $status );
