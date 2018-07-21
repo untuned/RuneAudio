@@ -64,7 +64,8 @@ systemctl start shairport-sync
 # shairport-sync-metadata-reader
 shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
 
-# standard cat metadata
+# standard named pipe cat
+cat /tmp/shairport-sync-metadata
 # ...
 # <item><type>636f7265</type><code>6173616c</code><length>18</length>
 # <data encoding="base64">
@@ -77,20 +78,3 @@ shairport-sync-metadata-reader < /tmp/shairport-sync-metadata
 # 6173616c = asal => album
 # 70726772 = prgr => start/elapsed/end
 # 50494354 = PICT => cover
-#
-
-cat /tmp/shairport-sync-metadata\
-	| grep -A 2 '61736172\|6d696e6d\|6173616c\|70726772\|50494354'\
-	| grep -v '<data encoding="base64">\|--'\
-	| sed 's/61736172/artist:/; s/6d696e6d/title:/; s/6173616c/album:/; s/70726772/time:/; s/50494354/cover:/'\
-	| sed 's|<item><type>.*</type><code>||; s|</code><length>.*</length>||; s|</data></item>||; s|</item>||'\
-	| perl -p -e 's/:\n/: "/'\
-	| perl -p -e 's/\n/",\n/'\
-	| sed '/7063656e/ d'
-
-# ...
-# album: "U29uZ3Mgb2YgSW5ub2NlbmNl",
-# ...
-# data:
-# js base64 to string: atob( 'U29uZ3Mgb2YgSW5ub2NlbmNl' ); // 'Songs of Innocence'
-```
