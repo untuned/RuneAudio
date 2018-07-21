@@ -65,6 +65,8 @@ pushstreamAirplay.onmessage = function( status ) { // on receive broadcast
 		$( '#playsource-airplay' ).removeClass( 'inactive' );
 	} else {
 		$( '#coverart, #share-group' ).css( 'width', '60%' );
+		clearInterval( GUI.currentKnob );
+		clearInterval( GUI.countdown );
 	}
 //}
 };
