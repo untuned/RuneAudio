@@ -25,6 +25,8 @@ ln -sf /lib/libicudata.so.{61.1,56}
 
 yes 2>/dev/null | pacman -S midori
 
+redis-cli hset addons mido 1 &> /dev/null
+
 echo -e "$bar Restart Midori ..."
 killall midori
 sleep 3
