@@ -1,10 +1,7 @@
 Chromium Browser
 ---
-
-- Default local browser is customized Midori, `midori-rune`, which cannot be upgraded
-- MPD upgrade breaks **Midori** and upgrade has high CPU load issue
-- **Firefox** has trouble with depends
-- **Chromium** can be used instead with the least issues
+(Install Chromium breaks default MPD. MPD Updrade needed.)
+**Chromium** has the least issues as an alternative browser
 	- Chromium cannot be installed without `ffmpeg` upgrade
 	- `ffmpeg` upgrade breaks `mpd-rune`
 	- upgrade `ffmpeg` + `mpd` > install `chromium`
