@@ -19,8 +19,8 @@ timestart
 
 pacman -S --noconfirm enchant freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3 harfbuzz hunspell icu libgcrypt libgpg-error libsoup libwebp gst-plugins-base-libs
 
-ln -sf /lib/libicuuc.so.{60.2,56}
-ln -sf /lib/libicudata.so.{60.2,56}
+ln -sf /lib/libicuuc.so.{61.1,56}
+ln -sf /lib/libicudata.so.{61.1,56}
 
 yes 2>/dev/null | pacman -S midori
 
