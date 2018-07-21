@@ -12,9 +12,9 @@ if ( $argv[ 1 ] === 'off' ) {
 	die();
 }
 
-ui_render( 'playback', 1 );
 wrk_startAirplay( $redis );
 exec( '/usr/bin/systemctl stop mpd' );
+ui_render( 'playback', 1 );
 	
 /* stdout stream from shairport-sync named pipe:
 ...
