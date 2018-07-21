@@ -1,13 +1,15 @@
 <?php
 $replace = array(
 	  '#<item><type>.*</type><code>.*</code><length>0</length>.*\\n#' => ''
-	, '#<item><type>.*</type><code>(.*)</code><length>.*</length>.*#' => "$1"
+	, '#<item><type>.*</type><code>(.*)</code><length>.*</length>.*\\n#' => "$1"
 	, '#<data encoding="base64">\\n#' => ''
-	, '#(.*)</data></item>#' => "$1"
-	, '#</item>#' => ''
+	, '#(.*)</data></item>.*\\n#' => "$1"
+	, '#.*</item>.*\\n#' => ''
 );
-$airplay_handle = fopen('/tmp/shairport-sync-metadata', 'r' );
+$airplay_handle = fopen( '/tmp/shairport-sync-metadata', 'r' );
 //stream_set_blocking( $airplay_handle, false );
+$i = 0;
+$output = '';
 while ( !feof( $airplay_handle ) ) {
 	$line = fgets( $airplay_handle );
 	$std = preg_replace(
@@ -15,13 +17,22 @@ while ( !feof( $airplay_handle ) ) {
 		array_values( $replace ),
 		$line
 	);
-	echo $std;
+	if ( !$std ) continue;
+	if ( $i === 0 ) {
+		$i++;
+		$code = hex2bin( $std );
+		$output.= "'$code'";
+	} else {
+		$data = ( $output === "'PICT'" || $output === "'mper'" ) ? $std : base64_decode( $std );
+		$output.= " : '$data',\n";
+		echo $output;
+		$output = '';
+		$i = 0;
+	}
+	//exec( "/usr/bin/curl -s -v -X POST 'http://localhost/pub?id=airplay' -d \"$std\"" );
 }
 fclose( $airplay_handle );
 
-// output:
-// hex string code
-// base64 string data
 
 /*
 <item><type>636f7265</type><code>6173616c</code><length>18</length>
