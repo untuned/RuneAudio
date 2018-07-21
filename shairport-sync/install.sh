@@ -11,16 +11,15 @@ installstart
 
 getuninstall
 
-pkg=shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
-
-wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/shairport.php
-wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/$pkg
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
-pacman -Sy --noconfirm libconfig
-pacman -U --noconfirm $pkg
+wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/shairport.php
 
+pkg=shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
+wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/$pkg
+pacman -U --noconfirm $pkg
 rm $pkg
+pacman -Sy --noconfirm libconfig
 
 # get dac's output_device
 ao=$( redis-cli get ao )
