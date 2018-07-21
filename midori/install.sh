@@ -17,7 +17,8 @@ timestart
 
 [[ $( pacman -Sy | grep -c 'up to date') != 5 ]] && rankmirrors
 
-pacman -S --noconfirm enchant freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3 harfbuzz hunspell icu libgcrypt libgpg-error libsoup libwebp gst-plugins-base-libs
+pacman -S --noconfirm enchant freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3 \
+	harfbuzz hunspell icu libgcrypt libgpg-error libsoup libwebp gst-plugins-base-libs zbar
 
 ln -sf /lib/libicuuc.so.{61.1,56}
 ln -sf /lib/libicudata.so.{61.1,56}
