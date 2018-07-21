@@ -13,7 +13,9 @@ getuninstall
 
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
 wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
-wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/shairport.php
+wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/shairport.js -P /srv/http/assets/js
+wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/shairport.php -P /srv/http/shairport.php
+chmod +x /srv/http/shairport.php
 
 pkg=shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/$pkg
@@ -59,8 +61,8 @@ $string
     pipe_name = "/tmp/shairport-sync-metadata";\
     pipe_timeout = 5000;
 ' -e '/run_this_before_play_begins/ i\
-    run_this_before_play_begins = '/var/www/command/airplay_toggle on';\
-    run_this_after_play_ends = '/var/www/command/airplay_toggle off';\
+    run_this_before_play_begins = '/srv/http/shairport.php on';\
+    run_this_after_play_ends = '/srv/http/shairport.php off';\
     session_timeout = 120;
 ' /etc/shairport-sync.conf
 
