@@ -20,8 +20,13 @@ timestart
 pacman -S --noconfirm enchant freetype2 gpg-crypter glib2 gstreamer gstreamer-vaapi gtk3 \
 	harfbuzz hunspell icu libgcrypt libgpg-error libsoup libwebp gst-plugins-base-libs zbar
 
-ln -sf /lib/libicuuc.so.{61.1,56}
-ln -sf /lib/libicudata.so.{61.1,56}
+file=$( ls -l /lib/libicuuc* | grep -v '^lrw' )
+file=$( echo $file | cut -d' ' -f9 )
+ln -sf $file /lib/libicuuc.so.56
+
+file=$( ls -l /lib/libicudata* | grep -v '^lrw' )
+file=$( echo $file | cut -d' ' -f9 )
+ln -sf $file /lib/libicudata.so.56
 
 yes 2>/dev/null | pacman -S midori
 
