@@ -5,6 +5,7 @@
 alias=shai
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 installstart
 
@@ -12,9 +13,10 @@ getuninstall
 
 pkg=shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
 
+wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/shairport.php
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/$pkg
-wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
-wget https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
+wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libcrypto.so.1.1 -P /usr/lib
+wgetnc https://github.com/rern/RuneAudio/raw/master/mpd/usr/lib/libssl.so.1.1 -P /usr/lib
 pacman -Sy --noconfirm libconfig
 pacman -U --noconfirm $pkg
 
@@ -67,5 +69,9 @@ systemctl stop shairport
 systemctl disable shairport
 systemctl start shairport-sync
 systemctl enable shairport-sync
+
+file=/srv/http/command/rune_Pl_wrk
+echo $file
+comment "activePlayer === 'Airplay'" -n -5 'close Redis connection'
 
 installfinish
