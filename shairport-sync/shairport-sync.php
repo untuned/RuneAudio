@@ -12,19 +12,6 @@ if ( $argv[ 1 ] === 'off' ) {
 	die();
 }
 
-# get dac's output_device
-$ao = $redis->get( 'ao' );
-if ( explode( '_', $ao )[ 0 ] === 'bcm2835 ALSA' ) {
-	$device = 0;
-	exec( "sed '/mixer_control_name/ s|^//||' /etc/shairport-sync.conf" );
-} else {
-	$shairportao = $redis->hGet( 'shairportao', $ao );
-	$device = substr( $shairportao, 0, 1 );
-	$format = substr( $shairportao, 1 );
-	exec( "sed 's/\(^\soutput_format = \).*/\1"$format"/' /etc/shairport-sync.conf" );
-}
-exec( "sed 's/\(^\soutput_device = \).*/\1"$device"/' /etc/shairport-sync.conf" );
-
 wrk_startAirplay( $redis );
 exec( '/usr/bin/systemctl stop mpd' );
 ui_render( 'playback', 1 );
