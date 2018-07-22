@@ -32,6 +32,13 @@ yes 2>/dev/null | pacman -S midori
 
 redis-cli hset addons mido 1 &> /dev/null
 
+if grep '^chromium' /root/.xinitrc; then
+	echo -e "$bar Disable Chromium ..."
+	sed -i -e '/^chromium/ s/^/#/
+	' -e '/midori/ s/^#//
+	' /root/.xinitrc
+fi
+
 echo -e "$bar Restart Midori ..."
 killall midori
 sleep 3
