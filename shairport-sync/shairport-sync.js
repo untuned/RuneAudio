@@ -7,15 +7,14 @@ pushstreamAirplay.addChannel( 'airplay' );
 pushstreamAirplay.onmessage = function( status ) { // on receive broadcast
 	var status = status[ 0 ];
 	var artist = atob( status[ '61736172' ] ); // arar = string from hex 61736172
-	var song = atob( status[ '6d696e6d' ] );  // minm
+	var song = atob( status[ '6d696e6d' ] );   // minm
 	var album = atob( status[ '6173616c' ] );  // asal
-	var time = atob( status[ '70726772' ] );   // prgr
-	var coverart = status[ '50494354' ];       // PICT - base64 string
+	var time = atob( status[ '70726772' ] );   // prgr - start/elapsed/end
+	var coverart = status[ '50494354' ];       // PICT - base64 jpeg
 	var time = time.split( '/' );
 	var total = Math.round( ( time[ 2 ] - time[ 1 ] ) / 44100 );
 	var elapsed = Math.round( ( time[ 0 ] - time[ 1 ] ) / 44100 );
 
-//function displayairplay() {
 	$( '#menu-top, #menu-bottom' ).toggleClass( 'hide', !display.bar );
 	if ( display.bar ) $( '.playback-controls' ).css( 'visibility', 'hidden' );
 	
