@@ -31,6 +31,7 @@ rm $pkg
 
 # get dac's output_device
 ao=$( redis-cli get ao )
+echo -e "$bar AirPlay output: $ao"
 if [[ ${ao:0:-2} == 'bcm2835 ALSA' ]]; then
 	# activate improved onboard dac (3.5mm jack) audio driver
 	if ! grep 'audio_pwm_mode=2' /boot/config.txt; then
@@ -56,6 +57,7 @@ else
 EOF
 )
 fi
+echo $string
 # set config
 sed -i -e "/output_device = / i\
 $string
