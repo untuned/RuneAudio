@@ -1,4 +1,4 @@
 Change Zoom Level of Local Browser
 ---
 
-For Midori and Chromium
+For Midori and Chromium only.
