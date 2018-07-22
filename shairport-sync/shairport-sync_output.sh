@@ -29,21 +29,13 @@ else
 EOF
 )
 fi
+echo $string
+
 # set config
-sed -i -e "/output_device = / i\
+sed -i -e '/^\s*output_device\|^\s*mixer_control_name\|^\s*output_format/ d
+' -e "/output_device = / i\
 $string
-" -i '/name = "%H"/ i\
-    volume_range_db = 50;
-' -e '/enabled = "no"/ i\
-    enabled = "yes";\
-    include_cover_art = "yes";\
-    pipe_name = "/tmp/shairport-sync-metadata";\
-    pipe_timeout = 5000;
-' -e '/run_this_before_play_begins/ i\
-    run_this_before_play_begins = '/srv/http/shairport-sync.php on';\
-    run_this_after_play_ends = '/srv/http/shairport-sync.php off';\
-    session_timeout = 120;
-' /etc/shairport-sync.conf
+" /etc/shairport-sync.conf
 
 systemctl restart shairport-sync
 
