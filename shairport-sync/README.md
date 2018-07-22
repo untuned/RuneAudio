@@ -1,4 +1,4 @@
-### shairport-sync
+### Shairport Sync
 
 Compiled from [shairport-sync](https://github.com/mikebrady/shairport-sync) with `---with-metadata` for metadata retrieval.
 
