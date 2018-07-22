@@ -19,6 +19,10 @@ chmod +x /srv/http/shairport-sync.php
 
 pkg=shairport-sync-3.2.1-1-armv7h.pkg.tar.xz
 wgetnc https://github.com/rern/RuneAudio/raw/$branch/shairport-sync/$pkg
+if pacman -Q shairport-sync &> /dev/null; then
+	echo -e "$bar Uninstall existing shairport-sync"
+	pacman -R shairport-sync
+fi
 pacman -U --noconfirm $pkg
 rm $pkg
 pacman -Sy --noconfirm libconfig
