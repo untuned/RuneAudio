@@ -77,5 +77,5 @@ cat /tmp/shairport-sync-metadata
 # 61736172 = asar => artist => base64 string            => artist = atob( DATA );
 # 6d696e6d = minm => song   => base64 string            => song   = atob( DATA );
 # 6173616c = asal => album  => base64 string            => album  = atob( DATA );
-# 70726772 = prgr => time   => base64 start/elapsed/end => st_el_en = atob( DATA ).split( '/' ); second = st_el_en[ n ] / 44100;
+# 70726772 = prgr => time   => base64 start/elapsed/end => st_el_en = atob( DATA ).split( '/' ); second = Math.round( st_el_en[ n ] / 44100 );
 # 50494354 = PICT => cover  => base64 jpeg string       => background-image  = 'url( "data:image/jpeg;base64,DATA" )'; // no conversion
