@@ -25,14 +25,15 @@ if [[ ${ao:0:-2} == 'bcm2835 ALSA' ]]; then
 else
 	output_device=$( aplay -l | grep "$ao" | sed 's/card \(.\):.*/\1/' )
 fi
-echo 'output_device = '$output_device
+echo 'DAC: '$ao
+echo 'output_device = "hw:'$output_device'"'
 
 # get dac's output_format
 for format in U8 S8 S16 S24 S24_3LE S24_3BE S32; do
 	std=$( cat /dev/urandom | timeout 1 aplay -q -f $format 2>&1 )
 	[[ -z $std ]] && output_format=$format
 done
-echo 'output_format = '$output_format
+echo 'output_format = "'$output_format'"'
 
 # ## set alsa = {...}
 sed -i '/output_device = "default"/ i\
