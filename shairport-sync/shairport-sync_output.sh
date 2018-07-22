@@ -10,7 +10,7 @@ if [[ ${ao:0:-2} == 'bcm2835 ALSA' ]]; then
     	sed -i '$ a\audio_pwm_mode=2' /boot/config.txt
 	fi
 	string=$( cat <<'EOF'
-	output_device=0;
+	output_device = 0;
 	mixer_control_name = "PCM";
 EOF
 )
