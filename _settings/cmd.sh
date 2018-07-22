@@ -43,6 +43,9 @@ tnm() {
 rd() {
 	redis-cli "$@"
 }
+topp() {
+	top -p $( pgrep $1 )
+}
 
 # multiboot only
 [[ ! $( fdisk -l | grep mmcblk0p5 ) ]] && return
