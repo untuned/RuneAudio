@@ -72,10 +72,10 @@ cat /tmp/shairport-sync-metadata
 # U29uZ3Mgb2YgSW5ub2NlbmNl</data></item>
 # ...
 # ------------------------------------------------------------------------------------------------------------------
-# hex        string  type      DATA                        JS coversion and usage 
+# hex        hex2bin DATA                      JS coversion and usage 
 # ------------------------------------------------------------------------------------------------------------------
-# 61736172 = asar => artist => base64 string            => artist = atob( DATA );
-# 6d696e6d = minm => song   => base64 string            => song   = atob( DATA );
-# 6173616c = asal => album  => base64 string            => album  = atob( DATA );
-# 70726772 = prgr => time   => base64 start/elapsed/end => st_el_en = atob( DATA ).split( '/' ); second = Math.round( st_el_en[ n ] / 44100 );
-# 50494354 = PICT => cover  => base64 jpeg string       => background-image  = 'url( "data:image/jpeg;base64,DATA" )'; // no conversion
+# 61736172   asar    base64 artist             artist = atob( DATA );
+# 6d696e6d   minm    base64 song               song   = atob( DATA );
+# 6173616c   asal    base64 album              album  = atob( DATA );
+# 70726772   prgr    base64 start/elapsed/end  st_el_en = atob( DATA ).split( '/' ); second = Math.round( st_el_en[ n ] / 44100 );
+# 50494354   PICT    base64 jpeg coverart         background-image = 'url( "data:image/jpeg;base64,DATA" )'; // no conversion
