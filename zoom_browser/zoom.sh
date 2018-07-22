@@ -12,4 +12,4 @@ redis-cli set zoomlevel $1 &> /dev/null
 
 clearcache
 
-title -l '=' "$bar Zoom level of local browser changed to $1"
+title -l '=' "$info Zoom level of local browser changed to $1"
