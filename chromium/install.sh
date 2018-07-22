@@ -48,9 +48,7 @@ fi
 
 file=/boot/config.txt
 echo $file
-echo 'hdmi_group=1
-hdmi_mode=31
-disable_overscan=1
+echo 'disable_overscan=1
 hdmi_ignore_cec=1' >> $file
 
 file=/root/.xinitrc
