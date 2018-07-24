@@ -28,29 +28,13 @@ file=/boot/config.txt
 echo $file
 sed -i '/disable_overscan=1/ s/^#//' $file
 
-# replace midori with chromium
-if [[ $1 != u ]]; then
-	z=$1;
-	zoom=$( echo "0.5 $z 3" \
-      | awk '{
-          if (( $1 < $2 && $2 < $3 ))
-            print $2
-          else if (( $2 < $1 ))
-            print $1
-          else
-            print $3
-        }'
-	)
-	redis-cli set zoomlevel $zoom
-else
-	zoom=$( redis-cli get zoomlevel )
-fi
-
 file=/boot/config.txt
 echo $file
 echo 'disable_overscan=1
 hdmi_ignore_cec=1' >> $file
 
+# replace midori with chromium
+zoom=$( redis-cli get zoomlevel )
 file=/root/.xinitrc
 echo $file
 sed -i '/^midori/ {
