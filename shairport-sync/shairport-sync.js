@@ -24,8 +24,6 @@ pushstreamAirplay.onmessage = function( status ) { // on receive broadcast
 	$( '#currentalbum' ).html( album );
 	scrolltext();
 	
-//	var imgcodetype = { '/': 'jpeg', 'i': 'png', 'R': 'gif' };
-//  var imgtype = imgcodetype[ coverart.charAt[ 0 ] ];
 	$( '#cover-art' ).css( {
 		  'background-image': 'url("/srv/http/assets/img/airplay-cover.jpg")'
 		, 'border-radius': 0
