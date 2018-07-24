@@ -41,9 +41,9 @@ if [[ $1 != u ]]; then
             print $3
         }'
 	)
+	redis-cli set zoomlevel $zoom
 else
-	zoom=$( redis-cli get chrozoom )
-	redis-cli del chrozoom &> /dev/null
+	zoom=$( redis-cli get zoomlevel )
 fi
 
 file=/boot/config.txt
