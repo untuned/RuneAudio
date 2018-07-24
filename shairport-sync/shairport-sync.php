@@ -43,6 +43,12 @@ while ( 1 ) ) {
 	} else {
 		$i = 0;
 		$data = $std;
+		if ( $code === '50494354' ) {
+			$coverfile = fopen( '/srv/http/assets/img/airplay-cover.jpg', 'wb' );
+			fwrite( $coverfile, base64_decode( $data ) );
+			fclose( $coverfile );
+			continue;
+		}
 		$status[ $code ] = $data;
 		// each stdout stream end with 'prgr'
 		if ( $code === '70726772' ) ui_render( 'airplay', json_encode( $status ) );
