@@ -10,6 +10,7 @@ pushstreamAirplay.onmessage = function( status ) { // on receive broadcast
 	var song = atob( status[ '6d696e6d' ] );   // minm
 	var album = atob( status[ '6173616c' ] );  // asal
 	var time = atob( status[ '70726772' ] );   // prgr - start/elapsed/end
+	var coverart = status[ '50494354' ];       // PICT - base64 jpeg
 	var time = time.split( '/' );
 	var total = Math.round( ( time[ 2 ] - time[ 1 ] ) / 44100 );
 	var elapsed = Math.round( ( time[ 0 ] - time[ 1 ] ) / 44100 );
@@ -24,8 +25,10 @@ pushstreamAirplay.onmessage = function( status ) { // on receive broadcast
 	$( '#currentalbum' ).html( album );
 	scrolltext();
 	
+//	var imgcodetype = { '/': 'jpeg', 'i': 'png', 'R': 'gif' };
+//  var imgtype = imgcodetype[ coverart.charAt[ 0 ] ];
 	$( '#cover-art' ).css( {
-		  'background-image': 'url("/srv/http/assets/img/airplay-cover.jpg")'
+		  'background-image': 'url("data:image/jpeg;base64,'+ coverart +'")'
 		, 'border-radius': 0
 	} );
 	
