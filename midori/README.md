@@ -3,7 +3,7 @@ Midori is not required if display output on RPi is not needed.
 `Menu` > `Settings` > `Disable local browser` : saves around 6% CPU load and 45MB memory.  
 
 Upgrade from default Midori to latest version without errors:
-- **RuneUI Enhancement** should be installed to fix too high CPU load
+- To fix too high CPU load, install **RuneUI Enhancement**
 - `pacman -S midori` upgrade alone breaks Midori
 - Fix dependency errors
 
