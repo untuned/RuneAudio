@@ -21,7 +21,7 @@ summb=$(( $freemb + $unpartmb ))
 
 # noobs has 3MB unpartitioned space
 if [[ $unpartmb -lt 10 ]]; then
-	title -l '=' "$info No useful space available. ( ${unpartmb}MB unused space )"
+	title -l '=' "$info No expandable space available. ( ${unpartmb}MB unused space )"
 	redis-cli hset addons expa 1 &> /dev/null
 	exit
 fi
@@ -36,13 +36,13 @@ fi
 
 # expand partition #######################################
 title -l '=' "$bar Expand partition ..."
-printf "%-23s %s\n"     'Current partiton      :' $devpart
-printf "%-23s %5s %s\n" 'Available free space  :' $freemb MB
-printf "%-23s %5s %s\n" 'Available unused space:' $unpartmb MB
+printf "%-23s %s\n"     'Current partiton :' $devpart
+printf "%-23s %5s %s\n" 'Available space  :' $freemb MB
+printf "%-23s %5s %s\n" 'Expandable space :' $unpartmb MB
 echo
 
 if [[ -t 1 ]]; then
-	yesno "Expand partiton to full unused space:" answer
+	yesno "Expand partiton to full expandable space:" answer
 	if [[ $answer == 0 ]]; then
 		title "$info Expand partition cancelled."
 		exit
@@ -69,9 +69,7 @@ if [[ $? != 0 ]]; then
 	title -nt "Try: reboot > resize2fs $devpart"
 	exit
 else
-	freekb=$( df | grep '/$' | awk '{print $4}' )
-	freemb=$(( $freekb / 1000 ))
-	
+	free=$( df -h | grep '/$' | awk '{print $4}' )
 	redis-cli hset addons expa 1 &> /dev/null # mark as expanded - disable webui button
-	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor $freemb ) MB free space."
+	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor $free ) available space."
 fi
