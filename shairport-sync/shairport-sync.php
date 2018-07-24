@@ -32,6 +32,16 @@ $replace = array(
 );
 $airplay_handle = fopen( '/tmp/shairport-sync-metadata', 'r' );
 stream_set_blocking( $airplay_handle, false );
+$status = array(
+	 'volume' => '100',
+	 'random' => '0',
+	 'single' => '0',
+	 'consume' => '0',
+	 'playlist' => '1',
+	 'playlistlength' => '1',
+	 'state' => 'play',
+	 'actPlayer' => 'Airplay'
+);
 $i = 0;
 while ( 1 ) ) {
 	$line = fgets( $airplay_handle );
@@ -39,17 +49,24 @@ while ( 1 ) ) {
 	if ( !$std ) continue;
 	if ( $i === 0 ) {
 		$i++;
-		$code = $std;
+		$code = hex2bin( $std );
 	} else {
 		$i = 0;
-		$data = $std;
-		$status[ $code ] = $data;
+		$data = $code === 'PICT' ? $std : base64_decode( $std );
+		
 		// each stdout stream end with 'prgr'
-		if ( $code === '70726772' ) {
+		if ( $code !== 'prgr' ) {
+			$status[ $code ] = $data;
+		} else {
+			$progress = explode( $data );
+			$status[ 'elapsed' ] = round( ( $progress[ 1 ] - $progress[ 0 ] ) / 44100 );
+			$status[ 'time' ] = round( ( $progress[ 2 ] - $progress[ 0 ] ) / 44100 ):
 			ui_render( 'airplay', json_encode( $status ) );
 			$coverfile = fopen( '/srv/http/assets/img/airplay-cover.jpg', 'wb' );
-			fwrite( $coverfile, base64_decode( $status[ '50494354' ] ) );
+			fwrite( $coverfile, base64_decode( $status[ 'PICT' ] ) );
 			fclose( $coverfile );
+			unset( $status[ 'PICT' ] );
+			$redis->set( 'act_player_info', json_encode( $status ) );
 		}
 	}
 }
