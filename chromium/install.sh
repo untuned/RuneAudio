@@ -46,6 +46,7 @@ chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-s
 
 installfinish $@
 
+redis-cli set browser 2
 redis-cli save
 
 title "$info Please reboot."
