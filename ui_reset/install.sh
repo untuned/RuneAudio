@@ -40,9 +40,6 @@ sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
 ' -e '/refresh_ao on\|refresh_ao off/ d
 ' /etc/udev/rules.d/rune_usb-audio.rules
 
-rm -fr /srv
-rm -f /usr/local/bin/uninstall_{back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
-
 cd /tmp
 wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file
 
@@ -56,8 +53,11 @@ chmod -R 755 /tmp/install
 cp -rfp /tmp/install/* /
 rm -rf /tmp/install
 
-redis-cli del volumemute webradios pathlyrics notifysec zoomlevel browser &> /dev/null
+rm -fr /srv
+rm -f /usr/local/bin/uninstall_{addo,back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
+
 redis-cli hdel addo back enha font gpio lyri paus RuneYoutube udac &> /dev/null
+redis-cli del volumemute webradios pathlyrics notifysec zoomlevel browser &> /dev/null
 
 title "$bar Install Addons ..."
 wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh
