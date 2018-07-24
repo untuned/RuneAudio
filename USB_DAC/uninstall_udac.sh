@@ -21,6 +21,6 @@ echo $file
 sed -i -e '/ui_notify/ s|^//||
 ' -e '/udac0/,/udac1/ d' $file
 
-redis-cli del udaclist
+redis-cli del udaclist &> /dev/null
 
 uninstallfinish $@
