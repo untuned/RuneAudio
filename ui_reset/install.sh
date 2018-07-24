@@ -60,7 +60,7 @@ redis-cli hdel addo back enha font gpio lyri paus RuneYoutube udac &> /dev/null
 redis-cli del volumemute webradios pathlyrics notifysec zoomlevel browser &> /dev/null
 
 title "$bar Install Addons ..."
-wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh
+wget -qN --show-progress --no-check-certificate https://github.com/rern/RuneAudio_Addons/raw/master/install.sh
 chmod +x install.sh
 ./install.sh
 
