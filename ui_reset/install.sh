@@ -43,6 +43,9 @@ sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
 cd /tmp
 wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file
 
+rm -fr /srv
+rm -f /usr/local/bin/uninstall_{addo,back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
+
 rm -rf /tmp/install
 mkdir -p /tmp/install
 bsdtar -xvf /tmp/$file -C /tmp/install
@@ -52,9 +55,6 @@ chown -R http:http /tmp/install/srv
 chmod -R 755 /tmp/install
 cp -rfp /tmp/install/* /
 rm -rf /tmp/install
-
-rm -fr /srv
-rm -f /usr/local/bin/uninstall_{addo,back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
 
 redis-cli hdel addo back enha font gpio lyri paus RuneYoutube udac &> /dev/null
 redis-cli del volumemute webradios pathlyrics notifysec zoomlevel browser &> /dev/null
