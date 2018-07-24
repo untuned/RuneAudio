@@ -43,14 +43,13 @@ while ( 1 ) ) {
 	} else {
 		$i = 0;
 		$data = $std;
-		if ( $code === '50494354' ) { // 1st character - '/': 'jpeg', 'i': 'png', 'R': 'gif' (AirPlay always jpeg)
-			$coverfile = fopen( '/srv/http/assets/img/airplay-cover.jpg', 'wb' );
-			fwrite( $coverfile, base64_decode( $data ) );
-			fclose( $coverfile );
-			continue;
-		}
 		$status[ $code ] = $data;
 		// each stdout stream end with 'prgr'
-		if ( $code === '70726772' ) ui_render( 'airplay', json_encode( $status ) );
+		if ( $code === '70726772' ) {
+			ui_render( 'airplay', json_encode( $status ) );
+			$coverfile = fopen( '/srv/http/assets/img/airplay-cover.jpg', 'wb' );
+			fwrite( $coverfile, base64_decode( $status[ '50494354' ] ) );
+			fclose( $coverfile );
+		}
 	}
 }
