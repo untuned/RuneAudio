@@ -1,7 +1,7 @@
 ## Midori Upgrade
 
 Midori is not required if display output on RPi is not needed.  
-`Menu` > `Settings` > `Disable local browser` : saves around 6% CPU load and 50MB memory.  
+`Menu` > `Settings` > `Disable local browser` : saves around 6% CPU load and 45MB memory.  
 
 Upgrade from default Midori to latest version without errors:
 - `pacman -S midori` upgrade alone breaks Midori
