@@ -16,6 +16,7 @@ crontab -l | { cat | sed '/addonsupdate.sh/ d'; } | crontab -
 rm -f /usr/share/bootsplash/{start,reboot,shutdown}-runeaudio.png
 # gpio
 rm -f /root/gpio*.py
+rm /etc/sudoers.d/http
 # back
 rm -f /etc/sudoers.d/http-backup
 #motd
