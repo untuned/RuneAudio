@@ -10,9 +10,9 @@ alias=uire
 title -l '=' "$bar Reset RuneUI ..."
 timestart
 
+echo -e "$bar Get files ..."
 # cwd '/srv/http' will be renoved
 cd /tmp
-echo -e "$bar Get files ..."
 wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file
 if [[ $? != 0 ]]; then
 	title -l '=' "$warn Get files failed. Please try again."
