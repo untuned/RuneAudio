@@ -10,6 +10,15 @@ alias=uire
 title -l '=' "$bar Reset RuneUI ..."
 timestart
 
+# cwd '/srv/http' will be renoved
+cd /tmp
+echo -e "$bar Get files ..."
+wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file
+if [[ $? != 0 ]]; then
+	title -l '=' "$warn Get files failed. Please try again."
+	exit
+fi
+
 crontab -l | { cat | sed '/addonsupdate.sh/ d'; } | crontab -
 
 # enha
@@ -37,9 +46,6 @@ else
 	rm -f /usr/local/bin/ply-image
 	rm -fr /usr/share/ply-image
 fi
-
-cd /tmp
-wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file
 
 rm -f /usr/local/bin/uninstall_{addo,back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
 rm -fr /srv
