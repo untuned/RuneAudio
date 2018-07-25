@@ -42,22 +42,27 @@ while ( 1 ) ) {
 		$code = hex2bin( $std );
 	} else {
 		$i = 0;
-		$data = $code === 'PICT' ? $std : base64_decode( $std );
+		$data = base64_decode( $std );
 		
-		// each stdout stream end with 'prgr'
-		if ( $code !== 'prgr' ) {
-			$status[ $code ] = $data;
-		} else {
+		if ( $code === 'arar' ) {
+			$status[ 'artist' ] = $data;
+		} else if ( $code === 'minm' ) {
+			$status[ 'song' ] = $data;
+		} else if ( $code === 'asal' ) {
+			$status[ 'album' ] = $data;
+		} else if ( $code === 'PICT' ) {
+			$cover = $data;
+		} else if ( $code === 'prgr' ) { // each send end with 'prgr'
 			$progress = explode( $data );
-			// append start time to filename to avoid cache
 			$status[ 'elapsed' ] = round( ( $progress[ 1 ] - $progress[ 0 ] ) / 44100 );
 			$status[ 'time' ] = round( ( $progress[ 2 ] - $progress[ 0 ] ) / 44100 ):
 			$status[ 'cover' ] = '/srv/http/assets/img/airplay'.$progress[ 0 ].'.jpg';
 			ui_render( 'airplay', json_encode( $status ) );
+			// append start time to filename to avoid cache
 			$coverfile = fopen( $status[ 'cover' ], 'wb' );
-			fwrite( $coverfile, base64_decode( $status[ 'PICT' ] ) );
+			fwrite( $coverfile, $cover );
+			$cover = '';
 			fclose( $coverfile );
-			unset( $status[ 'PICT' ] );
 			// current status not available in airplay 
 			$redis->set( 'act_player_info', json_encode( $status ) );
 		}
