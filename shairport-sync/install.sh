@@ -88,7 +88,7 @@ EOF
 )
 appendH '$'
 
-file=/srv/http/command/rune_Pl_wrk
+file=/srv/http/command/rune_PL_wrk
 echo $file
 comment "activePlayer === 'Airplay'" -n -5 'close Redis connection'
 
