@@ -32,14 +32,15 @@ rm $pkg
 # get dac's output_device
 ao=$( redis-cli get ao )
 echo -e "$bar AirPlay output: $ao"
+
 if [[ ${ao:0:-2} == 'bcm2835 ALSA' ]]; then
 	# activate improved onboard dac (3.5mm jack) audio driver
 	if ! grep 'audio_pwm_mode=2' /boot/config.txt; then
     	sed -i '$ a\audio_pwm_mode=2' /boot/config.txt
 	fi
 	string=$( cat <<'EOF'
-	output_device=0;
-	mixer_control_name = "PCM";
+    output_device=0;\n\
+    mixer_control_name = "PCM";
 EOF
 )
 else
@@ -50,18 +51,18 @@ else
 		std=$( cat /dev/urandom | timeout 1 aplay -q -f $format 2>&1 )
 		[[ -z $std ]] && output_format=$format
 	done
-	echo "Sample format = $output_format"
 	string=$( cat <<EOF
-	output_device = "hw:$output_device";
+    output_device = "hw:$output_device";\n\
     output_format = "$output_format";
 EOF
 )
 fi
 echo $string
+
 # set config
 sed -i -e "/output_device = / i\
 $string
-" -i '/name = "%H"/ i\
+" -e '/name = "%H"/ i\
     volume_range_db = 50;
 ' -e '/enabled = "no"/ i\
     enabled = "yes";\
@@ -69,8 +70,8 @@ $string
     pipe_name = "/tmp/shairport-sync-metadata";\
     pipe_timeout = 5000;
 ' -e '/run_this_before_play_begins/ i\
-    run_this_before_play_begins = '/srv/http/shairport-sync.php on';\
-    run_this_after_play_ends = '/srv/http/shairport-sync.php off';\
+    run_this_before_play_begins = "/srv/http/shairport-sync.php on";\
+    run_this_after_play_ends = "/srv/http/shairport-sync.php off";\
     session_timeout = 120;
 ' /etc/shairport-sync.conf
 
