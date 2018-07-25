@@ -51,11 +51,11 @@ else
 		std=$( cat /dev/urandom | timeout 1 aplay -q -f $format 2>&1 )
 		[[ -z $std ]] && output_format=$format
 	done
-	string=$( cat <<EOF
+	string="$( cat <<EOF
     output_device = "hw:$output_device";\n\
     output_format = "$output_format";
 EOF
-)
+)"
 fi
 echo $string
 
