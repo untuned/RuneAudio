@@ -1,28 +1,21 @@
-var pushstreamAirplay = new PushStream( {
-	host: window.location.hostname,
-	port: window.location.port,
-	modes: GUI.mode
-} );
-pushstreamAirplay.addChannel( 'airplay' );
-pushstreamAirplay.onmessage = function( status ) { // on receive broadcast
-	$( '#menu-top, #menu-bottom' ).toggleClass( 'hide', !display.bar );
-	if ( display.bar ) $( '.playback-controls' ).css( 'visibility', 'hidden' );
-	
+function displayairplay() {
+	$( '.playback-controls' ).css( 'visibility', 'hidden' );
 	$( '#divartist, #divsong, #divalbum' ).removeClass( 'scroll-left' );
 	$( '#playlist-position span, #format-bitrate, #total' ).html( '&nbsp;' );
-	$( '#currentartist' ).html( status[ 'artist' ] );
-	$( '#currentsong' ).html( status[ 'song'] );
-	$( '#currentalbum' ).html( status[ 'album'] );
-	scrolltext();
-	
+	$( '#currentartist' ).html( GUI.json.currentartist );
+	$( '#currentsong' ).html( GUI.json.currentsong );
+	$( '#currentalbum' ).html( GUI.json.currentalbum );
 	$( '#cover-art' ).css( {
-		  'background-image': 'url("'+ status[ 'cover' ] +'")'
+		  'background-image': 'url("/srv/http/assets/img/airplay-cover.jpg")'
 		, 'border-radius': 0
 	} );
-	
-	$( '#imode i, #coverartoverlay, #volume-knob, #play-group, #share-group, #vol-group' ).addClass( 'hide' );
-	$( '#elapsed, #total' ).html( '&nbsp;' );
+	scrolltext();
+	$( '#menu-top, #menu-bottom' ).toggleClass( 'hide', !display.bar );
+	$( '#playback-row' ).removeClass( 'hide' );
 	$( '#time-knob' ).toggleClass( 'hide', !display.time );
+	$( '#imode i, #coverartoverlay, #volume-knob, #play-group, #share-group, #vol-group' ).addClass( 'hide' );
+	$( '#playsource-mpd' ).addClass( 'inactive' );
+	$( '#playsource-airplay' ).removeClass( 'inactive' );
 	if ( display.time ) {
 		$( '#time-knob, #play-group, #coverart, #share-group' ).css( 'width', '45%' );
 		clearInterval( GUI.currentKnob );
@@ -53,9 +46,17 @@ pushstreamAirplay.onmessage = function( status ) { // on receive broadcast
 		$( '#playsource-mpd' ).addClass( 'inactive' );
 		$( '#playsource-airplay' ).removeClass( 'inactive' );
 	} else {
-		$( '#coverart, #share-group' ).css( 'width', '60%' );
 		clearInterval( GUI.currentKnob );
 		clearInterval( GUI.countdown );
+		$( '#coverart, #share-group' ).css( 'width', '60%' );
 	}
-};
+}
+
+var pushstreamAirplay = new PushStream( {
+	host: window.location.hostname,
+	port: window.location.port,
+	modes: GUI.mode
+} );
+pushstreamAirplay.addChannel( 'airplay' );
+pushstreamAirplay.onmessage = displayairplay;
 pushstreamAirplay.connect();
