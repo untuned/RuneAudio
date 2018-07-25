@@ -5,30 +5,18 @@ var pushstreamAirplay = new PushStream( {
 } );
 pushstreamAirplay.addChannel( 'airplay' );
 pushstreamAirplay.onmessage = function( status ) { // on receive broadcast
-	var status = status[ 0 ];
-	var artist = atob( status[ '61736172' ] ); // arar = string from hex 61736172
-	var song = atob( status[ '6d696e6d' ] );   // minm
-	var album = atob( status[ '6173616c' ] );  // asal
-	var time = atob( status[ '70726772' ] );   // prgr - start/elapsed/end
-	var coverart = status[ '50494354' ];       // PICT - base64 jpeg
-	var time = time.split( '/' );
-	var total = Math.round( ( time[ 2 ] - time[ 1 ] ) / 44100 );
-	var elapsed = Math.round( ( time[ 0 ] - time[ 1 ] ) / 44100 );
-
 	$( '#menu-top, #menu-bottom' ).toggleClass( 'hide', !display.bar );
 	if ( display.bar ) $( '.playback-controls' ).css( 'visibility', 'hidden' );
 	
 	$( '#divartist, #divsong, #divalbum' ).removeClass( 'scroll-left' );
 	$( '#playlist-position span, #format-bitrate, #total' ).html( '&nbsp;' );
-	$( '#currentartist' ).html( artist );
-	$( '#currentsong' ).html( song );
-	$( '#currentalbum' ).html( album );
+	$( '#currentartist' ).html( status[ 'artist' ] );
+	$( '#currentsong' ).html( status[ 'song'] );
+	$( '#currentalbum' ).html( status[ 'album'] );
 	scrolltext();
 	
-//	var imgcodetype = { '/': 'jpeg', 'i': 'png', 'R': 'gif' };
-//  var imgtype = imgcodetype[ coverart.charAt[ 0 ] ];
 	$( '#cover-art' ).css( {
-		  'background-image': 'url("data:image/jpeg;base64,'+ coverart +'")'
+		  'background-image': 'url("'+ status[ 'cover' ] +'")'
 		, 'border-radius': 0
 	} );
 	
@@ -39,6 +27,8 @@ pushstreamAirplay.onmessage = function( status ) { // on receive broadcast
 		$( '#time-knob, #play-group, #coverart, #share-group' ).css( 'width', '45%' );
 		clearInterval( GUI.currentKnob );
 		clearInterval( GUI.countdown );
+		var elapsed = status[ 'elapsed' ];
+		var time = status[ 'time' ];
 		var position = Math.round( elapsed / time * 1000 );
 		$( '#elapsed' ).text( converthms( elapsed ) ).css( 'color', '#e0e7ee' );
 		$( '#total' ).text( converthms( time ) );
