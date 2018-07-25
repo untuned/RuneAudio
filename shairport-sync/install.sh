@@ -48,6 +48,7 @@ else
 	# get dac's output_format
 	echo -e "$bar Get DAC Sample Format ..."
 	for format in U8 S8 S16 S24 S24_3LE S24_3BE S32; do
+		echo Test format: $format ...
 		std=$( cat /dev/urandom | timeout 1 aplay -q -f $format 2>&1 )
 		[[ -z $std ]] && output_format=$format
 	done
