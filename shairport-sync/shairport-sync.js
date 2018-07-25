@@ -21,7 +21,7 @@ function displayairplay() {
 		clearInterval( GUI.currentKnob );
 		clearInterval( GUI.countdown );
 		var elapsed = GUI.json.elapsed;
-		var time = GUI.json.time';
+		var time = GUI.json.time;
 		var position = Math.round( elapsed / time * 1000 );
 		$( '#elapsed' ).text( converthms( elapsed ) ).css( 'color', '#e0e7ee' );
 		$( '#total' ).text( converthms( time ) );
