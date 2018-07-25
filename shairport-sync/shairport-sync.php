@@ -45,11 +45,11 @@ while ( 1 ) ) {
 		$data = base64_decode( $std );
 		
 		if ( $code === 'arar' ) {
-			$status[ 'artist' ] = $data;
+			$status[ 'currentartist' ] = $data;
 		} else if ( $code === 'minm' ) {
-			$status[ 'song' ] = $data;
+			$status[ 'currentsong' ] = $data;
 		} else if ( $code === 'asal' ) {
-			$status[ 'album' ] = $data;
+			$status[ 'currentalbum' ] = $data;
 		} else if ( $code === 'PICT' ) {
 			$cover = $data;
 		} else if ( $code === 'prgr' ) { // each send end with 'prgr'
