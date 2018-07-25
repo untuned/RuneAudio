@@ -20,8 +20,8 @@ function displayairplay() {
 		$( '#time-knob, #play-group, #coverart, #share-group' ).css( 'width', '45%' );
 		clearInterval( GUI.currentKnob );
 		clearInterval( GUI.countdown );
-		var elapsed = status[ 'elapsed' ];
-		var time = status[ 'time' ];
+		var elapsed = GUI.json.elapsed;
+		var time = GUI.json.time';
 		var position = Math.round( elapsed / time * 1000 );
 		$( '#elapsed' ).text( converthms( elapsed ) ).css( 'color', '#e0e7ee' );
 		$( '#total' ).text( converthms( time ) );
