@@ -11,6 +11,13 @@ title -l '=' "$bar Reset RuneUI ..."
 timestart
 
 echo -e "$bar Get files ..."
+
+version=$( redis-cli get buildversion )
+if [[ $version == 20170229 ]]; then
+	file=ui_reset.tar.xz
+else
+	file=ui_reset03.tar.xz
+fi
 # cwd '/srv/http' will be renoved
 cd /tmp
 wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file
@@ -35,9 +42,7 @@ sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
 ' -e '/refresh_ao on\|refresh_ao off/ d
 ' /etc/udev/rules.d/rune_usb-audio.rules
 
-if [[ $( redis-cli get buildversion ) == 20170229 ]]; then
-	file=ui_reset.tar.xz
-else
+if [[ ! $version == 20170229 ]]; then
 	file=ui_reset03.tar.xz
 	# spla
 	systemctl disable ply-image
