@@ -38,13 +38,14 @@ else
 	rm -fr /usr/share/ply-image
 fi
 
-wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file -P /tmp
+cd /tmp
+wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file
 
 rm -f /usr/local/bin/uninstall_{addo,back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
 rm -fr /srv
 
-bsdtar -xvf /tmp/$file -C /
-rm /tmp/$file
+bsdtar -xvf $file -C /
+rm $file
 
 chown -R http:http /srv
 chmod -R 755 /srv
@@ -53,9 +54,9 @@ redis-cli hdel addons addo back enha font gpio lyri paus RuneYoutube udac &> /de
 redis-cli del volumemute webradios pathlyrics notifysec zoomlevel browser &> /dev/null
 
 title "$bar Install Addons ..."
-wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh -P /tmp
-chmod +x /tmp/install.sh
-/tmp/install.sh
+wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh
+chmod +x install.sh
+./install.sh
 
 timestop
 
