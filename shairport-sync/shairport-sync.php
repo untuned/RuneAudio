@@ -59,14 +59,15 @@ while ( 1 ) ) {
 			$status[ $code ] = $data;
 		} else {
 			$progress = explode( $data );
+			$status[ 'start' ] = round( $progress[ 0 ] / 44100 );
 			$status[ 'elapsed' ] = round( ( $progress[ 1 ] - $progress[ 0 ] ) / 44100 );
 			$status[ 'time' ] = round( ( $progress[ 2 ] - $progress[ 0 ] ) / 44100 ):
 			ui_render( 'airplay', json_encode( $status ) );
-			$coverfile = fopen( '/srv/http/assets/img/airplay-cover.jpg', 'wb' );
+			$coverfile = fopen( '/srv/http/assets/img/airplay'.$status[ 'start' ].'.jpg', 'wb' );
 			fwrite( $coverfile, base64_decode( $status[ 'PICT' ] ) );
 			fclose( $coverfile );
-			unset( $status[ 'PICT' ] );
-			$redis->set( 'act_player_info', json_encode( $status ) );
+			//unset( $status[ 'PICT' ] );
+			//$redis->set( 'act_player_info', json_encode( $status ) );
 		}
 	}
 }
