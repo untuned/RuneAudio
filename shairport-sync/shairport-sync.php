@@ -32,16 +32,6 @@ $replace = array(
 );
 $airplay_handle = fopen( '/tmp/shairport-sync-metadata', 'r' );
 stream_set_blocking( $airplay_handle, false );
-$status = array(
-	 'volume' => '100',
-	 'random' => '0',
-	 'single' => '0',
-	 'consume' => '0',
-	 'playlist' => '1',
-	 'playlistlength' => '1',
-	 'state' => 'play',
-	 'actPlayer' => 'Airplay'
-);
 $i = 0;
 while ( 1 ) ) {
 	$line = fgets( $airplay_handle );
