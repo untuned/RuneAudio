@@ -63,11 +63,13 @@ while ( 1 ) ) {
 			$status[ 'elapsed' ] = round( ( $progress[ 1 ] - $progress[ 0 ] ) / 44100 );
 			$status[ 'time' ] = round( ( $progress[ 2 ] - $progress[ 0 ] ) / 44100 ):
 			ui_render( 'airplay', json_encode( $status ) );
+			// append start time to filename to avoid cache
 			$coverfile = fopen( '/srv/http/assets/img/airplay'.$status[ 'start' ].'.jpg', 'wb' );
 			fwrite( $coverfile, base64_decode( $status[ 'PICT' ] ) );
 			fclose( $coverfile );
-			//unset( $status[ 'PICT' ] );
-			//$redis->set( 'act_player_info', json_encode( $status ) );
+			unset( $status[ 'PICT' ] );
+			// no current status in airplay 
+			$redis->set( 'act_player_info', json_encode( $status ) );
 		}
 	}
 }
