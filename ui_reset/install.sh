@@ -21,9 +21,12 @@ rm /etc/sudoers.d/http
 rm -f /etc/sudoers.d/http-backup
 #motd
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
+# udac
+sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
+' -e '/refresh_ao on\|refresh_ao off/ d
+' /etc/udev/rules.d/rune_usb-audio.rules
 
-version=$( redis-cli get buildversion )
-if [[ $version == 20170229 ]]; then
+if [[ $( redis-cli get buildversion ) == 20170229 ]]; then
 	file=ui_reset.tar.xz
 else
 	file=ui_reset03.tar.xz
@@ -35,28 +38,18 @@ else
 	rm -fr /usr/share/ply-image
 fi
 
-# udac
-sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
-' -e '/refresh_ao on\|refresh_ao off/ d
-' /etc/udev/rules.d/rune_usb-audio.rules
+wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file -P /tmp
 
-cd /tmp
-wgetnc https://github.com/rern/RuneAudio/raw/master/ui_reset/$file
-
-rm -fr /srv
 rm -f /usr/local/bin/uninstall_{addo,back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
+rm -fr /srv
 
-rm -rf /tmp/install
-mkdir -p /tmp/install
-bsdtar -xvf /tmp/$file -C /tmp/install
+bsdtar -xvf /tmp/$file -C /
 rm /tmp/$file
 
-chown -R http:http /tmp/install/srv
-chmod -R 755 /tmp/install
-cp -rfp /tmp/install/* /
-rm -rf /tmp/install
+chown -R http:http /srv
+chmod -R 755 /srv
 
-redis-cli hdel addo back enha font gpio lyri paus RuneYoutube udac &> /dev/null
+redis-cli hdel addons addo back enha font gpio lyri paus RuneYoutube udac &> /dev/null
 redis-cli del volumemute webradios pathlyrics notifysec zoomlevel browser &> /dev/null
 
 title "$bar Install Addons ..."
