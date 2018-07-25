@@ -59,16 +59,16 @@ while ( 1 ) ) {
 			$status[ $code ] = $data;
 		} else {
 			$progress = explode( $data );
-			$status[ 'start' ] = round( $progress[ 0 ] / 44100 );
+			// append start time to filename to avoid cache
 			$status[ 'elapsed' ] = round( ( $progress[ 1 ] - $progress[ 0 ] ) / 44100 );
 			$status[ 'time' ] = round( ( $progress[ 2 ] - $progress[ 0 ] ) / 44100 ):
+			$status[ 'cover' ] = '/srv/http/assets/img/airplay'.$progress[ 0 ].'.jpg';
 			ui_render( 'airplay', json_encode( $status ) );
-			// append start time to filename to avoid cache
-			$coverfile = fopen( '/srv/http/assets/img/airplay'.$status[ 'start' ].'.jpg', 'wb' );
+			$coverfile = fopen( $status[ 'cover' ], 'wb' );
 			fwrite( $coverfile, base64_decode( $status[ 'PICT' ] ) );
 			fclose( $coverfile );
 			unset( $status[ 'PICT' ] );
-			// no current status in airplay 
+			// current status not available in airplay 
 			$redis->set( 'act_player_info', json_encode( $status ) );
 		}
 	}
