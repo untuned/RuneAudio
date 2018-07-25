@@ -6,7 +6,7 @@ function displayairplay() {
 	$( '#currentsong' ).html( GUI.json.currentsong );
 	$( '#currentalbum' ).html( GUI.json.currentalbum );
 	$( '#cover-art' ).css( {
-		  'background-image': 'url("'+ GUI.json.currentcover +'")'
+		  'background-image': 'url("'+ GUI.json.cover +'")'
 		, 'border-radius': 0
 	} );
 	scrolltext();
