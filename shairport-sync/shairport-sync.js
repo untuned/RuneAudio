@@ -6,7 +6,7 @@ function displayairplay() {
 	$( '#currentsong' ).html( GUI.json.currentsong );
 	$( '#currentalbum' ).html( GUI.json.currentalbum );
 	$( '#cover-art' ).css( {
-		  'background-image': 'url("/srv/http/assets/img/airplay-cover.jpg")'
+		  'background-image': 'url("'+ GUI.json.currentcover +'")'
 		, 'border-radius': 0
 	} );
 	scrolltext();
@@ -58,5 +58,8 @@ var pushstreamAirplay = new PushStream( {
 	modes: GUI.mode
 } );
 pushstreamAirplay.addChannel( 'airplay' );
-pushstreamAirplay.onmessage = displayairplay;
+pushstreamAirplay.onmessage = function( data ) {
+	GUI.json = JSON.parse( data );
+	displayairplay;
+}
 pushstreamAirplay.connect();
