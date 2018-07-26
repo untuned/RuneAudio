@@ -13,6 +13,7 @@ else
     browser=Chromium
 fi
 
-clearcache
-
-title -l '=' "$info Local browser switched to $browser"
+title -nt "$bar Start $browser as local browser ..."
+killall Xorg &> /dev/null
+sleep 3
+xinit &> /dev/null &
