@@ -52,6 +52,14 @@ if [[ ! $version == 20170229 ]]; then
 	rm -fr /usr/share/ply-image
 fi
 
+if pacman -Q chromium &> /dev/null; then
+	zoomlevel=$( redis-cli get zoomlevel
+	sed -i -e '/midori/ s/^/#/
+	' -e "$ a\
+chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoomlevel
+	" /root/.xinitrc
+fi
+
 rm -f /usr/local/bin/uninstall_{addo,back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
 rm -fr /srv
 
