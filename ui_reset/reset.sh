@@ -53,7 +53,7 @@ if [[ ! $version == 20170229 ]]; then
 fi
 
 if pacman -Q chromium &> /dev/null; then
-	zoomlevel=$( redis-cli get zoomlevel
+	zoomlevel=$( redis-cli get zoomlevel )
 	sed -i -e '/midori/ s/^/#/
 	' -e "$ a\
 chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoomlevel
