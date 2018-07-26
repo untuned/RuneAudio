@@ -13,6 +13,8 @@ else
     browser=Chromium
 fi
 
+redis-cli set browser $1
+
 title -nt "$bar Start $browser as local browser ..."
 killall Xorg &> /dev/null
 sleep 3
