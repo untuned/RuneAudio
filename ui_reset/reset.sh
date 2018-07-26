@@ -55,7 +55,7 @@ fi
 if pacman -Q chromium &> /dev/null; then
 	zoomlevel=$( redis-cli get zoomlevel )
 	browser=$( redis-cli get browser )
-	[[ $( redis-cli get browser ) == 1 ]] && comment=# || comment=
+	[[ $( redis-cli get browser ) == 1 ]] && comment='#' || comment=
 	sed -i -e '/midori/ s/^/#/
 	' -e "$ a\
 ${comment}chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoomlevel
