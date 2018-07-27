@@ -53,9 +53,11 @@ topp() {
 if [[ ! $( fdisk -l | grep mmcblk0p5 ) ]]; then
 	mmc() {
 		echo $( tcolor mmc ) not available on single OS
+		return 1
 	}
 	mmcall() {
 		echo $( tcolor mmcall ) not available on single OS
+		return 1
 	}
 	boot() {
 		if [[ -d /home/osmc || $( uname -r | cut -d'-' -f1 ) > 4.4.39 ]]; then # osmc or kernel upgraded
