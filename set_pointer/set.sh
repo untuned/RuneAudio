@@ -2,7 +2,7 @@
 
 . /srv/http/addonstitle.sh
 
-title -l '=' "$bar Enable pointer of local browser ..."
+title -l '=' "$bar Pointer of local browser ..."
 
 if [[ $1 == 0 ]]; then
   yesno=no
