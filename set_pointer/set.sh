@@ -14,6 +14,8 @@ fi
 
 sed -i "s/\(use_cursor \).*/\1$yesno \&/" /root/.xinitrc
 
+redis-cli set pointer $1
+
 echo -e "$bar Restart local browser ..."
 killall Xorg &> /dev/null
 sleep 3
