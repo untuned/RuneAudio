@@ -15,7 +15,7 @@ fi
 
 redis-cli set browser $1 &> /dev/null
 
-title -nt "$bar Start $browser as local browser ..."
+title "$bar Start $( tcolor $browser ) as local browser ..."
 killall Xorg &> /dev/null
 sleep 3
 xinit &> /dev/null &
