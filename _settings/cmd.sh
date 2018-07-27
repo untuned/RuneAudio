@@ -44,7 +44,7 @@ rd() {
 	redis-cli "$@"
 }
 topp() {
-	top -p $( pgrep $1 )
+	top -p $( pgrep -d ',' $1 )
 }
 
 # multiboot only
