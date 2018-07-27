@@ -10,7 +10,7 @@ else
     sed -i "s/\(force-device-scale-factor=\).*/\1$1/" /root/.xinitrc
 fi
 
-redis-cli set zoomlevel $1 &> /dev/null
+redis-cli set setzoom $1 &> /dev/null
 
 echo -e "$bar Restart local browser ..."
 killall Xorg &> /dev/null
