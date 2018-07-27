@@ -41,6 +41,22 @@ rm -f /etc/motd.logo /etc/profile.d/motd.sh
 sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
 ' -e '/refresh_ao on\|refresh_ao off/ d
 ' /etc/udev/rules.d/rune_usb-audio.rules
+# keep chromium command line if installed
+if pacman -Q chromium &> /dev/null; then
+	zoomlevel=$( redis-cli get zoomlevel )
+	browser=$( redis-cli get browser )
+	if [[ $( redis-cli get browser ) == 1 ]]; then
+		mcomment=
+		comment='#'
+	else
+		mcomment='#'
+		comment=
+	fi
+	sed -i -e "/midori/ s/^/$mcomment/
+	" -e "$ a\
+${ccomment}chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoomlevel
+	" /root/.xinitrc
+fi
 
 if [[ ! $version == 20170229 ]]; then
 	file=ui_reset03.tar.xz
@@ -50,16 +66,6 @@ if [[ ! $version == 20170229 ]]; then
 	rm -f /etc/systemd/system/ply-image.service
 	rm -f /usr/local/bin/ply-image
 	rm -fr /usr/share/ply-image
-fi
-
-if pacman -Q chromium &> /dev/null; then
-	zoomlevel=$( redis-cli get zoomlevel )
-	browser=$( redis-cli get browser )
-	[[ $( redis-cli get browser ) == 1 ]] && comment='#' || comment=
-	sed -i -e '/midori/ s/^/#/
-	' -e "$ a\
-${comment}chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoomlevel
-	" /root/.xinitrc
 fi
 
 rm -f /usr/local/bin/uninstall_{addo,back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
@@ -72,7 +78,7 @@ chown -R http:http /srv
 chmod -R 755 /srv
 
 redis-cli hdel addons addo back enha font gpio lyri paus RuneYoutube udac &> /dev/null
-redis-cli del volumemute webradios pathlyrics notifysec zoomlevel browser &> /dev/null
+redis-cli del volumemute webradios pathlyrics notifysec &> /dev/null
 
 title "$bar Install Addons ..."
 wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh
