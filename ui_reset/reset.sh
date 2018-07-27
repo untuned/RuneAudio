@@ -44,17 +44,9 @@ sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
 # keep chromium command line if installed
 if pacman -Q chromium &> /dev/null; then
 	zoomlevel=$( redis-cli get zoomlevel )
-	browser=$( redis-cli get browser )
-	if [[ $( redis-cli get browser ) == 1 ]]; then
-		mcomment=
-		comment='#'
-	else
-		mcomment='#'
-		comment=
-	fi
-	sed -i -e "/midori/ s/^/$mcomment/
+	sed -i -e "/midori/ s/^/#/
 	" -e "$ a\
-${ccomment}chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoomlevel
+chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoomlevel
 	" /root/.xinitrc
 fi
 
