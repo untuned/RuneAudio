@@ -7,7 +7,7 @@ title -l '=' "$bar Pointer of local browser ..."
 if [[ $1 == 0 ]]; then
   yesno=no
   enable=disabled
-  val=
+  val=''
 else
   yesno=yes
   enable=enabled
