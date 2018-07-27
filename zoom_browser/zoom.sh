@@ -16,4 +16,4 @@ killall Xorg &> /dev/null
 sleep 3
 xinit &> /dev/null &
 
-title -l '=' "$info Zoom level of local browser changed to $1"
+title -nt "$info Zoom level of local browser changed to $1"
