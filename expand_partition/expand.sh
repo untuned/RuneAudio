@@ -71,5 +71,5 @@ if [[ $? != 0 ]]; then
 else
 	free=$( df -h | grep '/$' | awk '{print $4}' )
 	redis-cli hset addons expa 1 &> /dev/null # mark as expanded - disable webui button
-	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor $free ) available space."
+	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor ${free}B ) available space."
 fi
