@@ -81,4 +81,4 @@ clearcache
 timestop l
 title -l '=' "$bar MPD upgraded successfully to $mpdversion"
 echo -e "$info Next upgrade: pacman -Sy mpd"
-title -nt "$info Local browser: Midori must be upgraded"
+title -nt "$info Local browser enabled: $( tcolor Chromium ) browser must be installed to replace Midori"
