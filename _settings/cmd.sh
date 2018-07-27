@@ -9,33 +9,35 @@ tcolor() {
 	echo -e "\e[38;5;10m$1\e[0m"
 }
 
+sys() {
+	command=$1
+	shift
+	echo
+	for proc in $@; do
+		echo -e $( tcolor "systemctl $command $proc" )
+	done
+	echo
+	systemctl $command $@
+}
+
 sstt() {
-	echo -e '\n'$( tcolor "systemctl status $1" )'\n'
-	systemctl status $1
+	sys status $@
 }
 ssta() {
-	echo -e '\n'$( tcolor "systemctl start $1" )'\n'
-	systemctl start $1
+	sys start $@
 }
 ssto() {
-	echo -e '\n'$( tcolor "systemctl stop $1" )'\n'
-	systemctl stop $1
+	sys stop $@
 }
 sres() {
-	echo -e '\n'$( tcolor "systemctl restart $1" )'\n'
-	systemctl restart $1
+	sys restart $@
 }
 srel() {
-	echo -e '\n'$( tcolor "systemctl reload $1" )
-	systemctl reload $1
+	sys reload $@
 }
 sdre() {
 	echo -e '\n'$( tcolor "systemctl daemon-reload" )'\n'
 	systemctl daemon-reload
-}
-sfpm() {
-	echo -e '\n'$( tcolor "systemctl reload php-fpm" )'\n'
-	systemctl reload php-fpm
 }
 tnm() {
 	telnet localhost 6600
