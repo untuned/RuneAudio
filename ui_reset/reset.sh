@@ -44,6 +44,7 @@ sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
 # keep chromium command line if installed
 if pacman -Q chromium &> /dev/null; then
 	zoomlevel=$( redis-cli get zoomlevel )
+	#zoomlevel=$( redis-cli get setzoom )
 	sed -i -e "/midori/ s/^/#/
 	" -e "$ a\
 chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoomlevel
@@ -70,7 +71,7 @@ chown -R http:http /srv
 chmod -R 755 /srv
 
 redis-cli hdel addons addo back enha font gpio lyri paus RuneYoutube udac &> /dev/null
-redis-cli del volumemute webradios pathlyrics notifysec &> /dev/null
+redis-cli del volumemute webradios pathlyrics setnotify setzoom setpointer &> /dev/null
 
 title "$bar Install Addons ..."
 wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh
