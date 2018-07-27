@@ -2,6 +2,8 @@
 
 . /srv/http/addonstitle.sh
 
+title -l '=' "$bar Change zoom level of local browser ..."
+
 sed -i "s/^\(zoom-level=\).*/\1$1/" /root/.config/midori/config
 if grep '^chromium' /root/.xinitrc; then
     sed -i "s/\(force-device-scale-factor=\).*/\1$1/" /root/.xinitrc
