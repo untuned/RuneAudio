@@ -19,15 +19,17 @@ mmc() {
 }
 
 #################################################################################
-mmc 5
-osmcroot=$( sed -n '/"OSMC"/ {n;n;n;p}' /tmp/p5/installed_os.json | sed 's/.*p\(.*\)"/\1/' )
-mmc $osmcroot
-if [[ ! -e /tmp/p$osmcroot/walkthrough_completed ]]; then
-	echo -e "$bar OSMC pre-setup ..."
-	wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
-	. presetup.sh
+if [[ -d /home/osmc ]]; then
+	mmc 5
+	osmcroot=$( sed -n '/"OSMC"/ {n;n;n;p}' /tmp/p5/installed_os.json | sed 's/.*p\(.*\)"/\1/' )
+	mmc $osmcroot
+	if [[ ! -e /tmp/p$osmcroot/walkthrough_completed ]]; then
+		echo -e "$bar OSMC pre-setup ..."
+		wgetnc https://github.com/rern/OSMC/raw/master/_settings/presetup.sh
+		. presetup.sh
+	fi
+	echo
 fi
-echo
 
 # command shortcuts
 gitpath=https://github.com/rern/RuneAudio/raw/master
