@@ -50,8 +50,22 @@ topp() {
 }
 
 # multiboot only
-[[ ! $( fdisk -l | grep mmcblk0p5 ) ]] && return
-
+if [[ ! $( fdisk -l | grep mmcblk0p5 ) ]]; then
+	mmc() {
+		echo $( tcolor mmc ) not available on single OS
+	}
+	mmcall() {
+		echo $( tcolor mmcall ) not available on single OS
+	}
+	boot() {
+		if [[ -d /home/osmc || $( uname -r | cut -d'-' -f1 ) > 4.4.39 ]]; then # osmc or kernel upgraded
+			reboot $bootnum &
+		else                                                                     # runeaudio
+			/var/www/command/rune_shutdown 2> /dev/null; reboot &
+		fi
+	}
+	return
+fi
 mntsettings=/tmp/SETTINGS
 mkdir -p $mntsettings
 mount /dev/mmcblk0p5 $mntsettings 2> /dev/null
