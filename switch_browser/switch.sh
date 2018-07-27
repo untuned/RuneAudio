@@ -2,6 +2,8 @@
 
 . /srv/http/addonstitle.sh
 
+title -l '=' "$bar Switch local browser ..."
+
 file=/root/.xinitrc
 if [[ $1 == 1 ]]; then
     sed -i 's/^#*\(midori\)/\1/' $file
@@ -15,7 +17,9 @@ fi
 
 redis-cli set browser $1 &> /dev/null
 
-title "$bar Start $( tcolor $browser ) as local browser ..."
+echo -e "$bar Restart local browser ..."
 killall Xorg &> /dev/null
 sleep 3
 xinit &> /dev/null &
+
+title -nt "$info Local browser switched to $( tcolor $browser )"
