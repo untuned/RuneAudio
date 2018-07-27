@@ -10,7 +10,7 @@ fi
 
 redis-cli set zoomlevel $1 &> /dev/null
 
-title -nt "$bar Restart local browser ..."
+echo -e "$bar Restart local browser ..."
 killall Xorg &> /dev/null
 sleep 3
 xinit &> /dev/null &
