@@ -12,7 +12,7 @@ else
   enable=disabled
 fi
 
-sed -i "s/\(use_cursor \).*/\1$1 \&/" /root/.xinitrc
+sed -i "s/\(use_cursor \).*/\1$yesno \&/" /root/.xinitrc
 
 echo -e "$bar Restart local browser ..."
 killall Xorg &> /dev/null
