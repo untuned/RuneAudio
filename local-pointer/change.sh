@@ -2,7 +2,7 @@
 
 . /srv/http/addonstitle.sh
 
-title -l '=' "$bar Set local browser pointer ..."
+title -l '=' "$bar Enable pointer of local browser ..."
 
 if [[ $1 == 0 ]]; then
   yesno=no
@@ -19,4 +19,4 @@ killall Xorg &> /dev/null
 sleep 3
 xinit &> /dev/null &
 
-title -nt "$info Local browser pointer $( tcolor $enable )."
+title -nt "$info Pointer of local browser $( tcolor $enable )."
