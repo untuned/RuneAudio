@@ -7,14 +7,16 @@ title -l '=' "$bar Pointer of local browser ..."
 if [[ $1 == 0 ]]; then
   yesno=no
   enable=disabled
+  val=
 else
   yesno=yes
   enable=enabled
+  val=1
 fi
 
 sed -i "s/\(use_cursor \).*/\1$yesno \&/" /root/.xinitrc
 
-redis-cli set pointer $1
+redis-cli set pointer $val
 
 echo -e "$bar Restart local browser ..."
 killall Xorg &> /dev/null
