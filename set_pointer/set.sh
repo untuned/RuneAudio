@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm $0
+
 . /srv/http/addonstitle.sh
 
 title -l '=' "$bar Pointer of local browser ..."
