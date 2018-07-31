@@ -71,7 +71,7 @@ chown -R http:http /srv
 chmod -R 755 /srv
 
 redis-cli hdel addons addo back enha font gpio lyri paus RuneYoutube udac &> /dev/null
-redis-cli del volumemute webradios pathlyrics setnotify setzoom setpointer &> /dev/null
+redis-cli del volumemute webradios pathlyrics settings udaclist &> /dev/null
 
 title "$bar Install Addons ..."
 wgetnc https://github.com/rern/RuneAudio_Addons/raw/master/install.sh
