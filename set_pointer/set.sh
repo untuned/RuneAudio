@@ -6,12 +6,12 @@ rm $0
 
 title -l '=' "$bar Pointer of local browser ..."
 
-if [[ $1 == 0 ]]; then
-  yesno=no
-  enable=disabled
-else
+if [[ $1 == 1 ]]; then
   yesno=yes
   enable=enabled
+ else
+  yesno=no
+  enable=disabled
 fi
 
 sed -i "s/\(use_cursor \).*/\1$yesno \&/" /root/.xinitrc
