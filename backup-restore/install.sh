@@ -5,6 +5,7 @@
 alias=back
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 installstart $@
 
@@ -16,40 +17,61 @@ echo $dir
 mkdir -p $dir
 
 file=/srv/http/app/libs/runeaudio.php
-if ! grep -q 'bsdtar -czpf' $file; then
 echo $file
-sed -i -e '\|/run/backup_|,+1 s|^|//|
-' -e '\|/run/backup_| i\
-        $filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";\
-        $cmdstring = "rm -f /srv/http/tmp/backup_* &> /dev/null; ".\
-            "redis-cli save; ".\
-            "bsdtar -czpf $filepath".\
-            " --exclude /etc/netctl/examples ".\
-            "/etc/netctl ".\
-            "/mnt/MPD/Webradio ".\
-            "/var/lib/redis/rune.rdb ".\
-            "/var/lib/mpd ".\
-            "/etc/mpd.conf ".\
-            "/etc/mpdscribble.conf ".\
-            "/etc/spop"\
+
+comment -n +1 '/run/backup_'
+
+string=$( cat <<'EOF'
+        $filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";
+        $cmdstring = "rm -f /srv/http/tmp/backup_* &> /dev/null; ".
+            "redis-cli save; ".
+            "bsdtar -czpf $filepath".
+            " --exclude /etc/netctl/examples ".
+            "/etc/netctl ".
+            "/mnt/MPD/Webradio ".
+            "/var/lib/redis/rune.rdb ".
+            "/var/lib/mpd ".
+            "/etc/mpd.conf ".
+            "/etc/mpdscribble.conf ".
+            "/etc/spop"
         ;
-' $file
-fi
+insert  '/run/backup_'
 
 file=/srv/http/app/templates/settings.php
-if ! grep -q 'filebackup' $file; then
 echo $file
-sed -i -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
-' -e 's/type="file"/& name="filebackup"/
-' -e'/value="restore"/ s/name="syscmd" value="restore" //; s/type="submit" disabled>Upload/disabled>Restore/
-' $file
-fi
+	
+comment -n +6 'value="backup"'
+	
+string=$( cat <<'EOF'
+	    <form class="form-horizontal" id="restore">
+EOF
+)
+append -n +6 'value="backup"'
+	
+comment 'type="file"'
+	
+string=$( cat <<'EOF'
+                            Browse... <input name="filebackup">
+EOF
+)
+append 'type="file"'
+	
+comment 'value="restore"'
+	
+string=$( cat <<'EOF'
+                    <button id="btn-backup-upload" class="btn btn-primary btn-lg" disabled>Restore</button>
+EOF
+)
+append 'value="restore"'
 
 file=/srv/http/app/templates/footer.php
-if ! grep -q 'restore.js' $file; then
-	echo $file
-	echo '<script src="<?=$this->asset('\''/js/restore.js'\'')?>"></script>' >> $file
-fi
+$file
+
+string=$( cat <<'EOF'
+<script src="<?=$this->asset('/js/restore.js')?>"></script>
+EOF
+)
+append '$'
 
 echo -e "$bar Add new files ..."
 file=/srv/http/assets/js/restore.js
