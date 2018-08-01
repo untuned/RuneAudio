@@ -3,22 +3,12 @@
 alias=back
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 uninstallstart $@
 
 echo -e "$bar Restore files ..."
-file=/srv/http/app/libs/runeaudio.php
-echo $file
-sed -i -e '\|/run/backup_|,+1 s|^//||
-' -e '\|/srv/http/tmp|,/^ \+;/ d
-' $file
-
-file=/srv/http/app/templates/settings.php
-echo $file
-sed -i -e 's/id="restore"/method="post"/
-' -e 's/type="file" name="filebackup"/type="file"/
-' -e '/id="btn-backup-upload"/ s/id="btn-backup-upload"/& name="syscmd" value="restore"/; s/disabled>Restore/type="submit" disabled>Upload/
-' $file
+restorefile /srv/http/app/libs/runeaudio.php /srv/http/app/templates/settings.php
 
 rm -v /etc/sudoers.d/http-backup
 rm -v /srv/http/restore.*
