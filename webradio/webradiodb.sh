@@ -26,12 +26,25 @@ redis-cli del webradios &> /dev/null
 
 # add data from files
 for file in /mnt/MPD/Webradio/*.pls; do
-	name=$( basename "$file" )
-	name=${name%.*}
-	url=$( grep 'File1' "$file" | cut -d '=' -f2 )
-	
-	redis-cli hset webradios "$name" "$url" &> /dev/null
-	printf "%-30s : $url\n" "$name"
+	count=$( grep -c '^File' "$file" )
+	for (( i=1; i <= $count; i++ )); do
+		url=$( grep "^File$i" "$file" | cut -d '=' -f2 )
+		name=$( grep "^Title$i" "$file" | cut -d '=' -f2 )
+		redis-cli hset webradios "$name" "$url" &> /dev/null
+		printf "%-30s : $url\n" "$name"
+		
+		if (( $count > 1 )); then
+			string=$( cat <<EOF
+[playlist]
+NumberOfEntries=1
+File1=$url
+Title1=$name
+EOF
+)
+			echo "$string" > /mnt/MPD/Webradio/"$name".pls
+		fi
+	done
+	(( $count > 1 )) && rm "$file"
 done
 
 # refresh list
