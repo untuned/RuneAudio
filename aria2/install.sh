@@ -5,17 +5,16 @@
 alias=aria
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 installstart $@
 
 getuninstall
 
-gitpath=https://github.com/rern/RuneAudio/raw/$branch
-
 rankmirrors
 
 echo -e "$bar Aria2 package ..."
-pacman -S --noconfirm aria2 glibc
+pacman -Sy --noconfirm aria2 glibc
 
 if mount | grep -q '/dev/sda1'; then
 	mnt=$( mount | grep '/dev/sda1' | cut -d' ' -f3 )
@@ -36,22 +35,28 @@ ln -s $path/web /srv/http/aria2
 
 # modify file
 file=/etc/nginx/nginx.conf
-echo $file
-if ! grep -q 'aria2' $file; then
-	linenum=$( sed -n '/listen 80 /=' $file )
 
-sed -i -e '/^\s*rewrite/ s/^\s*/&#/
-' -e "$(( $linenum + 7 ))"' a\
-\            rewrite /css/(.*) /assets/css/$1 break;\
-\            rewrite /less/(.*) /assets/less/$1 break;\
-\            rewrite /js/(.*) /assets/js/$1 break;\
-\            rewrite /img/(.*) /assets/img/$1 break;\
-\            rewrite /fonts/(.*) /assets/fonts/$1 break;
-' -e "$(( $linenum + 9 ))"' a\
-\        location /aria2 {\
-\            alias '$path'/web;\
-\        }\
-' $file
+if ! grep -q 'aria2' $file; then
+	echo $file
+	
+	commentS '^\s*rewrite'
+	string=$( cat <<'EOF'
+            rewrite /css/(.*) /assets/css/$1 break;
+            rewrite /less/(.*) /assets/less/$1 break;
+            rewrite /js/(.*) /assets/js/$1 break;
+            rewrite /img/(.*) /assets/img/$1 break;
+            rewrite /fonts/(.*) /assets/fonts/$1 break;
+EOF
+'
+	appendS -n +7 'listen 80 '
+	
+	string=$( cat <<EOF
+        location /aria2 {
+            alias $path/web;
+        }
+EOF
+)
+	appendS -n +9 'listen 80 '
 fi
 
 mkdir -p /root/.config/aria2
