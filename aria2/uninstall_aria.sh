@@ -3,6 +3,7 @@
 alias=aria
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 uninstallstart $@
 
@@ -26,12 +27,7 @@ pacman -Rs --noconfirm aria2
 
 # restore file
 echo -e "$bar Restore files ..."
-file=/etc/nginx/nginx.conf
-echo $file
-sed -i -e '/location \/aria2/, /^$/ d
-' -e '/^\s*rewrite/ d
-' -e 's/#rewrite/rewrite/g
-' $file
+restorefile /etc/nginx/nginx.conf
 
 # remove files #######################################
 echo -e "$bar Remove files ..."
