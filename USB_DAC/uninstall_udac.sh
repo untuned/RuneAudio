@@ -9,7 +9,7 @@ uninstallstart $@
 
 echo -e "$bar Restore files ..."
 
-restorefile /etc/udev/rules.d/rune_usb-audio.rules file=/srv/http/command/refresh_ao
+restorefile /etc/udev/rules.d/rune_usb-audio.rules /srv/http/command/refresh_ao
 
 udevadm control --reload-rules && udevadm trigger
 
