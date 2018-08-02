@@ -91,7 +91,7 @@ for file in "${files[@]}"; do
 			fi
 			incrementname "$name"
 			printf "%-30s : $line\n" "$name"
-			redis-cli hset webradios "$name" "$url" &> /dev/null
+			redis-cli hset webradios "$name" "$line" &> /dev/null
 			makefile "$name" "$line"
 		done
 	fi
