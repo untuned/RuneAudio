@@ -2,7 +2,8 @@ Webradio import / export
 ---
 _Tested on RuneAudio 0.3 and 0.4b_
 
-Webradio needs files and database data together to make the list.
+- Webradio needs files and database data together to make the list.
+- This script can import either `*.pls`(single or multiple items per file) or `*.m3u`
 
 **webradio `<filename>.pls` file syntax:**    
 `Radio name` in Webradio list = filename  
@@ -14,7 +15,7 @@ Title1=filename
 ```
 
 **import files to database**  
-- copy webradio  `*.pls` files to `/mnt/MPD/Webradio/`  
+- copy webradio  `*.pls` or `*.m3u` files to `/mnt/MPD/Webradio/`  
 - run import script:
 	- delete webradio database
 	- get data from `*.pls` files
