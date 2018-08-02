@@ -4,6 +4,7 @@ _Tested on RuneAudio 0.3 and 0.4b_
 
 - Webradio needs files and database data together to make the list.
 - This script can import either `*.pls`(single or multiple items per file) or `*.m3u`
+- Redundant names will be incremented as `#N`
 
 **webradio `<filename>.pls` file syntax:**    
 `Radio name` in Webradio list = filename  
