@@ -4,18 +4,18 @@ rm $0
 
 . /srv/http/addonstitle.sh
 
-# if sub directories
-if ls -d /mnt/MPD/Webradio/*/ &> /dev/null; then
-	# -mindepth 2 = in sub directories && -type f = file
-	find /mnt/MPD/Webradio -mindepth 2 -type f -exec mv -i -- {} /mnt/MPD/Webradio \;
-	# * = all sub directory && .[^.] = not ..
-	rm -rf /mnt/MPD/Webradio/{*,.[^.]}/
-fi
-
-for file in /mnt/MPD/Webradio/*; do
+# all files include sub-directory
+allfiles=$( find /mnt/MPD/Webradio -type f )
+readarray -t files <<<"$allfiles"
+for file in "${files[@]}"; do
 	filename=$( basename "$file" )
 	ext=${filename##*.}
-	[[ $ext == 'pls' || $ext == 'm3u' ]] && break
+	if [[ $ext == 'pls' || $ext == 'm3u' ]]; then
+		rm -rf /tmp/Webradio
+		mkdir -p /tmp/Webradio
+		mv /mnt/MPD/Webradio/* /tmp/Webradio
+		break
+	fi
 	title -l '=' "$info No webradio files found."
 	title -nt 'Copy *.pls or *.m3u to /mnt/MPD/Webradio/ then run again.'
 	exit
@@ -26,7 +26,7 @@ title -l '=' "$bar Webradio Import ..."
 # clear database
 redis-cli del webradios &> /dev/null
 
-# add data from files
+# add data to files
 makefile() {
 	string=$( cat <<EOF
 [playlist]
@@ -37,38 +37,46 @@ EOF
 )
 	echo "$string" > /mnt/MPD/Webradio/"$1".pls
 }
+checkname() {
+	for n in "${names[@]}"; do
+		if [[ $n == $1 ]]; then
+			[[ -n $( echo $n | grep '_[0-9]\+$' ) ]] && num=${n##*_} || num=1
+			(( num++ ))
+			name=${1%_*}'_'$num
+			checkname "$name"
+			break
+		else
+			name=$1
+		fi
+	done
+}
 incrementname() {
-	if (( ${#names[@]} > 0 )); then
-		for n in "${names[@]}"; do
-			if [[ $n == $1 ]]; then
-				[[ -n $( echo $n | grep '_[0-9]\+$' ) ]] && num=${n##*_} || num=1
-				(( num++ ))
-				name=$1'_'$num
-			fi
-		done
+	if (( ${#names[@]} == 0 )); then
+		name=$1
+		names+=( "$name" )
+		return
 	fi
-	names+=( $name )
+	checkname "$name"
+	names+=( "$name" )
 }
 
-for file in /mnt/MPD/Webradio/*; do
+allfiles=$( find /tmp/Webradio -type f )
+readarray -t files <<<"$allfiles"
+for file in "${files[@]}"; do
 	if [[ ${file##*.} == pls ]]; then
 		# count to work with multiple items
 		count=$( grep -c '^File' "$file" )
 		for (( i=1; i <= $count; i++ )); do
 			name=$( grep "^Title$i" "$file" | cut -d '=' -f2 )
+			url=$( grep "^File$i" "$file" | cut -d '=' -f2 )
 			# no name
 			[[ -z $name ]] && name="noName"
-			# increment same name
 			incrementname "$name"
-			url=$( grep "^File$i" "$file" | cut -d '=' -f2 )
+			
 			printf "%-30s : $url\n" "$name"
 			redis-cli hset webradios "$name" "$url" &> /dev/null
-			# delete if has only 1 item
-			(( $count == 1 )) && rm "$file"
 			makefile "$name" "$url"
 		done
-		# delete after gone through all items
-		(( $count > 1 )) && rm "$file"
 	else
 		# *.m3u
 		cat $file | while read line; do
@@ -86,9 +94,10 @@ for file in /mnt/MPD/Webradio/*; do
 			redis-cli hset webradios "$name" "$url" &> /dev/null
 			makefile "$name" "$line"
 		done
-		rm "$file"
 	fi
 done
+
+rm -rf /tmp/Webradio
 
 # refresh list
 mpc update Webradio &> /dev/null
