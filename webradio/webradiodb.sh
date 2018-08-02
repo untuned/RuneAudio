@@ -12,11 +12,14 @@ if ls -d /mnt/MPD/Webradio/*/ &> /dev/null; then
 	rm -rf /mnt/MPD/Webradio/{*,.[^.]}/
 fi
 
-if ! ls /mnt/MPD/Webradio/*.{pls,m3u} &> /dev/null; then
+for file in /mnt/MPD/Webradio/*; do
+	filename=$( basename "$file" )
+	ext=${filename##*.}
+	[[ $ext == 'pls' || $ext == 'm3u' ]] && break
 	title -l '=' "$info No webradio files found."
 	title -nt 'Copy *.pls or *.m3u to /mnt/MPD/Webradio/ then run again.'
 	exit
-fi
+done
 
 title -l '=' "$bar Webradio Import ..."
 
