@@ -10,7 +10,7 @@ _Tested on RuneAudio 0.3 and 0.4b_
 ```sh
 [playlist]
 NumberOfEntries=1
-File1=http://urlpath:port
+File1=http://url/path
 Title1=filename
 ```
 
