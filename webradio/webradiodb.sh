@@ -38,9 +38,9 @@ incrementname() {
 	if (( ${#names[@]} > 0 )); then
 		for n in "${names[@]}"; do
 			if [[ $n == $1 ]]; then
-				[[ -n $( echo $n | grep ' #[0-9]\+$' ) ]] && num=${n##*\#} || num=1
+				[[ -n $( echo $n | grep '_[0-9]\+$' ) ]] && num=${n##*_} || num=1
 				(( num++ ))
-				name=$1' #'$num
+				name=$1'_'$num
 			fi
 		done
 	fi
