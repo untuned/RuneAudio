@@ -65,8 +65,9 @@ incrementname() {
 	fi
 }
 minify() {
+	yui=$( ls yuicompressor* 2> /dev/null )
+	[[ ! $yui ]]  && wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar
 	! pacman -Q jdk10-openjdk &> /dev/null && pacman -Sy --noconfirm jdk10-openjdk
-	! ls yuicompressor* &> /dev/null && wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar
 	path=$( dirname "$1" )
 	filename=$( basename "$1" )
 	name=${filename%.*}
@@ -76,7 +77,7 @@ minify() {
 	echo
 	echo Minifying ...
 	echo
-	java -jar yuicompressor-2.4.8.jar $1 -o $minname
+	java -jar $yui $1 -o $minname
 	echo "minified: $( tcolor $minname )"
 	echo
 }
