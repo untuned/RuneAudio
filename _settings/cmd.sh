@@ -48,7 +48,38 @@ rd() {
 topp() {
 	top -p $( pgrep -d ',' $1 )
 }
-
+incrementname() {
+	if ls $1 &> /dev/null; then
+		incr=${1##*.}
+		if [[ $incr =~ [0-9]+ ]]; then
+			(( incr++ ))
+			backupname="${1%.*}.$incr"
+		else
+			backupname="$minname.1"
+		fi
+		if [[ -e $backupname ]]; then
+			incrementname $backupname
+		else
+			mv $minname $backupname
+		fi
+	fi
+}
+minify() {
+	! pacman -Q jdk10-openjdk &> /dev/null && pacman -Sy --noconfirm jdk10-openjdk
+	! ls yuicompressor* &> /dev/null && wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar
+	path=$( dirname "$1" )
+	filename=$( basename "$1" )
+	name=${filename%.*}
+	ext=${filename##*.}
+	minname="$path/$name.min.$ext"
+	incrementname $minname
+	echo
+	echo Minifying ...
+	echo
+	java -jar yuicompressor-2.4.8.jar $1 -o $minname
+	echo "minified: $( tcolor $minname )"
+	echo
+}
 # multiboot only
 if [[ ! $( fdisk -l | grep mmcblk0p5 ) ]]; then
 	mmc() {
