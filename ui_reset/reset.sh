@@ -81,7 +81,6 @@ chmod +x install.sh
 timestop
 
 title "$bar $( tcolor RuneUI ) reset and $( tcolor Addons ) reinstalled successfully."
-echo "Please wait 5 seconds before continue."
-title -nt "$info Any issues, try 'reboot'."
+title -nt "$info Please wait Reinitialize for 5 seconds before continue."
 
 systemctl restart rune_SY_wrk
