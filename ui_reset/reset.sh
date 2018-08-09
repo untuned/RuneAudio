@@ -82,5 +82,5 @@ timestop
 
 clearcache
 
-title "$bar RuneUI reset and reinstall Addons successfully."
+title "$bar RuneUI reset and Addons reinstalled successfully."
 title -nt "$info Any issues, try" $( tcolor 'reboot' ).
