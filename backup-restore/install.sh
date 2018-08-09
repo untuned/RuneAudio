@@ -35,6 +35,8 @@ string=$( cat <<'EOF'
             "/etc/mpdscribble.conf ".
             "/etc/spop"
         ;
+EOF
+)
 insert  '/run/backup_'
 
 file=/srv/http/app/templates/settings.php
