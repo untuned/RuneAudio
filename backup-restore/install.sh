@@ -12,9 +12,6 @@ installstart $@
 getuninstall
 
 echo -e "$bar Modify files ..."
-dir=/srv/http/tmp
-echo $dir
-mkdir -p $dir
 
 file=/srv/http/app/libs/runeaudio.php
 echo $file
@@ -42,38 +39,38 @@ insert  '/run/backup_'
 file=/srv/http/app/templates/settings.php
 echo $file
 	
-comment -n +6 'value="backup"'
+commentH -n +6 'value="backup"'
 	
 string=$( cat <<'EOF'
 	    <form class="form-horizontal" id="restore">
 EOF
 )
-append -n +6 'value="backup"'
+appendH -n +6 'value="backup"'
 	
-comment 'type="file"'
+commentH 'type="file"'
 	
 string=$( cat <<'EOF'
                             Browse... <input name="filebackup">
 EOF
 )
-append 'type="file"'
+appendH 'type="file"'
 	
-comment 'value="restore"'
+commentH 'value="restore"'
 	
 string=$( cat <<'EOF'
                     <button id="btn-backup-upload" class="btn btn-primary btn-lg" disabled>Restore</button>
 EOF
 )
-append 'value="restore"'
+appendH 'value="restore"'
 
 file=/srv/http/app/templates/footer.php
-$file
+echo $file
 
 string=$( cat <<'EOF'
 <script src="<?=$this->asset('/js/restore.js')?>"></script>
 EOF
 )
-append '$'
+appendH '$'
 
 echo -e "$bar Add new files ..."
 file=/srv/http/assets/js/restore.js
@@ -137,9 +134,6 @@ rm $1
 file=/etc/sudoers.d/http-backup
 echo $file
 echo 'http ALL=NOPASSWD: ALL' > $file
-
-chmod 755 /srv/http/restore.* /srv/http/tmp
-chown http:http /srv/http/restore.* /srv/http/tmp
 
 installfinish $@
 
