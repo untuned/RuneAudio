@@ -3,6 +3,7 @@
 alias=motd
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 uninstallstart $@
 
@@ -13,14 +14,10 @@ fi
 
 echo -e "$bar Restore files ..."
 
-mv -v /etc/motd{.original,} 2> /dev/null
+mv -v /etc/motd{.backup,} 2> /dev/null
 rm -v /etc/motd.logo /etc/profile.d/motd.sh
 
-file=/etc/bash.bashrc
-echo $file
-sed -i -e '/^PS1=/ d
-' -e '/^#PS1=\|#export PS1=/ s/^#//
-' $file
+restorefile /etc/bash.bashrc
 
 uninstallfinish $@
 
