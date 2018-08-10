@@ -18,7 +18,8 @@ echo 'disable_splash=1' >> /boot/config.txt
 
 systemctl disable getty@tty1.service
 
-echo '[Unit]
+string=$( cat <<'EOF'
+[Unit]
 Description=Boot splash screen
 DefaultDependencies=no
 After=systemd-vconsole-setup.service
@@ -31,7 +32,10 @@ ExecStart=/usr/local/bin/ply-image /usr/share/ply-image/start.png
 
 [Install]
 WantedBy=getty.target
-' > /etc/systemd/system/ply-image.service
+EOF
+)
+echo -e "$string" > $file
+
 systemctl enable ply-image
 
 wgetnc $gitpath/ply-image -P /usr/local/bin
