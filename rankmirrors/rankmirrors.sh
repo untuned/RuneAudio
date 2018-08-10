@@ -2,7 +2,7 @@
 
 rm $0
 
-sec=5 # each server
+(( $# == 0 )) && sec=5 || sec=$1
 
 # rankmirrors.sh
 # mitigate download errors by enable(uncomment) and 
