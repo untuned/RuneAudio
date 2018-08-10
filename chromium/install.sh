@@ -25,14 +25,8 @@ sed -i 's/ ipv6.disable=1//' $file
 file=/boot/config.txt
 echo $file
 
-commentS 'disable_overscan=1'
-# -----------------------------------------------------------------------------
-file=/boot/config.txt
-echo $file
-
 string=$( cat <<'EOF'
 disable_overscan=1
-hdmi_ignore_cec=1
 EOF
 )
 appendS '$'
