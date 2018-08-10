@@ -54,7 +54,7 @@ fi
 string=$( cat <<EOF
 #!/bin/bash
 
-echo -e "'$color'$( < /etc/motd.logo )\e[0m\n"
+echo -e "$color$( < /etc/motd.logo )\e[0m\n"
 EOF
 )
 echo "$string" > $file
