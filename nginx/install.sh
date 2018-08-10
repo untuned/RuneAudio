@@ -21,10 +21,10 @@ mv /etc/nginx/nginx.conf{,.backup}
 mv /usr/lib/systemd/system/nginx.service{,.backup}
 
 echo -e "$bar Get NGINX packages ..."
-gitpath=https://github.com/rern/RuneAudio/raw/master/nginx/
+
 file=nginx-1.14.0-1-armv7h.pkg.tar.xz
 echo $file
-wgetnc $gitpath/$file
+wgetnc https://github.com/rern/RuneAudio/raw/master/nginx/$file
 
 yes 2>/dev/null | pacman -U $file
 
