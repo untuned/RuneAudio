@@ -5,11 +5,7 @@
 alias=chro
 
 . /srv/http/addonstitle.sh
-
-if ! pacman -Qi mpd &> /dev/null; then
-	title "$info MPD must be upgraged first."
-	exit
-fi
+. /srv/http/addonsedit.sh
 
 installstart $@
 
@@ -17,38 +13,47 @@ getuninstall
 
 pacman -S --noconfirm chromium nss harfbuzz freetype2 zlib libjpeg-turbo
 
-# modify file
 echo -e "$bar Modify file ..."
+
+# -----------------------------------------------------------------------------
 # fix - chromium try to probe ipv6
 file=/boot/cmdline.txt
 echo $file
 sed -i 's/ ipv6.disable=1//' $file
-# fix - page scaling
+# -----------------------------------------------------------------------------
+# remove black border on local screen
 file=/boot/config.txt
 echo $file
-sed -i '/disable_overscan=1/ s/^#//' $file
 
+commentS 'disable_overscan=1'
+# -----------------------------------------------------------------------------
 file=/boot/config.txt
 echo $file
-echo 'disable_overscan=1
-hdmi_ignore_cec=1' >> $file
 
+string=$( cat <<'EOF'
+disable_overscan=1
+hdmi_ignore_cec=1
+EOF
+)
+echo "$string" >> $file
+# -----------------------------------------------------------------------------
 # replace midori with chromium
-zoom=$( redis-cli get zoomlevel )
+zoom=$( redis-cli hget settings zoom )
 file=/root/.xinitrc
 echo $file
-sed -i '/^midori/ {
-s/^/#/
-a\
-chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor='$zoom'
-}
-' $file
+
+commentS '^midori'
+
+string=$( cat <<EOF
+chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoom
+EOF
+)
+appendS '^midori'
 
 installfinish $@
 
-redis-cli set browser 2
-redis-cli save
+echo -e "Chromium will take a little longer to launch."
+title -nt  "$info Please wait Reinitialize for 5 seconds before continue."
 
-title "$info Please reboot."
-title -nt "$bar It may take a couple minutes for Chromium 1st launch."
+systemctl restart rune_SY_wrk
 
