@@ -42,10 +42,10 @@ if ! grep -q 'aria2' $file; then
 	commentS '^\s*rewrite'
 	string=$( cat <<'EOF'
             rewrite /css/(.*) /assets/css/$1 break;
-            rewrite /less/(.*) /assets/less/$1 break;
-            rewrite /js/(.*) /assets/js/$1 break;
-            rewrite /img/(.*) /assets/img/$1 break;
             rewrite /fonts/(.*) /assets/fonts/$1 break;
+            rewrite /img/(.*) /assets/img/$1 break;
+            rewrite /js/(.*) /assets/js/$1 break;
+            rewrite /less/(.*) /assets/less/$1 break;
 EOF
 )
 	appendS -n +7 'listen 80 '
