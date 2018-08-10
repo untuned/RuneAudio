@@ -5,6 +5,7 @@
 alias=motd
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 installstart $@
 
@@ -14,7 +15,8 @@ echo -e "$bar Add new files ..."
 
 file=/etc/motd.logo
 echo $file
-cat > $file <<'EOF'
+
+string=$( cat <<'EOF'
                           .,;uh         
                    .,;cdk0XNWMM,        
              .,cdONMMMMMMMMMMMM:        
@@ -36,6 +38,8 @@ cat > $file <<'EOF'
                 dNNOd;'                 
                  ''                     
 EOF
+)
+echo "$string" > $file
 
 file=/etc/profile.d/motd.sh
 echo $file
@@ -47,27 +51,32 @@ else
 	redis-cli del motdcolor &> /dev/null
 fi
 
-echo '#!/bin/bash
+string=$( cat <<EOF
+#!/bin/bash
 
 echo -e "'$color'$( < /etc/motd.logo )\e[0m\n"
-' > $file
+EOF
+)
+echo "$string" > $file
 
 echo -e "$bar Modify files ..."
 
-mv -v /etc/motd{,.original} 2> /dev/null
+mv -v /etc/motd{,.backup}
 
 file=/etc/bash.bashrc
 echo $file
 
 [[ $( redis-cli get release ) == 0.4b ]] && release='\\[\'$color'\\]04\\[\\e[0m\\]'
 
-sed -i -e '/PS1=/ s/^/#/
-' -e '$ a\
-PS1=\x27\\[\\e[38;5;242m\\]\\u@\\h'$release':\\[\'$color'\\]\\w \\$\\[\\e[0m\\] \x27
-' $file
+commentS 'PS1='
+
+string=$( cat <<'EOF'
+PS1='\[\e[38;5;242m\]\u@\h\[\e[38;5;45m\]04\[\e[0m\]:\[\e[38;5;45m\]\w \$\[\e[0m\] '
+EOF
+)
+appendS '$'
 
 # \[ \]      - omit 'color syntax' count when press <home>, <end> key and command history
-
 # PS1='\[\e[38;5;'$color'm\]\u@\h:\[\e[0m\]\w \$ '
 # \x27       - escaped <'>
 # \\         - escaped <\>
