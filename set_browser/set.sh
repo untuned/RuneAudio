@@ -17,9 +17,6 @@ fi
 
 redis-cli set browser $1 &> /dev/null
 
-echo -e "$bar Restart local browser ..."
-killall Xorg &> /dev/null
-sleep 3
-xinit &> /dev/null &
-
 title -nt "$info Local browser switched to $( tcolor $browser )"
+
+clearcache
