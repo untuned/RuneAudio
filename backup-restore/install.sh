@@ -33,7 +33,7 @@ string=$( cat <<'EOF'
         ;
 EOF
 )
-insert  '/run/backup_'
+insert '/run/backup_'
 
 file=/srv/http/app/templates/settings.php
 	
@@ -96,7 +96,7 @@ $( '#restore' ).submit( function() {
 });
 EOF
 )
-echo -e "$string" > $file
+echo "$string" > $file
 
 file=/srv/http/restore.php
 echo $file
@@ -122,7 +122,7 @@ if ( $restore == 0 ) {
 }
 EOF
 )
-echo -e "$string" > $file
+echo "$string" > $file
 
 file=/srv/http/restore.sh
 echo $file
@@ -139,7 +139,7 @@ sed -i 's/opcache.enable=./opcache.enable=$( redis-cli get opcache )/' /etc/php/
 rm $1
 EOF
 )
-echo -e "$string" > $file
+echo "$string" > $file
 
 file=/etc/sudoers.d/http-backup
 echo $file
