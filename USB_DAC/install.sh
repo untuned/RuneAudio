@@ -30,15 +30,15 @@ udevadm control --reload-rules && udevadm trigger
 file=/srv/http/command/refresh_ao
 echo $file
 # $1 = ao@name
-string=$( cat <<'EOF'
+string=$( cat <<EOF
 if ( $argc > 1 ) {
 	if ( $argv[ 1 ] == "on" ) {
 		// "exec" gets only last line which is new power-on card
 		$ao = exec( '/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2' );
 		$name = $ao;
 	} else {
-		$ao = "'"${1%@*}"'";
-		$name = "'"${1#*@}"'";
+		$ao = '${1%@*}';
+		$name = '${1#*@}';
 	}
 	ui_notify( "Audio Output", "Switch to ".$name );
 	wrk_mpdconf( $redis, "switchao", $ao );
