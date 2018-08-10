@@ -40,8 +40,8 @@ if ( $argc > 1 ) {
 		$ao = '${1%@*}';
 		$name = '${1#*@}';
 	}
-	ui_notify( "Audio Output", "Switch to ".$name );
-	wrk_mpdconf( $redis, "switchao", $ao );
+	ui_notify( "Audio Output", "Switch to ".\$name );
+	wrk_mpdconf( $redis, "switchao", \$ao );
 }
 EOF
 )
