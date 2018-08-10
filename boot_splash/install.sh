@@ -3,6 +3,7 @@
 alias=spla
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 installstart $@
 
