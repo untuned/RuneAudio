@@ -15,7 +15,7 @@ else
     browser=Chromium
 fi
 
-redis-cli set browser $1 &> /dev/null
+redis-cli hset settings browser $1 &> /dev/null
 
 title -nt "$info Local browser switched to $( tcolor $browser )"
 
