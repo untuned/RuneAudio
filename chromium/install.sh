@@ -35,20 +35,20 @@ disable_overscan=1
 hdmi_ignore_cec=1
 EOF
 )
-echo "$string" >> $file
+appendS '$'
 # -----------------------------------------------------------------------------
 # replace midori with chromium
 zoom=$( redis-cli hget settings zoom )
 file=/root/.xinitrc
 echo $file
 
-commentS '^midori'
+commentS 'midori'
 
 string=$( cat <<EOF
 chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoom
 EOF
 )
-appendS '^midori'
+appendS '$'
 
 installfinish $@
 
