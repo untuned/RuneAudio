@@ -17,6 +17,6 @@ rm -rv /srv/http/tmp
 
 uninstallfinish $@
 
-title -nt "Please wait 5 seconds before continue."
+title -nt  "$info Please wait Reinitialize for 5 seconds before continue."
 
 systemctl restart rune_SY_wrk
