@@ -32,13 +32,13 @@ EOF
 )
 appendH 'value="backup"'
 
-commentH -n -6 'btn-backup-browse'
+commentH -n -3 'Restore player config'
 	
 string=$( cat <<'EOF'
 	    <form class="form-horizontal" id="restore">
 EOF
 )
-appendH -n -6 'btn-backup-browse'
+appendH -n -3 'Restore player config'
 	
 commentH 'type="file"'
 	
