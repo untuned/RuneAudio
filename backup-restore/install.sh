@@ -48,7 +48,7 @@ appendH -n +6 'value="backup"'
 commentH 'type="file"'
 	
 string=$( cat <<'EOF'
-                            Browse... <input name="filebackup">
+                            Browse... <input type="file" name="filebackup">
 EOF
 )
 appendH 'type="file"'
