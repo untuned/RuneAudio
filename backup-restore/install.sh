@@ -134,6 +134,8 @@ echo "$string" > $file
 file=/srv/http/backuprestore.sh
 echo $file
 string=$( cat <<'EOF'
+#!/bin/bash
+
 if (( $# > 0 )); then # restore
 	systemctl stop mpd redis
 	bsdtar -xpf $1 -C /
