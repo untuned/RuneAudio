@@ -59,7 +59,7 @@ appendH 'value="restore"'
 file=/srv/http/app/templates/footer.php
 
 string=$( cat <<'EOF'
-<?=( $this->uri(1) === 'addons' ? '<script src="'.$this->asset('/js/backuprestore.js').'"></script>' : '' ) ?>
+<?=( $this->uri(1) === 'settings' ? '<script src="'.$this->asset('/js/backuprestore.js').'"></script>' : '' ) ?>
 EOF
 )
 appendH '$'
