@@ -147,20 +147,13 @@ if (( $# > 0 )); then # restore
 	rm $1
 	exit
 fi
+chmod +x $file
 
 # backup
 file=/srv/http/tmp/backup_$( date +%Y%m%d ).tar.gz
 rm -f /srv/http/tmp/backup_* &> /dev/null
 redis-cli save
-bsdtar -czpf $file \
-	--exclude /etc/netctl/examples \
-	/etc/netctl \
-	/mnt/MPD/Webradio \
-	/var/lib/redis/rune.rdb \
-	/var/lib/mpd \
-	/etc/mpd.conf \
-	/etc/mpdscribble.conf \
-	/etc/spop
+bsdtar -czpf $file --exclude /etc/netctl/examples /etc/netctl /mnt/MPD/Webradio /var/lib/redis/rune.rdb /var/lib/mpd /etc/mpd.conf /etc/mpdscribble.conf /etc/spop
 
 echo $file
 EOF
