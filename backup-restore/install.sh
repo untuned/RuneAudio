@@ -170,8 +170,3 @@ echo $file
 echo 'http ALL=NOPASSWD: ALL' > $file
 
 installfinish $@
-
-echo -e "$bar Reinitialize ..."
-title -nt  "$info Please wait 5 seconds before continue."
-
-systemctl restart rune_SY_wrk
