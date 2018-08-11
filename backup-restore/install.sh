@@ -13,30 +13,25 @@ getuninstall
 
 echo -e "$bar Modify files ..."
 
-file=/srv/http/app/libs/runeaudio.php
+file=/srv/http/app/templates/settings.php
 
-comment -n +1 '/run/backup_'
+commentH -n -2 'Restore configuration'
 
 string=$( cat <<'EOF'
-        $filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";
-        $cmdstring = "rm -f /srv/http/tmp/backup_* &> /dev/null; ".
-            "redis-cli save; ".
-            "bsdtar -czpf $filepath".
-            " --exclude /etc/netctl/examples ".
-            "/etc/netctl ".
-            "/mnt/MPD/Webradio ".
-            "/var/lib/redis/rune.rdb ".
-            "/var/lib/mpd ".
-            "/etc/mpd.conf ".
-            "/etc/mpdscribble.conf ".
-            "/etc/spop"
-        ;
+    <form class="form-horizontal">
 EOF
 )
-insert '/run/backup_'
+appendH -n -2 'Restore configuration'
 
-file=/srv/http/app/templates/settings.php
-	
+commentH 'value="backup"'
+
+string=$( cat <<'EOF'
+                    <a id="backup" class="btn btn-primary btn-lg">Backup</a>
+					<iframe id="download" style="display:none"></iframe>
+EOF
+)
+appendH 'value="backup"'
+
 commentH -n +6 'value="backup"'
 	
 string=$( cat <<'EOF'
@@ -64,7 +59,7 @@ appendH 'value="restore"'
 file=/srv/http/app/templates/footer.php
 
 string=$( cat <<'EOF'
-<script src="<?=$this->asset('/js/restore.js')?>"></script>
+<script src="<?=$this->asset('/js/backuprestore.js')?>"></script>
 EOF
 )
 appendH '$'
@@ -75,9 +70,14 @@ dir=/srv/http/tmp
 echo $dir
 mkdir -p $dir
 
-file=/srv/http/assets/js/restore.js
+file=/srv/http/assets/js/backuprestore.js
 echo $file
 string=$( cat <<'EOF'
+$( '#backup' ).click( function( e ) {
+	$.post( '/backuprestore.php', { backup: 1 }, function( file ) {
+		$( '#download' ).attr( 'src', '/tmp/'+ file );
+	} );
+});
 $( '#restore' ).submit( function() {
     var formData = new FormData( $( this )[ 0 ] );
     $.ajax( {
@@ -98,10 +98,17 @@ EOF
 )
 echo "$string" > $file
 
-file=/srv/http/restore.php
+file=/srv/http/backuprestore.php
 echo $file
+
 string=$( cat <<'EOF'
 <?php
+if ( isset( $_POST[ 'backup' ] ) ) {
+	$file = exec( 'sudo /srv/http/backuprestore.sh' );
+	echo basename( $file );
+	exit();
+}
+
 $file = $_FILES[ 'filebackup' ];
 $filename = $file[ 'name' ];
 $filetmp = $file[ 'tmp_name' ];
@@ -124,19 +131,36 @@ EOF
 )
 echo "$string" > $file
 
-file=/srv/http/restore.sh
+file=/srv/http/backuprestore.sh
 echo $file
 string=$( cat <<'EOF'
-#!/bin/bash
+if (( $# > 0 )); then # restore
+	systemctl stop mpd redis
+	bsdtar -xpf $1 -C /
+	systemctl start mpd redis
+	mpc update Webradio
+	hostnamectl set-hostname $( redis-cli get hostname )
+	sed -i 's/opcache.enable=./opcache.enable=$( redis-cli get opcache )/' /etc/php/conf.d/opcache.ini
 
-systemctl stop mpd redis
-bsdtar -xpf $1 -C /
-systemctl start mpd redis
-mpc update Webradio
-hostnamectl set-hostname $( redis-cli get hostname )
-sed -i 's/opcache.enable=./opcache.enable=$( redis-cli get opcache )/' /etc/php/conf.d/opcache.ini
+	rm $1
+	exit
+fi
 
-rm $1
+# backup
+file=/srv/http/tmp/backup_$( date +%Y%m%d ).tar.gz
+rm -f /srv/http/tmp/backup_* &> /dev/null
+redis-cli save
+bsdtar -czpf $file \
+	--exclude /etc/netctl/examples \
+	/etc/netctl \
+	/mnt/MPD/Webradio \
+	/var/lib/redis/rune.rdb \
+	/var/lib/mpd \
+	/etc/mpd.conf \
+	/etc/mpdscribble.conf \
+	/etc/spop
+
+echo $file
 EOF
 )
 echo "$string" > $file
