@@ -136,26 +136,25 @@ echo $file
 string=$( cat <<'EOF'
 #!/bin/bash
 
-if (( $# > 0 )); then # restore
-	systemctl stop mpd redis
-	bsdtar -xpf $1 -C /
-	systemctl start mpd redis
-	mpc update Webradio
-	hostnamectl set-hostname $( redis-cli get hostname )
-	sed -i 's/opcache.enable=./opcache.enable=$( redis-cli get opcache )/' /etc/php/conf.d/opcache.ini
-
-	rm $1
+if (( $# = 0 )); then #  backup
+	file=/srv/http/tmp/backup_$( date +%Y%m%d ).tar.gz
+	rm -f /srv/http/tmp/backup_* &> /dev/null
+	redis-cli save
+	bsdtar -czpf $file --exclude /etc/netctl/examples /etc/netctl /mnt/MPD/Webradio /var/lib/redis/rune.rdb /var/lib/mpd /etc/mpd.conf /etc/mpdscribble.conf /etc/spop
+	
+	echo $file
 	exit
 fi
-chmod +x $file
 
-# backup
-file=/srv/http/tmp/backup_$( date +%Y%m%d ).tar.gz
-rm -f /srv/http/tmp/backup_* &> /dev/null
-redis-cli save
-bsdtar -czpf $file --exclude /etc/netctl/examples /etc/netctl /mnt/MPD/Webradio /var/lib/redis/rune.rdb /var/lib/mpd /etc/mpd.conf /etc/mpdscribble.conf /etc/spop
+# restore
+systemctl stop mpd redis
+bsdtar -xpf $1 -C /
+systemctl start mpd redis
+mpc update Webradio
+hostnamectl set-hostname $( redis-cli get hostname )
+sed -i 's/opcache.enable=./opcache.enable=$( redis-cli get opcache )/' /etc/php/conf.d/opcache.ini
 
-echo $file
+rm $1
 EOF
 )
 echo "$string" > $file
