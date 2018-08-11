@@ -8,7 +8,12 @@ alias=back
 uninstallstart $@
 
 echo -e "$bar Restore files ..."
-restorefile /srv/http/app/libs/runeaudio.php /srv/http/app/templates/settings.php
+files="
+/srv/http/app/libs/runeaudio.php
+/srv/http/app/templates/footer.php
+/srv/http/app/templates/settings.php
+"
+restorefile $files
 
 rm -v /etc/sudoers.d/http-backup
 rm -v /srv/http/restore.*
