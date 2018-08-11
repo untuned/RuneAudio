@@ -32,13 +32,13 @@ EOF
 )
 appendH 'value="backup"'
 
-commentH -n +6 'value="backup"'
+commentH -n -6 'btn-backup-browse'
 	
 string=$( cat <<'EOF'
 	    <form class="form-horizontal" id="restore">
 EOF
 )
-appendH -n +6 'value="backup"'
+appendH -n -6 'btn-backup-browse'
 	
 commentH 'type="file"'
 	
