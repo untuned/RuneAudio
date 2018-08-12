@@ -49,8 +49,6 @@ topp() {
 	top -p $( pgrep -d ',' $1 )
 }
 incrementname() {
-	! ls $1 &> /dev/null && return
-	
 	incr=${1##*.}
 	if [[ $incr =~ [0-9]+ ]]; then
 		(( incr++ ))
@@ -65,9 +63,11 @@ incrementname() {
 	fi
 }
 minify() {
-	if ! ls yuicompressor* &> /dev/null; then
+	yui=$( ls yuicompressor*.jar 2> /dev/null )
+	if [[ ! $yui ]]; then
 		version=$( curl -s https://github.com/yui/yuicompressor/releases/latest | sed 's|.*tag/v\(.*\)".*|\1|' )
-		wget https://github.com/yui/yuicompressor/releases/download/v$version/yuicompressor-$version.jar
+		yui=yuicompressor-$version.jar
+		wget https://github.com/yui/yuicompressor/releases/download/v$version/$yui
 	fi
 	! pacman -Q jdk10-openjdk &> /dev/null && pacman -Sy --noconfirm jdk10-openjdk
 	if (( $# == 0 )); then
@@ -79,7 +79,7 @@ minify() {
 	name=${filename%.*}
 	ext=${filename##*.}
 	minname="$path/$name.min.$ext"
-	incrementname $minname
+	ls $minname &> /dev/null && incrementname $minname
 	echo
 	echo Minifying ...
 	echo
