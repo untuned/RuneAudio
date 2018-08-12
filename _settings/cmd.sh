@@ -49,25 +49,31 @@ topp() {
 	top -p $( pgrep -d ',' $1 )
 }
 incrementname() {
-	if ls $1 &> /dev/null; then
-		incr=${1##*.}
-		if [[ $incr =~ [0-9]+ ]]; then
-			(( incr++ ))
-			backupname="${1%.*}.$incr"
-		else
-			backupname="$minname.1"
-		fi
-		if [[ -e $backupname ]]; then
-			incrementname $backupname
-		else
-			mv $minname $backupname
-		fi
+	! ls $1 &> /dev/null && return
+	
+	incr=${1##*.}
+	if [[ $incr =~ [0-9]+ ]]; then
+		(( incr++ ))
+		backupname="${1%.*}.$incr"
+	else
+		backupname="$minname.1"
+	fi
+	if [[ -e $backupname ]]; then
+		incrementname $backupname
+	else
+		mv $minname $backupname
 	fi
 }
 minify() {
-	yui=$( ls yuicompressor* 2> /dev/null )
-	[[ ! $yui ]]  && wget https://github.com/yui/yuicompressor/releases/download/v2.4.8/yuicompressor-2.4.8.jar
+	if ! ls yuicompressor* &> /dev/null; then
+		version=$( curl -s https://github.com/yui/yuicompressor/releases/latest | sed 's|.*tag/v\(.*\)".*|\1|' )
+		wget https://github.com/yui/yuicompressor/releases/download/v$version/yuicompressor-$version.jar
+	fi
 	! pacman -Q jdk10-openjdk &> /dev/null && pacman -Sy --noconfirm jdk10-openjdk
+	if (( $# == 0 )); then
+		echo 'No source file specified.'
+		return
+	fi
 	path=$( dirname "$1" )
 	filename=$( basename "$1" )
 	name=${filename%.*}
