@@ -54,12 +54,12 @@ incrementname() {
 		(( incr++ ))
 		backupname="${1%.*}.$incr"
 	else
-		backupname="$minname.1"
+		backupname="$minfile.1"
 	fi
 	if [[ -e $backupname ]]; then
 		incrementname $backupname
 	else
-		mv $minname $backupname
+		mv $minfile $backupname
 	fi
 }
 minify() {
@@ -78,13 +78,15 @@ minify() {
 	filename=$( basename "$1" )
 	name=${filename%.*}
 	ext=${filename##*.}
-	minname="$path/$name.min.$ext"
-	ls $minname &> /dev/null && incrementname $minname
+	minfile="$path/$name.min.$ext"
+	ls $minfile &> /dev/null && incrementname $minfile
 	echo
 	echo Minifying ...
 	echo
-	java -jar $yui $1 -o $minname
-	echo "minified: $( tcolor $minname )"
+	java -jar $yui $1 -o $minfile
+	# fix 0% and 0deg stripping
+	[[ $ext == 'css' ]] && sed -i 's/0{-webkit-transform:rotate(0)/0%{-webkit-transform:rotate(0deg)/g; s/transform:rotate(0)/transform:rotate(0deg)/g' $minfile
+	echo "minified: $( tcolor $minfile )"
 	echo
 }
 # multiboot only
