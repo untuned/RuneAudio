@@ -85,8 +85,12 @@ minify() {
 	echo
 	java -jar $yui $1 -o $minfile
 	# fix 0% and 0deg stripping
-	[[ $ext == 'css' ]] && sed -i 's/0{-webkit-transform:rotate(0)/0%{-webkit-transform:rotate(0deg)/g; s/transform:rotate(0)/transform:rotate(0deg)/g' $minfile
-	echo "minified: $( tcolor $minfile )"
+	[[ $ext == 'css' ]] && sed -i 's/0\({-webkit-transform:rotate(0)\)/0%\1/g; s/transform:rotate(0)/transform:rotate(0deg)/g' $minfile
+	minsize=$(( $( stat -c%s "$minfile" ) / 1024 ))
+	filesize=$(( $( stat -c%s "$1" ) / 1024 ))
+	ratio=$(( minsize * 100 / filesize ))
+	
+	echo "minified: $( tcolor $minfile ) - ${ratio}% ( ${filesize}kB -> ${minsize}kB )"
 	echo
 }
 # multiboot only
