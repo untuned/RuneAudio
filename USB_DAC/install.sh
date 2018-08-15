@@ -47,6 +47,6 @@ EOF
 )
 insert 'close Redis'
 
-redis-cli set aodefault $1
+redis-cli set aodefault "$1"
 
 installfinish $@
