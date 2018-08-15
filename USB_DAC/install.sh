@@ -54,7 +54,7 @@ if ( $argc > 1 ) {
 		$ao = exec( '/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2' );
 		$name = $ao;
 	} else {
-		$ao = 'bcm2835 ALSA_1';
+		$ao = 'bcm2835 ALSA_2';
 		$name = 'RaspberryPi HDMI Out';
 	}
 	ui_notify( "Audio Output", "Switch to ".$name );
