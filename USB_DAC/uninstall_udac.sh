@@ -13,4 +13,6 @@ restorefile /etc/udev/rules.d/rune_usb-audio.rules /srv/http/command/refresh_ao
 
 udevadm control --reload-rules && udevadm trigger
 
+redis-cli del aodefault
+
 uninstallfinish $@
