@@ -39,8 +39,9 @@ if ( $argc > 1 ) {
 	} else {
 		$ao = $redis->get( 'aodefault' );
 		$aoarray = array_flip( $redis->hGetAll( 'udaclist' ) );
+		$name = $aoarray[ $ao ];
 	}
-	ui_notify( 'Audio Output', 'Switch to '.$aoarray[ $ao ] );
+	ui_notify( 'Audio Output', 'Switch to '.$name );
 	wrk_mpdconf( $redis, 'switchao', $ao );
 }
 EOF
