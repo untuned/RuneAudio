@@ -29,40 +29,24 @@ udevadm control --reload-rules && udevadm trigger
 
 file=/srv/http/command/refresh_ao
 echo $file
-# $1 = ao@name
-if [[ $1 == 'bcm2835 ALSA_1@RaspberryPi Analog Out' ]]; then
-	string=$( cat <<'EOF'
+
+string=$( cat <<'EOF'
 if ( $argc > 1 ) {
 	if ( $argv[ 1 ] === "on" ) {
 		// "exec" gets only last line which is new power-on card
 		$ao = exec( '/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2' );
 		$name = $ao;
 	} else {
-		$ao = 'bcm2835 ALSA_1';
-		$name = 'RaspberryPi Analog Out';
+		$ao = $redis->get( 'aodefault' );
+		$name = $redis->hGet( 'udaclist', $ao );
 	}
-	ui_notify( "Audio Output", "Switch to ".$name );
-	wrk_mpdconf( $redis, "switchao", $ao );
+	ui_notify( 'Audio Output', 'Switch to '.$name );
+	wrk_mpdconf( $redis, 'switchao', $ao );
 }
 EOF
 )
-else
-	string=$( cat <<'EOF'
-if ( $argc > 1 ) {
-	if ( $argv[ 1 ] === "on" ) {
-		// "exec" gets only last line which is new power-on card
-		$ao = exec( '/usr/bin/aplay -lv | grep card | cut -d"]" -f1 | cut -d"[" -f2' );
-		$name = $ao;
-	} else {
-		$ao = 'bcm2835 ALSA_2';
-		$name = 'RaspberryPi HDMI Out';
-	}
-	ui_notify( "Audio Output", "Switch to ".$name );
-	wrk_mpdconf( $redis, "switchao", $ao );
-}
-EOF
-)
-fi
 insert 'close Redis'
+
+redis-cli set aodefault $1
 
 installfinish $@
