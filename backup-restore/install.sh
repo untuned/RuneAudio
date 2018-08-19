@@ -5,162 +5,120 @@
 alias=back
 
 . /srv/http/addonstitle.sh
-. /srv/http/addonsedit.sh
 
 installstart $@
 
 getuninstall
 
 echo -e "$bar Modify files ..."
-
-file=/srv/http/app/templates/settings.php
-
-commentH -n -2 'Restore configuration'
-
-string=$( cat <<'EOF'
-    <form class="form-horizontal">
-EOF
-)
-appendH -n -2 'Restore configuration'
-
-commentH 'value="backup"'
-
-string=$( cat <<'EOF'
-                    <a id="backup" class="btn btn-primary btn-lg">Backup</a>
-					<iframe id="download" style="display:none"></iframe>
-EOF
-)
-appendH 'value="backup"'
-
-commentH -n -3 'Restore player config'
-	
-string=$( cat <<'EOF'
-	    <form class="form-horizontal" id="restore">
-EOF
-)
-appendH -n -3 'Restore player config'
-	
-commentH 'type="file"'
-	
-string=$( cat <<'EOF'
-                            Browse... <input type="file" name="filebackup">
-EOF
-)
-appendH 'type="file"'
-	
-commentH 'value="restore"'
-	
-string=$( cat <<'EOF'
-                    <button id="btn-backup-upload" class="btn btn-primary btn-lg" disabled>Restore</button>
-EOF
-)
-appendH 'value="restore"'
-
-file=/srv/http/app/templates/footer.php
-
-string=$( cat <<'EOF'
-<?=( $this->uri(1) === 'settings' ? '<script src="'.$this->asset('/js/backuprestore.js').'"></script>' : '' ) ?>
-EOF
-)
-appendH '$'
-
-echo -e "$bar Add new files ..."
-
 dir=/srv/http/tmp
 echo $dir
 mkdir -p $dir
 
-file=/srv/http/assets/js/backuprestore.js
+file=/srv/http/app/libs/runeaudio.php
+if ! grep -q 'bsdtar -czpf' $file; then
 echo $file
-string=$( cat <<'EOF'
-$( '#backup' ).click( function( e ) {
-	$.post( '/backuprestore.php', { backup: 1 }, function( file ) {
-		$( '#download' ).attr( 'src', '/tmp/'+ file );
-	} );
-});
-$( '#restore' ).submit( function() {
-    var formData = new FormData( $( this )[ 0 ] );
-    $.ajax( {
-        url: "/backuprestore.php",
+sed -i -e '\|/run/backup_|,+1 s|^|//|
+' -e '\|/run/backup_| i\
+        $filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";\
+        $cmdstring = "rm -f /srv/http/tmp/backup_* &> /dev/null; ".\
+            "redis-cli save; ".\
+            "bsdtar -czpf $filepath".\
+                " --exclude /etc/netctl/examples ".\
+                "/etc/netctl ".\
+                "/mnt/MPD/Webradio ".\
+                "/var/lib/redis/rune.rdb ".\
+                "/var/lib/mpd ".\
+                "/etc/mpd.conf ".\
+                "/etc/mpdscribble.conf ".\
+                "/etc/spop"\
+        ;
+' $file
+fi
+
+file=/srv/http/app/templates/settings.php
+if ! grep -q 'filebackup' $file; then
+echo $file
+sed -i -e '/value="backup"/ {n;n;n;n;n;n; s/method="post"/id="restore"/}
+' -e 's/type="file"/& name="filebackup"/
+' -e'/value="restore"/ s/name="syscmd" value="restore" //; s/type="submit" disabled>Upload/disabled>Restore/
+' $file
+fi
+
+file=/srv/http/app/templates/footer.php
+if ! grep -q 'restore.js' $file; then
+	echo $file
+	echo '<script src="<?=$this->asset('\''/js/restore.js'\'')?>"></script>' >> $file
+fi
+
+echo -e "$bar Add new files ..."
+file=/srv/http/assets/js/restore.js
+echo $file
+echo '
+$("#restore").submit(function() {
+    var formData = new FormData($(this)[0]);
+    $.ajax({
+        url: "../../restore.php",
         type: "POST",
         data: formData,
         cache: false,
         contentType: false,
         enctype: "multipart/form-data",
         processData: false,
-        success: function( response ) {
-            info( response );
+        success: function (response) {
+            alert(response);
         }
     });
     return false
 });
-EOF
-)
-echo "$string" > $file
+' > $file
 
-file=/srv/http/backuprestore.php
+file=/srv/http/restore.php
 echo $file
-
-string=$( cat <<'EOF'
-<?php
-if ( isset( $_POST[ 'backup' ] ) ) {
-	$file = exec( 'sudo /srv/http/backuprestore.sh' );
-	echo basename( $file );
-	exit();
-}
-
-$file = $_FILES[ 'filebackup' ];
-$filename = $file[ 'name' ];
-$filetmp = $file[ 'tmp_name' ];
+echo '<?php
+$file = $_FILES["filebackup"];
+$filename = $file["name"];
+$filetmp = $file["tmp_name"];
 $filedest = "/srv/http/tmp/$filename";
-$filesize = filesize( $filetmp );
+$filesize = filesize($filetmp);
 
-if ( $filesize === 0 ) die( 'File upload error !' );
+if ($filesize === 0) die("File upload error !");
 
-exec( 'rm -f /srv/http/tmp/backup_*' );
-if ( ! move_uploaded_file( $filetmp, $filedest ) ) die( 'File move error !' );
+exec("rm -f /srv/http/tmp/backup_*");
+if (! move_uploaded_file($filetmp, $filedest)) die("File move error !");
 
-$restore = exec( 'sudo /srv/http/backuprestore.sh $filedest; echo $?' );
+$restore = exec("sudo /srv/http/restore.sh $filedest; echo $?");
 
-if ( $restore == 0 ) {
-	echo 'Restored successfully.';
+if ($restore == 0) {
+	echo "Restored successfully.";
 } else {
-	echo 'Restore failed !';
+	echo "Restore failed !";
 }
-EOF
-)
-echo "$string" > $file
+' > $file
 
-file=/srv/http/backuprestore.sh
+file=/srv/http/restore.sh
 echo $file
-string=$( cat <<'EOF'
-#!/bin/bash
+echo '#!/bin/bash
 
-if (( $# = 0 )); then #  backup
-	file=/srv/http/tmp/backup_$( date +%Y%m%d ).tar.gz
-	rm -f /srv/http/tmp/backup_* &> /dev/null
-	redis-cli save
-	bsdtar -czpf $file --exclude /etc/netctl/examples /etc/netctl /mnt/MPD/Webradio /var/lib/redis/rune.rdb /var/lib/mpd /etc/mpd.conf /etc/mpdscribble.conf /etc/spop
-	
-	echo $file
-	exit
-fi
-
-# restore
 systemctl stop mpd redis
 bsdtar -xpf $1 -C /
 systemctl start mpd redis
 mpc update Webradio
 hostnamectl set-hostname $( redis-cli get hostname )
-sed -i 's/opcache.enable=./opcache.enable=$( redis-cli get opcache )/' /etc/php/conf.d/opcache.ini
+sed -i "s/opcache.enable=./opcache.enable=$( redis-cli get opcache )/" /etc/php/conf.d/opcache.ini
 
 rm $1
-EOF
-)
-echo "$string" > $file
+' > $file
 
 file=/etc/sudoers.d/http-backup
 echo $file
 echo 'http ALL=NOPASSWD: ALL' > $file
 
+chmod 755 /srv/http/restore.* /srv/http/tmp
+chown http:http /srv/http/restore.* /srv/http/tmp
+
 installfinish $@
+
+title -nt "Please wait 5 seconds before continue."
+
+systemctl restart rune_SY_wrk
