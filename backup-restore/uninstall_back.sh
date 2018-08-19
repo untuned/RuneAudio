@@ -8,9 +8,13 @@ alias=back
 uninstallstart $@
 
 echo -e "$bar Restore files ..."
+
+file=/srv/http/app/templates/footer.php
+[[ -e $file.backup ]] && file=$file.backup
+
 files="
+$file
 /srv/http/app/libs/runeaudio.php
-/srv/http/app/templates/footer.php
 /srv/http/app/templates/settings.php
 "
 restorefile $files
