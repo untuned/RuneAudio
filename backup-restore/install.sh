@@ -20,21 +20,21 @@ mkdir -p $dir
 file=/srv/http/app/libs/runeaudio.php
 echo $file
 
-comment -n +1 '/run/backup_'
+comment '/run/backup_' -n +1 '/run/backup_'
 
 string=$( cat <<'EOF'
         $filepath = '/srv/http/tmp/backup_'.date( 'Ymd' ).'.tar.gz';
         $cmdstring = 'rm -f /srv/http/tmp/backup_* &> /dev/null; '.
             'redis-cli save; '.
-            'bsdtar -czpf $filepath '.
-                '--exclude /etc/netctl/examples '.
-                '/etc/netctl '.
-                '/mnt/MPD/Webradio '.
-                '/var/lib/redis/rune.rdb '.
-                '/var/lib/mpd '.
-                '/etc/mpd.conf '.
-                '/etc/mpdscribble.conf '.
-                '/etc/spop';
+            'bsdtar -czpf '.$filepath.
+                ' --exclude /etc/netctl/examples'.
+                ' /etc/netctl'.
+                ' /mnt/MPD/Webradio'.
+                ' /var/lib/redis/rune.rdb'.
+                ' /var/lib/mpd'.
+                ' /etc/mpd.conf'.
+                ' /etc/mpdscribble.conf'.
+                ' /etc/spop';
 EOF
 )
 insert -n +1 '/run/backup_'
