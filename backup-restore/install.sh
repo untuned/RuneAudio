@@ -104,7 +104,7 @@ $( '#restore' ).submit( function() {
         }
     });
     return false
-});
+} );
 $( '#btn-backup-upload' ).click( function() {
 	$( '#restore' ).submit();
 } );
@@ -131,9 +131,9 @@ if ( ! move_uploaded_file( $filetmp, $filedest ) ) die( 'File move error !' );
 $restore = exec( 'sudo /srv/http/restore.sh $filedest; echo $?' );
 
 if ( $restore == 0 ) {
-	echo 'Restored successfully.';
+	echo 'Settings restored successfully.';
 } else {
-	echo 'Restore failed !';
+	echo 'Settings restore failed !';
 }
 EOF
 )
@@ -146,7 +146,7 @@ string=$( cat <<'EOF'
 #!/bin/bash
 
 systemctl stop mpd redis
-bsdtar -xpf $1 -C /
+bsdtar -xpf "$1" -C /
 systemctl start mpd redis
 mpc update Webradio
 hostnamectl set-hostname $( redis-cli get hostname )
