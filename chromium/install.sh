@@ -46,8 +46,4 @@ appendS '$'
 
 installfinish $@
 
-echo -e "$bar Reinitialize ..."
-title -nt  "$info Please wait 5 seconds before continue."
-
-systemctl restart rune_SY_wrk
-
+reinitsystem
