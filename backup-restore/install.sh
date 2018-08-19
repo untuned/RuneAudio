@@ -20,7 +20,7 @@ mkdir -p $dir
 file=/srv/http/app/libs/runeaudio.php
 echo $file
 
-comment '/run/backup_' -n +1 '/run/backup_'
+comment '/run/backup_' 'mpdscribble.conf /etc/spop'
 
 string=$( cat <<'EOF'
         $filepath = '/srv/http/tmp/backup_'.date( 'Ymd' ).'.tar.gz';
@@ -37,7 +37,7 @@ string=$( cat <<'EOF'
                 ' /etc/spop';
 EOF
 )
-insert -n +1 '/run/backup_'
+insert 'mpdscribble.conf /etc/spop'
 #----------------------------------------------------------------------------------
 file=/srv/http/app/templates/settings.php
 echo $file
