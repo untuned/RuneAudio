@@ -23,7 +23,7 @@ echo $file
 comment -n +1 '/run/backup_'
 
 string=$( cat <<'EOF'
-        $filepath = '/srv/http/tmp/backup_'.date( 'Y-m-d' ).'.tar.gz';
+        $filepath = '/srv/http/tmp/backup_'.date( 'Ymd' ).'.tar.gz';
         $cmdstring = 'rm -f /srv/http/tmp/backup_* &> /dev/null; '.
             'redis-cli save; '.
             'bsdtar -czpf $filepath '.
