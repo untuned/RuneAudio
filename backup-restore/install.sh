@@ -105,6 +105,9 @@ $( '#restore' ).submit( function() {
     });
     return false
 });
+$( '#btn-backup-upload' ).click( function() {
+	$( '#restore' ).submit();
+} );
 EOF
 )
 echo "$string" > $file
