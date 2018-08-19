@@ -81,7 +81,7 @@ $( '#backup' ).click( function( e ) {
 $( '#restore' ).submit( function() {
     var formData = new FormData( $( this )[ 0 ] );
     $.ajax( {
-        url: "../../restore.php",
+        url: "/backuprestore.php",
         type: "POST",
         data: formData,
         cache: false,
