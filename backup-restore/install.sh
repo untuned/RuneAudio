@@ -23,19 +23,18 @@ echo $file
 comment -n +1 '/run/backup_'
 
 string=$( cat <<'EOF'
-        $filepath = "/srv/http/tmp/backup_".date("Y-m-d").".tar.gz";
-        $cmdstring = "rm -f /srv/http/tmp/backup_* &> /dev/null; ".
-            "redis-cli save; ".
-            "bsdtar -czpf $filepath".
-                " --exclude /etc/netctl/examples ".
-                "/etc/netctl ".
-                "/mnt/MPD/Webradio ".
-                "/var/lib/redis/rune.rdb ".
-                "/var/lib/mpd ".
-                "/etc/mpd.conf ".
-                "/etc/mpdscribble.conf ".
-                "/etc/spop"
-        ;
+        $filepath = '/srv/http/tmp/backup_'.date( 'Y-m-d' ).'.tar.gz';
+        $cmdstring = 'rm -f /srv/http/tmp/backup_* &> /dev/null; '.
+            'redis-cli save; '.
+            'bsdtar -czpf $filepath '.
+                '--exclude /etc/netctl/examples '.
+                '/etc/netctl '.
+                '/mnt/MPD/Webradio '.
+                '/var/lib/redis/rune.rdb '.
+                '/var/lib/mpd '.
+                '/etc/mpd.conf '.
+                '/etc/mpdscribble.conf '.
+                '/etc/spop';
 EOF
 )
 insert -n +1 '/run/backup_'
@@ -86,18 +85,22 @@ file=/srv/http/assets/js/restore.js
 echo $file
 
 string=$( cat <<'EOF'
-$("#restore").submit(function() {
-    var formData = new FormData($(this)[0]);
-    $.ajax({
-        url: "../../restore.php",
-        type: "POST",
+$( '#restore' ).submit( function() {
+    var formData = new FormData( $( this )[ 0 ] );
+    $.ajax( {
+        url: '../../restore.php',
+        type: 'POST',
         data: formData,
         cache: false,
         contentType: false,
-        enctype: "multipart/form-data",
+        enctype: 'multipart/form-data',
         processData: false,
-        success: function (response) {
-            alert(response);
+        success: function ( response ) {
+			info( {
+				  icon    : 'info-circle'
+				, title   : 'Restore Settings'
+				, message : response
+			} );
         }
     });
     return false
@@ -111,23 +114,23 @@ echo $file
 
 string=$( cat <<'EOF'
 <?php
-$file = $_FILES["filebackup"];
-$filename = $file["name"];
-$filetmp = $file["tmp_name"];
-$filedest = "/srv/http/tmp/$filename";
-$filesize = filesize($filetmp);
+$file = $_FILES[ 'filebackup' ];
+$filename = $file[ 'name' ];
+$filetmp = $file[ 'tmp_name' ];
+$filedest = '/srv/http/tmp/$filename';
+$filesize = filesize( $filetmp );
 
-if ($filesize === 0) die("File upload error !");
+if ( !$filesize ) die( 'File upload error !' );
 
-exec("rm -f /srv/http/tmp/backup_*");
-if (! move_uploaded_file($filetmp, $filedest)) die("File move error !");
+exec( 'rm -f /srv/http/tmp/backup_*' );
+if ( ! move_uploaded_file( $filetmp, $filedest ) ) die( 'File move error !' );
 
-$restore = exec("sudo /srv/http/restore.sh $filedest; echo $?");
+$restore = exec( 'sudo /srv/http/restore.sh $filedest; echo $?' );
 
-if ($restore == 0) {
-	echo "Restored successfully.";
+if ( $restore == 0 ) {
+	echo 'Restored successfully.';
 } else {
-	echo "Restore failed !";
+	echo 'Restore failed !';
 }
 EOF
 )
