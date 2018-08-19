@@ -97,9 +97,9 @@ $( '#restore' ).submit( function() {
         processData: false,
         success: function ( response ) {
 			info( {
-				  icon    : 'info-circle'
-				, title   : 'Restore Settings'
-				, message : response
+				  icon    : response == 0 ? 'info-circle' : 'warning'
+				, title   : 'Restore Settings' 
+				, message : 'Settings restored '+ response == 0 ? 'successfully.' : 'failed.'
 			} );
         }
     });
@@ -123,18 +123,12 @@ $filetmp = $file[ 'tmp_name' ];
 $filedest = '/srv/http/tmp/$filename';
 $filesize = filesize( $filetmp );
 
-if ( !$filesize ) die( 'File upload error !' );
+if ( !$filesize ) die( '-1' );
 
 exec( 'rm -f /srv/http/tmp/backup_*' );
 if ( ! move_uploaded_file( $filetmp, $filedest ) ) die( 'File move error !' );
 
-$restore = exec( 'sudo /srv/http/restore.sh $filedest; echo $?' );
-
-if ( $restore == 0 ) {
-	echo 'Settings restored successfully.';
-} else {
-	echo 'Settings restore failed !';
-}
+echo exec( 'sudo /srv/http/restore.sh "$filedest"; echo $?' );
 EOF
 )
 echo "$string" > $file
@@ -147,12 +141,11 @@ string=$( cat <<'EOF'
 
 systemctl stop mpd redis
 bsdtar -xpf "$1" -C /
+rm "$1"
 systemctl start mpd redis
 mpc update Webradio
 hostnamectl set-hostname $( redis-cli get hostname )
 sed -i "s/opcache.enable=./opcache.enable=$( redis-cli get opcache )/" /etc/php/conf.d/opcache.ini
-
-rm $1
 EOF
 )
 echo "$string" > $file
