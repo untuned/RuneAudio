@@ -72,7 +72,7 @@ echo $file
 [[ -e $file.backup ]] && file=$file.backup
 
 string=$( cat <<'EOF'
-<script src="<?=$this->asset('/js/restore.js')?>"></script>
+<script src="<?=$this->asset('/js/backuprestore.js')?>"></script>
 EOF
 )
 appendH '$'
@@ -81,7 +81,7 @@ appendH '$'
 echo -e "$bar Add new files ..."
 
 #----------------------------------------------------------------------------------
-file=/srv/http/assets/js/restore.js
+file=/srv/http/assets/js/backuprestore.js
 echo $file
 
 string=$( cat <<'EOF'
@@ -112,7 +112,7 @@ EOF
 )
 echo "$string" > $file
 #----------------------------------------------------------------------------------
-file=/srv/http/restore.php
+file=/srv/http/backuprestore.php
 echo $file
 
 string=$( cat <<'EOF'
@@ -120,7 +120,7 @@ string=$( cat <<'EOF'
 $file = $_FILES[ 'filebackup' ];
 $filename = $file[ 'name' ];
 $filetmp = $file[ 'tmp_name' ];
-$filedest = '/srv/http/tmp/$filename';
+$filedest = '/srv/http/tmp/'.$filename;
 $filesize = filesize( $filetmp );
 
 if ( !$filesize ) die( '-1' );
@@ -128,12 +128,12 @@ if ( !$filesize ) die( '-1' );
 exec( 'rm -f /srv/http/tmp/backup_*' );
 if ( ! move_uploaded_file( $filetmp, $filedest ) ) die( 'File move error !' );
 
-echo exec( 'sudo /srv/http/restore.sh "$filedest"; echo $?' );
+echo exec( 'sudo /srv/http/backuprestore.sh "'.$filedest.'"; echo $?' );
 EOF
 )
 echo "$string" > $file
 #----------------------------------------------------------------------------------
-file=/srv/http/restore.sh
+file=/srv/http/backuprestore.sh
 echo $file
 
 string=$( cat <<'EOF'
@@ -159,11 +159,9 @@ EOF
 )
 echo "$string" > $file
 #----------------------------------------------------------------------------------
-chmod 755 /srv/http/restore.* /srv/http/tmp
-chown http:http /srv/http/restore.* /srv/http/tmp
+chmod 755 /srv/http/backuprestore.* /srv/http/tmp
+chown http:http /srv/http/backuprestore.* /srv/http/tmp
 
 installfinish $@
 
-title -nt "Please wait 5 seconds before continue."
-
-systemctl restart rune_SY_wrk
+reinitsystem
