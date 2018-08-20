@@ -53,7 +53,7 @@ appendH -n -3 'Restore player config'
 commentH 'Browse...'
 
 string=$( cat <<'EOF'
-                            Browse... <input type="file" accept=".tar.gz" name="filebackup">
+                            Browse... <input type="file" accept=".tar.gz" id=="filebackup" name="filebackup">
 EOF
 )
 appendH 'Browse...'
