@@ -85,10 +85,19 @@ file=/srv/http/assets/js/backuprestore.js
 echo $file
 
 string=$( cat <<'EOF'
+$( '#filebackup' ).on( 'change', function() {
+	var label = $( this ).val().split( /[\\/]/ ).pop();
+	if ( label.indexOf( '.tar.gz' ) === -1 ) {
+		$( '#backup-file' ).html( '<i class="fa fa-times dx red"></i> not a valid backup file');
+		return;
+	}
+	$( '#backup-file' ).html( '<i class="fa fa-check dx green"> </i>'+ label );
+	$( '#btn-backup-upload' ).prop( 'disabled', false );
+} );
 $( '#restore' ).submit( function() {
     var formData = new FormData( $( this )[ 0 ] );
     $.ajax( {
-        url: '../../restore.php',
+        url: 'restore.php',
         type: 'POST',
         data: formData,
         cache: false,
