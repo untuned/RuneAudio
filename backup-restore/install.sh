@@ -61,7 +61,7 @@ appendH 'Browse...'
 commentH 'id="btn-backup-upload"'
 
 string=$( cat <<'EOF'
-                    <button id="btn-backup-upload" class="btn btn-primary btn-lg" disabled>Restore</button>
+                    <button id="btn-restore" class="btn btn-primary btn-lg" disabled>Restore</button>
 EOF
 )
 appendH 'id="btn-backup-upload"'
@@ -114,7 +114,7 @@ $( '#restore' ).submit( function() {
     });
     return false
 } );
-$( '#btn-backup-upload' ).click( function() {
+$( '#btn-restore' ).click( function() {
 	$( '#restore' ).submit();
 } );
 EOF
