@@ -28,6 +28,6 @@ hostnamectl set-hostname $( redis-cli get hostname )
 sed -i "s/opcache.enable=./opcache.enable=$( redis-cli get opcache )/" /etc/php/conf.d/opcache.ini
 
 timestop
-title -nt "$bar Settings and databases restored successfully."
+title "$bar Settings and databases restored successfully."
 
 reinitsystem
