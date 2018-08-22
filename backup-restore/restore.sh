@@ -24,3 +24,5 @@ sed -i "s/opcache.enable=./opcache.enable=$( redis-cli get opcache )/" /etc/php/
 
 timestop
 title -nt "$bar Settings restored successfully."
+
+systemctl reload php-fpm
