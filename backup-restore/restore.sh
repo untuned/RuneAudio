@@ -8,14 +8,19 @@ timestart
 
 title -l = "$bar Restore settings and databases ..."
 
+echo -e "$bar Stop mpd and redis ..."
 systemctl stop mpd redis
-
-file="/srv/http/tmp/$1"
+echo
+echo -e "$bar Extract files ..."
+echo File: $1
+file=/srv/http/tmp/"$1"
 bsdtar -xvpf "$file" -C /
 rm "$file"
 
+echo -e "$bar Restart mpd and redis ..."
 systemctl start mpd redis
 sleep 2
+
 mpc update Webradio &> /dev/null &
 
 hostnamectl set-hostname $( redis-cli get hostname )
