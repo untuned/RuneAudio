@@ -6,7 +6,7 @@ rm $0
 
 timestart
 
-title -l = "$bar Restore settings ..."
+title -l = "$bar Restore settings and databases ..."
 
 systemctl stop mpd redis
 
@@ -16,13 +16,13 @@ rm "$file"
 
 systemctl start mpd redis
 
-mpc update Webradio
+mpc update Webradio &
 
 hostnamectl set-hostname $( redis-cli get hostname )
 
 sed -i "s/opcache.enable=./opcache.enable=$( redis-cli get opcache )/" /etc/php/conf.d/opcache.ini
 
 timestop
-title -nt "$bar Settings restored successfully."
+title -nt "$bar Settings and databases restored successfully."
 
 systemctl reload php-fpm
