@@ -15,8 +15,8 @@ bsdtar -xpf "$file" -C /
 rm "$file"
 
 systemctl start mpd redis
-
-mpc update Webradio &
+sleep 2
+mpc update Webradio &> /dev/null &
 
 hostnamectl set-hostname $( redis-cli get hostname )
 
@@ -25,4 +25,4 @@ sed -i "s/opcache.enable=./opcache.enable=$( redis-cli get opcache )/" /etc/php/
 timestop
 title -nt "$bar Settings and databases restored successfully."
 
-systemctl reload php-fpm
+reinitsystem
