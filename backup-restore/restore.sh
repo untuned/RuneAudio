@@ -11,7 +11,7 @@ title -l = "$bar Restore settings and databases ..."
 systemctl stop mpd redis
 
 file="/srv/http/tmp/$1"
-bsdtar -xpf "$file" -C /
+bsdtar -xvpf "$file" -C /
 rm "$file"
 
 systemctl start mpd redis
