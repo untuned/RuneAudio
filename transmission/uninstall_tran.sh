@@ -27,7 +27,7 @@ pacman -Rs --noconfirm transmission-cli
 echo -e "$bar Remove files ..."
 
 rm -rv /etc/systemd/system/transmission.service.d
-rm -v /lib/systemd/system/trans.service
+rm -v /lib/systemd/system/tran.service
 rm -r $path/web
 
 uninstallfinish $@
