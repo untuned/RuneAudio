@@ -33,7 +33,7 @@ string=$( cat <<'EOF'
 
 <?php
 $redis = new Redis();
-$redis->connect('/tmp/redis.sock');
+$redis->pconnect( '127.0.0.1' );
 include('/var/www/app/libs/runeaudio.php');
 
 if ( $argc > 1 ) {
