@@ -19,14 +19,15 @@ echo $file
 commentS 'SUBSYSTEM=="sound"'
 
 string=$( cat <<'EOF'
-ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/udac.php on"
-ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/var/www/command/udac.php"
+ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/srv/http/udac.php on"
+ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/srv/http/udac.php"
 EOF
 )
 appendS 'SUBSYSTEM=="sound"'
 
 udevadm control --reload-rules && udevadm trigger
 
+file=/srv/http/udac.php
 string=$( cat <<'EOF'
 <?php
 $redis = new Redis();
@@ -47,7 +48,10 @@ wrk_mpdconf( $redis, 'switchao', $ao );
 }
 EOF
 )
-echo "string" /srv/http/udac.php
+echo "$string" > $file
+
+chown http:http $file
+chmod +x $file
 
 redis-cli set aodefault "$1" &> /dev/null
 
