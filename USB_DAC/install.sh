@@ -34,7 +34,9 @@ string=$( cat <<'EOF'
 <?php
 $redis = new Redis();
 $redis->pconnect( '127.0.0.1' );
-include('/var/www/app/libs/runeaudio.php');
+include '/srv/http/app/libs/runeaudio.php';
+
+wrk_mpdconf( $redis, 'refresh' );
 
 if ( $argc > 1 ) {
 	// "exec" gets only last line which is new power-on card
@@ -47,6 +49,8 @@ if ( $argc > 1 ) {
 
 ui_notify( 'Audio Output Switch', $name );
 wrk_mpdconf( $redis, 'switchao', $ao );
+
+$redis->close();
 EOF
 )
 echo "$string" > $file
