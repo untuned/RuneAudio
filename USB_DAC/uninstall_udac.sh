@@ -7,7 +7,7 @@ alias=udac
 
 uninstallstart $@
 
-rm -v /srv/http/udac.php
+rm -v /srv/http/usbdac
 
 echo -e "$bar Restore files ..."
 
