@@ -7,9 +7,11 @@ alias=udac
 
 uninstallstart $@
 
-rm -v /srv/http/usbdac
+echo -e "$bar Remove file ..."
+file=/srv/http/usbdac
+rm -v $file
 
-echo -e "$bar Restore files ..."
+echo -e "$bar Restore file ..."
 
 restorefile /etc/udev/rules.d/rune_usb-audio.rules
 
