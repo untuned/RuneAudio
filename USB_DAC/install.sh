@@ -41,8 +41,11 @@ if ( $argc > 1 ) {
 	$ao = $redis->get( 'aodefault' );
 	$name = $redis->hGet( 'udaclist', $ao );
 }
-
-ui_notify( 'Audio Output Switch', $name );
+if ( file_exists( '/srv/http/gpiosettings.php' ) {
+	ui_render( 'gpio', json_encode( array( 'state' => 'AO', 'name' => $name ) ) );
+} else {
+	ui_notify( 'Audio Output Switch', $name );
+}
 wrk_mpdconf( $redis, 'switchao', $ao );
 }
 EOF
