@@ -49,8 +49,6 @@ if ( $argc > 1 ) {
 
 ui_notify( 'Audio Output Switch', $name );
 wrk_mpdconf( $redis, 'switchao', $ao );
-
-$redis->close();
 EOF
 )
 echo "$string" > $file
