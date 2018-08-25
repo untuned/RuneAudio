@@ -39,7 +39,7 @@ sdre() {
 	echo -e '\n'$( tcolor "systemctl daemon-reload" )'\n'
 	systemctl daemon-reload
 }
-tnm() {
+mpdc() {
 	telnet localhost 6600
 }
 rd() {
