@@ -37,6 +37,7 @@ rm /etc/sudoers.d/http
 rm -f /etc/sudoers.d/http-backup
 #motd
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
+mv /etc/motd{.backup,}
 # udac
 sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
 ' -e '/refresh_ao on\|refresh_ao off/ d
