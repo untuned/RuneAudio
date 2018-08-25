@@ -29,6 +29,8 @@ udevadm control --reload-rules && udevadm trigger
 
 file=/srv/http/udac.php
 string=$( cat <<'EOF'
+#!/usr/bin/php
+
 <?php
 $redis = new Redis();
 $redis->connect('/tmp/redis.sock');
