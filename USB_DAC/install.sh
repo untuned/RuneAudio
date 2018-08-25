@@ -43,7 +43,7 @@ if ( $argc > 1 ) {
 }
 // broadcast
 if ( file_exists( /srv/http/gpiosettings.php ) {
-	ui_render( 'gpio', json_encode( [ 'state' => 'AO', 'name' => $name ] ) );
+	ui_render( 'gpio', json_encode( array( 'state' => 'AO', 'name' => $name ) ) );
 } else {
 	ui_notify( 'Audio Output Switch', $name );
 }
