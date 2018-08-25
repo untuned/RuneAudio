@@ -19,15 +19,15 @@ echo $file
 commentS 'SUBSYSTEM=="sound"'
 
 string=$( cat <<'EOF'
-ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/srv/http/udac.php on"
-ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/srv/http/udac.php"
+ACTION=="add", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/srv/http/usbdac on"
+ACTION=="remove", KERNEL=="card*", SUBSYSTEM=="sound", RUN+="/srv/http/usbdac"
 EOF
 )
 appendS 'SUBSYSTEM=="sound"'
 
 udevadm control --reload-rules && udevadm trigger
 
-file=/srv/http/udac.php
+file=/srv/http/usbdac
 string=$( cat <<'EOF'
 #!/usr/bin/php
 
