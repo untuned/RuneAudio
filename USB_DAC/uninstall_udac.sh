@@ -7,9 +7,11 @@ alias=udac
 
 uninstallstart $@
 
+rm -v /srv/http/udac.php
+
 echo -e "$bar Restore files ..."
 
-restorefile /etc/udev/rules.d/rune_usb-audio.rules /srv/http/command/refresh_ao
+restorefile /etc/udev/rules.d/rune_usb-audio.rules
 
 udevadm control --reload-rules && udevadm trigger
 
