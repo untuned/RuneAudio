@@ -5,7 +5,7 @@
 		, "pin3" : { "pin": "15", "name": "Subwoofer" }
 		, "pin4" : { "pin": "16", "name": "Amp"}
 	  }
-	, "pinname" : {
+	, "name" : {
 		  "11" : "(no name)"
 		, "13" : "DAC"
 		, "15" : "Subwoofer"
