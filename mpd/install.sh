@@ -17,8 +17,6 @@ timestart l
 rankmirrors
 
 echo -e "$bar Prefetch packages ..."
-echo To abort: SSH > killall install.sh pacman
-echo
 pacman -Sw --noconfirm libnfs icu libwebp gcc-libs wavpack ffmpeg pacman python2-pip mpd libmpdclient libgcrypt libgpg-error
 
 echo -e "$bar Get files ..."
