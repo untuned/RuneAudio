@@ -3,7 +3,7 @@ Samba Upgrade
 _Tested on RuneAudio 0.3 and 0.4b_
  
 - RuneAudio already installed `samba4-rune` (samba 4.3.4)  
-- Upgrading to latest Samba, 4.8.1 as of 20180516, with custom configuration should improve transfer speed by 30%, from **8MB/s** up to **11MB/s**, on wired network (max RPi 100Mbps bandwidth) 
+- Upgrading to latest Samba, 4.8.4 as of 20180819, with custom configuration should improve transfer speed by 30%, from **8MB/s** up to **11MB/s**, on wired network (max RPi 100Mbps bandwidth) 
 - RuneAudio has trouble with system wide upgrade. **Do not** `pacman -Syu`. 
 
 **Upgrage**  
