@@ -5,6 +5,7 @@
 alias=samb
 
 . /srv/http/addonstitle.sh
+. /srv/http/addonsedit.sh
 
 if [[ $( smbd -V ) != 'Version 4.3.4' ]]; then
 	redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
@@ -25,7 +26,7 @@ pacman -Syw libnsl ldb libtirpc tdb tevent smbclient samba libwbclient
 
 systemctl stop nmbd smbd
 
-rankmirrors
+pacman -Sy
 
 mv /etc/samba/smb.conf{,.backup}
 
@@ -41,7 +42,8 @@ root    hard    nofile    16384
 ' >> /etc/security/limits.conf
 
 # remove rune default startup if any
-sed -i '/start smbd/ d' /srv/http/command/rune_SY_wrk
+file=/srv/http/command/rune_SY_wrk
+comment 'start samba services' -n -1 '$kernel ='
 
 if (( $# > 1 )); then
 	file=/etc/samba/smb.conf
