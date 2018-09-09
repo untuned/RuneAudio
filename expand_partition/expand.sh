@@ -5,40 +5,27 @@ rm $0
 [[ ! -e /srv/http/addonstitle.sh ]] && wget -q https://github.com/rern/RuneAudio_Addons/raw/master/srv/http/addonstitle.sh -P /srv/http
 . /srv/http/addonstitle.sh
 
-freekb=$( df | grep '/$' | awk '{print $4}' ) # free disk space in kB
-freemb=$(( $freekb / 1000 ))
 devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 disk=/dev/${part::-2}
 
-fd=$( fdisk -l /dev/mmcblk0 )
-sectorbytes=$( echo "$fd" | grep '^Units' | awk '{print $(NF-1)}' )
-sectorall=$( echo "$fd" | grep 'sectors$' | awk '{print $(NF-1)}' )
-sectorused=$( echo "$fd" | tail -n1 | awk '{print $3}' )
-unpartmb=$(( ( sectorall - sectorused ) * sectorbytes / 1024 / 1024 ))
-
-summb=$(( $freemb + $unpartmb ))
+free=$( df -h | grep '/$' | awk '{print $4}' )
+unpart=$( sfdisk -F | grep mmcblk0 )
+unpartnum=$( echo $unpart | awk '{print $4}' )
+unpart=$( echo $unpart | awk '{print $4$5}' | tr -d ',' )
 
 # noobs has 3MB unpartitioned space
-if [[ $unpartmb -lt 10 ]]; then
-	title -l '=' "$info No expandable space available. ( ${unpartmb}MB unused space )"
+if [[ $unpartnum -lt 10 ]]; then
+	title -l '=' "$info No expandable space available. ( $unpart unused space )"
 	redis-cli hset addons expa 1 &> /dev/null
 	exit
-fi
-
-if [[ -t 1 ]] && ls /dev/sd* &>/dev/null; then
-	echo -e "$info Unmount and remove all USB drives before proceeding:"
-	ls /dev/sd?
-	echo
-	read -n 1 -s -p 'Press any key to continue ... '
-	echo
 fi
 
 # expand partition #######################################
 title -l '=' "$bar Expand partition ..."
 printf "%-23s %s\n"     'Current partiton :' $devpart
-printf "%-23s %5s %s\n" 'Available space  :' $freemb MB
-printf "%-23s %5s %s\n" 'Expandable space :' $unpartmb MB
+printf "%-23s %5s %s\n" 'Available space  :' $free'iB'
+printf "%-23s %5s %s\n" 'Expandable space :' $unpart
 echo
 
 if [[ -t 1 ]]; then
@@ -71,5 +58,5 @@ if [[ $? != 0 ]]; then
 else
 	free=$( df -h | grep '/$' | awk '{print $4}' )
 	redis-cli hset addons expa 1 &> /dev/null # mark as expanded - disable webui button
-	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor ${free}B ) available space."
+	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor ${free}iB ) available space."
 fi
