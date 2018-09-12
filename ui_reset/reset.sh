@@ -29,12 +29,9 @@ fi
 crontab -l | { cat | sed '/addonsupdate.sh/ d'; } | crontab -
 
 # enha
-rm -f /usr/share/bootsplash/{start,reboot,shutdown}-runeaudio.png
 # gpio
 rm -f /root/gpio*.py
 rm /etc/sudoers.d/http
-# back
-rm -f /etc/sudoers.d/http-backup
 #motd
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
 mv /etc/motd{.backup,}
