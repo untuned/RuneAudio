@@ -10,12 +10,12 @@ part=${devpart/\/dev\//}
 disk=/dev/${part::-2}
 
 free=$( df -h / | tail -n1 | awk '{print $4}' )
-unpart=$( sfdisk -F | grep mmcblk0 )
-unpartnum=$( echo $unpart | awk '{print $4}' )
+unpart=$( sfdisk -F /dev/mmcblk0 | head -n1 )
+unpartnum=$( echo $unpart | awk '{print $6}' )
 unpart=$( echo $unpart | awk '{print $4$5}' | tr -d ',' )
 
 # noobs has 3MB unpartitioned space
-if [[ $unpartnum -lt 10 ]]; then
+if (( $unpartnum < 10000000 )); then
 	title -l '=' "$info No expandable space available. ( $unpart unused space )"
 	redis-cli hset addons expa 1 &> /dev/null
 	exit
