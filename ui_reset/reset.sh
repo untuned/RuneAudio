@@ -34,7 +34,7 @@ rm -f /root/gpio*.py
 rm /etc/sudoers.d/http
 #motd
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
-mv /etc/motd{.backup,}
+mv /etc/motd{.backup,} 2> /dev/null
 # udac
 sed -i -e '/SUBSYSTEM=="sound"/ s/^#//
 ' -e '/refresh_ao on\|refresh_ao off/ d
