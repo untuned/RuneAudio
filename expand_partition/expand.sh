@@ -9,14 +9,13 @@ devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 disk=/dev/${part::-2}
 
-free=$( df -h / | tail -n1 | awk '{print $4}' )
-unpart=$( sfdisk -F /dev/mmcblk0 | head -n1 )
-unpartnum=$( echo $unpart | awk '{print $6}' )
-unpart=$( echo $unpart | awk '{print $4$5}' | tr -d ',' )
+freeib=$( df / | tail -n1 | awk '{print $4}' | numfmt --to=iec-i )
+unpart=$( sfdisk -F /dev/mmcblk0 | head -n1 | awk '{print $6}' )
+unpartib=$( echo $unpart | numfmt --to=iec-i )
 
 # noobs has 3MB unpartitioned space
-if (( $unpartnum < 10000000 )); then
-	title -l '=' "$info No expandable space available. ( $unpart unused space )"
+if (( $unpart < 10000000 )); then
+	title -l '=' "$info No expandable space available. ( ${unpartib}B unused space )"
 	redis-cli hset addons expa 1 &> /dev/null
 	exit
 fi
@@ -24,8 +23,8 @@ fi
 # expand partition #######################################
 title -l '=' "$bar Expand partition ..."
 printf "%-23s %s\n"     'Current partiton :' $devpart
-printf "%-23s %5s %s\n" 'Available space  :' $free'iB'
-printf "%-23s %5s %s\n" 'Expandable space :' $unpart
+printf "%-23s %5s %s\n" 'Available space  :' ${freeib}B
+printf "%-23s %5s %s\n" 'Expandable space :' ${unpartib}B'
 echo
 
 if [[ -t 1 ]]; then
@@ -56,7 +55,7 @@ if [[ $? != 0 ]]; then
 	title -nt "Try: reboot > resize2fs $devpart"
 	exit
 else
-	free=$( df -h / | tail -n1 | awk '{print $4}' )
+	freeib=$( df / | tail -n1 | awk '{print $4}' | numfmt --to=iec-i )
 	redis-cli hset addons expa 1 &> /dev/null # mark as expanded - disable webui button
-	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor ${free}iB ) available space."
+	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor ${freeib}B ) available space."
 fi
