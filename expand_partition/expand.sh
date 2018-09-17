@@ -24,7 +24,7 @@ fi
 title -l '=' "$bar Expand partition ..."
 printf "%-23s %s\n"     'Current partiton :' $devpart
 printf "%-23s %5s %s\n" 'Available space  :' ${freeib}B
-printf "%-23s %5s %s\n" 'Expandable space :' ${unpartib}B'
+printf "%-23s %5s %s\n" 'Expandable space :' ${unpartib}B
 echo
 
 if [[ -t 1 ]]; then
