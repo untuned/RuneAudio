@@ -9,7 +9,7 @@ devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 disk=/dev/${part::-2}
 
-freeib=$( df / | tail -n1 | awk '{print $4}' | numfmt --to=iec-i )
+freeib=$( df / | tail -n1 | awk '{print $4 * 1024}' | numfmt --to=iec-i )
 unpart=$( sfdisk -F /dev/mmcblk0 | head -n1 | awk '{print $6}' )
 unpartib=$( echo $unpart | numfmt --to=iec-i )
 
@@ -55,7 +55,7 @@ if [[ $? != 0 ]]; then
 	title -nt "Try: reboot > resize2fs $devpart"
 	exit
 else
-	freeib=$( df / | tail -n1 | awk '{print $4}' | numfmt --to=iec-i )
+	freeib=$( df / | tail -n1 | awk '{print $4 * 1024}' | numfmt --to=iec-i )
 	redis-cli hset addons expa 1 &> /dev/null # mark as expanded - disable webui button
 	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor ${freeib}B ) available space."
 fi
