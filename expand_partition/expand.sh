@@ -9,9 +9,9 @@ devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 disk=/dev/${part::-2}
 
-freeib=$( df / | tail -n1 | awk '{print $4 * 1024}' | numfmt --to=iec-i )
+freeib=$( df / | tail -n1 | awk '{print $4 * 1024}' | numfmt --to=iec-i --padding=10 )
 unpart=$( sfdisk -F /dev/mmcblk0 | head -n1 | awk '{print $6}' )
-unpartib=$( echo $unpart | numfmt --to=iec-i )
+unpartib=$( echo $unpart | numfmt --to=iec-i --padding=10 )
 
 # noobs has 3MB unpartitioned space
 if (( $unpart < 10000000 )); then
