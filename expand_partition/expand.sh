@@ -15,7 +15,7 @@ unpartib=$( echo $unpart | numfmt --to=iec-i --suffix=B --padding=6 )
 
 # noobs has 3MB unpartitioned space
 if (( $unpart < 10000000 )); then
-	title -l '=' "$info No expandable space available. ( $unpartib unused space )"
+	title -l '=' "$info No expandable space available. ("$unpartib" unused space )"
 	redis-cli hset addons expa 1 &> /dev/null
 	exit
 fi
