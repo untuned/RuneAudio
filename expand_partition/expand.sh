@@ -9,9 +9,9 @@ devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 disk=/dev/${part::-2}
 
-freeib=$( df / | tail -n1 | awk '{print $4 * 1024}' | numfmt --to=iec-i --padding=10 )
+freeib=$( df / | tail -n1 | awk '{print $4 * 1024}' | numfmt --to=iec-i --padding=6 )
 unpart=$( sfdisk -F /dev/mmcblk0 | head -n1 | awk '{print $6}' )
-unpartib=$( echo $unpart | numfmt --to=iec-i --padding=10 )
+unpartib=$( echo $unpart | numfmt --to=iec-i --padding=6 )
 
 # noobs has 3MB unpartitioned space
 if (( $unpart < 10000000 )); then
@@ -22,9 +22,9 @@ fi
 
 # expand partition #######################################
 title -l '=' "$bar Expand partition ..."
-printf "%-23s %s\n"     'Current partiton :' $devpart
-printf "%-23s %5s %s\n" 'Available space  :' ${freeib}B
-printf "%-23s %5s %s\n" 'Expandable space :' ${unpartib}B
+echo "Current partiton : $devpart"
+echo "Available space  : ${freeib}B"
+echo "Expandable space : ${unpartib}B"
 echo
 
 if [[ -t 1 ]]; then
