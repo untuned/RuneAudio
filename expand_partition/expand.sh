@@ -9,9 +9,9 @@ devpart=$( mount | grep 'on / type' | awk '{print $1}' )
 part=${devpart/\/dev\//}
 disk=/dev/${part::-2}
 
-freeib=$( df / | tail -n1 | awk '{print $4 * 1024}' | numfmt --to=iec-i --suffix=B --padding=6 )
+freeib=$( df / | tail -n1 | awk '{print $4 * 1024}' | numfmt --to=iec-i --suffix=B --padding=10 )
 unpart=$( sfdisk -F /dev/mmcblk0 | head -n1 | awk '{print $6}' )
-unpartib=$( echo $unpart | numfmt --to=iec-i --suffix=B --padding=6 )
+unpartib=$( echo $unpart | numfmt --to=iec-i --suffix=B --padding=10 )
 
 # noobs has 3MB unpartitioned space
 if (( $unpart < 10000000 )); then
@@ -22,8 +22,8 @@ fi
 
 # expand partition #######################################
 title -l '=' "$bar Expand partition ..."
-echo "Current partiton : $devpart"
-echo "Available space  : $freeib"
+echo "System partiton  : $devpart"
+echo "Free space       : $freeib"
 echo "Expandable space : $unpartib"
 echo
 
@@ -57,5 +57,5 @@ if [[ $? != 0 ]]; then
 else
 	freeib=$( df / | tail -n1 | awk '{print $4 * 1024}' | numfmt --to=iec-i --suffix=B )
 	redis-cli hset addons expa 1 &> /dev/null # mark as expanded - disable webui button
-	title -l '=' "$bar Partiton $( tcolor $devpart ) now has $( tcolor $freeib ) available space."
+	title -l '=' "$bar System partiton $( tcolor $devpart ) now has $( tcolor $freeib ) free space."
 fi
