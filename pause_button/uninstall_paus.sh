@@ -15,4 +15,4 @@ restorefile /srv/http/app/templates/header.php /srv/http/assets/js/runeui.js
 
 uninstallfinish $@
 
-clearcache
+restartlocalbrowser
