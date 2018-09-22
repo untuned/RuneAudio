@@ -85,4 +85,4 @@ redis-cli set dev 1 &> /dev/null # avoid edit runeui.min.js
 
 installfinish $@
 
-clearcache
+restartlocalbrowser
