@@ -18,4 +18,4 @@ rm lato.tar.xz
 
 installfinish $@
 
-clearcache
+restartlocalbrowser
