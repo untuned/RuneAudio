@@ -82,4 +82,6 @@ timestop
 
 title "$bar $( tcolor RuneUI ) reset and $( tcolor Addons ) reinstalled successfully."
 
+systemctl restart rune_PL_wrk
+
 reinitsystem
