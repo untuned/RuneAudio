@@ -14,7 +14,9 @@ if [[ $1 == 1 ]]; then
   enable=disabled
 fi
 
-sed -i "s/\(use_cursor \).*/\1$yesno \&/" /root/.xinitrc
+file=/etc/X11/xinit/start_chromium.sh
+[[ ! -e $file ]] && file=/root/.xinitrc
+sed -i "s/\(use_cursor \).*/\1$yesno \&/" $file
 
 redis-cli hset settings pointer $1 &> /dev/null
 
