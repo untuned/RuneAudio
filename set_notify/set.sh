@@ -8,7 +8,7 @@ title -l '=' "$bar Change notification duration ..."
 
 if [[ -e /srv/http/enhance.php ]]; then
 	#sed -i "s/\(notify.delay : \)[0-9]\+$/\1$(( $1 * 1000 ))/" /srv/http/assets/js/enhancefunction.js
-	sed -i "s/\(options.delay : \)[0-9]\+$/\1$(( $1 * 1000 ))/" /srv/http/assets/js/enhance.js
+	sed -i "s/\(PNotify.prototype.options.delay = \)[0-9]\+$/\1$(( $1 * 1000 ))/" /srv/http/assets/js/enhance.js
 fi
 
 sed -i "s/[0-9]\+\( : notify.delay\)/$(( $1 * 1000 ))\1/" /srv/http/assets/js/runeui.js
