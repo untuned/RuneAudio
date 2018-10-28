@@ -9,6 +9,7 @@ title -l '=' "$bar Pointer of local browser ..."
 file=/etc/X11/xinit/start_chromium.sh
 [[ ! -e $file ]] && file=/root/.xinitrc
 sed -i "s/\(use_cursor \).*/\1$1 \&/" $file
+redis-cli hset settings pointer $1 &> /dev/null
 
 echo -e "$bar Restart local browser ..."
 killall Xorg &> /dev/null
