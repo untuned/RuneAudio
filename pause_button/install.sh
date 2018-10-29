@@ -51,7 +51,7 @@ appendH 'id="play"'
 file=/srv/http/assets/js/runeui.js
 echo $file
 
-comment -n +1 'function refreshState' '$(.#stop.).addClass(.btn-primary.)'
+comment -n +2 'function refreshState' '$(.#stop.).addClass(.btn-primary.)'
 
 string=$( cat <<'EOF'
     if ( state === 'play' ) {
