@@ -18,7 +18,7 @@ version=$( redis-cli get buildversion )
 if [[ $version == 20170229 ]]; then
 	file=ui_reset.tar.xz
 else
-	file=ui_reset03.tar.xz
+	file=ui_reset05.tar.xz
 fi
 # cwd '/srv/http' will be renoved
 cd /tmp
@@ -49,16 +49,6 @@ if pacman -Q chromium &> /dev/null; then
 	" -e "$ a\
 chromium --no-sandbox --app=http://localhost --start-fullscreen --force-device-scale-factor=$zoomlevel
 	" /root/.xinitrc
-fi
-
-if [[ ! $version == 20170229 ]]; then
-	file=ui_reset03.tar.xz
-	# spla
-	systemctl disable ply-image
-	systemctl enable getty@tty1.service
-	rm -f /etc/systemd/system/ply-image.service
-	rm -f /usr/local/bin/ply-image
-	rm -fr /usr/share/ply-image
 fi
 
 rm -f /usr/local/bin/uninstall_{addo,back,enha,font,gpio,lyri,paus,RuneYoutube,udac}.sh
