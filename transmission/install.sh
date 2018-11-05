@@ -77,7 +77,7 @@ else
 fi
 
 # web ui alternative
-if [[ $2 == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
+if [[ $2 == 1 ]]; then
 	echo -e "$bar Get WebUI alternative ..."
 	file=master.zip
 	wgetnc https://github.com/ronggang/transmission-web-control/archive/master.zip
@@ -87,14 +87,10 @@ if [[ $2 == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
 	bsdtar -xf $file --strip 1 --exclude '.*' --exclude '*.md' -C $path/web
 	rm $file
 	chown -R root:root $path/web
-	redis-cli del tranwebui &> /dev/null
 fi
 
 systemctl daemon-reload
-if [[ $3 == 1 ]] || [[ $( redis-cli get transtartup ) ]]; then
-	systemctl enable tran
-	redis-cli del transtartup &> /dev/null
-fi
+[[ $3 == 1 ]] && systemctl enable tran
 
 echo -e "$bar Start Transmission ..."
 if ! systemctl start tran &> /dev/null; then
