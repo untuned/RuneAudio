@@ -79,12 +79,12 @@ fi
 # web ui alternative
 if [[ $2 == 1 ]] || [[ $( redis-cli get tranwebui ) ]]; then
 	echo -e "$bar Get WebUI alternative ..."
-	file=master.tar.gz
-	wgetnc https://github.com/ronggang/transmission-web-control/archive/$file
+	file=master.zip
+	wgetnc https://github.com/ronggang/transmission-web-control/archive/master.zip
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
 	mv $path/web/index{,.original}.html
-	bsdtar -xf $file -C $path/web
+	bsdtar -xf $file --strip 1 --exclude '.*' --exclude '*.md' -C $path/web
 	rm $file
 	chown -R root:root $path/web
 	redis-cli del tranwebui &> /dev/null
