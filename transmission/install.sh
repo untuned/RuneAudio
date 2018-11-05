@@ -79,7 +79,7 @@ if [[ $2 == 1 ]]; then
 	rm -rf $path/web
 	mv /usr/share/transmission/web $path
 	mv $path/web/index{,.original}.html
-	bsdtar -xf master.zip --strip 1 --exclude '.*' --exclude '*.md' -C $path/web
+	bsdtar --strip 2 --exclude '.*' --exclude '*.md' -C $path/web -xf master.zip transmission-web-control-master/src
 	rm master.zip
 	chown -R root:root $path/web
 fi
