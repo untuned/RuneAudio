@@ -52,28 +52,24 @@ rm -f $file
 systemctl start tran
 systemctl stop tran
 
-if [[ $1 != u ]]; then
-	sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
-	' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
-	' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
-	' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
-	' -e '/[^{},\{, \}]$/ s/$/, /
-	' -e '/^}$/ i\
-    "watch-dir": "'"$path"'/watch", \
-    "watch-dir-enabled": true
+sed -i -e 's|"download-dir": ".*"|"download-dir": "'"$path"'"|
+' -e 's|"incomplete-dir": ".*"|"incomplete-dir": "'"$path"'/incomplete"|
+' -e 's|"incomplete-dir-enabled": false|"incomplete-dir-enabled": true|
+' -e 's|"rpc-whitelist-enabled": true|"rpc-whitelist-enabled": false|
+' -e '/[^{},\{, \}]$/ s/$/, /
+' -e '/^}$/ i\
+"watch-dir": "'"$path"'/watch", \
+"watch-dir-enabled": true
+' $file
+# set password
+if [[ -n $1 && $1 != 0 ]]; then
+	sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
+	' -e 's|"rpc-password": ".*"|"rpc-password": "'"$1"'"|
+	' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
 	' $file
-	# set password
-	if [[ -n $1 && $1 != 0 ]]; then
-		sed -i -e 's|"rpc-authentication-required": false|"rpc-authentication-required": true|
-		' -e 's|"rpc-password": ".*"|"rpc-password": "'"$1"'"|
-		' -e 's|"rpc-username": ".*"|"rpc-username": "root"|
-		' $file
-	else
-		sed -i 's|"rpc-authentication-required": true|"rpc-authentication-required": false|
-		' $file
-	fi
 else
-	mv -f /tmp/settings.json $file
+	sed -i 's|"rpc-authentication-required": true|"rpc-authentication-required": false|
+	' $file
 fi
 
 # web ui alternative
