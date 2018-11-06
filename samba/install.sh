@@ -8,7 +8,7 @@ alias=samb
 . /srv/http/addonsedit.sh
 
 smbdv=$( smbd -V )
-if [[ $smbdv != 'Version 4.3.4' && $smbdv != 'Version 4.8.1' ]]; then
+if [[ $smbdv && $smbdv != 'Version 4.3.4' && $smbdv != 'Version 4.8.1' ]]; then
 	redis-cli hset addons samb 1 &> /dev/null # mark as upgraded - disable button
 	title "$info Samba already upgraded."
 	title -nt "Further upgrade: pacman -Sy samba"
