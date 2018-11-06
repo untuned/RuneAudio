@@ -23,7 +23,7 @@ title -l '=' "$bar Upgrade Samba ..."
 timestart
 
 echo -e "$bar Prefetch packages ..."
-pacman -Syw libnsl ldb libtirpc tdb tevent smbclient samba libwbclient
+pacman -Syw libnsl glibc ldb libtirpc tdb tevent smbclient samba libwbclient
 
 systemctl stop nmbd smbd
 
@@ -33,7 +33,7 @@ mv /etc/samba/smb.conf{,.backup}
 
 pacman -R --noconfirm samba4-rune
 pacman -S --noconfirm --force libnsl
-pacman -S --noconfirm ldb libtirpc tdb tevent smbclient samba
+pacman -S --noconfirm glibc ldb libtirpc tdb tevent smbclient samba
 pacman -S --noconfirm libwbclient
 
 # fix 'minimum rlimit_max'
