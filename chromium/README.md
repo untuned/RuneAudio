@@ -1,6 +1,6 @@
 Chromium Browser
 ---
-(Install Chromium breaks default MPD. MPD Updrade needed.)  
+(Install Chromium breaks default MPD. MPD Upgrade needed.)  
 
 **Chromium** has the least issues as an alternative browser
 - Chromium cannot be installed without `ffmpeg` upgrade
