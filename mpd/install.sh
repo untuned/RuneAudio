@@ -75,6 +75,7 @@ redis-cli hset addons mpdu 1 &> /dev/null # mark as upgraded - disable button
 mpdversion=$( mpd -V | head -n1 | awk '{ print $NF }' )
 
 clearcache
+systemctl restart rune_PL_wrk
 	
 timestop l
 title -l '=' "$bar MPD upgraded successfully to $mpdversion"
