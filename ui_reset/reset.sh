@@ -32,7 +32,7 @@ crontab -l | { cat | sed '/addonsupdate.sh/ d'; } | crontab -
 
 # enha
 # gpio
-rm -f /root/gpio*.py
+rm -f /root/gpio*
 rm /etc/sudoers.d/http
 #motd
 rm -f /etc/motd.logo /etc/profile.d/motd.sh
