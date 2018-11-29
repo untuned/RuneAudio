@@ -2,7 +2,7 @@
 
 # command shortcuts
 # passwords for samba and transmission
-# disable wifi, hdmi mode, fstab, pacman cache
+# disable hdmi mode, fstab, pacman cache
 # preload osmc pre-setup
 # restore settings
 # install addons
@@ -30,7 +30,7 @@ setpwd() {
 echo -e "$bar root password for Samba and Transmission ..."
 setpwd
 
-wget -qN --no-check-certificate https://github.com/rern/RuneAudio/raw/master/_settings/setupsystem.sh
+wget -qN --no-check-certificate https://github.com/untuned/RuneAudio/raw/master/_settings/setupsystem.sh
 . setupsystem.sh
 rm setupsystem.sh
 
