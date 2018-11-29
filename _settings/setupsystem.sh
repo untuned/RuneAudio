@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # command shortcuts
-# disable wifi, hdmi mode, fstab, pacman cache
+# disable hdmi mode, fstab, pacman cache
 # preload osmc pre-setup
 # restore settings
 
@@ -34,14 +34,6 @@ fi
 # command shortcuts
 gitpath=https://github.com/rern/RuneAudio/raw/master
 [[ ! -e /etc/profile.d/cmd.sh ]] && wgetnc $gitpath/_settings/cmd.sh -P /etc/profile.d
-
-echo -e "$bar Disable WiFi and Bluetooth ..."
-#################################################################################
-systemctl disable netctl-auto@wlan0
-systemctl stop netctl-auto@wlan0 shairport udevil upmpdcli
-rfkill block 0
-sed -i '/blacklist/ s/^#//' /etc/modprobe.d/disable_rpi3_wifi_bt.conf
-echo
 
 echo -e "$bar Set HDMI mode ..."
 #################################################################################
